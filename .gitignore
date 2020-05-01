@@ -5,7 +5,6 @@
 _main.rds
 _book
 !ga_script.html
-search_index.json
 *.rds
 _main.*
 bookdown*
