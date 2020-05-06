@@ -157,8 +157,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#python"><i class="fa fa-check"></i><b>1.4.1</b> Python</a></li>
 <li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#visual-studio-code-vs-code"><i class="fa fa-check"></i><b>1.4.2</b> Visual Studio Code (VS Code)</a></li>
-<li class="chapter" data-level="1.4.3" data-path="introduction.html"><a href="introduction.html#the-data-science-packages"><i class="fa fa-check"></i><b>1.4.3</b> The Data Science Packages</a></li>
-<li class="chapter" data-level="1.4.4" data-path="introduction.html"><a href="introduction.html#other-packages"><i class="fa fa-check"></i><b>1.4.4</b> Other packages</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction.html"><a href="introduction.html#package-management-pip"><i class="fa fa-check"></i><b>1.4.3</b> Package Management (pip)</a></li>
+<li class="chapter" data-level="1.4.4" data-path="introduction.html"><a href="introduction.html#the-data-science-packages"><i class="fa fa-check"></i><b>1.4.4</b> The Data Science Packages</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#running-python-code"><i class="fa fa-check"></i><b>1.5</b> Running Python code</a></li>
 </ul></li>
@@ -292,11 +292,38 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 <span id="cb1-5"><a href="introduction.html#cb1-5"></a><span class="co"># %%</span></span>
 <span id="cb1-6"><a href="introduction.html#cb1-6"></a>msg <span class="op">=</span> <span class="st">&quot;Hello again&quot;</span></span>
 <span id="cb1-7"><a href="introduction.html#cb1-7"></a><span class="bu">print</span>(msg)</span></code></pre></div>
-<p><img src="https://code.visualstudio.com/assets/docs/python/jupyter/code-cells-01.png" /></p>
+<p><img src="screenshots/vscode-code-cells-01.png" /></p>
 </div>
 </div>
-<div id="the-data-science-packages" class="section level3" number="1.4.3">
-<h3 number="1.4.3"><span class="header-section-number">1.4.3</span> The Data Science Packages</h3>
+<div id="package-management-pip" class="section level3" number="1.4.3">
+<h3 number="1.4.3"><span class="header-section-number">1.4.3</span> Package Management (pip)</h3>
+<p>You can install a standard set of data science python packages using <a href="https://pip.pypa.io/en/stable/user_guide/">pip</a>. However, there are some complications using pip on computers with multiple versions of Python.</p>
+<ul>
+<li><strong>pip</strong>: If your path environment is correct, then a standard <code>pip install [package]</code> will work. This is how most packages direct users to install Python packages.</li>
+<li><strong>pip3</strong>: If your OS has Python 2 and Python 3 installed, you may need to use <code>pip3 install [package]</code>.</li>
+<li><strong>Force Python version</strong>: You can run the pip related to a specific Python installation by using <code>python -m pip install [package]</code>. Some may need to provide the path to their Python installation if your Python path environment is not understood.</li>
+</ul>
+<p>A few cautions about package management with pip.</p>
+<ul>
+<li>Never run <code>sudo pip install</code>.</li>
+<li>If you don’t have root permissions or the OS package manager doesn’t have the package you need, use <code>pip install --user</code>.</li>
+<li>If you want multiple versions of the same library to coexist, to do Python development, or to isolate dependencies for any other reason, use <a href="https://docs.python.org/3/tutorial/venv.html">virtual environments</a>.</li>
+<li>Generally, you will want to update pip before installing packages - <code>python -m pip install --user --upgrade pip setuptools wheel</code></li>
+</ul>
+<p><a href="https://docs.conda.io/en/latest/">Conda</a>, <a href="https://python-poetry.org/docs/">poetry</a>, and <a href="https://pipenv.pypa.io/en/latest/">pipenv</a> are three other options for package management. However, we will focus on using pip.</p>
+<div id="pip-package-installation-examples" class="section level4" number="1.4.3.1">
+<h4 number="1.4.3.1"><span class="header-section-number">1.4.3.1</span> pip package installation examples</h4>
+<p>If we wanted to install the numpy, pandas, xlrd, matplolib, and seaborn packages, we would use pip. Depending on your OS configuration, one of the following should work.</p>
+<p><strong>Everything in your path is clean and you are an admin on your computer</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="introduction.html#cb2-1"></a><span class="ex">pip</span> install numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
+<p><strong>Everything in your path is clean and you want to install package for the user</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="introduction.html#cb3-1"></a><span class="ex">pip</span> install --user numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
+<p><strong>You have multiple Python versions installed you want to install package for the user without a need to understand which pip maps to which Python</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="introduction.html#cb4-1"></a><span class="ex">python</span> -m pip install --user numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
+</div>
+</div>
+<div id="the-data-science-packages" class="section level3" number="1.4.4">
+<h3 number="1.4.4"><span class="header-section-number">1.4.4</span> The Data Science Packages</h3>
 <p>You’ll also need to install some Python packages. A Python <strong>package</strong> is a collection of functions, data, and documentation that extends the capabilities of base Python. Using packages is key to the successful use of Python for data science. The majority of the packages that you will learn in this book are related to the so-called <a href="https://www.tidyverse.org/packages/">tidyverse packages</a> in R. There are attempts to port they tidyverse package process into Python. We are not showing the tools that recreate the tidyverse in Python but those that current Data Scientists use to do equivelent work in Python. You will notice that <a href="https://pandas.pydata.org/pandas-docs/stable/index.html">pandas</a> is the primary tool with a few packages that come with base Python. Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html">user guide</a> will be referenced heavily as we progress.</p>
 <table>
 <thead>
@@ -365,39 +392,31 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 </tbody>
 </table>
 <p>Notice that the visualization space in Python does not have a force like ggplot2. Chris Moffitt provided an <a href="https://pbpython.com/python-vis-flowchart.html">efficient visualization tools diagram</a> to help Python users with this decision.</p>
-<p>You can install the a standard set of data science python packages with the following lines of code:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="introduction.html#cb2-1"></a><span class="ex">pip</span> install numpy</span>
-<span id="cb2-2"><a href="introduction.html#cb2-2"></a><span class="ex">pip</span> install pandas</span>
-<span id="cb2-3"><a href="introduction.html#cb2-3"></a><span class="ex">pip</span> install xlrd</span>
-<span id="cb2-4"><a href="introduction.html#cb2-4"></a><span class="ex">pip</span> install matplotlib</span>
-<span id="cb2-5"><a href="introduction.html#cb2-5"></a><span class="ex">pip</span> install seaborn</span>
-<span id="cb2-6"><a href="introduction.html#cb2-6"></a><span class="ex">pip</span> install plotnine  </span>
-<span id="cb2-7"><a href="introduction.html#cb2-7"></a><span class="ex">pip</span> install altair vega_datasets</span>
-<span id="cb2-8"><a href="introduction.html#cb2-8"></a><span class="ex">pip</span> install statsmodels</span>
-<span id="cb2-9"><a href="introduction.html#cb2-9"></a><span class="ex">pip</span> install scikit-learn</span></code></pre></div>
-<p>On your own computer, type that line of code in the console, and then press enter to run it. R will download the packages from CRAN and install them on to your computer. If you have problems installing, make sure that you are connected to the internet, and that <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> isn’t blocked by your firewall or proxy.</p>
-<p>You will not be able to use the functions and objects in a package until you load it with <code>import</code>. It is common in python for each packge to have a standard abbreviated name. For example, numpy is imported as ‘np’ and pandas is imported as ‘pd’ in the code chunk below.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="introduction.html#cb3-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="introduction.html#cb3-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-3"><a href="introduction.html#cb3-3"></a><span class="im">import</span> string</span>
-<span id="cb3-4"><a href="introduction.html#cb3-4"></a><span class="im">import</span> re</span>
-<span id="cb3-5"><a href="introduction.html#cb3-5"></a><span class="im">import</span> matplotlib</span>
-<span id="cb3-6"><a href="introduction.html#cb3-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-7"><a href="introduction.html#cb3-7"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb3-8"><a href="introduction.html#cb3-8"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb3-9"><a href="introduction.html#cb3-9"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code></pre></div>
-</div>
-<div id="other-packages" class="section level3" number="1.4.4">
-<h3 number="1.4.4"><span class="header-section-number">1.4.4</span> Other packages</h3>
+<p>The following packages will give us a broad data science toolset in Python.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="introduction.html#cb5-1"></a><span class="ex">pip</span> install numpy pandas xlrd matplotlib</span>
+<span id="cb5-2"><a href="introduction.html#cb5-2"></a><span class="ex">pip</span> install seaborn plotnine altair vega_datasets</span>
+<span id="cb5-3"><a href="introduction.html#cb5-3"></a><span class="ex">pip</span> install statsmodels scikit-learn</span>
+<span id="cb5-4"><a href="introduction.html#cb5-4"></a><span class="ex">pip</span> install jupyter</span></code></pre></div>
+<p>On your computer, type that line of code in the console. The Python package manager pip will download the packages from <a href="https://pypi.org/">PyPi</a> and install them on to your computer. If you have problems installing, make sure that you are connected to the internet.</p>
+<p>You will not be able to use the functions and objects in a package until you load it with <code>import</code>. It is common in Python for each package to have a standard abbreviated name. For example, numpy is imported as ‘np’, and pandas is imported as ‘pd’ in the code chunk below.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="introduction.html#cb6-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="introduction.html#cb6-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-3"><a href="introduction.html#cb6-3"></a><span class="im">import</span> string</span>
+<span id="cb6-4"><a href="introduction.html#cb6-4"></a><span class="im">import</span> re</span>
+<span id="cb6-5"><a href="introduction.html#cb6-5"></a><span class="im">import</span> matplotlib</span>
+<span id="cb6-6"><a href="introduction.html#cb6-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-7"><a href="introduction.html#cb6-7"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-8"><a href="introduction.html#cb6-8"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb6-9"><a href="introduction.html#cb6-9"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code></pre></div>
 <p>There are many other excellent packages that are not included here.</p>
 </div>
 </div>
 <div id="running-python-code" class="section level2" number="1.5">
 <h2 number="1.5"><span class="header-section-number">1.5</span> Running Python code</h2>
 <p>The previous section showed you a couple of examples of running R code. Code in the book looks like this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="introduction.html#cb4-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb4-2"><a href="introduction.html#cb4-2"></a><span class="co">#&gt; [1] 3</span></span>
-<span id="cb4-3"><a href="introduction.html#cb4-3"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="introduction.html#cb7-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb7-2"><a href="introduction.html#cb7-2"></a><span class="co">#&gt; [1] 3</span></span>
+<span id="cb7-3"><a href="introduction.html#cb7-3"></a><span class="co">#&gt; 3</span></span></code></pre></div>
 <!-- If you run the same code in your local console, it will look like this: -->
 <!-- ``` -->
 <!-- > 1 + 2 -->

@@ -147,8 +147,51 @@ msg = "Hello again"
 print(msg)
 ```
 
-![](https://code.visualstudio.com/assets/docs/python/jupyter/code-cells-01.png)
+![](screenshots/vscode-code-cells-01.png)
 
+
+### Package Management (pip)
+
+You can install a standard set of data science python packages using [pip](https://pip.pypa.io/en/stable/user_guide/). However, there are some complications using pip on computers with multiple versions of Python.  
+
+* **pip**: If your path environment is correct, then a standard `pip install [package]` will work.  This is how most packages direct users to install Python packages.
+* **pip3**: If your OS has Python 2 and Python 3 installed, you may need to use `pip3 install [package]`.
+* **Force Python version**: You can run the pip related to a specific Python installation by using `python -m pip install [package]`. Some may need to provide the path to their Python installation if your Python path environment is not understood.
+
+A few cautions about package management with pip.
+
+- Never run `sudo pip install`.
+- If you don't have root permissions or the OS package manager doesn't have the package you need, use `pip install --user`. 
+- If you want multiple versions of the same library to coexist, to do Python development, or to isolate dependencies for any other reason, use [virtual environments](https://docs.python.org/3/tutorial/venv.html).
+- Generally, you will want to update pip before installing packages - `python -m pip install --user --upgrade pip setuptools wheel`
+
+[Conda](https://docs.conda.io/en/latest/), [poetry](https://python-poetry.org/docs/), and [pipenv](https://pipenv.pypa.io/en/latest/) are three other options for package management.  However, we will focus on using pip.
+
+#### pip package installation examples
+
+If we wanted to install the numpy, pandas, xlrd, matplolib, and seaborn packages, we would use pip.  Depending on your OS configuration, one of the following should work.
+
+**Everything in your path is clean and you are an admin on your computer**
+
+
+```bash
+pip install numpy pandas xlrd matplotlib seaborn
+```
+
+**Everything in your path is clean and you want to install package for the user**
+
+
+
+```bash
+pip install --user numpy pandas xlrd matplotlib seaborn
+```
+
+**You have multiple Python versions installed you want to install package for the user without a need to understand which pip maps to which Python**
+
+
+```bash
+python -m pip install --user numpy pandas xlrd matplotlib seaborn
+```
 
 
 ### The Data Science Packages
@@ -174,24 +217,19 @@ Tidyverse Package                          | Python Mapping
 
 Notice that the visualization space in Python does not have a force like ggplot2. Chris Moffitt provided an [efficient visualization tools diagram](https://pbpython.com/python-vis-flowchart.html) to help Python users with this decision.
 
-You can install the a standard set of data science python packages with the following lines of code:
+The following packages will give us a broad data science toolset in Python.
 
 
 ```bash
-pip install numpy
-pip install pandas
-pip install xlrd
-pip install matplotlib
-pip install seaborn
-pip install plotnine  
-pip install altair vega_datasets
-pip install statsmodels
-pip install scikit-learn
+pip install numpy pandas xlrd matplotlib
+pip install seaborn plotnine altair vega_datasets
+pip install statsmodels scikit-learn
+pip install jupyter
 ```
 
-On your own computer, type that line of code in the console, and then press enter to run it. R will download the packages from CRAN and install them on to your computer. If you have problems installing, make sure that you are connected to the internet, and that <https://cloud.r-project.org/> isn't blocked by your firewall or proxy. 
+On your computer, type that line of code in the console. The Python package manager pip will download the packages from [PyPi](https://pypi.org/) and install them on to your computer. If you have problems installing, make sure that you are connected to the internet. 
 
-You will not be able to use the functions and objects in a package until you load it with `import`. It is common in python for each packge to have a standard abbreviated name. For example, numpy is imported as 'np' and pandas is imported as 'pd' in the code chunk below. 
+You will not be able to use the functions and objects in a package until you load it with `import`. It is common in Python for each package to have a standard abbreviated name. For example, numpy is imported as 'np', and pandas is imported as 'pd' in the code chunk below. 
 
 
 ```python
@@ -206,8 +244,6 @@ from plotnine import *
 import altair as alt
 
 ```
-
-### Other packages
 
 There are many other excellent packages that are not included here. 
 
