@@ -127,6 +127,29 @@ Install the [Python extension for VS Code](https://marketplace.visualstudio.com/
 
 The [third video](https://www.youtube.com/watch?v=CXZYvNRIAKM&list=PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6&index=3) and [fourth video](https://www.youtube.com/watch?v=EU8eayHWoZg&list=PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6&index=4) in this [Python for Beginners](https://www.youtube.com/playlist?list=PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6) set of videos done by Microsoft can also guide you through the Python Extension.
 
+#### VS Code Interactive Python Window
+
+An open-source project called [Jupyter](http://jupyter-notebook.readthedocs.io/en/latest/) is the standard method for interactive Python use for data science or scientific computing. However, there are [some issues](https://towardsdatascience.com/5-reasons-why-jupyter-notebooks-suck-4dc201e27086) with its use in a development environment.  VS Code has provided a way for us to have the best of Python and Jupyter Notebooks with their [Python Interactive Window](https://code.visualstudio.com/docs/python/jupyter-support-py).
+
+You will need to install the [jupyter python package](https://jupyter.readthedocs.io/en/latest/install.html) using `pip` or `pip3` for the interactive Python window to work.  See the following section for guidance on using `pip`.
+
+Using the VS Code functionality, you will work with a standard `.py` file instead of the `.ipynb` extension typically used with jupyter notebooks.  The Python extension in VS Code will recognize `# %%` as a cell or chunk of python code and add notebook options to 'Run Cell' as well as other actions. You can see the code example bellow with the image of the view in VS Code as an example. [Microsoft's documentation](https://code.visualstudio.com/docs/python/jupyter-support-py) goes into more detail (https://code.visualstudio.com/docs/python/jupyter-support-py).
+
+
+
+```python
+# %%
+msg = "Hello World"
+print(msg)
+
+# %%
+msg = "Hello again"
+print(msg)
+```
+
+![](https://code.visualstudio.com/assets/docs/python/jupyter/code-cells-01.png)
+
+
 
 ### The Data Science Packages
 
@@ -134,29 +157,30 @@ You'll also need to install some Python packages. A Python __package__ is a coll
 
 Tidyverse Package                          | Python Mapping
 -------------                              | -------------
-[dblyr](https://dplyr.tidyverse.org/)      | [pandas](https://pypi.org/project/pandas/)
+[dplyr](https://dplyr.tidyverse.org/)      | [pandas](https://pypi.org/project/pandas/)
 [tidyr](https://tidyr.tidyverse.org/)      | [pandas](https://pypi.org/project/pandas/)
 [tibble](https://tibble.tidyverse.org/)    | [pandas](https://pypi.org/project/pandas/)
 [stringr](https://stringr.tidyverse.org/)  | [string and re](https://docs.python.org/3/library/text.html)
 [forcats](https://forcats.tidyverse.org/)  | [pandas categorical data](https://pandas.pydata.org/pandas-docs/stable/user_guide/categorical.html)
 [readr](https://readr.tidyverse.org/)      | [pandas io tools](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html)
+[readxl](https://readxl.tidyverse.org/)    | [xlrd](https://xlrd.readthedocs.io/en/stable/) and [openpyxl](https://openpyxl.readthedocs.io/en/stable/)
 [ggplot2](https://ggplot2.tidyverse.org/)  | [seaborn](https://seaborn.pydata.org/), [altair](https://altair-viz.github.io/), [plotnine](https://plotnine.readthedocs.io/en/stable/)
 [purrr](https://purrr.tidyverse.org/)      | [built in map function](https://docs.python.org/3/library/functions.html#map)
 [base R stats package](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)  | [statsmodels](https://www.statsmodels.org/stable/index.html)
 [tidymodels](https://github.com/tidymodels)| [scikit-learn](https://scikit-learn.org/stable/)
 [R tensorflow](https://tensorflow.rstudio.com/)  |  [tensorflow](https://www.tensorflow.org/overview)
 [R keras](https://keras.rstudio.com/)         | [keras](https://keras.io/)
-
+[rmarkdown](https://github.com/rstudio/rmarkdown)  | [jupyter](https://jupyter.readthedocs.io/en/latest/install.html)
 
 Notice that the visualization space in Python does not have a force like ggplot2. Chris Moffitt provided an [efficient visualization tools diagram](https://pbpython.com/python-vis-flowchart.html) to help Python users with this decision.
 
-
-You can install the a stanard set of data science python packages with the following lines of code:
+You can install the a standard set of data science python packages with the following lines of code:
 
 
 ```bash
 pip install numpy
 pip install pandas
+pip install xlrd
 pip install matplotlib
 pip install seaborn
 pip install plotnine  

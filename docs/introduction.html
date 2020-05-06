@@ -280,6 +280,20 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 <p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension for VS Code</a> from the Visual Studio Marketplace. For additional details on installing extensions, see <a href="https://code.visualstudio.com/docs/editor/extension-gallery">Extension Marketplace</a>. The Python extension is named Python and it’s published by Microsoft. You can follow more of <a href="https://code.visualstudio.com/docs/python/python-tutorial">their tutorial at code.visualstudio.com</a>.</p>
 <p>The <a href="https://www.youtube.com/watch?v=CXZYvNRIAKM&amp;list=PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6&amp;index=3">third video</a> and <a href="https://www.youtube.com/watch?v=EU8eayHWoZg&amp;list=PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6&amp;index=4">fourth video</a> in this <a href="https://www.youtube.com/playlist?list=PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6">Python for Beginners</a> set of videos done by Microsoft can also guide you through the Python Extension.</p>
 </div>
+<div id="vs-code-interactive-python-window" class="section level4" number="1.4.2.2">
+<h4 number="1.4.2.2"><span class="header-section-number">1.4.2.2</span> VS Code Interactive Python Window</h4>
+<p>An open-source project called <a href="http://jupyter-notebook.readthedocs.io/en/latest/">Jupyter</a> is the standard method for interactive Python use for data science or scientific computing. However, there are <a href="https://towardsdatascience.com/5-reasons-why-jupyter-notebooks-suck-4dc201e27086">some issues</a> with its use in a development environment. VS Code has provided a way for us to have the best of Python and Jupyter Notebooks with their <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">Python Interactive Window</a>.</p>
+<p>You will need to install the <a href="https://jupyter.readthedocs.io/en/latest/install.html">jupyter python package</a> using <code>pip</code> or <code>pip3</code> for the interactive Python window to work. See the following section for guidance on using <code>pip</code>.</p>
+<p>Using the VS Code functionality, you will work with a standard <code>.py</code> file instead of the <code>.ipynb</code> extension typically used with jupyter notebooks. The Python extension in VS Code will recognize <code># %%</code> as a cell or chunk of python code and add notebook options to ‘Run Cell’ as well as other actions. You can see the code example bellow with the image of the view in VS Code as an example. <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">Microsoft’s documentation</a> goes into more detail (<a href="https://code.visualstudio.com/docs/python/jupyter-support-py" class="uri">https://code.visualstudio.com/docs/python/jupyter-support-py</a>).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="introduction.html#cb1-1"></a><span class="co"># %%</span></span>
+<span id="cb1-2"><a href="introduction.html#cb1-2"></a>msg <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span></span>
+<span id="cb1-3"><a href="introduction.html#cb1-3"></a><span class="bu">print</span>(msg)</span>
+<span id="cb1-4"><a href="introduction.html#cb1-4"></a></span>
+<span id="cb1-5"><a href="introduction.html#cb1-5"></a><span class="co"># %%</span></span>
+<span id="cb1-6"><a href="introduction.html#cb1-6"></a>msg <span class="op">=</span> <span class="st">&quot;Hello again&quot;</span></span>
+<span id="cb1-7"><a href="introduction.html#cb1-7"></a><span class="bu">print</span>(msg)</span></code></pre></div>
+<p><img src="https://code.visualstudio.com/assets/docs/python/jupyter/code-cells-01.png" /></p>
+</div>
 </div>
 <div id="the-data-science-packages" class="section level3" number="1.4.3">
 <h3 number="1.4.3"><span class="header-section-number">1.4.3</span> The Data Science Packages</h3>
@@ -293,7 +307,7 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://dplyr.tidyverse.org/">dblyr</a></td>
+<td><a href="https://dplyr.tidyverse.org/">dplyr</a></td>
 <td><a href="https://pypi.org/project/pandas/">pandas</a></td>
 </tr>
 <tr class="even">
@@ -317,52 +331,61 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 <td><a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">pandas io tools</a></td>
 </tr>
 <tr class="odd">
+<td><a href="https://readxl.tidyverse.org/">readxl</a></td>
+<td><a href="https://xlrd.readthedocs.io/en/stable/">xlrd</a> and <a href="https://openpyxl.readthedocs.io/en/stable/">openpyxl</a></td>
+</tr>
+<tr class="even">
 <td><a href="https://ggplot2.tidyverse.org/">ggplot2</a></td>
 <td><a href="https://seaborn.pydata.org/">seaborn</a>, <a href="https://altair-viz.github.io/">altair</a>, <a href="https://plotnine.readthedocs.io/en/stable/">plotnine</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://purrr.tidyverse.org/">purrr</a></td>
 <td><a href="https://docs.python.org/3/library/functions.html#map">built in map function</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html">base R stats package</a></td>
 <td><a href="https://www.statsmodels.org/stable/index.html">statsmodels</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://github.com/tidymodels">tidymodels</a></td>
 <td><a href="https://scikit-learn.org/stable/">scikit-learn</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://tensorflow.rstudio.com/">R tensorflow</a></td>
 <td><a href="https://www.tensorflow.org/overview">tensorflow</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://keras.rstudio.com/">R keras</a></td>
 <td><a href="https://keras.io/">keras</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/rstudio/rmarkdown">rmarkdown</a></td>
+<td><a href="https://jupyter.readthedocs.io/en/latest/install.html">jupyter</a></td>
 </tr>
 </tbody>
 </table>
 <p>Notice that the visualization space in Python does not have a force like ggplot2. Chris Moffitt provided an <a href="https://pbpython.com/python-vis-flowchart.html">efficient visualization tools diagram</a> to help Python users with this decision.</p>
-<p>You can install the a stanard set of data science python packages with the following lines of code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="introduction.html#cb1-1"></a><span class="ex">pip</span> install numpy</span>
-<span id="cb1-2"><a href="introduction.html#cb1-2"></a><span class="ex">pip</span> install pandas</span>
-<span id="cb1-3"><a href="introduction.html#cb1-3"></a><span class="ex">pip</span> install matplotlib</span>
-<span id="cb1-4"><a href="introduction.html#cb1-4"></a><span class="ex">pip</span> install seaborn</span>
-<span id="cb1-5"><a href="introduction.html#cb1-5"></a><span class="ex">pip</span> install plotnine  </span>
-<span id="cb1-6"><a href="introduction.html#cb1-6"></a><span class="ex">pip</span> install altair vega_datasets</span>
-<span id="cb1-7"><a href="introduction.html#cb1-7"></a><span class="ex">pip</span> install statsmodels</span>
-<span id="cb1-8"><a href="introduction.html#cb1-8"></a><span class="ex">pip</span> install scikit-learn</span></code></pre></div>
+<p>You can install the a standard set of data science python packages with the following lines of code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="introduction.html#cb2-1"></a><span class="ex">pip</span> install numpy</span>
+<span id="cb2-2"><a href="introduction.html#cb2-2"></a><span class="ex">pip</span> install pandas</span>
+<span id="cb2-3"><a href="introduction.html#cb2-3"></a><span class="ex">pip</span> install xlrd</span>
+<span id="cb2-4"><a href="introduction.html#cb2-4"></a><span class="ex">pip</span> install matplotlib</span>
+<span id="cb2-5"><a href="introduction.html#cb2-5"></a><span class="ex">pip</span> install seaborn</span>
+<span id="cb2-6"><a href="introduction.html#cb2-6"></a><span class="ex">pip</span> install plotnine  </span>
+<span id="cb2-7"><a href="introduction.html#cb2-7"></a><span class="ex">pip</span> install altair vega_datasets</span>
+<span id="cb2-8"><a href="introduction.html#cb2-8"></a><span class="ex">pip</span> install statsmodels</span>
+<span id="cb2-9"><a href="introduction.html#cb2-9"></a><span class="ex">pip</span> install scikit-learn</span></code></pre></div>
 <p>On your own computer, type that line of code in the console, and then press enter to run it. R will download the packages from CRAN and install them on to your computer. If you have problems installing, make sure that you are connected to the internet, and that <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> isn’t blocked by your firewall or proxy.</p>
 <p>You will not be able to use the functions and objects in a package until you load it with <code>import</code>. It is common in python for each packge to have a standard abbreviated name. For example, numpy is imported as ‘np’ and pandas is imported as ‘pd’ in the code chunk below.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="introduction.html#cb2-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="introduction.html#cb2-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-3"><a href="introduction.html#cb2-3"></a><span class="im">import</span> string</span>
-<span id="cb2-4"><a href="introduction.html#cb2-4"></a><span class="im">import</span> re</span>
-<span id="cb2-5"><a href="introduction.html#cb2-5"></a><span class="im">import</span> matplotlib</span>
-<span id="cb2-6"><a href="introduction.html#cb2-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-7"><a href="introduction.html#cb2-7"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb2-8"><a href="introduction.html#cb2-8"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb2-9"><a href="introduction.html#cb2-9"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="introduction.html#cb3-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="introduction.html#cb3-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="introduction.html#cb3-3"></a><span class="im">import</span> string</span>
+<span id="cb3-4"><a href="introduction.html#cb3-4"></a><span class="im">import</span> re</span>
+<span id="cb3-5"><a href="introduction.html#cb3-5"></a><span class="im">import</span> matplotlib</span>
+<span id="cb3-6"><a href="introduction.html#cb3-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-7"><a href="introduction.html#cb3-7"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-8"><a href="introduction.html#cb3-8"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb3-9"><a href="introduction.html#cb3-9"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code></pre></div>
 </div>
 <div id="other-packages" class="section level3" number="1.4.4">
 <h3 number="1.4.4"><span class="header-section-number">1.4.4</span> Other packages</h3>
@@ -372,9 +395,9 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 <div id="running-python-code" class="section level2" number="1.5">
 <h2 number="1.5"><span class="header-section-number">1.5</span> Running Python code</h2>
 <p>The previous section showed you a couple of examples of running R code. Code in the book looks like this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="introduction.html#cb3-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb3-2"><a href="introduction.html#cb3-2"></a><span class="co">#&gt; [1] 3</span></span>
-<span id="cb3-3"><a href="introduction.html#cb3-3"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="introduction.html#cb4-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb4-2"><a href="introduction.html#cb4-2"></a><span class="co">#&gt; [1] 3</span></span>
+<span id="cb4-3"><a href="introduction.html#cb4-3"></a><span class="co">#&gt; 3</span></span></code></pre></div>
 <!-- If you run the same code in your local console, it will look like this: -->
 <!-- ``` -->
 <!-- > 1 + 2 -->
