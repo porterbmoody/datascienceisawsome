@@ -195,7 +195,7 @@ python -m pip install --user numpy pandas xlrd matplotlib seaborn
 
 You'll also need to install some Python packages. A Python __package__ is a collection of functions, data, and documentation that extends the capabilities of base Python. Using packages is key to the successful use of Python for data science. The majority of the packages that you will learn in this book are related to the so-called [tidyverse packages](https://www.tidyverse.org/packages/) in R. There are attempts to port they tidyverse package process into Python.  We are not showing the tools that recreate the tidyverse in Python but those that current Data Scientists use to do equivelent work in Python. You will notice that [pandas](https://pandas.pydata.org/pandas-docs/stable/index.html) is the primary tool with a few packages that come with base Python. Pandas [user guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html) will be referenced heavily as we progress. 
 
-Tidyverse Package                          | Python Mapping
+R Tidyverse Package                          | Python Package
 -------------                              | -------------
 [dplyr](https://dplyr.tidyverse.org/)      | [pandas](https://pypi.org/project/pandas/)
 [tidyr](https://tidyr.tidyverse.org/)      | [pandas](https://pypi.org/project/pandas/)
@@ -223,7 +223,7 @@ pip install statsmodels scikit-learn
 pip install jupyter
 ```
 
-On your computer, type that line of code in the console. The Python package manager pip will download the packages from [PyPi](https://pypi.org/) and install them on to your computer. If you have problems installing, make sure that you are connected to the internet. 
+On your computer, type that above of code in the command line. The Python package manager pip will download the packages from [PyPi](https://pypi.org/) and install them on to your computer. If you have problems installing, make sure that you are connected to the internet. 
 
 You will not be able to use the functions and objects in a package until you load it with `import`. It is common in Python for each package to have a standard abbreviated name. For example, numpy is imported as 'np', and pandas is imported as 'pd' in the code chunk below. 
 
