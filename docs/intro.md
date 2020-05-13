@@ -249,131 +249,159 @@ There are many other excellent packages that are not included here.
 
 ## Running Python code
 
-The previous section showed you a couple of examples of running R code. Code in the book looks like this:
+The previous section showed you a couple of examples of running Python code. Code in the book looks like this:
 
 
 ```python
 1 + 2
-#> [1] 3
+#> 3
 #> 3
 ```
 
-<!-- If you run the same code in your local console, it will look like this: -->
+If you run the same code in interactive python with VS Code, it will look like this:
 
-<!-- ``` -->
-<!-- > 1 + 2 -->
-<!-- [1] 3 -->
-<!-- ``` -->
+```
+[1] 1 + 2
+3
+```
 
-<!-- There are two main differences. In your console, you type after the `>`, called the __prompt__; we don't show the prompt in the book. In the book, output is commented out with `#>`; in your console it appears directly after your code. These two differences mean that if you're working with an electronic version of the book, you can easily copy code out of the book and into the console. -->
+The Python Interactive window can be used as a standalone console with arbitrary code (with or without code cells). To use the window as a console, open it with the *Python: Show Python Interactive window* command from the *Command Palette*. You can then type in code, using **Enter** to go to a new line and **Shift+Enter** to run the code.
 
-<!-- Throughout the book we use a consistent set of conventions to refer to code: -->
 
-<!-- * Functions are in a code font and followed by parentheses, like `sum()`,  -->
-<!--   or `mean()`. -->
+There are two main differences. In your interactive window, you type after the `[#]`; we don't show the line number in the book. In the book, output is commented out with `#>`; in your console it appears directly after your code. These two differences mean that if you're working with an electronic version of the book, you can easily copy code out of the book and into the interactive window.
 
-<!-- * Other R objects (like data or function arguments) are in a code font, -->
-<!--   without parentheses, like `flights` or `x`. -->
+Throughout the book we use a consistent set of conventions to refer to code:
 
-<!-- * If we want to make it clear what package an object comes from, we'll use -->
-<!--   the package name followed by two colons, like `dplyr::mutate()`, or    -->
-<!--   `nycflights13::flights`. This is also valid R code. -->
+* Functions are in a code font and followed by parentheses, like `sum()`,
+  or `mean()`.
 
-<!-- ## Getting help and learning more -->
+* Other R objects (like data or function arguments) are in a code font,
+  without parentheses, like `flights` or `x`.
 
-<!-- This book is not an island; there is no single resource that will allow you to master R. As you start to apply the techniques described in this book to your own data you will soon find questions that I do not answer. This section describes a few tips on how to get help, and to help you keep learning. -->
+## Getting help and learning more
 
-<!-- If you get stuck, start with Google. Typically adding "R" to a query is enough to restrict it to relevant results: if the search isn't useful, it often means that there aren't any R-specific results available. Google is particularly useful for error messages. If you get an error message and you have no idea what it means, try googling it! Chances are that someone else has been confused by it in the past, and there will be help somewhere on the web. (If the error message isn't in English, run `Sys.setenv(LANGUAGE = "en")` and re-run the code; you're more likely to find help for English error messages.) -->
+This book is not an island; there is no single resource that will allow you to master Python for data science. As you start to apply the techniques described in this book to your own data you will soon find questions that we do not answer. This section describes a few tips on how to get help, and to help you keep learning.
 
-<!-- If Google doesn't help, try [stackoverflow](http://stackoverflow.com). Start by spending a little time searching for an existing answer, including `[R]` to restrict your search to questions and answers that use R. If you don't find anything useful, prepare a minimal reproducible example or __reprex__.  A good reprex makes it easier for other people to help you, and often you'll figure out the problem yourself in the course of making it. -->
+If you get stuck, start with Google. Typically adding "python" to a query is enough to restrict it to relevant results: if the search isn't useful, it often means that there aren't any Python-specific results available. Google is particularly useful for error messages. If you get an error message and you have no idea what it means, try googling it! Chances are that someone else has been confused by it in the past, and there will be help somewhere on the web. (If the error message isn't in English, run `Sys.setenv(LANGUAGE = "en")` and re-run the code; you're more likely to find help for English error messages.)
 
-<!-- There are three things you need to include to make your example reproducible: required packages, data, and code. -->
+If Google doesn't help, try [stackoverflow](http://stackoverflow.com). Start by spending a little time searching for an existing answer, including `[python]` to restrict your search to questions and answers that use Python. If you don't find anything useful, prepare a minimal reproducible example or __reprex__.  A good reprex makes it easier for other people to help you, and often you'll figure out the problem yourself in the course of making it.
 
-<!-- 1.  **Packages** should be loaded at the top of the script, so it's easy to -->
-<!--     see which ones the example needs. This is a good time to check that you're -->
-<!--     using the latest version of each package; it's possible you've discovered -->
-<!--     a bug that's been fixed since you installed the package. For packages -->
-<!--     in the tidyverse, the easiest way to check is to run `tidyverse_update()`. -->
+There are three things you need to include to make your example reproducible: required packages, data, and code.
 
-<!-- 1.  The easiest way to include **data** in a question is to use `dput()` to  -->
-<!--     generate the R code to recreate it. For example, to recreate the `mtcars`  -->
-<!--     dataset in R, I'd perform the following steps: -->
+1.  **Packages** should be imported at the top of the script, so it's easy to
+    see which ones the example needs. This is a good time to check that you're
+    using the latest version of each package; it's possible you've discovered
+    a bug that's been fixed since you installed the package. 
 
-<!--     1. Run `dput(mtcars)` in R -->
-<!--     2. Copy the output -->
-<!--     3. In my reproducible script, type `mtcars <- ` then paste. -->
+2.  The easiest way to include **data** in a question is to create a minimal 
+    example to that recreates it. Try and find the smallest subset of your data
+    that still reveals the problem.
 
-<!--     Try and find the smallest subset of your data that still reveals -->
-<!--     the problem. -->
+3.  Spend a little bit of time ensuring that your **code** is easy for others to
+    read:
 
-<!-- 1.  Spend a little bit of time ensuring that your **code** is easy for others to -->
-<!--     read: -->
+    * Make sure you've used spaces and your variable names are concise, yet
+      informative.
 
-<!--     * Make sure you've used spaces and your variable names are concise, yet -->
-<!--       informative. -->
+    * Use comments to indicate where your problem lies.
 
-<!--     * Use comments to indicate where your problem lies. -->
+    * Do your best to remove everything that is not related to the problem.
+      The shorter your code is, the easier it is to understand, and the
+      easier it is to fix.
 
-<!--     * Do your best to remove everything that is not related to the problem.   -->
-<!--       The shorter your code is, the easier it is to understand, and the  -->
-<!--       easier it is to fix. -->
+Finish by checking that you have actually made a reproducible example by starting a fresh Python session to run your script in.
 
-<!-- Finish by checking that you have actually made a reproducible example by starting a fresh R session and copying and pasting your script in.  -->
+You should also spend some time preparing yourself to solve problems before they occur. Investing a little time in learning Python each day will pay off handsomely in the long run. One way is to follow what Wes McKinney, Garrett, and everyone else at RStudio are doing on the [Pandas blog](https://pandas.pydata.org/community/blog/) or the [ossdata blog](https://discuss.ossdata.org/). This is where they post announcements about new packages and new IDE features. You might also want to follow Wes McKinney ([\@wesmckinn](https://twitter.com/wesmckinn)) on Twitter, or follow [\@code](https://twitter.com/code) to keep up with new features in VS Code.
 
-<!-- You should also spend some time preparing yourself to solve problems before they occur. Investing a little time in learning R each day will pay off handsomely in the long run. One way is to follow what Hadley, Garrett, and everyone else at RStudio are doing on the [RStudio blog](https://blog.rstudio.org). This is where we post announcements about new packages, new IDE features, and in-person courses. You might also want to follow Hadley ([\@hadleywickham](https://twitter.com/hadleywickham)) or Garrett ([\@statgarrett](https://twitter.com/statgarrett)) on Twitter, or follow [\@rstudiotips](https://twitter.com/rstudiotips) to keep up with new features in the IDE. -->
+To keep up with the data science community more broadly, we recommend reading <https://planet.scipy.org/#>. If you're an active Twitter user, follow the `#datascience` hashtag. 
 
-<!-- To keep up with the R community more broadly, we recommend reading <http://www.r-bloggers.com>: it aggregates over 500 blogs about R from around the world. If you're an active Twitter user, follow the `#rstats` hashtag. Twitter is one of the key tools that Hadley uses to keep up with new developments in the community. -->
+## Acknowledgements
 
-<!-- ## Acknowledgements -->
+The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code.  You can see the original [acknowledgements here](https://r4ds.had.co.nz/introduction.html#acknowledgements). 
 
-<!-- This book isn't just the product of Hadley and Garrett, but is the result of many conversations (in person and online) that we've had with the many people in the R community. There are a few people we'd like to thank in particular, because they have spent many hours answering our dumb questions and helping us to better think about data science: -->
+## Colophon
 
-<!-- * Jenny Bryan and Lionel Henry for many helpful discussions around working -->
-<!--   with lists and list-columns. -->
+An online version of this book is available at <https://byuidatascience.github.io/python4ds/>. It will continue to evolve. The source of the book is available at <https://github.com/byuidatascience/python4ds>. The book is powered by <https://bookdown.org> which makes it easy to turn R markdown files into HTML, PDF, and EPUB.
 
-<!-- * The three chapters on workflow were adapted (with permission), from -->
-<!--   <http://stat545.com/block002_hello-r-workspace-wd-project.html> by  -->
-<!--   Jenny Bryan. -->
+This book was built with:
 
-<!-- * Genevera Allen for discussions about models, modelling, the statistical -->
-<!--   learning perspective, and the difference between hypothesis generation and  -->
-<!--   hypothesis confirmation. -->
 
-<!-- * Yihui Xie for his work on the [bookdown](https://github.com/rstudio/bookdown)  -->
-<!--   package, and for tirelessly responding to my feature requests. -->
-
-<!-- * Bill Behrman for his thoughtful reading of the entire book, and for trying  -->
-<!--   it out with his data science class at Stanford. -->
-
-<!-- * The \#rstats twitter community who reviewed all of the draft chapters -->
-<!--   and provided tons of useful feedback. -->
-
-<!-- * Tal Galili for augmenting his dendextend package to support a section on clustering that did not make it into the final draft. -->
-
-<!-- This book was written in the open, and many people contributed pull requests to fix minor problems. Special thanks goes to everyone who contributed via GitHub:  -->
-
-<!-- ```{r, results = "asis", echo = FALSE, message = FALSE} -->
-<!-- library(dplyr) -->
-<!-- # git --no-pager shortlog -ns > contribs.txt -->
-<!-- contribs <- readr::read_tsv("contribs.txt", col_names = c("n", "name")) -->
-
-<!-- contribs <- contribs %>%  -->
-<!--   filter(!name %in% c("hadley", "Garrett", "Hadley Wickham", -->
-<!--                       "Garrett Grolemund")) %>%  -->
-<!--   arrange(name) %>%  -->
-<!--   mutate(uname = ifelse(!grepl(" ", name), paste0("@", name), name)) -->
-
-<!-- cat("Thanks go to all contributers in alphabetical order: ") -->
-<!-- cat(paste0(contribs$uname, collapse = ", ")) -->
-<!-- cat(".\n") -->
-<!-- ``` -->
-
-<!-- ## Colophon -->
-
-<!-- An online version of this book is available at <http://r4ds.had.co.nz>. It will continue to evolve in between reprints of the physical book. The source of the book is available at <https://github.com/hadley/r4ds>. The book is powered by <https://bookdown.org> which makes it easy to turn R markdown files into HTML, PDF, and EPUB. -->
-
-<!-- This book was built with: -->
-
-<!-- ```{r} -->
-<!-- sessioninfo::session_info(c("tidyverse")) -->
-<!-- ``` -->
+```r
+sessioninfo::session_info()
+#> - Session info ---------------------------------------------------------------
+#>  setting  value                       
+#>  version  R version 3.6.3 (2020-02-29)
+#>  os       macOS Catalina 10.15.4      
+#>  system   x86_64, darwin15.6.0        
+#>  ui       X11                         
+#>  language (EN)                        
+#>  collate  en_US.UTF-8                 
+#>  ctype    en_US.UTF-8                 
+#>  tz       America/Boise               
+#>  date     2020-05-13                  
+#> 
+#> - Packages -------------------------------------------------------------------
+#>  package     * version date       lib source                            
+#>  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.0)                    
+#>  backports     1.1.6   2020-04-05 [1] CRAN (R 3.6.3)                    
+#>  bookdown      0.14    2019-10-01 [1] CRAN (R 3.6.0)                    
+#>  broom         0.5.6   2020-04-20 [1] CRAN (R 3.6.2)                    
+#>  cellranger    1.1.0   2016-07-27 [1] CRAN (R 3.6.0)                    
+#>  cli           2.0.2   2020-02-28 [1] CRAN (R 3.6.0)                    
+#>  colorspace    1.4-1   2019-03-18 [1] CRAN (R 3.6.0)                    
+#>  crayon        1.3.4   2017-09-16 [1] CRAN (R 3.6.0)                    
+#>  DBI           1.0.0   2018-05-02 [1] CRAN (R 3.6.0)                    
+#>  dbplyr        1.4.2   2019-06-17 [1] CRAN (R 3.6.0)                    
+#>  digest        0.6.25  2020-02-23 [1] CRAN (R 3.6.0)                    
+#>  dplyr       * 0.8.5   2020-03-07 [1] CRAN (R 3.6.0)                    
+#>  ellipsis      0.3.0   2019-09-20 [1] CRAN (R 3.6.0)                    
+#>  evaluate      0.14    2019-05-28 [1] CRAN (R 3.6.0)                    
+#>  fansi         0.4.1   2020-01-08 [1] CRAN (R 3.6.0)                    
+#>  forcats     * 0.5.0   2020-03-01 [1] CRAN (R 3.6.1)                    
+#>  fs            1.4.1   2020-04-04 [1] CRAN (R 3.6.3)                    
+#>  generics      0.0.2   2018-11-29 [1] CRAN (R 3.6.0)                    
+#>  ggplot2     * 3.3.0   2020-03-05 [1] CRAN (R 3.6.1)                    
+#>  glue          1.4.0   2020-04-03 [1] CRAN (R 3.6.3)                    
+#>  gtable        0.3.0   2019-03-25 [1] CRAN (R 3.6.0)                    
+#>  haven         2.2.0   2019-11-08 [1] CRAN (R 3.6.0)                    
+#>  hms           0.5.3   2020-01-08 [1] CRAN (R 3.6.0)                    
+#>  htmltools     0.4.0   2019-10-04 [1] CRAN (R 3.6.0)                    
+#>  httr          1.4.1   2019-08-05 [1] CRAN (R 3.6.0)                    
+#>  jsonlite      1.6.1   2020-02-02 [1] CRAN (R 3.6.0)                    
+#>  knitr         1.28    2020-02-06 [1] CRAN (R 3.6.0)                    
+#>  lattice       0.20-38 2018-11-04 [1] CRAN (R 3.6.3)                    
+#>  lifecycle     0.2.0   2020-03-06 [1] CRAN (R 3.6.0)                    
+#>  lubridate     1.7.4   2018-04-11 [1] CRAN (R 3.6.0)                    
+#>  magrittr      1.5     2014-11-22 [1] CRAN (R 3.6.0)                    
+#>  modelr        0.1.5   2019-08-08 [1] CRAN (R 3.6.0)                    
+#>  munsell       0.5.0   2018-06-12 [1] CRAN (R 3.6.0)                    
+#>  nlme          3.1-144 2020-02-06 [1] CRAN (R 3.6.3)                    
+#>  pillar        1.4.4   2020-05-05 [1] CRAN (R 3.6.2)                    
+#>  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 3.6.0)                    
+#>  purrr       * 0.3.4   2020-04-17 [1] CRAN (R 3.6.2)                    
+#>  R6            2.4.1   2019-11-12 [1] CRAN (R 3.6.1)                    
+#>  Rcpp          1.0.4.6 2020-04-09 [1] CRAN (R 3.6.3)                    
+#>  readr       * 1.3.1   2018-12-21 [1] CRAN (R 3.6.0)                    
+#>  readxl        1.3.1   2019-03-13 [1] CRAN (R 3.6.0)                    
+#>  reprex        0.3.0   2019-05-16 [1] CRAN (R 3.6.0)                    
+#>  reticulate    1.14    2019-12-17 [1] CRAN (R 3.6.1)                    
+#>  rlang         0.4.6   2020-05-02 [1] CRAN (R 3.6.2)                    
+#>  rmarkdown     2.1.3   2020-05-07 [1] Github (rstudio/rmarkdown@d7e1bda)
+#>  rstudioapi    0.11    2020-02-07 [1] CRAN (R 3.6.0)                    
+#>  rvest         0.3.5   2019-11-08 [1] CRAN (R 3.6.0)                    
+#>  scales        1.1.0   2019-11-18 [1] CRAN (R 3.6.0)                    
+#>  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 3.6.0)                    
+#>  stringi       1.4.6   2020-02-17 [1] CRAN (R 3.6.0)                    
+#>  stringr     * 1.4.0   2019-02-10 [1] CRAN (R 3.6.0)                    
+#>  tibble      * 3.0.1   2020-04-20 [1] CRAN (R 3.6.2)                    
+#>  tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 3.6.2)                    
+#>  tidyselect    1.0.0   2020-01-27 [1] CRAN (R 3.6.0)                    
+#>  tidyverse   * 1.3.0   2019-11-21 [1] CRAN (R 3.6.0)                    
+#>  vctrs         0.2.4   2020-03-10 [1] CRAN (R 3.6.0)                    
+#>  withr         2.2.0   2020-04-20 [1] CRAN (R 3.6.2)                    
+#>  xfun          0.13    2020-04-13 [1] CRAN (R 3.6.2)                    
+#>  xml2          1.3.2   2020-04-23 [1] CRAN (R 3.6.2)                    
+#>  yaml          2.2.1   2020-02-01 [1] CRAN (R 3.6.0)                    
+#> 
+#> [1] /Library/Frameworks/R.framework/Versions/3.6/Resources/library
+```
