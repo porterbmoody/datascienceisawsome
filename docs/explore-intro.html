@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Python for Data Science</title>
+  <title>2 Introduction | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Python for Data Science" />
+  <meta property="og:title" content="2 Introduction | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
   <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Python for Data Science" />
+  <meta name="twitter:title" content="2 Introduction | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction.html"/>
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="data-visualisation.html"/>
 <script src="libs/header-attrs-2.1.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -212,16 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Python for Data Science</h1>
-<p class="author"><em>J. Hathaway</em></p>
-</div>
-<div id="welcome" class="section level1 unnumbered" number="">
-<h1>Welcome</h1>
-<p><a href="http://amzn.to/2aHLAQ1"><img src="cover.png" width="250" height="375" alt="Cover image" align="right" style="margin: 0 1em 0 1em" /></a> This is the port of the website for <strong>“<a href="https://r4ds.had.co.nz/index.html">R for Data Science</a>”</strong> into Python. I am keeping Garrett Grolemund and Hadley Wickham’s writing and examples as much as possible while demonstrating Python instead of R.</p>
-<p>This book will teach you how to do data science with Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with R. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data.</p>
-<p>This website is (and will always be) <strong>free to use</strong>, and is licensed under the <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0</a> License.</p>
-<p>The book is written in <a href="https://rmarkdown.rstudio.com">RMarkdown</a> with <a href="https://bookdown.org">bookdown</a>. The orignial authors and contributors can be found <a href="https://r4ds.had.co.nz/index.html">here</a></p>
+<div id="explore-intro" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Introduction</h1>
+<p>The goal of the first part of this book is to get you up to speed with the basic tools of <strong>data exploration</strong> as quickly as possible. Data exploration is the art of looking at your data, rapidly generating hypotheses, quickly testing them, then repeating again and again and again. The goal of data exploration is to generate many promising leads that you can later explore in more depth.</p>
+<p><img src="diagrams/data-science-explore.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>In this part of the book you will learn some useful tools that have an immediate payoff:</p>
+<ul>
+<li><p>Visualisation is a fun place to start with Python programming, because the
+payoff is so clear: you get to make elegant and informative plots that help
+you understand data. In <a href="data-visualisation.html#data-visualisation">data visualisation</a> you’ll dive into visualisation,
+learning the basic structure of a pandas plot, and powerful techniques for
+turning data into plots.</p></li>
+<li><p>Visualisation alone is typically not enough, so in [data transformation]
+you’ll learn the key verbs that allow you to select important variables,
+filter out key observations, create new variables, and compute summaries.</p></li>
+<li><p>Finally, in [exploratory data analysis], you’ll combine visualisation and
+transformation with your curiosity and scepticism to ask and answer
+interesting questions about data.</p></li>
+</ul>
+<p>Modelling is an important part of the exploratory process, but you don’t have the skills to effectively learn or apply it yet. We’ll come back to it in <a href="#model-intro">modelling</a>, once you’re better equipped with more data wrangling and programming tools.</p>
+<p>Nestled among these three chapters that teach you the tools of exploration are three chapters that focus on your Python workflow. In [workflow: basics], [workflow: scripts], and [workflow: projects] you’ll learn good practices for writing and organising your R code. These will set you up for success in the long run, as they’ll give you the tools to stay organised when you tackle real projects.</p>
 
 </div>
             </section>
@@ -229,8 +239,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -252,7 +262,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/byuidatascience/python4ds/edit/master/index.rmd",
+"link": "https://github.com/byuidatascience/python4ds/edit/master/explore.Rmd",
 "text": "Edit"
 },
 "history": {

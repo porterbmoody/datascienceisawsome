@@ -1,4 +1,3 @@
-
 ---
 knit: "bookdown::render_book"
 title: "Python for Data Science"

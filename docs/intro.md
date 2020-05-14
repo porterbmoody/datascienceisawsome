@@ -1,4 +1,3 @@
-
 # Introduction
 
 Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. The goal of "Python for Data Science" is to help you learn some of the tools in Python that will allow you to begin your data science journey. After reading this book, you'll have the tools to tackle a wide variety of data science challenges, using the best parts of Python. 
@@ -315,6 +314,10 @@ You should also spend some time preparing yourself to solve problems before they
 
 To keep up with the data science community more broadly, we recommend reading <https://planet.scipy.org/#>. If you're an active Twitter user, follow the `#datascience` hashtag. 
 
+## Datasets access
+
+The data used in [R for Data Science](https://r4ds.had.co.nz/) is generally within the R packages themselves. Many of the Python data science packages also come with datasets upon import. However, we will use the original datasets presented in R for Data Science.  We have a [data4python4ds](https://github.com/byuidatascience/data4python4ds) GitHub data repository that contains all the datasets in varied file formats and all examples will use Pandas to read the data from GitHub.
+
 ## Acknowledgements
 
 The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code.  You can see the original [acknowledgements here](https://r4ds.had.co.nz/introduction.html#acknowledgements). 
@@ -344,10 +347,11 @@ sessioninfo::session_info()
 #>  package     * version date       lib source                            
 #>  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.0)                    
 #>  backports     1.1.6   2020-04-05 [1] CRAN (R 3.6.3)                    
-#>  bookdown      0.14    2019-10-01 [1] CRAN (R 3.6.0)                    
+#>  bookdown      0.18    2020-03-05 [1] CRAN (R 3.6.0)                    
 #>  broom         0.5.6   2020-04-20 [1] CRAN (R 3.6.2)                    
 #>  cellranger    1.1.0   2016-07-27 [1] CRAN (R 3.6.0)                    
 #>  cli           2.0.2   2020-02-28 [1] CRAN (R 3.6.0)                    
+#>  codetools     0.2-16  2018-12-24 [1] CRAN (R 3.6.3)                    
 #>  colorspace    1.4-1   2019-03-18 [1] CRAN (R 3.6.0)                    
 #>  crayon        1.3.4   2017-09-16 [1] CRAN (R 3.6.0)                    
 #>  DBI           1.0.0   2018-05-02 [1] CRAN (R 3.6.0)                    

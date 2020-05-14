@@ -11,14 +11,16 @@ This chapter will teach you how to visualise your data using seaborn. Python has
 
 This chapter focusses on Altair. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:
 
-```{python setup}
+
+```python
 import pandas as pd
 import seaborn as sns
 ```
 
 If you run this code and get the error message "No module named 'seaborn'" or "No module named 'pandas'", you'll need to first install them.
 
-```{bash eval = FALSE}
+
+```bash
 python -m pip install pandas seaborn
 ```
 
@@ -32,7 +34,8 @@ Let's use our first graph to answer a question: Do cars with big engines use mor
 
 You can test your answer with the `mpg` __data frame__ found in ggplot2 (aka  `ggplot2::mpg`). A data frame is a rectangular collection of variables (in the columns) and observations (in the rows). The *'mpg'* data contains observations collected by the US Environmental Protection Agency on 38 models of car. We will identify the *'mpg'* data using `mpg` for the remainder of this introduction.
 
-```{python}
+
+```python
 mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
 ```
 
@@ -53,8 +56,10 @@ To plot `mpg`, run this code to put `displ` on the x-axis and `hwy` on the y-axi
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
 
-```{python}
+
+```python
 sns.relplot(x = "displ", y = "hwy", data = mpg)
+#> <seaborn.axisgrid.FacetGrid object at 0x1353dad90>
 ```
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?

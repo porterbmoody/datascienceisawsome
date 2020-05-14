@@ -308,6 +308,10 @@ You should also spend some time preparing yourself to solve problems before they
 
 To keep up with the data science community more broadly, we recommend reading <https://planet.scipy.org/#>. If you're an active Twitter user, follow the `#datascience` hashtag. 
 
+## Datasets access
+
+The data used in [R for Data Science](https://r4ds.had.co.nz/) is generally within the R packages themselves. Many of the Python data science packages also come with datasets upon import. However, we will use the original datasets presented in R for Data Science.  We have a [data4python4ds](https://github.com/byuidatascience/data4python4ds) GitHub data repository that contains all the datasets in varied file formats and all examples will use Pandas to read the data from GitHub.
+
 ## Acknowledgements
 
 The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code.  You can see the original [acknowledgements here](https://r4ds.had.co.nz/introduction.html#acknowledgements). 

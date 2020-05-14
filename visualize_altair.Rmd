@@ -1,25 +1,53 @@
-# Data visualisation
+# Data visualisation (Altair)
 
-## Introduction (pandas)
+```{r, echo=FALSE}
+knitr::opts_chunk$set(python.reticulate = TRUE)
+library(reticulate)
+use_python("usr/local/bin/python3")
+```
+
+
+## Introduction
 
 > "The simple graph has brought more information to the data analyst’s mind 
 > than any other device." --- John Tukey
 
-This chapter will teach you how to visualise your data using seaborn. Python has several systems for making graphs, but seaborn is one of the most used. Its dataset-oriented plotting functions operate on dataframes and arrays containing whole datasets and internally perform the necessary semantic mapping and statistical aggregation to produce informative plots.
+This chapter will teach you how to visualise your data using Altair. Python has several systems for making graphs, but altiar is one of the most elegant and versatile. Altair implements the __declarative visualization__ much like the __grammar of graphics__, a coherent system for describing and building graphs. With altair, you can do more faster by learning one system and applying it in many places.
+
+If you'd like to learn more about Altair before you start, I'd recommend reading "Altair: Interactive Statistical Visualizations for Python", <https://joss.theoj.org/papers/10.21105/joss.01057.pdf>.
+
+We should note that we are building this book using R with the package bookdown.  Rendering Altair graphics using a python chunk is not straight forward but is not important for our use in VS Code. In VS Code the example chunks will render in the interactive Python viewer automatically. The following two code chunks show how we are rendering the Altair graphics in this book.
+
+```
+
+# ```{python, echo=FALSE, cache=FALSE}
+# chart.save("altair_charts/e1.html")
+# ```
+
+# ```{r, echo=FALSE}
+# htmltools::includeHTML("altair_charts/e1.html")
+# ```
+
+```
 
 ### Prerequisites
 
 This chapter focusses on Altair. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:
 
-```{python setup}
-import pandas as pd
-import seaborn as sns
+```{python, cache=FALSE}
+
+import pandas as pd   
+import altair as alt   
+from altair_saver import save
+
 ```
 
-If you run this code and get the error message "No module named 'seaborn'" or "No module named 'pandas'", you'll need to first install them.
+usr/local/bin/python3
+
+If you run this code and get the error message "No module named 'altair'" or "No module named 'pandas'", you'll need to first install them.
 
 ```{bash eval = FALSE}
-python -m pip install pandas seaborn
+python -m pip install pandas altair altair_saver
 ```
 
 You only need to install a package once, but you need to reload it every time you start a new session.
@@ -32,8 +60,10 @@ Let's use our first graph to answer a question: Do cars with big engines use mor
 
 You can test your answer with the `mpg` __data frame__ found in ggplot2 (aka  `ggplot2::mpg`). A data frame is a rectangular collection of variables (in the columns) and observations (in the rows). The *'mpg'* data contains observations collected by the US Environmental Protection Agency on 38 models of car. We will identify the *'mpg'* data using `mpg` for the remainder of this introduction.
 
-```{python}
+```{python, cache=FALSE}
+
 mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
+
 ```
 
 Among the variables in `mpg` are:
@@ -46,36 +76,57 @@ Among the variables in `mpg` are:
 
 To learn more about `mpg`, read informat at [data4python4ds](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
 
-### Creating a seaborn plot
+### Creating an Altair plot
 
 To plot `mpg`, run this code to put `displ` on the x-axis and `hwy` on the y-axis:
 
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy))
+```{python, cache=FALSE}
 
-```{python}
-sns.relplot(x = "displ", y = "hwy", data = mpg)
+chart = (alt.
+  Chart(mpg).
+  mark_point().
+  encode(
+    x='displ',
+    y='hwy'))
+
+```
+
+```{python, echo=FALSE, cache=FALSE}
+chart.save("altair_charts/e1.html")
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("altair_charts/e1.html")
 ```
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?
 
-With seaborn, you begin a plot with the function `sns`. `sns` simply connects to the functions imported from seaborn as sns. Seaborn is a Python data visualization library based on [matplotlib]((https://matplotlib.org/)). It provides a high-level interface for drawing attractive and informative statistical graphics. 
+With ggplot2, you begin a plot with the function `ggplot()`. `ggplot()` creates a coordinate system that you can add layers to. The first argument of `ggplot()` is the dataset to use in the graph. So `ggplot(data = mpg)` creates an empty graph, but it's not very interesting so I'm not going to show it here.
 
-You complete your graph by using the varied arguments within each of the four main plotting categories. You can find detailed tutorials done by seaborn by following the links.
+You complete your graph by adding one or more layers to `ggplot()`. The function `geom_point()` adds a layer of points to your plot, which creates a scatterplot. ggplot2 comes with many geom functions that each add a different type of layer to a plot. You'll learn a whole bunch of them throughout this chapter.
 
-1. [Visualizing statistical relationships](https://seaborn.pydata.org/tutorial/relational.html#emphasizing-continuity-with-line-plots)
-2. [Plotting with categorical data](https://seaborn.pydata.org/tutorial/categorical.html)
-3. [Visualizing the distribution of a dataset](https://seaborn.pydata.org/tutorial/distributions.html)
-4. [Visualizing linear relationships](https://seaborn.pydata.org/tutorial/regression.html)
+Each geom function in ggplot2 takes a `mapping` argument. This defines how variables in your dataset are mapped to visual properties. The `mapping` argument is always paired with `aes()`, and the `x` and `y` arguments of `aes()` specify which variables to map to the x and y axes. ggplot2 looks for the mapped variables in the `data` argument, in this case, `mpg`.
 
-Each plotting category maps varied arguments to your data. This defines how variables in your dataset are mapped to visual properties. 
+### A graphing template
+
+Let's turn this code into a reusable template for making graphs with ggplot2. To make a graph, replace the bracketed sections in the code below with a dataset, a geom function, or a collection of mappings.
+
+```{r eval = FALSE}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```
+
+The rest of this chapter will show you how to complete and extend this template to make different types of graphs. We will begin with the `<MAPPINGS>` component.
 
 ### Exercises
 
-1. How many rows are in `mpg`? How many columns?
+1.  Run `ggplot(data = mpg)`. What do you see?
 
-1.  What does the `drv` variable describe?  
+1.  How many rows are in `mpg`? How many columns?
 
+1.  What does the `drv` variable describe?  Read the help for `?mpg` to find
+    out.
+     
 1.  Make a scatterplot of `hwy` vs `cyl`.
 
 1.  What happens if you make a scatterplot of `class` vs `drv`? Why is
