@@ -1,5 +1,7 @@
 # Data visualisation
 
+
+
 ## Introduction (pandas)
 
 > "The simple graph has brought more information to the data analyst’s mind 
@@ -9,19 +11,20 @@ This chapter will teach you how to visualise your data using seaborn. Python has
 
 ### Prerequisites
 
-This chapter focusses on Altair. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:
+This chapter focusses on seaborn. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:
 
 
 ```python
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 ```
 
 If you run this code and get the error message "No module named 'seaborn'" or "No module named 'pandas'", you'll need to first install them.
 
 
 ```bash
-python -m pip install pandas seaborn
+python -m pip install pandas seaborn matplotlib
 ```
 
 You only need to install a package once, but you need to reload it every time you start a new session.
@@ -53,14 +56,15 @@ To learn more about `mpg`, read informat at [data4python4ds](https://github.com/
 
 To plot `mpg`, run this code to put `displ` on the x-axis and `hwy` on the y-axis:
 
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy))
 
 
 ```python
 sns.relplot(x = "displ", y = "hwy", data = mpg)
-#> <seaborn.axisgrid.FacetGrid object at 0x1353dad90>
+#> <seaborn.axisgrid.FacetGrid object at 0x13377ad90>
+plt.show()
 ```
+
+\includegraphics[width=0.7\linewidth]{/Users/hathawayj/git/byuidatascience/python4ds/visualize_files/figure-latex/unnamed-chunk-4-1} 
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?
 

@@ -223,11 +223,12 @@ than any other device.” — John Tukey</p>
 <p>This chapter will teach you how to visualise your data using seaborn. Python has several systems for making graphs, but seaborn is one of the most used. Its dataset-oriented plotting functions operate on dataframes and arrays containing whole datasets and internally perform the necessary semantic mapping and statistical aggregation to produce informative plots.</p>
 <div id="prerequisites-1" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Prerequisites</h3>
-<p>This chapter focusses on Altair. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:</p>
+<p>This chapter focusses on seaborn. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="data-visualisation.html#cb10-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-2"><a href="data-visualisation.html#cb10-2"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div>
+<span id="cb10-2"><a href="data-visualisation.html#cb10-2"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-3"><a href="data-visualisation.html#cb10-3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
 <p>If you run this code and get the error message “No module named ‘seaborn’” or “No module named ‘pandas’”, you’ll need to first install them.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="data-visualisation.html#cb11-1"></a><span class="ex">python</span> -m pip install pandas seaborn</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="data-visualisation.html#cb11-1"></a><span class="ex">python</span> -m pip install pandas seaborn matplotlib</span></code></pre></div>
 <p>You only need to install a package once, but you need to reload it every time you start a new session.</p>
 </div>
 </div>
@@ -250,10 +251,10 @@ fuel efficiency when they travel the same distance.</p></li>
 <div id="creating-a-seaborn-plot" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Creating a seaborn plot</h3>
 <p>To plot <code>mpg</code>, run this code to put <code>displ</code> on the x-axis and <code>hwy</code> on the y-axis:</p>
-<p>ggplot(data = mpg) +
-geom_point(mapping = aes(x = displ, y = hwy))</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="data-visualisation.html#cb13-1"></a>sns.relplot(x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>, y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>, data <span class="op">=</span> mpg)</span>
-<span id="cb13-2"><a href="data-visualisation.html#cb13-2"></a><span class="co">#&gt; &lt;seaborn.axisgrid.FacetGrid object at 0x130342ad0&gt;</span></span></code></pre></div>
+<span id="cb13-2"><a href="data-visualisation.html#cb13-2"></a><span class="co">#&gt; &lt;seaborn.axisgrid.FacetGrid object at 0x136cdde10&gt;</span></span>
+<span id="cb13-3"><a href="data-visualisation.html#cb13-3"></a>plt.show()</span></code></pre></div>
+<p><img src="visualize_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>The plot shows a negative relationship between engine size (<code>displ</code>) and fuel efficiency (<code>hwy</code>). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?</p>
 <p>With seaborn, you begin a plot with the function <code>sns</code>. <code>sns</code> simply connects to the functions imported from seaborn as sns. Seaborn is a Python data visualization library based on <a href="(https://matplotlib.org/)">matplotlib</a>. It provides a high-level interface for drawing attractive and informative statistical graphics.</p>
 <p>You complete your graph by using the varied arguments within each of the four main plotting categories. You can find detailed tutorials done by seaborn by following the links.</p>
