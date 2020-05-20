@@ -172,7 +172,7 @@ To map an encoding to a variable, associate the name of the encoding to the name
 
 The colors reveal that many of the unusual points are two-seater cars. These cars don't seem like hybrids, and are, in fact, sports cars! Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines.
 
-In the above example, we mapped `class` to the color aesthetic, but we could have mapped `class` to the size aesthetic in the same way. In this case, the exact size of each point would reveal its class affiliation. We get a _warning_ here, because mapping an unordered variable (`class`) to an ordered aesthetic (`size`) is not a good idea.
+In the above example, we mapped `class` to the color encoding, but we could have mapped `class` to the size encoding in the same way. In this case, the exact size of each point would reveal its class affiliation. Mapping an unordered variable (`class`) to an ordered aesthetic (`size`) is not a good idea.
 
 
 ```python
@@ -190,164 +190,226 @@ chart = (alt.
 
 \begin{center}\includegraphics[width=0.7\linewidth]{visualize_altair_files/figure-latex/unnamed-chunk-14-1} 
 
+Or we could have mapped `class` to the _opacity_ encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.
 
 
-<!-- Or we could have mapped `class` to the _alpha_ aesthetic, which controls the transparency of the points, or to the shape aesthetic, which controls the shape of the points. -->
+```python
+# First
+chart1 = (alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+    opacity = "class"
+    )
+)
 
-<!-- ```{r out.width = "50%", fig.align = 'default', warning = FALSE, fig.asp = 1/2, fig.cap =""} -->
-<!-- # Left -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy, alpha = class)) -->
+# Second
+chart2 = (alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+    shape = "class"
+    )
+)
+```
 
-<!-- # Right -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy, shape = class)) -->
-<!-- ``` -->
 
-<!-- What happened to the SUVs? ggplot2 will only use six shapes at a time. By default, additional groups will go unplotted when you use the shape aesthetic. -->
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_altair_files/figure-latex/unnamed-chunk-16-1} 
 
-<!-- For each aesthetic, you use `aes()` to associate the name of the aesthetic with a variable to display. The `aes()` function gathers together each of the aesthetic mappings used by a layer and passes them to the layer's mapping argument. The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves aesthetics, visual properties that you can map to variables to display information about the data.  -->
 
-<!-- Once you map an aesthetic, ggplot2 takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, ggplot2 does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values. -->
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_altair_files/figure-latex/unnamed-chunk-17-1} 
 
-<!-- You can also _set_ the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue: -->
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy), color = "blue") -->
-<!-- ``` -->
+Altair will only use 8 shapes for one chart. Charting more than 8 shapes is not recommended as the shapes simply recycle.
 
-<!-- Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an aesthetic manually, set the aesthetic by name as an argument of your geom function; i.e. it goes _outside_ of `aes()`. You'll need to pick a level that makes sense for that aesthetic: -->
+For each encoding, you use `encode()` to associate the name of the encoding with a variable to display. The `encode()` function gathers together each of the encoded mappings used by a layer and passes them to the layer's mapping argument. The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves encodings, visual properties that you can map to variables to display information about the data.
 
-<!-- * The name of a color as a character string. -->
+Once you map an encoding, Altair takes care of the rest. It selects a reasonable scale to use with the encoding, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, Altair does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values.
 
-<!-- * The size of a point in mm. -->
+You can also _configure_ the encoding properties of your mark manually. For example, we can make all of the points in our plot blue:
 
-<!-- * The shape of a point as a number, as shown in Figure \@ref(fig:shapes). -->
 
-<!-- ```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R has 25 built in shapes that are identified by numbers. There are some seeming duplicates: for example, 0, 15, and 22 are all squares. The difference comes from the interaction of the `colour` and `fill` aesthetics. The hollow shapes (0--14) have a border determined by `colour`; the solid shapes (15--18) are filled with `colour`; the filled shapes (21--24) have a border of `colour` and are filled with `fill`.", warning = FALSE} -->
-<!-- shapes <- tibble( -->
-<!--   shape = c(0, 1, 2, 5, 3, 4, 6:19, 22, 21, 24, 23, 20), -->
-<!--   x = (0:24 %/% 5) / 2, -->
-<!--   y = (-(0:24 %% 5)) / 4 -->
-<!-- ) -->
-<!-- ggplot(shapes, aes(x, y)) +  -->
-<!--   geom_point(aes(shape = shape), size = 5, fill = "red") + -->
-<!--   geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) + -->
-<!--   scale_shape_identity() + -->
-<!--   expand_limits(x = 4.1) + -->
-<!--   scale_x_continuous(NULL, breaks = NULL) +  -->
-<!--   scale_y_continuous(NULL, breaks = NULL, limits = c(-1.2, 0.2)) +  -->
-<!--   theme_minimal() + -->
-<!--   theme(aspect.ratio = 1/2.75) -->
-<!-- ``` -->
+```python
+chart = (alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+    color = alt.value("blue")
+    )
+)
+```
 
-<!-- ### Exercises -->
 
-<!-- 1.  What's gone wrong with this code? Why are the points not blue? -->
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_altair_files/figure-latex/unnamed-chunk-19-1} 
 
-<!--     ```{r} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy, color = "blue")) -->
-<!--     ``` -->
+Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
 
-<!-- 1.  Which variables in `mpg` are categorical? Which variables are continuous?  -->
-<!--     (Hint: type `?mpg` to read the documentation for the dataset). How -->
-<!--     can you see this information when you run `mpg`? -->
+* The name of a color as a character string.
 
-<!-- 1.  Map a continuous variable to `color`, `size`, and `shape`. How do -->
-<!--     these aesthetics behave differently for categorical vs. continuous -->
-<!--     variables?  -->
+* The size of a point in pixels.
 
-<!-- 1.  What happens if you map the same variable to multiple aesthetics?  -->
+* The shape of a point as a character string.
 
-<!-- 1.  What does the `stroke` aesthetic do? What shapes does it work with? -->
-<!--     (Hint: use `?geom_point`) -->
+Note that only a limited set of mark properties can be bound to encodings, so for some (e.g. fillOpacity, strokeOpacity, etc.) the encoding approach using `alt.value()` is not available. Encoding settings will always override local or global configuration settings. There are other methods for manually encoding properties as explained in the [Altair documentation](https://altair-viz.github.io/user_guide/customization.html)
 
-<!-- 1.  What happens if you map an aesthetic to something other than a variable  -->
-<!--     name, like `aes(colour = displ < 5)`?  Note, you'll also need to specify x and y. -->
+### Exercises
 
-<!-- ## Common problems -->
+1.  Which variables in `mpg` are categorical? Which variables are continuous?
+    How can you see this information when you run `mpg`? (Hint `mpg.dtypes`)
 
-<!-- As you start to run R code, you're likely to run into problems. Don't worry --- it happens to everyone. I have been writing R code for years, and every day I still write code that doesn't work!  -->
+1.  Map a continuous variable to `color`, `size`, and `shape`. How do
+    these aesthetics behave differently for categorical vs. continuous
+    variables?
 
-<!-- Start by carefully comparing the code that you're running to the code in the book. R is extremely picky, and a misplaced character can make all the difference. Make sure that every `(` is matched with a `)` and every `"` is paired with another `"`. Sometimes you'll run the code and nothing happens. Check the left-hand of your console: if it's a `+`, it means that R doesn't think you've typed a complete expression and it's waiting for you to finish it. In this case, it's usually easy to start from scratch again by pressing ESCAPE to abort processing the current command. -->
+1.  What happens if you map the same variable to multiple encodings?
 
-<!-- One common problem when creating ggplot2 graphics is to put the `+` in the wrong place: it has to come at the end of the line, not the start. In other words, make sure you haven't accidentally written code like this: -->
+1.  What does the `stroke` encoding do? What shapes does it work with?
+    (Hint: use `mark_point()`)
 
-<!-- ```R -->
-<!-- ggplot(data = mpg)  -->
-<!-- + geom_point(mapping = aes(x = displ, y = hwy)) -->
-<!-- ``` -->
+## Common problems
 
-<!-- If you're still stuck, try the help. You can get help about any R function by running `?function_name` in the console, or selecting the function name and pressing F1 in RStudio. Don't worry if the help doesn't seem that helpful - instead skip down to the examples and look for code that matches what you're trying to do. -->
+As you start to run Python code, you're likely to run into problems. Don't worry --- it happens to everyone. I have been writing Python code for months, and every day I still write code that doesn't work!
 
-<!-- If that doesn't help, carefully read the error message. Sometimes the answer will be buried there! But when you're new to R, the answer might be in the error message but you don't yet know how to understand it. Another great tool is Google: try googling the error message, as it's likely someone else has had the same problem, and has gotten help online. -->
+Start by carefully comparing the code that you're running to the code in the book. Python is extremely picky, and a misplaced character can make all the difference. Make sure that every `(` is matched with a `)` and every `"` is paired with another `"`. 
 
-<!-- ## Facets -->
+One common problem when creating Altair graphics as shown in this book, is to put the `()` in the wrong place: the `(` comes before the `alt.chart()` command and the `)` has to come at the end of the command. 
 
-<!-- One way to add additional variables is with aesthetics. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.  -->
+For example the code below works in Python. 
 
-<!-- To facet your plot by a single variable, use `facet_wrap()`. The first argument of `facet_wrap()` should be a formula, which you create with `~` followed by a variable name (here "formula" is the name of a data structure in R, not a synonym for "equation"). The variable that you pass to `facet_wrap()` should be discrete.  -->
+```python
+alt.Chart(mpg).mark_point(filled = True).encode(x = "displ", y = "hwy")
+```
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) +  -->
-<!--   facet_wrap(~ class, nrow = 2) -->
-<!-- ``` -->
+However, the complexity of the more details graphics necessicates placing the code on multiple lines. When using multiple lines we need the enclosing `()`. Make sure you haven't accidentally excluded a `(` or `)` like this
 
-<!-- To facet your plot on the combination of two variables, add `facet_grid()` to your plot call. The first argument of `facet_grid()` is also a formula. This time the formula should contain two variable names separated by a `~`.  -->
+```Python
+(alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy")
+```
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) +  -->
-<!--   facet_grid(drv ~ cyl) -->
-<!-- ``` -->
+or placed the `()` incorrectly like this
 
-<!-- If you prefer to not facet in the rows or columns dimension, use a `.` instead of a variable name, e.g. `+ facet_grid(. ~ cyl)`. -->
+```Python
+(chart = alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy")
+)    
+```
 
-<!-- ### Exercises -->
+If you're still stuck, try the help. You can get help about any Altair function from their website - <https://altair-viz.github.io/>, or hovering over the function name in VS Code. If that doesn't help, carefully read the error message. Sometimes the answer will be buried there! But when you're new to Python, the answer might be in the error message but you don't yet know how to understand it. Another great tool is Google: try googling the error message, as it's likely someone else has had the same problem, and has gotten help online.
 
-<!-- 1.  What happens if you facet on a continuous variable? -->
+## Facets
 
-<!-- 1.  What do the empty cells in plot with `facet_grid(drv ~ cyl)` mean? -->
-<!--     How do they relate to this plot? -->
+One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.
 
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = drv, y = cyl)) -->
-<!--     ``` -->
+To facet your plot by a single variable, use `facet()`. The first argument of `facet()` is . The variable that you pass to `facet_wrap()` should be discrete.
 
-<!-- 1.  What plots does the following code make? What does `.` do? -->
 
-<!--     ```{r eval = FALSE} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy)) + -->
-<!--       facet_grid(drv ~ .) -->
+```python
+chart_f = (alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+   ).
+   facet(
+      facet = "class",
+      columns = 4
+   )
+)
+```
 
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy)) + -->
-<!--       facet_grid(. ~ cyl) -->
-<!--     ``` -->
 
-<!-- 1.  Take the first faceted plot in this section: -->
+\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_1} \end{center}
 
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy)) +  -->
-<!--       facet_wrap(~ class, nrow = 2) -->
-<!--     ``` -->
+To facet your plot on the combination of two variables, The first argument of `facet()` is also `column` and the second is `row`. This time the formula should contain two variable names.
 
-<!--     What are the advantages to using faceting instead of the colour aesthetic? -->
-<!--     What are the disadvantages? How might the balance change if you had a  -->
-<!--     larger dataset? -->
 
-<!-- 1.  Read `?facet_wrap`. What does `nrow` do? What does `ncol` do? What other -->
-<!--     options control the layout of the individual panels? Why doesn't -->
-<!--     `facet_grid()` have `nrow` and `ncol` arguments? -->
+```python
+chart_f2 = (alt.
+  Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+   ).
+   facet(
+      column = "drv",
+      row = "cyl"
+   )
+)
+```
 
-<!-- 1.  When using `facet_grid()` you should usually put the variable with more -->
-<!--     unique levels in the columns. Why? -->
+
+\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_2} \end{center}
+
+If you prefer to not facet in the rows or columns dimension, simply remove that facet argument. You can read more about [compound charts in the Altair documentation](https://altair-viz.github.io/user_guide/compound_charts.html).
+
+### Exercises
+
+1.  What happens if you facet on a continuous variable?
+
+1.  What do the empty cells in plot with `facet(column = "drv", row = "cyl")` mean?
+    How do they relate to this plot?
+
+    
+    ```python
+    (alt.
+      Chart(mpg).
+      mark_point().
+      encode(
+        x = "drv",
+        y = "cyl")
+    )
+    ```
+
+1.  What plots does the following code make? What does `.` do?
+
+    
+    ```python
+    (alt.
+      Chart(mpg).
+      mark_point(filled = True).
+      encode(
+        x = "displ",
+        y = "hwy").
+      facet(
+      column = "drv")
+    )
+    
+    (alt.
+      Chart(mpg).
+      mark_point(filled = True).
+      encode(
+        x = "displ",
+        y = "hwy").
+      facet(
+      row = "cyl")
+    )
+    ```
+
+1.  Take the first faceted plot in this section:
+
+    What are the advantages to using faceting instead of the colour aesthetic?
+    What are the disadvantages? How might the balance change if you had a
+    larger dataset?
+
+1.  When using `facet()` you should usually put the variable with more
+    unique levels in the columns. Why?
 
 <!-- ## Geometric objects -->
 
