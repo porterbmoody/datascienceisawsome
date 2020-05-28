@@ -4,8 +4,7 @@ rmd_files: [
   "index.rmd",
   "intro.Rmd",
   "explore.Rmd",
-  "visualize.Rmd",
-  "visualize_altair.Rmd"
+  "visualize.Rmd"
 ]
 
 before_chapter_script: "_common.R"

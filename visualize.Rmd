@@ -3,30 +3,46 @@
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(python.reticulate = TRUE)
 library(reticulate)
+library(ggplot2)
+library(vegawidget)
 use_python("usr/local/bin/python3")
 ```
 
-## Introduction (pandas)
+
+## Introduction
 
 > "The simple graph has brought more information to the data analyst’s mind 
 > than any other device." --- John Tukey
 
-This chapter will teach you how to visualise your data using seaborn. Python has several systems for making graphs, but seaborn is one of the most used. Its dataset-oriented plotting functions operate on dataframes and arrays containing whole datasets and internally perform the necessary semantic mapping and statistical aggregation to produce informative plots.
+This chapter will teach you how to visualise your data using Altair. Python has several systems for making graphs, but altiar is one of the most elegant and versatile. Altair implements the __declarative visualization__ much like the __grammar of graphics__, a coherent system for describing and building graphs. With altair, you can do more faster by learning one system and applying it in many places.
+
+If you'd like to learn more about Altair before you start, I'd recommend reading "Altair: Interactive Statistical Visualizations for Python", <https://joss.theoj.org/papers/10.21105/joss.01057.pdf>.
+
+We should note that we are building this book using R with the package bookdown.  Rendering Altair graphics using a python chunk is not straight forward but is not important for our use in VS Code. In VS Code the example chunks will render in the interactive Python viewer automatically. The following R code chunk shows how we are rendering the Altair graphics in this book. Thanks to ijlyttle for [his GitHub Gist](https://gist.github.com/ijlyttle/aa314d02b5f7f85702ea2a648393b21f).
+
+```
+
+# ```{R, echo=FALSE}
+# vegawidget::as_vegaspec(py$chart$to_json())
+# ```
+
+```
 
 ### Prerequisites
 
-This chapter focusses on seaborn. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:
+This chapter focusses on Altair. Language has been shifted using the material from [Altair's materials](https://altair-viz.github.io/index.html). To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:
 
-```{python setup}
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+```{python, cache=FALSE}
+
+import pandas as pd   
+import altair as alt   
+
 ```
 
-If you run this code and get the error message "No module named 'seaborn'" or "No module named 'pandas'", you'll need to first install them.
+If you run this code and get the error message "No module named 'altair'" or "No module named 'pandas'", you'll need to first install them.
 
 ```{bash eval = FALSE}
-python -m pip install pandas seaborn matplotlib
+python -m pip install pandas altair
 ```
 
 You only need to install a package once, but you need to reload it every time you start a new session.
@@ -39,8 +55,10 @@ Let's use our first graph to answer a question: Do cars with big engines use mor
 
 You can test your answer with the `mpg` __data frame__ found in ggplot2 (aka  `ggplot2::mpg`). A data frame is a rectangular collection of variables (in the columns) and observations (in the rows). The *'mpg'* data contains observations collected by the US Environmental Protection Agency on 38 models of car. We will identify the *'mpg'* data using `mpg` for the remainder of this introduction.
 
-```{python}
+```{python, cache=FALSE}
+
 mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
+
 ```
 
 Among the variables in `mpg` are:
@@ -53,32 +71,53 @@ Among the variables in `mpg` are:
 
 To learn more about `mpg`, read informat at [data4python4ds](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
 
-### Creating a seaborn plot
+### Creating an Altair plot
 
 To plot `mpg`, run this code to put `displ` on the x-axis and `hwy` on the y-axis:
 
+```{python, cache=FALSE}
 
-```{python}
-sns.relplot(x = "displ", y = "hwy", data = mpg)
-plt.show()
+chart = (alt.Chart(mpg).
+  mark_point().
+  encode(
+    x='displ', 
+    y='hwy')
+  )
+
+```
+
+
+```{R, echo=FALSE}
+
+vegawidget::as_vegaspec(py$chart$to_json())
+
 ```
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?
 
-With seaborn, you begin a plot with the function `sns`. `sns` simply connects to the functions imported from seaborn as sns. Seaborn is a Python data visualization library based on [matplotlib]((https://matplotlib.org/)). It provides a high-level interface for drawing attractive and informative statistical graphics. 
+With Altair, you begin a plot with the function `Chart()`. `Chart()` creates a Chart object that you can add layers to. The only argument of `Chart()` is the dataset to use in the graph. So `Chart(mpg)` creates an Chart object upon which we can marks.
 
-You complete your graph by using the varied arguments within each of the four main plotting categories. You can find detailed tutorials done by seaborn by following the links.
+You complete your graph by adding one or more marks to `Chart()`. The attribute `mark_point()` adds a layer of points to your plot, which creates a scatterplot. Altair comes with many mark methods that each add a different type of layer to a plot. You'll learn a whole bunch of them throughout this chapter.
 
-1. [Visualizing statistical relationships](https://seaborn.pydata.org/tutorial/relational.html#emphasizing-continuity-with-line-plots)
-2. [Plotting with categorical data](https://seaborn.pydata.org/tutorial/categorical.html)
-3. [Visualizing the distribution of a dataset](https://seaborn.pydata.org/tutorial/distributions.html)
-4. [Visualizing linear relationships](https://seaborn.pydata.org/tutorial/regression.html)
+Each mark method in Altair has an `encode()` attribute. This defines how variables in your dataset are encoded to visual properties. The `encode()` method is always paired with `x` and `y` arguments to specify which variables to map to the x and y axes. Altair looks for the encoded variables in the `data` argument, in this case, `mpg`. For pandas dataframes, Altair automatically determines the appropriate data type for the mapped column.
 
-Each plotting category maps varied arguments to your data. This defines how variables in your dataset are mapped to visual properties. 
+### A graphing template
+
+Let's turn this code into a reusable template for making graphs with ggplot2. To make a graph, replace the bracketed sections in the code below with a dataset, a geom function, or a collection of mappings.
+
+```{python eval = FALSE}
+(alt.Chart(<DATA>).  
+  <mark_*().>
+  encode(<ENCODINGS>))
+```
+
+The rest of this chapter will show you how to complete and extend this template to make different types of graphs. We will begin with the `<ENCODINGS>` component.
 
 ### Exercises
 
-1. How many rows are in `mpg`? How many columns?
+1.  Run `Chart(mpg).mark_points()`. What do you see?
+
+1.  How many rows are in `mpg`? How many columns?
 
 1.  What does the `drv` variable describe?  
 
@@ -87,259 +126,415 @@ Each plotting category maps varied arguments to your data. This defines how vari
 1.  What happens if you make a scatterplot of `class` vs `drv`? Why is
     the plot not useful?
 
-<!-- ## Aesthetic mappings -->
+## Aesthetic mappings
 
-<!-- > "The greatest value of a picture is when it forces us to notice what we -->
-<!-- > never expected to see." --- John Tukey -->
+> "The greatest value of a picture is when it forces us to notice what we
+> never expected to see." --- John Tukey
 
-<!-- In the plot below, one group of points (highlighted in red) seems to fall outside of the linear trend. These cars have a higher mileage than you might expect. How can you explain these cars?  -->
+In the plot below, one group of points (highlighted in red) seems to fall outside of the linear trend. These cars have a higher mileage than you might expect. How can you explain these cars?
 
-<!-- ```{r, echo = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + -->
-<!--   geom_point() +  -->
-<!--   geom_point(data = dplyr::filter(mpg, displ > 5, hwy > 20), colour = "red", size = 2.2) -->
-<!-- ``` -->
+```{r, echo = FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_point(data = dplyr::filter(mpg, displ > 5, hwy > 20), colour = "red", size = 2.2) +
+  theme_bw()
+```
 
-<!-- Let's hypothesize that the cars are hybrids. One way to test this hypothesis is to look at the `class` value for each car. The `class` variable of the `mpg` dataset classifies cars into groups such as compact, midsize, and SUV. If the outlying points are hybrids, they should be classified as compact cars or, perhaps, subcompact cars (keep in mind that this data was collected before hybrid trucks and SUVs became popular). -->
+```{python, echo = FALSE, eval=FALSE}
+(alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = 'displ',
+    y = 'hwy',
+    color = alt.condition(
+      (datum.displ > 5) & (datum.hwy > 20) , 
+      alt.ColorValue('red'), 
+      alt.ColorValue('black')),
+    size = alt.condition(
+      (datum.displ > 5) & (datum.hwy > 20), 
+      alt.SizeValue(50),
+      alt.SizeValue(25))
+                                )
+)
 
-<!-- You can add a third variable, like `class`, to a two dimensional scatterplot by mapping it to an __aesthetic__. An aesthetic is a visual property of the objects in your plot. Aesthetics include things like the size, the shape, or the color of your points. You can display a point (like the one below) in different ways by changing the values of its aesthetic properties. Since we already use the word "value" to describe data, let's use the word "level" to describe aesthetic properties. Here we change the levels of a point's size, shape, and color to make the point small, triangular, or blue: -->
+```
 
-<!-- ```{r, echo = FALSE, asp = 1/4} -->
-<!-- ggplot() + -->
-<!--   geom_point(aes(1, 1), size = 20) + -->
-<!--   geom_point(aes(2, 1), size = 10) +  -->
-<!--   geom_point(aes(3, 1), size = 20, shape = 17) +  -->
-<!--   geom_point(aes(4, 1), size = 20, colour = "blue") +  -->
-<!--   scale_x_continuous(NULL, limits = c(0.5, 4.5), labels = NULL) +  -->
-<!--   scale_y_continuous(NULL, limits = c(0.9, 1.1), labels = NULL) +  -->
-<!--   theme(aspect.ratio = 1/3) -->
-<!-- ``` -->
 
-<!-- You can convey information about your data by mapping the aesthetics in your plot to the variables in your dataset. For example, you can map the colors of your points to the `class` variable to reveal the class of each car. -->
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy, color = class)) -->
-<!-- ``` -->
 
-<!-- (If you prefer British English, like Hadley, you can use `colour` instead of `color`.) -->
+Let's hypothesize that the cars are hybrids. One way to test this hypothesis is to look at the `class` value for each car. The `class` variable of the `mpg` dataset classifies cars into groups such as compact, midsize, and SUV. If the outlying points are hybrids, they should be classified as compact cars or, perhaps, subcompact cars (keep in mind that this data was collected before hybrid trucks and SUVs became popular).
 
-<!-- To map an aesthetic to a variable, associate the name of the aesthetic to the name of the variable inside `aes()`. ggplot2 will automatically assign a unique level of the aesthetic (here a unique color) to each unique value of the variable, a process known as __scaling__. ggplot2 will also add a legend that explains which levels correspond to which values. -->
+You can add a third variable, like `class`, to a two dimensional scatterplot by mapping it to an __encoding__. An encoding is a visual property of the objects in your plot. Encodings include things like the size, the shape, or the color of your points. You can display a point (like the one below) in different ways by changing the values of its encoded properties. Since we already use the word "value" to describe data, let's use the word "level" to describe encoded properties. Here we change the levels of a point's size, shape, and color to make the point small, triangular, or blue:
 
-<!-- The colors reveal that many of the unusual points are two-seater cars. These cars don't seem like hybrids, and are, in fact, sports cars! Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines. -->
+```{r, echo = FALSE, asp = 1/4}
+ggplot() +
+  geom_point(aes(1, 1), size = 20) +
+  geom_point(aes(2, 1), size = 10) +
+  geom_point(aes(3, 1), size = 20, shape = 17) +
+  geom_point(aes(4, 1), size = 20, colour = "blue") +
+  scale_x_continuous(NULL, limits = c(0.5, 4.5), labels = NULL) +
+  scale_y_continuous(NULL, limits = c(0.9, 1.1), labels = NULL) +
+  theme_bw() +
+  theme(aspect.ratio = 1/3)
+```
 
-<!-- In the above example, we mapped `class` to the color aesthetic, but we could have mapped `class` to the size aesthetic in the same way. In this case, the exact size of each point would reveal its class affiliation. We get a _warning_ here, because mapping an unordered variable (`class`) to an ordered aesthetic (`size`) is not a good idea. -->
+You can convey information about your data by mapping the encodings in your plot to the variables in your dataset. For example, you can map the colors of your points to the `class` variable to reveal the class of each car.
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy, size = class)) -->
-<!-- ``` -->
+```{python, cache=FALSE}
 
-<!-- Or we could have mapped `class` to the _alpha_ aesthetic, which controls the transparency of the points, or to the shape aesthetic, which controls the shape of the points. -->
+chart = (alt.Chart(mpg).
+  mark_point().
+  encode(
+    x = "displ",
+    y = "hwy",
+    color = "class"
+    )
+  )
 
-<!-- ```{r out.width = "50%", fig.align = 'default', warning = FALSE, fig.asp = 1/2, fig.cap =""} -->
-<!-- # Left -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy, alpha = class)) -->
+```
 
-<!-- # Right -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy, shape = class)) -->
-<!-- ``` -->
+```{R, echo=FALSE}
 
-<!-- What happened to the SUVs? ggplot2 will only use six shapes at a time. By default, additional groups will go unplotted when you use the shape aesthetic. -->
+vegawidget::as_vegaspec(py$chart$to_json())
 
-<!-- For each aesthetic, you use `aes()` to associate the name of the aesthetic with a variable to display. The `aes()` function gathers together each of the aesthetic mappings used by a layer and passes them to the layer's mapping argument. The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves aesthetics, visual properties that you can map to variables to display information about the data.  -->
+```
 
-<!-- Once you map an aesthetic, ggplot2 takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, ggplot2 does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values. -->
+(We don't prefer British English, like Hadley, so don't use `colour` instead of `color`.)
 
-<!-- You can also _set_ the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue: -->
+To map an encoding to a variable, associate the name of the encoding to the name of the variable inside `encode()`. Altair will automatically assign a unique level of the encoding (here a unique color) to each unique value of the variable, a process known as __scaling__. Altair will also add a legend that explains which levels correspond to which values.
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy), color = "blue") -->
-<!-- ``` -->
+The colors reveal that many of the unusual points are two-seater cars. These cars don't seem like hybrids, and are, in fact, sports cars! Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines.
 
-<!-- Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an aesthetic manually, set the aesthetic by name as an argument of your geom function; i.e. it goes _outside_ of `aes()`. You'll need to pick a level that makes sense for that aesthetic: -->
+In the above example, we mapped `class` to the color encoding, but we could have mapped `class` to the size encoding in the same way. In this case, the exact size of each point would reveal its class affiliation. Mapping an unordered variable (`class`) to an ordered aesthetic (`size`) is not a good idea.
 
-<!-- * The name of a color as a character string. -->
+```{python, cache=FALSE}
+chart = (alt.Chart(mpg).
+  mark_point().
+  encode(
+    x = "displ",
+    y = "hwy",
+    size = "class"
+    )
+  )
+```
 
-<!-- * The size of a point in mm. -->
+```{R, echo=FALSE}
 
-<!-- * The shape of a point as a number, as shown in Figure \@ref(fig:shapes). -->
+vegawidget::as_vegaspec(py$chart$to_json())
 
-<!-- ```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R has 25 built in shapes that are identified by numbers. There are some seeming duplicates: for example, 0, 15, and 22 are all squares. The difference comes from the interaction of the `colour` and `fill` aesthetics. The hollow shapes (0--14) have a border determined by `colour`; the solid shapes (15--18) are filled with `colour`; the filled shapes (21--24) have a border of `colour` and are filled with `fill`.", warning = FALSE} -->
-<!-- shapes <- tibble( -->
-<!--   shape = c(0, 1, 2, 5, 3, 4, 6:19, 22, 21, 24, 23, 20), -->
-<!--   x = (0:24 %/% 5) / 2, -->
-<!--   y = (-(0:24 %% 5)) / 4 -->
-<!-- ) -->
-<!-- ggplot(shapes, aes(x, y)) +  -->
-<!--   geom_point(aes(shape = shape), size = 5, fill = "red") + -->
-<!--   geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) + -->
-<!--   scale_shape_identity() + -->
-<!--   expand_limits(x = 4.1) + -->
-<!--   scale_x_continuous(NULL, breaks = NULL) +  -->
-<!--   scale_y_continuous(NULL, breaks = NULL, limits = c(-1.2, 0.2)) +  -->
-<!--   theme_minimal() + -->
-<!--   theme(aspect.ratio = 1/2.75) -->
-<!-- ``` -->
+```
 
-<!-- ### Exercises -->
+Or we could have mapped `class` to the _opacity_ encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.
 
-<!-- 1.  What's gone wrong with this code? Why are the points not blue? -->
+```{python, cache=FALSE}
+# First
+chart1 = (alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+    opacity = "class"
+    )
+  )
 
-<!--     ```{r} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy, color = "blue")) -->
-<!--     ``` -->
+# Second
+chart2 = (alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+    shape = "class"
+    )
+  )
+```
 
-<!-- 1.  Which variables in `mpg` are categorical? Which variables are continuous?  -->
-<!--     (Hint: type `?mpg` to read the documentation for the dataset). How -->
-<!--     can you see this information when you run `mpg`? -->
+```{R, echo=FALSE}
 
-<!-- 1.  Map a continuous variable to `color`, `size`, and `shape`. How do -->
-<!--     these aesthetics behave differently for categorical vs. continuous -->
-<!--     variables?  -->
+vegawidget::as_vegaspec(py$chart1$to_json())
 
-<!-- 1.  What happens if you map the same variable to multiple aesthetics?  -->
+```
 
-<!-- 1.  What does the `stroke` aesthetic do? What shapes does it work with? -->
-<!--     (Hint: use `?geom_point`) -->
+```{R, echo=FALSE}
 
-<!-- 1.  What happens if you map an aesthetic to something other than a variable  -->
-<!--     name, like `aes(colour = displ < 5)`?  Note, you'll also need to specify x and y. -->
+vegawidget::as_vegaspec(py$chart2$to_json())
 
-<!-- ## Common problems -->
+```
 
-<!-- As you start to run R code, you're likely to run into problems. Don't worry --- it happens to everyone. I have been writing R code for years, and every day I still write code that doesn't work!  -->
 
-<!-- Start by carefully comparing the code that you're running to the code in the book. R is extremely picky, and a misplaced character can make all the difference. Make sure that every `(` is matched with a `)` and every `"` is paired with another `"`. Sometimes you'll run the code and nothing happens. Check the left-hand of your console: if it's a `+`, it means that R doesn't think you've typed a complete expression and it's waiting for you to finish it. In this case, it's usually easy to start from scratch again by pressing ESCAPE to abort processing the current command. -->
+Altair will only use 8 shapes for one chart. Charting more than 8 shapes is not recommended as the shapes simply recycle.
 
-<!-- One common problem when creating ggplot2 graphics is to put the `+` in the wrong place: it has to come at the end of the line, not the start. In other words, make sure you haven't accidentally written code like this: -->
+For each encoding, you use `encode()` to associate the name of the encoding with a variable to display. The `encode()` function gathers together each of the encoded mappings used by a layer and passes them to the layer's mapping argument. The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves encodings, visual properties that you can map to variables to display information about the data.
 
-<!-- ```R -->
-<!-- ggplot(data = mpg)  -->
-<!-- + geom_point(mapping = aes(x = displ, y = hwy)) -->
-<!-- ``` -->
+Once you map an encoding, Altair takes care of the rest. It selects a reasonable scale to use with the encoding, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, Altair does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values.
 
-<!-- If you're still stuck, try the help. You can get help about any R function by running `?function_name` in the console, or selecting the function name and pressing F1 in RStudio. Don't worry if the help doesn't seem that helpful - instead skip down to the examples and look for code that matches what you're trying to do. -->
+You can also _configure_ the encoding properties of your mark manually. For example, we can make all of the points in our plot blue:
 
-<!-- If that doesn't help, carefully read the error message. Sometimes the answer will be buried there! But when you're new to R, the answer might be in the error message but you don't yet know how to understand it. Another great tool is Google: try googling the error message, as it's likely someone else has had the same problem, and has gotten help online. -->
+```{python, cache=FALSE}
 
-<!-- ## Facets -->
+chart = (alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+    color = alt.value("blue")
+    )
+  )
 
-<!-- One way to add additional variables is with aesthetics. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.  -->
+```
 
-<!-- To facet your plot by a single variable, use `facet_wrap()`. The first argument of `facet_wrap()` should be a formula, which you create with `~` followed by a variable name (here "formula" is the name of a data structure in R, not a synonym for "equation"). The variable that you pass to `facet_wrap()` should be discrete.  -->
+```{R, echo=FALSE}
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) +  -->
-<!--   facet_wrap(~ class, nrow = 2) -->
-<!-- ``` -->
+vegawidget::as_vegaspec(py$chart$to_json())
 
-<!-- To facet your plot on the combination of two variables, add `facet_grid()` to your plot call. The first argument of `facet_grid()` is also a formula. This time the formula should contain two variable names separated by a `~`.  -->
+```
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) +  -->
-<!--   facet_grid(drv ~ cyl) -->
-<!-- ``` -->
+Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
 
-<!-- If you prefer to not facet in the rows or columns dimension, use a `.` instead of a variable name, e.g. `+ facet_grid(. ~ cyl)`. -->
+* The name of a color as a character string.
 
-<!-- ### Exercises -->
+* The size of a point in pixels.
 
-<!-- 1.  What happens if you facet on a continuous variable? -->
+* The shape of a point as a character string.
 
-<!-- 1.  What do the empty cells in plot with `facet_grid(drv ~ cyl)` mean? -->
-<!--     How do they relate to this plot? -->
+Note that only a limited set of mark properties can be bound to encodings, so for some (e.g. fillOpacity, strokeOpacity, etc.) the encoding approach using `alt.value()` is not available. Encoding settings will always override local or global configuration settings. There are other methods for manually encoding properties as explained in the [Altair documentation](https://altair-viz.github.io/user_guide/customization.html)
 
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = drv, y = cyl)) -->
-<!--     ``` -->
+### Exercises
 
-<!-- 1.  What plots does the following code make? What does `.` do? -->
+1.  Which variables in `mpg` are categorical? Which variables are continuous?
+    How can you see this information when you run `mpg`? (Hint `mpg.dtypes`)
 
-<!--     ```{r eval = FALSE} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy)) + -->
-<!--       facet_grid(drv ~ .) -->
+1.  Map a continuous variable to `color`, `size`, and `shape`. How do
+    these aesthetics behave differently for categorical vs. continuous
+    variables?
 
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy)) + -->
-<!--       facet_grid(. ~ cyl) -->
-<!--     ``` -->
+1.  What happens if you map the same variable to multiple encodings?
 
-<!-- 1.  Take the first faceted plot in this section: -->
+1.  What does the `stroke` encoding do? What shapes does it work with?
+    (Hint: use `mark_point()`)
 
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg) +  -->
-<!--       geom_point(mapping = aes(x = displ, y = hwy)) +  -->
-<!--       facet_wrap(~ class, nrow = 2) -->
-<!--     ``` -->
+## Common problems
 
-<!--     What are the advantages to using faceting instead of the colour aesthetic? -->
-<!--     What are the disadvantages? How might the balance change if you had a  -->
-<!--     larger dataset? -->
+As you start to run Python code, you're likely to run into problems. Don't worry --- it happens to everyone. I have been writing Python code for months, and every day I still write code that doesn't work!
 
-<!-- 1.  Read `?facet_wrap`. What does `nrow` do? What does `ncol` do? What other -->
-<!--     options control the layout of the individual panels? Why doesn't -->
-<!--     `facet_grid()` have `nrow` and `ncol` arguments? -->
+Start by carefully comparing the code that you're running to the code in the book. Python is extremely picky, and a misplaced character can make all the difference. Make sure that every `(` is matched with a `)` and every `"` is paired with another `"`. 
 
-<!-- 1.  When using `facet_grid()` you should usually put the variable with more -->
-<!--     unique levels in the columns. Why? -->
+One common problem when creating Altair graphics as shown in this book, is to put the `()` in the wrong place: the `(` comes before the `alt.chart()` command and the `)` has to come at the end of the command. 
 
-<!-- ## Geometric objects -->
+For example the code below works in Python. 
 
-<!-- How are these two plots similar?  -->
+```python
+alt.Chart(mpg).mark_point(filled = True).encode(x = "displ", y = "hwy")
+```
 
-<!-- ```{r echo = FALSE, out.width = "50%", fig.align="default", message = FALSE} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) -->
+However, the complexity of the more details graphics necessicates placing the code on multiple lines. When using multiple lines we need the enclosing `()`. Make sure you haven't accidentally excluded a `(` or `)` like this
 
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
-<!-- ``` -->
+```Python
+(alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy")
+```
 
-<!-- Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different visual object to represent the data. In ggplot2 syntax, we say that they use different __geoms__. -->
+or placed the `()` incorrectly like this
 
-<!-- A __geom__ is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. Scatterplots break the trend; they use the point geom. As we see above, you can use different geoms to plot the same data. The plot on the left uses the point geom, and the plot on the right uses the smooth geom, a smooth line fitted to the data.  -->
+```Python
+(chart = alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy")
+)    
+```
 
-<!-- To change the geom in your plot, change the geom function that you add to `ggplot()`. For instance, to make the plots above, you can use this code: -->
+If you're still stuck, try the help. You can get help about any Altair function from their website - <https://altair-viz.github.io/>, or hovering over the function name in VS Code. If that doesn't help, carefully read the error message. Sometimes the answer will be buried there! But when you're new to Python, the answer might be in the error message but you don't yet know how to understand it. Another great tool is Google: try googling the error message, as it's likely someone else has had the same problem, and has gotten help online.
 
-<!-- ```{r eval = FALSE} -->
-<!-- # left -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) -->
+## Facets
 
-<!-- # right -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
-<!-- ``` -->
+One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.
 
-<!-- Every geom function in ggplot2 takes a `mapping` argument. However, not every aesthetic works with every geom. You could set the shape of a point, but you couldn't set the "shape" of a line. On the other hand, you _could_ set the linetype of a line. `geom_smooth()` will draw a different line, with a different linetype, for each unique value of the variable that you map to linetype. -->
+To facet your plot by a single variable, use `facet()`. The first argument of `facet()` is . The variable that you pass to `facet_wrap()` should be discrete.
 
-<!-- ```{r message = FALSE} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv)) -->
-<!-- ``` -->
+```{python, cache=FALSE}
+chart_f = (alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+   ).
+   facet(
+      facet = "class",
+      columns = 4
+    )
+  )
+```
 
-<!-- Here `geom_smooth()` separates the cars into three lines based on their `drv` value, which describes a car's drivetrain. One line describes all of the points with a `4` value, one line describes all of the points with an `f` value, and one line describes all of the points with an `r` value. Here, `4` stands for four-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive. -->
+```{R, echo=FALSE, dpi = 72}
 
-<!-- If this sounds strange, we can make it more clear by overlaying the lines on top of the raw data and then coloring everything according to `drv`.  -->
+knitr::include_graphics("screenshots/altair_facet_1.png")
 
-<!-- ```{r echo = FALSE, message = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +  -->
-<!--   geom_point() + -->
-<!--   geom_smooth(mapping = aes(linetype = drv)) -->
-<!-- ``` -->
+```
 
-<!-- Notice that this plot contains two geoms in the same graph! If this makes you excited, buckle up. We will learn how to place multiple geoms in the same plot very soon. -->
+To facet your plot on the combination of two variables, The first argument of `facet()` is also `column` and the second is `row`. This time the formula should contain two variable names.
 
-<!-- ggplot2 provides over 40 geoms, and extension packages provide even more (see <https://www.ggplot2-exts.org> for a sampling). The best way to get a comprehensive overview is the ggplot2 cheatsheet, which you can find at <http://rstudio.com/cheatsheets>. To learn more about any single geom, use help: `?geom_smooth`. -->
+```{python, cache=FALSE}
+chart_f2 = (alt.Chart(mpg).
+  mark_point(filled = True).
+  encode(
+    x = "displ",
+    y = "hwy",
+   ).
+   facet(
+      column = "drv",
+      row = "cyl"
+    )
+  )
+```
+
+```{R, echo=FALSE, dpi = 72}
+
+knitr::include_graphics("screenshots/altair_facet_2.png")
+
+```
+
+If you prefer to not facet in the rows or columns dimension, simply remove that facet argument. You can read more about [compound charts in the Altair documentation](https://altair-viz.github.io/user_guide/compound_charts.html).
+
+### Exercises
+
+1.  What happens if you facet on a continuous variable?
+
+1.  What do the empty cells in plot with `facet(column = "drv", row = "cyl")` mean?
+    How do they relate to this plot?
+
+    ```{python, eval = FALSE}
+    (alt.Chart(mpg).
+      mark_point().
+      encode(
+        x = "drv",
+        y = "cyl")
+    )
+    ```
+
+1.  What plots does the following code make? What does `.` do?
+
+    ```{python eval = FALSE}
+    (alt.Chart(mpg).
+      mark_point(filled = True).
+      encode(
+        x = "displ",
+        y = "hwy").
+      facet(column = "drv")
+    )
+
+    (alt.Chart(mpg).
+      mark_point(filled = True).
+      encode(
+        x = "displ",
+        y = "hwy").
+      facet(row = "cyl")
+    )
+    ```
+
+1.  Take the first faceted plot in this section:
+
+    What are the advantages to using faceting instead of the colour aesthetic?
+    What are the disadvantages? How might the balance change if you had a
+    larger dataset?
+
+1.  When using `facet()` you should usually put the variable with more
+    unique levels in the columns. Why?
+
+## Geometric objects
+
+How are these two plots similar?
+
+```{python, cache=FALSE}
+chartp = (alt.Chart(mpg).
+  mark_point().
+  encode(
+    x = "displ",
+    y = "hwy"
+    )
+  )
+
+chartf = (alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy"
+    ).
+  transform_loess("displ", "hwy").
+  mark_line()
+  )
+
+```
+
+```{R, echo=FALSE}
+
+vegawidget::as_vegaspec(py$chartp$to_json())
+
+```
+
+```{R, echo=FALSE, fig.align="left"}
+
+knitr::include_graphics("screenshots/altair_smooth_line.png")
+
+```
+
+
+
+Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different visual object to represent the data. In Altair syntax, we say that they use different __marks__.
+
+A __mark__ is the geometrical object that a plot uses to represent data. People often describe plots by the type of mark that the plot uses. For example, bar charts use bar marks, line charts use line marks, boxplots use boxplot marks, and so on. Scatterplots break the trend; they use the point mark. As we see above, you can use different marks to plot the same data. The first plot uses the point mark, and the second plot uses the line mark, a smooth line fitted to the data is calculated using a transformation. To change the mark in your plot, change the mark function that you add to `Chart()`. 
+
+Every mark function in Altair has `encode` arguments. However, not every encoding works with every mark. You could set the shape of a point, but you couldn't set the "shape" of a line. On the other hand, you _could_ set the type of line. `mark_line()` will draw a different line, with a different `strokeDash`, for each unique value of the variable that you map to `strokeDash`.
+
+
+```{python, cache=FALSE}
+chartl = (alt.Chart(mpg).
+  transform_loess("displ", "hwy", groupby = ["drv"]).
+  mark_line().
+  encode(
+    x = "displ",
+    y = "hwy",
+    strokeDash = "drv"
+    )
+  )
+```
+
+```{R, echo=FALSE, fig.align="left"}
+
+knitr::include_graphics("screenshots/altair_dashed_lines.png")
+
+```
+
+
+
+Here `mark_line()` separates the cars into three lines based on their `drv` value, which describes a car's drivetrain. One line describes all of the points with a `4` value, one line describes all of the points with an `f` value, and one line describes all of the points with an `r` value. Here, `4` stands for four-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive.
+
+If this sounds strange, we can make it more clear by overlaying the lines on top of the raw data and then coloring everything according to `drv`.
+
+```{python, echo = FALSE, message = FALSE, cache=FALSE}
+chartp = (alt.Chart(mpg).
+  mark_point().
+  encode(
+    x = "displ",
+    y = "hwy",
+    strokeDash = "drv",
+    color = "drv"
+  ))
+
+chart = chartp + chartp.transform_loess("displ", "hwy", groupby = ["drv"]).mark_line()
+```
+
+```{R, echo=FALSE, fig.align="left"}
+
+knitr::include_graphics("screenshots/altair_points_dashed_lines.png")
+
+```
+
+Notice that this plot contains two marks in the same graph! If this makes you excited, buckle up. We will learn how to place multiple marks on the same chart very soon.
+
+Altair provides about 15 marks. The best way to get a comprehensive overview is the Altair marks page, which you can find at <https://altair-viz.github.io/user_guide/marks.html>. 
 
 <!-- Many geoms, like `geom_smooth()`, use a single geometric object to display multiple rows of data. For these geoms, you can set the `group` aesthetic to a categorical variable to draw multiple objects. ggplot2 will draw a separate object for each unique value of the grouping variable. In practice, ggplot2 will automatically group the data for these geoms whenever you map an aesthetic to a discrete variable (as in the `linetype` example). It is convenient to rely on this feature because the group aesthetic by itself does not add a legend or distinguishing features to the geoms. -->
 
@@ -360,7 +555,7 @@ Each plotting category maps varied arguments to your data. This defines how vari
 <!-- To display multiple geoms in the same plot, add multiple geom functions to `ggplot()`: -->
 
 <!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg) +  -->
+<!-- ggplot(data = mpg) + -->
 <!--   geom_point(mapping = aes(x = displ, y = hwy)) + -->
 <!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
 <!-- ``` -->

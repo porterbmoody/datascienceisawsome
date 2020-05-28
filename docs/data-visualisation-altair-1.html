@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Data visualisation | Python for Data Science</title>
+  <title>4 Data visualisation (Altair) | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Data visualisation | Python for Data Science" />
+  <meta property="og:title" content="4 Data visualisation (Altair) | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
   <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Data visualisation | Python for Data Science" />
+  <meta name="twitter:title" content="4 Data visualisation (Altair) | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="explore-intro.html"/>
+<link rel="prev" href="data-visualisation-altair.html"/>
 
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -174,29 +174,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Explore</b></span></li>
 <li class="chapter" data-level="2" data-path="explore-intro.html"><a href="explore-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data visualisation</a>
+<li class="chapter" data-level="3" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html"><i class="fa fa-check"></i><b>3</b> Data visualisation (Altair)</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="data-visualisation.html"><a href="data-visualisation.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.1.1" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
+<li class="chapter" data-level="3.2" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#the-mpg-data-frame"><i class="fa fa-check"></i><b>3.2.1</b> The <code>mpg</code> data frame</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-an-altair-plot"><i class="fa fa-check"></i><b>3.2.2</b> Creating an Altair plot</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-visualisation.html"><a href="data-visualisation.html#a-graphing-template"><i class="fa fa-check"></i><b>3.2.3</b> A graphing template</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>3.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#the-mpg-data-frame"><i class="fa fa-check"></i><b>3.2.1</b> The <code>mpg</code> data frame</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#creating-an-altair-plot"><i class="fa fa-check"></i><b>3.2.2</b> Creating an Altair plot</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#a-graphing-template"><i class="fa fa-check"></i><b>3.2.3</b> A graphing template</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#exercises"><i class="fa fa-check"></i><b>3.2.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="data-visualisation.html"><a href="data-visualisation.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.3</b> Aesthetic mappings</a>
+<li class="chapter" data-level="3.3" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.3</b> Aesthetic mappings</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="3.3.1" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#exercises-1"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#common-problems"><i class="fa fa-check"></i><b>3.4</b> Common problems</a></li>
-<li class="chapter" data-level="3.5" data-path="data-visualisation.html"><a href="data-visualisation.html#facets"><i class="fa fa-check"></i><b>3.5</b> Facets</a>
+<li class="chapter" data-level="3.4" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#common-problems"><i class="fa fa-check"></i><b>3.4</b> Common problems</a></li>
+<li class="chapter" data-level="3.5" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#facets"><i class="fa fa-check"></i><b>3.5</b> Facets</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="3.5.1" data-path="data-visualisation-altair.html"><a href="data-visualisation-altair.html#exercises-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data-visualisation.html"><a href="data-visualisation.html#geometric-objects"><i class="fa fa-check"></i><b>3.6</b> Geometric objects</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html"><i class="fa fa-check"></i><b>4</b> Data visualisation (Altair)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#prerequisites-2"><i class="fa fa-check"></i><b>4.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#first-steps-1"><i class="fa fa-check"></i><b>4.2</b> First steps</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#the-mpg-data-frame-1"><i class="fa fa-check"></i><b>4.2.1</b> The <code>mpg</code> data frame</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#creating-an-altair-plot-1"><i class="fa fa-check"></i><b>4.2.2</b> Creating an Altair plot</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#a-graphing-template-1"><i class="fa fa-check"></i><b>4.2.3</b> A graphing template</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#exercises-3"><i class="fa fa-check"></i><b>4.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#aesthetic-mappings-1"><i class="fa fa-check"></i><b>4.3</b> Aesthetic mappings</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#exercises-4"><i class="fa fa-check"></i><b>4.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#common-problems-1"><i class="fa fa-check"></i><b>4.4</b> Common problems</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#facets-1"><i class="fa fa-check"></i><b>4.5</b> Facets</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="data-visualisation-altair-1.html"><a href="data-visualisation-altair-1.html#exercises-5"><i class="fa fa-check"></i><b>4.5.1</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -215,10 +237,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-visualisation" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Data visualisation</h1>
-<div id="introduction-1" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Introduction</h2>
+<div id="data-visualisation-altair-1" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Data visualisation (Altair)</h1>
+<div id="introduction-2" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
 <blockquote>
 <p>“The simple graph has brought more information to the data analyst’s mind
 than any other device.” — John Tukey</p>
@@ -231,25 +253,25 @@ than any other device.” — John Tukey</p>
 # vegawidget::as_vegaspec(py$chart$to_json())
 # ```
 </code></pre>
-<div id="prerequisites-1" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Prerequisites</h3>
+<div id="prerequisites-2" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Prerequisites</h3>
 <p>This chapter focusses on Altair. Language has been shifted using the material from <a href="https://altair-viz.github.io/index.html">Altair’s materials</a>. To access the datasets, help pages, and functions that we will use in this chapter, load the Python data science tools by running this code:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="data-visualisation.html#cb11-1"></a></span>
-<span id="cb11-2"><a href="data-visualisation.html#cb11-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd   </span>
-<span id="cb11-3"><a href="data-visualisation.html#cb11-3"></a><span class="im">import</span> altair <span class="im">as</span> alt   </span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="data-visualisation-altair-1.html#cb28-1"></a></span>
+<span id="cb28-2"><a href="data-visualisation-altair-1.html#cb28-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd   </span>
+<span id="cb28-3"><a href="data-visualisation-altair-1.html#cb28-3"></a><span class="im">import</span> altair <span class="im">as</span> alt   </span></code></pre></div>
 <p>If you run this code and get the error message “No module named ‘altair’” or “No module named ‘pandas’”, you’ll need to first install them.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="data-visualisation.html#cb12-1"></a><span class="ex">python</span> -m pip install pandas altair</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="data-visualisation-altair-1.html#cb29-1"></a><span class="ex">python</span> -m pip install pandas altair altair_saver</span></code></pre></div>
 <p>You only need to install a package once, but you need to reload it every time you start a new session.</p>
 </div>
 </div>
-<div id="first-steps" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> First steps</h2>
+<div id="first-steps-1" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> First steps</h2>
 <p>Let’s use our first graph to answer a question: Do cars with big engines use more fuel than cars with small engines? You probably already have an answer, but try to make your answer precise. What does the relationship between engine size and fuel efficiency look like? Is it positive? Negative? Linear? Nonlinear?</p>
-<div id="the-mpg-data-frame" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> The <code>mpg</code> data frame</h3>
+<div id="the-mpg-data-frame-1" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> The <code>mpg</code> data frame</h3>
 <p>You can test your answer with the <code>mpg</code> <strong>data frame</strong> found in ggplot2 (aka <code>ggplot2::mpg</code>). A data frame is a rectangular collection of variables (in the columns) and observations (in the rows). The <em>‘mpg’</em> data contains observations collected by the US Environmental Protection Agency on 38 models of car. We will identify the <em>‘mpg’</em> data using <code>mpg</code> for the remainder of this introduction.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="data-visualisation.html#cb13-1"></a></span>
-<span id="cb13-2"><a href="data-visualisation.html#cb13-2"></a>mpg <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="data-visualisation-altair-1.html#cb30-1"></a></span>
+<span id="cb30-2"><a href="data-visualisation-altair-1.html#cb30-2"></a>mpg <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv&quot;</span>)</span></code></pre></div>
 <p>Among the variables in <code>mpg</code> are:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>displ</code>, a car’s engine size, in litres.</p></li>
@@ -259,16 +281,17 @@ fuel efficiency when they travel the same distance.</p></li>
 </ol>
 <p>To learn more about <code>mpg</code>, read informat at <a href="https://github.com/byuidatascience/data4python4ds/blob/master/data.md">data4python4ds</a>.</p>
 </div>
-<div id="creating-an-altair-plot" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Creating an Altair plot</h3>
+<div id="creating-an-altair-plot-1" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Creating an Altair plot</h3>
 <p>To plot <code>mpg</code>, run this code to put <code>displ</code> on the x-axis and <code>hwy</code> on the y-axis:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="data-visualisation.html#cb14-1"></a></span>
-<span id="cb14-2"><a href="data-visualisation.html#cb14-2"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb14-3"><a href="data-visualisation.html#cb14-3"></a>  mark_point().</span>
-<span id="cb14-4"><a href="data-visualisation.html#cb14-4"></a>  encode(</span>
-<span id="cb14-5"><a href="data-visualisation.html#cb14-5"></a>    x<span class="op">=</span><span class="st">&#39;displ&#39;</span>, </span>
-<span id="cb14-6"><a href="data-visualisation.html#cb14-6"></a>    y<span class="op">=</span><span class="st">&#39;hwy&#39;</span>)</span>
-<span id="cb14-7"><a href="data-visualisation.html#cb14-7"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="data-visualisation-altair-1.html#cb31-1"></a></span>
+<span id="cb31-2"><a href="data-visualisation-altair-1.html#cb31-2"></a>chart <span class="op">=</span> (alt.</span>
+<span id="cb31-3"><a href="data-visualisation-altair-1.html#cb31-3"></a>  Chart(mpg).</span>
+<span id="cb31-4"><a href="data-visualisation-altair-1.html#cb31-4"></a>  mark_point().</span>
+<span id="cb31-5"><a href="data-visualisation-altair-1.html#cb31-5"></a>  encode(</span>
+<span id="cb31-6"><a href="data-visualisation-altair-1.html#cb31-6"></a>    x<span class="op">=</span><span class="st">&#39;displ&#39;</span>, </span>
+<span id="cb31-7"><a href="data-visualisation-altair-1.html#cb31-7"></a>    y<span class="op">=</span><span class="st">&#39;hwy&#39;</span>)</span>
+<span id="cb31-8"><a href="data-visualisation-altair-1.html#cb31-8"></a>  )</span></code></pre></div>
 <div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
   "chart_spec": {
@@ -3350,16 +3373,16 @@ fuel efficiency when they travel the same distance.</p></li>
 <p>You complete your graph by adding one or more marks to <code>Chart()</code>. The attribute <code>mark_point()</code> adds a layer of points to your plot, which creates a scatterplot. Altair comes with many mark methods that each add a different type of layer to a plot. You’ll learn a whole bunch of them throughout this chapter.</p>
 <p>Each mark method in Altair has an <code>encode()</code> attribute. This defines how variables in your dataset are encoded to visual properties. The <code>encode()</code> method is always paired with <code>x</code> and <code>y</code> arguments to specify which variables to map to the x and y axes. Altair looks for the encoded variables in the <code>data</code> argument, in this case, <code>mpg</code>. For pandas dataframes, Altair automatically determines the appropriate data type for the mapped column.</p>
 </div>
-<div id="a-graphing-template" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> A graphing template</h3>
+<div id="a-graphing-template-1" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> A graphing template</h3>
 <p>Let’s turn this code into a reusable template for making graphs with ggplot2. To make a graph, replace the bracketed sections in the code below with a dataset, a geom function, or a collection of mappings.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="data-visualisation.html#cb15-1"></a>(alt.Chart(<span class="op">&lt;</span>DATA<span class="op">&gt;</span>).  </span>
-<span id="cb15-2"><a href="data-visualisation.html#cb15-2"></a>  <span class="op">&lt;</span>mark_<span class="op">*</span>().<span class="op">&gt;</span></span>
-<span id="cb15-3"><a href="data-visualisation.html#cb15-3"></a>  encode(<span class="op">&lt;</span>ENCODINGS<span class="op">&gt;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="data-visualisation-altair-1.html#cb32-1"></a>(alt.Chart(<span class="op">&lt;</span>DATA<span class="op">&gt;</span>).  </span>
+<span id="cb32-2"><a href="data-visualisation-altair-1.html#cb32-2"></a>  <span class="op">&lt;</span>mark_<span class="op">*</span>().<span class="op">&gt;</span></span>
+<span id="cb32-3"><a href="data-visualisation-altair-1.html#cb32-3"></a>  encode(<span class="op">&lt;</span>ENCODINGS<span class="op">&gt;</span>))</span></code></pre></div>
 <p>The rest of this chapter will show you how to complete and extend this template to make different types of graphs. We will begin with the <code>&lt;ENCODINGS&gt;</code> component.</p>
 </div>
-<div id="exercises" class="section level3" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> Exercises</h3>
+<div id="exercises-3" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Run <code>Chart(mpg).mark_points()</code>. What do you see?</p></li>
 <li><p>How many rows are in <code>mpg</code>? How many columns?</p></li>
@@ -3370,27 +3393,28 @@ the plot not useful?</p></li>
 </ol>
 </div>
 </div>
-<div id="aesthetic-mappings" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Aesthetic mappings</h2>
+<div id="aesthetic-mappings-1" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Aesthetic mappings</h2>
 <blockquote>
 <p>“The greatest value of a picture is when it forces us to notice what we
 never expected to see.” — John Tukey</p>
 </blockquote>
 <p>In the plot below, one group of points (highlighted in red) seems to fall outside of the linear trend. These cars have a higher mileage than you might expect. How can you explain these cars?</p>
-<p><img src="visualize_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="visualize_altair_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Let’s hypothesize that the cars are hybrids. One way to test this hypothesis is to look at the <code>class</code> value for each car. The <code>class</code> variable of the <code>mpg</code> dataset classifies cars into groups such as compact, midsize, and SUV. If the outlying points are hybrids, they should be classified as compact cars or, perhaps, subcompact cars (keep in mind that this data was collected before hybrid trucks and SUVs became popular).</p>
 <p>You can add a third variable, like <code>class</code>, to a two dimensional scatterplot by mapping it to an <strong>encoding</strong>. An encoding is a visual property of the objects in your plot. Encodings include things like the size, the shape, or the color of your points. You can display a point (like the one below) in different ways by changing the values of its encoded properties. Since we already use the word “value” to describe data, let’s use the word “level” to describe encoded properties. Here we change the levels of a point’s size, shape, and color to make the point small, triangular, or blue:</p>
-<p><img src="visualize_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="visualize_altair_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>You can convey information about your data by mapping the encodings in your plot to the variables in your dataset. For example, you can map the colors of your points to the <code>class</code> variable to reveal the class of each car.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="data-visualisation.html#cb16-1"></a></span>
-<span id="cb16-2"><a href="data-visualisation.html#cb16-2"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb16-3"><a href="data-visualisation.html#cb16-3"></a>  mark_point().</span>
-<span id="cb16-4"><a href="data-visualisation.html#cb16-4"></a>  encode(</span>
-<span id="cb16-5"><a href="data-visualisation.html#cb16-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb16-6"><a href="data-visualisation.html#cb16-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb16-7"><a href="data-visualisation.html#cb16-7"></a>    color <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
-<span id="cb16-8"><a href="data-visualisation.html#cb16-8"></a>    )</span>
-<span id="cb16-9"><a href="data-visualisation.html#cb16-9"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="data-visualisation-altair-1.html#cb33-1"></a></span>
+<span id="cb33-2"><a href="data-visualisation-altair-1.html#cb33-2"></a>chart <span class="op">=</span> (alt.</span>
+<span id="cb33-3"><a href="data-visualisation-altair-1.html#cb33-3"></a>  Chart(mpg).</span>
+<span id="cb33-4"><a href="data-visualisation-altair-1.html#cb33-4"></a>  mark_point().</span>
+<span id="cb33-5"><a href="data-visualisation-altair-1.html#cb33-5"></a>  encode(</span>
+<span id="cb33-6"><a href="data-visualisation-altair-1.html#cb33-6"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb33-7"><a href="data-visualisation-altair-1.html#cb33-7"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb33-8"><a href="data-visualisation-altair-1.html#cb33-8"></a>    color <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
+<span id="cb33-9"><a href="data-visualisation-altair-1.html#cb33-9"></a>    )</span>
+<span id="cb33-10"><a href="data-visualisation-altair-1.html#cb33-10"></a>)</span></code></pre></div>
 <div id="htmlwidget-e5c8c404fe174e4c81bd" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{
   "chart_spec": {
@@ -6475,14 +6499,15 @@ never expected to see.” — John Tukey</p>
 <p>To map an encoding to a variable, associate the name of the encoding to the name of the variable inside <code>encode()</code>. Altair will automatically assign a unique level of the encoding (here a unique color) to each unique value of the variable, a process known as <strong>scaling</strong>. Altair will also add a legend that explains which levels correspond to which values.</p>
 <p>The colors reveal that many of the unusual points are two-seater cars. These cars don’t seem like hybrids, and are, in fact, sports cars! Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines.</p>
 <p>In the above example, we mapped <code>class</code> to the color encoding, but we could have mapped <code>class</code> to the size encoding in the same way. In this case, the exact size of each point would reveal its class affiliation. Mapping an unordered variable (<code>class</code>) to an ordered aesthetic (<code>size</code>) is not a good idea.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="data-visualisation.html#cb17-1"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb17-2"><a href="data-visualisation.html#cb17-2"></a>  mark_point().</span>
-<span id="cb17-3"><a href="data-visualisation.html#cb17-3"></a>  encode(</span>
-<span id="cb17-4"><a href="data-visualisation.html#cb17-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb17-5"><a href="data-visualisation.html#cb17-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb17-6"><a href="data-visualisation.html#cb17-6"></a>    size <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
-<span id="cb17-7"><a href="data-visualisation.html#cb17-7"></a>    )</span>
-<span id="cb17-8"><a href="data-visualisation.html#cb17-8"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="data-visualisation-altair-1.html#cb34-1"></a>chart <span class="op">=</span> (alt.</span>
+<span id="cb34-2"><a href="data-visualisation-altair-1.html#cb34-2"></a>  Chart(mpg).</span>
+<span id="cb34-3"><a href="data-visualisation-altair-1.html#cb34-3"></a>  mark_point().</span>
+<span id="cb34-4"><a href="data-visualisation-altair-1.html#cb34-4"></a>  encode(</span>
+<span id="cb34-5"><a href="data-visualisation-altair-1.html#cb34-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb34-6"><a href="data-visualisation-altair-1.html#cb34-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb34-7"><a href="data-visualisation-altair-1.html#cb34-7"></a>    size <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
+<span id="cb34-8"><a href="data-visualisation-altair-1.html#cb34-8"></a>    )</span>
+<span id="cb34-9"><a href="data-visualisation-altair-1.html#cb34-9"></a>)</span></code></pre></div>
 <div id="htmlwidget-36aa3d2a04d42bbc2145" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
 <script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{
   "chart_spec": {
@@ -9564,27 +9589,29 @@ never expected to see.” — John Tukey</p>
   }
 },"evals":[],"jsHooks":[]}</script>
 <p>Or we could have mapped <code>class</code> to the <em>opacity</em> encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="data-visualisation.html#cb18-1"></a><span class="co"># First</span></span>
-<span id="cb18-2"><a href="data-visualisation.html#cb18-2"></a>chart1 <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb18-3"><a href="data-visualisation.html#cb18-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb18-4"><a href="data-visualisation.html#cb18-4"></a>  encode(</span>
-<span id="cb18-5"><a href="data-visualisation.html#cb18-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb18-6"><a href="data-visualisation.html#cb18-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb18-7"><a href="data-visualisation.html#cb18-7"></a>    opacity <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
-<span id="cb18-8"><a href="data-visualisation.html#cb18-8"></a>    )</span>
-<span id="cb18-9"><a href="data-visualisation.html#cb18-9"></a>  )</span>
-<span id="cb18-10"><a href="data-visualisation.html#cb18-10"></a></span>
-<span id="cb18-11"><a href="data-visualisation.html#cb18-11"></a><span class="co"># Second</span></span>
-<span id="cb18-12"><a href="data-visualisation.html#cb18-12"></a>chart2 <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb18-13"><a href="data-visualisation.html#cb18-13"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb18-14"><a href="data-visualisation.html#cb18-14"></a>  encode(</span>
-<span id="cb18-15"><a href="data-visualisation.html#cb18-15"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb18-16"><a href="data-visualisation.html#cb18-16"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb18-17"><a href="data-visualisation.html#cb18-17"></a>    shape <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
-<span id="cb18-18"><a href="data-visualisation.html#cb18-18"></a>    )</span>
-<span id="cb18-19"><a href="data-visualisation.html#cb18-19"></a>  )</span></code></pre></div>
-<div id="htmlwidget-febe03efa1a2d8d52a86" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
-<script type="application/json" data-for="htmlwidget-febe03efa1a2d8d52a86">{"x":{
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="data-visualisation-altair-1.html#cb35-1"></a><span class="co"># First</span></span>
+<span id="cb35-2"><a href="data-visualisation-altair-1.html#cb35-2"></a>chart1 <span class="op">=</span> (alt.</span>
+<span id="cb35-3"><a href="data-visualisation-altair-1.html#cb35-3"></a>  Chart(mpg).</span>
+<span id="cb35-4"><a href="data-visualisation-altair-1.html#cb35-4"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb35-5"><a href="data-visualisation-altair-1.html#cb35-5"></a>  encode(</span>
+<span id="cb35-6"><a href="data-visualisation-altair-1.html#cb35-6"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb35-7"><a href="data-visualisation-altair-1.html#cb35-7"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb35-8"><a href="data-visualisation-altair-1.html#cb35-8"></a>    opacity <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
+<span id="cb35-9"><a href="data-visualisation-altair-1.html#cb35-9"></a>    )</span>
+<span id="cb35-10"><a href="data-visualisation-altair-1.html#cb35-10"></a>)</span>
+<span id="cb35-11"><a href="data-visualisation-altair-1.html#cb35-11"></a></span>
+<span id="cb35-12"><a href="data-visualisation-altair-1.html#cb35-12"></a><span class="co"># Second</span></span>
+<span id="cb35-13"><a href="data-visualisation-altair-1.html#cb35-13"></a>chart2 <span class="op">=</span> (alt.</span>
+<span id="cb35-14"><a href="data-visualisation-altair-1.html#cb35-14"></a>  Chart(mpg).</span>
+<span id="cb35-15"><a href="data-visualisation-altair-1.html#cb35-15"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb35-16"><a href="data-visualisation-altair-1.html#cb35-16"></a>  encode(</span>
+<span id="cb35-17"><a href="data-visualisation-altair-1.html#cb35-17"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb35-18"><a href="data-visualisation-altair-1.html#cb35-18"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb35-19"><a href="data-visualisation-altair-1.html#cb35-19"></a>    shape <span class="op">=</span> <span class="st">&quot;class&quot;</span></span>
+<span id="cb35-20"><a href="data-visualisation-altair-1.html#cb35-20"></a>    )</span>
+<span id="cb35-21"><a href="data-visualisation-altair-1.html#cb35-21"></a>)</span></code></pre></div>
+<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
     "config": {
@@ -12666,8 +12693,8 @@ never expected to see.” — John Tukey</p>
     "renderer": "canvas"
   }
 },"evals":[],"jsHooks":[]}</script>
-<div id="htmlwidget-1fb4450895fe099f74a1" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1fb4450895fe099f74a1">{"x":{
+<div id="htmlwidget-e5c8c404fe174e4c81bd" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
     "config": {
@@ -15753,17 +15780,17 @@ never expected to see.” — John Tukey</p>
 <p>For each encoding, you use <code>encode()</code> to associate the name of the encoding with a variable to display. The <code>encode()</code> function gathers together each of the encoded mappings used by a layer and passes them to the layer’s mapping argument. The syntax highlights a useful insight about <code>x</code> and <code>y</code>: the x and y locations of a point are themselves encodings, visual properties that you can map to variables to display information about the data.</p>
 <p>Once you map an encoding, Altair takes care of the rest. It selects a reasonable scale to use with the encoding, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, Altair does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values.</p>
 <p>You can also <em>configure</em> the encoding properties of your mark manually. For example, we can make all of the points in our plot blue:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="data-visualisation.html#cb19-1"></a></span>
-<span id="cb19-2"><a href="data-visualisation.html#cb19-2"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb19-3"><a href="data-visualisation.html#cb19-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb19-4"><a href="data-visualisation.html#cb19-4"></a>  encode(</span>
-<span id="cb19-5"><a href="data-visualisation.html#cb19-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb19-6"><a href="data-visualisation.html#cb19-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb19-7"><a href="data-visualisation.html#cb19-7"></a>    color <span class="op">=</span> alt.value(<span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb19-8"><a href="data-visualisation.html#cb19-8"></a>    )</span>
-<span id="cb19-9"><a href="data-visualisation.html#cb19-9"></a>  )</span></code></pre></div>
-<div id="htmlwidget-10b3b7155e8045a1b2ad" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
-<script type="application/json" data-for="htmlwidget-10b3b7155e8045a1b2ad">{"x":{
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="data-visualisation-altair-1.html#cb36-1"></a>chart <span class="op">=</span> (alt.</span>
+<span id="cb36-2"><a href="data-visualisation-altair-1.html#cb36-2"></a>  Chart(mpg).</span>
+<span id="cb36-3"><a href="data-visualisation-altair-1.html#cb36-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb36-4"><a href="data-visualisation-altair-1.html#cb36-4"></a>  encode(</span>
+<span id="cb36-5"><a href="data-visualisation-altair-1.html#cb36-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb36-6"><a href="data-visualisation-altair-1.html#cb36-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb36-7"><a href="data-visualisation-altair-1.html#cb36-7"></a>    color <span class="op">=</span> alt.value(<span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb36-8"><a href="data-visualisation-altair-1.html#cb36-8"></a>    )</span>
+<span id="cb36-9"><a href="data-visualisation-altair-1.html#cb36-9"></a>)</span></code></pre></div>
+<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
     "config": {
@@ -18851,8 +18878,8 @@ never expected to see.” — John Tukey</p>
 <li><p>The shape of a point as a character string.</p></li>
 </ul>
 <p>Note that only a limited set of mark properties can be bound to encodings, so for some (e.g. fillOpacity, strokeOpacity, etc.) the encoding approach using <code>alt.value()</code> is not available. Encoding settings will always override local or global configuration settings. There are other methods for manually encoding properties as explained in the <a href="https://altair-viz.github.io/user_guide/customization.html">Altair documentation</a></p>
-<div id="exercises-1" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Exercises</h3>
+<div id="exercises-4" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Which variables in <code>mpg</code> are categorical? Which variables are continuous?
 How can you see this information when you run <code>mpg</code>? (Hint <code>mpg.dtypes</code>)</p></li>
@@ -18865,86 +18892,95 @@ variables?</p></li>
 </ol>
 </div>
 </div>
-<div id="common-problems" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Common problems</h2>
+<div id="common-problems-1" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Common problems</h2>
 <p>As you start to run Python code, you’re likely to run into problems. Don’t worry — it happens to everyone. I have been writing Python code for months, and every day I still write code that doesn’t work!</p>
 <p>Start by carefully comparing the code that you’re running to the code in the book. Python is extremely picky, and a misplaced character can make all the difference. Make sure that every <code>(</code> is matched with a <code>)</code> and every <code>"</code> is paired with another <code>"</code>.</p>
 <p>One common problem when creating Altair graphics as shown in this book, is to put the <code>()</code> in the wrong place: the <code>(</code> comes before the <code>alt.chart()</code> command and the <code>)</code> has to come at the end of the command.</p>
 <p>For example the code below works in Python.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="data-visualisation.html#cb20-1"></a>alt.Chart(mpg).mark_point(filled <span class="op">=</span> <span class="va">True</span>).encode(x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>, y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="data-visualisation-altair-1.html#cb37-1"></a>alt.Chart(mpg).mark_point(filled <span class="op">=</span> <span class="va">True</span>).encode(x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>, y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
 <p>However, the complexity of the more details graphics necessicates placing the code on multiple lines. When using multiple lines we need the enclosing <code>()</code>. Make sure you haven’t accidentally excluded a <code>(</code> or <code>)</code> like this</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="data-visualisation.html#cb21-1"></a>(alt.Chart(mpg).</span>
-<span id="cb21-2"><a href="data-visualisation.html#cb21-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb21-3"><a href="data-visualisation.html#cb21-3"></a>  encode(</span>
-<span id="cb21-4"><a href="data-visualisation.html#cb21-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb21-5"><a href="data-visualisation.html#cb21-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="data-visualisation-altair-1.html#cb38-1"></a>(alt.</span>
+<span id="cb38-2"><a href="data-visualisation-altair-1.html#cb38-2"></a>  Chart(mpg).</span>
+<span id="cb38-3"><a href="data-visualisation-altair-1.html#cb38-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb38-4"><a href="data-visualisation-altair-1.html#cb38-4"></a>  encode(</span>
+<span id="cb38-5"><a href="data-visualisation-altair-1.html#cb38-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb38-6"><a href="data-visualisation-altair-1.html#cb38-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
 <p>or placed the <code>()</code> incorrectly like this</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="data-visualisation.html#cb22-1"></a>(chart <span class="op">=</span> alt.Chart(mpg).</span>
-<span id="cb22-2"><a href="data-visualisation.html#cb22-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb22-3"><a href="data-visualisation.html#cb22-3"></a>  encode(</span>
-<span id="cb22-4"><a href="data-visualisation.html#cb22-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb22-5"><a href="data-visualisation.html#cb22-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span>
-<span id="cb22-6"><a href="data-visualisation.html#cb22-6"></a>)    </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="data-visualisation-altair-1.html#cb39-1"></a>(chart <span class="op">=</span> alt.</span>
+<span id="cb39-2"><a href="data-visualisation-altair-1.html#cb39-2"></a>  Chart(mpg).</span>
+<span id="cb39-3"><a href="data-visualisation-altair-1.html#cb39-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb39-4"><a href="data-visualisation-altair-1.html#cb39-4"></a>  encode(</span>
+<span id="cb39-5"><a href="data-visualisation-altair-1.html#cb39-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb39-6"><a href="data-visualisation-altair-1.html#cb39-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span>
+<span id="cb39-7"><a href="data-visualisation-altair-1.html#cb39-7"></a>)    </span></code></pre></div>
 <p>If you’re still stuck, try the help. You can get help about any Altair function from their website - <a href="https://altair-viz.github.io/" class="uri">https://altair-viz.github.io/</a>, or hovering over the function name in VS Code. If that doesn’t help, carefully read the error message. Sometimes the answer will be buried there! But when you’re new to Python, the answer might be in the error message but you don’t yet know how to understand it. Another great tool is Google: try googling the error message, as it’s likely someone else has had the same problem, and has gotten help online.</p>
 </div>
-<div id="facets" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Facets</h2>
+<div id="facets-1" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Facets</h2>
 <p>One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into <strong>facets</strong>, subplots that each display one subset of the data.</p>
 <p>To facet your plot by a single variable, use <code>facet()</code>. The first argument of <code>facet()</code> is . The variable that you pass to <code>facet_wrap()</code> should be discrete.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="data-visualisation.html#cb23-1"></a>chart_f <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb23-2"><a href="data-visualisation.html#cb23-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb23-3"><a href="data-visualisation.html#cb23-3"></a>  encode(</span>
-<span id="cb23-4"><a href="data-visualisation.html#cb23-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb23-5"><a href="data-visualisation.html#cb23-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb23-6"><a href="data-visualisation.html#cb23-6"></a>   ).</span>
-<span id="cb23-7"><a href="data-visualisation.html#cb23-7"></a>   facet(</span>
-<span id="cb23-8"><a href="data-visualisation.html#cb23-8"></a>      facet <span class="op">=</span> <span class="st">&quot;class&quot;</span>,</span>
-<span id="cb23-9"><a href="data-visualisation.html#cb23-9"></a>      columns <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb23-10"><a href="data-visualisation.html#cb23-10"></a>    )</span>
-<span id="cb23-11"><a href="data-visualisation.html#cb23-11"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="data-visualisation-altair-1.html#cb40-1"></a>chart_f <span class="op">=</span> (alt.</span>
+<span id="cb40-2"><a href="data-visualisation-altair-1.html#cb40-2"></a>  Chart(mpg).</span>
+<span id="cb40-3"><a href="data-visualisation-altair-1.html#cb40-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb40-4"><a href="data-visualisation-altair-1.html#cb40-4"></a>  encode(</span>
+<span id="cb40-5"><a href="data-visualisation-altair-1.html#cb40-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb40-6"><a href="data-visualisation-altair-1.html#cb40-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb40-7"><a href="data-visualisation-altair-1.html#cb40-7"></a>   ).</span>
+<span id="cb40-8"><a href="data-visualisation-altair-1.html#cb40-8"></a>   facet(</span>
+<span id="cb40-9"><a href="data-visualisation-altair-1.html#cb40-9"></a>      facet <span class="op">=</span> <span class="st">&quot;class&quot;</span>,</span>
+<span id="cb40-10"><a href="data-visualisation-altair-1.html#cb40-10"></a>      columns <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb40-11"><a href="data-visualisation-altair-1.html#cb40-11"></a>   )</span>
+<span id="cb40-12"><a href="data-visualisation-altair-1.html#cb40-12"></a>)</span></code></pre></div>
 <p><img src="screenshots/altair_facet_1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>To facet your plot on the combination of two variables, The first argument of <code>facet()</code> is also <code>column</code> and the second is <code>row</code>. This time the formula should contain two variable names.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="data-visualisation.html#cb24-1"></a>chart_f2 <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb24-2"><a href="data-visualisation.html#cb24-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb24-3"><a href="data-visualisation.html#cb24-3"></a>  encode(</span>
-<span id="cb24-4"><a href="data-visualisation.html#cb24-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb24-5"><a href="data-visualisation.html#cb24-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb24-6"><a href="data-visualisation.html#cb24-6"></a>   ).</span>
-<span id="cb24-7"><a href="data-visualisation.html#cb24-7"></a>   facet(</span>
-<span id="cb24-8"><a href="data-visualisation.html#cb24-8"></a>      column <span class="op">=</span> <span class="st">&quot;drv&quot;</span>,</span>
-<span id="cb24-9"><a href="data-visualisation.html#cb24-9"></a>      row <span class="op">=</span> <span class="st">&quot;cyl&quot;</span></span>
-<span id="cb24-10"><a href="data-visualisation.html#cb24-10"></a>    )</span>
-<span id="cb24-11"><a href="data-visualisation.html#cb24-11"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="data-visualisation-altair-1.html#cb41-1"></a>chart_f2 <span class="op">=</span> (alt.</span>
+<span id="cb41-2"><a href="data-visualisation-altair-1.html#cb41-2"></a>  Chart(mpg).</span>
+<span id="cb41-3"><a href="data-visualisation-altair-1.html#cb41-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb41-4"><a href="data-visualisation-altair-1.html#cb41-4"></a>  encode(</span>
+<span id="cb41-5"><a href="data-visualisation-altair-1.html#cb41-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb41-6"><a href="data-visualisation-altair-1.html#cb41-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
+<span id="cb41-7"><a href="data-visualisation-altair-1.html#cb41-7"></a>   ).</span>
+<span id="cb41-8"><a href="data-visualisation-altair-1.html#cb41-8"></a>   facet(</span>
+<span id="cb41-9"><a href="data-visualisation-altair-1.html#cb41-9"></a>      column <span class="op">=</span> <span class="st">&quot;drv&quot;</span>,</span>
+<span id="cb41-10"><a href="data-visualisation-altair-1.html#cb41-10"></a>      row <span class="op">=</span> <span class="st">&quot;cyl&quot;</span></span>
+<span id="cb41-11"><a href="data-visualisation-altair-1.html#cb41-11"></a>   )</span>
+<span id="cb41-12"><a href="data-visualisation-altair-1.html#cb41-12"></a>)</span></code></pre></div>
 <p><img src="screenshots/altair_facet_2.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>If you prefer to not facet in the rows or columns dimension, simply remove that facet argument. You can read more about <a href="https://altair-viz.github.io/user_guide/compound_charts.html">compound charts in the Altair documentation</a>.</p>
-<div id="exercises-2" class="section level3" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> Exercises</h3>
+<div id="exercises-5" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>What happens if you facet on a continuous variable?</p></li>
 <li><p>What do the empty cells in plot with <code>facet(column = "drv", row = "cyl")</code> mean?
 How do they relate to this plot?</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="data-visualisation.html#cb25-1"></a>(alt.Chart(mpg).</span>
-<span id="cb25-2"><a href="data-visualisation.html#cb25-2"></a>  mark_point().</span>
-<span id="cb25-3"><a href="data-visualisation.html#cb25-3"></a>  encode(</span>
-<span id="cb25-4"><a href="data-visualisation.html#cb25-4"></a>    x <span class="op">=</span> <span class="st">&quot;drv&quot;</span>,</span>
-<span id="cb25-5"><a href="data-visualisation.html#cb25-5"></a>    y <span class="op">=</span> <span class="st">&quot;cyl&quot;</span>)</span>
-<span id="cb25-6"><a href="data-visualisation.html#cb25-6"></a>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="data-visualisation-altair-1.html#cb42-1"></a>(alt.</span>
+<span id="cb42-2"><a href="data-visualisation-altair-1.html#cb42-2"></a>  Chart(mpg).</span>
+<span id="cb42-3"><a href="data-visualisation-altair-1.html#cb42-3"></a>  mark_point().</span>
+<span id="cb42-4"><a href="data-visualisation-altair-1.html#cb42-4"></a>  encode(</span>
+<span id="cb42-5"><a href="data-visualisation-altair-1.html#cb42-5"></a>    x <span class="op">=</span> <span class="st">&quot;drv&quot;</span>,</span>
+<span id="cb42-6"><a href="data-visualisation-altair-1.html#cb42-6"></a>    y <span class="op">=</span> <span class="st">&quot;cyl&quot;</span>)</span>
+<span id="cb42-7"><a href="data-visualisation-altair-1.html#cb42-7"></a>)</span></code></pre></div></li>
 <li><p>What plots does the following code make? What does <code>.</code> do?</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="data-visualisation.html#cb26-1"></a>(alt.Chart(mpg).</span>
-<span id="cb26-2"><a href="data-visualisation.html#cb26-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb26-3"><a href="data-visualisation.html#cb26-3"></a>  encode(</span>
-<span id="cb26-4"><a href="data-visualisation.html#cb26-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb26-5"><a href="data-visualisation.html#cb26-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>).</span>
-<span id="cb26-6"><a href="data-visualisation.html#cb26-6"></a>  facet(column <span class="op">=</span> <span class="st">&quot;drv&quot;</span>)</span>
-<span id="cb26-7"><a href="data-visualisation.html#cb26-7"></a>)</span>
-<span id="cb26-8"><a href="data-visualisation.html#cb26-8"></a></span>
-<span id="cb26-9"><a href="data-visualisation.html#cb26-9"></a>(alt.Chart(mpg).</span>
-<span id="cb26-10"><a href="data-visualisation.html#cb26-10"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb26-11"><a href="data-visualisation.html#cb26-11"></a>  encode(</span>
-<span id="cb26-12"><a href="data-visualisation.html#cb26-12"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb26-13"><a href="data-visualisation.html#cb26-13"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>).</span>
-<span id="cb26-14"><a href="data-visualisation.html#cb26-14"></a>  facet(row <span class="op">=</span> <span class="st">&quot;cyl&quot;</span>)</span>
-<span id="cb26-15"><a href="data-visualisation.html#cb26-15"></a>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="data-visualisation-altair-1.html#cb43-1"></a>(alt.</span>
+<span id="cb43-2"><a href="data-visualisation-altair-1.html#cb43-2"></a>  Chart(mpg).</span>
+<span id="cb43-3"><a href="data-visualisation-altair-1.html#cb43-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb43-4"><a href="data-visualisation-altair-1.html#cb43-4"></a>  encode(</span>
+<span id="cb43-5"><a href="data-visualisation-altair-1.html#cb43-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb43-6"><a href="data-visualisation-altair-1.html#cb43-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>).</span>
+<span id="cb43-7"><a href="data-visualisation-altair-1.html#cb43-7"></a>  facet(</span>
+<span id="cb43-8"><a href="data-visualisation-altair-1.html#cb43-8"></a>  column <span class="op">=</span> <span class="st">&quot;drv&quot;</span>)</span>
+<span id="cb43-9"><a href="data-visualisation-altair-1.html#cb43-9"></a>)</span>
+<span id="cb43-10"><a href="data-visualisation-altair-1.html#cb43-10"></a></span>
+<span id="cb43-11"><a href="data-visualisation-altair-1.html#cb43-11"></a>(alt.</span>
+<span id="cb43-12"><a href="data-visualisation-altair-1.html#cb43-12"></a>  Chart(mpg).</span>
+<span id="cb43-13"><a href="data-visualisation-altair-1.html#cb43-13"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb43-14"><a href="data-visualisation-altair-1.html#cb43-14"></a>  encode(</span>
+<span id="cb43-15"><a href="data-visualisation-altair-1.html#cb43-15"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb43-16"><a href="data-visualisation-altair-1.html#cb43-16"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>).</span>
+<span id="cb43-17"><a href="data-visualisation-altair-1.html#cb43-17"></a>  facet(</span>
+<span id="cb43-18"><a href="data-visualisation-altair-1.html#cb43-18"></a>  row <span class="op">=</span> <span class="st">&quot;cyl&quot;</span>)</span>
+<span id="cb43-19"><a href="data-visualisation-altair-1.html#cb43-19"></a>)</span></code></pre></div></li>
 <li><p>Take the first faceted plot in this section:</p>
 <p>What are the advantages to using faceting instead of the colour aesthetic?
 What are the disadvantages? How might the balance change if you had a
@@ -18952,3122 +18988,39 @@ larger dataset?</p></li>
 <li><p>When using <code>facet()</code> you should usually put the variable with more
 unique levels in the columns. Why?</p></li>
 </ol>
-</div>
-</div>
-<div id="geometric-objects" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Geometric objects</h2>
-<p>How are these two plots similar?</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="data-visualisation.html#cb27-1"></a>chartp <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb27-2"><a href="data-visualisation.html#cb27-2"></a>  mark_point().</span>
-<span id="cb27-3"><a href="data-visualisation.html#cb27-3"></a>  encode(</span>
-<span id="cb27-4"><a href="data-visualisation.html#cb27-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb27-5"><a href="data-visualisation.html#cb27-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span></span>
-<span id="cb27-6"><a href="data-visualisation.html#cb27-6"></a>    )</span>
-<span id="cb27-7"><a href="data-visualisation.html#cb27-7"></a>  )</span>
-<span id="cb27-8"><a href="data-visualisation.html#cb27-8"></a></span>
-<span id="cb27-9"><a href="data-visualisation.html#cb27-9"></a>chartf <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb27-10"><a href="data-visualisation.html#cb27-10"></a>  encode(</span>
-<span id="cb27-11"><a href="data-visualisation.html#cb27-11"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb27-12"><a href="data-visualisation.html#cb27-12"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span></span>
-<span id="cb27-13"><a href="data-visualisation.html#cb27-13"></a>    ).</span>
-<span id="cb27-14"><a href="data-visualisation.html#cb27-14"></a>  transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).</span>
-<span id="cb27-15"><a href="data-visualisation.html#cb27-15"></a>  mark_line()</span>
-<span id="cb27-16"><a href="data-visualisation.html#cb27-16"></a>  )</span></code></pre></div>
-<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
-  "chart_spec": {
-    "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
-    "config": {
-      "view": {
-        "continuousHeight": 300,
-        "continuousWidth": 400
-      }
-    },
-    "data": {
-      "name": "data-784d2a789a5f3a352263a16b6c4cd367"
-    },
-    "datasets": {
-      "data-784d2a789a5f3a352263a16b6c4cd367": [
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 31,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 30,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "auto(av)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.1,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 27,
-          "manufacturer": "audi",
-          "model": "a4",
-          "trans": "auto(av)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 16,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 28,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 27,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.1,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.1,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "audi",
-          "model": "a4 quattro",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 24,
-          "manufacturer": "audi",
-          "model": "a6 quattro",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.1,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "audi",
-          "model": "a6 quattro",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 16,
-          "cyl": 8,
-          "displ": 4.2,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 23,
-          "manufacturer": "audi",
-          "model": "a6 quattro",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 5.3,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "chevrolet",
-          "model": "c1500 suburban 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.3,
-          "drv": "r",
-          "fl": "e",
-          "hwy": 15,
-          "manufacturer": "chevrolet",
-          "model": "c1500 suburban 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 5.3,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "chevrolet",
-          "model": "c1500 suburban 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "chevrolet",
-          "model": "c1500 suburban 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 6,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "chevrolet",
-          "model": "c1500 suburban 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "2seater",
-          "cty": 16,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "chevrolet",
-          "model": "corvette",
-          "trans": "manual(m6)",
-          "year": 1999
-        },
-        {
-          "class": "2seater",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 23,
-          "manufacturer": "chevrolet",
-          "model": "corvette",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "2seater",
-          "cty": 16,
-          "cyl": 8,
-          "displ": 6.2,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "chevrolet",
-          "model": "corvette",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "2seater",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 6.2,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "chevrolet",
-          "model": "corvette",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "2seater",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 7,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 24,
-          "manufacturer": "chevrolet",
-          "model": "corvette",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 5.3,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "chevrolet",
-          "model": "k1500 tahoe 4wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.3,
-          "drv": "4",
-          "fl": "e",
-          "hwy": 14,
-          "manufacturer": "chevrolet",
-          "model": "k1500 tahoe 4wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "chevrolet",
-          "model": "k1500 tahoe 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 6.5,
-          "drv": "4",
-          "fl": "d",
-          "hwy": 17,
-          "manufacturer": "chevrolet",
-          "model": "k1500 tahoe 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "chevrolet",
-          "model": "malibu",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 22,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 30,
-          "manufacturer": "chevrolet",
-          "model": "malibu",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.1,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "chevrolet",
-          "model": "malibu",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "chevrolet",
-          "model": "malibu",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.6,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "chevrolet",
-          "model": "malibu",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "minivan",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l3)",
-          "year": 1999
-        },
-        {
-          "class": "minivan",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "minivan",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 22,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "minivan",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 22,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "minivan",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "minivan",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "minivan",
-          "cty": 11,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "e",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "minivan",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 22,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "minivan",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 21,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "minivan",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 23,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l6)",
-          "year": 2008
-        },
-        {
-          "class": "minivan",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 23,
-          "manufacturer": "dodge",
-          "model": "caravan 2wd",
-          "trans": "auto(l6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 3.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 6,
-          "displ": 3.9,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 3.9,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 9,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "e",
-          "hwy": 12,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "dodge",
-          "model": "dakota pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 6,
-          "displ": 3.9,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 9,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "e",
-          "hwy": 12,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 16,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.9,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "dodge",
-          "model": "durango 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 16,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 9,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "e",
-          "hwy": 12,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 16,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 9,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "e",
-          "hwy": 12,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 16,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.9,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "dodge",
-          "model": "ram 1500 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "expedition 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "expedition 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "ford",
-          "model": "expedition 2wd",
-          "trans": "auto(l6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "explorer 4wd",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "ford",
-          "model": "explorer 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "explorer 4wd",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "ford",
-          "model": "explorer 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "ford",
-          "model": "explorer 4wd",
-          "trans": "auto(l6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "explorer 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 4.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 4.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 16,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 16,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "ford",
-          "model": "f150 pickup 4wd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 25,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 21,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 22,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 23,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 15,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 22,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 20,
-          "manufacturer": "ford",
-          "model": "mustang",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 28,
-          "cyl": 4,
-          "displ": 1.6,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 33,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 24,
-          "cyl": 4,
-          "displ": 1.6,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 32,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 25,
-          "cyl": 4,
-          "displ": 1.6,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 32,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 23,
-          "cyl": 4,
-          "displ": 1.6,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 24,
-          "cyl": 4,
-          "displ": 1.6,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 32,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 26,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 34,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 25,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 36,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 24,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "c",
-          "hwy": 36,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "honda",
-          "model": "civic",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 30,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 31,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 28,
-          "manufacturer": "hyundai",
-          "model": "sonata",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 28,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 2.7,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 2.7,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 2.7,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "hyundai",
-          "model": "tiburon",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "4",
-          "fl": "d",
-          "hwy": 22,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 9,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "e",
-          "hwy": 12,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 6.1,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 14,
-          "manufacturer": "jeep",
-          "model": "grand cherokee 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 4,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 15,
-          "manufacturer": "land rover",
-          "model": "range rover",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 4.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "land rover",
-          "model": "range rover",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 4.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "land rover",
-          "model": "range rover",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 15,
-          "manufacturer": "land rover",
-          "model": "range rover",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "lincoln",
-          "model": "navigator 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "r",
-          "fl": "p",
-          "hwy": 16,
-          "manufacturer": "lincoln",
-          "model": "navigator 2wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 5.4,
-          "drv": "r",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "lincoln",
-          "model": "navigator 2wd",
-          "trans": "auto(l6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "mercury",
-          "model": "mountaineer 4wd",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "mercury",
-          "model": "mountaineer 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 4.6,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "mercury",
-          "model": "mountaineer 4wd",
-          "trans": "auto(l6)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "mercury",
-          "model": "mountaineer 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "nissan",
-          "model": "altima",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "nissan",
-          "model": "altima",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 23,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 31,
-          "manufacturer": "nissan",
-          "model": "altima",
-          "trans": "auto(av)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 23,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 32,
-          "manufacturer": "nissan",
-          "model": "altima",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 6,
-          "displ": 3.5,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 27,
-          "manufacturer": "nissan",
-          "model": "altima",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 6,
-          "displ": 3.5,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "nissan",
-          "model": "altima",
-          "trans": "auto(av)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "nissan",
-          "model": "maxima",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 25,
-          "manufacturer": "nissan",
-          "model": "maxima",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 6,
-          "displ": 3.5,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "nissan",
-          "model": "maxima",
-          "trans": "auto(av)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "nissan",
-          "model": "pathfinder 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "nissan",
-          "model": "pathfinder 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 20,
-          "manufacturer": "nissan",
-          "model": "pathfinder 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 12,
-          "cyl": 8,
-          "displ": 5.6,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 18,
-          "manufacturer": "nissan",
-          "model": "pathfinder 4wd",
-          "trans": "auto(s5)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.1,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "pontiac",
-          "model": "grand prix",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "pontiac",
-          "model": "grand prix",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "pontiac",
-          "model": "grand prix",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 28,
-          "manufacturer": "pontiac",
-          "model": "grand prix",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 16,
-          "cyl": 8,
-          "displ": 5.3,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "pontiac",
-          "model": "grand prix",
-          "trans": "auto(s4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 25,
-          "manufacturer": "subaru",
-          "model": "forester awd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "subaru",
-          "model": "forester awd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "subaru",
-          "model": "forester awd",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "subaru",
-          "model": "forester awd",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "subaru",
-          "model": "forester awd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 23,
-          "manufacturer": "subaru",
-          "model": "forester awd",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.2,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "auto(s4)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "auto(s4)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "p",
-          "hwy": 25,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 20,
-          "cyl": 4,
-          "displ": 2.5,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "subaru",
-          "model": "impreza awd",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 4,
-          "displ": 2.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "toyota",
-          "model": "4runner 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 16,
-          "cyl": 4,
-          "displ": 2.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "toyota",
-          "model": "4runner 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "toyota",
-          "model": "4runner 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "toyota",
-          "model": "4runner 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "toyota",
-          "model": "4runner 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 14,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "toyota",
-          "model": "4runner 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 31,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 31,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 6,
-          "displ": 3.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 28,
-          "manufacturer": "toyota",
-          "model": "camry",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 31,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 22,
-          "cyl": 4,
-          "displ": 2.4,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 31,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "auto(s5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 3.3,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 27,
-          "manufacturer": "toyota",
-          "model": "camry solara",
-          "trans": "auto(s5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 24,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 30,
-          "manufacturer": "toyota",
-          "model": "corolla",
-          "trans": "auto(l3)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 24,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 33,
-          "manufacturer": "toyota",
-          "model": "corolla",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 26,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 35,
-          "manufacturer": "toyota",
-          "model": "corolla",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 28,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 37,
-          "manufacturer": "toyota",
-          "model": "corolla",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 26,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 35,
-          "manufacturer": "toyota",
-          "model": "corolla",
-          "trans": "auto(l4)",
-          "year": 2008
-        },
-        {
-          "class": "suv",
-          "cty": 11,
-          "cyl": 8,
-          "displ": 4.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 15,
-          "manufacturer": "toyota",
-          "model": "land cruiser wagon 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "suv",
-          "cty": 13,
-          "cyl": 8,
-          "displ": 5.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "toyota",
-          "model": "land cruiser wagon 4wd",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 15,
-          "cyl": 4,
-          "displ": 2.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 16,
-          "cyl": 4,
-          "displ": 2.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 17,
-          "cyl": 4,
-          "displ": 2.7,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 22,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 17,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 3.4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 19,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "pickup",
-          "cty": 15,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 18,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "pickup",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 4,
-          "drv": "4",
-          "fl": "r",
-          "hwy": 20,
-          "manufacturer": "toyota",
-          "model": "toyota tacoma 4wd",
-          "trans": "auto(l5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "gti",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "volkswagen",
-          "model": "gti",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "gti",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 22,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "gti",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "volkswagen",
-          "model": "gti",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 33,
-          "cyl": 4,
-          "displ": 1.9,
-          "drv": "f",
-          "fl": "d",
-          "hwy": 44,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 22,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 5,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 21,
-          "cyl": 5,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "compact",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 23,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "compact",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 24,
-          "manufacturer": "volkswagen",
-          "model": "jetta",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 35,
-          "cyl": 4,
-          "displ": 1.9,
-          "drv": "f",
-          "fl": "d",
-          "hwy": 44,
-          "manufacturer": "volkswagen",
-          "model": "new beetle",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 29,
-          "cyl": 4,
-          "displ": 1.9,
-          "drv": "f",
-          "fl": "d",
-          "hwy": 41,
-          "manufacturer": "volkswagen",
-          "model": "new beetle",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "new beetle",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 26,
-          "manufacturer": "volkswagen",
-          "model": "new beetle",
-          "trans": "auto(l4)",
-          "year": 1999
-        },
-        {
-          "class": "subcompact",
-          "cty": 20,
-          "cyl": 5,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 28,
-          "manufacturer": "volkswagen",
-          "model": "new beetle",
-          "trans": "manual(m5)",
-          "year": 2008
-        },
-        {
-          "class": "subcompact",
-          "cty": 20,
-          "cyl": 5,
-          "displ": 2.5,
-          "drv": "f",
-          "fl": "r",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "new beetle",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 4,
-          "displ": 1.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 19,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 28,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "auto(s6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 21,
-          "cyl": 4,
-          "displ": 2,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 29,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "manual(m6)",
-          "year": 2008
-        },
-        {
-          "class": "midsize",
-          "cty": 16,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "auto(l5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 18,
-          "cyl": 6,
-          "displ": 2.8,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "manual(m5)",
-          "year": 1999
-        },
-        {
-          "class": "midsize",
-          "cty": 17,
-          "cyl": 6,
-          "displ": 3.6,
-          "drv": "f",
-          "fl": "p",
-          "hwy": 26,
-          "manufacturer": "volkswagen",
-          "model": "passat",
-          "trans": "auto(s6)",
-          "year": 2008
-        }
-      ]
-    },
-    "encoding": {
-      "x": {
-        "field": "displ",
-        "type": "quantitative"
-      },
-      "y": {
-        "field": "hwy",
-        "type": "quantitative"
-      }
-    },
-    "mark": "point"
-  },
-  "embed_options": {
-    "defaultStyle": true,
-    "renderer": "canvas"
-  }
-},"evals":[],"jsHooks":[]}</script>
-<p><img src="screenshots/altair_smooth_line.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
-<p>Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different visual object to represent the data. In Altair syntax, we say that they use different <strong>marks</strong>.</p>
-<p>A <strong>mark</strong> is the geometrical object that a plot uses to represent data. People often describe plots by the type of mark that the plot uses. For example, bar charts use bar marks, line charts use line marks, boxplots use boxplot marks, and so on. Scatterplots break the trend; they use the point mark. As we see above, you can use different marks to plot the same data. The first plot uses the point mark, and the second plot uses the line mark, a smooth line fitted to the data is calculated using a transformation. To change the mark in your plot, change the mark function that you add to <code>Chart()</code>.</p>
-<p>Every mark function in Altair has <code>encode</code> arguments. However, not every encoding works with every mark. You could set the shape of a point, but you couldn’t set the “shape” of a line. On the other hand, you <em>could</em> set the type of line. <code>mark_line()</code> will draw a different line, with a different <code>strokeDash</code>, for each unique value of the variable that you map to <code>strokeDash</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="data-visualisation.html#cb28-1"></a>chartl <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb28-2"><a href="data-visualisation.html#cb28-2"></a>  transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>, groupby <span class="op">=</span> [<span class="st">&quot;drv&quot;</span>]).</span>
-<span id="cb28-3"><a href="data-visualisation.html#cb28-3"></a>  mark_line().</span>
-<span id="cb28-4"><a href="data-visualisation.html#cb28-4"></a>  encode(</span>
-<span id="cb28-5"><a href="data-visualisation.html#cb28-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
-<span id="cb28-6"><a href="data-visualisation.html#cb28-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
-<span id="cb28-7"><a href="data-visualisation.html#cb28-7"></a>    strokeDash <span class="op">=</span> <span class="st">&quot;drv&quot;</span></span>
-<span id="cb28-8"><a href="data-visualisation.html#cb28-8"></a>    )</span>
-<span id="cb28-9"><a href="data-visualisation.html#cb28-9"></a>  )</span></code></pre></div>
-<p><img src="screenshots/altair_dashed_lines.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
-<p>Here <code>mark_line()</code> separates the cars into three lines based on their <code>drv</code> value, which describes a car’s drivetrain. One line describes all of the points with a <code>4</code> value, one line describes all of the points with an <code>f</code> value, and one line describes all of the points with an <code>r</code> value. Here, <code>4</code> stands for four-wheel drive, <code>f</code> for front-wheel drive, and <code>r</code> for rear-wheel drive.</p>
-<p>If this sounds strange, we can make it more clear by overlaying the lines on top of the raw data and then coloring everything according to <code>drv</code>.</p>
-<p><img src="screenshots/altair_points_dashed_lines.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
-<p>Notice that this plot contains two marks in the same graph! If this makes you excited, buckle up. We will learn how to place multiple marks on the same chart very soon.</p>
-<p>Altair provides about 15 marks. The best way to get a comprehensive overview is the Altair marks page, which you can find at <a href="https://altair-viz.github.io/user_guide/marks.html" class="uri">https://altair-viz.github.io/user_guide/marks.html</a>.</p>
+<!-- ## Geometric objects -->
+<!-- How are these two plots similar?  -->
+<!-- ```{r echo = FALSE, out.width = "50%", fig.align="default", message = FALSE} -->
+<!-- ggplot(data = mpg) +  -->
+<!--   geom_point(mapping = aes(x = displ, y = hwy)) -->
+<!-- ggplot(data = mpg) +  -->
+<!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
+<!-- ``` -->
+<!-- Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different visual object to represent the data. In ggplot2 syntax, we say that they use different __geoms__. -->
+<!-- A __geom__ is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. Scatterplots break the trend; they use the point geom. As we see above, you can use different geoms to plot the same data. The plot on the left uses the point geom, and the plot on the right uses the smooth geom, a smooth line fitted to the data.  -->
+<!-- To change the geom in your plot, change the geom function that you add to `ggplot()`. For instance, to make the plots above, you can use this code: -->
+<!-- ```{r eval = FALSE} -->
+<!-- # left -->
+<!-- ggplot(data = mpg) +  -->
+<!--   geom_point(mapping = aes(x = displ, y = hwy)) -->
+<!-- # right -->
+<!-- ggplot(data = mpg) +  -->
+<!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
+<!-- ``` -->
+<!-- Every geom function in ggplot2 takes a `mapping` argument. However, not every aesthetic works with every geom. You could set the shape of a point, but you couldn't set the "shape" of a line. On the other hand, you _could_ set the linetype of a line. `geom_smooth()` will draw a different line, with a different linetype, for each unique value of the variable that you map to linetype. -->
+<!-- ```{r message = FALSE} -->
+<!-- ggplot(data = mpg) +  -->
+<!--   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv)) -->
+<!-- ``` -->
+<!-- Here `geom_smooth()` separates the cars into three lines based on their `drv` value, which describes a car's drivetrain. One line describes all of the points with a `4` value, one line describes all of the points with an `f` value, and one line describes all of the points with an `r` value. Here, `4` stands for four-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive. -->
+<!-- If this sounds strange, we can make it more clear by overlaying the lines on top of the raw data and then coloring everything according to `drv`.  -->
+<!-- ```{r echo = FALSE, message = FALSE} -->
+<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +  -->
+<!--   geom_point() + -->
+<!--   geom_smooth(mapping = aes(linetype = drv)) -->
+<!-- ``` -->
+<!-- Notice that this plot contains two geoms in the same graph! If this makes you excited, buckle up. We will learn how to place multiple geoms in the same plot very soon. -->
+<!-- ggplot2 provides over 40 geoms, and extension packages provide even more (see <https://www.ggplot2-exts.org> for a sampling). The best way to get a comprehensive overview is the ggplot2 cheatsheet, which you can find at <http://rstudio.com/cheatsheets>. To learn more about any single geom, use help: `?geom_smooth`. -->
 <!-- Many geoms, like `geom_smooth()`, use a single geometric object to display multiple rows of data. For these geoms, you can set the `group` aesthetic to a categorical variable to draw multiple objects. ggplot2 will draw a separate object for each unique value of the grouping variable. In practice, ggplot2 will automatically group the data for these geoms whenever you map an aesthetic to a discrete variable (as in the `linetype` example). It is convenient to rely on this feature because the group aesthetic by itself does not add a legend or distinguishing features to the geoms. -->
 <!-- ```{r, fig.width = 3, fig.align = 'default', out.width = "33%", message = FALSE} -->
 <!-- ggplot(data = mpg) + -->
@@ -22082,7 +19035,7 @@ unique levels in the columns. Why?</p></li>
 <!-- ``` -->
 <!-- To display multiple geoms in the same plot, add multiple geom functions to `ggplot()`: -->
 <!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg) + -->
+<!-- ggplot(data = mpg) +  -->
 <!--   geom_point(mapping = aes(x = displ, y = hwy)) + -->
 <!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
 <!-- ``` -->
@@ -22378,12 +19331,13 @@ unique levels in the columns. Why?</p></li>
 
 </div>
 </div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="explore-intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualisation-altair.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -22406,7 +19360,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/byuidatascience/python4ds/edit/master/visualize.Rmd",
+"link": "https://github.com/byuidatascience/python4ds/edit/master/visualize_altair.Rmd",
 "text": "Edit"
 },
 "history": {
