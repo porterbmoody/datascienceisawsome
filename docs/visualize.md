@@ -12,13 +12,19 @@ This chapter will teach you how to visualise your data using Altair. Python has 
 
 If you'd like to learn more about Altair before you start, I'd recommend reading "Altair: Interactive Statistical Visualizations for Python", <https://joss.theoj.org/papers/10.21105/joss.01057.pdf>.
 
-We should note that we are building this book using R with the package bookdown.  Rendering Altair graphics using a python chunk is not straight forward but is not important for our use in VS Code. In VS Code the example chunks will render in the interactive Python viewer automatically. The following R code chunk shows how we are rendering the Altair graphics in this book. Thanks to ijlyttle for [his GitHub Gist](https://gist.github.com/ijlyttle/aa314d02b5f7f85702ea2a648393b21f).
+We should note that we are building this book using R with the package bookdown.  Rendering Altair graphics using a python chunk is not straight forward but is not important for our use in VS Code. In VS Code the example chunks will render in the interactive Python viewer automatically. The following R code chunks show how we are rendering the Altair graphics in this book. Thanks to ijlyttle for [his GitHub Gist](https://gist.github.com/ijlyttle/aa314d02b5f7f85702ea2a648393b21f).
 
 ```
 
 # ```{R, echo=FALSE}
 # vegawidget::as_vegaspec(py$chart$to_json())
 # ```
+
+# For Python examples that show chart.save()
+
+#```{r, message = FALSE, echo=FALSE}
+#knitr::include_graphics("screenshots/chartp_chartleft.png")
+#```
 
 ```
 
@@ -127,11 +133,9 @@ The rest of this chapter will show you how to complete and extend this template 
 In the plot below, one group of points (highlighted in red) seems to fall outside of the linear trend. These cars have a higher mileage than you might expect. How can you explain these cars?
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 
-
-
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_condition_chart} \end{flushleft}
 
 
 Let's hypothesize that the cars are hybrids. One way to test this hypothesis is to look at the `class` value for each car. The `class` variable of the `mpg` dataset classifies cars into groups such as compact, midsize, and SUV. If the outlying points are hybrids, they should be classified as compact cars or, perhaps, subcompact cars (keep in mind that this data was collected before hybrid trucks and SUVs became popular).
@@ -205,13 +209,17 @@ chart2 = (alt.Chart(mpg).
     shape = "class"
     )
   )
+  
+chart1.save("screenshots/altair_opacity.png")
+#> WARN Channel opacity should not be used with an unsorted discrete field.
+chart2.save("screenshots/altair_shape.png")
+  
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-16-1} 
 
+\includegraphics[width=0.5\linewidth]{screenshots/altair_opacity} \includegraphics[width=0.5\linewidth]{screenshots/altair_shape} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-17-1} 
 
 
 Altair will only use 8 shapes for one chart. Charting more than 8 shapes is not recommended as the shapes simply recycle.
@@ -236,7 +244,7 @@ chart = (alt.Chart(mpg).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-19-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-18-1} 
 
 Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
 
@@ -318,10 +326,13 @@ chart_f = (alt.Chart(mpg).
       columns = 4
     )
   )
+  
+chart_f.save("screenshots/altair_facet_1.png")
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_1} \end{center}
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_1} \end{flushleft}
+
 
 To facet your plot on the combination of two variables, The first argument of `facet()` is also `column` and the second is `row`. This time the formula should contain two variable names.
 
@@ -338,10 +349,13 @@ chart_f2 = (alt.Chart(mpg).
       row = "cyl"
     )
   )
+  
+chart_f2.save("screenshots/altair_facet_2.png")
+#> WARN row encoding should be discrete (ordinal / nominal / binned).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_2} \end{center}
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_2} \end{flushleft}
 
 If you prefer to not facet in the rows or columns dimension, simply remove that facet argument. You can read more about [compound charts in the Altair documentation](https://altair-viz.github.io/user_guide/compound_charts.html).
 
@@ -414,13 +428,14 @@ chartf = (alt.Chart(mpg).
   transform_loess("displ", "hwy").
   mark_line()
   )
+
+chartp.save("screenshots/altair_basic_points.png")  
+chartf.save("screenshots/altair_smooth_line.png")
 ```
+  
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-27-1} 
-
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_smooth_line} \end{flushleft}
+\includegraphics[width=0.5\linewidth]{screenshots/altair_basic_points} \includegraphics[width=0.5\linewidth]{screenshots/altair_smooth_line} 
 
 
 
@@ -442,6 +457,11 @@ chartl = (alt.Chart(mpg).
     strokeDash = "drv"
     )
   )
+  
+
+chartl.save("screenshots/altair_dashed_lines.png")
+
+  
 ```
 
 
@@ -462,38 +482,93 @@ Notice that this plot contains two marks in the same graph! If this makes you ex
 
 Altair provides about 15 marks. The best way to get a comprehensive overview is the Altair marks page, which you can find at <https://altair-viz.github.io/user_guide/marks.html>. 
 
-<!-- Many geoms, like `geom_smooth()`, use a single geometric object to display multiple rows of data. For these geoms, you can set the `group` aesthetic to a categorical variable to draw multiple objects. ggplot2 will draw a separate object for each unique value of the grouping variable. In practice, ggplot2 will automatically group the data for these geoms whenever you map an aesthetic to a discrete variable (as in the `linetype` example). It is convenient to rely on this feature because the group aesthetic by itself does not add a legend or distinguishing features to the geoms. -->
+Many marks, like `mark_line()`, use a single mark object to display multiple rows of data. For these marks, you can set the `detail` encoding to a categorical variable to draw multiple objects. Altair will draw a separate object for each unique value of the detail variable. In practice, Altair will automatically group the data for these marks whenever you map an encoding to a discrete variable (as in the `strokeDash` example). It is convenient to rely on this feature because the detail encoding by itself does not add a legend or distinguishing features to the marks.
 
-<!-- ```{r, fig.width = 3, fig.align = 'default', out.width = "33%", message = FALSE} -->
-<!-- ggplot(data = mpg) + -->
-<!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
 
-<!-- ggplot(data = mpg) + -->
-<!--   geom_smooth(mapping = aes(x = displ, y = hwy, group = drv)) -->
 
-<!-- ggplot(data = mpg) + -->
-<!--   geom_smooth( -->
-<!--     mapping = aes(x = displ, y = hwy, color = drv), -->
-<!--     show.legend = FALSE -->
-<!--   ) -->
-<!-- ``` -->
+```python
+chartleft = (alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy",
+  ).
+  transform_loess("displ", "hwy").
+  mark_line()
+  
+  )
 
-<!-- To display multiple geoms in the same plot, add multiple geom functions to `ggplot()`: -->
+chartmiddle = (alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy",
+    detail = "drv"
+    ).
+  transform_loess("displ", "hwy", groupby = ["drv"]).
+  mark_line()
+  )
 
-<!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg) + -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) + -->
-<!--   geom_smooth(mapping = aes(x = displ, y = hwy)) -->
-<!-- ``` -->
+chartright = (alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy",
+    color=alt.Color("drv", legend=None)
+    ).
+  transform_loess("displ", "hwy", groupby = ["drv"]).
+  mark_line()
+  )
+chartleft.save("screenshots/altair_chartleft.png")
+chartmiddle.save("screenshots/altair_chartmiddle.png")
+chartright.save("screenshots/altair_chartright.png")
 
-<!-- This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display `cty` instead of `hwy`. You'd need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of mappings to `ggplot()`. ggplot2 will treat these mappings as global mappings that apply to each geom in the graph.  In other words, this code will produce the same plot as the previous code: -->
+```
 
-<!-- ```{r, eval = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--   geom_point() +  -->
-<!--   geom_smooth() -->
-<!-- ``` -->
 
+
+
+\includegraphics[width=0.33\linewidth]{screenshots/altair_chartleft} \includegraphics[width=0.33\linewidth]{screenshots/altair_chartmiddle} \includegraphics[width=0.33\linewidth]{screenshots/altair_chartright} 
+
+To display multiple marks in the same plot, you can add multiple mark functions to `alt.Chart()` or used [layered charts](https://altair-viz.github.io/user_guide/compound_charts.html) as shown in the example below:
+
+
+```python
+chartp = (alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy"
+  ).
+  mark_point()
+)
+
+chart = chartp + chartleft  
+
+chart.save("screenshots/altair_chartcombine.png")
+  
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_chartcombine} \end{center}
+
+This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display `cty` instead of `hwy`. You'd need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of encodings to base `alt.Chart()`. Altair will treat these encodings as global encodings that apply to each mark in the chart.  In other words, this code will produce the same plot as the previous code:
+
+
+```python
+base =(alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy"
+  )
+)
+
+chart = base.mark_point() + base.transform_loess("displ", "hwy").mark_line()
+
+chart.save("screenshots/altair_combine_clean.png")
+  
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_combine_clean} \end{center}
 <!-- If you place mappings in a geom function, ggplot2 will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the global mappings _for that layer only_. This makes it possible to display different aesthetics in different layers. -->
 
 <!-- ```{r, message = FALSE} -->
