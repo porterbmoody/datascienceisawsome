@@ -196,7 +196,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data-visualisation.html"><a href="data-visualisation.html#geometric-objects"><i class="fa fa-check"></i><b>3.6</b> Geometric objects</a></li>
+<li class="chapter" data-level="3.6" data-path="data-visualisation.html"><a href="data-visualisation.html#geometric-objects"><i class="fa fa-check"></i><b>3.6</b> Geometric objects</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-visualisation.html"><a href="data-visualisation.html#statistical-transformations"><i class="fa fa-check"></i><b>3.7</b> Statistical transformations</a></li>
 </ul></li>
 </ul>
 
@@ -12885,7 +12889,7 @@ unique levels in the columns. Why?</p></li>
 <span id="cb29-31"><a href="data-visualisation.html#cb29-31"></a>chartmiddle.save(<span class="st">&quot;screenshots/altair_chartmiddle.png&quot;</span>)</span>
 <span id="cb29-32"><a href="data-visualisation.html#cb29-32"></a>chartright.save(<span class="st">&quot;screenshots/altair_chartright.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_chartleft.png" width="33%" /><img src="screenshots/altair_chartmiddle.png" width="33%" /><img src="screenshots/altair_chartright.png" width="33%" /></p>
-<p>To display multiple marks in the same plot, you can add multiple mark functions to <code>alt.Chart()</code> or used <a href="https://altair-viz.github.io/user_guide/compound_charts.html">layered charts</a> as shown in the example below:</p>
+<p>To display multiple marks in the same plot, you can used <a href="https://altair-viz.github.io/user_guide/compound_charts.html">layered charts</a> as shown in the example below that uses the <code>chartleft</code> object from the above code chunk:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="data-visualisation.html#cb30-1"></a>chartp <span class="op">=</span> (alt.Chart(mpg).</span>
 <span id="cb30-2"><a href="data-visualisation.html#cb30-2"></a>  encode(</span>
 <span id="cb30-3"><a href="data-visualisation.html#cb30-3"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
@@ -12899,7 +12903,7 @@ unique levels in the columns. Why?</p></li>
 <span id="cb30-11"><a href="data-visualisation.html#cb30-11"></a>chart.save(<span class="st">&quot;screenshots/altair_chartcombine.png&quot;</span>)</span>
 <span id="cb30-12"><a href="data-visualisation.html#cb30-12"></a>  </span></code></pre></div>
 <p><img src="screenshots/altair_chartcombine.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display <code>cty</code> instead of <code>hwy</code>. You’d need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of encodings to base <code>alt.Chart()</code>. Altair will treat these encodings as global encodings that apply to each mark in the chart. In other words, this code will produce the same plot as the previous code:</p>
+<p>This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display <code>cty</code> instead of <code>hwy</code>. You’d need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of encodings to a base <code>alt.Chart()</code>. Altair will treat these encodings as global encodings that apply to each mark layer in the layered chart. In other words, this code will produce the same plot as the previous code:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="data-visualisation.html#cb31-1"></a>base <span class="op">=</span>(alt.Chart(mpg).</span>
 <span id="cb31-2"><a href="data-visualisation.html#cb31-2"></a>  encode(</span>
 <span id="cb31-3"><a href="data-visualisation.html#cb31-3"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
@@ -12912,63 +12916,55 @@ unique levels in the columns. Why?</p></li>
 <span id="cb31-10"><a href="data-visualisation.html#cb31-10"></a>chart.save(<span class="st">&quot;screenshots/altair_combine_clean.png&quot;</span>)</span>
 <span id="cb31-11"><a href="data-visualisation.html#cb31-11"></a>  </span></code></pre></div>
 <p><img src="screenshots/altair_combine_clean.png" width="70%" style="display: block; margin: auto;" />
-<!-- If you place mappings in a geom function, ggplot2 will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the global mappings _for that layer only_. This makes it possible to display different aesthetics in different layers. --></p>
-<!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--   geom_point(mapping = aes(color = class)) +  -->
-<!--   geom_smooth() -->
-<!-- ``` -->
-<!-- You can use the same idea to specify different `data` for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only. -->
-<!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--   geom_point(mapping = aes(color = class)) +  -->
-<!--   geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE) -->
-<!-- ``` -->
-<!-- (You'll learn how `filter()` works in the chapter on data transformations: for now, just know that this command selects only the subcompact cars.) -->
-<!-- ### Exercises -->
-<!-- 1.  What geom would you use to draw a line chart? A boxplot?  -->
-<!--     A histogram? An area chart? -->
-<!-- 1.  Run this code in your head and predict what the output will look like. -->
-<!--     Then, run the code in R and check your predictions. -->
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ``` -->
-<!-- 1.  What does `show.legend = FALSE` do?  What happens if you remove it?   -->
-<!--     Why do you think I used it earlier in the chapter? -->
-<!-- 1.  What does the `se` argument to `geom_smooth()` do? -->
-<!-- 1.  Will these two graphs look different? Why/why not? -->
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth() -->
-<!--     ggplot() +  -->
-<!--       geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy)) -->
-<!--     ``` -->
-<!-- 1.  Recreate the R code necessary to generate the following graphs. -->
-<!--     ```{r echo = FALSE, fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE} -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_smooth(aes(group = drv), se = FALSE) + -->
-<!--       geom_point() -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point(aes(color = drv)) +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point(aes(color = drv)) + -->
-<!--       geom_smooth(aes(linetype = drv), se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point(size = 4, colour = "white") +  -->
-<!--       geom_point(aes(colour = drv)) -->
-<!--     ``` -->
-<!-- ## Statistical transformations -->
+If you place encodings in an encode function, Altair will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the base encodings <em>for that layer only</em>. This makes it possible to display different aesthetics in different layers.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="data-visualisation.html#cb32-1"></a>base <span class="op">=</span>(alt.Chart(mpg).</span>
+<span id="cb32-2"><a href="data-visualisation.html#cb32-2"></a>  encode(</span>
+<span id="cb32-3"><a href="data-visualisation.html#cb32-3"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb32-4"><a href="data-visualisation.html#cb32-4"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span></span>
+<span id="cb32-5"><a href="data-visualisation.html#cb32-5"></a>  )</span>
+<span id="cb32-6"><a href="data-visualisation.html#cb32-6"></a>)</span>
+<span id="cb32-7"><a href="data-visualisation.html#cb32-7"></a></span>
+<span id="cb32-8"><a href="data-visualisation.html#cb32-8"></a>chart <span class="op">=</span> base.encode(color <span class="op">=</span> <span class="st">&quot;drv&quot;</span>).mark_point() <span class="op">+</span> base.transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).mark_line()</span>
+<span id="cb32-9"><a href="data-visualisation.html#cb32-9"></a></span>
+<span id="cb32-10"><a href="data-visualisation.html#cb32-10"></a>chart.save(<span class="st">&quot;screenshots/altair_combine_clean_color.png&quot;</span>)</span></code></pre></div>
+<p><img src="screenshots/altair_combine_clean_color.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>You can use the same idea to specify different <code>data</code> for each layer. Here, our smooth line displays just a subset of the <code>mpg</code> dataset, the subcompact cars. The local data argument in <code>geom_smooth()</code> overrides the global data argument in <code>ggplot()</code> for that layer only.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="data-visualisation.html#cb33-1"></a><span class="co">#column name of class does not work nicely with Altair filter.</span></span>
+<span id="cb33-2"><a href="data-visualisation.html#cb33-2"></a></span>
+<span id="cb33-3"><a href="data-visualisation.html#cb33-3"></a>base <span class="op">=</span> (alt.Chart(mpg.rename(columns <span class="op">=</span> {<span class="st">&quot;class&quot;</span>: <span class="st">&quot;class1&quot;</span>})).</span>
+<span id="cb33-4"><a href="data-visualisation.html#cb33-4"></a>  encode(</span>
+<span id="cb33-5"><a href="data-visualisation.html#cb33-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
+<span id="cb33-6"><a href="data-visualisation.html#cb33-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span></span>
+<span id="cb33-7"><a href="data-visualisation.html#cb33-7"></a>  )</span>
+<span id="cb33-8"><a href="data-visualisation.html#cb33-8"></a>)</span>
+<span id="cb33-9"><a href="data-visualisation.html#cb33-9"></a></span>
+<span id="cb33-10"><a href="data-visualisation.html#cb33-10"></a>chart_smooth_sub <span class="op">=</span> (base.</span>
+<span id="cb33-11"><a href="data-visualisation.html#cb33-11"></a>  transform_filter(</span>
+<span id="cb33-12"><a href="data-visualisation.html#cb33-12"></a>  alt.datum.class1 <span class="op">==</span> <span class="st">&quot;subcompact&quot;</span></span>
+<span id="cb33-13"><a href="data-visualisation.html#cb33-13"></a>  ).</span>
+<span id="cb33-14"><a href="data-visualisation.html#cb33-14"></a>  transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).</span>
+<span id="cb33-15"><a href="data-visualisation.html#cb33-15"></a>  mark_line()</span>
+<span id="cb33-16"><a href="data-visualisation.html#cb33-16"></a>)  </span>
+<span id="cb33-17"><a href="data-visualisation.html#cb33-17"></a></span>
+<span id="cb33-18"><a href="data-visualisation.html#cb33-18"></a>chart <span class="op">=</span> base.encode(color <span class="op">=</span> <span class="st">&quot;class1&quot;</span>).mark_point() <span class="op">+</span> chart_smooth_sub</span>
+<span id="cb33-19"><a href="data-visualisation.html#cb33-19"></a></span>
+<span id="cb33-20"><a href="data-visualisation.html#cb33-20"></a>chart.save(<span class="st">&quot;screenshots/altair_combine_clean_color_filter.png&quot;</span>)</span></code></pre></div>
+<p><img src="screenshots/altair_combine_clean_color_filter.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>(You’ll learn how <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.filter.html">pandas filter</a> works in the chapter on data transformations. To keep the same base chart, <a href="https://altair-viz.github.io/user_guide/transform/filter.html">filtering</a> is done with Altair in this example: for now, just know that this command selects only the subcompact cars.)</p>
+<div id="exercises-3" class="section level3" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>What geom would you use to draw a line chart? A boxplot?
+A histogram? An area chart?</p></li>
+<li><p>What does <code>legend=None</code> in <code>alt.Color()</code> do? What happens if you remove it?
+Why do you think I used it earlier in the chapter?</p></li>
+<li><p>Recreate the Python code necessary to generate the following graphs.</p>
+<p><img src="screenshots/altair_q_c1.png" width="50%" /><img src="screenshots/altair_q_c2.png" width="50%" /><img src="screenshots/altair_q_c3.png" width="50%" /><img src="screenshots/altair_q_c4.png" width="50%" /><img src="screenshots/altair_q_c5.png" width="50%" /><img src="screenshots/altair_q_c6.png" width="50%" /></p></li>
+</ol>
+</div>
+</div>
+<div id="statistical-transformations" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Statistical transformations</h2>
 <!-- Next, let's take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with `geom_bar()`. The following chart displays the total number of diamonds in the `diamonds` dataset, grouped by `cut`. The `diamonds` dataset comes in ggplot2 and contains information about ~54,000 diamonds, including the `price`, `carat`, `color`, `clarity`, and `cut` of each diamond. The chart shows that more diamonds are available with high quality cuts than with low quality cuts.  -->
 <!-- ```{r} -->
 <!-- ggplot(data = diamonds) +  -->

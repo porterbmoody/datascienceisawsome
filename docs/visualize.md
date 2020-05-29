@@ -527,7 +527,7 @@ chartright.save("screenshots/altair_chartright.png")
 
 \includegraphics[width=0.33\linewidth]{screenshots/altair_chartleft} \includegraphics[width=0.33\linewidth]{screenshots/altair_chartmiddle} \includegraphics[width=0.33\linewidth]{screenshots/altair_chartright} 
 
-To display multiple marks in the same plot, you can add multiple mark functions to `alt.Chart()` or used [layered charts](https://altair-viz.github.io/user_guide/compound_charts.html) as shown in the example below:
+To display multiple marks in the same plot, you can used [layered charts](https://altair-viz.github.io/user_guide/compound_charts.html) as shown in the example below that uses the `chartleft` object from the above code chunk:
 
 
 ```python
@@ -549,7 +549,7 @@ chart.save("screenshots/altair_chartcombine.png")
 
 \begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_chartcombine} \end{center}
 
-This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display `cty` instead of `hwy`. You'd need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of encodings to base `alt.Chart()`. Altair will treat these encodings as global encodings that apply to each mark in the chart.  In other words, this code will produce the same plot as the previous code:
+This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display `cty` instead of `hwy`. You'd need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of encodings to a base `alt.Chart()`. Altair will treat these encodings as global encodings that apply to each mark layer in the layered chart.  In other words, this code will produce the same plot as the previous code:
 
 
 ```python
@@ -569,80 +569,74 @@ chart.save("screenshots/altair_combine_clean.png")
 
 
 \begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_combine_clean} \end{center}
-<!-- If you place mappings in a geom function, ggplot2 will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the global mappings _for that layer only_. This makes it possible to display different aesthetics in different layers. -->
-
-<!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--   geom_point(mapping = aes(color = class)) +  -->
-<!--   geom_smooth() -->
-<!-- ``` -->
-
-<!-- You can use the same idea to specify different `data` for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only. -->
-
-<!-- ```{r, message = FALSE} -->
-<!-- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--   geom_point(mapping = aes(color = class)) +  -->
-<!--   geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE) -->
-<!-- ``` -->
-
-<!-- (You'll learn how `filter()` works in the chapter on data transformations: for now, just know that this command selects only the subcompact cars.) -->
-
-<!-- ### Exercises -->
-
-<!-- 1.  What geom would you use to draw a line chart? A boxplot?  -->
-<!--     A histogram? An area chart? -->
-
-<!-- 1.  Run this code in your head and predict what the output will look like. -->
-<!--     Then, run the code in R and check your predictions. -->
-
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ``` -->
-
-<!-- 1.  What does `show.legend = FALSE` do?  What happens if you remove it?   -->
-<!--     Why do you think I used it earlier in the chapter? -->
-
-<!-- 1.  What does the `se` argument to `geom_smooth()` do? -->
+If you place encodings in an encode function, Altair will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the base encodings _for that layer only_. This makes it possible to display different aesthetics in different layers.
 
 
-<!-- 1.  Will these two graphs look different? Why/why not? -->
+```python
+base =(alt.Chart(mpg).
+  encode(
+    x = "displ",
+    y = "hwy"
+  )
+)
 
-<!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth() -->
+chart = base.encode(color = "drv").mark_point() + base.transform_loess("displ", "hwy").mark_line()
 
-<!--     ggplot() +  -->
-<!--       geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy)) -->
-<!--     ``` -->
+chart.save("screenshots/altair_combine_clean_color.png")
+```
 
-<!-- 1.  Recreate the R code necessary to generate the following graphs. -->
 
-<!--     ```{r echo = FALSE, fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE} -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_smooth(aes(group = drv), se = FALSE) + -->
-<!--       geom_point() -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +  -->
-<!--       geom_point() +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point(aes(color = drv)) +  -->
-<!--       geom_smooth(se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point(aes(color = drv)) + -->
-<!--       geom_smooth(aes(linetype = drv), se = FALSE) -->
-<!--     ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +  -->
-<!--       geom_point(size = 4, colour = "white") +  -->
-<!--       geom_point(aes(colour = drv)) -->
-<!--     ``` -->
+\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_combine_clean_color} \end{center}
 
-<!-- ## Statistical transformations -->
+You can use the same idea to specify different `data` for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only.
+
+
+```python
+#column name of class does not work nicely with Altair filter.
+
+base = (alt.Chart(mpg.rename(columns = {"class": "class1"})).
+  encode(
+    x = "displ",
+    y = "hwy"
+  )
+)
+
+chart_smooth_sub = (base.
+  transform_filter(
+  alt.datum.class1 == "subcompact"
+  ).
+  transform_loess("displ", "hwy").
+  mark_line()
+)  
+
+chart = base.encode(color = "class1").mark_point() + chart_smooth_sub
+
+chart.save("screenshots/altair_combine_clean_color_filter.png")
+```
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_combine_clean_color_filter} \end{center}
+
+
+(You'll learn how [pandas filter](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.filter.html) works in the chapter on data transformations. To keep the same base chart, [filtering](https://altair-viz.github.io/user_guide/transform/filter.html) is done with Altair in this example: for now, just know that this command selects only the subcompact cars.)
+
+### Exercises
+
+1.  What geom would you use to draw a line chart? A boxplot?
+    A histogram? An area chart?
+
+1.  What does `legend=None` in `alt.Color()` do?  What happens if you remove it?
+    Why do you think I used it earlier in the chapter?
+
+
+1.  Recreate the Python code necessary to generate the following graphs.
+
+
+
+    
+    \includegraphics[width=0.5\linewidth]{screenshots/altair_q_c1} \includegraphics[width=0.5\linewidth]{screenshots/altair_q_c2} \includegraphics[width=0.5\linewidth]{screenshots/altair_q_c3} \includegraphics[width=0.5\linewidth]{screenshots/altair_q_c4} \includegraphics[width=0.5\linewidth]{screenshots/altair_q_c5} \includegraphics[width=0.5\linewidth]{screenshots/altair_q_c6} 
+
+## Statistical transformations
 
 <!-- Next, let's take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with `geom_bar()`. The following chart displays the total number of diamonds in the `diamonds` dataset, grouped by `cut`. The `diamonds` dataset comes in ggplot2 and contains information about ~54,000 diamonds, including the `price`, `carat`, `color`, `clarity`, and `cut` of each diamond. The chart shows that more diamonds are available with high quality cuts than with low quality cuts.  -->
 
