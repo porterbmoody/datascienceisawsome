@@ -48,6 +48,20 @@ python -m pip install pandas altair
 
 You only need to install a package once, but you need to reload it every time you start a new session.
 
+### Altair data management
+
+When [specifying data in Altair](https://altair-viz.github.io/user_guide/data.html#user-guide-data), we can use pandas DataFrame objects or other Altair options. According to the [Altair documentation](https://altair-viz.github.io/user_guide/faq.html#why-does-altair-lead-to-such-extremely-large-notebooks), the use of a pandas DataFrame will prompt Altair to store the entire data set in JSON format in the chart object. You should be carefully creating Altair specs with all the data in the chart object for use in HTML or Jupyter Notebooks. If you try to plot a data set with more than 5000 rows, Altair will return a [maxRowsError](https://altair-viz.github.io/user_guide/faq.html#altair-faq-max-rows).
+
+In this book, we will save the Altair chart as a '.png' file to avoid dealing with large stored data in our '.html' files. We have elected to use the [Local Filesystem](https://altair-viz.github.io/user_guide/faq.html#local-filesystem) approach proposed by Altair. They do note that the filesystem approach may not work on some cloud-based Jupyter notebook services.
+
+
+
+```python
+alt.data_transformers.enable('json')
+#> DataTransformerRegistry.enable('json')
+```
+
+
 ## First steps
 
 Let's use our first graph to answer a question: Do cars with big engines use more fuel than cars with small engines? You probably already have an answer, but try to make your answer precise. What does the relationship between engine size and fuel efficiency look like? Is it positive? Negative? Linear? Nonlinear?
@@ -80,16 +94,16 @@ To plot `mpg`, run this code to put `displ` on the x-axis and `hwy` on the y-axi
 ```python
 
 chart = (alt.Chart(mpg).
-  mark_point().
   encode(
     x='displ', 
-    y='hwy')
-  )
+    y='hwy').
+  mark_point()
+)
 ```
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-6-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-7-1} 
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?
 
@@ -143,7 +157,7 @@ Let's hypothesize that the cars are hybrids. One way to test this hypothesis is 
 You can add a third variable, like `class`, to a two dimensional scatterplot by mapping it to an __encoding__. An encoding is a visual property of the objects in your plot. Encodings include things like the size, the shape, or the color of your points. You can display a point (like the one below) in different ways by changing the values of its encoded properties. Since we already use the word "value" to describe data, let's use the word "level" to describe encoded properties. Here we change the levels of a point's size, shape, and color to make the point small, triangular, or blue:
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-10-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 You can convey information about your data by mapping the encodings in your plot to the variables in your dataset. For example, you can map the colors of your points to the `class` variable to reveal the class of each car.
 
@@ -161,7 +175,7 @@ chart = (alt.Chart(mpg).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-12-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-13-1} 
 
 (We don't prefer British English, like Hadley, so don't use `colour` instead of `color`.)
 
@@ -184,7 +198,7 @@ chart = (alt.Chart(mpg).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-14-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-15-1} 
 
 Or we could have mapped `class` to the _opacity_ encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.
 
@@ -244,7 +258,7 @@ chart = (alt.Chart(mpg).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-18-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-19-1} 
 
 Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
 
@@ -638,44 +652,84 @@ chart.save("screenshots/altair_combine_clean_color_filter.png")
 
 ## Statistical transformations
 
-<!-- Next, let's take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with `geom_bar()`. The following chart displays the total number of diamonds in the `diamonds` dataset, grouped by `cut`. The `diamonds` dataset comes in ggplot2 and contains information about ~54,000 diamonds, including the `price`, `carat`, `color`, `clarity`, and `cut` of each diamond. The chart shows that more diamonds are available with high quality cuts than with low quality cuts.  -->
+Next, let's take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with `mark_bar()`. The following chart displays the total number of diamonds in the `diamonds` dataset, grouped by `cut`. The `diamonds` dataset comes in ggplot2 R package and can be used in Python using the following Python command. Note that we also need to use pandas to format a few of the columns as ordered categorical to have the diamonds DataFrame act like it does in R.
 
-<!-- ```{r} -->
-<!-- ggplot(data = diamonds) +  -->
-<!--   geom_bar(mapping = aes(x = cut)) -->
-<!-- ``` -->
 
-<!-- On the x-axis, the chart displays `cut`, a variable from `diamonds`. On the y-axis, it displays count, but count is not a variable in `diamonds`! Where does count come from? Many graphs, like scatterplots, plot the raw values of your dataset. Other graphs, like bar charts, calculate new values to plot: -->
+```python
 
-<!-- * bar charts, histograms, and frequency polygons bin your data  -->
-<!--   and then plot bin counts, the number of points that fall in each bin. -->
+diamonds = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv")
 
-<!-- * smoothers fit a model to your data and then plot predictions from the -->
-<!--   model. -->
+diamonds['cut'] = pd.Categorical(diamonds.cut, 
+  ordered = True, 
+  categories =  ["Fair", "Good", "Very Good", "Premium", "Ideal" ])
 
-<!-- * boxplots compute a robust summary of the distribution and then display a  -->
-<!--   specially formatted box. -->
+diamonds['color'] = pd.Categorical(diamonds.color, 
+  ordered = True, 
+  categories =  ["D", "E", "F", "G", "H", "I", "J"])
 
-<!-- The algorithm used to calculate new values for a graph is called a __stat__, short for statistical transformation. The figure below describes how this process works with `geom_bar()`. -->
 
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-stat-bar.png") -->
-<!-- ``` -->
+diamonds['clarity'] = pd.Categorical(diamonds.clarity, 
+  ordered = True, 
+  categories =  ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"])
+
+```
+
+It contains information about ~54,000 diamonds, including the `price`, `carat`, `color`, `clarity`, and `cut` of each diamond. The chart shows that more diamonds are available with high quality cuts than with low quality cuts. 
+
+
+```python
+chart = (alt.Chart(diamonds).
+  encode(
+    x = "cut",
+    y = alt.Y("count():Q")
+  ).
+  mark_bar().
+  properties(width = 400)
+)
+
+chart.save("screenshots/altair_diamond_bar.png")
+```
+
+
+```r
+knitr::include_graphics("screenshots/altair_diamond_bar.png")
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_diamond_bar} \end{center}
+
+
+On the x-axis, the chart displays `cut`, a variable from `diamonds`. On the y-axis, it displays count, but count is not a variable in `diamonds`! Many graphs, like scatterplots, plot the raw values of your dataset. Other graphs, like bar charts, calculate new values to plot:
+
+* bar charts, histograms, and frequency polygons bin your data
+  and then plot bin counts, the number of points that fall in each bin.
+
+* smoothers fit a model to your data and then plot predictions from the
+  model.
+
+* boxplots compute a robust summary of the distribution and then display a
+  specially formatted box.
+
+The algorithm used to calculate new values for a graph is called a __transform__, short for transformation. The figure below describes how this process works with `mark_bar()`.
+
+
+\begin{center}\includegraphics[width=1\linewidth]{images/visualization-stat-bar-altair} \end{center}
 
 <!-- You can learn which stat a geom uses by inspecting the default value for the `stat` argument. For example, `?geom_bar` shows that the default value for `stat` is "count", which means that `geom_bar()` uses `stat_count()`. `stat_count()` is documented on the same page as `geom_bar()`, and if you scroll down you can find a section called "Computed variables". That describes how it computes two new variables: `count` and `prop`. -->
 
 <!-- You can generally use geoms and stats interchangeably. For example, you can recreate the previous plot using `stat_count()` instead of `geom_bar()`: -->
 
 <!-- ```{r} -->
-<!-- ggplot(data = diamonds) +  -->
+<!-- ggplot(data = diamonds) + -->
 <!--   stat_count(mapping = aes(x = cut)) -->
 <!-- ``` -->
 
 <!-- This works because every geom has a default stat; and every stat has a default geom. This means that you can typically use geoms without worrying about the underlying statistical transformation. There are three reasons you might need to use a stat explicitly: -->
 
-<!-- 1.  You might want to override the default stat. In the code below, I change  -->
-<!--     the stat of `geom_bar()` from count (the default) to identity. This lets  -->
-<!--     me map the height of the bars to the raw values of a $y$ variable.  -->
+<!-- 1.  You might want to override the default stat. In the code below, I change -->
+<!--     the stat of `geom_bar()` from count (the default) to identity. This lets -->
+<!--     me map the height of the bars to the raw values of a $y$ variable. -->
 <!--     Unfortunately when people talk about bar charts casually, they might be -->
 <!--     referring to this type of bar chart, where the height of the bar is already -->
 <!--     present in the data, or the previous bar chart where the height of the bar -->
@@ -704,7 +758,7 @@ chart.save("screenshots/altair_combine_clean_color_filter.png")
 <!--     proportion, rather than count: -->
 
 <!--     ```{r} -->
-<!--     ggplot(data = diamonds) +  -->
+<!--     ggplot(data = diamonds) + -->
 <!--       geom_bar(mapping = aes(x = cut, y = stat(prop), group = 1)) -->
 <!--     ``` -->
 
@@ -713,11 +767,11 @@ chart.save("screenshots/altair_combine_clean_color_filter.png")
 
 <!-- 1.  You might want to draw greater attention to the statistical transformation -->
 <!--     in your code. For example, you might use `stat_summary()`, which -->
-<!--     summarises the y values for each unique x value, to draw  -->
+<!--     summarises the y values for each unique x value, to draw -->
 <!--     attention to the summary that you're computing: -->
 
 <!--     ```{r} -->
-<!--     ggplot(data = diamonds) +  -->
+<!--     ggplot(data = diamonds) + -->
 <!--       stat_summary( -->
 <!--         mapping = aes(x = cut, y = depth), -->
 <!--         fun.ymin = min, -->
@@ -731,13 +785,13 @@ chart.save("screenshots/altair_combine_clean_color_filter.png")
 <!-- ### Exercises -->
 
 <!-- 1.  What is the default geom associated with `stat_summary()`? How could -->
-<!--     you rewrite the previous plot to use that geom function instead of the  -->
+<!--     you rewrite the previous plot to use that geom function instead of the -->
 <!--     stat function? -->
 
 <!-- 1.  What does `geom_col()` do? How is it different to `geom_bar()`? -->
 
-<!-- 1.  Most geoms and stats come in pairs that are almost always used in  -->
-<!--     concert. Read through the documentation and make a list of all the  -->
+<!-- 1.  Most geoms and stats come in pairs that are almost always used in -->
+<!--     concert. Read through the documentation and make a list of all the -->
 <!--     pairs. What do they have in common? -->
 
 <!-- 1.  What variables does `stat_smooth()` compute? What parameters control -->
@@ -747,9 +801,9 @@ chart.save("screenshots/altair_combine_clean_color_filter.png")
 <!--     words what is the problem with these two graphs? -->
 
 <!--     ```{r, eval = FALSE} -->
-<!--     ggplot(data = diamonds) +  -->
+<!--     ggplot(data = diamonds) + -->
 <!--       geom_bar(mapping = aes(x = cut, y = ..prop..)) -->
-<!--     ggplot(data = diamonds) +  -->
+<!--     ggplot(data = diamonds) + -->
 <!--       geom_bar(mapping = aes(x = cut, fill = color, y = ..prop..)) -->
 <!--     ``` -->
 
