@@ -10,4 +10,5 @@ _main.*
 bookdown*
 tmp-pdfcrop-*
 figures
+altair-data-*
 .DS_Store
