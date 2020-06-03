@@ -13058,21 +13058,23 @@ specially formatted box.</p></li>
 <span id="cb40-4"><a href="data-visualisation.html#cb40-4"></a>    x <span class="op">=</span> <span class="st">&quot;cut&quot;</span>,</span>
 <span id="cb40-5"><a href="data-visualisation.html#cb40-5"></a>    y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>),</span>
 <span id="cb40-6"><a href="data-visualisation.html#cb40-6"></a>    stroke <span class="op">=</span> <span class="st">&quot;cut&quot;</span></span>
-<span id="cb40-7"><a href="data-visualisation.html#cb40-7"></a>    )</span>
-<span id="cb40-8"><a href="data-visualisation.html#cb40-8"></a>  )</span>
-<span id="cb40-9"><a href="data-visualisation.html#cb40-9"></a>  </span>
-<span id="cb40-10"><a href="data-visualisation.html#cb40-10"></a>chart_right <span class="op">=</span> (alt.Chart(diamonds).</span>
-<span id="cb40-11"><a href="data-visualisation.html#cb40-11"></a>  mark_bar().</span>
-<span id="cb40-12"><a href="data-visualisation.html#cb40-12"></a>  encode(</span>
-<span id="cb40-13"><a href="data-visualisation.html#cb40-13"></a>    x <span class="op">=</span> <span class="st">&quot;cut&quot;</span>,</span>
-<span id="cb40-14"><a href="data-visualisation.html#cb40-14"></a>    y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>),</span>
-<span id="cb40-15"><a href="data-visualisation.html#cb40-15"></a>    color <span class="op">=</span> <span class="st">&quot;cut&quot;</span></span>
-<span id="cb40-16"><a href="data-visualisation.html#cb40-16"></a>    )</span>
-<span id="cb40-17"><a href="data-visualisation.html#cb40-17"></a>  ) </span>
-<span id="cb40-18"><a href="data-visualisation.html#cb40-18"></a></span>
-<span id="cb40-19"><a href="data-visualisation.html#cb40-19"></a>chart_left.save(<span class="st">&quot;screenshots/altair_bar_linecolor.png&quot;</span>)</span>
-<span id="cb40-20"><a href="data-visualisation.html#cb40-20"></a>chart_right.save(<span class="st">&quot;screenshots/altair_bar_fillcolor.png&quot;</span>)</span></code></pre></div>
-<p><img src="screenshots/altair_bar_linecolor.png" width="70%" height="25%" /><img src="screenshots/altair_bar_fillcolor.png" width="70%" height="25%" /></p>
+<span id="cb40-7"><a href="data-visualisation.html#cb40-7"></a>    ).</span>
+<span id="cb40-8"><a href="data-visualisation.html#cb40-8"></a>  properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb40-9"><a href="data-visualisation.html#cb40-9"></a>  )</span>
+<span id="cb40-10"><a href="data-visualisation.html#cb40-10"></a>  </span>
+<span id="cb40-11"><a href="data-visualisation.html#cb40-11"></a>chart_right <span class="op">=</span> (alt.Chart(diamonds).</span>
+<span id="cb40-12"><a href="data-visualisation.html#cb40-12"></a>  mark_bar().</span>
+<span id="cb40-13"><a href="data-visualisation.html#cb40-13"></a>  encode(</span>
+<span id="cb40-14"><a href="data-visualisation.html#cb40-14"></a>    x <span class="op">=</span> <span class="st">&quot;cut&quot;</span>,</span>
+<span id="cb40-15"><a href="data-visualisation.html#cb40-15"></a>    y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>),</span>
+<span id="cb40-16"><a href="data-visualisation.html#cb40-16"></a>    color <span class="op">=</span> <span class="st">&quot;cut&quot;</span></span>
+<span id="cb40-17"><a href="data-visualisation.html#cb40-17"></a>    ).</span>
+<span id="cb40-18"><a href="data-visualisation.html#cb40-18"></a>  properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb40-19"><a href="data-visualisation.html#cb40-19"></a>  ) </span>
+<span id="cb40-20"><a href="data-visualisation.html#cb40-20"></a></span>
+<span id="cb40-21"><a href="data-visualisation.html#cb40-21"></a>chart_left.save(<span class="st">&quot;screenshots/altair_bar_linecolor.png&quot;</span>)</span>
+<span id="cb40-22"><a href="data-visualisation.html#cb40-22"></a>chart_right.save(<span class="st">&quot;screenshots/altair_bar_fillcolor.png&quot;</span>)</span></code></pre></div>
+<p><img src="screenshots/altair_bar_linecolor.png" width="50%" /><img src="screenshots/altair_bar_fillcolor.png" width="50%" /></p>
 <p>Note what happens if you map the color encoding to another variable, like <code>clarity</code>: the bars are automatically stacked. Each colored rectangle represents a combination of <code>cut</code> and <code>clarity</code>.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="data-visualisation.html#cb41-1"></a>chart <span class="op">=</span> (alt.Chart(diamonds).</span>
 <span id="cb41-2"><a href="data-visualisation.html#cb41-2"></a>  mark_bar().</span>
@@ -13081,11 +13083,12 @@ specially formatted box.</p></li>
 <span id="cb41-5"><a href="data-visualisation.html#cb41-5"></a>    y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>),</span>
 <span id="cb41-6"><a href="data-visualisation.html#cb41-6"></a>    color <span class="op">=</span> <span class="st">&quot;clarity&quot;</span></span>
 <span id="cb41-7"><a href="data-visualisation.html#cb41-7"></a></span>
-<span id="cb41-8"><a href="data-visualisation.html#cb41-8"></a>  )</span>
-<span id="cb41-9"><a href="data-visualisation.html#cb41-9"></a>  )</span>
-<span id="cb41-10"><a href="data-visualisation.html#cb41-10"></a>  </span>
-<span id="cb41-11"><a href="data-visualisation.html#cb41-11"></a>chart.save(<span class="st">&quot;screenshots/stacked_barchart.png&quot;</span>)  </span></code></pre></div>
-<p><img src="screenshots/stacked_barchart.png" width="70%" height="25%" style="display: block; margin: auto;" /></p>
+<span id="cb41-8"><a href="data-visualisation.html#cb41-8"></a>  ).</span>
+<span id="cb41-9"><a href="data-visualisation.html#cb41-9"></a>  properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb41-10"><a href="data-visualisation.html#cb41-10"></a>  )</span>
+<span id="cb41-11"><a href="data-visualisation.html#cb41-11"></a>  </span>
+<span id="cb41-12"><a href="data-visualisation.html#cb41-12"></a>chart.save(<span class="st">&quot;screenshots/stacked_barchart.png&quot;</span>)  </span></code></pre></div>
+<p><img src="screenshots/stacked_barchart.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>The stacking is performed automatically by <code>mark_bar()</code>. If you don’t want a stacked bar chart, you can use use the <code>stack</code> argument in <code>alt.Y()</code> one of three other options: <code>"identity"</code>, <code>"dodge"</code> or <code>"fill"</code>.</p>
 <ul>
 <li><p><code>position = "identity"</code> will place each object exactly where it falls in
@@ -13100,22 +13103,24 @@ transparent by setting <code>fill = NA</code>.</p>
 <span id="cb42-5"><a href="data-visualisation.html#cb42-5"></a>      y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb42-6"><a href="data-visualisation.html#cb42-6"></a>      color <span class="op">=</span> <span class="st">&quot;clarity&quot;</span>,</span>
 <span id="cb42-7"><a href="data-visualisation.html#cb42-7"></a>      opacity <span class="op">=</span> alt.value(<span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)</span>
-<span id="cb42-8"><a href="data-visualisation.html#cb42-8"></a>    )</span>
-<span id="cb42-9"><a href="data-visualisation.html#cb42-9"></a>)</span>
-<span id="cb42-10"><a href="data-visualisation.html#cb42-10"></a></span>
-<span id="cb42-11"><a href="data-visualisation.html#cb42-11"></a>chart_right <span class="op">=</span> (alt.Chart(diamonds).</span>
-<span id="cb42-12"><a href="data-visualisation.html#cb42-12"></a>    mark_bar().</span>
-<span id="cb42-13"><a href="data-visualisation.html#cb42-13"></a>    encode(</span>
-<span id="cb42-14"><a href="data-visualisation.html#cb42-14"></a>      x <span class="op">=</span> <span class="st">&quot;cut&quot;</span>,</span>
-<span id="cb42-15"><a href="data-visualisation.html#cb42-15"></a>      y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
-<span id="cb42-16"><a href="data-visualisation.html#cb42-16"></a>      stroke <span class="op">=</span> <span class="st">&quot;clarity&quot;</span>,</span>
-<span id="cb42-17"><a href="data-visualisation.html#cb42-17"></a>      color <span class="op">=</span> alt.value(<span class="st">&quot;none&quot;</span>)</span>
-<span id="cb42-18"><a href="data-visualisation.html#cb42-18"></a>    )</span>
-<span id="cb42-19"><a href="data-visualisation.html#cb42-19"></a>)</span>
-<span id="cb42-20"><a href="data-visualisation.html#cb42-20"></a></span>
-<span id="cb42-21"><a href="data-visualisation.html#cb42-21"></a>chart_left.save(<span class="st">&quot;screenshots/altair_nostack_opacity.png&quot;</span>)</span>
-<span id="cb42-22"><a href="data-visualisation.html#cb42-22"></a>chart_right.save(<span class="st">&quot;screenshots/altair_nostack_lines.png&quot;</span>)</span></code></pre></div>
-<p><img src="screenshots/altair_nostack_opacity.png" width="70%" height="25%" /><img src="screenshots/altair_nostack_lines.png" width="70%" height="25%" /></p></li>
+<span id="cb42-8"><a href="data-visualisation.html#cb42-8"></a>    ).</span>
+<span id="cb42-9"><a href="data-visualisation.html#cb42-9"></a>    properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb42-10"><a href="data-visualisation.html#cb42-10"></a>)</span>
+<span id="cb42-11"><a href="data-visualisation.html#cb42-11"></a></span>
+<span id="cb42-12"><a href="data-visualisation.html#cb42-12"></a>chart_right <span class="op">=</span> (alt.Chart(diamonds).</span>
+<span id="cb42-13"><a href="data-visualisation.html#cb42-13"></a>    mark_bar().</span>
+<span id="cb42-14"><a href="data-visualisation.html#cb42-14"></a>    encode(</span>
+<span id="cb42-15"><a href="data-visualisation.html#cb42-15"></a>      x <span class="op">=</span> <span class="st">&quot;cut&quot;</span>,</span>
+<span id="cb42-16"><a href="data-visualisation.html#cb42-16"></a>      y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
+<span id="cb42-17"><a href="data-visualisation.html#cb42-17"></a>      stroke <span class="op">=</span> <span class="st">&quot;clarity&quot;</span>,</span>
+<span id="cb42-18"><a href="data-visualisation.html#cb42-18"></a>      color <span class="op">=</span> alt.value(<span class="st">&quot;none&quot;</span>)</span>
+<span id="cb42-19"><a href="data-visualisation.html#cb42-19"></a>    ).</span>
+<span id="cb42-20"><a href="data-visualisation.html#cb42-20"></a>    properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb42-21"><a href="data-visualisation.html#cb42-21"></a>)</span>
+<span id="cb42-22"><a href="data-visualisation.html#cb42-22"></a></span>
+<span id="cb42-23"><a href="data-visualisation.html#cb42-23"></a>chart_left.save(<span class="st">&quot;screenshots/altair_nostack_opacity.png&quot;</span>)</span>
+<span id="cb42-24"><a href="data-visualisation.html#cb42-24"></a>chart_right.save(<span class="st">&quot;screenshots/altair_nostack_lines.png&quot;</span>)</span></code></pre></div>
+<p><img src="screenshots/altair_nostack_opacity.png" width="50%" /><img src="screenshots/altair_nostack_lines.png" width="50%" /></p></li>
 <li><p><code>position = "fill"</code> works like stacking, but makes each set of stacked bars
 the same height. This makes it easier to compare proportions across
 groups.</p>
@@ -13125,12 +13130,13 @@ groups.</p>
 <span id="cb43-4"><a href="data-visualisation.html#cb43-4"></a>    x <span class="op">=</span> <span class="st">&quot;cut&quot;</span>,</span>
 <span id="cb43-5"><a href="data-visualisation.html#cb43-5"></a>    y <span class="op">=</span> alt.Y(<span class="st">&quot;count()&quot;</span>, stack<span class="op">=</span><span class="st">&#39;normalize&#39;</span>),</span>
 <span id="cb43-6"><a href="data-visualisation.html#cb43-6"></a>    color <span class="op">=</span> <span class="st">&quot;clarity&quot;</span></span>
-<span id="cb43-7"><a href="data-visualisation.html#cb43-7"></a>  )</span>
-<span id="cb43-8"><a href="data-visualisation.html#cb43-8"></a>)</span>
-<span id="cb43-9"><a href="data-visualisation.html#cb43-9"></a></span>
-<span id="cb43-10"><a href="data-visualisation.html#cb43-10"></a>chart.save(<span class="st">&quot;screenshots/altair_normalize_bar.png&quot;</span>)</span></code></pre></div>
+<span id="cb43-7"><a href="data-visualisation.html#cb43-7"></a>  ).</span>
+<span id="cb43-8"><a href="data-visualisation.html#cb43-8"></a>  properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb43-9"><a href="data-visualisation.html#cb43-9"></a>)</span>
+<span id="cb43-10"><a href="data-visualisation.html#cb43-10"></a></span>
+<span id="cb43-11"><a href="data-visualisation.html#cb43-11"></a>chart.save(<span class="st">&quot;screenshots/altair_normalize_bar.png&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-visualisation.html#cb44-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;screenshots/altair_normalize_bar.png&quot;</span>)</span></code></pre></div>
-<p><img src="screenshots/altair_normalize_bar.png" width="70%" height="25%" style="display: block; margin: auto;" /></p></li>
+<p><img src="screenshots/altair_normalize_bar.png" width="50%" style="display: block; margin: auto;" /></p></li>
 <li><p>Placing overlapping objects directly <em>beside</em> one another is done by using the <code>column</code> encoding. This makes it easier to compare individual values with a common baseline.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="data-visualisation.html#cb45-1"></a>chart <span class="op">=</span> (alt.Chart(diamonds).</span>
 <span id="cb45-2"><a href="data-visualisation.html#cb45-2"></a>  mark_bar().</span>
@@ -13143,11 +13149,12 @@ groups.</p>
 <span id="cb45-9"><a href="data-visualisation.html#cb45-9"></a>)</span>
 <span id="cb45-10"><a href="data-visualisation.html#cb45-10"></a></span>
 <span id="cb45-11"><a href="data-visualisation.html#cb45-11"></a>chart.save(<span class="st">&quot;screenshots/altair_position_dodge.png&quot;</span>)</span></code></pre></div>
-<p><img src="screenshots/altair_position_dodge.png" width="70%" height="25%" style="display: block; margin: auto;" /></p></li>
+<p><img src="screenshots/altair_position_dodge.png" width="100%" style="display: block; margin: auto;" /></p></li>
 </ul>
 <p>Altair does not have a simple way to add random jitter to points using an encoding or simple argument to <code>alt.X()</code> or <code>alt.Y()</code>. Altair can create a jittered point plot, also called a <a href="https://altair-viz.github.io/gallery/stripplot.html">stripplot</a>. However, it is not as straight forward.</p>
 <!-- ## Coordinate systems -->
 <!-- https://altair-viz.github.io/gallery/#maps -->
+<!-- https://altair-viz.github.io/gallery/world_projections.html -->
 <!-- Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are a number of other coordinate systems that are occasionally helpful. -->
 <!-- *   `coord_flip()` switches the x and y axes. This is useful (for example), -->
 <!--     if you want horizontal boxplots. It's also useful for long labels: it's -->

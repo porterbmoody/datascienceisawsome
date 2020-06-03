@@ -780,7 +780,8 @@ chart_left = (alt.Chart(diamonds).
     x = "cut",
     y = alt.Y("count()"),
     stroke = "cut"
-    )
+    ).
+  properties(width = 200)
   )
   
 chart_right = (alt.Chart(diamonds).
@@ -789,7 +790,8 @@ chart_right = (alt.Chart(diamonds).
     x = "cut",
     y = alt.Y("count()"),
     color = "cut"
-    )
+    ).
+  properties(width = 200)
   ) 
 
 chart_left.save("screenshots/altair_bar_linecolor.png")
@@ -800,7 +802,7 @@ chart_right.save("screenshots/altair_bar_fillcolor.png")
 
 
 
-\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_bar_linecolor} \includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_bar_fillcolor} 
+\includegraphics[width=0.5\linewidth]{screenshots/altair_bar_linecolor} \includegraphics[width=0.5\linewidth]{screenshots/altair_bar_fillcolor} 
 
 Note what happens if you map the color encoding to another variable, like `clarity`: the bars are automatically stacked. Each colored rectangle represents a combination of `cut` and `clarity`.
 
@@ -813,7 +815,8 @@ chart = (alt.Chart(diamonds).
     y = alt.Y("count()"),
     color = "clarity"
 
-  )
+  ).
+  properties(width = 200)
   )
   
 chart.save("screenshots/stacked_barchart.png")  
@@ -821,7 +824,7 @@ chart.save("screenshots/stacked_barchart.png")
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/stacked_barchart} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{screenshots/stacked_barchart} \end{center}
 
 The stacking is performed automatically by `mark_bar()`. If you don't want a stacked bar chart, you can use use the `stack` argument in  `alt.Y()` one of three other options: `"identity"`, `"dodge"` or `"fill"`.
 
@@ -840,7 +843,8 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
           y = alt.Y("count()", stack=None),
           color = "clarity",
           opacity = alt.value(1/5)
-        )
+        ).
+        properties(width = 200)
     )
     
     chart_right = (alt.Chart(diamonds).
@@ -850,7 +854,8 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
           y = alt.Y("count()", stack=None),
           stroke = "clarity",
           color = alt.value("none")
-        )
+        ).
+        properties(width = 200)
     )
     
     chart_left.save("screenshots/altair_nostack_opacity.png")
@@ -859,7 +864,7 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
     
 
     
-    \includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_nostack_opacity} \includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_nostack_lines} 
+    \includegraphics[width=0.5\linewidth]{screenshots/altair_nostack_opacity} \includegraphics[width=0.5\linewidth]{screenshots/altair_nostack_lines} 
 
 *   `position = "fill"` works like stacking, but makes each set of stacked bars
     the same height. This makes it easier to compare proportions across
@@ -873,7 +878,8 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
         x = "cut",
         y = alt.Y("count()", stack='normalize'),
         color = "clarity"
-      )
+      ).
+      properties(width = 200)
     )
     
     chart.save("screenshots/altair_normalize_bar.png")
@@ -887,7 +893,7 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
     
     
     
-    \begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_normalize_bar} \end{center}
+    \begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_normalize_bar} \end{center}
 
 *   Placing overlapping objects directly _beside_ one another is done by using the `column` encoding.     This makes it easier to compare individual values with a common baseline.
     
@@ -909,7 +915,7 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
 
 
     
-    \begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_position_dodge} \end{center}
+    \begin{center}\includegraphics[width=1\linewidth]{screenshots/altair_position_dodge} \end{center}
 
 Altair does not have a simple way to add random jitter to points using an encoding or simple argument to `alt.X()` or `alt.Y()`. Altair can create a jittered point plot, also called a [stripplot](https://altair-viz.github.io/gallery/stripplot.html).  However, it is not as straight forward.
 
@@ -917,6 +923,7 @@ Altair does not have a simple way to add random jitter to points using an encodi
 <!-- ## Coordinate systems -->
 
 <!-- https://altair-viz.github.io/gallery/#maps -->
+<!-- https://altair-viz.github.io/gallery/world_projections.html -->
 
 <!-- Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are a number of other coordinate systems that are occasionally helpful. -->
 
