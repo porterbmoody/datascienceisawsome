@@ -768,102 +768,155 @@ chart.save("screenshots/altair_boxplot.png")
 \begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_boxplot} \end{center}
 
 
-<!-- ## Position adjustments -->
+## Position adjustments
 
-<!-- https://stackoverflow.com/questions/58618197/produce-dodged-or-side-by-side-bar-column-charts-in-altair -->
-<!-- https://altair-viz.github.io/gallery/grouped_bar_chart.html -->
-<!-- https://altair-viz.github.io/gallery/stacked_bar_chart.html -->
-<!-- https://github.com/altair-viz/altair/blob/master/altair/examples/stripplot.py -->
-<!-- https://altair-viz.github.io/gallery/stripplot.html -->
+There's one more piece of magic associated with bar charts. You can colour a bar chart using either the `stroke` aesthetic, or, more usefully, `color`:
 
-<!-- There's one more piece of magic associated with bar charts. You can colour a bar chart using either the `colour` aesthetic, or, more usefully, `fill`: -->
 
-<!-- ```{r out.width = "50%", fig.align = "default"} -->
-<!-- ggplot(data = diamonds) +  -->
-<!--   geom_bar(mapping = aes(x = cut, colour = cut)) -->
-<!-- ggplot(data = diamonds) +  -->
-<!--   geom_bar(mapping = aes(x = cut, fill = cut)) -->
-<!-- ``` -->
+```python
+chart_left = (alt.Chart(diamonds).
+  mark_bar().
+  encode(
+    x = "cut",
+    y = alt.Y("count()"),
+    stroke = "cut"
+    )
+  )
+  
+chart_right = (alt.Chart(diamonds).
+  mark_bar().
+  encode(
+    x = "cut",
+    y = alt.Y("count()"),
+    color = "cut"
+    )
+  ) 
 
-<!-- Note what happens if you map the fill aesthetic to another variable, like `clarity`: the bars are automatically stacked. Each colored rectangle represents a combination of `cut` and `clarity`. -->
+chart_left.save("screenshots/altair_bar_linecolor.png")
+chart_right.save("screenshots/altair_bar_fillcolor.png")
 
-<!-- ```{r} -->
-<!-- ggplot(data = diamonds) +  -->
-<!--   geom_bar(mapping = aes(x = cut, fill = clarity)) -->
-<!-- ``` -->
+```
 
-<!-- The stacking is performed automatically by the __position adjustment__ specified by the `position` argument. If you don't want a stacked bar chart, you can use one of three other options: `"identity"`, `"dodge"` or `"fill"`. -->
 
-<!-- *   `position = "identity"` will place each object exactly where it falls in  -->
-<!--     the context of the graph. This is not very useful for bars, because it -->
-<!--     overlaps them. To see that overlapping we either need to make the bars -->
-<!--     slightly transparent by setting `alpha` to a small value, or completely -->
-<!--     transparent by setting `fill = NA`. -->
 
-<!--     ```{r out.width = "50%", fig.align = "default"} -->
-<!--     ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) +  -->
-<!--       geom_bar(alpha = 1/5, position = "identity") -->
-<!--     ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) +  -->
-<!--       geom_bar(fill = NA, position = "identity") -->
-<!--     ``` -->
 
-<!--     The identity position adjustment is more useful for 2d geoms, like points, -->
-<!--     where it is the default. -->
+\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_bar_linecolor} \includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_bar_fillcolor} 
 
-<!-- *   `position = "fill"` works like stacking, but makes each set of stacked bars -->
-<!--     the same height. This makes it easier to compare proportions across  -->
-<!--     groups. -->
+Note what happens if you map the color encoding to another variable, like `clarity`: the bars are automatically stacked. Each colored rectangle represents a combination of `cut` and `clarity`.
 
-<!--     ```{r} -->
-<!--     ggplot(data = diamonds) +  -->
-<!--       geom_bar(mapping = aes(x = cut, fill = clarity), position = "fill") -->
-<!--     ``` -->
 
-<!-- *   `position = "dodge"` places overlapping objects directly _beside_ one  -->
-<!--     another. This makes it easier to compare individual values. -->
+```python
+chart = (alt.Chart(diamonds).
+  mark_bar().
+  encode(
+    x = "cut",
+    y = alt.Y("count()"),
+    color = "clarity"
 
-<!--     ```{r} -->
-<!--     ggplot(data = diamonds) +  -->
-<!--       geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") -->
-<!--     ``` -->
+  )
+  )
+  
+chart.save("screenshots/stacked_barchart.png")  
+```
 
-<!-- There's one other type of adjustment that's not useful for bar charts, but it can be very useful for scatterplots. Recall our first scatterplot. Did you notice that the plot displays only 126 points, even though there are 234 observations in the dataset? -->
 
-<!-- ```{r echo = FALSE} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy)) -->
-<!-- ``` -->
 
-<!-- The values of `hwy` and `displ` are rounded so the points appear on a grid and many points overlap each other. This problem is known as __overplotting__. This arrangement makes it hard to see where the mass of the data is. Are the data points spread equally throughout the graph, or is there one special combination of `hwy` and `displ` that contains 109 values?  -->
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/stacked_barchart} \end{center}
 
-<!-- You can avoid this gridding by setting the position adjustment to "jitter".  `position = "jitter"` adds a small amount of random noise to each point. This spreads the points out because no two points are likely to receive the same amount of random noise. -->
+The stacking is performed automatically by `mark_bar()`. If you don't want a stacked bar chart, you can use use the `stack` argument in  `alt.Y()` one of three other options: `"identity"`, `"dodge"` or `"fill"`.
 
-<!-- ```{r} -->
-<!-- ggplot(data = mpg) +  -->
-<!--   geom_point(mapping = aes(x = displ, y = hwy), position = "jitter") -->
-<!-- ``` -->
+*   `position = "identity"` will place each object exactly where it falls in
+    the context of the graph. This is not very useful for bars, because it
+    overlaps them. To see that overlapping we either need to make the bars
+    slightly transparent by setting `alpha` to a small value, or completely
+    transparent by setting `fill = NA`.
+    
+    
+    ```python
+    chart_left = (alt.Chart(diamonds).
+        mark_bar().
+        encode(
+          x = "cut",
+          y = alt.Y("count()", stack=None),
+          color = "clarity",
+          opacity = alt.value(1/5)
+        )
+    )
+    
+    chart_right = (alt.Chart(diamonds).
+        mark_bar().
+        encode(
+          x = "cut",
+          y = alt.Y("count()", stack=None),
+          stroke = "clarity",
+          color = alt.value("none")
+        )
+    )
+    
+    chart_left.save("screenshots/altair_nostack_opacity.png")
+    chart_right.save("screenshots/altair_nostack_lines.png")
+    ```
+    
 
-<!-- Adding randomness seems like a strange way to improve your plot, but while it makes your graph less accurate at small scales, it makes your graph _more_ revealing at large scales. Because this is such a useful operation, ggplot2 comes with a shorthand for `geom_point(position = "jitter")`: `geom_jitter()`. -->
+    
+    \includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_nostack_opacity} \includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_nostack_lines} 
 
-<!-- To learn more about a position adjustment, look up the help page associated with each adjustment: `?position_dodge`, `?position_fill`, `?position_identity`, `?position_jitter`, and `?position_stack`. -->
+*   `position = "fill"` works like stacking, but makes each set of stacked bars
+    the same height. This makes it easier to compare proportions across
+    groups.
 
-<!-- ### Exercises -->
+    
+    ```python
+    chart = (alt.Chart(diamonds).
+      mark_bar().
+      encode(
+        x = "cut",
+        y = alt.Y("count()", stack='normalize'),
+        color = "clarity"
+      )
+    )
+    
+    chart.save("screenshots/altair_normalize_bar.png")
+    ```
 
-<!-- 1.  What is the problem with this plot? How could you improve it? -->
 
-<!--     ```{r} -->
-<!--     ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +  -->
-<!--       geom_point() -->
-<!--     ``` -->
+    
+    ```r
+    knitr::include_graphics("screenshots/altair_normalize_bar.png")
+    ```
+    
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_normalize_bar} \end{center}
 
-<!-- 1.  What parameters to `geom_jitter()` control the amount of jittering? -->
+*   Placing overlapping objects directly _beside_ one another is done by using the `column` encoding.     This makes it easier to compare individual values with a common baseline.
+    
+    
+    ```python
+    chart = (alt.Chart(diamonds).
+      mark_bar().
+      encode(
+        x='clarity',
+        y=alt.Y('count()'),
+        color='clarity',
+        column='cut'
+      )
+    )
+    
+    chart.save("screenshots/altair_position_dodge.png")
+    ```
+    
 
-<!-- 1.  Compare and contrast `geom_jitter()` with `geom_count()`. -->
 
-<!-- 1.  What's the default position adjustment for `geom_boxplot()`? Create -->
-<!--     a visualisation of the `mpg` dataset that demonstrates it. -->
+    
+    \begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{screenshots/altair_position_dodge} \end{center}
+
+Altair does not have a simple way to add random jitter to points using an encoding or simple argument to `alt.X()` or `alt.Y()`. Altair can create a jittered point plot, also called a [stripplot](https://altair-viz.github.io/gallery/stripplot.html).  However, it is not as straight forward.
+
 
 <!-- ## Coordinate systems -->
+
+<!-- https://altair-viz.github.io/gallery/#maps -->
 
 <!-- Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are a number of other coordinate systems that are occasionally helpful. -->
 
