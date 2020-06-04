@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="explore-intro.html"/>
-
+<link rel="next" href="workflow-basics.html"/>
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -203,6 +203,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="data-visualisation.html"><a href="data-visualisation.html#statistical-transformations"><i class="fa fa-check"></i><b>3.7</b> Statistical transformations</a></li>
 <li class="chapter" data-level="3.8" data-path="data-visualisation.html"><a href="data-visualisation.html#position-adjustments"><i class="fa fa-check"></i><b>3.8</b> Position adjustments</a></li>
+<li class="chapter" data-level="3.9" data-path="data-visualisation.html"><a href="data-visualisation.html#coordinate-systems-maps"><i class="fa fa-check"></i><b>3.9</b> Coordinate systems (maps)</a></li>
+<li class="chapter" data-level="3.10" data-path="data-visualisation.html"><a href="data-visualisation.html#the-layered-grammar-of-graphics"><i class="fa fa-check"></i><b>3.10</b> The layered grammar of graphics</a></li>
+<li class="chapter" data-level="3.11" data-path="data-visualisation.html"><a href="data-visualisation.html#altairs-grammar-of-graphics"><i class="fa fa-check"></i><b>3.11</b> Altair’s grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-basics.html"><a href="workflow-basics.html"><i class="fa fa-check"></i><b>4</b> Workflow: basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
+<li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#exercises-4"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="workflow-scripts.html"><a href="workflow-scripts.html#running-code"><i class="fa fa-check"></i><b>6.1</b> Running code</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>7</b> Workflow: projects</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="workflow-projects.html"><a href="workflow-projects.html#what-is-real"><i class="fa fa-check"></i><b>7.1</b> What is real?</a></li>
+<li class="chapter" data-level="7.2" data-path="workflow-projects.html"><a href="workflow-projects.html#where-does-your-analysis-live"><i class="fa fa-check"></i><b>7.2</b> Where does your analysis live?</a></li>
+<li class="chapter" data-level="7.3" data-path="workflow-projects.html"><a href="workflow-projects.html#paths-and-directories"><i class="fa fa-check"></i><b>7.3</b> Paths and directories</a></li>
+<li class="chapter" data-level="7.4" data-path="workflow-projects.html"><a href="workflow-projects.html#vs-code-workspaces"><i class="fa fa-check"></i><b>7.4</b> VS Code workspaces</a></li>
+<li class="chapter" data-level="7.5" data-path="workflow-projects.html"><a href="workflow-projects.html#summary"><i class="fa fa-check"></i><b>7.5</b> Summary</a></li>
 </ul></li>
 </ul>
 
@@ -13152,85 +13181,56 @@ groups.</p>
 <p><img src="screenshots/altair_position_dodge.png" width="100%" style="display: block; margin: auto;" /></p></li>
 </ul>
 <p>Altair does not have a simple way to add random jitter to points using an encoding or simple argument to <code>alt.X()</code> or <code>alt.Y()</code>. Altair can create a jittered point plot, also called a <a href="https://altair-viz.github.io/gallery/stripplot.html">stripplot</a>. However, it is not as straight forward.</p>
-<!-- ## Coordinate systems -->
-<!-- https://altair-viz.github.io/gallery/#maps -->
-<!-- https://altair-viz.github.io/gallery/world_projections.html -->
-<!-- Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are a number of other coordinate systems that are occasionally helpful. -->
-<!-- *   `coord_flip()` switches the x and y axes. This is useful (for example), -->
-<!--     if you want horizontal boxplots. It's also useful for long labels: it's -->
-<!--     hard to get them to fit without overlapping on the x-axis. -->
-<!--     ```{r fig.width = 3, out.width = "50%", fig.align = "default"} -->
-<!--     ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +  -->
-<!--       geom_boxplot() -->
-<!--     ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +  -->
-<!--       geom_boxplot() + -->
-<!--       coord_flip() -->
-<!--     ``` -->
-<!-- *   `coord_quickmap()` sets the aspect ratio correctly for maps. This is very -->
-<!--     important if you're plotting spatial data with ggplot2 (which unfortunately -->
-<!--     we don't have the space to cover in this book). -->
-<!--     ```{r fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE} -->
-<!--     nz <- map_data("nz") -->
-<!--     ggplot(nz, aes(long, lat, group = group)) + -->
-<!--       geom_polygon(fill = "white", colour = "black") -->
-<!--     ggplot(nz, aes(long, lat, group = group)) + -->
-<!--       geom_polygon(fill = "white", colour = "black") + -->
-<!--       coord_quickmap() -->
-<!--     ``` -->
-<!-- *   `coord_polar()` uses polar coordinates. Polar coordinates reveal an  -->
-<!--     interesting connection between a bar chart and a Coxcomb chart. -->
-<!--     ```{r fig.width = 3, out.width = "50%", fig.align = "default", fig.asp = 1} -->
-<!--     bar <- ggplot(data = diamonds) +  -->
-<!--       geom_bar( -->
-<!--         mapping = aes(x = cut, fill = cut),  -->
-<!--         show.legend = FALSE, -->
-<!--         width = 1 -->
-<!--       ) +  -->
-<!--       theme(aspect.ratio = 1) + -->
-<!--       labs(x = NULL, y = NULL) -->
-<!--     bar + coord_flip() -->
-<!--     bar + coord_polar() -->
-<!--     ``` -->
-<!-- ### Exercises -->
-<!-- 1.  Turn a stacked bar chart into a pie chart using `coord_polar()`. -->
-<!-- 1.  What does `labs()` do? Read the documentation. -->
-<!-- 1.  What's the difference between `coord_quickmap()` and `coord_map()`? -->
-<!-- 1.  What does the plot below tell you about the relationship between city -->
-<!--     and highway mpg? Why is `coord_fixed()` important? What does  -->
-<!--     `geom_abline()` do? -->
-<!--     ```{r, fig.asp = 1, out.width = "50%"} -->
-<!--     ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + -->
-<!--       geom_point() +  -->
-<!--       geom_abline() + -->
-<!--       coord_fixed() -->
-<!--     ``` -->
-<!-- ## The layered grammar of graphics -->
-<!-- In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with ggplot2. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template: -->
-<!-- ``` -->
-<!-- ggplot(data = <DATA>) +  -->
-<!--   <GEOM_FUNCTION>( -->
-<!--      mapping = aes(<MAPPINGS>), -->
-<!--      stat = <STAT>,  -->
-<!--      position = <POSITION> -->
-<!--   ) + -->
-<!--   <COORDINATE_FUNCTION> + -->
-<!--   <FACET_FUNCTION> -->
-<!-- ``` -->
-<!-- Our new template takes seven parameters, the bracketed words that appear in the template. In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function. -->
-<!-- The seven parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe _any_ plot as a combination of a dataset, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, and a faceting scheme.  -->
-<!-- To see how this works, consider how you could build a basic plot from scratch: you could start with a dataset and then transform it into the information that you want to display (with a stat). -->
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-grammar-1.png") -->
-<!-- ``` -->
-<!-- Next, you could choose a geometric object to represent each observation in the transformed data. You could then use the aesthetic properties of the geoms to represent variables in the data. You would map the values of each variable to the levels of an aesthetic. -->
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-grammar-2.png") -->
-<!-- ``` -->
-<!-- You'd then select a coordinate system to place the geoms into. You'd use the location of the objects (which is itself an aesthetic property) to display the values of the x and y variables. At that point, you would have a complete graph, but you could further adjust the positions of the geoms within the coordinate system (a position adjustment) or split the graph into subplots (faceting). You could also extend the plot by adding one or more additional layers, where each additional layer uses a dataset, a geom, a set of mappings, a stat, and a position adjustment. -->
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-grammar-3.png") -->
-<!-- ``` -->
-<!-- You could use this method to build _any_ plot that you imagine. In other words, you can use the code template that you've learned in this chapter to build hundreds of thousands of unique plots. -->
+<p>We should note that Altair also does not provide piechart or donut chart marks as well.</p>
+</div>
+<div id="coordinate-systems-maps" class="section level2" number="3.9">
+<h2><span class="header-section-number">3.9</span> Coordinate systems (maps)</h2>
+<p>Coordinate systems are generally on an x and y axis in Altair. This coordinate system is the Cartesian coordinate system, where the x and y positions act independently to determine the location of each point. Maps are on a Cartesian coordinate system, but their behavior is different as they require a <a href="https://altair-viz.github.io/gallery/world_projections.html">transformation or projection</a> of the globe to an x and y Cartesian plane.</p>
+<p>Visualizing data on maps can get complicated quickly. Altair has a some <a href="https://altair-viz.github.io/gallery/index.html#maps">mapping marks</a> available for charts. The data formats for plotting with maps also get more involved. You can use the <a href="https://iliatimofeev.github.io/gpdvega/">gpdvega</a> package to help with spatial data in Altair. Many Python users us <a href="https://geopandas.org/">geopandas</a> or <a href="https://pypi.org/project/Shapely/1.6.3/">Shapely</a> to handle spatial data in Python. <a href="https://www.e-education.psu.edu/geog489/node/2201">PennState has a nice list</a> of spatial tools for Python.</p>
+</div>
+<div id="the-layered-grammar-of-graphics" class="section level2" number="3.10">
+<h2><span class="header-section-number">3.10</span> The layered grammar of graphics</h2>
+<p>In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make <em>any</em> type of plot with ggplot2. To see this, let’s add position adjustments, stats, coordinate systems, and faceting to our code template:</p>
+<pre><code>(alt.Chart(&lt;DATA&gt;).
+  encoding(
+    
+  ).facet(
+    column = &lt;FACET VARIABLE&gt;
+  ).
+  &lt;TRANFORM_FUNCTION&gt;().
+  &lt;MARK_FUNCTION&gt;().
+  properties(
+    width = ,
+    height = 
+  )
+  )</code></pre>
+<p>Altair’s general template takes four main parameters - <code>alt.Chart()</code>, <code>mark_*()</code>, <code>encode()</code>, and <code>facet()</code>. In practice, only need to supply the first three parameters to make a chart because Altair will provide useful defaults for everything except the data, the encodings, and the mark function.</p>
+<p>The parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe <em>any</em> plot as a combination of a dataset, a mark, a set of encodings, a transformation, a position adjustment, and a faceting scheme.</p>
+<p>To see how this works, consider how you could build a basic plot from scratch: you could start with a dataset and then transform it into the information that you want to display (with a stat).</p>
+<p><img src="images/visualization-grammar-1-altair.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Next, you could choose a geometric object to represent each observation in the transformed data. You could then use the aesthetic properties of the geoms to represent variables in the data. You would map the values of each variable to the levels of an aesthetic.</p>
+<p><img src="images/Visualization-grammar-2-altair.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>You’d then select a coordinate system to place the geoms into. You’d use the location of the objects (which is itself an aesthetic property) to display the values of the x and y variables. At that point, you would have a complete graph, but you could further adjust the positions of the geoms within the coordinate system (a position adjustment) or split the graph into subplots (faceting). You could also extend the plot by adding one or more additional layers, where each additional layer uses a dataset, a geom, a set of mappings, a stat, and a position adjustment.</p>
+<p><img src="images/visualization-grammar-3-altair.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>You could use this method to build <em>any</em> plot that you imagine. In other words, you can use the code template that you’ve learned in this chapter to build hundreds of thousands of unique plots.</p>
+</div>
+<div id="altairs-grammar-of-graphics" class="section level2" number="3.11">
+<h2><span class="header-section-number">3.11</span> Altair’s grammar of graphics</h2>
+<p><a href="https://plotnine.readthedocs.io/en/stable/index.html">Plotnine</a> is a Python implementation of <a href="https://ggplot2.tidyverse.org/">ggplot2 in R’s</a> grammar of graphics using <a href="https://matplotlib.org/">matplotlib</a> as the plotting backend. Altair’s implementation of the grammar of graphics, much like ggplot2 or plotnine at a high level. However, it uses the <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> grammar of graphics constructs and plotting backend.</p>
+<p>Below are some useful links that will help you dig deeper into the Altair implementation of the grammar of graphics.</p>
+<ul>
+<li>Altair <a href="https://altair-viz.github.io/user_guide/marks.html">mark guidance</a></li>
+<li>Altair <a href="https://altair-viz.github.io/user_guide/encoding.html">encoding guidance</a></li>
+<li>Altair <a href="https://altair-viz.github.io/user_guide/compound_charts.html?highlight=bin%20scale">facet guidance</a></li>
+<li>Altair <a href="https://altair-viz.github.io/user_guide/transform/index.html">tranformations guidance</a></li>
+<li>Altair <a href="https://altair-viz.github.io/user_guide/customization.html">chart customization</a></li>
+<li>Altair <a href="https://altair-viz.github.io/gallery/bar_chart_sorted.html">sorting barcharts</a></li>
+<li>Altair <a href="https://towardsdatascience.com/consistently-beautiful-visualizations-with-altair-themes-c7f9f889602">theme editing</a></li>
+<li>Altair <a href="https://altair-viz.github.io/user_guide/encoding.html?highlight=data%20types#encoding-data-types">Encoding data types</a></li>
+</ul>
+<!-- https://github.com/altair-viz/altair/issues/1021 -->
+<!-- https://altair-viz.github.io/gallery/scatter_marginal_hist.html -->
+<!-- https://altair-viz.github.io/case_studies/exploring-weather.html -->
 
 </div>
 </div>
@@ -13239,8 +13239,8 @@ groups.</p>
           </div>
         </div>
       </div>
-<a href="explore-intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="explore-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="workflow-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

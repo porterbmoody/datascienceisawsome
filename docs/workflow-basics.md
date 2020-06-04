@@ -8,20 +8,23 @@ Before we go any further, let's make sure you've got a solid foundation in runni
 
 Let's review some basics we've so far omitted in the interests of getting you plotting as quickly as possible. You can use Python as a calculator:
 
-```{pyton}
+
+```pyton
 1 / 200 * 30
 (59 + 73 + 2) / 3
 ```
 
 You can create new objects with `=`:
 
-```{python}
+
+```python
 x = 3 * 4
 ```
 
 All Python statements where you create objects, __assignment__ statements, have the same form:
 
-```{r eval = FALSE}
+
+```r
 object_name = value
 ```
 
@@ -31,7 +34,8 @@ When reading that code say "object name gets value" in your head. You will make 
 
 Object names must start with a letter, and can only contain letters, numbers, and `_`. You cannot use `.` like R. You want your object names to be descriptive, so you'll need a convention for multiple words. Python [coding conventions](https://visualgit.readthedocs.io/en/latest/pages/naming_convention.html) recommend __snake_case__ where you separate lowercase words with `_`. 
 
-```{r, eval = FALSE}
+
+```r
 i_use_snake_case
 otherPeopleUseCamelCase
 some.people.use.periods
@@ -42,13 +46,16 @@ We'll come back to code style later, in [functions].
 
 You can inspect an object by typing its name:
 
-```{python}
+
+```python
 x
+#> 12
 ```
 
 Make another assignment:
 
-```{python}
+
+```python
 this_is_a_really_long_name = 2.5
 ```
 
@@ -56,13 +63,15 @@ To inspect this object, try out VS Codes completion facility: type "this_", paus
 
 Make yet another assignment:
 
-```{python}
+
+```python
 python_rocks = 2 ^ 3
 ```
 
 Let's try to inspect it:
 
-```{python, eval = FALSE}
+
+```python
 python_rock
 #> ---------------------------------------------------------------------------
 #> NameError                                 Traceback (most recent call last)
@@ -86,7 +95,8 @@ There's an implied contract between you and Python: it will do the tedious compu
 Python does not have a large collection of built-in mathematical and statistical functions. You will need to use `pandas`, `numpy`, `scikit-learn`, and `statsmodels` to get the suite of functions for working and modeling with data. 
 
 
-```{python}
+
+```python
 import pandas as pd
 import numpy as np
 import sklearn as sk
@@ -96,7 +106,8 @@ import statsmodels.api as sm
 
 Functions are called like this:
 
-```{python eval = FALSE}
+
+```python
 <AS PACKAGE NAME>.function_name(arg1 = val1, arg2 = val2, ...)
 ```
 
@@ -104,13 +115,16 @@ Let's try using `np.arange()` which returns regular **arange**ment of numbers an
 
 VS Code will add matching opening (`(`) and closing (`)`) parentheses for you. Type the arguments `1, 10` and hit return.
 
-```{python}
+
+```python
 np.arange(1,10)
+#> array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 ```
 
 Type this code and notice you get similar assistance with the paired quotation marks:
 
-```{python}
+
+```python
 x = "hello world"
 ```
 
@@ -119,9 +133,8 @@ Quotation marks and parentheses must always come in a pair. VS Code does its bes
 
 Now look at your Python interactive environment in VS Code in the top toolbar by selecting the icon circled in red :
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("screenshots/vscode-env.png")
-```
+
+\begin{center}\includegraphics[width=10.14in]{screenshots/vscode-env} \end{center}
 
 Here you can see all of the objects that you've created.
 
@@ -129,9 +142,18 @@ Here you can see all of the objects that you've created.
 
 1.  Why does this code not work?
 
-    ```{python, error = TRUE}
+    
+    ```python
     my_variable <- 10
+    #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'my_variable' is not defined
+    #> 
+    #> Detailed traceback: 
+    #>   File "<string>", line 1, in <module>
     my_varıable
+    #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'my_varıable' is not defined
+    #> 
+    #> Detailed traceback: 
+    #>   File "<string>", line 1, in <module>
     ```
     
     Look carefully! (This may seem like an exercise in pointlessness, but

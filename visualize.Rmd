@@ -1031,112 +1031,75 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
 
 Altair does not have a simple way to add random jitter to points using an encoding or simple argument to `alt.X()` or `alt.Y()`. Altair can create a jittered point plot, also called a [stripplot](https://altair-viz.github.io/gallery/stripplot.html).  However, it is not as straight forward.
 
+We should note that Altair also does not provide piechart or donut chart marks as well.
 
-<!-- ## Coordinate systems -->
+## Coordinate systems (maps)
 
-<!-- https://altair-viz.github.io/gallery/#maps -->
-<!-- https://altair-viz.github.io/gallery/world_projections.html -->
+Coordinate systems are generally on an x and y axis in Altair. This coordinate system is the Cartesian coordinate system, where the x and y positions act independently to determine the location of each point. Maps are on a Cartesian coordinate system, but their behavior is different as they require a [transformation or projection](https://altair-viz.github.io/gallery/world_projections.html) of the globe to an x and y Cartesian plane.
 
-<!-- Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are a number of other coordinate systems that are occasionally helpful. -->
+Visualizing data on maps can get complicated quickly.  Altair has a some [mapping marks](https://altair-viz.github.io/gallery/index.html#maps) available for charts. The data formats for plotting with maps also get more involved.  You can use the [gpdvega](https://iliatimofeev.github.io/gpdvega/) package to help with spatial data in Altair. Many Python users us [geopandas](https://geopandas.org/) or [Shapely](https://pypi.org/project/Shapely/1.6.3/) to handle spatial data in Python. [PennState has a nice list](https://www.e-education.psu.edu/geog489/node/2201) of spatial tools for Python. 
 
-<!-- *   `coord_flip()` switches the x and y axes. This is useful (for example), -->
-<!--     if you want horizontal boxplots. It's also useful for long labels: it's -->
-<!--     hard to get them to fit without overlapping on the x-axis. -->
+## The layered grammar of graphics
 
-<!--     ```{r fig.width = 3, out.width = "50%", fig.align = "default"} -->
-<!--     ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +  -->
-<!--       geom_boxplot() -->
-<!--     ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +  -->
-<!--       geom_boxplot() + -->
-<!--       coord_flip() -->
-<!--     ``` -->
+In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with ggplot2. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
 
-<!-- *   `coord_quickmap()` sets the aspect ratio correctly for maps. This is very -->
-<!--     important if you're plotting spatial data with ggplot2 (which unfortunately -->
-<!--     we don't have the space to cover in this book). -->
+```
+(alt.Chart(<DATA>).
+  encoding(
+    
+  ).facet(
+    column = <FACET VARIABLE>
+  ).
+  <TRANFORM_FUNCTION>().
+  <MARK_FUNCTION>().
+  properties(
+    width = ,
+    height = 
+  )
+  )
+```
 
-<!--     ```{r fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE} -->
-<!--     nz <- map_data("nz") -->
+Altair's general template takes four main parameters - `alt.Chart()`, `mark_*()`, `encode()`, and `facet()`. In practice, only need to supply the first three parameters to make a chart because Altair will provide useful defaults for everything except the data, the encodings, and the mark function.
 
-<!--     ggplot(nz, aes(long, lat, group = group)) + -->
-<!--       geom_polygon(fill = "white", colour = "black") -->
+The parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe _any_ plot as a combination of a dataset, a mark, a set of encodings, a transformation, a position adjustment, and a faceting scheme.
 
-<!--     ggplot(nz, aes(long, lat, group = group)) + -->
-<!--       geom_polygon(fill = "white", colour = "black") + -->
-<!--       coord_quickmap() -->
-<!--     ``` -->
+To see how this works, consider how you could build a basic plot from scratch: you could start with a dataset and then transform it into the information that you want to display (with a stat).
 
-<!-- *   `coord_polar()` uses polar coordinates. Polar coordinates reveal an  -->
-<!--     interesting connection between a bar chart and a Coxcomb chart. -->
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/visualization-grammar-1-altair.png")
+```
 
-<!--     ```{r fig.width = 3, out.width = "50%", fig.align = "default", fig.asp = 1} -->
-<!--     bar <- ggplot(data = diamonds) +  -->
-<!--       geom_bar( -->
-<!--         mapping = aes(x = cut, fill = cut),  -->
-<!--         show.legend = FALSE, -->
-<!--         width = 1 -->
-<!--       ) +  -->
-<!--       theme(aspect.ratio = 1) + -->
-<!--       labs(x = NULL, y = NULL) -->
+Next, you could choose a geometric object to represent each observation in the transformed data. You could then use the aesthetic properties of the geoms to represent variables in the data. You would map the values of each variable to the levels of an aesthetic.
 
-<!--     bar + coord_flip() -->
-<!--     bar + coord_polar() -->
-<!--     ``` -->
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/visualization-grammar-2-altair.png")
+```
 
-<!-- ### Exercises -->
+You'd then select a coordinate system to place the geoms into. You'd use the location of the objects (which is itself an aesthetic property) to display the values of the x and y variables. At that point, you would have a complete graph, but you could further adjust the positions of the geoms within the coordinate system (a position adjustment) or split the graph into subplots (faceting). You could also extend the plot by adding one or more additional layers, where each additional layer uses a dataset, a geom, a set of mappings, a stat, and a position adjustment.
 
-<!-- 1.  Turn a stacked bar chart into a pie chart using `coord_polar()`. -->
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/visualization-grammar-3-altair.png")
+```
 
-<!-- 1.  What does `labs()` do? Read the documentation. -->
+You could use this method to build _any_ plot that you imagine. In other words, you can use the code template that you've learned in this chapter to build hundreds of thousands of unique plots.
 
-<!-- 1.  What's the difference between `coord_quickmap()` and `coord_map()`? -->
+## Altair's grammar of graphics
 
-<!-- 1.  What does the plot below tell you about the relationship between city -->
-<!--     and highway mpg? Why is `coord_fixed()` important? What does  -->
-<!--     `geom_abline()` do? -->
+[Plotnine](https://plotnine.readthedocs.io/en/stable/index.html) is a Python implementation of [ggplot2 in R's](https://ggplot2.tidyverse.org/) grammar of graphics using [matplotlib](https://matplotlib.org/) as the plotting backend. Altair's implementation of the grammar of graphics, much like ggplot2 or plotnine at a high level.  However, it uses the [Vega-Lite](https://vega.github.io/vega-lite/) grammar of graphics constructs and plotting backend. 
 
-<!--     ```{r, fig.asp = 1, out.width = "50%"} -->
-<!--     ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + -->
-<!--       geom_point() +  -->
-<!--       geom_abline() + -->
-<!--       coord_fixed() -->
-<!--     ``` -->
+Below are some useful links that will help you dig deeper into the Altair implementation of the grammar of graphics.
 
-<!-- ## The layered grammar of graphics -->
+- Altair [mark guidance](https://altair-viz.github.io/user_guide/marks.html)
+- Altair [encoding guidance](https://altair-viz.github.io/user_guide/encoding.html)
+- Altair [facet guidance](https://altair-viz.github.io/user_guide/compound_charts.html?highlight=bin%20scale)
+- Altair [tranformations guidance](https://altair-viz.github.io/user_guide/transform/index.html)
+- Altair [chart customization](https://altair-viz.github.io/user_guide/customization.html)
+- Altair [sorting barcharts](https://altair-viz.github.io/gallery/bar_chart_sorted.html)
+- Altair [theme editing](https://towardsdatascience.com/consistently-beautiful-visualizations-with-altair-themes-c7f9f889602)
+- Altair [Encoding data types](https://altair-viz.github.io/user_guide/encoding.html?highlight=data%20types#encoding-data-types)
 
-<!-- In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with ggplot2. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template: -->
 
-<!-- ``` -->
-<!-- ggplot(data = <DATA>) +  -->
-<!--   <GEOM_FUNCTION>( -->
-<!--      mapping = aes(<MAPPINGS>), -->
-<!--      stat = <STAT>,  -->
-<!--      position = <POSITION> -->
-<!--   ) + -->
-<!--   <COORDINATE_FUNCTION> + -->
-<!--   <FACET_FUNCTION> -->
-<!-- ``` -->
+<!-- https://github.com/altair-viz/altair/issues/1021 -->
+<!-- https://altair-viz.github.io/gallery/scatter_marginal_hist.html -->
+<!-- https://altair-viz.github.io/case_studies/exploring-weather.html -->
 
-<!-- Our new template takes seven parameters, the bracketed words that appear in the template. In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function. -->
-
-<!-- The seven parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe _any_ plot as a combination of a dataset, a geom, a set of mappings, a stat, a position adjustment, a coordinate system, and a faceting scheme.  -->
-
-<!-- To see how this works, consider how you could build a basic plot from scratch: you could start with a dataset and then transform it into the information that you want to display (with a stat). -->
-
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-grammar-1.png") -->
-<!-- ``` -->
-
-<!-- Next, you could choose a geometric object to represent each observation in the transformed data. You could then use the aesthetic properties of the geoms to represent variables in the data. You would map the values of each variable to the levels of an aesthetic. -->
-
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-grammar-2.png") -->
-<!-- ``` -->
-
-<!-- You'd then select a coordinate system to place the geoms into. You'd use the location of the objects (which is itself an aesthetic property) to display the values of the x and y variables. At that point, you would have a complete graph, but you could further adjust the positions of the geoms within the coordinate system (a position adjustment) or split the graph into subplots (faceting). You could also extend the plot by adding one or more additional layers, where each additional layer uses a dataset, a geom, a set of mappings, a stat, and a position adjustment. -->
-
-<!-- ```{r, echo = FALSE, out.width = "100%"} -->
-<!-- knitr::include_graphics("images/visualization-grammar-3.png") -->
-<!-- ``` -->
-
-<!-- You could use this method to build _any_ plot that you imagine. In other words, you can use the code template that you've learned in this chapter to build hundreds of thousands of unique plots. -->

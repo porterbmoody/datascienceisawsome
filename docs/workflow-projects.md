@@ -19,7 +19,8 @@ VS Code's interactive Python has a powerful notion of the __working directory__.
 
 And you can print this out in Python code by running `os.getcwd()`:
 
-```{python eval = FALSE}
+
+```python
 import os
 os.getcwd()
 #> '/Users/hathawayj/git/byuidatascience/python4ds'
@@ -29,7 +30,8 @@ As a beginning Python user, it's OK to let your home directory, documents direct
 
 __I do not recommend it__, but you can also set the working directory from within Python:
 
-```{python eval = FALSE}
+
+```python
 os.chdir("/path/to/my/CoolProject")
 ```
 
@@ -71,7 +73,8 @@ Once this process is complete, you'll get a new VS Code workspace just for this 
 
 Check that the "home" directory of your workspace is the current working directory:
 
-```{python eval = FALSE}
+
+```python
 import os
 os.getcwd()
 #> '/Users/hathawayj/Downloads/python4ds'
@@ -81,7 +84,8 @@ Whenever you refer to a file with a relative path it will look for it here.
 
 Now enter the following commands in the script editor, and save the file, calling it "diamonds.py". Next, run the complete script which will save a PNG, CSV, and JSON file into your project directory. Don't worry about the details, you'll learn them later in the book.
 
-```{python toy-line, eval = FALSE}
+
+```python
 import pandas as pd 
 import altair as alt 
 

@@ -4,7 +4,12 @@ rmd_files: [
   "index.rmd",
   "intro.Rmd",
   "explore.Rmd",
-  "visualize.Rmd"
+  "visualize.Rmd",
+  "workflow-basics.Rmd",
+  "transform.Rmd",
+  "workflow-scripts.Rmd",
+
+  "workflow-projects.Rmd"
 ]
 
 before_chapter_script: "_common.R"

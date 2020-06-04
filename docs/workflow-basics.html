@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Introduction | Python for Data Science</title>
+  <title>4 Workflow: basics | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Introduction | Python for Data Science" />
+  <meta property="og:title" content="4 Workflow: basics | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
   <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Introduction | Python for Data Science" />
+  <meta name="twitter:title" content="4 Workflow: basics | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="data-visualisation.html"/>
+<link rel="prev" href="data-visualisation.html"/>
+<link rel="next" href="transform.html"/>
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -250,35 +250,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="explore-intro" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Introduction</h1>
-<p>The goal of the first part of this book is to get you up to speed with the basic tools of <strong>data exploration</strong> as quickly as possible. Data exploration is the art of looking at your data, rapidly generating hypotheses, quickly testing them, then repeating again and again and again. The goal of data exploration is to generate many promising leads that you can later explore in more depth.</p>
-<p><img src="diagrams/data-science-explore.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>In this part of the book you will learn some useful tools that have an immediate payoff:</p>
-<ul>
-<li><p>Visualisation is a fun place to start with Python programming, because the
-payoff is so clear: you get to make elegant and informative plots that help
-you understand data. In <a href="data-visualisation.html#data-visualisation">data visualisation</a> you’ll dive into visualisation,
-learning the basic structure of a pandas plot, and powerful techniques for
-turning data into plots.</p></li>
-<li><p>Visualisation alone is typically not enough, so in <a href="transform.html#transform">data transformation</a>
-you’ll learn the key verbs that allow you to select important variables,
-filter out key observations, create new variables, and compute summaries.</p></li>
-<li><p>Finally, in [exploratory data analysis], you’ll combine visualisation and
-transformation with your curiosity and scepticism to ask and answer
-interesting questions about data.</p></li>
-</ul>
-<p>Modelling is an important part of the exploratory process, but you don’t have the skills to effectively learn or apply it yet. We’ll come back to it in <a href="#model-intro">modelling</a>, once you’re better equipped with more data wrangling and programming tools.</p>
-<p>Nestled among these three chapters that teach you the tools of exploration are three chapters that focus on your Python workflow. In <a href="workflow-basics.html#workflow-basics">workflow: basics</a>, <a href="workflow-scripts.html#workflow-scripts">workflow: scripts</a>, and <a href="workflow-projects.html#workflow-projects">workflow: projects</a> you’ll learn good practices for writing and organising your R code. These will set you up for success in the long run, as they’ll give you the tools to stay organised when you tackle real projects.</p>
+<div id="workflow-basics" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Workflow: basics</h1>
+<p>You now have some experience running Python code. I didn’t give you many details, but you’ve obviously figured out the basics, or you would’ve thrown this book away in frustration! Frustration is natural when you start programming in Python, because it is such a stickler for punctuation, and even one character out of place will cause it to complain. But while you should expect to be a little frustrated, take comfort in that it’s both typical and temporary: it happens to everyone, and the only way to get over it is to keep trying.</p>
+<p>Before we go any further, let’s make sure you’ve got a solid foundation in running Python code, and that you know about some of the most helpful VS Code features.</p>
+<div id="coding-basics" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Coding basics</h2>
+<p>Let’s review some basics we’ve so far omitted in the interests of getting you plotting as quickly as possible. You can use Python as a calculator:</p>
+<pre class="pyton"><code>1 / 200 * 30
+(59 + 73 + 2) / 3</code></pre>
+<p>You can create new objects with <code>=</code>:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="workflow-basics.html#cb48-1"></a>x <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span></span></code></pre></div>
+<p>All Python statements where you create objects, <strong>assignment</strong> statements, have the same form:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="workflow-basics.html#cb49-1"></a>object_name =<span class="st"> </span>value</span></code></pre></div>
+<p>When reading that code say “object name gets value” in your head. You will make lots of assignments in data science Python programming. It is also good code formatting practice to wrap <code>=</code> with spaces. Code is miserable to read on a good day, so giveyoureyesabreak and use spaces.</p>
+</div>
+<div id="whats-in-a-name" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> What’s in a name?</h2>
+<p>Object names must start with a letter, and can only contain letters, numbers, and <code>_</code>. You cannot use <code>.</code> like R. You want your object names to be descriptive, so you’ll need a convention for multiple words. Python <a href="https://visualgit.readthedocs.io/en/latest/pages/naming_convention.html">coding conventions</a> recommend <strong>snake_case</strong> where you separate lowercase words with <code>_</code>.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="workflow-basics.html#cb50-1"></a>i_use_snake_case</span>
+<span id="cb50-2"><a href="workflow-basics.html#cb50-2"></a>otherPeopleUseCamelCase</span>
+<span id="cb50-3"><a href="workflow-basics.html#cb50-3"></a>some.people.use.periods</span>
+<span id="cb50-4"><a href="workflow-basics.html#cb50-4"></a>And_aFew.People_RENOUNCEconvention</span></code></pre></div>
+<p>We’ll come back to code style later, in [functions].</p>
+<p>You can inspect an object by typing its name:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="workflow-basics.html#cb51-1"></a>x</span>
+<span id="cb51-2"><a href="workflow-basics.html#cb51-2"></a><span class="co">#&gt; 12</span></span></code></pre></div>
+<p>Make another assignment:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="workflow-basics.html#cb52-1"></a>this_is_a_really_long_name <span class="op">=</span> <span class="fl">2.5</span></span></code></pre></div>
+<p>To inspect this object, try out VS Codes completion facility: type “this_”, pause, add characters until you have a unique prefix, then press shift + return.</p>
+<p>Make yet another assignment:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="workflow-basics.html#cb53-1"></a>python_rocks <span class="op">=</span> <span class="dv">2</span> <span class="op">^</span> <span class="dv">3</span></span></code></pre></div>
+<p>Let’s try to inspect it:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="workflow-basics.html#cb54-1"></a>python_rock</span>
+<span id="cb54-2"><a href="workflow-basics.html#cb54-2"></a><span class="co">#&gt; ---------------------------------------------------------------------------</span></span>
+<span id="cb54-3"><a href="workflow-basics.html#cb54-3"></a><span class="co">#&gt; NameError                                 Traceback (most recent call last)</span></span>
+<span id="cb54-4"><a href="workflow-basics.html#cb54-4"></a><span class="co">#&gt; ~.../python4ds_practice.py in </span></span>
+<span id="cb54-5"><a href="workflow-basics.html#cb54-5"></a><span class="co">#&gt; ----&gt; 1 python_rock</span></span>
+<span id="cb54-6"><a href="workflow-basics.html#cb54-6"></a><span class="co">#&gt; NameError: name &#39;python_rock&#39; is not defined</span></span>
+<span id="cb54-7"><a href="workflow-basics.html#cb54-7"></a></span>
+<span id="cb54-8"><a href="workflow-basics.html#cb54-8"></a>Python_rocks</span>
+<span id="cb54-9"><a href="workflow-basics.html#cb54-9"></a><span class="co">#&gt; ---------------------------------------------------------------------------</span></span>
+<span id="cb54-10"><a href="workflow-basics.html#cb54-10"></a><span class="co">#&gt; NameError                                 Traceback (most recent call last)</span></span>
+<span id="cb54-11"><a href="workflow-basics.html#cb54-11"></a><span class="co">#&gt; ~.../python4ds_practice.py in </span></span>
+<span id="cb54-12"><a href="workflow-basics.html#cb54-12"></a><span class="co">#&gt; ----&gt; 1 Python_rocks</span></span>
+<span id="cb54-13"><a href="workflow-basics.html#cb54-13"></a><span class="co">#&gt; NameError: name &#39;Python_rocks&#39; is not defined</span></span></code></pre></div>
+<p>There’s an implied contract between you and Python: it will do the tedious computation for you, but in return, you must be completely precise in your instructions. Typos matter. Case matters.</p>
+</div>
+<div id="calling-functions" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Calling functions</h2>
+<p>Python does not have a large collection of built-in mathematical and statistical functions. You will need to use <code>pandas</code>, <code>numpy</code>, <code>scikit-learn</code>, and <code>statsmodels</code> to get the suite of functions for working and modeling with data.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="workflow-basics.html#cb55-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb55-2"><a href="workflow-basics.html#cb55-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb55-3"><a href="workflow-basics.html#cb55-3"></a><span class="im">import</span> sklearn <span class="im">as</span> sk</span>
+<span id="cb55-4"><a href="workflow-basics.html#cb55-4"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm </span></code></pre></div>
+<p>Functions are called like this:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="workflow-basics.html#cb56-1"></a><span class="op">&lt;</span>AS PACKAGE NAME<span class="op">&gt;</span>.function_name(arg1 <span class="op">=</span> val1, arg2 <span class="op">=</span> val2, ...)</span></code></pre></div>
+<p>Let’s try using <code>np.arange()</code> which returns regular <strong>arange</strong>ment of numbers and, while we’re at it, learn more helpful features of <a href="https://code.visualstudio.com/docs/editor/intellisense">intellisense</a> in VS code. Type <code>np.ar</code> and pause. A popup shows you possible completions. Specify <code>np.arange()</code> by typing more (a “ange”) to disambiguate, or by using ↑/↓ arrows to select. If you hover over <code>np.arange</code> or type <code>np.arange()</code> a floating tooltip pops up, reminding you of the function’s arguments and purpose. If you want more help, can scroll through the arguments tool tip with your mouse.</p>
+<p>VS Code will add matching opening (<code>(</code>) and closing (<code>)</code>) parentheses for you. Type the arguments <code>1, 10</code> and hit return.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="workflow-basics.html#cb57-1"></a>np.arange(<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb57-2"><a href="workflow-basics.html#cb57-2"></a><span class="co">#&gt; array([1, 2, 3, 4, 5, 6, 7, 8, 9])</span></span></code></pre></div>
+<p>Type this code and notice you get similar assistance with the paired quotation marks:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="workflow-basics.html#cb58-1"></a>x <span class="op">=</span> <span class="st">&quot;hello world&quot;</span></span></code></pre></div>
+<p>Quotation marks and parentheses must always come in a pair. VS Code does its best to help you, but it’s still possible to mess up and end up with a mismatch.</p>
+<p>Now look at your Python interactive environment in VS Code in the top toolbar by selecting the icon circled in red :</p>
+<p><img src="screenshots/vscode-env.png" width="365" style="display: block; margin: auto;" /></p>
+<p>Here you can see all of the objects that you’ve created.</p>
+</div>
+<div id="exercises-4" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li><p>Why does this code not work?</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="workflow-basics.html#cb59-1"></a>my_variable <span class="op">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb59-2"><a href="workflow-basics.html#cb59-2"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name &#39;my_variable&#39; is not defined</span></span>
+<span id="cb59-3"><a href="workflow-basics.html#cb59-3"></a><span class="co">#&gt; </span></span>
+<span id="cb59-4"><a href="workflow-basics.html#cb59-4"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb59-5"><a href="workflow-basics.html#cb59-5"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb59-6"><a href="workflow-basics.html#cb59-6"></a>my_varıable</span>
+<span id="cb59-7"><a href="workflow-basics.html#cb59-7"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name &#39;my_varıable&#39; is not defined</span></span>
+<span id="cb59-8"><a href="workflow-basics.html#cb59-8"></a><span class="co">#&gt; </span></span>
+<span id="cb59-9"><a href="workflow-basics.html#cb59-9"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb59-10"><a href="workflow-basics.html#cb59-10"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span></code></pre></div>
+<p>Look carefully! (This may seem like an exercise in pointlessness, but
+training your brain to notice even the tiniest difference will pay off
+when programming.)</p></li>
+<li><p>Navigate to Visual Studio Code keyboard shortcuts by going to the menu
+under File &gt; Preferences &gt; Keyboard Shortcuts. (Code &gt; Preferences &gt;
+Keyboard Shortcuts on macOS). What do you see? You can read more about
+<a href="https://code.visualstudio.com/docs/getstarted/keybindings">keybindings on the VS Code website</a>.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-visualisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-visualisation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transform.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -300,7 +370,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/byuidatascience/python4ds/edit/master/explore.Rmd",
+"link": "https://github.com/byuidatascience/python4ds/edit/master/workflow-basics.Rmd",
 "text": "Edit"
 },
 "history": {

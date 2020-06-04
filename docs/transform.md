@@ -8,7 +8,8 @@ Visualisation is an important tool for insight generation, but it is rare that y
 
 In this chapter we're going to focus on how to use the pandas package, the core package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 package, and use Altair to help us understand the data. 
 
-```{python setup, message = FALSE, eval=FALSE}
+
+```python
 import pandas as pd
 import altair as alt
 
@@ -20,7 +21,7 @@ nycflights13 = pd.read_csv(flights_url)
 
 <!-- ### nycflights13 -->
 
-<!-- To explore the basic data manipulation verbs of dplyr, we'll use `nycflights13::flights`. This data frame contains all `r format(nrow(nycflights13::flights), big.mark = ",")` flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is documented in `?flights`. -->
+<!-- To explore the basic data manipulation verbs of dplyr, we'll use `nycflights13::flights`. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is documented in `?flights`. -->
 
 <!-- ```{r} -->
 <!-- flights -->
