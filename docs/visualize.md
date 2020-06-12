@@ -2,7 +2,6 @@
 
 
 
-
 ## Introduction
 
 > "The simple graph has brought more information to the data analyst’s mind 

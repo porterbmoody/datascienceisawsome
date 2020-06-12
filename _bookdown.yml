@@ -15,12 +15,11 @@ rmd_files: [
 before_chapter_script: "_common.R"
 output_dir: "docs"
 
+#  "visualize.Rmd",
 
-#  "workflow-basics.Rmd",
-#  "transform.Rmd",
-#  "workflow-scripts.Rmd",
 #  "EDA.Rmd",
-#  "workflow-projects.Rmd",
+
+
 #
 #  "wrangle.Rmd",
 #  "tibble.Rmd",

@@ -2,318 +2,557 @@
 
 ## Introduction
 
-Visualisation is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you'll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You'll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.
+Visualization is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you'll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You'll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.
 
 ### Prerequisites
 
-In this chapter we're going to focus on how to use the pandas package, the core package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 package, and use Altair to help us understand the data. 
+In this chapter we're going to focus on how to use the pandas package, the foundational package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need the math package that comes with Python.
 
 
 ```python
 import pandas as pd
 import altair as alt
+import math
 
-flights_url = ""
 
-nycflights13 = pd.read_csv(flights_url)
+flights_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/flights/flights.csv"
 
+flights = pd.read_csv(flights_url)
+flights['time_hour'] = pd.to_datetime(flights.time_hour, format = "%Y-%m-%d %H:%M:%S")
 ```
 
-<!-- ### nycflights13 -->
+### nycflights13
 
-<!-- To explore the basic data manipulation verbs of dplyr, we'll use `nycflights13::flights`. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is documented in `?flights`. -->
+To explore the basic data manipulation verbs of pandas, we'll use `flights`. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is [documented here](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
 
-<!-- ```{r} -->
-<!-- flights -->
-<!-- ``` -->
 
-<!-- You might notice that this data frame prints a little differently from other data frames you might have used in the past: it only shows the first few rows and all the columns that fit on one screen. (To see the whole dataset, you can run `View(flights)` which will open the dataset in the RStudio viewer). It prints differently because it's a __tibble__. Tibbles are data frames, but slightly tweaked to work better in the tidyverse. For now, you don't need to worry about the differences; we'll come back to tibbles in more detail in [wrangle](#wrangle-intro). -->
+```
+#>         year  month  day  ...  hour  minute             time_hour
+#> 0       2013      1    1  ...     5      15  2013-01-01T10:00:00Z
+#> 1       2013      1    1  ...     5      29  2013-01-01T10:00:00Z
+#> 2       2013      1    1  ...     5      40  2013-01-01T10:00:00Z
+#> 3       2013      1    1  ...     5      45  2013-01-01T10:00:00Z
+#> 4       2013      1    1  ...     6       0  2013-01-01T11:00:00Z
+#> ...      ...    ...  ...  ...   ...     ...                   ...
+#> 336771  2013      9   30  ...    14      55  2013-09-30T18:00:00Z
+#> 336772  2013      9   30  ...    22       0  2013-10-01T02:00:00Z
+#> 336773  2013      9   30  ...    12      10  2013-09-30T16:00:00Z
+#> 336774  2013      9   30  ...    11      59  2013-09-30T15:00:00Z
+#> 336775  2013      9   30  ...     8      40  2013-09-30T12:00:00Z
+#> 
+#> [336776 rows x 19 columns]
+```
 
-<!-- You might also have noticed the row of three (or four) letter abbreviations under the column names. These describe the type of each variable: -->
+You might notice that this data frame does not print in its entirety as other data frames you might have seen in the past: it only shows the first few and last few rows with only the columns that fit on one screen. (To see the whole dataset, you can open the variable view in your interactive Python window and double click on the flights object which will open the dataset in the VS Code data viewer). 
 
-<!-- * `int` stands for integers. -->
+Using `flights.dtypes` will show you the variables types for each column.  These describe the type of each variable:
 
-<!-- * `dbl` stands for doubles, or real numbers. -->
 
-<!-- * `chr` stands for character vectors, or strings. -->
+```
+#> year                            int64
+#> month                           int64
+#> day                             int64
+#> dep_time                      float64
+#> sched_dep_time                  int64
+#> dep_delay                     float64
+#> arr_time                      float64
+#> sched_arr_time                  int64
+#> arr_delay                     float64
+#> carrier                        object
+#> flight                          int64
+#> tailnum                        object
+#> origin                         object
+#> dest                           object
+#> air_time                      float64
+#> distance                        int64
+#> hour                            int64
+#> minute                          int64
+#> time_hour         datetime64[ns, UTC]
+#> dtype: object
+```
 
-<!-- * `dttm` stands for date-times (a date + a time). -->
+* `int64` stands for integers.
 
-<!-- There are three other common types of variables that aren't used in this dataset but you'll encounter later in the book: -->
+* `float64` stands for doubles, or real numbers.
 
-<!-- * `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`. -->
+* `object` stands for character vectors, or strings.
 
-<!-- * `fctr` stands for factors, which R uses to represent categorical variables -->
-<!--   with fixed possible values. -->
+* `datetime64` stands for date-times (a date + a time) and dates. You can read [more about pandas datetime tools](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html)
 
-<!-- * `date` stands for dates. -->
+There are three other common types of variables that aren't used in this dataset but you'll encounter later in the book:
 
-<!-- ### dplyr basics -->
+* `bool` stands for logical, vectors that contain only `True` or `False`.
 
-<!-- In this chapter you are going to learn the five key dplyr functions that allow you to solve the vast majority of your data manipulation challenges: -->
+* `category` stands for factors, which pandas uses to represent categorical variables
+  with fixed possible values.
 
-<!-- * Pick observations by their values (`filter()`). -->
-<!-- * Reorder the rows (`arrange()`). -->
-<!-- * Pick variables by their names (`select()`). -->
-<!-- * Create new variables with functions of existing variables (`mutate()`). -->
-<!-- * Collapse many values down to a single summary (`summarise()`). -->
 
-<!-- These can all be used in conjunction with `group_by()` which changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These six functions provide the verbs for a language of data manipulation. -->
+### pandas data manipulation basics
 
-<!-- All verbs work similarly:  -->
+<!-- https://pandas.pydata.org/pandas-docs/stable/getting_started/basics.html -->
+<!-- https://www.dataquest.io/blog/pandas-cheat-sheet/ -->
+<!-- https://medium.com/dunder-data/minimally-sufficient-pandas-a8e67f2a2428 -->
 
-<!-- 1.  The first argument is a data frame. -->
+In this chapter you are going to learn five key pandas functions or object methods. Object methods are things the objects can perform. For example, pandas data frames know how to tell you their shape, the pandas object knows how to concatenate two data frames together. The way we tell an object we want it to do something is with the ‘dot operator’. Below are the five methods that allow you to solve the vast majority of your data manipulation challenges:
 
-<!-- 1.  The subsequent arguments describe what to do with the data frame, -->
-<!--     using the variable names (without quotes). -->
+* Pick observations by their values (`query()`).
+* Reorder the rows (`sort()`).
+* Pick variables by their names (`select()`).
+* Create new variables with functions of existing variables (`assign()`).
+* Collapse many values down to a single summary (`groupby()`).
 
-<!-- 1.  The result is a new data frame. -->
+The pandas package can handle all of the same functionality of dplyr in R.  You can read [pandas mapping guide](https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html) and [this towards data science article](https://towardsdatascience.com/tidying-up-pandas-4572bfa38776) to get more details on the following brief table. 
 
-<!-- Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let's dive in and see how these verbs work. -->
+ R dplyr function | Python pandas function
+__________________|_______________________
+ `filter()`       |  `query()`            
+ `arrange()`      |  `sort_values()`      
+ `select()`       |  `filter()` or `loc[]`
+ `rename ()`      |  `rename()`           
+ `mutate()`       |  `assign()`           
+ `group_by ()`    |  `groupby()`          
+ `summarise()`    |  `agg()`              
 
-<!-- ## Filter rows with `filter()` -->
 
-<!-- `filter()` allows you to subset observations based on their values. The first argument is the name of the data frame. The second and subsequent arguments are the expressions that filter the data frame. For example, we can select all flights on January 1st with: -->
+The `groupby()` changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These functions provide the verbs for a language of data manipulation.
 
-<!-- ```{r} -->
-<!-- filter(flights, month == 1, day == 1) -->
-<!-- ``` -->
+All verbs work similarly:
 
-<!-- When you run that line of code, dplyr executes the filtering operation and returns a new data frame. dplyr functions never modify their inputs, so if you want to save the result, you'll need to use the assignment operator, `<-`: -->
+1.  The first argument is a pandas dataFrame.
 
-<!-- ```{r} -->
-<!-- jan1 <- filter(flights, month == 1, day == 1) -->
-<!-- ``` -->
+1.  The subsequent methods describe what to do with the data frame.
 
-<!-- R either prints out the results, or saves them to a variable. If you want to do both, you can wrap the assignment in parentheses: -->
+1.  The result is a new data frame.
 
-<!-- ```{r} -->
-<!-- (dec25 <- filter(flights, month == 12, day == 25)) -->
-<!-- ``` -->
+Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let's dive in and see how these verbs work.
 
-<!-- ### Comparisons -->
+## Filter rows with `query()`
 
-<!-- To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. R provides the standard suite: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal).  -->
+`query()` allows you to subset observations based on their values. The first argument specifies the rows to be selected. This argument can be label names or a boolean series. The second argument specifies the columns to be selected. The bolean filter on the rows is our focus. For example, we can select all flights on January 1st with:
 
-<!-- When you're starting out with R, the easiest mistake to make is to use `=` instead of `==` when testing for equality. When this happens you'll get an informative error: -->
 
-<!-- ```{r, error = TRUE} -->
-<!-- filter(flights, month = 1) -->
-<!-- ``` -->
+```python
+flights.query('month == 1 & day == 1')
+#>      year  month  day  ...  hour  minute                 time_hour
+#> 0    2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1    2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2    2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3    2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4    2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ..    ...    ...  ...  ...   ...     ...                       ...
+#> 837  2013      1    1  ...    23      59 2013-01-02 04:00:00+00:00
+#> 838  2013      1    1  ...    16      30 2013-01-01 21:00:00+00:00
+#> 839  2013      1    1  ...    19      35 2013-01-02 00:00:00+00:00
+#> 840  2013      1    1  ...    15       0 2013-01-01 20:00:00+00:00
+#> 841  2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> 
+#> [842 rows x 19 columns]
+```
 
-<!-- There's another common problem you might encounter when using `==`: floating point numbers. These results might surprise you! -->
+The previous expression is equivalent to `flights[(flights.month == 1) & (flights.day == 1)]`
 
-<!-- ```{r} -->
-<!-- sqrt(2) ^ 2 == 2 -->
-<!-- 1 / 49 * 49 == 1 -->
-<!-- ``` -->
 
-<!-- Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `near()`: -->
+When you run that line of code, pandas executes the filtering operation and returns a new data frame. pandas functions usually don't modify their inputs, so if you want to save the result, you'll need to use the assignment operator, `=`:
 
-<!-- ```{r} -->
-<!-- near(sqrt(2) ^ 2,  2) -->
-<!-- near(1 / 49 * 49, 1) -->
-<!-- ``` -->
 
-<!-- ### Logical operators -->
+```pandas
+jan1 = flights.query('month == 1 & day == 1')
+```
 
-<!-- Multiple arguments to `filter()` are combined with "and": every expression must be true in order for a row to be included in the output. For other types of combinations, you'll need to use Boolean operators yourself: `&` is "and", `|` is "or", and `!` is "not". Figure \@ref(fig:bool-ops) shows the complete set of Boolean operations. -->
+Interactive Python either prints out the results, or saves them to a variable. 
 
-<!-- ```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."} -->
-<!-- knitr::include_graphics("diagrams/transform-logical.png") -->
-<!-- ``` -->
+### Comparisons
 
-<!-- The following code finds all flights that departed in November or December: -->
+To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. Python provides the standard suite: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal).
 
-<!-- ```{r, eval = FALSE} -->
-<!-- filter(flights, month == 11 | month == 12) -->
-<!-- ``` -->
+When you're starting out with Python, the easiest mistake to make is to use `=` instead of `==` when testing for equality. When this happens you'll get an error:
 
-<!-- The order of operations doesn't work like English. You can't write `filter(flights, month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `TRUE`. In a numeric context (like here), `TRUE` becomes one, so this finds all flights in January, not November or December. This is quite confusing! -->
 
-<!-- A useful short-hand for this problem is `x %in% y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above: -->
+```python
+flights.query('month = 1')
+#> Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: cannot assign without a target object
+#> 
+#> Detailed traceback: 
+#>   File "<string>", line 1, in <module>
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/frame.py", line 3231, in query
+#>     res = self.eval(expr, **kwargs)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/frame.py", line 3346, in eval
+#>     return _eval(expr, inplace=inplace, **kwargs)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/eval.py", line 332, in eval
+#>     parsed_expr = Expr(expr, engine=engine, parser=parser, env=env)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py", line 764, in __init__
+#>     self.terms = self.parse()
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py", line 781, in parse
+#>     return self._visitor.visit(self.expr)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py", line 375, in visit
+#>     return visitor(node, **kwargs)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py", line 381, in visit_Module
+#>     return self.visit(expr, **kwargs)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py", line 375, in visit
+#>     return visitor(node, **kwargs)
+#>   File "/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py", line 585, in visit_Assign
+#>     raise ValueError("cannot assign without a target object")
+```
 
-<!-- ```{r, eval = FALSE} -->
-<!-- nov_dec <- filter(flights, month %in% c(11, 12)) -->
-<!-- ``` -->
+There's another common problem you might encounter when using `==`: floating point numbers. The following result might surprise you!
 
-<!-- Sometimes you can simplify complicated subsetting by remembering De Morgan's law: `!(x & y)` is the same as `!x | !y`, and `!(x | y)` is the same as `!x & !y`. For example, if you wanted to find flights that weren't delayed (on arrival or departure) by more than two hours, you could use either of the following two filters: -->
 
-<!-- ```{r, eval = FALSE} -->
-<!-- filter(flights, !(arr_delay > 120 | dep_delay > 120)) -->
-<!-- filter(flights, arr_delay <= 120, dep_delay <= 120) -->
-<!-- ``` -->
+```python
+math.sqrt(2) ** 2 ==  2
+#> False
+1 / 49 * 49 == 1
+#> False
+```
 
-<!-- As well as `&` and `|`, R also has `&&` and `||`. Don't use them here! You'll learn when you should use them in [conditional execution]. -->
+Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `math.isclose()`:
 
-<!-- Whenever you start using complicated, multipart expressions in `filter()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly. -->
 
-<!-- ### Missing values -->
+```python
+math.isclose(math.sqrt(2) ** 2,  2)
+#> True
+math.isclose(1 / 49 * 49, 1)
+#> True
+```
 
-<!-- One important feature of R that can make comparison tricky are missing values, or `NA`s ("not availables"). `NA` represents an unknown value so missing values are "contagious": almost any operation involving an unknown value will also be unknown. -->
+### Logical operators
 
-<!-- ```{r} -->
-<!-- NA > 5 -->
-<!-- 10 == NA -->
-<!-- NA + 10 -->
-<!-- NA / 2 -->
-<!-- ``` -->
+Multiple arguments to `query()` are combined with "and": every expression must be true in order for a row to be included in the output. For other types of combinations, you'll need to use Boolean operators yourself: `&` is "and", `|` is "or", and `!` is "not". Figure \@ref(fig:bool-ops) shows the complete set of Boolean operations.
 
-<!-- The most confusing result is this one: -->
+\begin{figure}
 
-<!-- ```{r} -->
-<!-- NA == NA -->
-<!-- ``` -->
+{\centering \includegraphics[width=0.7\linewidth]{diagrams/transform-logical} 
 
-<!-- It's easiest to understand why this is true with a bit more context: -->
+}
 
-<!-- ```{r} -->
-<!-- # Let x be Mary's age. We don't know how old she is. -->
-<!-- x <- NA -->
+\caption{Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects.}(\#fig:bool-ops)
+\end{figure}
 
-<!-- # Let y be John's age. We don't know how old he is. -->
-<!-- y <- NA -->
+The following code finds all flights that departed in November or December:
 
-<!-- # Are John and Mary the same age? -->
-<!-- x == y -->
-<!-- # We don't know! -->
-<!-- ``` -->
 
-<!-- If you want to determine if a value is missing, use `is.na()`: -->
+```python
+flights.query('month == 11 | month == 12')
+```
 
-<!-- ```{r} -->
-<!-- is.na(x) -->
-<!-- ``` -->
+The order of operations doesn't work like English. You can't write `filter(flights, month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `True`. In a numeric context (like here), `True` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
 
-<!-- `filter()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and `NA` values. If you want to preserve missing values, ask for them explicitly: -->
+A useful short-hand for this problem is `x in y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above:
 
-<!-- ```{r} -->
-<!-- df <- tibble(x = c(1, NA, 3)) -->
-<!-- filter(df, x > 1) -->
-<!-- filter(df, is.na(x) | x > 1) -->
-<!-- ``` -->
 
-<!-- ### Exercises -->
+```python
+nov_dec = flights.query('month in [11, 12]')
+```
 
-<!-- 1.  Find all flights that -->
+Sometimes you can simplify complicated subsetting by remembering De Morgan's law: `!(x & y)` is the same as `!x | !y`, and `!(x | y)` is the same as `!x & !y`. For example, if you wanted to find flights that weren't delayed (on arrival or departure) by more than two hours, you could use either of the following two filters:
 
-<!--     1. Had an arrival delay of two or more hours -->
-<!--     1. Flew to Houston (`IAH` or `HOU`) -->
-<!--     1. Were operated by United, American, or Delta -->
-<!--     1. Departed in summer (July, August, and September) -->
-<!--     1. Arrived more than two hours late, but didn't leave late -->
-<!--     1. Were delayed by at least an hour, but made up over 30 minutes in flight -->
-<!--     1. Departed between midnight and 6am (inclusive) -->
 
-<!-- 1.  Another useful dplyr filtering helper is `between()`. What does it do? -->
-<!--     Can you use it to simplify the code needed to answer the previous  -->
-<!--     challenges? -->
+```python
+flights.query('arr_delay > 120 | dep_delay > 120')
+flights.query('arr_delay <= 120 | dep_delay <= 120')
+```
 
-<!-- 1.  How many flights have a missing `dep_time`? What other variables are  -->
-<!--     missing? What might these rows represent? -->
+<!-- As well as `&` and `|`, Python also has `&&` and `||`. Don't use them here! You'll learn when you should use them in [conditional execution]. -->
 
-<!-- 1.  Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing? -->
-<!--     Why is `FALSE & NA` not missing? Can you figure out the general -->
-<!--     rule?  (`NA * 0` is a tricky counterexample!) -->
+Whenever you start using complicated, multipart expressions in `query()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly.
 
-<!-- ## Arrange rows with `arrange()` -->
+### Missing values
 
-<!-- `arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns: -->
+One important feature of pandas in Python that can make comparison tricky are missing values, or `NA`s ("not availables"). `NA` represents an unknown value so missing values are "contagious": almost any operation involving an unknown value will also be unknown.
 
-<!-- ```{r} -->
-<!-- arrange(flights, year, month, day) -->
-<!-- ``` -->
 
-<!-- Use `desc()` to re-order by a column in descending order: -->
+```python
+math.nan + 10
+#> nan
+math.nan / 2
+#> nan
+```
 
-<!-- ```{r} -->
-<!-- arrange(flights, desc(dep_delay)) -->
-<!-- ``` -->
+The most confusing result are the comparisons. They always return a `False`. The logic for this result [is explained on stackoverflow](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). The [pandas missing data guide](https://pandas.pydata.org/pandas-docs/dev/user_guide/missing_data.html) is a helpful read.
 
-<!-- Missing values are always sorted at the end: -->
 
-<!-- ```{r} -->
-<!-- df <- tibble(x = c(5, 2, NA)) -->
-<!-- arrange(df, x) -->
-<!-- arrange(df, desc(x)) -->
-<!-- ``` -->
+```python
+math.nan > 5
+#> False
+10 == math.nan
+#> False
+math.nan == math.nan
+#> False
+```
 
-<!-- ### Exercises -->
+It's easiest to understand why this is true with a bit more context:
 
-<!-- 1.  How could you use `arrange()` to sort all missing values to the start? -->
-<!--     (Hint: use `is.na()`). -->
 
-<!-- 1.  Sort `flights` to find the most delayed flights. Find the flights that -->
-<!--     left earliest. -->
+```python
+# Let x be Mary's age. We don't know how old she is.
+x = math.nan
 
-<!-- 1.  Sort `flights` to find the fastest (highest speed) flights. -->
+# Let y be John's age. We don't know how old he is.
+y = math.nan
 
-<!-- 1.  Which flights travelled the farthest? Which travelled the shortest? -->
+# Are John and Mary the same age?
+x == y
+# Illogical comparisons are False.
+#> False
+```
 
-<!-- ## Select columns with `select()` {#select} -->
+The Python development team did decide to provide functionality to find `math.nan` objects in your code by allowing `math.nan != math.nan` to return `True`.  Once again you can [read the rationale for this decision](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). Python now has `isnan()` functions to make this comparison more straight forward in your code. 
 
-<!-- It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `select()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables. -->
+Pandas uses the `nan` structure in Python to identify __NA__ or 'missing' values. If you want to determine if a value is missing, use `pd.isna()`:
 
-<!-- `select()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea: -->
 
-<!-- ```{r} -->
-<!-- # Select columns by name -->
-<!-- select(flights, year, month, day) -->
-<!-- # Select all columns between year and day (inclusive) -->
-<!-- select(flights, year:day) -->
-<!-- # Select all columns except those from year to day (inclusive) -->
-<!-- select(flights, -(year:day)) -->
-<!-- ``` -->
+```python
+pd.isna(x)
+#> True
+```
 
-<!-- There are a number of helper functions you can use within `select()`: -->
+`query()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and __NA__ values. 
 
-<!-- * `starts_with("abc")`: matches names that begin with "abc". -->
 
-<!-- * `ends_with("xyz")`: matches names that end with "xyz". -->
+```python
+df = pd.DataFrame({'x': [1, math.nan, 3]})
+df.query('x > 1')
+#>      x
+#> 2  3.0
+```
 
-<!-- * `contains("ijk")`: matches names that contain "ijk". -->
+If you want to preserve missing values, ask for them explicitly using the trick mentioned in the previous paragraph or by using `pd.isna()` with the symbolic reference `@` in your condition:
 
-<!-- * `matches("(.)\\1")`: selects variables that match a regular expression. -->
-<!--    This one matches any variables that contain repeated characters. You'll  -->
-<!--    learn more about regular expressions in [strings]. -->
 
-<!-- *  `num_range("x", 1:3)`: matches `x1`, `x2` and `x3`. -->
+```python
+df.query('x != x | x > 1')
+#>      x
+#> 1  NaN
+#> 2  3.0
+df.query('@pd.isna(x) | x > 1')
+#>      x
+#> 1  NaN
+#> 2  3.0
+```
 
-<!-- See `?select` for more details. -->
+### Exercises
 
-<!-- `select()` can be used to rename variables, but it's rarely useful because it drops all of the variables not explicitly mentioned. Instead, use `rename()`, which is a variant of `select()` that keeps all the variables that aren't explicitly mentioned: -->
+1.  Find all flights that
 
-<!-- ```{r} -->
-<!-- rename(flights, tail_num = tailnum) -->
-<!-- ``` -->
+    1. Had an arrival delay of two or more hours
+    1. Flew to Houston (`IAH` or `HOU`)
+    1. Were operated by United, American, or Delta
+    1. Departed in summer (July, August, and September)
+    1. Arrived more than two hours late, but didn't leave late
+    1. Were delayed by at least an hour, but made up over 30 minutes in flight
+    1. Departed between midnight and 6am (inclusive)
 
-<!-- Another option is to use `select()` in conjunction with the `everything()` helper. This is useful if you have a handful of variables you'd like to move to the start of the data frame. -->
+1.  How many flights have a missing `dep_time`? What other variables are
+    missing? What might these rows represent?
 
-<!-- ```{r} -->
-<!-- select(flights, time_hour, air_time, everything()) -->
-<!-- ``` -->
+## Arrange or sort rows with `sort_values()`
 
-<!-- ### Exercises -->
+`sort()` works similarly to `query()` except that instead of selecting rows, it changes their order. It takes a data frame and a column name or a list of column names to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 
-<!-- 1.  Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, -->
-<!--     `arr_time`, and `arr_delay` from `flights`. -->
 
-<!-- 1.  What happens if you include the name of a variable multiple times in -->
-<!--     a `select()` call? -->
+```python
+flights.sort_values(by = ['year', 'month', 'day'])
+#>         year  month  day  ...  hour  minute                 time_hour
+#> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 111291  2013     12   31  ...     7       5 2013-12-31 12:00:00+00:00
+#> 111292  2013     12   31  ...     8      25 2013-12-31 13:00:00+00:00
+#> 111293  2013     12   31  ...    16      15 2013-12-31 21:00:00+00:00
+#> 111294  2013     12   31  ...     6       0 2013-12-31 11:00:00+00:00
+#> 111295  2013     12   31  ...     8      30 2013-12-31 13:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
+```
 
-<!-- 1.  What does the `one_of()` function do? Why might it be helpful in conjunction -->
-<!--     with this vector? -->
+Use the argument `ascending = False` to re-order by a column in descending order:
 
-<!--     ```{r} -->
-<!--     vars <- c("year", "month", "day", "dep_delay", "arr_delay") -->
-<!--     ``` -->
 
-<!-- 1.  Does the result of running the following code surprise you?  How do the -->
-<!--     select helpers deal with case by default? How can you change that default? -->
+```python
+flights.sort_values(by = ['year', 'month', 'day'], ascending = False)
+#>         year  month  day  ...  hour  minute                 time_hour
+#> 110520  2013     12   31  ...    23      59 2014-01-01 04:00:00+00:00
+#> 110521  2013     12   31  ...    23      59 2014-01-01 04:00:00+00:00
+#> 110522  2013     12   31  ...    22      45 2014-01-01 03:00:00+00:00
+#> 110523  2013     12   31  ...     5       0 2013-12-31 10:00:00+00:00
+#> 110524  2013     12   31  ...     5      15 2013-12-31 10:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 837     2013      1    1  ...    23      59 2013-01-02 04:00:00+00:00
+#> 838     2013      1    1  ...    16      30 2013-01-01 21:00:00+00:00
+#> 839     2013      1    1  ...    19      35 2013-01-02 00:00:00+00:00
+#> 840     2013      1    1  ...    15       0 2013-01-01 20:00:00+00:00
+#> 841     2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
+```
 
-<!--     ```{r, eval = FALSE} -->
-<!--     select(flights, contains("TIME")) -->
-<!--     ``` -->
+Missing values are always sorted at the end:
+
+
+```python
+df = pd.DataFrame({'x': [5, 2, math.nan]})
+df.sort_values('x')
+#>      x
+#> 1  2.0
+#> 0  5.0
+#> 2  NaN
+df.sort_values('x', ascending = False)
+#>      x
+#> 0  5.0
+#> 1  2.0
+#> 2  NaN
+```
+
+### Exercises
+
+1.  How could you use `sort()` to sort all missing values to the start?
+    (Hint: use `isna()`). 
+    
+    <!-- df.sort_values('x', ascending = False, na_position = "first") -->
+
+
+1.  Sort `flights` to find the most delayed flights. Find the flights that
+    left earliest.
+
+1.  Sort `flights` to find the fastest (highest speed) flights.
+
+1.  Which flights travelled the farthest? Which travelled the shortest?
+
+## Select columns with `filter()` or `loc[]` {#select}
+
+It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `fliter()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables.
+
+`filter()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea:
+
+
+
+```python
+# Select columns by name
+flights.filter(['year', 'month', 'day'])
+# Select all columns except year and day (inclusive)
+#>         year  month  day
+#> 0       2013      1    1
+#> 1       2013      1    1
+#> 2       2013      1    1
+#> 3       2013      1    1
+#> 4       2013      1    1
+#> ...      ...    ...  ...
+#> 336771  2013      9   30
+#> 336772  2013      9   30
+#> 336773  2013      9   30
+#> 336774  2013      9   30
+#> 336775  2013      9   30
+#> 
+#> [336776 rows x 3 columns]
+flights.drop(columns = ['year', 'day'])
+#>         month  dep_time  sched_dep_time  ...  hour  minute                 time_hour
+#> 0           1     517.0             515  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1           1     533.0             529  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2           1     542.0             540  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3           1     544.0             545  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4           1     554.0             600  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...       ...       ...             ...  ...   ...     ...                       ...
+#> 336771      9       NaN            1455  ...    14      55 2013-09-30 18:00:00+00:00
+#> 336772      9       NaN            2200  ...    22       0 2013-10-01 02:00:00+00:00
+#> 336773      9       NaN            1210  ...    12      10 2013-09-30 16:00:00+00:00
+#> 336774      9       NaN            1159  ...    11      59 2013-09-30 15:00:00+00:00
+#> 336775      9       NaN             840  ...     8      40 2013-09-30 12:00:00+00:00
+#> 
+#> [336776 rows x 17 columns]
+```
+
+`loc[]` functions in a similar fashion.
+
+
+```python
+# Select columns by name
+flights.loc[:, ['year', 'month', 'day']]
+# Select all columns between year and day (inclusive)
+#>         year  month  day
+#> 0       2013      1    1
+#> 1       2013      1    1
+#> 2       2013      1    1
+#> 3       2013      1    1
+#> 4       2013      1    1
+#> ...      ...    ...  ...
+#> 336771  2013      9   30
+#> 336772  2013      9   30
+#> 336773  2013      9   30
+#> 336774  2013      9   30
+#> 336775  2013      9   30
+#> 
+#> [336776 rows x 3 columns]
+flights.loc[:, 'year':'day']
+# Select all columns except year and day (inclusive)
+#>         year  month  day
+#> 0       2013      1    1
+#> 1       2013      1    1
+#> 2       2013      1    1
+#> 3       2013      1    1
+#> 4       2013      1    1
+#> ...      ...    ...  ...
+#> 336771  2013      9   30
+#> 336772  2013      9   30
+#> 336773  2013      9   30
+#> 336774  2013      9   30
+#> 336775  2013      9   30
+#> 
+#> [336776 rows x 3 columns]
+```
+
+There are a number of helper regular expressions you can use within `filter()`:
+
+* `flights.filter(regex = '^sch')`: matches column names that begin with "sch".
+
+* `flights.filter(regex = "time$")`: matches names that end with "time".
+
+* `flights.filter(regex = "_dep_")`: matches names that contain "_dep_".
+
+* `flights.filter(regex = '(.)\\1')`: selects variables that match a regular expression.
+   This one matches any variables that contain repeated characters. You'll
+   learn more about regular expressions in [strings].
+
+See [pandas filter documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.filter.html) for more details.
+
+Use `rename()` to rename a column or multiple columns.
+
+
+```python
+flights.rename(columns = {'year': 'YEAR', 'month':'MONTH'})
+#>         YEAR  MONTH  day  ...  hour  minute                 time_hour
+#> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+#> 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+#> 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+#> 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+#> 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
+```
+
+
+### Exercises
+
+1.  Brainstorm as many ways as possible to select `dep_time`, `dep_delay`,
+    `arr_time`, and `arr_delay` from `flights`.
+
+1.  What happens if you include the name of a variable multiple times in
+    a `filter()` call?
+
+1.  Does the result of running the following code surprise you?  How do the
+    select helpers deal with case by default? How can you change that default?
+
+    
+    ```r
+    flights.filter(regex = "TIME")
+    ```
 
 <!-- ## Add new variables with `mutate()` -->
 

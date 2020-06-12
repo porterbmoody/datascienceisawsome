@@ -61,6 +61,8 @@ Paths and directories are a little complicated because there are two basic style
 
 ## VS Code workspaces
 
+<!-- https://code.visualstudio.com/docs/python/data-science-tutorial -->
+
 Python experts keep all the files associated with a project together --- input data, R scripts, analytical results, figures. This is such a wise and common practice that VS Code has built-in support for this via __workspaces__.
 
 Let's make a workspace for you to use while you're working through the rest of this book. Click File > Open and select a newly created folder for your work. New Project, then:

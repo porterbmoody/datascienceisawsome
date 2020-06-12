@@ -219,6 +219,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
+<li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="transform.html"><a href="transform.html#filter-rows-with-query"><i class="fa fa-check"></i><b>5.2</b> Filter rows with <code>query()</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+<li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>sort_values()</code></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>filter()</code> or <code>loc[]</code></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
@@ -254,210 +271,413 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">5</span> Data transformation</h1>
 <div id="introduction-2" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Introduction</h2>
-<p>Visualisation is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you’ll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You’ll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.</p>
+<p>Visualization is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you’ll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You’ll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.</p>
 <div id="prerequisites-2" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Prerequisites</h3>
-<p>In this chapter we’re going to focus on how to use the pandas package, the core package for data science in Python. We’ll illustrate the key ideas using data from the nycflights13 package, and use Altair to help us understand the data.</p>
+<p>In this chapter we’re going to focus on how to use the pandas package, the foundational package for data science in Python. We’ll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need the math package that comes with Python.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="transform.html#cb60-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb60-2"><a href="transform.html#cb60-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb60-3"><a href="transform.html#cb60-3"></a></span>
-<span id="cb60-4"><a href="transform.html#cb60-4"></a>flights_url <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb60-3"><a href="transform.html#cb60-3"></a><span class="im">import</span> math</span>
+<span id="cb60-4"><a href="transform.html#cb60-4"></a></span>
 <span id="cb60-5"><a href="transform.html#cb60-5"></a></span>
-<span id="cb60-6"><a href="transform.html#cb60-6"></a>nycflights13 <span class="op">=</span> pd.read_csv(flights_url)</span></code></pre></div>
-<!-- ### nycflights13 -->
-<!-- To explore the basic data manipulation verbs of dplyr, we'll use `nycflights13::flights`. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is documented in `?flights`. -->
-<!-- ```{r} -->
-<!-- flights -->
-<!-- ``` -->
-<!-- You might notice that this data frame prints a little differently from other data frames you might have used in the past: it only shows the first few rows and all the columns that fit on one screen. (To see the whole dataset, you can run `View(flights)` which will open the dataset in the RStudio viewer). It prints differently because it's a __tibble__. Tibbles are data frames, but slightly tweaked to work better in the tidyverse. For now, you don't need to worry about the differences; we'll come back to tibbles in more detail in [wrangle](#wrangle-intro). -->
-<!-- You might also have noticed the row of three (or four) letter abbreviations under the column names. These describe the type of each variable: -->
-<!-- * `int` stands for integers. -->
-<!-- * `dbl` stands for doubles, or real numbers. -->
-<!-- * `chr` stands for character vectors, or strings. -->
-<!-- * `dttm` stands for date-times (a date + a time). -->
-<!-- There are three other common types of variables that aren't used in this dataset but you'll encounter later in the book: -->
-<!-- * `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`. -->
-<!-- * `fctr` stands for factors, which R uses to represent categorical variables -->
-<!--   with fixed possible values. -->
-<!-- * `date` stands for dates. -->
-<!-- ### dplyr basics -->
-<!-- In this chapter you are going to learn the five key dplyr functions that allow you to solve the vast majority of your data manipulation challenges: -->
-<!-- * Pick observations by their values (`filter()`). -->
-<!-- * Reorder the rows (`arrange()`). -->
-<!-- * Pick variables by their names (`select()`). -->
-<!-- * Create new variables with functions of existing variables (`mutate()`). -->
-<!-- * Collapse many values down to a single summary (`summarise()`). -->
-<!-- These can all be used in conjunction with `group_by()` which changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These six functions provide the verbs for a language of data manipulation. -->
-<!-- All verbs work similarly:  -->
-<!-- 1.  The first argument is a data frame. -->
-<!-- 1.  The subsequent arguments describe what to do with the data frame, -->
-<!--     using the variable names (without quotes). -->
-<!-- 1.  The result is a new data frame. -->
-<!-- Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let's dive in and see how these verbs work. -->
-<!-- ## Filter rows with `filter()` -->
-<!-- `filter()` allows you to subset observations based on their values. The first argument is the name of the data frame. The second and subsequent arguments are the expressions that filter the data frame. For example, we can select all flights on January 1st with: -->
-<!-- ```{r} -->
-<!-- filter(flights, month == 1, day == 1) -->
-<!-- ``` -->
-<!-- When you run that line of code, dplyr executes the filtering operation and returns a new data frame. dplyr functions never modify their inputs, so if you want to save the result, you'll need to use the assignment operator, `<-`: -->
-<!-- ```{r} -->
-<!-- jan1 <- filter(flights, month == 1, day == 1) -->
-<!-- ``` -->
-<!-- R either prints out the results, or saves them to a variable. If you want to do both, you can wrap the assignment in parentheses: -->
-<!-- ```{r} -->
-<!-- (dec25 <- filter(flights, month == 12, day == 25)) -->
-<!-- ``` -->
-<!-- ### Comparisons -->
-<!-- To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. R provides the standard suite: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal).  -->
-<!-- When you're starting out with R, the easiest mistake to make is to use `=` instead of `==` when testing for equality. When this happens you'll get an informative error: -->
-<!-- ```{r, error = TRUE} -->
-<!-- filter(flights, month = 1) -->
-<!-- ``` -->
-<!-- There's another common problem you might encounter when using `==`: floating point numbers. These results might surprise you! -->
-<!-- ```{r} -->
-<!-- sqrt(2) ^ 2 == 2 -->
-<!-- 1 / 49 * 49 == 1 -->
-<!-- ``` -->
-<!-- Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `near()`: -->
-<!-- ```{r} -->
-<!-- near(sqrt(2) ^ 2,  2) -->
-<!-- near(1 / 49 * 49, 1) -->
-<!-- ``` -->
-<!-- ### Logical operators -->
-<!-- Multiple arguments to `filter()` are combined with "and": every expression must be true in order for a row to be included in the output. For other types of combinations, you'll need to use Boolean operators yourself: `&` is "and", `|` is "or", and `!` is "not". Figure \@ref(fig:bool-ops) shows the complete set of Boolean operations. -->
-<!-- ```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."} -->
-<!-- knitr::include_graphics("diagrams/transform-logical.png") -->
-<!-- ``` -->
-<!-- The following code finds all flights that departed in November or December: -->
-<!-- ```{r, eval = FALSE} -->
-<!-- filter(flights, month == 11 | month == 12) -->
-<!-- ``` -->
-<!-- The order of operations doesn't work like English. You can't write `filter(flights, month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `TRUE`. In a numeric context (like here), `TRUE` becomes one, so this finds all flights in January, not November or December. This is quite confusing! -->
-<!-- A useful short-hand for this problem is `x %in% y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above: -->
-<!-- ```{r, eval = FALSE} -->
-<!-- nov_dec <- filter(flights, month %in% c(11, 12)) -->
-<!-- ``` -->
-<!-- Sometimes you can simplify complicated subsetting by remembering De Morgan's law: `!(x & y)` is the same as `!x | !y`, and `!(x | y)` is the same as `!x & !y`. For example, if you wanted to find flights that weren't delayed (on arrival or departure) by more than two hours, you could use either of the following two filters: -->
-<!-- ```{r, eval = FALSE} -->
-<!-- filter(flights, !(arr_delay > 120 | dep_delay > 120)) -->
-<!-- filter(flights, arr_delay <= 120, dep_delay <= 120) -->
-<!-- ``` -->
-<!-- As well as `&` and `|`, R also has `&&` and `||`. Don't use them here! You'll learn when you should use them in [conditional execution]. -->
-<!-- Whenever you start using complicated, multipart expressions in `filter()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly. -->
-<!-- ### Missing values -->
-<!-- One important feature of R that can make comparison tricky are missing values, or `NA`s ("not availables"). `NA` represents an unknown value so missing values are "contagious": almost any operation involving an unknown value will also be unknown. -->
-<!-- ```{r} -->
-<!-- NA > 5 -->
-<!-- 10 == NA -->
-<!-- NA + 10 -->
-<!-- NA / 2 -->
-<!-- ``` -->
-<!-- The most confusing result is this one: -->
-<!-- ```{r} -->
-<!-- NA == NA -->
-<!-- ``` -->
-<!-- It's easiest to understand why this is true with a bit more context: -->
-<!-- ```{r} -->
-<!-- # Let x be Mary's age. We don't know how old she is. -->
-<!-- x <- NA -->
-<!-- # Let y be John's age. We don't know how old he is. -->
-<!-- y <- NA -->
-<!-- # Are John and Mary the same age? -->
-<!-- x == y -->
-<!-- # We don't know! -->
-<!-- ``` -->
-<!-- If you want to determine if a value is missing, use `is.na()`: -->
-<!-- ```{r} -->
-<!-- is.na(x) -->
-<!-- ``` -->
-<!-- `filter()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and `NA` values. If you want to preserve missing values, ask for them explicitly: -->
-<!-- ```{r} -->
-<!-- df <- tibble(x = c(1, NA, 3)) -->
-<!-- filter(df, x > 1) -->
-<!-- filter(df, is.na(x) | x > 1) -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  Find all flights that -->
-<!--     1. Had an arrival delay of two or more hours -->
-<!--     1. Flew to Houston (`IAH` or `HOU`) -->
-<!--     1. Were operated by United, American, or Delta -->
-<!--     1. Departed in summer (July, August, and September) -->
-<!--     1. Arrived more than two hours late, but didn't leave late -->
-<!--     1. Were delayed by at least an hour, but made up over 30 minutes in flight -->
-<!--     1. Departed between midnight and 6am (inclusive) -->
-<!-- 1.  Another useful dplyr filtering helper is `between()`. What does it do? -->
-<!--     Can you use it to simplify the code needed to answer the previous  -->
-<!--     challenges? -->
-<!-- 1.  How many flights have a missing `dep_time`? What other variables are  -->
-<!--     missing? What might these rows represent? -->
-<!-- 1.  Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing? -->
-<!--     Why is `FALSE & NA` not missing? Can you figure out the general -->
-<!--     rule?  (`NA * 0` is a tricky counterexample!) -->
-<!-- ## Arrange rows with `arrange()` -->
-<!-- `arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns: -->
-<!-- ```{r} -->
-<!-- arrange(flights, year, month, day) -->
-<!-- ``` -->
-<!-- Use `desc()` to re-order by a column in descending order: -->
-<!-- ```{r} -->
-<!-- arrange(flights, desc(dep_delay)) -->
-<!-- ``` -->
-<!-- Missing values are always sorted at the end: -->
-<!-- ```{r} -->
-<!-- df <- tibble(x = c(5, 2, NA)) -->
-<!-- arrange(df, x) -->
-<!-- arrange(df, desc(x)) -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  How could you use `arrange()` to sort all missing values to the start? -->
-<!--     (Hint: use `is.na()`). -->
-<!-- 1.  Sort `flights` to find the most delayed flights. Find the flights that -->
-<!--     left earliest. -->
-<!-- 1.  Sort `flights` to find the fastest (highest speed) flights. -->
-<!-- 1.  Which flights travelled the farthest? Which travelled the shortest? -->
-<!-- ## Select columns with `select()` {#select} -->
-<!-- It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `select()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables. -->
-<!-- `select()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea: -->
-<!-- ```{r} -->
-<!-- # Select columns by name -->
-<!-- select(flights, year, month, day) -->
-<!-- # Select all columns between year and day (inclusive) -->
-<!-- select(flights, year:day) -->
-<!-- # Select all columns except those from year to day (inclusive) -->
-<!-- select(flights, -(year:day)) -->
-<!-- ``` -->
-<!-- There are a number of helper functions you can use within `select()`: -->
-<!-- * `starts_with("abc")`: matches names that begin with "abc". -->
-<!-- * `ends_with("xyz")`: matches names that end with "xyz". -->
-<!-- * `contains("ijk")`: matches names that contain "ijk". -->
-<!-- * `matches("(.)\\1")`: selects variables that match a regular expression. -->
-<!--    This one matches any variables that contain repeated characters. You'll  -->
-<!--    learn more about regular expressions in [strings]. -->
-<!-- *  `num_range("x", 1:3)`: matches `x1`, `x2` and `x3`. -->
-<!-- See `?select` for more details. -->
-<!-- `select()` can be used to rename variables, but it's rarely useful because it drops all of the variables not explicitly mentioned. Instead, use `rename()`, which is a variant of `select()` that keeps all the variables that aren't explicitly mentioned: -->
-<!-- ```{r} -->
-<!-- rename(flights, tail_num = tailnum) -->
-<!-- ``` -->
-<!-- Another option is to use `select()` in conjunction with the `everything()` helper. This is useful if you have a handful of variables you'd like to move to the start of the data frame. -->
-<!-- ```{r} -->
-<!-- select(flights, time_hour, air_time, everything()) -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, -->
-<!--     `arr_time`, and `arr_delay` from `flights`. -->
-<!-- 1.  What happens if you include the name of a variable multiple times in -->
-<!--     a `select()` call? -->
-<!-- 1.  What does the `one_of()` function do? Why might it be helpful in conjunction -->
-<!--     with this vector? -->
-<!--     ```{r} -->
-<!--     vars <- c("year", "month", "day", "dep_delay", "arr_delay") -->
-<!--     ``` -->
-<!-- 1.  Does the result of running the following code surprise you?  How do the -->
-<!--     select helpers deal with case by default? How can you change that default? -->
-<!--     ```{r, eval = FALSE} -->
-<!--     select(flights, contains("TIME")) -->
-<!--     ``` -->
+<span id="cb60-6"><a href="transform.html#cb60-6"></a>flights_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/flights/flights.csv&quot;</span></span>
+<span id="cb60-7"><a href="transform.html#cb60-7"></a></span>
+<span id="cb60-8"><a href="transform.html#cb60-8"></a>flights <span class="op">=</span> pd.read_csv(flights_url)</span>
+<span id="cb60-9"><a href="transform.html#cb60-9"></a>flights[<span class="st">&#39;time_hour&#39;</span>] <span class="op">=</span> pd.to_datetime(flights.time_hour, <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S&quot;</span>)</span></code></pre></div>
+</div>
+<div id="nycflights13" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> nycflights13</h3>
+<p>To explore the basic data manipulation verbs of pandas, we’ll use <code>flights</code>. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US <a href="http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&amp;Link=0">Bureau of Transportation Statistics</a>, and is <a href="https://github.com/byuidatascience/data4python4ds/blob/master/data.md">documented here</a>.</p>
+<pre><code>#&gt;         year  month  day  ...  hour  minute             time_hour
+#&gt; 0       2013      1    1  ...     5      15  2013-01-01T10:00:00Z
+#&gt; 1       2013      1    1  ...     5      29  2013-01-01T10:00:00Z
+#&gt; 2       2013      1    1  ...     5      40  2013-01-01T10:00:00Z
+#&gt; 3       2013      1    1  ...     5      45  2013-01-01T10:00:00Z
+#&gt; 4       2013      1    1  ...     6       0  2013-01-01T11:00:00Z
+#&gt; ...      ...    ...  ...  ...   ...     ...                   ...
+#&gt; 336771  2013      9   30  ...    14      55  2013-09-30T18:00:00Z
+#&gt; 336772  2013      9   30  ...    22       0  2013-10-01T02:00:00Z
+#&gt; 336773  2013      9   30  ...    12      10  2013-09-30T16:00:00Z
+#&gt; 336774  2013      9   30  ...    11      59  2013-09-30T15:00:00Z
+#&gt; 336775  2013      9   30  ...     8      40  2013-09-30T12:00:00Z
+#&gt; 
+#&gt; [336776 rows x 19 columns]</code></pre>
+<p>You might notice that this data frame does not print in its entirety as other data frames you might have seen in the past: it only shows the first few and last few rows with only the columns that fit on one screen. (To see the whole dataset, you can open the variable view in your interactive Python window and double click on the flights object which will open the dataset in the VS Code data viewer).</p>
+<p>Using <code>flights.dtypes</code> will show you the variables types for each column. These describe the type of each variable:</p>
+<pre><code>#&gt; year                            int64
+#&gt; month                           int64
+#&gt; day                             int64
+#&gt; dep_time                      float64
+#&gt; sched_dep_time                  int64
+#&gt; dep_delay                     float64
+#&gt; arr_time                      float64
+#&gt; sched_arr_time                  int64
+#&gt; arr_delay                     float64
+#&gt; carrier                        object
+#&gt; flight                          int64
+#&gt; tailnum                        object
+#&gt; origin                         object
+#&gt; dest                           object
+#&gt; air_time                      float64
+#&gt; distance                        int64
+#&gt; hour                            int64
+#&gt; minute                          int64
+#&gt; time_hour         datetime64[ns, UTC]
+#&gt; dtype: object</code></pre>
+<ul>
+<li><p><code>int64</code> stands for integers.</p></li>
+<li><p><code>float64</code> stands for doubles, or real numbers.</p></li>
+<li><p><code>object</code> stands for character vectors, or strings.</p></li>
+<li><p><code>datetime64</code> stands for date-times (a date + a time) and dates. You can read <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html">more about pandas datetime tools</a></p></li>
+</ul>
+<p>There are three other common types of variables that aren’t used in this dataset but you’ll encounter later in the book:</p>
+<ul>
+<li><p><code>bool</code> stands for logical, vectors that contain only <code>True</code> or <code>False</code>.</p></li>
+<li><p><code>category</code> stands for factors, which pandas uses to represent categorical variables
+with fixed possible values.</p></li>
+</ul>
+</div>
+<div id="pandas-data-manipulation-basics" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> pandas data manipulation basics</h3>
+<!-- https://pandas.pydata.org/pandas-docs/stable/getting_started/basics.html -->
+<!-- https://www.dataquest.io/blog/pandas-cheat-sheet/ -->
+<!-- https://medium.com/dunder-data/minimally-sufficient-pandas-a8e67f2a2428 -->
+<p>In this chapter you are going to learn five key pandas functions or object methods. Object methods are things the objects can perform. For example, pandas data frames know how to tell you their shape, the pandas object knows how to concatenate two data frames together. The way we tell an object we want it to do something is with the ‘dot operator’. Below are the five methods that allow you to solve the vast majority of your data manipulation challenges:</p>
+<ul>
+<li>Pick observations by their values (<code>query()</code>).</li>
+<li>Reorder the rows (<code>sort()</code>).</li>
+<li>Pick variables by their names (<code>select()</code>).</li>
+<li>Create new variables with functions of existing variables (<code>assign()</code>).</li>
+<li>Collapse many values down to a single summary (<code>groupby()</code>).</li>
+</ul>
+<p>The pandas package can handle all of the same functionality of dplyr in R. You can read <a href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html">pandas mapping guide</a> and <a href="https://towardsdatascience.com/tidying-up-pandas-4572bfa38776">this towards data science article</a> to get more details on the following brief table.</p>
+<p>R dplyr function | Python pandas function
+__________________|_______________________
+<code>filter()</code> | <code>query()</code><br />
+<code>arrange()</code> | <code>sort_values()</code><br />
+<code>select()</code> | <code>filter()</code> or <code>loc[]</code>
+<code>rename ()</code> | <code>rename()</code><br />
+<code>mutate()</code> | <code>assign()</code><br />
+<code>group_by ()</code> | <code>groupby()</code><br />
+<code>summarise()</code> | <code>agg()</code></p>
+<p>The <code>groupby()</code> changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These functions provide the verbs for a language of data manipulation.</p>
+<p>All verbs work similarly:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first argument is a pandas dataFrame.</p></li>
+<li><p>The subsequent methods describe what to do with the data frame.</p></li>
+<li><p>The result is a new data frame.</p></li>
+</ol>
+<p>Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let’s dive in and see how these verbs work.</p>
+</div>
+</div>
+<div id="filter-rows-with-query" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Filter rows with <code>query()</code></h2>
+<p><code>query()</code> allows you to subset observations based on their values. The first argument specifies the rows to be selected. This argument can be label names or a boolean series. The second argument specifies the columns to be selected. The bolean filter on the rows is our focus. For example, we can select all flights on January 1st with:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="transform.html#cb63-1"></a>flights.query(<span class="st">&#39;month == 1 &amp; day == 1&#39;</span>)</span>
+<span id="cb63-2"><a href="transform.html#cb63-2"></a><span class="co">#&gt;      year  month  day  ...  hour  minute                 time_hour</span></span>
+<span id="cb63-3"><a href="transform.html#cb63-3"></a><span class="co">#&gt; 0    2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb63-4"><a href="transform.html#cb63-4"></a><span class="co">#&gt; 1    2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb63-5"><a href="transform.html#cb63-5"></a><span class="co">#&gt; 2    2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb63-6"><a href="transform.html#cb63-6"></a><span class="co">#&gt; 3    2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb63-7"><a href="transform.html#cb63-7"></a><span class="co">#&gt; 4    2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb63-8"><a href="transform.html#cb63-8"></a><span class="co">#&gt; ..    ...    ...  ...  ...   ...     ...                       ...</span></span>
+<span id="cb63-9"><a href="transform.html#cb63-9"></a><span class="co">#&gt; 837  2013      1    1  ...    23      59 2013-01-02 04:00:00+00:00</span></span>
+<span id="cb63-10"><a href="transform.html#cb63-10"></a><span class="co">#&gt; 838  2013      1    1  ...    16      30 2013-01-01 21:00:00+00:00</span></span>
+<span id="cb63-11"><a href="transform.html#cb63-11"></a><span class="co">#&gt; 839  2013      1    1  ...    19      35 2013-01-02 00:00:00+00:00</span></span>
+<span id="cb63-12"><a href="transform.html#cb63-12"></a><span class="co">#&gt; 840  2013      1    1  ...    15       0 2013-01-01 20:00:00+00:00</span></span>
+<span id="cb63-13"><a href="transform.html#cb63-13"></a><span class="co">#&gt; 841  2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb63-14"><a href="transform.html#cb63-14"></a><span class="co">#&gt; </span></span>
+<span id="cb63-15"><a href="transform.html#cb63-15"></a><span class="co">#&gt; [842 rows x 19 columns]</span></span></code></pre></div>
+<p>The previous expression is equivalent to <code>flights[(flights.month == 1) &amp; (flights.day == 1)]</code></p>
+<p>When you run that line of code, pandas executes the filtering operation and returns a new data frame. pandas functions usually don’t modify their inputs, so if you want to save the result, you’ll need to use the assignment operator, <code>=</code>:</p>
+<pre class="pandas"><code>jan1 = flights.query(&#39;month == 1 &amp; day == 1&#39;)</code></pre>
+<p>Interactive Python either prints out the results, or saves them to a variable.</p>
+<div id="comparisons" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Comparisons</h3>
+<p>To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. Python provides the standard suite: <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>!=</code> (not equal), and <code>==</code> (equal).</p>
+<p>When you’re starting out with Python, the easiest mistake to make is to use <code>=</code> instead of <code>==</code> when testing for equality. When this happens you’ll get an error:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="transform.html#cb65-1"></a>flights.query(<span class="st">&#39;month = 1&#39;</span>)</span>
+<span id="cb65-2"><a href="transform.html#cb65-2"></a><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: cannot assign without a target object</span></span>
+<span id="cb65-3"><a href="transform.html#cb65-3"></a><span class="co">#&gt; </span></span>
+<span id="cb65-4"><a href="transform.html#cb65-4"></a><span class="co">#&gt; Detailed traceback: </span></span>
+<span id="cb65-5"><a href="transform.html#cb65-5"></a><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb65-6"><a href="transform.html#cb65-6"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/frame.py&quot;, line 3231, in query</span></span>
+<span id="cb65-7"><a href="transform.html#cb65-7"></a><span class="co">#&gt;     res = self.eval(expr, **kwargs)</span></span>
+<span id="cb65-8"><a href="transform.html#cb65-8"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/frame.py&quot;, line 3346, in eval</span></span>
+<span id="cb65-9"><a href="transform.html#cb65-9"></a><span class="co">#&gt;     return _eval(expr, inplace=inplace, **kwargs)</span></span>
+<span id="cb65-10"><a href="transform.html#cb65-10"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/eval.py&quot;, line 332, in eval</span></span>
+<span id="cb65-11"><a href="transform.html#cb65-11"></a><span class="co">#&gt;     parsed_expr = Expr(expr, engine=engine, parser=parser, env=env)</span></span>
+<span id="cb65-12"><a href="transform.html#cb65-12"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 764, in __init__</span></span>
+<span id="cb65-13"><a href="transform.html#cb65-13"></a><span class="co">#&gt;     self.terms = self.parse()</span></span>
+<span id="cb65-14"><a href="transform.html#cb65-14"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 781, in parse</span></span>
+<span id="cb65-15"><a href="transform.html#cb65-15"></a><span class="co">#&gt;     return self._visitor.visit(self.expr)</span></span>
+<span id="cb65-16"><a href="transform.html#cb65-16"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 375, in visit</span></span>
+<span id="cb65-17"><a href="transform.html#cb65-17"></a><span class="co">#&gt;     return visitor(node, **kwargs)</span></span>
+<span id="cb65-18"><a href="transform.html#cb65-18"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 381, in visit_Module</span></span>
+<span id="cb65-19"><a href="transform.html#cb65-19"></a><span class="co">#&gt;     return self.visit(expr, **kwargs)</span></span>
+<span id="cb65-20"><a href="transform.html#cb65-20"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 375, in visit</span></span>
+<span id="cb65-21"><a href="transform.html#cb65-21"></a><span class="co">#&gt;     return visitor(node, **kwargs)</span></span>
+<span id="cb65-22"><a href="transform.html#cb65-22"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 585, in visit_Assign</span></span>
+<span id="cb65-23"><a href="transform.html#cb65-23"></a><span class="co">#&gt;     raise ValueError(&quot;cannot assign without a target object&quot;)</span></span></code></pre></div>
+<p>There’s another common problem you might encounter when using <code>==</code>: floating point numbers. The following result might surprise you!</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="transform.html#cb66-1"></a>math.sqrt(<span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span> <span class="op">==</span>  <span class="dv">2</span></span>
+<span id="cb66-2"><a href="transform.html#cb66-2"></a><span class="co">#&gt; False</span></span>
+<span id="cb66-3"><a href="transform.html#cb66-3"></a><span class="dv">1</span> <span class="op">/</span> <span class="dv">49</span> <span class="op">*</span> <span class="dv">49</span> <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb66-4"><a href="transform.html#cb66-4"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<p>Computers use finite precision arithmetic (they obviously can’t store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on <code>==</code>, use <code>math.isclose()</code>:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="transform.html#cb67-1"></a>math.isclose(math.sqrt(<span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span>,  <span class="dv">2</span>)</span>
+<span id="cb67-2"><a href="transform.html#cb67-2"></a><span class="co">#&gt; True</span></span>
+<span id="cb67-3"><a href="transform.html#cb67-3"></a>math.isclose(<span class="dv">1</span> <span class="op">/</span> <span class="dv">49</span> <span class="op">*</span> <span class="dv">49</span>, <span class="dv">1</span>)</span>
+<span id="cb67-4"><a href="transform.html#cb67-4"></a><span class="co">#&gt; True</span></span></code></pre></div>
+</div>
+<div id="logical-operators" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Logical operators</h3>
+<p>Multiple arguments to <code>query()</code> are combined with “and”: every expression must be true in order for a row to be included in the output. For other types of combinations, you’ll need to use Boolean operators yourself: <code>&amp;</code> is “and”, <code>|</code> is “or”, and <code>!</code> is “not”. Figure <a href="transform.html#fig:bool-ops">5.1</a> shows the complete set of Boolean operations.</p>
+<div class="figure" style="text-align: center"><span id="fig:bool-ops"></span>
+<img src="diagrams/transform-logical.png" alt="Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects." width="70%" />
+<p class="caption">
+Figure 5.1: Complete set of boolean operations. <code>x</code> is the left-hand circle, <code>y</code> is the right-hand circle, and the shaded region show which parts each operator selects.
+</p>
+</div>
+<p>The following code finds all flights that departed in November or December:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="transform.html#cb68-1"></a>flights.query(<span class="st">&#39;month == 11 | month == 12&#39;</span>)</span></code></pre></div>
+<p>The order of operations doesn’t work like English. You can’t write <code>filter(flights, month == (11 | 12))</code>, which you might literally translate into “finds all flights that departed in November or December”. Instead it finds all months that equal <code>11 | 12</code>, an expression that evaluates to <code>True</code>. In a numeric context (like here), <code>True</code> becomes one, so this finds all flights in January, not November or December. This is quite confusing!</p>
+<p>A useful short-hand for this problem is <code>x in y</code>. This will select every row where <code>x</code> is one of the values in <code>y</code>. We could use it to rewrite the code above:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="transform.html#cb69-1"></a>nov_dec <span class="op">=</span> flights.query(<span class="st">&#39;month in [11, 12]&#39;</span>)</span></code></pre></div>
+<p>Sometimes you can simplify complicated subsetting by remembering De Morgan’s law: <code>!(x &amp; y)</code> is the same as <code>!x | !y</code>, and <code>!(x | y)</code> is the same as <code>!x &amp; !y</code>. For example, if you wanted to find flights that weren’t delayed (on arrival or departure) by more than two hours, you could use either of the following two filters:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="transform.html#cb70-1"></a>flights.query(<span class="st">&#39;arr_delay &gt; 120 | dep_delay &gt; 120&#39;</span>)</span>
+<span id="cb70-2"><a href="transform.html#cb70-2"></a>flights.query(<span class="st">&#39;arr_delay &lt;= 120 | dep_delay &lt;= 120&#39;</span>)</span></code></pre></div>
+<!-- As well as `&` and `|`, Python also has `&&` and `||`. Don't use them here! You'll learn when you should use them in [conditional execution]. -->
+<p>Whenever you start using complicated, multipart expressions in <code>query()</code>, consider making them explicit variables instead. That makes it much easier to check your work. You’ll learn how to create new variables shortly.</p>
+</div>
+<div id="missing-values" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Missing values</h3>
+<p>One important feature of pandas in Python that can make comparison tricky are missing values, or <code>NA</code>s (“not availables”). <code>NA</code> represents an unknown value so missing values are “contagious”: almost any operation involving an unknown value will also be unknown.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="transform.html#cb71-1"></a>math.nan <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb71-2"><a href="transform.html#cb71-2"></a><span class="co">#&gt; nan</span></span>
+<span id="cb71-3"><a href="transform.html#cb71-3"></a>math.nan <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb71-4"><a href="transform.html#cb71-4"></a><span class="co">#&gt; nan</span></span></code></pre></div>
+<p>The most confusing result are the comparisons. They always return a <code>False</code>. The logic for this result <a href="https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values">is explained on stackoverflow</a>. The <a href="https://pandas.pydata.org/pandas-docs/dev/user_guide/missing_data.html">pandas missing data guide</a> is a helpful read.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="transform.html#cb72-1"></a>math.nan <span class="op">&gt;</span> <span class="dv">5</span></span>
+<span id="cb72-2"><a href="transform.html#cb72-2"></a><span class="co">#&gt; False</span></span>
+<span id="cb72-3"><a href="transform.html#cb72-3"></a><span class="dv">10</span> <span class="op">==</span> math.nan</span>
+<span id="cb72-4"><a href="transform.html#cb72-4"></a><span class="co">#&gt; False</span></span>
+<span id="cb72-5"><a href="transform.html#cb72-5"></a>math.nan <span class="op">==</span> math.nan</span>
+<span id="cb72-6"><a href="transform.html#cb72-6"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<p>It’s easiest to understand why this is true with a bit more context:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="transform.html#cb73-1"></a><span class="co"># Let x be Mary&#39;s age. We don&#39;t know how old she is.</span></span>
+<span id="cb73-2"><a href="transform.html#cb73-2"></a>x <span class="op">=</span> math.nan</span>
+<span id="cb73-3"><a href="transform.html#cb73-3"></a></span>
+<span id="cb73-4"><a href="transform.html#cb73-4"></a><span class="co"># Let y be John&#39;s age. We don&#39;t know how old he is.</span></span>
+<span id="cb73-5"><a href="transform.html#cb73-5"></a>y <span class="op">=</span> math.nan</span>
+<span id="cb73-6"><a href="transform.html#cb73-6"></a></span>
+<span id="cb73-7"><a href="transform.html#cb73-7"></a><span class="co"># Are John and Mary the same age?</span></span>
+<span id="cb73-8"><a href="transform.html#cb73-8"></a>x <span class="op">==</span> y</span>
+<span id="cb73-9"><a href="transform.html#cb73-9"></a><span class="co"># Illogical comparisons are False.</span></span>
+<span id="cb73-10"><a href="transform.html#cb73-10"></a><span class="co">#&gt; False</span></span></code></pre></div>
+<p>The Python development team did decide to provide functionality to find <code>math.nan</code> objects in your code by allowing <code>math.nan != math.nan</code> to return <code>True</code>. Once again you can <a href="https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values">read the rationale for this decision</a>. Python now has <code>isnan()</code> functions to make this comparison more straight forward in your code.</p>
+<p>Pandas uses the <code>nan</code> structure in Python to identify <strong>NA</strong> or ‘missing’ values. If you want to determine if a value is missing, use <code>pd.isna()</code>:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="transform.html#cb74-1"></a>pd.isna(x)</span>
+<span id="cb74-2"><a href="transform.html#cb74-2"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<p><code>query()</code> only includes rows where the condition is <code>TRUE</code>; it excludes both <code>FALSE</code> and <strong>NA</strong> values.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="transform.html#cb75-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x&#39;</span>: [<span class="dv">1</span>, math.nan, <span class="dv">3</span>]})</span>
+<span id="cb75-2"><a href="transform.html#cb75-2"></a>df.query(<span class="st">&#39;x &gt; 1&#39;</span>)</span>
+<span id="cb75-3"><a href="transform.html#cb75-3"></a><span class="co">#&gt;      x</span></span>
+<span id="cb75-4"><a href="transform.html#cb75-4"></a><span class="co">#&gt; 2  3.0</span></span></code></pre></div>
+<p>If you want to preserve missing values, ask for them explicitly using the trick mentioned in the previous paragraph or by using <code>pd.isna()</code> with the symbolic reference <code>@</code> in your condition:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="transform.html#cb76-1"></a>df.query(<span class="st">&#39;x != x | x &gt; 1&#39;</span>)</span>
+<span id="cb76-2"><a href="transform.html#cb76-2"></a><span class="co">#&gt;      x</span></span>
+<span id="cb76-3"><a href="transform.html#cb76-3"></a><span class="co">#&gt; 1  NaN</span></span>
+<span id="cb76-4"><a href="transform.html#cb76-4"></a><span class="co">#&gt; 2  3.0</span></span>
+<span id="cb76-5"><a href="transform.html#cb76-5"></a>df.query(<span class="st">&#39;@pd.isna(x) | x &gt; 1&#39;</span>)</span>
+<span id="cb76-6"><a href="transform.html#cb76-6"></a><span class="co">#&gt;      x</span></span>
+<span id="cb76-7"><a href="transform.html#cb76-7"></a><span class="co">#&gt; 1  NaN</span></span>
+<span id="cb76-8"><a href="transform.html#cb76-8"></a><span class="co">#&gt; 2  3.0</span></span></code></pre></div>
+</div>
+<div id="exercises-5" class="section level3" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Find all flights that</p>
+<ol style="list-style-type: decimal">
+<li>Had an arrival delay of two or more hours</li>
+<li>Flew to Houston (<code>IAH</code> or <code>HOU</code>)</li>
+<li>Were operated by United, American, or Delta</li>
+<li>Departed in summer (July, August, and September)</li>
+<li>Arrived more than two hours late, but didn’t leave late</li>
+<li>Were delayed by at least an hour, but made up over 30 minutes in flight</li>
+<li>Departed between midnight and 6am (inclusive)</li>
+</ol></li>
+<li><p>How many flights have a missing <code>dep_time</code>? What other variables are
+missing? What might these rows represent?</p></li>
+</ol>
+</div>
+</div>
+<div id="arrange-or-sort-rows-with-sort_values" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Arrange or sort rows with <code>sort_values()</code></h2>
+<p><code>sort()</code> works similarly to <code>query()</code> except that instead of selecting rows, it changes their order. It takes a data frame and a column name or a list of column names to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="transform.html#cb77-1"></a>flights.sort_values(by <span class="op">=</span> [<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>])</span>
+<span id="cb77-2"><a href="transform.html#cb77-2"></a><span class="co">#&gt;         year  month  day  ...  hour  minute                 time_hour</span></span>
+<span id="cb77-3"><a href="transform.html#cb77-3"></a><span class="co">#&gt; 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb77-4"><a href="transform.html#cb77-4"></a><span class="co">#&gt; 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb77-5"><a href="transform.html#cb77-5"></a><span class="co">#&gt; 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb77-6"><a href="transform.html#cb77-6"></a><span class="co">#&gt; 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb77-7"><a href="transform.html#cb77-7"></a><span class="co">#&gt; 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb77-8"><a href="transform.html#cb77-8"></a><span class="co">#&gt; ...      ...    ...  ...  ...   ...     ...                       ...</span></span>
+<span id="cb77-9"><a href="transform.html#cb77-9"></a><span class="co">#&gt; 111291  2013     12   31  ...     7       5 2013-12-31 12:00:00+00:00</span></span>
+<span id="cb77-10"><a href="transform.html#cb77-10"></a><span class="co">#&gt; 111292  2013     12   31  ...     8      25 2013-12-31 13:00:00+00:00</span></span>
+<span id="cb77-11"><a href="transform.html#cb77-11"></a><span class="co">#&gt; 111293  2013     12   31  ...    16      15 2013-12-31 21:00:00+00:00</span></span>
+<span id="cb77-12"><a href="transform.html#cb77-12"></a><span class="co">#&gt; 111294  2013     12   31  ...     6       0 2013-12-31 11:00:00+00:00</span></span>
+<span id="cb77-13"><a href="transform.html#cb77-13"></a><span class="co">#&gt; 111295  2013     12   31  ...     8      30 2013-12-31 13:00:00+00:00</span></span>
+<span id="cb77-14"><a href="transform.html#cb77-14"></a><span class="co">#&gt; </span></span>
+<span id="cb77-15"><a href="transform.html#cb77-15"></a><span class="co">#&gt; [336776 rows x 19 columns]</span></span></code></pre></div>
+<p>Use the argument <code>ascending = False</code> to re-order by a column in descending order:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="transform.html#cb78-1"></a>flights.sort_values(by <span class="op">=</span> [<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>], ascending <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb78-2"><a href="transform.html#cb78-2"></a><span class="co">#&gt;         year  month  day  ...  hour  minute                 time_hour</span></span>
+<span id="cb78-3"><a href="transform.html#cb78-3"></a><span class="co">#&gt; 110520  2013     12   31  ...    23      59 2014-01-01 04:00:00+00:00</span></span>
+<span id="cb78-4"><a href="transform.html#cb78-4"></a><span class="co">#&gt; 110521  2013     12   31  ...    23      59 2014-01-01 04:00:00+00:00</span></span>
+<span id="cb78-5"><a href="transform.html#cb78-5"></a><span class="co">#&gt; 110522  2013     12   31  ...    22      45 2014-01-01 03:00:00+00:00</span></span>
+<span id="cb78-6"><a href="transform.html#cb78-6"></a><span class="co">#&gt; 110523  2013     12   31  ...     5       0 2013-12-31 10:00:00+00:00</span></span>
+<span id="cb78-7"><a href="transform.html#cb78-7"></a><span class="co">#&gt; 110524  2013     12   31  ...     5      15 2013-12-31 10:00:00+00:00</span></span>
+<span id="cb78-8"><a href="transform.html#cb78-8"></a><span class="co">#&gt; ...      ...    ...  ...  ...   ...     ...                       ...</span></span>
+<span id="cb78-9"><a href="transform.html#cb78-9"></a><span class="co">#&gt; 837     2013      1    1  ...    23      59 2013-01-02 04:00:00+00:00</span></span>
+<span id="cb78-10"><a href="transform.html#cb78-10"></a><span class="co">#&gt; 838     2013      1    1  ...    16      30 2013-01-01 21:00:00+00:00</span></span>
+<span id="cb78-11"><a href="transform.html#cb78-11"></a><span class="co">#&gt; 839     2013      1    1  ...    19      35 2013-01-02 00:00:00+00:00</span></span>
+<span id="cb78-12"><a href="transform.html#cb78-12"></a><span class="co">#&gt; 840     2013      1    1  ...    15       0 2013-01-01 20:00:00+00:00</span></span>
+<span id="cb78-13"><a href="transform.html#cb78-13"></a><span class="co">#&gt; 841     2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb78-14"><a href="transform.html#cb78-14"></a><span class="co">#&gt; </span></span>
+<span id="cb78-15"><a href="transform.html#cb78-15"></a><span class="co">#&gt; [336776 rows x 19 columns]</span></span></code></pre></div>
+<p>Missing values are always sorted at the end:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="transform.html#cb79-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x&#39;</span>: [<span class="dv">5</span>, <span class="dv">2</span>, math.nan]})</span>
+<span id="cb79-2"><a href="transform.html#cb79-2"></a>df.sort_values(<span class="st">&#39;x&#39;</span>)</span>
+<span id="cb79-3"><a href="transform.html#cb79-3"></a><span class="co">#&gt;      x</span></span>
+<span id="cb79-4"><a href="transform.html#cb79-4"></a><span class="co">#&gt; 1  2.0</span></span>
+<span id="cb79-5"><a href="transform.html#cb79-5"></a><span class="co">#&gt; 0  5.0</span></span>
+<span id="cb79-6"><a href="transform.html#cb79-6"></a><span class="co">#&gt; 2  NaN</span></span>
+<span id="cb79-7"><a href="transform.html#cb79-7"></a>df.sort_values(<span class="st">&#39;x&#39;</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb79-8"><a href="transform.html#cb79-8"></a><span class="co">#&gt;      x</span></span>
+<span id="cb79-9"><a href="transform.html#cb79-9"></a><span class="co">#&gt; 0  5.0</span></span>
+<span id="cb79-10"><a href="transform.html#cb79-10"></a><span class="co">#&gt; 1  2.0</span></span>
+<span id="cb79-11"><a href="transform.html#cb79-11"></a><span class="co">#&gt; 2  NaN</span></span></code></pre></div>
+<div id="exercises-6" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>How could you use <code>sort()</code> to sort all missing values to the start?
+(Hint: use <code>isna()</code>).</p>
+<!-- df.sort_values('x', ascending = False, na_position = "first") --></li>
+<li><p>Sort <code>flights</code> to find the most delayed flights. Find the flights that
+left earliest.</p></li>
+<li><p>Sort <code>flights</code> to find the fastest (highest speed) flights.</p></li>
+<li><p>Which flights travelled the farthest? Which travelled the shortest?</p></li>
+</ol>
+</div>
+</div>
+<div id="select" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Select columns with <code>filter()</code> or <code>loc[]</code></h2>
+<p>It’s not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you’re actually interested in. <code>fliter()</code> allows you to rapidly zoom in on a useful subset using operations based on the names of the variables.</p>
+<p><code>filter()</code> is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="transform.html#cb80-1"></a><span class="co"># Select columns by name</span></span>
+<span id="cb80-2"><a href="transform.html#cb80-2"></a>flights.<span class="bu">filter</span>([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>])</span>
+<span id="cb80-3"><a href="transform.html#cb80-3"></a><span class="co"># Select all columns except year and day (inclusive)</span></span>
+<span id="cb80-4"><a href="transform.html#cb80-4"></a><span class="co">#&gt;         year  month  day</span></span>
+<span id="cb80-5"><a href="transform.html#cb80-5"></a><span class="co">#&gt; 0       2013      1    1</span></span>
+<span id="cb80-6"><a href="transform.html#cb80-6"></a><span class="co">#&gt; 1       2013      1    1</span></span>
+<span id="cb80-7"><a href="transform.html#cb80-7"></a><span class="co">#&gt; 2       2013      1    1</span></span>
+<span id="cb80-8"><a href="transform.html#cb80-8"></a><span class="co">#&gt; 3       2013      1    1</span></span>
+<span id="cb80-9"><a href="transform.html#cb80-9"></a><span class="co">#&gt; 4       2013      1    1</span></span>
+<span id="cb80-10"><a href="transform.html#cb80-10"></a><span class="co">#&gt; ...      ...    ...  ...</span></span>
+<span id="cb80-11"><a href="transform.html#cb80-11"></a><span class="co">#&gt; 336771  2013      9   30</span></span>
+<span id="cb80-12"><a href="transform.html#cb80-12"></a><span class="co">#&gt; 336772  2013      9   30</span></span>
+<span id="cb80-13"><a href="transform.html#cb80-13"></a><span class="co">#&gt; 336773  2013      9   30</span></span>
+<span id="cb80-14"><a href="transform.html#cb80-14"></a><span class="co">#&gt; 336774  2013      9   30</span></span>
+<span id="cb80-15"><a href="transform.html#cb80-15"></a><span class="co">#&gt; 336775  2013      9   30</span></span>
+<span id="cb80-16"><a href="transform.html#cb80-16"></a><span class="co">#&gt; </span></span>
+<span id="cb80-17"><a href="transform.html#cb80-17"></a><span class="co">#&gt; [336776 rows x 3 columns]</span></span>
+<span id="cb80-18"><a href="transform.html#cb80-18"></a>flights.drop(columns <span class="op">=</span> [<span class="st">&#39;year&#39;</span>, <span class="st">&#39;day&#39;</span>])</span>
+<span id="cb80-19"><a href="transform.html#cb80-19"></a><span class="co">#&gt;         month  dep_time  sched_dep_time  ...  hour  minute                 time_hour</span></span>
+<span id="cb80-20"><a href="transform.html#cb80-20"></a><span class="co">#&gt; 0           1     517.0             515  ...     5      15 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb80-21"><a href="transform.html#cb80-21"></a><span class="co">#&gt; 1           1     533.0             529  ...     5      29 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb80-22"><a href="transform.html#cb80-22"></a><span class="co">#&gt; 2           1     542.0             540  ...     5      40 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb80-23"><a href="transform.html#cb80-23"></a><span class="co">#&gt; 3           1     544.0             545  ...     5      45 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb80-24"><a href="transform.html#cb80-24"></a><span class="co">#&gt; 4           1     554.0             600  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb80-25"><a href="transform.html#cb80-25"></a><span class="co">#&gt; ...       ...       ...             ...  ...   ...     ...                       ...</span></span>
+<span id="cb80-26"><a href="transform.html#cb80-26"></a><span class="co">#&gt; 336771      9       NaN            1455  ...    14      55 2013-09-30 18:00:00+00:00</span></span>
+<span id="cb80-27"><a href="transform.html#cb80-27"></a><span class="co">#&gt; 336772      9       NaN            2200  ...    22       0 2013-10-01 02:00:00+00:00</span></span>
+<span id="cb80-28"><a href="transform.html#cb80-28"></a><span class="co">#&gt; 336773      9       NaN            1210  ...    12      10 2013-09-30 16:00:00+00:00</span></span>
+<span id="cb80-29"><a href="transform.html#cb80-29"></a><span class="co">#&gt; 336774      9       NaN            1159  ...    11      59 2013-09-30 15:00:00+00:00</span></span>
+<span id="cb80-30"><a href="transform.html#cb80-30"></a><span class="co">#&gt; 336775      9       NaN             840  ...     8      40 2013-09-30 12:00:00+00:00</span></span>
+<span id="cb80-31"><a href="transform.html#cb80-31"></a><span class="co">#&gt; </span></span>
+<span id="cb80-32"><a href="transform.html#cb80-32"></a><span class="co">#&gt; [336776 rows x 17 columns]</span></span></code></pre></div>
+<p><code>loc[]</code> functions in a similar fashion.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="transform.html#cb81-1"></a><span class="co"># Select columns by name</span></span>
+<span id="cb81-2"><a href="transform.html#cb81-2"></a>flights.loc[:, [<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>]]</span>
+<span id="cb81-3"><a href="transform.html#cb81-3"></a><span class="co"># Select all columns between year and day (inclusive)</span></span>
+<span id="cb81-4"><a href="transform.html#cb81-4"></a><span class="co">#&gt;         year  month  day</span></span>
+<span id="cb81-5"><a href="transform.html#cb81-5"></a><span class="co">#&gt; 0       2013      1    1</span></span>
+<span id="cb81-6"><a href="transform.html#cb81-6"></a><span class="co">#&gt; 1       2013      1    1</span></span>
+<span id="cb81-7"><a href="transform.html#cb81-7"></a><span class="co">#&gt; 2       2013      1    1</span></span>
+<span id="cb81-8"><a href="transform.html#cb81-8"></a><span class="co">#&gt; 3       2013      1    1</span></span>
+<span id="cb81-9"><a href="transform.html#cb81-9"></a><span class="co">#&gt; 4       2013      1    1</span></span>
+<span id="cb81-10"><a href="transform.html#cb81-10"></a><span class="co">#&gt; ...      ...    ...  ...</span></span>
+<span id="cb81-11"><a href="transform.html#cb81-11"></a><span class="co">#&gt; 336771  2013      9   30</span></span>
+<span id="cb81-12"><a href="transform.html#cb81-12"></a><span class="co">#&gt; 336772  2013      9   30</span></span>
+<span id="cb81-13"><a href="transform.html#cb81-13"></a><span class="co">#&gt; 336773  2013      9   30</span></span>
+<span id="cb81-14"><a href="transform.html#cb81-14"></a><span class="co">#&gt; 336774  2013      9   30</span></span>
+<span id="cb81-15"><a href="transform.html#cb81-15"></a><span class="co">#&gt; 336775  2013      9   30</span></span>
+<span id="cb81-16"><a href="transform.html#cb81-16"></a><span class="co">#&gt; </span></span>
+<span id="cb81-17"><a href="transform.html#cb81-17"></a><span class="co">#&gt; [336776 rows x 3 columns]</span></span>
+<span id="cb81-18"><a href="transform.html#cb81-18"></a>flights.loc[:, <span class="st">&#39;year&#39;</span>:<span class="st">&#39;day&#39;</span>]</span>
+<span id="cb81-19"><a href="transform.html#cb81-19"></a><span class="co"># Select all columns except year and day (inclusive)</span></span>
+<span id="cb81-20"><a href="transform.html#cb81-20"></a><span class="co">#&gt;         year  month  day</span></span>
+<span id="cb81-21"><a href="transform.html#cb81-21"></a><span class="co">#&gt; 0       2013      1    1</span></span>
+<span id="cb81-22"><a href="transform.html#cb81-22"></a><span class="co">#&gt; 1       2013      1    1</span></span>
+<span id="cb81-23"><a href="transform.html#cb81-23"></a><span class="co">#&gt; 2       2013      1    1</span></span>
+<span id="cb81-24"><a href="transform.html#cb81-24"></a><span class="co">#&gt; 3       2013      1    1</span></span>
+<span id="cb81-25"><a href="transform.html#cb81-25"></a><span class="co">#&gt; 4       2013      1    1</span></span>
+<span id="cb81-26"><a href="transform.html#cb81-26"></a><span class="co">#&gt; ...      ...    ...  ...</span></span>
+<span id="cb81-27"><a href="transform.html#cb81-27"></a><span class="co">#&gt; 336771  2013      9   30</span></span>
+<span id="cb81-28"><a href="transform.html#cb81-28"></a><span class="co">#&gt; 336772  2013      9   30</span></span>
+<span id="cb81-29"><a href="transform.html#cb81-29"></a><span class="co">#&gt; 336773  2013      9   30</span></span>
+<span id="cb81-30"><a href="transform.html#cb81-30"></a><span class="co">#&gt; 336774  2013      9   30</span></span>
+<span id="cb81-31"><a href="transform.html#cb81-31"></a><span class="co">#&gt; 336775  2013      9   30</span></span>
+<span id="cb81-32"><a href="transform.html#cb81-32"></a><span class="co">#&gt; </span></span>
+<span id="cb81-33"><a href="transform.html#cb81-33"></a><span class="co">#&gt; [336776 rows x 3 columns]</span></span></code></pre></div>
+<p>There are a number of helper regular expressions you can use within <code>filter()</code>:</p>
+<ul>
+<li><p><code>flights.filter(regex = '^sch')</code>: matches column names that begin with “sch”.</p></li>
+<li><p><code>flights.filter(regex = "time$")</code>: matches names that end with “time”.</p></li>
+<li><p><code>flights.filter(regex = "_dep_")</code>: matches names that contain “<em>dep</em>”.</p></li>
+<li><p><code>flights.filter(regex = '(.)\\1')</code>: selects variables that match a regular expression.
+This one matches any variables that contain repeated characters. You’ll
+learn more about regular expressions in [strings].</p></li>
+</ul>
+<p>See <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.filter.html">pandas filter documentation</a> for more details.</p>
+<p>Use <code>rename()</code> to rename a column or multiple columns.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="transform.html#cb82-1"></a>flights.rename(columns <span class="op">=</span> {<span class="st">&#39;year&#39;</span>: <span class="st">&#39;YEAR&#39;</span>, <span class="st">&#39;month&#39;</span>:<span class="st">&#39;MONTH&#39;</span>})</span>
+<span id="cb82-2"><a href="transform.html#cb82-2"></a><span class="co">#&gt;         YEAR  MONTH  day  ...  hour  minute                 time_hour</span></span>
+<span id="cb82-3"><a href="transform.html#cb82-3"></a><span class="co">#&gt; 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb82-4"><a href="transform.html#cb82-4"></a><span class="co">#&gt; 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb82-5"><a href="transform.html#cb82-5"></a><span class="co">#&gt; 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb82-6"><a href="transform.html#cb82-6"></a><span class="co">#&gt; 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb82-7"><a href="transform.html#cb82-7"></a><span class="co">#&gt; 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb82-8"><a href="transform.html#cb82-8"></a><span class="co">#&gt; ...      ...    ...  ...  ...   ...     ...                       ...</span></span>
+<span id="cb82-9"><a href="transform.html#cb82-9"></a><span class="co">#&gt; 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00</span></span>
+<span id="cb82-10"><a href="transform.html#cb82-10"></a><span class="co">#&gt; 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00</span></span>
+<span id="cb82-11"><a href="transform.html#cb82-11"></a><span class="co">#&gt; 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00</span></span>
+<span id="cb82-12"><a href="transform.html#cb82-12"></a><span class="co">#&gt; 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00</span></span>
+<span id="cb82-13"><a href="transform.html#cb82-13"></a><span class="co">#&gt; 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00</span></span>
+<span id="cb82-14"><a href="transform.html#cb82-14"></a><span class="co">#&gt; </span></span>
+<span id="cb82-15"><a href="transform.html#cb82-15"></a><span class="co">#&gt; [336776 rows x 19 columns]</span></span></code></pre></div>
+<div id="exercises-7" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Brainstorm as many ways as possible to select <code>dep_time</code>, <code>dep_delay</code>,
+<code>arr_time</code>, and <code>arr_delay</code> from <code>flights</code>.</p></li>
+<li><p>What happens if you include the name of a variable multiple times in
+a <code>filter()</code> call?</p></li>
+<li><p>Does the result of running the following code surprise you? How do the
+select helpers deal with case by default? How can you change that default?</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="transform.html#cb83-1"></a><span class="kw">flights.filter</span>(<span class="dt">regex =</span> <span class="st">&quot;TIME&quot;</span>)</span></code></pre></div></li>
+</ol>
 <!-- ## Add new variables with `mutate()` -->
 <!-- Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. That's the job of `mutate()`.  -->
 <!-- `mutate()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. Remember that when you're in RStudio, the easiest way to see all the columns is `View()`. -->
