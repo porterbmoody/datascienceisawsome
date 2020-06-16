@@ -237,6 +237,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>assign()</code></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>agg()</code></a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#combining-multiple-operations-with-the-pipe"><i class="fa fa-check"></i><b>5.6.1</b> Combining multiple operations with the pipe</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
 <ul>
@@ -277,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter we’re going to focus on how to use the pandas package, the foundational package for data science in Python. We’ll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need the math package that comes with Python.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="transform.html#cb60-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb60-2"><a href="transform.html#cb60-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb60-3"><a href="transform.html#cb60-3"></a><span class="im">import</span> math</span>
+<span id="cb60-3"><a href="transform.html#cb60-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb60-4"><a href="transform.html#cb60-4"></a></span>
 <span id="cb60-5"><a href="transform.html#cb60-5"></a></span>
 <span id="cb60-6"><a href="transform.html#cb60-6"></a>flights_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/flights/flights.csv&quot;</span></span>
@@ -288,18 +297,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="nycflights13" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> nycflights13</h3>
 <p>To explore the basic data manipulation verbs of pandas, we’ll use <code>flights</code>. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US <a href="http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&amp;Link=0">Bureau of Transportation Statistics</a>, and is <a href="https://github.com/byuidatascience/data4python4ds/blob/master/data.md">documented here</a>.</p>
-<pre><code>#&gt;         year  month  day  ...  hour  minute             time_hour
-#&gt; 0       2013      1    1  ...     5      15  2013-01-01T10:00:00Z
-#&gt; 1       2013      1    1  ...     5      29  2013-01-01T10:00:00Z
-#&gt; 2       2013      1    1  ...     5      40  2013-01-01T10:00:00Z
-#&gt; 3       2013      1    1  ...     5      45  2013-01-01T10:00:00Z
-#&gt; 4       2013      1    1  ...     6       0  2013-01-01T11:00:00Z
-#&gt; ...      ...    ...  ...  ...   ...     ...                   ...
-#&gt; 336771  2013      9   30  ...    14      55  2013-09-30T18:00:00Z
-#&gt; 336772  2013      9   30  ...    22       0  2013-10-01T02:00:00Z
-#&gt; 336773  2013      9   30  ...    12      10  2013-09-30T16:00:00Z
-#&gt; 336774  2013      9   30  ...    11      59  2013-09-30T15:00:00Z
-#&gt; 336775  2013      9   30  ...     8      40  2013-09-30T12:00:00Z
+<pre><code>#&gt;         year  month  day  ...  hour  minute                 time_hour
+#&gt; 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#&gt; 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#&gt; 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#&gt; 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#&gt; 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#&gt; ...      ...    ...  ...  ...   ...     ...                       ...
+#&gt; 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+#&gt; 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+#&gt; 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+#&gt; 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+#&gt; 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
 #&gt; 
 #&gt; [336776 rows x 19 columns]</code></pre>
 <p>You might notice that this data frame does not print in its entirety as other data frames you might have seen in the past: it only shows the first few and last few rows with only the columns that fit on one screen. (To see the whole dataset, you can open the variable view in your interactive Python window and double click on the flights object which will open the dataset in the VS Code data viewer).</p>
@@ -420,14 +429,14 @@ __________________|_______________________
 <span id="cb65-22"><a href="transform.html#cb65-22"></a><span class="co">#&gt;   File &quot;/usr/local/lib/python3.7/site-packages/pandas/core/computation/expr.py&quot;, line 585, in visit_Assign</span></span>
 <span id="cb65-23"><a href="transform.html#cb65-23"></a><span class="co">#&gt;     raise ValueError(&quot;cannot assign without a target object&quot;)</span></span></code></pre></div>
 <p>There’s another common problem you might encounter when using <code>==</code>: floating point numbers. The following result might surprise you!</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="transform.html#cb66-1"></a>math.sqrt(<span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span> <span class="op">==</span>  <span class="dv">2</span></span>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="transform.html#cb66-1"></a>np.sqrt(<span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span> <span class="op">==</span>  <span class="dv">2</span></span>
 <span id="cb66-2"><a href="transform.html#cb66-2"></a><span class="co">#&gt; False</span></span>
 <span id="cb66-3"><a href="transform.html#cb66-3"></a><span class="dv">1</span> <span class="op">/</span> <span class="dv">49</span> <span class="op">*</span> <span class="dv">49</span> <span class="op">==</span> <span class="dv">1</span></span>
 <span id="cb66-4"><a href="transform.html#cb66-4"></a><span class="co">#&gt; False</span></span></code></pre></div>
-<p>Computers use finite precision arithmetic (they obviously can’t store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on <code>==</code>, use <code>math.isclose()</code>:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="transform.html#cb67-1"></a>math.isclose(math.sqrt(<span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span>,  <span class="dv">2</span>)</span>
+<p>Computers use finite precision arithmetic (they obviously can’t store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on <code>==</code>, use <code>np.isclose()</code>:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="transform.html#cb67-1"></a>np.isclose(np.sqrt(<span class="dv">2</span>) <span class="op">**</span> <span class="dv">2</span>,  <span class="dv">2</span>)</span>
 <span id="cb67-2"><a href="transform.html#cb67-2"></a><span class="co">#&gt; True</span></span>
-<span id="cb67-3"><a href="transform.html#cb67-3"></a>math.isclose(<span class="dv">1</span> <span class="op">/</span> <span class="dv">49</span> <span class="op">*</span> <span class="dv">49</span>, <span class="dv">1</span>)</span>
+<span id="cb67-3"><a href="transform.html#cb67-3"></a>np.isclose(<span class="dv">1</span> <span class="op">/</span> <span class="dv">49</span> <span class="op">*</span> <span class="dv">49</span>, <span class="dv">1</span>)</span>
 <span id="cb67-4"><a href="transform.html#cb67-4"></a><span class="co">#&gt; True</span></span></code></pre></div>
 </div>
 <div id="logical-operators" class="section level3" number="5.2.2">
@@ -453,34 +462,34 @@ Figure 5.1: Complete set of boolean operations. <code>x</code> is the left-hand 
 <div id="missing-values" class="section level3" number="5.2.3">
 <h3><span class="header-section-number">5.2.3</span> Missing values</h3>
 <p>One important feature of pandas in Python that can make comparison tricky are missing values, or <code>NA</code>s (“not availables”). <code>NA</code> represents an unknown value so missing values are “contagious”: almost any operation involving an unknown value will also be unknown.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="transform.html#cb71-1"></a>math.nan <span class="op">+</span> <span class="dv">10</span></span>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="transform.html#cb71-1"></a>np.nan <span class="op">+</span> <span class="dv">10</span></span>
 <span id="cb71-2"><a href="transform.html#cb71-2"></a><span class="co">#&gt; nan</span></span>
-<span id="cb71-3"><a href="transform.html#cb71-3"></a>math.nan <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb71-3"><a href="transform.html#cb71-3"></a>np.nan <span class="op">/</span> <span class="dv">2</span></span>
 <span id="cb71-4"><a href="transform.html#cb71-4"></a><span class="co">#&gt; nan</span></span></code></pre></div>
 <p>The most confusing result are the comparisons. They always return a <code>False</code>. The logic for this result <a href="https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values">is explained on stackoverflow</a>. The <a href="https://pandas.pydata.org/pandas-docs/dev/user_guide/missing_data.html">pandas missing data guide</a> is a helpful read.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="transform.html#cb72-1"></a>math.nan <span class="op">&gt;</span> <span class="dv">5</span></span>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="transform.html#cb72-1"></a>np.nan <span class="op">&gt;</span> <span class="dv">5</span></span>
 <span id="cb72-2"><a href="transform.html#cb72-2"></a><span class="co">#&gt; False</span></span>
-<span id="cb72-3"><a href="transform.html#cb72-3"></a><span class="dv">10</span> <span class="op">==</span> math.nan</span>
+<span id="cb72-3"><a href="transform.html#cb72-3"></a><span class="dv">10</span> <span class="op">==</span> np.nan</span>
 <span id="cb72-4"><a href="transform.html#cb72-4"></a><span class="co">#&gt; False</span></span>
-<span id="cb72-5"><a href="transform.html#cb72-5"></a>math.nan <span class="op">==</span> math.nan</span>
+<span id="cb72-5"><a href="transform.html#cb72-5"></a>np.nan <span class="op">==</span> np.nan</span>
 <span id="cb72-6"><a href="transform.html#cb72-6"></a><span class="co">#&gt; False</span></span></code></pre></div>
 <p>It’s easiest to understand why this is true with a bit more context:</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="transform.html#cb73-1"></a><span class="co"># Let x be Mary&#39;s age. We don&#39;t know how old she is.</span></span>
-<span id="cb73-2"><a href="transform.html#cb73-2"></a>x <span class="op">=</span> math.nan</span>
+<span id="cb73-2"><a href="transform.html#cb73-2"></a>x <span class="op">=</span> np.nan</span>
 <span id="cb73-3"><a href="transform.html#cb73-3"></a></span>
 <span id="cb73-4"><a href="transform.html#cb73-4"></a><span class="co"># Let y be John&#39;s age. We don&#39;t know how old he is.</span></span>
-<span id="cb73-5"><a href="transform.html#cb73-5"></a>y <span class="op">=</span> math.nan</span>
+<span id="cb73-5"><a href="transform.html#cb73-5"></a>y <span class="op">=</span> np.nan</span>
 <span id="cb73-6"><a href="transform.html#cb73-6"></a></span>
 <span id="cb73-7"><a href="transform.html#cb73-7"></a><span class="co"># Are John and Mary the same age?</span></span>
 <span id="cb73-8"><a href="transform.html#cb73-8"></a>x <span class="op">==</span> y</span>
 <span id="cb73-9"><a href="transform.html#cb73-9"></a><span class="co"># Illogical comparisons are False.</span></span>
 <span id="cb73-10"><a href="transform.html#cb73-10"></a><span class="co">#&gt; False</span></span></code></pre></div>
-<p>The Python development team did decide to provide functionality to find <code>math.nan</code> objects in your code by allowing <code>math.nan != math.nan</code> to return <code>True</code>. Once again you can <a href="https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values">read the rationale for this decision</a>. Python now has <code>isnan()</code> functions to make this comparison more straight forward in your code.</p>
+<p>The Python development team did decide to provide functionality to find <code>np.nan</code> objects in your code by allowing <code>np.nan != np.nan</code> to return <code>True</code>. Once again you can <a href="https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values">read the rationale for this decision</a>. Python now has <code>isnan()</code> functions to make this comparison more straight forward in your code.</p>
 <p>Pandas uses the <code>nan</code> structure in Python to identify <strong>NA</strong> or ‘missing’ values. If you want to determine if a value is missing, use <code>pd.isna()</code>:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="transform.html#cb74-1"></a>pd.isna(x)</span>
 <span id="cb74-2"><a href="transform.html#cb74-2"></a><span class="co">#&gt; True</span></span></code></pre></div>
 <p><code>query()</code> only includes rows where the condition is <code>TRUE</code>; it excludes both <code>FALSE</code> and <strong>NA</strong> values.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="transform.html#cb75-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x&#39;</span>: [<span class="dv">1</span>, math.nan, <span class="dv">3</span>]})</span>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="transform.html#cb75-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x&#39;</span>: [<span class="dv">1</span>, np.nan, <span class="dv">3</span>]})</span>
 <span id="cb75-2"><a href="transform.html#cb75-2"></a>df.query(<span class="st">&#39;x &gt; 1&#39;</span>)</span>
 <span id="cb75-3"><a href="transform.html#cb75-3"></a><span class="co">#&gt;      x</span></span>
 <span id="cb75-4"><a href="transform.html#cb75-4"></a><span class="co">#&gt; 2  3.0</span></span></code></pre></div>
@@ -547,7 +556,7 @@ missing? What might these rows represent?</p></li>
 <span id="cb78-14"><a href="transform.html#cb78-14"></a><span class="co">#&gt; </span></span>
 <span id="cb78-15"><a href="transform.html#cb78-15"></a><span class="co">#&gt; [336776 rows x 19 columns]</span></span></code></pre></div>
 <p>Missing values are always sorted at the end:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="transform.html#cb79-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x&#39;</span>: [<span class="dv">5</span>, <span class="dv">2</span>, math.nan]})</span>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="transform.html#cb79-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x&#39;</span>: [<span class="dv">5</span>, <span class="dv">2</span>, np.nan]})</span>
 <span id="cb79-2"><a href="transform.html#cb79-2"></a>df.sort_values(<span class="st">&#39;x&#39;</span>)</span>
 <span id="cb79-3"><a href="transform.html#cb79-3"></a><span class="co">#&gt;      x</span></span>
 <span id="cb79-4"><a href="transform.html#cb79-4"></a><span class="co">#&gt; 1  2.0</span></span>
@@ -678,180 +687,823 @@ a <code>filter()</code> call?</p></li>
 select helpers deal with case by default? How can you change that default?</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="transform.html#cb83-1"></a><span class="kw">flights.filter</span>(<span class="dt">regex =</span> <span class="st">&quot;TIME&quot;</span>)</span></code></pre></div></li>
 </ol>
-<!-- ## Add new variables with `mutate()` -->
-<!-- Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. That's the job of `mutate()`.  -->
-<!-- `mutate()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. Remember that when you're in RStudio, the easiest way to see all the columns is `View()`. -->
-<!-- ```{r} -->
-<!-- flights_sml <- select(flights,  -->
-<!--   year:day,  -->
-<!--   ends_with("delay"),  -->
-<!--   distance,  -->
-<!--   air_time -->
-<!-- ) -->
-<!-- mutate(flights_sml, -->
-<!--   gain = dep_delay - arr_delay, -->
-<!--   speed = distance / air_time * 60 -->
-<!-- ) -->
-<!-- ``` -->
-<!-- Note that you can refer to columns that you've just created: -->
-<!-- ```{r} -->
-<!-- mutate(flights_sml, -->
-<!--   gain = dep_delay - arr_delay, -->
-<!--   hours = air_time / 60, -->
-<!--   gain_per_hour = gain / hours -->
-<!-- ) -->
-<!-- ``` -->
-<!-- If you only want to keep the new variables, use `transmute()`: -->
-<!-- ```{r} -->
-<!-- transmute(flights, -->
-<!--   gain = dep_delay - arr_delay, -->
-<!--   hours = air_time / 60, -->
-<!--   gain_per_hour = gain / hours -->
-<!-- ) -->
-<!-- ``` -->
-<!-- ### Useful creation functions {#mutate-funs} -->
-<!-- There are many functions for creating new variables that you can use with `mutate()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful: -->
-<!-- *   Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised, -->
-<!--     using the so called "recycling rules". If one parameter is shorter than  -->
-<!--     the other, it will be automatically extended to be the same length. This  -->
-<!--     is most useful when one of the arguments is a single number: `air_time / 60`, -->
-<!--     `hours * 60 + minute`, etc. -->
-<!--     Arithmetic operators are also useful in conjunction with the aggregate -->
-<!--     functions you'll learn about later. For example, `x / sum(x)` calculates  -->
-<!--     the proportion of a total, and `y - mean(y)` computes the difference from  -->
-<!--     the mean. -->
-<!-- *   Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where -->
-<!--     `x == y * (x %/% y) + (x %% y)`. Modular arithmetic is a handy tool because  -->
-<!--     it allows you to break integers up into pieces. For example, in the  -->
-<!--     flights dataset, you can compute `hour` and `minute` from `dep_time` with: -->
-<!--     ```{r} -->
-<!--     transmute(flights, -->
-<!--       dep_time, -->
-<!--       hour = dep_time %/% 100, -->
-<!--       minute = dep_time %% 100 -->
-<!--     ) -->
-<!--     ``` -->
-<!-- *   Logs: `log()`, `log2()`, `log10()`. Logarithms are an incredibly useful -->
-<!--     transformation for dealing with data that ranges across multiple orders of -->
-<!--     magnitude. They also convert multiplicative relationships to additive, a -->
-<!--     feature we'll come back to in modelling. -->
-<!--     All else being equal, I recommend using `log2()` because it's easy to -->
-<!--     interpret: a difference of 1 on the log scale corresponds to doubling on -->
-<!--     the original scale and a difference of -1 corresponds to halving. -->
-<!-- *   Offsets: `lead()` and `lag()` allow you to refer to leading or lagging  -->
-<!--     values. This allows you to compute running differences (e.g. `x - lag(x)`)  -->
-<!--     or find when values change (`x != lag(x)`). They are most useful in  -->
-<!--     conjunction with `group_by()`, which you'll learn about shortly. -->
-<!--     ```{r} -->
-<!--     (x <- 1:10) -->
-<!--     lag(x) -->
-<!--     lead(x) -->
-<!--     ``` -->
-<!-- *   Cumulative and rolling aggregates: R provides functions for running sums, -->
-<!--     products, mins and maxes: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`;  -->
-<!--     and dplyr provides `cummean()` for cumulative means. If you need rolling -->
-<!--     aggregates (i.e. a sum computed over a rolling window), try the RcppRoll -->
-<!--     package. -->
-<!--     ```{r} -->
-<!--     x -->
-<!--     cumsum(x) -->
-<!--     cummean(x) -->
-<!--     ``` -->
-<!-- *   Logical comparisons, `<`, `<=`, `>`, `>=`, `!=`, and `==`, which you learned about -->
-<!--     earlier. If you're doing a complex sequence of logical operations it's  -->
-<!--     often a good idea to store the interim values in new variables so you can -->
-<!--     check that each step is working as expected. -->
-<!-- *   Ranking: there are a number of ranking functions, but you should  -->
-<!--     start with `min_rank()`. It does the most usual type of ranking  -->
-<!--     (e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small -->
-<!--     ranks; use `desc(x)` to give the largest values the smallest ranks.  -->
-<!--     ```{r} -->
-<!--     y <- c(1, 2, 2, NA, 3, 4) -->
-<!--     min_rank(y) -->
-<!--     min_rank(desc(y)) -->
-<!--     ``` -->
-<!--     If `min_rank()` doesn't do what you need, look at the variants -->
-<!--     `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`, -->
-<!--     `ntile()`.  See their help pages for more details. -->
-<!--     ```{r} -->
-<!--     row_number(y) -->
-<!--     dense_rank(y) -->
-<!--     percent_rank(y) -->
-<!--     cume_dist(y) -->
-<!--     ``` -->
-<!-- ### Exercises -->
-<!-- ```{r, eval = FALSE, echo = FALSE} -->
-<!-- flights <- flights %>% mutate( -->
-<!--   dep_time = hour * 60 + minute, -->
-<!--   arr_time = (arr_time %/% 100) * 60 + (arr_time %% 100), -->
-<!--   airtime2 = arr_time - dep_time, -->
-<!--   dep_sched = dep_time + dep_delay -->
-<!-- ) -->
-<!-- ggplot(flights, aes(dep_sched)) + geom_histogram(binwidth = 60) -->
-<!-- ggplot(flights, aes(dep_sched %% 60)) + geom_histogram(binwidth = 1) -->
-<!-- ggplot(flights, aes(air_time - airtime2)) + geom_histogram() -->
-<!-- ``` -->
-<!-- 1.  Currently `dep_time` and `sched_dep_time` are convenient to look at, but -->
-<!--     hard to compute with because they're not really continuous numbers.  -->
-<!--     Convert them to a more convenient representation of number of minutes -->
-<!--     since midnight. -->
-<!-- 1.  Compare `air_time` with `arr_time - dep_time`. What do you expect to see? -->
-<!--     What do you see? What do you need to do to fix it? -->
-<!-- 1.  Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you -->
-<!--     expect those three numbers to be related? -->
-<!-- 1.  Find the 10 most delayed flights using a ranking function. How do you want  -->
-<!--     to handle ties? Carefully read the documentation for `min_rank()`. -->
-<!-- 1.  What does `1:3 + 1:10` return? Why? -->
-<!-- 1.  What trigonometric functions does R provide? -->
-<!-- ## Grouped summaries with `summarise()` -->
-<!-- The last key verb is `summarise()`. It collapses a data frame to a single row: -->
-<!-- ```{r} -->
-<!-- summarise(flights, delay = mean(dep_delay, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- (We'll come back to what that `na.rm = TRUE` means very shortly.) -->
-<!-- `summarise()` is not terribly useful unless we pair it with `group_by()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the dplyr verbs on a grouped data frame they'll be automatically applied "by group". For example, if we applied exactly the same code to a data frame grouped by date, we get the average delay per date: -->
-<!-- ```{r} -->
-<!-- by_day <- group_by(flights, year, month, day) -->
-<!-- summarise(by_day, delay = mean(dep_delay, na.rm = TRUE)) -->
-<!-- ``` -->
-<!-- Together `group_by()` and `summarise()` provide one of the tools that you'll use most commonly when working with dplyr: grouped summaries. But before we go any further with this, we need to introduce a powerful new idea: the pipe. -->
-<!-- ### Combining multiple operations with the pipe -->
-<!-- Imagine that we want to explore the relationship between the distance and average delay for each location. Using what you know about dplyr, you might write code like this: -->
-<!-- ```{r, fig.width = 6} -->
-<!-- by_dest <- group_by(flights, dest) -->
-<!-- delay <- summarise(by_dest, -->
-<!--   count = n(), -->
-<!--   dist = mean(distance, na.rm = TRUE), -->
-<!--   delay = mean(arr_delay, na.rm = TRUE) -->
-<!-- ) -->
-<!-- delay <- filter(delay, count > 20, dest != "HNL") -->
-<!-- # It looks like delays increase with distance up to ~750 miles  -->
-<!-- # and then decrease. Maybe as flights get longer there's more  -->
-<!-- # ability to make up delays in the air? -->
-<!-- ggplot(data = delay, mapping = aes(x = dist, y = delay)) + -->
-<!--   geom_point(aes(size = count), alpha = 1/3) + -->
-<!--   geom_smooth(se = FALSE) -->
-<!-- ``` -->
-<!-- There are three steps to prepare this data: -->
-<!-- 1.  Group flights by destination. -->
-<!-- 1.  Summarise to compute distance, average delay, and number of flights. -->
-<!-- 1.  Filter to remove noisy points and Honolulu airport, which is almost -->
-<!--     twice as far away as the next closest airport. -->
-<!-- This code is a little frustrating to write because we have to give each intermediate data frame a name, even though we don't care about it. Naming things is hard, so this slows down our analysis.  -->
-<!-- There's another way to tackle the same problem with the pipe, `%>%`: -->
-<!-- ```{r} -->
-<!-- delays <- flights %>%  -->
-<!--   group_by(dest) %>%  -->
-<!--   summarise( -->
-<!--     count = n(), -->
-<!--     dist = mean(distance, na.rm = TRUE), -->
-<!--     delay = mean(arr_delay, na.rm = TRUE) -->
-<!--   ) %>%  -->
-<!--   filter(count > 20, dest != "HNL") -->
-<!-- ``` -->
-<!-- This focuses on the transformations, not what's being transformed, which makes the code easier to read. You can read it as a series of imperative statements: group, then summarise, then filter. As suggested by this reading, a good way to pronounce `%>%` when reading code is "then". -->
-<!-- Behind the scenes, `x %>% f(y)` turns into `f(x, y)`, and `x %>% f(y) %>% g(z)` turns into `g(f(x, y), z)` and so on. You can use the pipe to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom. We'll use piping frequently from now on because it considerably improves the readability of code, and we'll come back to it in more detail in [pipes]. -->
-<!-- Working with the pipe is one of the key criteria for belonging to the tidyverse. The only exception is ggplot2: it was written before the pipe was discovered. Unfortunately, the next iteration of ggplot2, ggvis, which does use the pipe, isn't quite ready for prime time yet.  -->
+</div>
+</div>
+<div id="add-new-variables-with-assign" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Add new variables with <code>assign()</code></h2>
+<p>Besides selecting sets of existing columns, it’s often useful to add new columns that are functions of existing columns. That’s the job of <code>assign()</code>.</p>
+<p><code>assign()</code> always adds new columns at the end of your dataset so we’ll start by creating a narrower dataset so we can see the new variables.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="transform.html#cb84-1"></a></span>
+<span id="cb84-2"><a href="transform.html#cb84-2"></a>flights_sml <span class="op">=</span> (flights.</span>
+<span id="cb84-3"><a href="transform.html#cb84-3"></a>    <span class="bu">filter</span>(regex <span class="op">=</span> <span class="st">&quot;^year$|^month$|^day$|delay$|^distance$|^air_time$&quot;</span>)</span>
+<span id="cb84-4"><a href="transform.html#cb84-4"></a>)</span>
+<span id="cb84-5"><a href="transform.html#cb84-5"></a></span>
+<span id="cb84-6"><a href="transform.html#cb84-6"></a>flights_sml.assign(</span>
+<span id="cb84-7"><a href="transform.html#cb84-7"></a>    gain <span class="op">=</span> <span class="kw">lambda</span> x: x.dep_delay <span class="op">-</span> x.arr_delay,</span>
+<span id="cb84-8"><a href="transform.html#cb84-8"></a>    speed <span class="op">=</span> <span class="kw">lambda</span> x: x.distance <span class="op">/</span> x.air_time <span class="op">*</span> <span class="dv">60</span></span>
+<span id="cb84-9"><a href="transform.html#cb84-9"></a>    ).head()</span>
+<span id="cb84-10"><a href="transform.html#cb84-10"></a><span class="co">#&gt;    year  month  day  dep_delay  arr_delay  air_time  distance  gain       speed</span></span>
+<span id="cb84-11"><a href="transform.html#cb84-11"></a><span class="co">#&gt; 0  2013      1    1        2.0       11.0     227.0      1400  -9.0  370.044053</span></span>
+<span id="cb84-12"><a href="transform.html#cb84-12"></a><span class="co">#&gt; 1  2013      1    1        4.0       20.0     227.0      1416 -16.0  374.273128</span></span>
+<span id="cb84-13"><a href="transform.html#cb84-13"></a><span class="co">#&gt; 2  2013      1    1        2.0       33.0     160.0      1089 -31.0  408.375000</span></span>
+<span id="cb84-14"><a href="transform.html#cb84-14"></a><span class="co">#&gt; 3  2013      1    1       -1.0      -18.0     183.0      1576  17.0  516.721311</span></span>
+<span id="cb84-15"><a href="transform.html#cb84-15"></a><span class="co">#&gt; 4  2013      1    1       -6.0      -25.0     116.0       762  19.0  394.137931</span></span></code></pre></div>
+<p>Note that you can refer to columns that you’ve just created:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="transform.html#cb85-1"></a>flights_sml.assign(</span>
+<span id="cb85-2"><a href="transform.html#cb85-2"></a>    gain <span class="op">=</span> <span class="kw">lambda</span> x: x.dep_delay <span class="op">-</span> x.arr_delay,</span>
+<span id="cb85-3"><a href="transform.html#cb85-3"></a>    hours <span class="op">=</span> <span class="kw">lambda</span> x: x.air_time <span class="op">/</span> <span class="dv">60</span>,</span>
+<span id="cb85-4"><a href="transform.html#cb85-4"></a>    gain_per_hour <span class="op">=</span> <span class="kw">lambda</span> x: x.gain <span class="op">/</span> x.hours</span>
+<span id="cb85-5"><a href="transform.html#cb85-5"></a>).head()</span>
+<span id="cb85-6"><a href="transform.html#cb85-6"></a><span class="co">#&gt;    year  month  day  dep_delay  ...  distance  gain     hours  gain_per_hour</span></span>
+<span id="cb85-7"><a href="transform.html#cb85-7"></a><span class="co">#&gt; 0  2013      1    1        2.0  ...      1400  -9.0  3.783333      -2.378855</span></span>
+<span id="cb85-8"><a href="transform.html#cb85-8"></a><span class="co">#&gt; 1  2013      1    1        4.0  ...      1416 -16.0  3.783333      -4.229075</span></span>
+<span id="cb85-9"><a href="transform.html#cb85-9"></a><span class="co">#&gt; 2  2013      1    1        2.0  ...      1089 -31.0  2.666667     -11.625000</span></span>
+<span id="cb85-10"><a href="transform.html#cb85-10"></a><span class="co">#&gt; 3  2013      1    1       -1.0  ...      1576  17.0  3.050000       5.573770</span></span>
+<span id="cb85-11"><a href="transform.html#cb85-11"></a><span class="co">#&gt; 4  2013      1    1       -6.0  ...       762  19.0  1.933333       9.827586</span></span>
+<span id="cb85-12"><a href="transform.html#cb85-12"></a><span class="co">#&gt; </span></span>
+<span id="cb85-13"><a href="transform.html#cb85-13"></a><span class="co">#&gt; [5 rows x 10 columns]</span></span></code></pre></div>
+<div id="mutate-funs" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Useful creation functions</h3>
+<p>There are many functions for creating new variables that you can use with <code>assign()</code>. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. Some arithmetic operators are available in Python without the need for any additional packages. However, many arithmetic functions like <code>mean()</code> and <code>std()</code> are accessed through importing additional packages. Python comes with a <code>math</code> and <code>statistics</code> package. However, we recommend the <strong>NumPy</strong> package for accessing the suite of mathematical functions needed. You would import NumPy with <code>import numpy as np</code>. There’s no way to list every possible function that you might use, but here’s a selection of functions that are frequently useful:</p>
+<ul>
+<li><p>Arithmetic operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>. These are all vectorised,
+using the so called “recycling rules”. If one parameter is shorter than
+the other, it will be automatically extended to be the same length. This
+is most useful when one of the arguments is a single number: <code>air_time / 60</code>,
+<code>hours * 60 + minute</code>, etc.</p>
+<p>Arithmetic operators are also useful in conjunction with the aggregate
+functions you’ll learn about later. For example, <code>x / np.sum(x)</code> calculates
+the proportion of a total, and <code>y - np.mean(y)</code> computes the difference from
+the mean.</p></li>
+<li><p>Modular arithmetic: <code>//</code> (integer division) and <code>%</code> (remainder), where
+<code>x == y * (x // y) + (x % y)</code>. Modular arithmetic is a handy tool because
+it allows you to break integers up into pieces. For example, in the
+flights dataset, you can compute <code>hour</code> and <code>minute</code> from <code>dep_time</code> with:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="transform.html#cb86-1"></a>(flights.</span>
+<span id="cb86-2"><a href="transform.html#cb86-2"></a>    <span class="bu">filter</span>([<span class="st">&#39;dep_time&#39;</span>]).</span>
+<span id="cb86-3"><a href="transform.html#cb86-3"></a>    assign(</span>
+<span id="cb86-4"><a href="transform.html#cb86-4"></a>      hour <span class="op">=</span> <span class="kw">lambda</span> x: x.dep_time <span class="op">//</span> <span class="dv">100</span>,</span>
+<span id="cb86-5"><a href="transform.html#cb86-5"></a>      minute <span class="op">=</span> <span class="kw">lambda</span> x: x.dep_time <span class="op">%</span> <span class="dv">100</span>)</span>
+<span id="cb86-6"><a href="transform.html#cb86-6"></a>)</span>
+<span id="cb86-7"><a href="transform.html#cb86-7"></a><span class="co">#&gt;         dep_time  hour  minute</span></span>
+<span id="cb86-8"><a href="transform.html#cb86-8"></a><span class="co">#&gt; 0          517.0   5.0    17.0</span></span>
+<span id="cb86-9"><a href="transform.html#cb86-9"></a><span class="co">#&gt; 1          533.0   5.0    33.0</span></span>
+<span id="cb86-10"><a href="transform.html#cb86-10"></a><span class="co">#&gt; 2          542.0   5.0    42.0</span></span>
+<span id="cb86-11"><a href="transform.html#cb86-11"></a><span class="co">#&gt; 3          544.0   5.0    44.0</span></span>
+<span id="cb86-12"><a href="transform.html#cb86-12"></a><span class="co">#&gt; 4          554.0   5.0    54.0</span></span>
+<span id="cb86-13"><a href="transform.html#cb86-13"></a><span class="co">#&gt; ...          ...   ...     ...</span></span>
+<span id="cb86-14"><a href="transform.html#cb86-14"></a><span class="co">#&gt; 336771       NaN   NaN     NaN</span></span>
+<span id="cb86-15"><a href="transform.html#cb86-15"></a><span class="co">#&gt; 336772       NaN   NaN     NaN</span></span>
+<span id="cb86-16"><a href="transform.html#cb86-16"></a><span class="co">#&gt; 336773       NaN   NaN     NaN</span></span>
+<span id="cb86-17"><a href="transform.html#cb86-17"></a><span class="co">#&gt; 336774       NaN   NaN     NaN</span></span>
+<span id="cb86-18"><a href="transform.html#cb86-18"></a><span class="co">#&gt; 336775       NaN   NaN     NaN</span></span>
+<span id="cb86-19"><a href="transform.html#cb86-19"></a><span class="co">#&gt; </span></span>
+<span id="cb86-20"><a href="transform.html#cb86-20"></a><span class="co">#&gt; [336776 rows x 3 columns]</span></span></code></pre></div></li>
+<li><p>Logs: <code>np.log()</code>, <code>np.log2()</code>, <code>np.log10()</code>. Logarithms are an incredibly useful
+transformation for dealing with data that ranges across multiple orders of
+magnitude. They also convert multiplicative relationships to additive, a
+feature we’ll come back to in modelling.</p>
+<p>All else being equal, I recommend using <code>np.log2()</code> because it’s easy to
+interpret: a difference of 1 on the log scale corresponds to doubling on
+the original scale and a difference of -1 corresponds to halving.</p></li>
+<li><p>Offsets: <code>shift(1)</code> and <code>shift(-1)</code> allow you to refer to leading or lagging
+values. This allows you to compute running differences (e.g. <code>x - x.shift(1)</code>)
+or find when values change (<code>x != x.shift(1)</code>). They are most useful in
+conjunction with <code>groupby()</code>, which you’ll learn about shortly.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="transform.html#cb87-1"></a>x <span class="op">=</span> pd.Series(np.arange(<span class="dv">1</span>,<span class="dv">10</span>))</span>
+<span id="cb87-2"><a href="transform.html#cb87-2"></a>x.shift(<span class="dv">1</span>)</span>
+<span id="cb87-3"><a href="transform.html#cb87-3"></a><span class="co">#&gt; 0    NaN</span></span>
+<span id="cb87-4"><a href="transform.html#cb87-4"></a><span class="co">#&gt; 1    1.0</span></span>
+<span id="cb87-5"><a href="transform.html#cb87-5"></a><span class="co">#&gt; 2    2.0</span></span>
+<span id="cb87-6"><a href="transform.html#cb87-6"></a><span class="co">#&gt; 3    3.0</span></span>
+<span id="cb87-7"><a href="transform.html#cb87-7"></a><span class="co">#&gt; 4    4.0</span></span>
+<span id="cb87-8"><a href="transform.html#cb87-8"></a><span class="co">#&gt; 5    5.0</span></span>
+<span id="cb87-9"><a href="transform.html#cb87-9"></a><span class="co">#&gt; 6    6.0</span></span>
+<span id="cb87-10"><a href="transform.html#cb87-10"></a><span class="co">#&gt; 7    7.0</span></span>
+<span id="cb87-11"><a href="transform.html#cb87-11"></a><span class="co">#&gt; 8    8.0</span></span>
+<span id="cb87-12"><a href="transform.html#cb87-12"></a><span class="co">#&gt; dtype: float64</span></span>
+<span id="cb87-13"><a href="transform.html#cb87-13"></a>x.shift(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb87-14"><a href="transform.html#cb87-14"></a><span class="co">#&gt; 0    2.0</span></span>
+<span id="cb87-15"><a href="transform.html#cb87-15"></a><span class="co">#&gt; 1    3.0</span></span>
+<span id="cb87-16"><a href="transform.html#cb87-16"></a><span class="co">#&gt; 2    4.0</span></span>
+<span id="cb87-17"><a href="transform.html#cb87-17"></a><span class="co">#&gt; 3    5.0</span></span>
+<span id="cb87-18"><a href="transform.html#cb87-18"></a><span class="co">#&gt; 4    6.0</span></span>
+<span id="cb87-19"><a href="transform.html#cb87-19"></a><span class="co">#&gt; 5    7.0</span></span>
+<span id="cb87-20"><a href="transform.html#cb87-20"></a><span class="co">#&gt; 6    8.0</span></span>
+<span id="cb87-21"><a href="transform.html#cb87-21"></a><span class="co">#&gt; 7    9.0</span></span>
+<span id="cb87-22"><a href="transform.html#cb87-22"></a><span class="co">#&gt; 8    NaN</span></span>
+<span id="cb87-23"><a href="transform.html#cb87-23"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
+<li><p>Cumulative and rolling aggregates: pandas provides functions for running sums,
+products, mins and maxes: <code>cumsum()</code>, <code>cumprod()</code>, <code>cummin()</code>, <code>cummax()</code>.
+If you need rolling aggregates (i.e. a sum computed over a rolling window),
+try the <code>rolling()</code> in the pandas package.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="transform.html#cb88-1"></a>x</span>
+<span id="cb88-2"><a href="transform.html#cb88-2"></a><span class="co">#&gt; 0    1</span></span>
+<span id="cb88-3"><a href="transform.html#cb88-3"></a><span class="co">#&gt; 1    2</span></span>
+<span id="cb88-4"><a href="transform.html#cb88-4"></a><span class="co">#&gt; 2    3</span></span>
+<span id="cb88-5"><a href="transform.html#cb88-5"></a><span class="co">#&gt; 3    4</span></span>
+<span id="cb88-6"><a href="transform.html#cb88-6"></a><span class="co">#&gt; 4    5</span></span>
+<span id="cb88-7"><a href="transform.html#cb88-7"></a><span class="co">#&gt; 5    6</span></span>
+<span id="cb88-8"><a href="transform.html#cb88-8"></a><span class="co">#&gt; 6    7</span></span>
+<span id="cb88-9"><a href="transform.html#cb88-9"></a><span class="co">#&gt; 7    8</span></span>
+<span id="cb88-10"><a href="transform.html#cb88-10"></a><span class="co">#&gt; 8    9</span></span>
+<span id="cb88-11"><a href="transform.html#cb88-11"></a><span class="co">#&gt; dtype: int64</span></span>
+<span id="cb88-12"><a href="transform.html#cb88-12"></a>x.cumsum()</span>
+<span id="cb88-13"><a href="transform.html#cb88-13"></a><span class="co">#&gt; 0     1</span></span>
+<span id="cb88-14"><a href="transform.html#cb88-14"></a><span class="co">#&gt; 1     3</span></span>
+<span id="cb88-15"><a href="transform.html#cb88-15"></a><span class="co">#&gt; 2     6</span></span>
+<span id="cb88-16"><a href="transform.html#cb88-16"></a><span class="co">#&gt; 3    10</span></span>
+<span id="cb88-17"><a href="transform.html#cb88-17"></a><span class="co">#&gt; 4    15</span></span>
+<span id="cb88-18"><a href="transform.html#cb88-18"></a><span class="co">#&gt; 5    21</span></span>
+<span id="cb88-19"><a href="transform.html#cb88-19"></a><span class="co">#&gt; 6    28</span></span>
+<span id="cb88-20"><a href="transform.html#cb88-20"></a><span class="co">#&gt; 7    36</span></span>
+<span id="cb88-21"><a href="transform.html#cb88-21"></a><span class="co">#&gt; 8    45</span></span>
+<span id="cb88-22"><a href="transform.html#cb88-22"></a><span class="co">#&gt; dtype: int64</span></span>
+<span id="cb88-23"><a href="transform.html#cb88-23"></a>x.rolling(<span class="dv">2</span>).mean()</span>
+<span id="cb88-24"><a href="transform.html#cb88-24"></a><span class="co">#&gt; 0    NaN</span></span>
+<span id="cb88-25"><a href="transform.html#cb88-25"></a><span class="co">#&gt; 1    1.5</span></span>
+<span id="cb88-26"><a href="transform.html#cb88-26"></a><span class="co">#&gt; 2    2.5</span></span>
+<span id="cb88-27"><a href="transform.html#cb88-27"></a><span class="co">#&gt; 3    3.5</span></span>
+<span id="cb88-28"><a href="transform.html#cb88-28"></a><span class="co">#&gt; 4    4.5</span></span>
+<span id="cb88-29"><a href="transform.html#cb88-29"></a><span class="co">#&gt; 5    5.5</span></span>
+<span id="cb88-30"><a href="transform.html#cb88-30"></a><span class="co">#&gt; 6    6.5</span></span>
+<span id="cb88-31"><a href="transform.html#cb88-31"></a><span class="co">#&gt; 7    7.5</span></span>
+<span id="cb88-32"><a href="transform.html#cb88-32"></a><span class="co">#&gt; 8    8.5</span></span>
+<span id="cb88-33"><a href="transform.html#cb88-33"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
+<li><p>Logical comparisons, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>!=</code>, and <code>==</code>, which you learned about
+earlier. If you’re doing a complex sequence of logical operations it’s
+often a good idea to store the interim values in new variables so you can
+check that each step is working as expected.</p></li>
+<li><p>Ranking: there are a number of ranking functions, but you should
+start with <code>min_rank()</code>. It does the most usual type of ranking
+(e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small
+ranks; use <code>desc(x)</code> to give the largest values the smallest ranks.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="transform.html#cb89-1"></a>y <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, np.nan, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb89-2"><a href="transform.html#cb89-2"></a>y.rank(method <span class="op">=</span> <span class="st">&#39;min&#39;</span>)</span>
+<span id="cb89-3"><a href="transform.html#cb89-3"></a><span class="co">#&gt; 0    1.0</span></span>
+<span id="cb89-4"><a href="transform.html#cb89-4"></a><span class="co">#&gt; 1    2.0</span></span>
+<span id="cb89-5"><a href="transform.html#cb89-5"></a><span class="co">#&gt; 2    2.0</span></span>
+<span id="cb89-6"><a href="transform.html#cb89-6"></a><span class="co">#&gt; 3    NaN</span></span>
+<span id="cb89-7"><a href="transform.html#cb89-7"></a><span class="co">#&gt; 4    4.0</span></span>
+<span id="cb89-8"><a href="transform.html#cb89-8"></a><span class="co">#&gt; 5    5.0</span></span>
+<span id="cb89-9"><a href="transform.html#cb89-9"></a><span class="co">#&gt; dtype: float64</span></span>
+<span id="cb89-10"><a href="transform.html#cb89-10"></a>y.rank(ascending<span class="op">=</span><span class="va">False</span>, method <span class="op">=</span> <span class="st">&#39;min&#39;</span>)</span>
+<span id="cb89-11"><a href="transform.html#cb89-11"></a><span class="co">#&gt; 0    5.0</span></span>
+<span id="cb89-12"><a href="transform.html#cb89-12"></a><span class="co">#&gt; 1    3.0</span></span>
+<span id="cb89-13"><a href="transform.html#cb89-13"></a><span class="co">#&gt; 2    3.0</span></span>
+<span id="cb89-14"><a href="transform.html#cb89-14"></a><span class="co">#&gt; 3    NaN</span></span>
+<span id="cb89-15"><a href="transform.html#cb89-15"></a><span class="co">#&gt; 4    2.0</span></span>
+<span id="cb89-16"><a href="transform.html#cb89-16"></a><span class="co">#&gt; 5    1.0</span></span>
+<span id="cb89-17"><a href="transform.html#cb89-17"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div>
+<p>If <code>method = 'min'`` doesn't do what you need, look at the variants</code>method = ‘first’<code>,</code>method = ‘dense’<code>,</code>method = ‘percent’<code>,</code>pct = True`.
+See the rank <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rank.html">help page</a> for more details.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="transform.html#cb90-1"></a>y.rank(method <span class="op">=</span> <span class="st">&#39;first&#39;</span>)</span>
+<span id="cb90-2"><a href="transform.html#cb90-2"></a><span class="co">#&gt; 0    1.0</span></span>
+<span id="cb90-3"><a href="transform.html#cb90-3"></a><span class="co">#&gt; 1    2.0</span></span>
+<span id="cb90-4"><a href="transform.html#cb90-4"></a><span class="co">#&gt; 2    3.0</span></span>
+<span id="cb90-5"><a href="transform.html#cb90-5"></a><span class="co">#&gt; 3    NaN</span></span>
+<span id="cb90-6"><a href="transform.html#cb90-6"></a><span class="co">#&gt; 4    4.0</span></span>
+<span id="cb90-7"><a href="transform.html#cb90-7"></a><span class="co">#&gt; 5    5.0</span></span>
+<span id="cb90-8"><a href="transform.html#cb90-8"></a><span class="co">#&gt; dtype: float64</span></span>
+<span id="cb90-9"><a href="transform.html#cb90-9"></a>y.rank(method <span class="op">=</span> <span class="st">&#39;dense&#39;</span>)</span>
+<span id="cb90-10"><a href="transform.html#cb90-10"></a><span class="co">#&gt; 0    1.0</span></span>
+<span id="cb90-11"><a href="transform.html#cb90-11"></a><span class="co">#&gt; 1    2.0</span></span>
+<span id="cb90-12"><a href="transform.html#cb90-12"></a><span class="co">#&gt; 2    2.0</span></span>
+<span id="cb90-13"><a href="transform.html#cb90-13"></a><span class="co">#&gt; 3    NaN</span></span>
+<span id="cb90-14"><a href="transform.html#cb90-14"></a><span class="co">#&gt; 4    3.0</span></span>
+<span id="cb90-15"><a href="transform.html#cb90-15"></a><span class="co">#&gt; 5    4.0</span></span>
+<span id="cb90-16"><a href="transform.html#cb90-16"></a><span class="co">#&gt; dtype: float64</span></span>
+<span id="cb90-17"><a href="transform.html#cb90-17"></a>y.rank(pct <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb90-18"><a href="transform.html#cb90-18"></a><span class="co">#&gt; 0    0.2</span></span>
+<span id="cb90-19"><a href="transform.html#cb90-19"></a><span class="co">#&gt; 1    0.5</span></span>
+<span id="cb90-20"><a href="transform.html#cb90-20"></a><span class="co">#&gt; 2    0.5</span></span>
+<span id="cb90-21"><a href="transform.html#cb90-21"></a><span class="co">#&gt; 3    NaN</span></span>
+<span id="cb90-22"><a href="transform.html#cb90-22"></a><span class="co">#&gt; 4    0.8</span></span>
+<span id="cb90-23"><a href="transform.html#cb90-23"></a><span class="co">#&gt; 5    1.0</span></span>
+<span id="cb90-24"><a href="transform.html#cb90-24"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
+</ul>
+</div>
+<div id="exercises-8" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Currently <code>dep_time</code> and <code>sched_dep_time</code> are convenient to look at, but
+hard to compute with because they’re not really continuous numbers.
+Convert them to a more convenient representation of number of minutes
+since midnight.</p></li>
+<li><p>Compare <code>air_time</code> with <code>arr_time - dep_time</code>. What do you expect to see?
+What do you see? What do you need to do to fix it?</p></li>
+<li><p>Compare <code>dep_time</code>, <code>sched_dep_time</code>, and <code>dep_delay</code>. How would you
+expect those three numbers to be related?</p></li>
+<li><p>Find the 10 most delayed flights using a ranking function. How do you want
+to handle ties? Carefully read the documentation for <code>method = 'min'</code>.</p></li>
+<li><p>What trigonometric functions does <strong>NumPy</strong> provide?</p></li>
+</ol>
+</div>
+</div>
+<div id="grouped-summaries-or-aggregations-with-agg" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> Grouped summaries or aggregations with <code>agg()</code></h2>
+<p>The last key verb is <code>agg()</code>. It collapses a data frame to a single row:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="transform.html#cb91-1"></a>flights.agg({<span class="st">&#39;dep_delay&#39;</span>: np.mean})</span>
+<span id="cb91-2"><a href="transform.html#cb91-2"></a><span class="co">#&gt; dep_delay    12.63907</span></span>
+<span id="cb91-3"><a href="transform.html#cb91-3"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div>
+<p>(Pandas aggregate functions ignores the <code>np.nan</code> values like <code>na.rm = TRUE</code> in R.)</p>
+<p><code>agg()</code> is not terribly useful unless we pair it with <code>groupby()</code>. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they’ll be automatically applied “by group”. For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the <code>groupby()</code> function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation">named aggregation</a> in pandas:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="transform.html#cb92-1"></a>by_day <span class="op">=</span> flights.groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>])</span>
+<span id="cb92-2"><a href="transform.html#cb92-2"></a>by_day.agg(delay <span class="op">=</span> (<span class="st">&#39;dep_delay&#39;</span>, np.mean)).reset_index()</span>
+<span id="cb92-3"><a href="transform.html#cb92-3"></a><span class="co">#&gt;      year  month  day      delay</span></span>
+<span id="cb92-4"><a href="transform.html#cb92-4"></a><span class="co">#&gt; 0    2013      1    1  11.548926</span></span>
+<span id="cb92-5"><a href="transform.html#cb92-5"></a><span class="co">#&gt; 1    2013      1    2  13.858824</span></span>
+<span id="cb92-6"><a href="transform.html#cb92-6"></a><span class="co">#&gt; 2    2013      1    3  10.987832</span></span>
+<span id="cb92-7"><a href="transform.html#cb92-7"></a><span class="co">#&gt; 3    2013      1    4   8.951595</span></span>
+<span id="cb92-8"><a href="transform.html#cb92-8"></a><span class="co">#&gt; 4    2013      1    5   5.732218</span></span>
+<span id="cb92-9"><a href="transform.html#cb92-9"></a><span class="co">#&gt; ..    ...    ...  ...        ...</span></span>
+<span id="cb92-10"><a href="transform.html#cb92-10"></a><span class="co">#&gt; 360  2013     12   27  10.937630</span></span>
+<span id="cb92-11"><a href="transform.html#cb92-11"></a><span class="co">#&gt; 361  2013     12   28   7.981550</span></span>
+<span id="cb92-12"><a href="transform.html#cb92-12"></a><span class="co">#&gt; 362  2013     12   29  22.309551</span></span>
+<span id="cb92-13"><a href="transform.html#cb92-13"></a><span class="co">#&gt; 363  2013     12   30  10.698113</span></span>
+<span id="cb92-14"><a href="transform.html#cb92-14"></a><span class="co">#&gt; 364  2013     12   31   6.996053</span></span>
+<span id="cb92-15"><a href="transform.html#cb92-15"></a><span class="co">#&gt; </span></span>
+<span id="cb92-16"><a href="transform.html#cb92-16"></a><span class="co">#&gt; [365 rows x 4 columns]</span></span></code></pre></div>
+<p>Note the use of <code>reset_index()</code> to remove pandas creation of a <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical">MultiIndex</a>. You can read more about the use of grouby in pandas with their <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html">Group By: split-apply-combine user Guid documentation</a></p>
+<p>Together <code>groupby()</code> and <code>agg()</code> provide one of the tools that you’ll use most commonly when working with pandas: grouped summaries. But before we go any further with this, we need to introduce a structure for pandas code when doing data science work. We structure our code much like ‘the pipe’, <code>%&gt;%</code> in the tidyverse packages from R-Studio.</p>
+<div id="combining-multiple-operations-with-the-pipe" class="section level3" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Combining multiple operations with the pipe</h3>
+<p>Imagine that we want to explore the relationship between the distance and average delay for each location. Using what you know about pandas, you might write code like this:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="transform.html#cb93-1"></a>by_dest <span class="op">=</span> flights.groupby(<span class="st">&#39;dest&#39;</span>)</span>
+<span id="cb93-2"><a href="transform.html#cb93-2"></a>delay <span class="op">=</span> by_dest.agg(</span>
+<span id="cb93-3"><a href="transform.html#cb93-3"></a>    count <span class="op">=</span> (<span class="st">&#39;distance&#39;</span>, <span class="st">&#39;size&#39;</span>),</span>
+<span id="cb93-4"><a href="transform.html#cb93-4"></a>  dist <span class="op">=</span> (<span class="st">&#39;distance&#39;</span>, np.mean),</span>
+<span id="cb93-5"><a href="transform.html#cb93-5"></a>  delay <span class="op">=</span> (<span class="st">&#39;arr_delay&#39;</span>, np.mean)</span>
+<span id="cb93-6"><a href="transform.html#cb93-6"></a>)</span>
+<span id="cb93-7"><a href="transform.html#cb93-7"></a>delay <span class="op">=</span> delay.query(<span class="st">&#39;count &gt; 20 &amp; dest != &quot;HNL&quot;&#39;</span>)</span>
+<span id="cb93-8"><a href="transform.html#cb93-8"></a></span>
+<span id="cb93-9"><a href="transform.html#cb93-9"></a><span class="co"># It looks like delays increase with distance up to ~750 miles</span></span>
+<span id="cb93-10"><a href="transform.html#cb93-10"></a><span class="co"># and then decrease. Maybe as flights get longer there&#39;s more</span></span>
+<span id="cb93-11"><a href="transform.html#cb93-11"></a><span class="co"># ability to make up delays in the air?</span></span>
+<span id="cb93-12"><a href="transform.html#cb93-12"></a>chart_base <span class="op">=</span> (alt.Chart(delay).</span>
+<span id="cb93-13"><a href="transform.html#cb93-13"></a>  encode(</span>
+<span id="cb93-14"><a href="transform.html#cb93-14"></a>    x <span class="op">=</span> <span class="st">&#39;dist&#39;</span>,</span>
+<span id="cb93-15"><a href="transform.html#cb93-15"></a>    y <span class="op">=</span> <span class="st">&#39;delay&#39;</span></span>
+<span id="cb93-16"><a href="transform.html#cb93-16"></a>  ))</span>
+<span id="cb93-17"><a href="transform.html#cb93-17"></a>  </span>
+<span id="cb93-18"><a href="transform.html#cb93-18"></a>chart <span class="op">=</span> chart_base.mark_point() <span class="op">+</span> chart_base.transform_loess(<span class="st">&#39;dist&#39;</span>, <span class="st">&#39;delay&#39;</span>).mark_line()  </span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="transform.html#cb94-1"></a>vegawidget<span class="op">::</span><span class="kw">as_vegaspec</span>(py<span class="op">$</span>chart<span class="op">$</span><span class="kw">to_json</span>())</span></code></pre></div>
+<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
+  "chart_spec": {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+    "config": {
+      "view": {
+        "continuousHeight": 300,
+        "continuousWidth": 400
+      }
+    },
+    "data": {
+      "name": "data-3702ca1c412d99811a48df476b255e71"
+    },
+    "datasets": {
+      "data-3702ca1c412d99811a48df476b255e71": [
+        {
+          "count": 254,
+          "delay": 4.3819,
+          "dist": 1826
+        },
+        {
+          "count": 265,
+          "delay": 4.8523,
+          "dist": 199
+        },
+        {
+          "count": 439,
+          "delay": 14.3971,
+          "dist": 143
+        },
+        {
+          "count": 17215,
+          "delay": 11.3001,
+          "dist": 757.1082
+        },
+        {
+          "count": 2439,
+          "delay": 6.0199,
+          "dist": 1514.253
+        },
+        {
+          "count": 275,
+          "delay": 8.0038,
+          "dist": 583.5818
+        },
+        {
+          "count": 443,
+          "delay": 7.0485,
+          "dist": 116
+        },
+        {
+          "count": 375,
+          "delay": 8.0279,
+          "dist": 378
+        },
+        {
+          "count": 297,
+          "delay": 16.8773,
+          "dist": 865.9966
+        },
+        {
+          "count": 6333,
+          "delay": 11.8125,
+          "dist": 758.2135
+        },
+        {
+          "count": 15508,
+          "delay": 2.9144,
+          "dist": 190.637
+        },
+        {
+          "count": 896,
+          "delay": 8.2455,
+          "dist": 1578.9833
+        },
+        {
+          "count": 2589,
+          "delay": 8.951,
+          "dist": 265.0915
+        },
+        {
+          "count": 4681,
+          "delay": 8.946,
+          "dist": 296.8084
+        },
+        {
+          "count": 371,
+          "delay": 8.1757,
+          "dist": 2465
+        },
+        {
+          "count": 1781,
+          "delay": 10.7267,
+          "dist": 179.4183
+        },
+        {
+          "count": 36,
+          "delay": 7.6,
+          "dist": 1882
+        },
+        {
+          "count": 116,
+          "delay": 41.7642,
+          "dist": 603.5517
+        },
+        {
+          "count": 864,
+          "delay": 19.6983,
+          "dist": 397
+        },
+        {
+          "count": 52,
+          "delay": 9.5,
+          "dist": 305
+        },
+        {
+          "count": 2884,
+          "delay": 10.593,
+          "dist": 632.9168
+        },
+        {
+          "count": 4573,
+          "delay": 9.1816,
+          "dist": 414.1743
+        },
+        {
+          "count": 14064,
+          "delay": 7.3603,
+          "dist": 538.0273
+        },
+        {
+          "count": 3524,
+          "delay": 10.6013,
+          "dist": 476.5551
+        },
+        {
+          "count": 138,
+          "delay": 14.6716,
+          "dist": 444
+        },
+        {
+          "count": 3941,
+          "delay": 15.3646,
+          "dist": 575.1599
+        },
+        {
+          "count": 1525,
+          "delay": 12.6805,
+          "dist": 537.1023
+        },
+        {
+          "count": 9705,
+          "delay": 9.067,
+          "dist": 211.0062
+        },
+        {
+          "count": 7266,
+          "delay": 8.6065,
+          "dist": 1614.6784
+        },
+        {
+          "count": 8738,
+          "delay": 0.3221,
+          "dist": 1383.043
+        },
+        {
+          "count": 569,
+          "delay": 19.0057,
+          "dist": 1020.8875
+        },
+        {
+          "count": 9384,
+          "delay": 5.43,
+          "dist": 498.1285
+        },
+        {
+          "count": 213,
+          "delay": 6.3043,
+          "dist": 1735.7089
+        },
+        {
+          "count": 12055,
+          "delay": 8.0821,
+          "dist": 1070.0688
+        },
+        {
+          "count": 765,
+          "delay": 18.1896,
+          "dist": 605.7817
+        },
+        {
+          "count": 1606,
+          "delay": 14.1126,
+          "dist": 449.8418
+        },
+        {
+          "count": 849,
+          "delay": 15.9354,
+          "dist": 595.96
+        },
+        {
+          "count": 2115,
+          "delay": 7.1762,
+          "dist": 1420.1551
+        },
+        {
+          "count": 5700,
+          "delay": 13.8642,
+          "dist": 224.8468
+        },
+        {
+          "count": 7198,
+          "delay": 4.2408,
+          "dist": 1407.2067
+        },
+        {
+          "count": 110,
+          "delay": 4.6355,
+          "dist": 500
+        },
+        {
+          "count": 2077,
+          "delay": 9.9404,
+          "dist": 652.2629
+        },
+        {
+          "count": 25,
+          "delay": 28.0952,
+          "dist": 1875.6
+        },
+        {
+          "count": 2720,
+          "delay": 11.8448,
+          "dist": 824.6761
+        },
+        {
+          "count": 5997,
+          "delay": 0.2577,
+          "dist": 2240.9615
+        },
+        {
+          "count": 16174,
+          "delay": 0.5471,
+          "dist": 2468.6224
+        },
+        {
+          "count": 668,
+          "delay": -0.062,
+          "dist": 2465
+        },
+        {
+          "count": 2008,
+          "delay": 14.5141,
+          "dist": 1097.6952
+        },
+        {
+          "count": 14082,
+          "delay": 5.4546,
+          "dist": 943.1106
+        },
+        {
+          "count": 4113,
+          "delay": 12.3642,
+          "dist": 718.046
+        },
+        {
+          "count": 1789,
+          "delay": 10.6453,
+          "dist": 954.2012
+        },
+        {
+          "count": 1009,
+          "delay": 14.7876,
+          "dist": 207.0297
+        },
+        {
+          "count": 11728,
+          "delay": 0.2991,
+          "dist": 1091.5524
+        },
+        {
+          "count": 2802,
+          "delay": 14.1672,
+          "dist": 733.3815
+        },
+        {
+          "count": 572,
+          "delay": 20.196,
+          "dist": 803.9545
+        },
+        {
+          "count": 7185,
+          "delay": 7.2702,
+          "dist": 1017.4017
+        },
+        {
+          "count": 3799,
+          "delay": 6.4902,
+          "dist": 1177.7057
+        },
+        {
+          "count": 221,
+          "delay": -0.2857,
+          "dist": 173
+        },
+        {
+          "count": 59,
+          "delay": 4.6034,
+          "dist": 550.661
+        },
+        {
+          "count": 312,
+          "delay": 3.0777,
+          "dist": 2576
+        },
+        {
+          "count": 346,
+          "delay": 30.619,
+          "dist": 1325
+        },
+        {
+          "count": 849,
+          "delay": 14.6989,
+          "dist": 1135.5665
+        },
+        {
+          "count": 17283,
+          "delay": 5.8766,
+          "dist": 729.0008
+        },
+        {
+          "count": 1536,
+          "delay": 10.9491,
+          "dist": 288.5234
+        },
+        {
+          "count": 6554,
+          "delay": 8.563,
+          "dist": 1028.8381
+        },
+        {
+          "count": 1354,
+          "delay": 5.1416,
+          "dist": 2445.5657
+        },
+        {
+          "count": 1632,
+          "delay": 10.1272,
+          "dist": 94.3235
+        },
+        {
+          "count": 4656,
+          "delay": 2.097,
+          "dist": 2141.3033
+        },
+        {
+          "count": 2875,
+          "delay": 7.681,
+          "dist": 334.0612
+        },
+        {
+          "count": 365,
+          "delay": 7.8715,
+          "dist": 1617
+        },
+        {
+          "count": 376,
+          "delay": 16.2346,
+          "dist": 160
+        },
+        {
+          "count": 2352,
+          "delay": 11.6604,
+          "dist": 276.1284
+        },
+        {
+          "count": 8163,
+          "delay": 10.0524,
+          "dist": 426.7577
+        },
+        {
+          "count": 2454,
+          "delay": 20.1113,
+          "dist": 281.4046
+        },
+        {
+          "count": 2416,
+          "delay": 11.5606,
+          "dist": 259.2508
+        },
+        {
+          "count": 3537,
+          "delay": 3.2381,
+          "dist": 1072.8533
+        },
+        {
+          "count": 2737,
+          "delay": 3.1392,
+          "dist": 2437.2992
+        },
+        {
+          "count": 686,
+          "delay": 6.9454,
+          "dist": 1578.3411
+        },
+        {
+          "count": 804,
+          "delay": 15.1295,
+          "dist": 709.1841
+        },
+        {
+          "count": 1157,
+          "delay": 12.6694,
+          "dist": 645.9836
+        },
+        {
+          "count": 3923,
+          "delay": -1.0991,
+          "dist": 2412.6653
+        },
+        {
+          "count": 13331,
+          "delay": 2.6729,
+          "dist": 2577.9236
+        },
+        {
+          "count": 329,
+          "delay": 3.4482,
+          "dist": 2569
+        },
+        {
+          "count": 5819,
+          "delay": 2.5205,
+          "dist": 1599.8336
+        },
+        {
+          "count": 2467,
+          "delay": 0.1763,
+          "dist": 1986.9866
+        },
+        {
+          "count": 284,
+          "delay": 12.1099,
+          "dist": 2521
+        },
+        {
+          "count": 825,
+          "delay": -7.8682,
+          "dist": 2434
+        },
+        {
+          "count": 1211,
+          "delay": 3.0824,
+          "dist": 1044.6515
+        },
+        {
+          "count": 4339,
+          "delay": 11.0785,
+          "dist": 878.7232
+        },
+        {
+          "count": 522,
+          "delay": -3.8359,
+          "dist": 1626.9828
+        },
+        {
+          "count": 1761,
+          "delay": 8.9039,
+          "dist": 205.9216
+        },
+        {
+          "count": 7466,
+          "delay": 7.4085,
+          "dist": 1003.9356
+        },
+        {
+          "count": 315,
+          "delay": 33.6599,
+          "dist": 1215
+        },
+        {
+          "count": 101,
+          "delay": 12.9684,
+          "dist": 652.3861
+        },
+        {
+          "count": 631,
+          "delay": 24.0692,
+          "dist": 638.8098
+        },
+        {
+          "count": 1036,
+          "delay": 7.4657,
+          "dist": 1142.5058
+        }
+      ]
+    },
+    "layer": [
+      {
+        "encoding": {
+          "x": {
+            "field": "dist",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "delay",
+            "type": "quantitative"
+          }
+        },
+        "mark": "point"
+      },
+      {
+        "encoding": {
+          "x": {
+            "field": "dist",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "delay",
+            "type": "quantitative"
+          }
+        },
+        "mark": "line",
+        "transform": [
+          {
+            "loess": "delay",
+            "on": "dist"
+          }
+        ]
+      }
+    ]
+  },
+  "embed_options": {
+    "defaultStyle": true,
+    "renderer": "canvas"
+  }
+},"evals":[],"jsHooks":[]}</script>
+<p>There are three steps to prepare this data:</p>
+<ol style="list-style-type: decimal">
+<li><p>Group flights by destination.</p></li>
+<li><p>Summarise to compute distance, average delay, and number of flights.</p></li>
+<li><p>Filter to remove noisy points and Honolulu airport, which is almost
+twice as far away as the next closest airport.</p></li>
+</ol>
+<p>This code is a little frustrating to write because we have to give each intermediate data frame a name, even though we don’t care about it. Naming things is hard, so this slows down our analysis.</p>
+<p>There’s another way to tackle the same problem without the additional objects:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="transform.html#cb95-1"></a>delays <span class="op">=</span> (flights.</span>
+<span id="cb95-2"><a href="transform.html#cb95-2"></a>    groupby(<span class="st">&#39;dest&#39;</span>).</span>
+<span id="cb95-3"><a href="transform.html#cb95-3"></a>    agg(</span>
+<span id="cb95-4"><a href="transform.html#cb95-4"></a>        count <span class="op">=</span> (<span class="st">&#39;distance&#39;</span>, <span class="st">&#39;size&#39;</span>),</span>
+<span id="cb95-5"><a href="transform.html#cb95-5"></a>        dist <span class="op">=</span> (<span class="st">&#39;distance&#39;</span>, np.mean),</span>
+<span id="cb95-6"><a href="transform.html#cb95-6"></a>        delay <span class="op">=</span> (<span class="st">&#39;arr_delay&#39;</span>, np.mean) </span>
+<span id="cb95-7"><a href="transform.html#cb95-7"></a>    ).</span>
+<span id="cb95-8"><a href="transform.html#cb95-8"></a>    query(<span class="st">&#39;count &gt; 20 &amp; dest != &quot;HNL&quot;&#39;</span>))</span></code></pre></div>
+<p>This focuses on the transformations, not what’s being transformed, which makes the code easier to read. You can read it as a series of imperative statements: group, then summarise, then filter. As suggested by this reading, a good way to pronounce <code>.</code> when reading pandas code is “then”.</p>
+<p>You can use the <code>()</code> with <code>.</code> to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom. We’ll use this format frequently from now on because it considerably improves the readability of complex pandas code.</p>
 <!-- ### Missing values -->
 <!-- You may have wondered about the `na.rm` argument we used above. What happens if we don't set it? -->
 <!-- ```{r} -->

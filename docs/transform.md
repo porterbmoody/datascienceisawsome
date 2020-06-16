@@ -1,5 +1,8 @@
 # Data transformation {#transform}
 
+
+
+
 ## Introduction
 
 Visualization is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you'll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You'll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.
@@ -12,7 +15,7 @@ In this chapter we're going to focus on how to use the pandas package, the found
 ```python
 import pandas as pd
 import altair as alt
-import math
+import numpy as np
 
 
 flights_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/flights/flights.csv"
@@ -27,18 +30,18 @@ To explore the basic data manipulation verbs of pandas, we'll use `flights`. Thi
 
 
 ```
-#>         year  month  day  ...  hour  minute             time_hour
-#> 0       2013      1    1  ...     5      15  2013-01-01T10:00:00Z
-#> 1       2013      1    1  ...     5      29  2013-01-01T10:00:00Z
-#> 2       2013      1    1  ...     5      40  2013-01-01T10:00:00Z
-#> 3       2013      1    1  ...     5      45  2013-01-01T10:00:00Z
-#> 4       2013      1    1  ...     6       0  2013-01-01T11:00:00Z
-#> ...      ...    ...  ...  ...   ...     ...                   ...
-#> 336771  2013      9   30  ...    14      55  2013-09-30T18:00:00Z
-#> 336772  2013      9   30  ...    22       0  2013-10-01T02:00:00Z
-#> 336773  2013      9   30  ...    12      10  2013-09-30T16:00:00Z
-#> 336774  2013      9   30  ...    11      59  2013-09-30T15:00:00Z
-#> 336775  2013      9   30  ...     8      40  2013-09-30T12:00:00Z
+#>         year  month  day  ...  hour  minute                 time_hour
+#> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+#> 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+#> 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+#> 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+#> 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
 #> 
 #> [336776 rows x 19 columns]
 ```
@@ -198,19 +201,19 @@ There's another common problem you might encounter when using `==`: floating poi
 
 
 ```python
-math.sqrt(2) ** 2 ==  2
+np.sqrt(2) ** 2 ==  2
 #> False
 1 / 49 * 49 == 1
 #> False
 ```
 
-Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `math.isclose()`:
+Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `np.isclose()`:
 
 
 ```python
-math.isclose(math.sqrt(2) ** 2,  2)
+np.isclose(np.sqrt(2) ** 2,  2)
 #> True
-math.isclose(1 / 49 * 49, 1)
+np.isclose(1 / 49 * 49, 1)
 #> True
 ```
 
@@ -261,9 +264,9 @@ One important feature of pandas in Python that can make comparison tricky are mi
 
 
 ```python
-math.nan + 10
+np.nan + 10
 #> nan
-math.nan / 2
+np.nan / 2
 #> nan
 ```
 
@@ -271,11 +274,11 @@ The most confusing result are the comparisons. They always return a `False`. The
 
 
 ```python
-math.nan > 5
+np.nan > 5
 #> False
-10 == math.nan
+10 == np.nan
 #> False
-math.nan == math.nan
+np.nan == np.nan
 #> False
 ```
 
@@ -284,10 +287,10 @@ It's easiest to understand why this is true with a bit more context:
 
 ```python
 # Let x be Mary's age. We don't know how old she is.
-x = math.nan
+x = np.nan
 
 # Let y be John's age. We don't know how old he is.
-y = math.nan
+y = np.nan
 
 # Are John and Mary the same age?
 x == y
@@ -295,7 +298,7 @@ x == y
 #> False
 ```
 
-The Python development team did decide to provide functionality to find `math.nan` objects in your code by allowing `math.nan != math.nan` to return `True`.  Once again you can [read the rationale for this decision](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). Python now has `isnan()` functions to make this comparison more straight forward in your code. 
+The Python development team did decide to provide functionality to find `np.nan` objects in your code by allowing `np.nan != np.nan` to return `True`.  Once again you can [read the rationale for this decision](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). Python now has `isnan()` functions to make this comparison more straight forward in your code. 
 
 Pandas uses the `nan` structure in Python to identify __NA__ or 'missing' values. If you want to determine if a value is missing, use `pd.isna()`:
 
@@ -309,7 +312,7 @@ pd.isna(x)
 
 
 ```python
-df = pd.DataFrame({'x': [1, math.nan, 3]})
+df = pd.DataFrame({'x': [1, np.nan, 3]})
 df.query('x > 1')
 #>      x
 #> 2  3.0
@@ -392,7 +395,7 @@ Missing values are always sorted at the end:
 
 
 ```python
-df = pd.DataFrame({'x': [5, 2, math.nan]})
+df = pd.DataFrame({'x': [5, 2, np.nan]})
 df.sort_values('x')
 #>      x
 #> 1  2.0
@@ -554,234 +557,362 @@ flights.rename(columns = {'year': 'YEAR', 'month':'MONTH'})
     flights.filter(regex = "TIME")
     ```
 
-<!-- ## Add new variables with `mutate()` -->
+## Add new variables with `assign()`
 
-<!-- Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. That's the job of `mutate()`.  -->
+Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. That's the job of `assign()`.
 
-<!-- `mutate()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. Remember that when you're in RStudio, the easiest way to see all the columns is `View()`. -->
+`assign()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. 
 
-<!-- ```{r} -->
-<!-- flights_sml <- select(flights,  -->
-<!--   year:day,  -->
-<!--   ends_with("delay"),  -->
-<!--   distance,  -->
-<!--   air_time -->
-<!-- ) -->
-<!-- mutate(flights_sml, -->
-<!--   gain = dep_delay - arr_delay, -->
-<!--   speed = distance / air_time * 60 -->
-<!-- ) -->
-<!-- ``` -->
 
-<!-- Note that you can refer to columns that you've just created: -->
+```python
 
-<!-- ```{r} -->
-<!-- mutate(flights_sml, -->
-<!--   gain = dep_delay - arr_delay, -->
-<!--   hours = air_time / 60, -->
-<!--   gain_per_hour = gain / hours -->
-<!-- ) -->
-<!-- ``` -->
+flights_sml = (flights.
+    filter(regex = "^year$|^month$|^day$|delay$|^distance$|^air_time$")
+)
 
-<!-- If you only want to keep the new variables, use `transmute()`: -->
+flights_sml.assign(
+    gain = lambda x: x.dep_delay - x.arr_delay,
+    speed = lambda x: x.distance / x.air_time * 60
+    ).head()
+#>    year  month  day  dep_delay  arr_delay  air_time  distance  gain       speed
+#> 0  2013      1    1        2.0       11.0     227.0      1400  -9.0  370.044053
+#> 1  2013      1    1        4.0       20.0     227.0      1416 -16.0  374.273128
+#> 2  2013      1    1        2.0       33.0     160.0      1089 -31.0  408.375000
+#> 3  2013      1    1       -1.0      -18.0     183.0      1576  17.0  516.721311
+#> 4  2013      1    1       -6.0      -25.0     116.0       762  19.0  394.137931
+```
 
-<!-- ```{r} -->
-<!-- transmute(flights, -->
-<!--   gain = dep_delay - arr_delay, -->
-<!--   hours = air_time / 60, -->
-<!--   gain_per_hour = gain / hours -->
-<!-- ) -->
-<!-- ``` -->
+Note that you can refer to columns that you've just created:
 
-<!-- ### Useful creation functions {#mutate-funs} -->
 
-<!-- There are many functions for creating new variables that you can use with `mutate()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful: -->
+```python
+flights_sml.assign(
+    gain = lambda x: x.dep_delay - x.arr_delay,
+    hours = lambda x: x.air_time / 60,
+    gain_per_hour = lambda x: x.gain / x.hours
+).head()
+#>    year  month  day  dep_delay  ...  distance  gain     hours  gain_per_hour
+#> 0  2013      1    1        2.0  ...      1400  -9.0  3.783333      -2.378855
+#> 1  2013      1    1        4.0  ...      1416 -16.0  3.783333      -4.229075
+#> 2  2013      1    1        2.0  ...      1089 -31.0  2.666667     -11.625000
+#> 3  2013      1    1       -1.0  ...      1576  17.0  3.050000       5.573770
+#> 4  2013      1    1       -6.0  ...       762  19.0  1.933333       9.827586
+#> 
+#> [5 rows x 10 columns]
+```
 
-<!-- *   Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised, -->
-<!--     using the so called "recycling rules". If one parameter is shorter than  -->
-<!--     the other, it will be automatically extended to be the same length. This  -->
-<!--     is most useful when one of the arguments is a single number: `air_time / 60`, -->
-<!--     `hours * 60 + minute`, etc. -->
+### Useful creation functions {#mutate-funs}
 
-<!--     Arithmetic operators are also useful in conjunction with the aggregate -->
-<!--     functions you'll learn about later. For example, `x / sum(x)` calculates  -->
-<!--     the proportion of a total, and `y - mean(y)` computes the difference from  -->
-<!--     the mean. -->
+There are many functions for creating new variables that you can use with `assign()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. Some arithmetic operators are available in Python without the need for any additional packages. However, many arithmetic functions like `mean()` and `std()` are accessed through importing additional packages. Python comes with a `math` and `statistics` package. However, we recommend the __NumPy__ package for accessing the suite of mathematical functions needed. You would import NumPy with `import numpy as np`. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful:
 
-<!-- *   Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where -->
-<!--     `x == y * (x %/% y) + (x %% y)`. Modular arithmetic is a handy tool because  -->
-<!--     it allows you to break integers up into pieces. For example, in the  -->
-<!--     flights dataset, you can compute `hour` and `minute` from `dep_time` with: -->
+*   Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised,
+    using the so called "recycling rules". If one parameter is shorter than
+    the other, it will be automatically extended to be the same length. This
+    is most useful when one of the arguments is a single number: `air_time / 60`,
+    `hours * 60 + minute`, etc.
 
-<!--     ```{r} -->
-<!--     transmute(flights, -->
-<!--       dep_time, -->
-<!--       hour = dep_time %/% 100, -->
-<!--       minute = dep_time %% 100 -->
-<!--     ) -->
-<!--     ``` -->
+    Arithmetic operators are also useful in conjunction with the aggregate
+    functions you'll learn about later. For example, `x / np.sum(x)` calculates
+    the proportion of a total, and `y - np.mean(y)` computes the difference from
+    the mean.
 
-<!-- *   Logs: `log()`, `log2()`, `log10()`. Logarithms are an incredibly useful -->
-<!--     transformation for dealing with data that ranges across multiple orders of -->
-<!--     magnitude. They also convert multiplicative relationships to additive, a -->
-<!--     feature we'll come back to in modelling. -->
+*   Modular arithmetic: `//` (integer division) and `%` (remainder), where
+    `x == y * (x // y) + (x % y)`. Modular arithmetic is a handy tool because
+    it allows you to break integers up into pieces. For example, in the
+    flights dataset, you can compute `hour` and `minute` from `dep_time` with:
 
-<!--     All else being equal, I recommend using `log2()` because it's easy to -->
-<!--     interpret: a difference of 1 on the log scale corresponds to doubling on -->
-<!--     the original scale and a difference of -1 corresponds to halving. -->
+    
+    ```python
+    (flights.
+        filter(['dep_time']).
+        assign(
+          hour = lambda x: x.dep_time // 100,
+          minute = lambda x: x.dep_time % 100)
+    )
+    #>         dep_time  hour  minute
+    #> 0          517.0   5.0    17.0
+    #> 1          533.0   5.0    33.0
+    #> 2          542.0   5.0    42.0
+    #> 3          544.0   5.0    44.0
+    #> 4          554.0   5.0    54.0
+    #> ...          ...   ...     ...
+    #> 336771       NaN   NaN     NaN
+    #> 336772       NaN   NaN     NaN
+    #> 336773       NaN   NaN     NaN
+    #> 336774       NaN   NaN     NaN
+    #> 336775       NaN   NaN     NaN
+    #> 
+    #> [336776 rows x 3 columns]
+    ```
 
-<!-- *   Offsets: `lead()` and `lag()` allow you to refer to leading or lagging  -->
-<!--     values. This allows you to compute running differences (e.g. `x - lag(x)`)  -->
-<!--     or find when values change (`x != lag(x)`). They are most useful in  -->
-<!--     conjunction with `group_by()`, which you'll learn about shortly. -->
+*   Logs: `np.log()`, `np.log2()`, `np.log10()`. Logarithms are an incredibly useful
+    transformation for dealing with data that ranges across multiple orders of
+    magnitude. They also convert multiplicative relationships to additive, a
+    feature we'll come back to in modelling.
 
-<!--     ```{r} -->
-<!--     (x <- 1:10) -->
-<!--     lag(x) -->
-<!--     lead(x) -->
-<!--     ``` -->
+    All else being equal, I recommend using `np.log2()` because it's easy to
+    interpret: a difference of 1 on the log scale corresponds to doubling on
+    the original scale and a difference of -1 corresponds to halving.
 
-<!-- *   Cumulative and rolling aggregates: R provides functions for running sums, -->
-<!--     products, mins and maxes: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`;  -->
-<!--     and dplyr provides `cummean()` for cumulative means. If you need rolling -->
-<!--     aggregates (i.e. a sum computed over a rolling window), try the RcppRoll -->
-<!--     package. -->
+*   Offsets: `shift(1)` and `shift(-1)` allow you to refer to leading or lagging
+    values. This allows you to compute running differences (e.g. `x - x.shift(1)`)
+    or find when values change (`x != x.shift(1)`). They are most useful in
+    conjunction with `groupby()`, which you'll learn about shortly.
 
-<!--     ```{r} -->
-<!--     x -->
-<!--     cumsum(x) -->
-<!--     cummean(x) -->
-<!--     ``` -->
+    
+    ```python
+    x = pd.Series(np.arange(1,10))
+    x.shift(1)
+    #> 0    NaN
+    #> 1    1.0
+    #> 2    2.0
+    #> 3    3.0
+    #> 4    4.0
+    #> 5    5.0
+    #> 6    6.0
+    #> 7    7.0
+    #> 8    8.0
+    #> dtype: float64
+    x.shift(-1)
+    #> 0    2.0
+    #> 1    3.0
+    #> 2    4.0
+    #> 3    5.0
+    #> 4    6.0
+    #> 5    7.0
+    #> 6    8.0
+    #> 7    9.0
+    #> 8    NaN
+    #> dtype: float64
+    ```
 
-<!-- *   Logical comparisons, `<`, `<=`, `>`, `>=`, `!=`, and `==`, which you learned about -->
-<!--     earlier. If you're doing a complex sequence of logical operations it's  -->
-<!--     often a good idea to store the interim values in new variables so you can -->
-<!--     check that each step is working as expected. -->
+*   Cumulative and rolling aggregates: pandas provides functions for running sums,
+    products, mins and maxes: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`.
+    If you need rolling aggregates (i.e. a sum computed over a rolling window), 
+    try the `rolling()` in the pandas package.
 
-<!-- *   Ranking: there are a number of ranking functions, but you should  -->
-<!--     start with `min_rank()`. It does the most usual type of ranking  -->
-<!--     (e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small -->
-<!--     ranks; use `desc(x)` to give the largest values the smallest ranks.  -->
+    
+    ```python
+    x
+    #> 0    1
+    #> 1    2
+    #> 2    3
+    #> 3    4
+    #> 4    5
+    #> 5    6
+    #> 6    7
+    #> 7    8
+    #> 8    9
+    #> dtype: int64
+    x.cumsum()
+    #> 0     1
+    #> 1     3
+    #> 2     6
+    #> 3    10
+    #> 4    15
+    #> 5    21
+    #> 6    28
+    #> 7    36
+    #> 8    45
+    #> dtype: int64
+    x.rolling(2).mean()
+    #> 0    NaN
+    #> 1    1.5
+    #> 2    2.5
+    #> 3    3.5
+    #> 4    4.5
+    #> 5    5.5
+    #> 6    6.5
+    #> 7    7.5
+    #> 8    8.5
+    #> dtype: float64
+    ```
 
-<!--     ```{r} -->
-<!--     y <- c(1, 2, 2, NA, 3, 4) -->
-<!--     min_rank(y) -->
-<!--     min_rank(desc(y)) -->
-<!--     ``` -->
+*   Logical comparisons, `<`, `<=`, `>`, `>=`, `!=`, and `==`, which you learned about
+    earlier. If you're doing a complex sequence of logical operations it's
+    often a good idea to store the interim values in new variables so you can
+    check that each step is working as expected.
 
-<!--     If `min_rank()` doesn't do what you need, look at the variants -->
-<!--     `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`, -->
-<!--     `ntile()`.  See their help pages for more details. -->
+*   Ranking: there are a number of ranking functions, but you should
+    start with `min_rank()`. It does the most usual type of ranking
+    (e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small
+    ranks; use `desc(x)` to give the largest values the smallest ranks.
 
-<!--     ```{r} -->
-<!--     row_number(y) -->
-<!--     dense_rank(y) -->
-<!--     percent_rank(y) -->
-<!--     cume_dist(y) -->
-<!--     ``` -->
+    
+    ```python
+    y = pd.Series([1, 2, 2, np.nan, 3, 4])
+    y.rank(method = 'min')
+    #> 0    1.0
+    #> 1    2.0
+    #> 2    2.0
+    #> 3    NaN
+    #> 4    4.0
+    #> 5    5.0
+    #> dtype: float64
+    y.rank(ascending=False, method = 'min')
+    #> 0    5.0
+    #> 1    3.0
+    #> 2    3.0
+    #> 3    NaN
+    #> 4    2.0
+    #> 5    1.0
+    #> dtype: float64
+    ```
 
-<!-- ### Exercises -->
+    If `method = 'min'`` doesn't do what you need, look at the variants
+    `method = 'first'`, `method = 'dense'`, `method = 'percent'`, `pct = True`.
+    See the rank [help page](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rank.html) for more details.
 
-<!-- ```{r, eval = FALSE, echo = FALSE} -->
-<!-- flights <- flights %>% mutate( -->
-<!--   dep_time = hour * 60 + minute, -->
-<!--   arr_time = (arr_time %/% 100) * 60 + (arr_time %% 100), -->
-<!--   airtime2 = arr_time - dep_time, -->
-<!--   dep_sched = dep_time + dep_delay -->
-<!-- ) -->
+    
+    ```python
+    y.rank(method = 'first')
+    #> 0    1.0
+    #> 1    2.0
+    #> 2    3.0
+    #> 3    NaN
+    #> 4    4.0
+    #> 5    5.0
+    #> dtype: float64
+    y.rank(method = 'dense')
+    #> 0    1.0
+    #> 1    2.0
+    #> 2    2.0
+    #> 3    NaN
+    #> 4    3.0
+    #> 5    4.0
+    #> dtype: float64
+    y.rank(pct = True)
+    #> 0    0.2
+    #> 1    0.5
+    #> 2    0.5
+    #> 3    NaN
+    #> 4    0.8
+    #> 5    1.0
+    #> dtype: float64
+    ```
 
-<!-- ggplot(flights, aes(dep_sched)) + geom_histogram(binwidth = 60) -->
-<!-- ggplot(flights, aes(dep_sched %% 60)) + geom_histogram(binwidth = 1) -->
-<!-- ggplot(flights, aes(air_time - airtime2)) + geom_histogram() -->
-<!-- ``` -->
+### Exercises
 
-<!-- 1.  Currently `dep_time` and `sched_dep_time` are convenient to look at, but -->
-<!--     hard to compute with because they're not really continuous numbers.  -->
-<!--     Convert them to a more convenient representation of number of minutes -->
-<!--     since midnight. -->
 
-<!-- 1.  Compare `air_time` with `arr_time - dep_time`. What do you expect to see? -->
-<!--     What do you see? What do you need to do to fix it? -->
 
-<!-- 1.  Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you -->
-<!--     expect those three numbers to be related? -->
+1.  Currently `dep_time` and `sched_dep_time` are convenient to look at, but
+    hard to compute with because they're not really continuous numbers.
+    Convert them to a more convenient representation of number of minutes
+    since midnight.
 
-<!-- 1.  Find the 10 most delayed flights using a ranking function. How do you want  -->
-<!--     to handle ties? Carefully read the documentation for `min_rank()`. -->
+1.  Compare `air_time` with `arr_time - dep_time`. What do you expect to see?
+    What do you see? What do you need to do to fix it?
 
-<!-- 1.  What does `1:3 + 1:10` return? Why? -->
+1.  Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you
+    expect those three numbers to be related?
 
-<!-- 1.  What trigonometric functions does R provide? -->
+1.  Find the 10 most delayed flights using a ranking function. How do you want
+    to handle ties? Carefully read the documentation for `method = 'min'`.
 
-<!-- ## Grouped summaries with `summarise()` -->
+1.  What trigonometric functions does __NumPy__ provide?
 
-<!-- The last key verb is `summarise()`. It collapses a data frame to a single row: -->
+## Grouped summaries or aggregations with `agg()`
 
-<!-- ```{r} -->
-<!-- summarise(flights, delay = mean(dep_delay, na.rm = TRUE)) -->
-<!-- ``` -->
+The last key verb is `agg()`. It collapses a data frame to a single row:
 
-<!-- (We'll come back to what that `na.rm = TRUE` means very shortly.) -->
 
-<!-- `summarise()` is not terribly useful unless we pair it with `group_by()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the dplyr verbs on a grouped data frame they'll be automatically applied "by group". For example, if we applied exactly the same code to a data frame grouped by date, we get the average delay per date: -->
+```python
+flights.agg({'dep_delay': np.mean})
+#> dep_delay    12.63907
+#> dtype: float64
+```
 
-<!-- ```{r} -->
-<!-- by_day <- group_by(flights, year, month, day) -->
-<!-- summarise(by_day, delay = mean(dep_delay, na.rm = TRUE)) -->
-<!-- ``` -->
+(Pandas aggregate functions ignores the `np.nan` values like `na.rm = TRUE` in R.)
 
-<!-- Together `group_by()` and `summarise()` provide one of the tools that you'll use most commonly when working with dplyr: grouped summaries. But before we go any further with this, we need to introduce a powerful new idea: the pipe. -->
+`agg()` is not terribly useful unless we pair it with `groupby()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they'll be automatically applied "by group". For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the `groupby()` function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called [named aggregation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation) in pandas:
 
-<!-- ### Combining multiple operations with the pipe -->
 
-<!-- Imagine that we want to explore the relationship between the distance and average delay for each location. Using what you know about dplyr, you might write code like this: -->
+```python
+by_day = flights.groupby(['year', 'month', 'day'])
+by_day.agg(delay = ('dep_delay', np.mean)).reset_index()
+#>      year  month  day      delay
+#> 0    2013      1    1  11.548926
+#> 1    2013      1    2  13.858824
+#> 2    2013      1    3  10.987832
+#> 3    2013      1    4   8.951595
+#> 4    2013      1    5   5.732218
+#> ..    ...    ...  ...        ...
+#> 360  2013     12   27  10.937630
+#> 361  2013     12   28   7.981550
+#> 362  2013     12   29  22.309551
+#> 363  2013     12   30  10.698113
+#> 364  2013     12   31   6.996053
+#> 
+#> [365 rows x 4 columns]
+```
 
-<!-- ```{r, fig.width = 6} -->
-<!-- by_dest <- group_by(flights, dest) -->
-<!-- delay <- summarise(by_dest, -->
-<!--   count = n(), -->
-<!--   dist = mean(distance, na.rm = TRUE), -->
-<!--   delay = mean(arr_delay, na.rm = TRUE) -->
-<!-- ) -->
-<!-- delay <- filter(delay, count > 20, dest != "HNL") -->
+Note the use of `reset_index()` to remove pandas creation of a [MultiIndex](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical). You can read more about the use of grouby in pandas with their [Group By: split-apply-combine user Guid documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
 
-<!-- # It looks like delays increase with distance up to ~750 miles  -->
-<!-- # and then decrease. Maybe as flights get longer there's more  -->
-<!-- # ability to make up delays in the air? -->
-<!-- ggplot(data = delay, mapping = aes(x = dist, y = delay)) + -->
-<!--   geom_point(aes(size = count), alpha = 1/3) + -->
-<!--   geom_smooth(se = FALSE) -->
-<!-- ``` -->
+Together `groupby()` and `agg()` provide one of the tools that you'll use most commonly when working with pandas: grouped summaries. But before we go any further with this, we need to introduce a structure for pandas code when doing data science work. We structure our code much like 'the pipe', `%>%` in the tidyverse packages from R-Studio.
 
-<!-- There are three steps to prepare this data: -->
+### Combining multiple operations with the pipe
 
-<!-- 1.  Group flights by destination. -->
+Imagine that we want to explore the relationship between the distance and average delay for each location. Using what you know about pandas, you might write code like this:
 
-<!-- 1.  Summarise to compute distance, average delay, and number of flights. -->
 
-<!-- 1.  Filter to remove noisy points and Honolulu airport, which is almost -->
-<!--     twice as far away as the next closest airport. -->
+```python
+by_dest = flights.groupby('dest')
+delay = by_dest.agg(
+    count = ('distance', 'size'),
+  dist = ('distance', np.mean),
+  delay = ('arr_delay', np.mean)
+)
+delay = delay.query('count > 20 & dest != "HNL"')
 
-<!-- This code is a little frustrating to write because we have to give each intermediate data frame a name, even though we don't care about it. Naming things is hard, so this slows down our analysis.  -->
+# It looks like delays increase with distance up to ~750 miles
+# and then decrease. Maybe as flights get longer there's more
+# ability to make up delays in the air?
+chart_base = (alt.Chart(delay).
+  encode(
+    x = 'dist',
+    y = 'delay'
+  ))
+  
+chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').mark_line()  
+```
 
-<!-- There's another way to tackle the same problem with the pipe, `%>%`: -->
 
-<!-- ```{r} -->
-<!-- delays <- flights %>%  -->
-<!--   group_by(dest) %>%  -->
-<!--   summarise( -->
-<!--     count = n(), -->
-<!--     dist = mean(distance, na.rm = TRUE), -->
-<!--     delay = mean(arr_delay, na.rm = TRUE) -->
-<!--   ) %>%  -->
-<!--   filter(count > 20, dest != "HNL") -->
-<!-- ``` -->
+```r
+vegawidget::as_vegaspec(py$chart$to_json())
+```
 
-<!-- This focuses on the transformations, not what's being transformed, which makes the code easier to read. You can read it as a series of imperative statements: group, then summarise, then filter. As suggested by this reading, a good way to pronounce `%>%` when reading code is "then". -->
 
-<!-- Behind the scenes, `x %>% f(y)` turns into `f(x, y)`, and `x %>% f(y) %>% g(z)` turns into `g(f(x, y), z)` and so on. You can use the pipe to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom. We'll use piping frequently from now on because it considerably improves the readability of code, and we'll come back to it in more detail in [pipes]. -->
 
-<!-- Working with the pipe is one of the key criteria for belonging to the tidyverse. The only exception is ggplot2: it was written before the pipe was discovered. Unfortunately, the next iteration of ggplot2, ggvis, which does use the pipe, isn't quite ready for prime time yet.  -->
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-36-1} 
+
+There are three steps to prepare this data:
+
+1.  Group flights by destination.
+
+1.  Summarise to compute distance, average delay, and number of flights.
+
+1.  Filter to remove noisy points and Honolulu airport, which is almost
+    twice as far away as the next closest airport.
+
+This code is a little frustrating to write because we have to give each intermediate data frame a name, even though we don't care about it. Naming things is hard, so this slows down our analysis.
+
+There's another way to tackle the same problem without the additional objects:
+
+
+```python
+delays = (flights.
+    groupby('dest').
+    agg(
+        count = ('distance', 'size'),
+        dist = ('distance', np.mean),
+        delay = ('arr_delay', np.mean) 
+    ).
+    query('count > 20 & dest != "HNL"'))
+```
+
+This focuses on the transformations, not what's being transformed, which makes the code easier to read. You can read it as a series of imperative statements: group, then summarise, then filter. As suggested by this reading, a good way to pronounce `.` when reading pandas code is "then".
+
+You can use the `()` with `.` to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom. We'll use this format frequently from now on because it considerably improves the readability of complex pandas code.
 
 <!-- ### Missing values -->
 
