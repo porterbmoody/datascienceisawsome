@@ -9,14 +9,14 @@ Visualization is an important tool for insight generation, but it is rare that y
 
 ### Prerequisites
 
-In this chapter we're going to focus on how to use the pandas package, the foundational package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need the math package that comes with Python.
+In this chapter we're going to focus on how to use the pandas package, the foundational package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need two additional Python packages to help us with mathematical and statistical functions - [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html). Notice the `from ____ import ____` follows the [SciPy guidance](https://docs.scipy.org/doc/scipy/reference/api.html) to import functions from submodule spaces. Now we will call functions using the SciPy package with the `stats.<FUNCTION>` structure.
 
 
 ```python
 import pandas as pd
 import altair as alt
 import numpy as np
-
+from scipy import stats
 
 flights_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/flights/flights.csv"
 
@@ -96,7 +96,7 @@ There are three other common types of variables that aren't used in this dataset
 <!-- https://www.dataquest.io/blog/pandas-cheat-sheet/ -->
 <!-- https://medium.com/dunder-data/minimally-sufficient-pandas-a8e67f2a2428 -->
 
-In this chapter you are going to learn five key pandas functions or object methods. Object methods are things the objects can perform. For example, pandas data frames know how to tell you their shape, the pandas object knows how to concatenate two data frames together. The way we tell an object we want it to do something is with the ‘dot operator’. Below are the five methods that allow you to solve the vast majority of your data manipulation challenges:
+In this chapter you are going to learn five key pandas functions or object methods. Object methods are things the objects can perform. For example, pandas data frames know how to tell you their shape, the pandas object knows how to concatenate two data frames together. The way we tell an object we want it to do something is with the ‘dot operator’. We will refer to these object operators as functions or methods. Below are the five methods that allow you to solve the vast majority of your data manipulation challenges:
 
 * Pick observations by their values (`query()`).
 * Reorder the rows (`sort()`).
@@ -106,16 +106,18 @@ In this chapter you are going to learn five key pandas functions or object metho
 
 The pandas package can handle all of the same functionality of dplyr in R.  You can read [pandas mapping guide](https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html) and [this towards data science article](https://towardsdatascience.com/tidying-up-pandas-4572bfa38776) to get more details on the following brief table. 
 
- R dplyr function | Python pandas function
-__________________|_______________________
- `filter()`       |  `query()`            
- `arrange()`      |  `sort_values()`      
- `select()`       |  `filter()` or `loc[]`
- `rename ()`      |  `rename()`           
- `mutate()`       |  `assign()`           
- `group_by ()`    |  `groupby()`          
- `summarise()`    |  `agg()`              
 
+|R dplyr function | Python pandas function|
+|_________________|_______________________|
+|`filter()`       |  `query()`            |
+|`arrange()`      |  `sort_values()`      |
+|`select()`       |  `filter()` or `loc[]`|
+|`rename ()`      |  `rename()`           |
+|`mutate()`       |  `assign()` (see note)|
+|`group_by ()`    |  `groupby()`          |
+|`summarise()`    |  `agg()`              |
+
+**Note:** The `dpylr::mutate()` function works similar to `assign()` in pandas on data frames.  But you cannot use `assign()` on grouped data frame in pandas like you would use `dplyr::mutate()` on a grouped object. In that case you would use `transform()` and even then the functionality is not quite the same.
 
 The `groupby()` changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These functions provide the verbs for a language of data manipulation.
 
@@ -850,7 +852,7 @@ Note the use of `reset_index()` to remove pandas creation of a [MultiIndex](http
 
 Together `groupby()` and `agg()` provide one of the tools that you'll use most commonly when working with pandas: grouped summaries. But before we go any further with this, we need to introduce a structure for pandas code when doing data science work. We structure our code much like 'the pipe', `%>%` in the tidyverse packages from R-Studio.
 
-### Combining multiple operations with the pipe
+### Combining multiple operations
 
 Imagine that we want to explore the relationship between the distance and average delay for each location. Using what you know about pandas, you might write code like this:
 
@@ -875,12 +877,6 @@ chart_base = (alt.Chart(delay).
   
 chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').mark_line()  
 ```
-
-
-```r
-vegawidget::as_vegaspec(py$chart$to_json())
-```
-
 
 
 \begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-36-1} 
@@ -914,307 +910,518 @@ This focuses on the transformations, not what's being transformed, which makes t
 
 You can use the `()` with `.` to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom. We'll use this format frequently from now on because it considerably improves the readability of complex pandas code.
 
-<!-- ### Missing values -->
+### Missing values
 
-<!-- You may have wondered about the `na.rm` argument we used above. What happens if we don't set it? -->
+You may have wondered about the `np.nan` values we put into our pandas data frame above. Pandas just started an experimental options (version 1.0) for `pd.NA` but it is not standard as in the R language.  You can read the full details about [missing data in pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html#working-with-missing-data). 
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   group_by(year, month, day) %>%  -->
-<!--   summarise(mean = mean(dep_delay)) -->
-<!-- ``` -->
+Pandas' and NumPy's handling of missing values defaults to the opposite functionality of R and the Tidyverse. Here are three key defaults when using Pandas. 
 
-<!-- We get a lot of missing values! That's because aggregation functions obey the usual rule of missing values: if there's any missing value in the input, the output will be a missing value. Fortunately, all aggregation functions have an `na.rm` argument which removes the missing values prior to computation: -->
+1. When summing data, NA (missing) values will be treated as zero.
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   group_by(year, month, day) %>%  -->
-<!--   summarise(mean = mean(dep_delay, na.rm = TRUE)) -->
-<!-- ``` -->
+1. If the data are all NA, the result will be 0.
 
-<!-- In this case, where missing values represent cancelled flights, we could also tackle the problem by first removing the cancelled flights. We'll save this dataset so we can reuse it in the next few examples. -->
+1. Cumulative methods ignore NA values by default, but preserve them in the resulting arrays. To override this behaviour and include missing values, use `skipna=False`.
 
-<!-- ```{r} -->
-<!-- not_cancelled <- flights %>%  -->
-<!--   filter(!is.na(dep_delay), !is.na(arr_delay)) -->
+1. All the `.groupby()` methods exclude missing values in their calculations as described in the [pandas groupby documentation](https://pandas.pydata.org/pandas-docs/stable/reference/groupby.html).
 
-<!-- not_cancelled %>%  -->
-<!--   group_by(year, month, day) %>%  -->
-<!--   summarise(mean = mean(dep_delay)) -->
-<!-- ``` -->
+In our case, where missing values represent cancelled flights, we could also tackle the problem by first removing the cancelled flights. We'll save this dataset so we can reuse it in the next few examples.
 
-<!-- ### Counts -->
 
-<!-- Whenever you do any aggregation, it's always a good idea to include either a count (`n()`), or a count of non-missing values (`sum(!is.na(x))`). That way you can check that you're not drawing conclusions based on very small amounts of data. For example, let's look at the planes (identified by their tail number) that have the highest average delays: -->
+```python
+not_cancelled = flights.dropna(subset = ['dep_delay', 'arr_delay']) 
+```
 
-<!-- ```{r} -->
-<!-- delays <- not_cancelled %>%  -->
-<!--   group_by(tailnum) %>%  -->
-<!--   summarise( -->
-<!--     delay = mean(arr_delay) -->
-<!--   ) -->
+### Counts
 
-<!-- ggplot(data = delays, mapping = aes(x = delay)) +  -->
-<!--   geom_freqpoly(binwidth = 10) -->
-<!-- ``` -->
+Whenever you do any aggregation, it's always a good idea to include either a count (`size()`), or a count of non-missing values (`sum(!is.na(x))`). That way you can check that you're not drawing conclusions based on very small amounts of data. For example, let's look at the planes (identified by their tail number) that have the highest average delays:
 
-<!-- Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)! -->
 
-<!-- The story is actually a little more nuanced. We can get more insight if we draw a scatterplot of number of flights vs. average delay: -->
+```python
+delays = not_cancelled.groupby('tailnum').agg(
+    delay = ("arr_delay", np.mean)
+)
 
-<!-- ```{r} -->
-<!-- delays <- not_cancelled %>%  -->
-<!--   group_by(tailnum) %>%  -->
-<!--   summarise( -->
-<!--     delay = mean(arr_delay, na.rm = TRUE), -->
-<!--     n = n() -->
-<!--   ) -->
+chart = (alt.Chart(delays).
+    transform_density(
+        density = 'delay',
+        as_ = ['delay', 'density'],
+        bandwidth=10
+    ).
+    encode(
+    x = 'delay:Q',
+    y = 'density:Q'
+    ).
+    mark_line()
+  )
+```
 
-<!-- ggplot(data = delays, mapping = aes(x = n, y = delay)) +  -->
-<!--   geom_point(alpha = 1/10) -->
-<!-- ``` -->
 
-<!-- Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases. -->
-
-<!-- When looking at this sort of plot, it's often useful to filter out the groups with the smallest numbers of observations, so you can see more of the pattern and less of the extreme variation in the smallest groups. This is what the following code does, as well as showing you a handy pattern for integrating ggplot2 into dplyr flows. It's a bit painful that you have to switch from `%>%` to `+`, but once you get the hang of it, it's quite convenient. -->
-
-<!-- ```{r} -->
-<!-- delays %>%  -->
-<!--   filter(n > 25) %>%  -->
-<!--   ggplot(mapping = aes(x = n, y = delay)) +  -->
-<!--     geom_point(alpha = 1/10) -->
-<!-- ``` -->
-
-<!-- -------------------------------------------------------------------------------- -->
-
-<!-- RStudio tip: a useful keyboard shortcut is Cmd/Ctrl + Shift + P. This resends the previously sent chunk from the editor to the console. This is very convenient when you're (e.g.) exploring the value of `n` in the example above. You send the whole block once with Cmd/Ctrl + Enter, then you modify the value of `n` and press Cmd/Ctrl + Shift + P to resend the complete block. -->
-
-<!-- -------------------------------------------------------------------------------- -->
-
-<!-- There's another common variation of this type of pattern. Let's look at how the average performance of batters in baseball is related to the number of times they're at bat. Here I use data from the __Lahman__ package to compute the batting average (number of hits / number of attempts) of every major league baseball player.   -->
-
-<!-- When I plot the skill of the batter (measured by the batting average, `ba`) against the number of opportunities to hit the ball (measured by at bat, `ab`), you see two patterns: -->
-
-<!-- 1.  As above, the variation in our aggregate decreases as we get more  -->
-<!--     data points. -->
-
-<!-- 2.  There's a positive correlation between skill (`ba`) and opportunities to  -->
-<!--     hit the ball (`ab`). This is because teams control who gets to play,  -->
-<!--     and obviously they'll pick their best players. -->
-
-<!-- ```{r} -->
-<!-- # Convert to a tibble so it prints nicely -->
-<!-- batting <- as_tibble(Lahman::Batting) -->
-
-<!-- batters <- batting %>%  -->
-<!--   group_by(playerID) %>%  -->
-<!--   summarise( -->
-<!--     ba = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE), -->
-<!--     ab = sum(AB, na.rm = TRUE) -->
-<!--   ) -->
-
-<!-- batters %>%  -->
-<!--   filter(ab > 100) %>%  -->
-<!--   ggplot(mapping = aes(x = ab, y = ba)) + -->
-<!--     geom_point() +  -->
-<!--     geom_smooth(se = FALSE) -->
-<!-- ``` -->
-
-<!-- This also has important implications for ranking. If you naively sort on `desc(ba)`, the people with the best batting averages are clearly lucky, not skilled: -->
-
-<!-- ```{r} -->
-<!-- batters %>%  -->
-<!--   arrange(desc(ba)) -->
-<!-- ``` -->
-
-<!-- You can find a good explanation of this problem at <http://varianceexplained.org/r/empirical_bayes_baseball/> and <http://www.evanmiller.org/how-not-to-sort-by-average-rating.html>. -->
-
-<!-- ### Useful summary functions {#summarise-funs} -->
-
-<!-- Just using means, counts, and sum can get you a long way, but R provides many other useful summary functions: -->
-
-<!-- *   Measures of location: we've used `mean(x)`, but `median(x)` is also -->
-<!--     useful. The mean is the sum divided by the length; the median is a value  -->
-<!--     where 50% of `x` is above it, and 50% is below it. -->
-
-<!--     It's sometimes useful to combine aggregation with logical subsetting.  -->
-<!--     We haven't talked about this sort of subsetting yet, but you'll learn more -->
-<!--     about it in [subsetting]. -->
-
-<!--     ```{r} -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(year, month, day) %>%  -->
-<!--       summarise( -->
-<!--         avg_delay1 = mean(arr_delay), -->
-<!--         avg_delay2 = mean(arr_delay[arr_delay > 0]) # the average positive delay -->
-<!--       ) -->
-<!--     ``` -->
-
-<!-- *   Measures of spread: `sd(x)`, `IQR(x)`, `mad(x)`. The root mean squared deviation, -->
-<!--     or standard deviation `sd(x)`, is the standard measure of spread. -->
-<!--     The interquartile range `IQR(x)` and median absolute deviation `mad(x)` -->
-<!--     are robust equivalents that may be more useful if you have outliers. -->
-
-<!--     ```{r} -->
-<!--     # Why is distance to some destinations more variable than to others? -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(dest) %>%  -->
-<!--       summarise(distance_sd = sd(distance)) %>%  -->
-<!--       arrange(desc(distance_sd)) -->
-<!--     ``` -->
-
-<!-- *   Measures of rank: `min(x)`, `quantile(x, 0.25)`, `max(x)`. Quantiles -->
-<!--     are a generalisation of the median. For example, `quantile(x, 0.25)` -->
-<!--     will find a value of `x` that is greater than 25% of the values, -->
-<!--     and less than the remaining 75%. -->
-
-<!--     ```{r} -->
-<!--     # When do the first and last flights leave each day? -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(year, month, day) %>%  -->
-<!--       summarise( -->
-<!--         first = min(dep_time), -->
-<!--         last = max(dep_time) -->
-<!--       ) -->
-<!--     ``` -->
-
-<!-- *   Measures of position: `first(x)`, `nth(x, 2)`, `last(x)`. These work  -->
-<!--     similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default  -->
-<!--     value if that position does not exist (i.e. you're trying to get the 3rd -->
-<!--     element from a group that only has two elements). For example, we can -->
-<!--     find the first and last departure for each day: -->
-
-<!--     ```{r} -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(year, month, day) %>%  -->
-<!--       summarise( -->
-<!--         first_dep = first(dep_time),  -->
-<!--         last_dep = last(dep_time) -->
-<!--       ) -->
-<!--     ``` -->
-
-<!--     These functions are complementary to filtering on ranks. Filtering gives -->
-<!--     you all variables, with each observation in a separate row: -->
-
-<!--     ```{r} -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(year, month, day) %>%  -->
-<!--       mutate(r = min_rank(desc(dep_time))) %>%  -->
-<!--       filter(r %in% range(r)) -->
-<!--     ``` -->
-
-<!-- *   Counts: You've seen `n()`, which takes no arguments, and returns the  -->
-<!--     size of the current group. To count the number of non-missing values, use -->
-<!--     `sum(!is.na(x))`. To count the number of distinct (unique) values, use -->
-<!--     `n_distinct(x)`. -->
-
-<!--     ```{r} -->
-<!--     # Which destinations have the most carriers? -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(dest) %>%  -->
-<!--       summarise(carriers = n_distinct(carrier)) %>%  -->
-<!--       arrange(desc(carriers)) -->
-<!--     ``` -->
-
-<!--     Counts are so useful that dplyr provides a simple helper if all you want is  -->
-<!--     a count: -->
-
-<!--     ```{r} -->
-<!--     not_cancelled %>%  -->
-<!--       count(dest) -->
-<!--     ``` -->
-
-<!--     You can optionally provide a weight variable. For example, you could use  -->
-<!--     this to "count" (sum) the total number of miles a plane flew: -->
-
-<!--     ```{r} -->
-<!--     not_cancelled %>%  -->
-<!--       count(tailnum, wt = distance) -->
-<!--     ``` -->
-
-<!-- *   Counts and proportions of logical values: `sum(x > 10)`, `mean(y == 0)`. -->
-<!--     When used with numeric functions, `TRUE` is converted to 1 and `FALSE` to 0.  -->
-<!--     This makes `sum()` and `mean()` very useful: `sum(x)` gives the number of  -->
-<!--     `TRUE`s in `x`, and `mean(x)` gives the proportion. -->
-
-<!--     ```{r} -->
-<!--     # How many flights left before 5am? (these usually indicate delayed -->
-<!--     # flights from the previous day) -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(year, month, day) %>%  -->
-<!--       summarise(n_early = sum(dep_time < 500)) -->
-
-<!--     # What proportion of flights are delayed by more than an hour? -->
-<!--     not_cancelled %>%  -->
-<!--       group_by(year, month, day) %>%  -->
-<!--       summarise(hour_prop = mean(arr_delay > 60)) -->
-<!--     ``` -->
-
-<!-- ### Grouping by multiple variables -->
-
-<!-- When you group by multiple variables, each summary peels off one level of the grouping. That makes it easy to progressively roll up a dataset: -->
-
-<!-- ```{r} -->
-<!-- daily <- group_by(flights, year, month, day) -->
-<!-- (per_day   <- summarise(daily, flights = n())) -->
-<!-- (per_month <- summarise(per_day, flights = sum(flights))) -->
-<!-- (per_year  <- summarise(per_month, flights = sum(flights))) -->
-<!-- ``` -->
-
-<!-- Be careful when progressively rolling up summaries: it's OK for sums and counts, but you need to think about weighting means and variances, and it's not possible to do it exactly for rank-based statistics like the median. In other words, the sum of groupwise sums is the overall sum, but the median of groupwise medians is not the overall median. -->
-
-<!-- ### Ungrouping -->
-
-<!-- If you need to remove grouping, and return to operations on ungrouped data, use `ungroup()`.  -->
-
-<!-- ```{r} -->
-<!-- daily %>%  -->
-<!--   ungroup() %>%             # no longer grouped by date -->
-<!--   summarise(flights = n())  # all flights -->
-<!-- ``` -->
-
-<!-- ### Exercises -->
-
-<!-- 1.  Brainstorm at least 5 different ways to assess the typical delay  -->
-<!--     characteristics of a group of flights. Consider the following scenarios: -->
-
-<!--     * A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of  -->
-<!--       the time. -->
-
-<!--     * A flight is always 10 minutes late. -->
-
-<!--     * A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of  -->
-<!--       the time. -->
-
-<!--     * 99% of the time a flight is on time. 1% of the time it's 2 hours late. -->
-
-<!--     Which is more important: arrival delay or departure delay? -->
-
-<!-- 1.  Come up with another approach that will give you the same output as  -->
-<!--     `not_cancelled %>% count(dest)` and  -->
-<!--     `not_cancelled %>% count(tailnum, wt = distance)` (without using  -->
-<!--     `count()`). -->
-
-<!-- 1.  Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)` -->
-<!--     ) is slightly suboptimal. Why? Which is the most important column? -->
-
-<!-- 1.  Look at the number of cancelled flights per day. Is there a pattern? -->
-<!--     Is the proportion of cancelled flights related to the average delay? -->
-
-<!-- 1.  Which carrier has the worst delays? Challenge: can you disentangle the -->
-<!--     effects of bad airports vs. bad carriers? Why/why not? (Hint: think about -->
-<!--     `flights %>% group_by(carrier, dest) %>% summarise(n())`) -->
-
-<!-- 1.  What does the `sort` argument to `count()` do. When might you use it? -->
-
-<!-- ## Grouped mutates (and filters) -->
-
-<!-- Grouping is most useful in conjunction with `summarise()`, but you can also do convenient operations with `mutate()` and `filter()`: -->
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-40-1} 
+
+Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)!
+
+The story is actually a little more nuanced. We can get more insight if we draw a scatterplot of number of flights vs. average delay:
+
+
+```python
+delays = not_cancelled.groupby('tailnum').agg(
+    delay = ("arr_delay", np.mean),
+    n = ('arr_delay', 'size')
+)
+
+chart = (alt.Chart(delays).
+    encode(
+        x = 'n',
+        y = 'delay'
+    ).
+    mark_point(
+        filled = True, 
+        opacity = 1/10)
+)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-42-1} 
+
+Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases.
+
+When looking at this sort of plot, it's often useful to filter out the groups with the smallest numbers of observations, so you can see more of the pattern and less of the extreme variation in the smallest groups. This is what the following code does, as well as showing you a handy pattern for simple data frame manipulations only needed for a chart. 
+
+
+```python
+chart = (alt.Chart(delays.query("n > 25")).
+    encode(
+        x = 'n',
+        y = 'delay'
+    ).
+    mark_point(
+        filled = True, 
+        opacity = 1/10)
+)
+
+chart.save("screenshots/altair_delays.png")
+```
+
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_delays} \end{flushleft}
+
+There's another common variation of this type of pattern. Let's look at how the average performance of batters in baseball is related to the number of times they're at bat. Here I use data from the __Lahman__ package to compute the batting average (number of hits / number of attempts) of every major league baseball player.
+
+When I plot the skill of the batter (measured by the batting average, `ba`) against the number of opportunities to hit the ball (measured by at bat, `ab`), you see two patterns:
+
+1.  As above, the variation in our aggregate decreases as we get more
+    data points.
+
+2.  There's a positive correlation between skill (`ba`) and opportunities to
+    hit the ball (`ab`). This is because teams control who gets to play,
+    and obviously they'll pick their best players.
+
+
+```python
+# settings for Altair to handle large data
+alt.data_transformers.enable('json')
+#> DataTransformerRegistry.enable('json')
+batting_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/batting/batting.csv"
+batting = pd.read_csv(batting_url)
+
+batters = (batting.
+    groupby('playerID').
+    agg(
+        ab = ("AB", "sum"),
+        h = ("H", "sum")
+    ).
+    assign(
+        ba = lambda x: x.h/x.ab
+    )
+  )
+
+chart = (alt.Chart(batters.query('ab > 100')).
+    encode(
+        x = 'ab',
+        y = 'ba'
+    ).
+    mark_point()
+)
+
+
+chart.save("screenshots/altair_batters.png")
+```
+
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_batters} \end{flushleft}
+
+
+This also has important implications for ranking. If you naively sort on `desc(ba)`, the people with the best batting averages are clearly lucky, not skilled:
+
+
+```python
+batters.sort_values('ba', ascending = False).head(10)
+#>            ab  h   ba
+#> playerID             
+#> egeco01     1  1  1.0
+#> simspe01    1  1  1.0
+#> paciojo01   3  3  1.0
+#> bruneju01   1  1  1.0
+#> liddeda01   1  1  1.0
+#> garcimi02   1  1  1.0
+#> meehabi01   1  1  1.0
+#> rodried01   1  1  1.0
+#> hopkimi01   2  2  1.0
+#> gallaja01   1  1  1.0
+```
+
+You can find a good explanation of this problem at <http://varianceexplained.org/r/empirical_bayes_baseball/> and <http://www.evanmiller.org/how-not-to-sort-by-average-rating.html>.
+
+### Useful summary functions {#summarise-funs}
+
+Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and Pandas provide many other useful summary functions (remember we are using the SciPy stats submodule):
+
+*   Measures of location: we've used `np.mean()`, but `np.median()` is also
+    useful. The mean is the sum divided by the length; the median is a value
+    where 50% of `x` is above it, and 50% is below it.
+
+    It's sometimes useful to combine aggregation with logical subsetting.
+    We haven't talked about this sort of subsetting yet, but you'll learn more
+    about it in [subsetting].
+
+    
+    ```python
+    (not_cancelled.
+    groupby(['year', 'month', 'day']).
+    agg(
+        avg_delay1 = ('arr_delay', np.mean),
+        avg_delay2 = ('arr_delay', lambda x: np.mean(x[x > 0]))
+        )
+    )
+    #>                 avg_delay1  avg_delay2
+    #> year month day                        
+    #> 2013 1     1     12.651023   32.481562
+    #>            2     12.692888   32.029907
+    #>            3      5.733333   27.660870
+    #>            4     -1.932819   28.309764
+    #>            5     -1.525802   22.558824
+    #> ...                    ...         ...
+    #>      12    27    -0.148803   29.046832
+    #>            28    -3.259533   25.607692
+    #>            29    18.763825   47.256356
+    #>            30    10.057712   31.243802
+    #>            31     6.212121   24.455959
+    #> 
+    #> [365 rows x 2 columns]
+    ```
+
+*   Measures of spread: `np.sd()`, `stats.iqr()`, `stats.median_absolute_deviation()`. 
+    The root mean squared deviation, or standard deviation `np.sd()`, is the standard 
+    measure of spread. The interquartile range `stats.iqr()` and median absolute deviation
+    `stats.median_absolute_deviation()` are robust equivalents that may be more useful if
+    you have outliers.
+
+    
+    ```python
+    # Why is distance to some destinations more variable than to others?
+    (not_cancelled.
+    groupby(['dest']).
+    agg(distance_sd = ('distance', np.std)).
+    sort_values('distance_sd', ascending = False)
+    )
+    #>       distance_sd
+    #> dest             
+    #> EGE     10.542765
+    #> SAN     10.350094
+    #> SFO     10.216017
+    #> HNL     10.004197
+    #> SEA      9.977993
+    #> ...           ...
+    #> BZN      0.000000
+    #> BUR      0.000000
+    #> PSE      0.000000
+    #> ABQ      0.000000
+    #> LEX           NaN
+    #> 
+    #> [104 rows x 1 columns]
+    ```
+
+*   Measures of rank: `np.min()`, `np.quantile()`, `np.max()`. Quantiles
+    are a generalisation of the median. For example, `np.quantile(x, 0.25)`
+    will find a value of `x` that is greater than 25% of the values,
+    and less than the remaining 75%.
+
+    
+    ```python
+    # When do the first and last flights leave each day?
+    (not_cancelled.
+        groupby(['year', 'month', 'day']).
+        agg(
+          first = ('dep_time', np.min),
+          last = ('dep_time', np.max)
+        )
+    )
+    #>                 first    last
+    #> year month day               
+    #> 2013 1     1    517.0  2356.0
+    #>            2     42.0  2354.0
+    #>            3     32.0  2349.0
+    #>            4     25.0  2358.0
+    #>            5     14.0  2357.0
+    #> ...               ...     ...
+    #>      12    27     2.0  2351.0
+    #>            28     7.0  2358.0
+    #>            29     3.0  2400.0
+    #>            30     1.0  2356.0
+    #>            31    13.0  2356.0
+    #> 
+    #> [365 rows x 2 columns]
+    ```
+
+*   Measures of position: `first()`, `nth()`, `last()`. These work
+    similarly to `x[1]`, `x[2]`, and `x[size(x)]` but let you set a default
+    value if that position does not exist (i.e. you're trying to get the 3rd
+    element from a group that only has two elements). For example, we can
+    find the first and last departure for each day:
+
+    
+    ```python
+    # using first and last
+    (not_cancelled.
+      groupby(['year', 'month','day']).
+      agg(
+        first_dep = ('dep_time', 'first'),
+        last_dep  = ('dep_time', 'last')
+      )
+    )
+    #>                 first_dep  last_dep
+    #> year month day                     
+    #> 2013 1     1        517.0    2356.0
+    #>            2         42.0    2354.0
+    #>            3         32.0    2349.0
+    #>            4         25.0    2358.0
+    #>            5         14.0    2357.0
+    #> ...                   ...       ...
+    #>      12    27         2.0    2351.0
+    #>            28         7.0    2358.0
+    #>            29         3.0    2400.0
+    #>            30         1.0    2356.0
+    #>            31        13.0    2356.0
+    #> 
+    #> [365 rows x 2 columns]
+    ```
+
+    
+    ```python
+    # using position
+    (not_cancelled.
+      groupby(['year', 'month','day']).
+      agg(
+        first_dep = ('dep_time', lambda x: list(x)[1]),
+        last_dep = ('dep_time', lambda x: list(x)[-1])
+        )
+    )
+    #>                 first_dep  last_dep
+    #> year month day                     
+    #> 2013 1     1        533.0    2356.0
+    #>            2        126.0    2354.0
+    #>            3         50.0    2349.0
+    #>            4        106.0    2358.0
+    #>            5         37.0    2357.0
+    #> ...                   ...       ...
+    #>      12    27         8.0    2351.0
+    #>            28        56.0    2358.0
+    #>            29        39.0    2400.0
+    #>            30        23.0    2356.0
+    #>            31        18.0    2356.0
+    #> 
+    #> [365 rows x 2 columns]
+    ```
+  
+    <!-- These functions are complementary to filtering on ranks. Filtering gives -->
+    <!-- you all variables, with each observation in a separate row: -->
+
+    <!-- ```{r} -->
+    <!-- not_cancelled %>% -->
+    <!--   group_by(year, month, day) %>% -->
+    <!--   mutate(r = min_rank(desc(dep_time))) %>% -->
+    <!--   filter(r %in% range(r)) -->
+    <!-- ``` -->
+
+*   Counts: You've seen `size()`, which takes no arguments, and returns the
+    size of the current group. To count the number of non-missing values, use
+    `isnull().sum()`. To count the number of unique (distinct) values, use
+    `nunique()`.
+
+    
+    ```python
+    # Which destinations have the most carriers?
+    (flights.
+      groupby('dest').
+      agg(
+        carriers_unique = ('carrier', 'nunique'),
+        carriers_count = ('carrier', 'size'),
+        missing_time = ('dep_time', lambda x: x.isnull().sum())
+        )
+    )
+    #>       carriers_unique  carriers_count  missing_time
+    #> dest                                               
+    #> ABQ                 1             254           0.0
+    #> ACK                 1             265           0.0
+    #> ALB                 1             439          20.0
+    #> ANC                 1               8           0.0
+    #> ATL                 7           17215         317.0
+    #> ...               ...             ...           ...
+    #> TPA                 7            7466          59.0
+    #> TUL                 1             315          16.0
+    #> TVC                 2             101           5.0
+    #> TYS                 2             631          52.0
+    #> XNA                 2            1036          25.0
+    #> 
+    #> [105 rows x 3 columns]
+    ```
+
+    Counts are useful and pandas provides a simple helper if all you want is
+    a count:
+
+    
+    ```python
+    not_cancelled['dest'].value_counts()
+    #> ATL    16837
+    #> ORD    16566
+    #> LAX    16026
+    #> BOS    15022
+    #> MCO    13967
+    #>        ...  
+    #> MTJ       14
+    #> HDN       14
+    #> SBN       10
+    #> ANC        8
+    #> LEX        1
+    #> Name: dest, Length: 104, dtype: int64
+    ```
+
+*   Counts and proportions of logical values: `sum(x > 10)`, `mean(y == 0)`.
+    When used with numeric functions, `TRUE` is converted to 1 and `FALSE` to 0.
+    This makes `sum()` and `mean()` very useful: `sum(x)` gives the number of
+    `TRUE`s in `x`, and `mean(x)` gives the proportion.
+
+    
+    ```python
+    # How many flights left before 5am? (these usually indicate delayed
+    # flights from the previous day)
+    (not_cancelled.
+      groupby(['year', 'month','day']).
+      agg(
+        n_early = ('dep_time', lambda x: np.sum(x < 500))
+        )
+    )
+    
+    # What proportion of flights are delayed by more than an hour?
+    #>                 n_early
+    #> year month day         
+    #> 2013 1     1        0.0
+    #>            2        3.0
+    #>            3        4.0
+    #>            4        3.0
+    #>            5        3.0
+    #> ...                 ...
+    #>      12    27       7.0
+    #>            28       2.0
+    #>            29       3.0
+    #>            30       6.0
+    #>            31       4.0
+    #> 
+    #> [365 rows x 1 columns]
+    (not_cancelled.
+      groupby(['year', 'month','day']).
+      agg(
+        hour_prop = ('arr_delay', lambda x: np.sum(x > 60))
+        )
+    )
+    #>                 hour_prop
+    #> year month day           
+    #> 2013 1     1         60.0
+    #>            2         79.0
+    #>            3         51.0
+    #>            4         36.0
+    #>            5         25.0
+    #> ...                   ...
+    #>      12    27        51.0
+    #>            28        31.0
+    #>            29       129.0
+    #>            30        69.0
+    #>            31        33.0
+    #> 
+    #> [365 rows x 1 columns]
+    ```
+
+### Grouping by multiple variables
+
+Be careful when progressively rolling up summaries: it's OK for sums and counts, but you need to think about weighting means and variances, and it's not possible to do it exactly for rank-based statistics like the median. In other words, the sum of groupwise sums is the overall sum, but the median of groupwise medians is not the overall median.
+
+### Ungrouping (reseting the index)
+
+If you need to remove grouping and MultiIndex use `reset.index()`. This is a rough equivalent to `ungroup()` in R but it is not the same thing. Notice the column names are no longer in multiple levels.
+
+
+```python
+dat = (not_cancelled.
+        groupby(['year', 'month','day']).
+        agg(
+          hour_prop = ('arr_delay', lambda x: np.sum(x > 60))
+          )
+      )
+
+dat.head()
+#>                 hour_prop
+#> year month day           
+#> 2013 1     1         60.0
+#>            2         79.0
+#>            3         51.0
+#>            4         36.0
+#>            5         25.0
+dat.reset_index().head()
+
+#>    year  month  day  hour_prop
+#> 0  2013      1    1       60.0
+#> 1  2013      1    2       79.0
+#> 2  2013      1    3       51.0
+#> 3  2013      1    4       36.0
+#> 4  2013      1    5       25.0
+```
+
+### Exercises
+
+1.  Brainstorm at least 5 different ways to assess the typical delay
+    characteristics of a group of flights. Consider the following scenarios:
+
+    * A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of
+      the time.
+
+    * A flight is always 10 minutes late.
+
+    * A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of
+      the time.
+
+    * 99% of the time a flight is on time. 1% of the time it's 2 hours late.
+
+    Which is more important: arrival delay or departure delay?
+
+1.  Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`
+    ) is slightly suboptimal. Why? Which is the most important column?
+
+1.  Look at the number of cancelled flights per day. Is there a pattern?
+    Is the proportion of cancelled flights related to the average delay?
+
+1.  Which carrier has the worst delays? Challenge: can you disentangle the
+    effects of bad airports vs. bad carriers? Why/why not? (Hint: think about
+    `flights.groupby(['carrier', 'dest']).agg(n = ('dep_time', 'size'))`)
+
+## Grouped mutates (and filters)
+
+Grouping is most useful in conjunction with `agg()`, but you can also do convenient operations with `transform()` and `filter()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `assign()` and the best equivalent is `transform()`.
 
 <!-- *   Find the worst members of each group: -->
 
 <!--     ```{r} -->
-<!--     flights_sml %>%  -->
+<!--     flights_sml %>% -->
 <!--       group_by(year, month, day) %>% -->
 <!--       filter(rank(desc(arr_delay)) < 10) -->
 <!--     ``` -->
@@ -1222,8 +1429,8 @@ You can use the `()` with `.` to rewrite multiple operations in a way that you c
 <!-- *   Find all groups bigger than a threshold: -->
 
 <!--     ```{r} -->
-<!--     popular_dests <- flights %>%  -->
-<!--       group_by(dest) %>%  -->
+<!--     popular_dests <- flights %>% -->
+<!--       group_by(dest) %>% -->
 <!--       filter(n() > 365) -->
 <!--     popular_dests -->
 <!--     ``` -->
@@ -1231,9 +1438,9 @@ You can use the `()` with `.` to rewrite multiple operations in a way that you c
 <!-- *   Standardise to compute per group metrics: -->
 
 <!--     ```{r} -->
-<!--     popular_dests %>%  -->
-<!--       filter(arr_delay > 0) %>%  -->
-<!--       mutate(prop_delay = arr_delay / sum(arr_delay)) %>%  -->
+<!--     popular_dests %>% -->
+<!--       filter(arr_delay > 0) %>% -->
+<!--       mutate(prop_delay = arr_delay / sum(arr_delay)) %>% -->
 <!--       select(year:day, dest, arr_delay, prop_delay) -->
 <!--     ``` -->
 

@@ -120,6 +120,8 @@ VS Code comes with a [simple and intuitive layout](https://code.visualstudio.com
 - **Panels** - You can display different panels below the editor region for output or debug information, errors and warnings, or an integrated terminal. Panel can also be moved to the right for more vertical space.
 Each time you start VS Code, it opens up in the same state it was in when you last closed it. The folder, layout, and opened files are preserved.
 
+**Microsoft provides a [great tutorial](https://code.visualstudio.com/docs/python/data-science-tutorial) to get you through the following sections if you would like to follow their guide.**
+
 #### VS Code Python Extension
 
 Install the [Python extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python) from the Visual Studio Marketplace. For additional details on installing extensions, see [Extension Marketplace](https://code.visualstudio.com/docs/editor/extension-gallery). The Python extension is named Python and it's published by Microsoft. You can follow more of [their tutorial at code.visualstudio.com](https://code.visualstudio.com/docs/python/python-tutorial).
@@ -132,7 +134,9 @@ An open-source project called [Jupyter](http://jupyter-notebook.readthedocs.io/e
 
 You will need to install the [jupyter python package](https://jupyter.readthedocs.io/en/latest/install.html) using `pip` or `pip3` for the interactive Python window to work.  See the following section for guidance on using `pip`.
 
-Using the VS Code functionality, you will work with a standard `.py` file instead of the `.ipynb` extension typically used with jupyter notebooks.  The Python extension in VS Code will recognize `# %%` as a cell or chunk of python code and add notebook options to 'Run Cell' as well as other actions. You can see the code example bellow with the image of the view in VS Code as an example. [Microsoft's documentation](https://code.visualstudio.com/docs/python/jupyter-support-py) goes into more detail (https://code.visualstudio.com/docs/python/jupyter-support-py).
+Using the VS Code functionality, you will work with a standard `.py` file instead of the `.ipynb` extension typically used with jupyter notebooks.  The Python extension in VS Code will recognize `# %%` as a cell or chunk of python code and add notebook options to 'Run Cell' as well as other actions. You can see the code example bellow with the image of the view in VS Code as an example. [Microsoft's documentation](https://code.visualstudio.com/docs/python/jupyter-support-py) goes into more detail (https://code.visualstudio.com/docs/python/jupyter-support-py). 
+
+To make the interactive window use more functional you can `ctrl + ,` or `cmd + ,` on a mac to open the settings. From there you can search _'Send Selection to Interactive Window'_ and make sure the box is checked. Now you will be able to use `shift + return` to send a selected chunk of code or an entire cell.
 
 
 

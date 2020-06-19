@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Workflow: projects | Python for Data Science</title>
+  <title>9 Introduction | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Workflow: projects | Python for Data Science" />
+  <meta property="og:title" content="9 Introduction | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
   <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Workflow: projects | Python for Data Science" />
+  <meta name="twitter:title" content="9 Introduction | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exploratory-data-analysis.html"/>
-<link rel="next" href="wrangle-intro.html"/>
+<link rel="prev" href="workflow-projects.html"/>
+
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -289,116 +289,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workflow-projects" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Workflow: projects</h1>
-<p>One day you will need to quit Python, go do something else and return to your analysis the next day. One day you will be working on multiple analyses simultaneously that all use Python and you want to keep them separate. One day you will need to bring data from the outside world into Python and send numerical results and figures from Python back out into the world. To handle these real life situations, you need to make two decisions:</p>
-<ol style="list-style-type: decimal">
-<li><p>What about your analysis is “real”, i.e. what will you save as your
-lasting record of what happened?</p></li>
-<li><p>Where does your analysis “live”?</p></li>
-</ol>
-<div id="what-is-real" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> What is real?</h2>
-<p>As a beginning Python user, it’s OK to consider your environment (i.e. the objects listed in the variables pane) “real”. However, in the long run, you’ll be much better off if you consider your Python scripts as “real”.</p>
-<p>With your Python scripts (and your data files), you can recreate the environment. It’s much harder to recreate your Python scripts from your environment! You’ll either have to retype a lot of code from memory (making mistakes all the way) or you’ll have to carefully mine your Python history. There’s nothing worse than discovering three months after the fact that you’ve only stored the results of an important calculation in your workspace, not the calculation itself in your code.</p>
-</div>
-<div id="where-does-your-analysis-live" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Where does your analysis live?</h2>
-<p>VS Code’s interactive Python has a powerful notion of the <strong>working directory</strong>. This is where Python looks for files that you ask it to load, and where it will put any files that you ask it to save. The interactive console will default the working directory to the location of your <code>.py</code> script.</p>
-<p>And you can print this out in Python code by running <code>os.getcwd()</code>:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="workflow-projects.html#cb110-1"></a><span class="im">import</span> os</span>
-<span id="cb110-2"><a href="workflow-projects.html#cb110-2"></a>os.getcwd()</span>
-<span id="cb110-3"><a href="workflow-projects.html#cb110-3"></a><span class="co">#&gt; &#39;/Users/hathawayj/git/byuidatascience/python4ds&#39;</span></span></code></pre></div>
-<p>As a beginning Python user, it’s OK to let your home directory, documents directory, or any other weird directory on your computer be Python’s working directory. But you’re six chapters into this book, and you’re no longer a rank beginner. Very soon now you should evolve to organising your analytical projects into directories and, when working on a project, setting Python’s working directory to the associated directory.</p>
-<p><strong>I do not recommend it</strong>, but you can also set the working directory from within Python:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="workflow-projects.html#cb111-1"></a>os.chdir(<span class="st">&quot;/path/to/my/CoolProject&quot;</span>)</span></code></pre></div>
-<p>But you should never do this because there’s a better way; a way that also puts you on the path to managing your Python data science work like an expert.</p>
-</div>
-<div id="paths-and-directories" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> Paths and directories</h2>
-<p>Paths and directories are a little complicated because there are two basic styles of paths: Mac/Linux and Windows. There are three chief ways in which they differ:</p>
-<ol style="list-style-type: decimal">
-<li><p>The most important difference is how you separate the components of the
-path. Mac and Linux uses slashes (e.g. <code>plots/diamonds.pdf</code>) and Windows
-uses backslashes (e.g. <code>plots\diamonds.pdf</code>). Python can work with either type
-(no matter what platform you’re currently using), but unfortunately,
-backslashes mean something special to Python, and to get a single backslash
-in the path, you need to type two backslashes! That makes life frustrating,
-so I recommend always using the Linux/Mac style with forward slashes.</p></li>
-<li><p>Absolute paths (i.e. paths that point to the same place regardless of
-your working directory) look different. In Windows they start with a drive
-letter (e.g. <code>C:</code>) or two backslashes (e.g. <code>\\servername</code>) and in
-Mac/Linux they start with a slash “/” (e.g. <code>/users/hadley</code>). You should
-<strong>never</strong> use absolute paths in your scripts, because they hinder sharing:
-no one else will have exactly the same directory configuration as you.</p></li>
-<li><p>The last minor difference is the place that <code>~</code> points to. <code>~</code> is a
-convenient shortcut to your home directory. Windows doesn’t really have
-the notion of a home directory, so it instead points to your documents
-directory.</p></li>
-</ol>
-</div>
-<div id="vs-code-workspaces" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> VS Code workspaces</h2>
-<!-- https://code.visualstudio.com/docs/python/data-science-tutorial -->
-<p>Python experts keep all the files associated with a project together — input data, R scripts, analytical results, figures. This is such a wise and common practice that VS Code has built-in support for this via <strong>workspaces</strong>.</p>
-<p>Let’s make a workspace for you to use while you’re working through the rest of this book. Click File &gt; Open and select a newly created folder for your work. New Project, then:</p>
-<p>Name your folder <code>python4ds</code> and think carefully about which <em>subdirectory</em> you put the folder in. If you don’t store it somewhere sensible, it will be hard to find it in the future!</p>
-<p>Once this process is complete, you’ll get a new VS Code workspace just for this book. Under the Welcome screen select ‘New File’ and save the file, calling it “diamonds.py”. Upon saving the file as a Python file VS Code will make sure your workspace is setup to work with Python with a few prompts.</p>
-<p>Check that the “home” directory of your workspace is the current working directory:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="workflow-projects.html#cb112-1"></a><span class="im">import</span> os</span>
-<span id="cb112-2"><a href="workflow-projects.html#cb112-2"></a>os.getcwd()</span>
-<span id="cb112-3"><a href="workflow-projects.html#cb112-3"></a><span class="co">#&gt; &#39;/Users/hathawayj/Downloads/python4ds&#39;</span></span></code></pre></div>
-<p>Whenever you refer to a file with a relative path it will look for it here.</p>
-<p>Now enter the following commands in the script editor, and save the file, calling it “diamonds.py”. Next, run the complete script which will save a PNG, CSV, and JSON file into your project directory. Don’t worry about the details, you’ll learn them later in the book.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="workflow-projects.html#cb113-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb113-2"><a href="workflow-projects.html#cb113-2"></a><span class="im">import</span> altair <span class="im">as</span> alt </span>
-<span id="cb113-3"><a href="workflow-projects.html#cb113-3"></a></span>
-<span id="cb113-4"><a href="workflow-projects.html#cb113-4"></a>alt.data_transformers.enable(<span class="st">&#39;json&#39;</span>)</span>
-<span id="cb113-5"><a href="workflow-projects.html#cb113-5"></a></span>
-<span id="cb113-6"><a href="workflow-projects.html#cb113-6"></a>url_path <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv&quot;</span></span>
-<span id="cb113-7"><a href="workflow-projects.html#cb113-7"></a></span>
-<span id="cb113-8"><a href="workflow-projects.html#cb113-8"></a>diamonds <span class="op">=</span> pd.read_csv(url_path)</span>
-<span id="cb113-9"><a href="workflow-projects.html#cb113-9"></a></span>
-<span id="cb113-10"><a href="workflow-projects.html#cb113-10"></a>chart <span class="op">=</span> (alt.Chart(diamonds).</span>
-<span id="cb113-11"><a href="workflow-projects.html#cb113-11"></a>    mark_circle().</span>
-<span id="cb113-12"><a href="workflow-projects.html#cb113-12"></a>    encode(</span>
-<span id="cb113-13"><a href="workflow-projects.html#cb113-13"></a>        x <span class="op">=</span> alt.X(<span class="st">&quot;carat&quot;</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb113-14"><a href="workflow-projects.html#cb113-14"></a>        y <span class="op">=</span> alt.Y(<span class="st">&quot;price&quot;</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb113-15"><a href="workflow-projects.html#cb113-15"></a>        size <span class="op">=</span> <span class="st">&quot;count()&quot;</span></span>
-<span id="cb113-16"><a href="workflow-projects.html#cb113-16"></a>    )</span>
-<span id="cb113-17"><a href="workflow-projects.html#cb113-17"></a>    )</span>
-<span id="cb113-18"><a href="workflow-projects.html#cb113-18"></a>    </span>
-<span id="cb113-19"><a href="workflow-projects.html#cb113-19"></a>chart.save(<span class="st">&quot;diamonds.png&quot;</span>)</span>
-<span id="cb113-20"><a href="workflow-projects.html#cb113-20"></a></span>
-<span id="cb113-21"><a href="workflow-projects.html#cb113-21"></a>diamonds.to_csv(<span class="st">&quot;diamonds.csv&quot;</span>)</span></code></pre></div>
-<p>Inspect the folder associated with your project — notice the <code>.vscode</code> folder. Double-click that folder to see the default workspace settings for your project. You can <a href="https://code.visualstudio.com/docs/editor/multi-root-workspaces">read more about VS code workspaces</a> to understand the other available options.</p>
-<p>In your favorite OS-specific way, search your computer for <code>diamonds.png</code> and you will find the PNG (no surprise) but <em>also the script that created it</em> (<code>diamonds.py</code>). This is huge win! One day you will want to remake a figure or just understand where it came from. If you rigorously save figures to files <strong>with Python code</strong> and never with the mouse or the clipboard, you will be able to reproduce old work with ease!</p>
-</div>
-<div id="summary" class="section level2" number="8.5">
-<h2><span class="header-section-number">8.5</span> Summary</h2>
-<p>In summary, VS Code workspaces give you a solid workflow that will serve you well in the future:</p>
+<div id="wrangle-intro" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Introduction</h1>
+<p>In this part of the book, you’ll learn about data wrangling, the art of getting your data into R in a useful form for visualisation and modelling. Data wrangling is very important: without it you can’t work with your own data! There are three main parts to data wrangling:</p>
+<p><img src="diagrams/data-science-wrangle.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>This part of the book proceeds as follows:</p>
 <ul>
-<li><p>Create an workspace for each data analysis project.</p></li>
-<li><p>Keep data files there; we’ll talk about loading them into Python in
-[data import].</p></li>
-<li><p>Keep scripts there; edit them, run them in bits or as a whole.</p></li>
-<li><p>Save your outputs (plots and cleaned data) there.</p></li>
-<li><p>Only ever use relative paths, not absolute paths.</p></li>
+<li><p>In [tibbles], you’ll learn about the variant of the data frame that we use
+in this book: the <strong>tibble</strong>. You’ll learn what makes them different
+from regular data frames, and how you can construct them “by hand”.</p></li>
+<li><p>In [data import], you’ll learn how to get your data from disk and into R.
+We’ll focus on plain-text rectangular formats, but will give you pointers
+to packages that help with other types of data.</p></li>
+<li><p>In [tidy data], you’ll learn about tidy data, a consistent way of storing
+your data that makes transformation, visualisation, and modelling easier.
+You’ll learn the underlying principles, and how to get your data into a
+tidy form.</p></li>
 </ul>
-<p>Everything you need is in one place, and cleanly separated from all the other projects that you are working on.</p>
+<p>Data wrangling also encompasses data transformation, which you’ve already learned a little about. Now we’ll focus on new skills for three specific types of data you will frequently encounter in practice:</p>
+<ul>
+<li><p>[Relational data] will give you tools for working with multiple
+interrelated datasets.</p></li>
+<li><p>[Strings] will introduce regular expressions, a powerful tool for
+manipulating strings.</p></li>
+<li><p>[Factors] are how R stores categorical data. They are used when a variable
+has a fixed set of possible values, or when you want to use a non-alphabetical
+ordering of a string.</p></li>
+<li><p>[Dates and times] will give you the key tools for working with
+dates and date-times.</p></li>
+</ul>
 
 </div>
-</div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="exploratory-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="wrangle-intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="workflow-projects.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -420,7 +348,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/byuidatascience/python4ds/edit/master/workflow-projects.Rmd",
+"link": "https://github.com/byuidatascience/python4ds/edit/master/wrangle.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -8,20 +8,15 @@ rmd_files: [
   "workflow-basics.Rmd",
   "transform.Rmd",
   "workflow-scripts.Rmd",
-
-  "workflow-projects.Rmd"
+  "EDA.Rmd",
+  "workflow-projects.Rmd",
+  "wrangle.Rmd"
 ]
 
 before_chapter_script: "_common.R"
 output_dir: "docs"
 
-#  "visualize.Rmd",
 
-#  "EDA.Rmd",
-
-
-#
-#  "wrangle.Rmd",
 #  "tibble.Rmd",
 #  "import.Rmd",
 #  "tidy.Rmd",
