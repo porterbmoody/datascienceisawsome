@@ -252,7 +252,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
 <li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped mutates (and filters)</a></li>
+<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
 <ul>
@@ -260,7 +263,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>8</b> Workflow: projects</a>
 <ul>
@@ -301,75 +312,226 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>EDA is not a formal process with a strict set of rules. More than anything, EDA is a state of mind. During the initial phases of EDA you should feel free to investigate every idea that occurs to you. Some of these ideas will pan out, and some will be dead ends. As your exploration continues, you will home in on a few particularly productive areas that you’ll eventually write up and communicate to others.</p>
 <p>EDA is an important part of any data analysis, even if the questions are handed to you on a platter, because you always need to investigate the quality of your data. Data cleaning is just one application of EDA: you ask questions about whether your data meets your expectations or not. To do data cleaning, you’ll need to deploy all the tools of EDA: visualisation, transformation, and modelling.</p>
-<!-- ### Prerequisites -->
-<!-- In this chapter we'll combine what you've learned about dplyr and ggplot2 to interactively ask questions, answer them with data, and then ask new questions. -->
-<!-- ```{r setup, message = FALSE} -->
-<!-- library(tidyverse) -->
-<!-- ``` -->
-<!-- ## Questions -->
-<!-- > "There are no routine statistical questions, only questionable statistical -->
-<!-- > routines." --- Sir David Cox -->
-<!-- > "Far better an approximate answer to the right question, which is often -->
-<!-- > vague, than an exact answer to the wrong question, which can always be made -->
-<!-- > precise." --- John Tukey -->
-<!-- Your goal during EDA is to develop an understanding of your data. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make. -->
-<!-- EDA is fundamentally a creative process. And like most creative processes, the key to asking _quality_ questions is to generate a large _quantity_ of questions. It is difficult to ask revealing questions at the start of your analysis because you do not know what insights are contained in your dataset. On the other hand, each new question that you ask will expose you to a new aspect of your data and increase your chance of making a discovery. You can quickly drill down into the most interesting parts of your data---and develop a set of thought-provoking questions---if you follow up each question with a new question based on what you find. -->
-<!-- There is no rule about which questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries within your data. You can loosely word these questions as: -->
-<!-- 1. What type of variation occurs within my variables? -->
-<!-- 1. What type of covariation occurs between my variables? -->
-<!-- The rest of this chapter will look at these two questions. I'll explain what variation and covariation are, and I'll show you several ways to answer each question. To make the discussion easier, let's define some terms:  -->
-<!-- *   A __variable__ is a quantity, quality, or property that you can measure.  -->
-<!-- *   A __value__ is the state of a variable when you measure it. The value of a -->
-<!--     variable may change from measurement to measurement. -->
-<!-- *   An __observation__ is a set of measurements made under similar conditions -->
-<!--     (you usually make all of the measurements in an observation at the same  -->
-<!--     time and on the same object). An observation will contain several values,  -->
-<!--     each associated with a different variable. I'll sometimes refer to  -->
-<!--     an observation as a data point. -->
-<!-- *   __Tabular data__ is a set of values, each associated with a variable and an -->
-<!--     observation. Tabular data is _tidy_ if each value is placed in its own -->
-<!--     "cell", each variable in its own column, and each observation in its own  -->
-<!--     row.  -->
-<!-- So far, all of the data that you've seen has been tidy. In real-life, most data isn't tidy, so we'll come back to these ideas again in [tidy data]. -->
-<!-- ## Variation -->
-<!-- **Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Categorical variables can also vary if you measure across different subjects (e.g. the eye colors of different people), or different times (e.g. the energy levels of an electron at different moments).  -->
-<!-- Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable's values. -->
-<!-- ### Visualising distributions -->
-<!-- How you visualise the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is **categorical** if it can only take one of a small set of values. In R, categorical variables are usually saved as factors or character vectors. To examine the distribution of a categorical variable, use a bar chart: -->
-<!-- ```{r} -->
-<!-- ggplot(data = diamonds) + -->
-<!--   geom_bar(mapping = aes(x = cut)) -->
-<!-- ``` -->
-<!-- The height of the bars displays how many observations occurred with each x value. You can compute these values manually with `dplyr::count()`: -->
-<!-- ```{r} -->
-<!-- diamonds %>%  -->
-<!--   count(cut) -->
-<!-- ``` -->
-<!-- A variable is **continuous** if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram: -->
-<!-- ```{r} -->
-<!-- ggplot(data = diamonds) + -->
-<!--   geom_histogram(mapping = aes(x = carat), binwidth = 0.5) -->
-<!-- ``` -->
-<!-- You can compute this by hand by combining `dplyr::count()` and `ggplot2::cut_width()`: -->
-<!-- ```{r} -->
-<!-- diamonds %>%  -->
-<!--   count(cut_width(carat, 0.5)) -->
-<!-- ``` -->
-<!-- A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a `carat` value between 0.25 and 0.75, which are the left and right edges of the bar.  -->
-<!-- You can set the width of the intervals in a histogram with the `binwidth` argument, which is measured in the units of the `x` variable. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns. For example, here is how the graph above looks when we zoom into just the diamonds with a size of less than three carats and choose a smaller binwidth. -->
-<!-- ```{r} -->
-<!-- smaller <- diamonds %>%  -->
-<!--   filter(carat < 3) -->
-<!-- ggplot(data = smaller, mapping = aes(x = carat)) + -->
-<!--   geom_histogram(binwidth = 0.1) -->
-<!-- ``` -->
-<!-- If you wish to overlay multiple histograms in the same plot, I recommend using `geom_freqpoly()` instead of `geom_histogram()`. `geom_freqpoly()` performs the same calculation as `geom_histogram()`, but instead of displaying the counts with bars, uses lines instead. It's much easier to understand overlapping lines than bars. -->
-<!-- ```{r} -->
-<!-- ggplot(data = smaller, mapping = aes(x = carat, colour = cut)) + -->
-<!--   geom_freqpoly(binwidth = 0.1) -->
-<!-- ``` -->
-<!-- There are a few challenges with this type of plot, which we will come back to in [visualising a categorical and a continuous variable](#cat-cont). -->
-<!-- Now that you can visualise variation, what should you look for in your plots? And what type of follow-up questions should you ask? I've put together a list below of the most useful types of information that you will find in your graphs, along with some follow-up questions for each type of information. The key to asking good follow-up questions will be to rely on your curiosity (What do you want to learn more about?) as well as your skepticism (How could this be misleading?). -->
+<div id="prerequisites-3" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Prerequisites</h3>
+<p>In this chapter we’ll combine what you’ve learned about pandas and Altair to interactively ask questions, answer them with data, and then ask new questions.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="exploratory-data-analysis.html#cb113-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb113-2"><a href="exploratory-data-analysis.html#cb113-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb113-3"><a href="exploratory-data-analysis.html#cb113-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb113-4"><a href="exploratory-data-analysis.html#cb113-4"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb113-5"><a href="exploratory-data-analysis.html#cb113-5"></a></span>
+<span id="cb113-6"><a href="exploratory-data-analysis.html#cb113-6"></a>alt.data_transformers.enable(<span class="st">&#39;json&#39;</span>)</span>
+<span id="cb113-7"><a href="exploratory-data-analysis.html#cb113-7"></a><span class="co">#&gt; DataTransformerRegistry.enable(&#39;json&#39;)</span></span></code></pre></div>
+<p>Then make sure you have the diamonds data loaded.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="exploratory-data-analysis.html#cb114-1"></a></span>
+<span id="cb114-2"><a href="exploratory-data-analysis.html#cb114-2"></a>diamonds <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv&quot;</span>)</span>
+<span id="cb114-3"><a href="exploratory-data-analysis.html#cb114-3"></a></span>
+<span id="cb114-4"><a href="exploratory-data-analysis.html#cb114-4"></a>diamonds[<span class="st">&#39;cut&#39;</span>] <span class="op">=</span> pd.Categorical(diamonds.cut, </span>
+<span id="cb114-5"><a href="exploratory-data-analysis.html#cb114-5"></a>  ordered <span class="op">=</span> <span class="va">True</span>, </span>
+<span id="cb114-6"><a href="exploratory-data-analysis.html#cb114-6"></a>  categories <span class="op">=</span>  [<span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Good&quot;</span>, <span class="st">&quot;Very Good&quot;</span>, <span class="st">&quot;Premium&quot;</span>, <span class="st">&quot;Ideal&quot;</span> ])</span>
+<span id="cb114-7"><a href="exploratory-data-analysis.html#cb114-7"></a></span>
+<span id="cb114-8"><a href="exploratory-data-analysis.html#cb114-8"></a>diamonds[<span class="st">&#39;color&#39;</span>] <span class="op">=</span> pd.Categorical(diamonds.color, </span>
+<span id="cb114-9"><a href="exploratory-data-analysis.html#cb114-9"></a>  ordered <span class="op">=</span> <span class="va">True</span>, </span>
+<span id="cb114-10"><a href="exploratory-data-analysis.html#cb114-10"></a>  categories <span class="op">=</span>  [<span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;H&quot;</span>, <span class="st">&quot;I&quot;</span>, <span class="st">&quot;J&quot;</span>])</span>
+<span id="cb114-11"><a href="exploratory-data-analysis.html#cb114-11"></a></span>
+<span id="cb114-12"><a href="exploratory-data-analysis.html#cb114-12"></a></span>
+<span id="cb114-13"><a href="exploratory-data-analysis.html#cb114-13"></a>diamonds[<span class="st">&#39;clarity&#39;</span>] <span class="op">=</span> pd.Categorical(diamonds.clarity, </span>
+<span id="cb114-14"><a href="exploratory-data-analysis.html#cb114-14"></a>  ordered <span class="op">=</span> <span class="va">True</span>, </span>
+<span id="cb114-15"><a href="exploratory-data-analysis.html#cb114-15"></a>  categories <span class="op">=</span>  [<span class="st">&quot;I1&quot;</span>, <span class="st">&quot;SI2&quot;</span>, <span class="st">&quot;SI1&quot;</span>, <span class="st">&quot;VS2&quot;</span>, <span class="st">&quot;VS1&quot;</span>, <span class="st">&quot;VVS2&quot;</span>, <span class="st">&quot;VVS1&quot;</span>, <span class="st">&quot;IF&quot;</span>])</span></code></pre></div>
+</div>
+</div>
+<div id="questions" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Questions</h2>
+<blockquote>
+<p>“There are no routine statistical questions, only questionable statistical
+routines.” — Sir David Cox</p>
+</blockquote>
+<blockquote>
+<p>“Far better an approximate answer to the right question, which is often
+vague, than an exact answer to the wrong question, which can always be made
+precise.” — John Tukey</p>
+</blockquote>
+<p>Your goal during EDA is to develop an understanding of your data. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.</p>
+<p>EDA is fundamentally a creative process. And like most creative processes, the key to asking <em>quality</em> questions is to generate a large <em>quantity</em> of questions. It is difficult to ask revealing questions at the start of your analysis because you do not know what insights are contained in your dataset. On the other hand, each new question that you ask will expose you to a new aspect of your data and increase your chance of making a discovery. You can quickly drill down into the most interesting parts of your data—and develop a set of thought-provoking questions—if you follow up each question with a new question based on what you find.</p>
+<p>There is no rule about which questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries within your data. You can loosely word these questions as:</p>
+<ol style="list-style-type: decimal">
+<li><p>What type of variation occurs within my variables?</p></li>
+<li><p>What type of covariation occurs between my variables?</p></li>
+</ol>
+<p>The rest of this chapter will look at these two questions. I’ll explain what variation and covariation are, and I’ll show you several ways to answer each question. To make the discussion easier, let’s define some terms:</p>
+<ul>
+<li><p>A <strong>variable</strong> is a quantity, quality, or property that you can measure.</p></li>
+<li><p>A <strong>value</strong> is the state of a variable when you measure it. The value of a
+variable may change from measurement to measurement.</p></li>
+<li><p>An <strong>observation</strong> is a set of measurements made under similar conditions
+(you usually make all of the measurements in an observation at the same
+time and on the same object). An observation will contain several values,
+each associated with a different variable. I’ll sometimes refer to
+an observation as a data point.</p></li>
+<li><p><strong>Tabular data</strong> is a set of values, each associated with a variable and an
+observation. Tabular data is <em>tidy</em> if each value is placed in its own
+“cell”, each variable in its own column, and each observation in its own
+row.</p></li>
+</ul>
+<p>So far, all of the data that you’ve seen has been tidy. In real-life, most data isn’t tidy, so we’ll come back to these ideas again in [tidy data].</p>
+</div>
+<div id="variation" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Variation</h2>
+<p><strong>Variation</strong> is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Categorical variables can also vary if you measure across different subjects (e.g. the eye colors of different people), or different times (e.g. the energy levels of an electron at different moments).
+Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable’s values.</p>
+<div id="visualising-distributions" class="section level3" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Visualising distributions</h3>
+<p>How you visualise the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is <strong>categorical</strong> if it can only take one of a small set of values. In R, categorical variables are usually saved as factors or character vectors. To examine the distribution of a categorical variable, use a bar chart:</p>
+<p>We want the height of the bars to display how many observations occurred with each x value. You can compute these values with <code>size()</code>:</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="exploratory-data-analysis.html#cb115-1"></a>chart_dat <span class="op">=</span> (diamonds.</span>
+<span id="cb115-2"><a href="exploratory-data-analysis.html#cb115-2"></a>              groupby(<span class="st">&#39;cut&#39;</span>).</span>
+<span id="cb115-3"><a href="exploratory-data-analysis.html#cb115-3"></a>              agg(count <span class="op">=</span> (<span class="st">&#39;carat&#39;</span>, <span class="st">&#39;size&#39;</span>)).</span>
+<span id="cb115-4"><a href="exploratory-data-analysis.html#cb115-4"></a>              reset_index())</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="exploratory-data-analysis.html#cb116-1"></a>chart <span class="op">=</span> (alt.Chart(chart_dat).</span>
+<span id="cb116-2"><a href="exploratory-data-analysis.html#cb116-2"></a>    encode(</span>
+<span id="cb116-3"><a href="exploratory-data-analysis.html#cb116-3"></a>        x <span class="op">=</span> <span class="st">&#39;cut&#39;</span>,</span>
+<span id="cb116-4"><a href="exploratory-data-analysis.html#cb116-4"></a>        y <span class="op">=</span> <span class="st">&#39;count&#39;</span></span>
+<span id="cb116-5"><a href="exploratory-data-analysis.html#cb116-5"></a>    ).</span>
+<span id="cb116-6"><a href="exploratory-data-analysis.html#cb116-6"></a>    mark_bar().</span>
+<span id="cb116-7"><a href="exploratory-data-analysis.html#cb116-7"></a>    properties(width <span class="op">=</span> <span class="dv">400</span>)</span>
+<span id="cb116-8"><a href="exploratory-data-analysis.html#cb116-8"></a>)</span></code></pre></div>
+<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
+  "chart_spec": {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+    "config": {
+      "view": {
+        "continuousHeight": 300,
+        "continuousWidth": 400
+      }
+    },
+    "data": {
+      "format": {
+        "type": "json"
+      },
+      "url": "altair-data-645db9d8c01cf01dd924319c5ef7d635.json"
+    },
+    "encoding": {
+      "x": {
+        "field": "cut",
+        "type": "nominal"
+      },
+      "y": {
+        "field": "count",
+        "type": "quantitative"
+      }
+    },
+    "mark": "bar",
+    "width": 400
+  },
+  "embed_options": {
+    "defaultStyle": true,
+    "renderer": "canvas"
+  }
+},"evals":[],"jsHooks":[]}</script>
+<p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram:</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="exploratory-data-analysis.html#cb117-1"></a>chart <span class="op">=</span> (alt.Chart(diamonds).</span>
+<span id="cb117-2"><a href="exploratory-data-analysis.html#cb117-2"></a>    encode(</span>
+<span id="cb117-3"><a href="exploratory-data-analysis.html#cb117-3"></a>        x <span class="op">=</span> alt.X(<span class="st">&#39;carat&#39;</span>, <span class="bu">bin</span> <span class="op">=</span> alt.Bin(step <span class="op">=</span> <span class="fl">0.5</span>)), </span>
+<span id="cb117-4"><a href="exploratory-data-analysis.html#cb117-4"></a>        y <span class="op">=</span> <span class="st">&#39;count()&#39;</span>).</span>
+<span id="cb117-5"><a href="exploratory-data-analysis.html#cb117-5"></a>        mark_bar()</span>
+<span id="cb117-6"><a href="exploratory-data-analysis.html#cb117-6"></a>)</span></code></pre></div>
+<div id="htmlwidget-e5c8c404fe174e4c81bd" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{
+  "chart_spec": {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+    "config": {
+      "view": {
+        "continuousHeight": 300,
+        "continuousWidth": 400
+      }
+    },
+    "data": {
+      "format": {
+        "type": "json"
+      },
+      "url": "altair-data-9f071a27ef076cd8a1d55d74a1b153c6.json"
+    },
+    "encoding": {
+      "x": {
+        "bin": {
+          "step": 0.5
+        },
+        "field": "carat",
+        "type": "quantitative"
+      },
+      "y": {
+        "aggregate": "count",
+        "type": "quantitative"
+      }
+    },
+    "mark": "bar"
+  },
+  "embed_options": {
+    "defaultStyle": true,
+    "renderer": "canvas"
+  }
+},"evals":[],"jsHooks":[]}</script>
+<p>A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a <code>carat</code> value between 0.25 and 0.75, which are the left and right edges of the bar.</p>
+<p>You can set the width of the intervals in a histogram with the <code>alt.Bin()</code> and the <code>step</code> argument, which is measured in the units of the <code>x</code> variable. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns. For example, here is how the graph above looks when we zoom into just the diamonds with a size of less than three carats and choose a smaller binwidth.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="exploratory-data-analysis.html#cb118-1"></a>smaller <span class="op">=</span> diamonds.query(<span class="st">&#39;carat &lt; 3&#39;</span>)</span>
+<span id="cb118-2"><a href="exploratory-data-analysis.html#cb118-2"></a></span>
+<span id="cb118-3"><a href="exploratory-data-analysis.html#cb118-3"></a>chart <span class="op">=</span> (alt.Chart(smaller).</span>
+<span id="cb118-4"><a href="exploratory-data-analysis.html#cb118-4"></a>    encode(</span>
+<span id="cb118-5"><a href="exploratory-data-analysis.html#cb118-5"></a>        x <span class="op">=</span> alt.X(<span class="st">&#39;carat&#39;</span>, <span class="bu">bin</span> <span class="op">=</span> alt.Bin(step <span class="op">=</span> <span class="fl">0.1</span>)), </span>
+<span id="cb118-6"><a href="exploratory-data-analysis.html#cb118-6"></a>        y <span class="op">=</span> <span class="st">&#39;count()&#39;</span>).</span>
+<span id="cb118-7"><a href="exploratory-data-analysis.html#cb118-7"></a>        mark_bar()</span>
+<span id="cb118-8"><a href="exploratory-data-analysis.html#cb118-8"></a>)</span></code></pre></div>
+<div id="htmlwidget-36aa3d2a04d42bbc2145" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
+<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{
+  "chart_spec": {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+    "config": {
+      "view": {
+        "continuousHeight": 300,
+        "continuousWidth": 400
+      }
+    },
+    "data": {
+      "format": {
+        "type": "json"
+      },
+      "url": "altair-data-3830d9a099bc3159772fdf4a0cfd43bf.json"
+    },
+    "encoding": {
+      "x": {
+        "bin": {
+          "step": 0.1
+        },
+        "field": "carat",
+        "type": "quantitative"
+      },
+      "y": {
+        "aggregate": "count",
+        "type": "quantitative"
+      }
+    },
+    "mark": "bar"
+  },
+  "embed_options": {
+    "defaultStyle": true,
+    "renderer": "canvas"
+  }
+},"evals":[],"jsHooks":[]}</script>
+<p>If you wish to see multiple histograms, Altair doesn’t have a straightforward way to overly histograms. We recommend using <code>facet()</code>. <code>facet()</code> performs the same calculation for each group within the facet varaible.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="exploratory-data-analysis.html#cb119-1"></a>chart <span class="op">=</span> (alt.Chart(smaller).</span>
+<span id="cb119-2"><a href="exploratory-data-analysis.html#cb119-2"></a>    encode(</span>
+<span id="cb119-3"><a href="exploratory-data-analysis.html#cb119-3"></a>        x <span class="op">=</span> alt.X(<span class="st">&#39;carat&#39;</span>, <span class="bu">bin</span> <span class="op">=</span> alt.Bin(step <span class="op">=</span> <span class="fl">0.1</span>)), </span>
+<span id="cb119-4"><a href="exploratory-data-analysis.html#cb119-4"></a>        y <span class="op">=</span> <span class="st">&#39;count()&#39;</span>,</span>
+<span id="cb119-5"><a href="exploratory-data-analysis.html#cb119-5"></a>        color <span class="op">=</span> <span class="st">&#39;cut&#39;</span>).</span>
+<span id="cb119-6"><a href="exploratory-data-analysis.html#cb119-6"></a>        mark_bar().</span>
+<span id="cb119-7"><a href="exploratory-data-analysis.html#cb119-7"></a>        facet(facet <span class="op">=</span> <span class="st">&#39;cut&#39;</span>, columns <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb119-8"><a href="exploratory-data-analysis.html#cb119-8"></a>)</span>
+<span id="cb119-9"><a href="exploratory-data-analysis.html#cb119-9"></a></span>
+<span id="cb119-10"><a href="exploratory-data-analysis.html#cb119-10"></a>chart.save(<span class="st">&quot;screenshots/altair_diamonds_facet_hist.png&quot;</span>)</span></code></pre></div>
+<p><img src="screenshots/altair_diamonds_facet_hist.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>There are a few challenges with this type of plot, which we will come back to in <a href="#cat-cont">visualising a categorical and a continuous variable</a>.</p>
+<p>Now that you can visualise variation, what should you look for in your plots? And what type of follow-up questions should you ask? I’ve put together a list below of the most useful types of information that you will find in your graphs, along with some follow-up questions for each type of information. The key to asking good follow-up questions will be to rely on your curiosity (What do you want to learn more about?) as well as your skepticism (How could this be misleading?).</p>
 <!-- ### Typical values -->
 <!-- In both bar charts and histograms, tall bars show the common values of a variable, and shorter bars show less-common values. Places that do not have bars reveal values that were not seen in your data. To turn this information into useful questions, look for anything unexpected: -->
 <!-- * Which values are the most common? Why? -->
@@ -695,6 +857,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- Another useful resource is the [_R Graphics Cookbook_](https://amzn.com/1449316956) by Winston Chang. Much of the contents are available online at <http://www.cookbook-r.com/Graphs/>. -->
 <!-- I also recommend [_Graphical Data Analysis with R_](https://amzn.com/1498715230), by Antony Unwin. This is a book-length treatment similar to the material covered in this chapter, but has the space to go into much greater depth.  -->
 
+</div>
 </div>
 </div>
             </section>

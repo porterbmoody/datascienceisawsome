@@ -1237,11 +1237,22 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     <!-- These functions are complementary to filtering on ranks. Filtering gives -->
     <!-- you all variables, with each observation in a separate row: -->
 
-    <!-- ```{r} -->
-    <!-- not_cancelled %>% -->
-    <!--   group_by(year, month, day) %>% -->
-    <!--   mutate(r = min_rank(desc(dep_time))) %>% -->
-    <!--   filter(r %in% range(r)) -->
+    <!-- ```{python} -->
+    <!-- not_cancelled['f'] = not_cancelled.assign( -->
+    <!--         r = lambda x: (x. -->
+    <!--                         groupby(['year', 'month','day']). -->
+    <!--                         dep_time.agg('rank', method = 'min')) -->
+    <!--     ).groupby(['year', 'month','day']).r.transform( -->
+    <!--         lambda x: (x == np.min(x)) | (x == np.max(x)) -->
+    <!--     ) -->
+
+    <!-- not_cancelled.query('f == True').drop(columns = 'f') -->
+
+    <!-- # The pandas way to do this -->
+    <!-- df['min_c'] = df.groupby('A')['C'].transform('min') -->
+    <!-- df['max_c'] = df.groupby('A')['C'].transform('max') -->
+
+    <!-- df.query(' (C == min_c) or (C == max_c) ').filter(['A', 'B', 'C']) -->
     <!-- ``` -->
 
 *   Counts: You've seen `size()`, which takes no arguments, and returns the
@@ -1414,65 +1425,110 @@ dat.reset_index().head()
     effects of bad airports vs. bad carriers? Why/why not? (Hint: think about
     `flights.groupby(['carrier', 'dest']).agg(n = ('dep_time', 'size'))`)
 
-## Grouped mutates (and filters)
+## Grouped transforms (and filters)
 
-Grouping is most useful in conjunction with `agg()`, but you can also do convenient operations with `transform()` and `filter()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `assign()` and the best equivalent is `transform()`.
+Grouping is most useful in conjunction with `agg()`, but you can also do convenient operations with `transform()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `assign()` and the best equivalent is `transform()`. Following pandas [groupby guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html) on 'split-apply-combine', we would assign our transfomred variables to our data frame and then perform filters on the full data frame.
 
-<!-- *   Find the worst members of each group: -->
+*   Find the worst members of each group:
 
-<!--     ```{r} -->
-<!--     flights_sml %>% -->
-<!--       group_by(year, month, day) %>% -->
-<!--       filter(rank(desc(arr_delay)) < 10) -->
-<!--     ``` -->
+    
+    ```python
+    flights_sml['ranks'] = (flights_sml.
+                            groupby(['year', 'month','day']).
+                            arr_delay.rank(ascending = False))
+    #> /usr/local/bin/python3:3: SettingWithCopyWarning: 
+    #> A value is trying to be set on a copy of a slice from a DataFrame.
+    #> Try using .loc[row_indexer,col_indexer] = value instead
+    #> 
+    #> See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+    flights_sml.query('ranks < 10').drop(columns = 'ranks')
+    #>         year  month  day  dep_delay  arr_delay  air_time  distance
+    #> 151     2013      1    1      853.0      851.0      41.0       184
+    #> 649     2013      1    1      290.0      338.0     213.0      1134
+    #> 673     2013      1    1      260.0      263.0      46.0       266
+    #> 729     2013      1    1      157.0      174.0      60.0       213
+    #> 746     2013      1    1      216.0      222.0     121.0       708
+    #> ...      ...    ...  ...        ...        ...       ...       ...
+    #> 336579  2013      9   30      158.0      121.0      95.0       765
+    #> 336668  2013      9   30      182.0      174.0      95.0       708
+    #> 336724  2013      9   30      158.0      136.0      91.0       746
+    #> 336757  2013      9   30      194.0      194.0      50.0       301
+    #> 336763  2013      9   30      154.0      130.0     123.0       944
+    #> 
+    #> [3306 rows x 7 columns]
+    ```
 
-<!-- *   Find all groups bigger than a threshold: -->
+*   Find all groups bigger than a threshold:
 
-<!--     ```{r} -->
-<!--     popular_dests <- flights %>% -->
-<!--       group_by(dest) %>% -->
-<!--       filter(n() > 365) -->
-<!--     popular_dests -->
-<!--     ``` -->
+    
+    ```python
+    popular_dests = flights
+    popular_dests['n'] = popular_dests.groupby('dest').arr_delay.transform('size')
+    popular_dests = flights.query('n > 365').drop(columns = 'n')
+    popular_dests
+    #>         year  month  day  ...  hour  minute                 time_hour
+    #> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+    #> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+    #> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+    #> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+    #> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+    #> ...      ...    ...  ...  ...   ...     ...                       ...
+    #> 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+    #> 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+    #> 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+    #> 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+    #> 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
+    #> 
+    #> [332577 rows x 19 columns]
+    ```
 
-<!-- *   Standardise to compute per group metrics: -->
+*   Standardise to compute per group metrics:
 
-<!--     ```{r} -->
-<!--     popular_dests %>% -->
-<!--       filter(arr_delay > 0) %>% -->
-<!--       mutate(prop_delay = arr_delay / sum(arr_delay)) %>% -->
-<!--       select(year:day, dest, arr_delay, prop_delay) -->
-<!--     ``` -->
+    
+    ```python
+    (popular_dests.
+    query('arr_delay > 0').
+    assign(prop_delay = lambda x: x.arr_delay / x.groupby('dest').arr_delay.transform('sum')).
+    filter(['year', 'month', 'day', 'dest', 'arr_delay', 'prop_delay'])
+    )
+    #>         year  month  day dest  arr_delay  prop_delay
+    #> 0       2013      1    1  IAH       11.0    0.000111
+    #> 1       2013      1    1  IAH       20.0    0.000201
+    #> 2       2013      1    1  MIA       33.0    0.000235
+    #> 5       2013      1    1  ORD       12.0    0.000042
+    #> 6       2013      1    1  FLL       19.0    0.000094
+    #> ...      ...    ...  ...  ...        ...         ...
+    #> 336759  2013      9   30  BNA        7.0    0.000057
+    #> 336760  2013      9   30  STL       57.0    0.000717
+    #> 336762  2013      9   30  SFO       42.0    0.000204
+    #> 336763  2013      9   30  MCO      130.0    0.000631
+    #> 336768  2013      9   30  BOS        1.0    0.000005
+    #> 
+    #> [131106 rows x 6 columns]
+    ```
 
-<!-- A grouped filter is a grouped mutate followed by an ungrouped filter. I generally avoid them except for quick and dirty manipulations: otherwise it's hard to check that you've done the manipulation correctly. -->
+### Exercises
 
-<!-- Functions that work most naturally in grouped mutates and filters are known as  window functions (vs. the summary functions used for summaries). You can learn more about useful window functions in the corresponding vignette: `vignette("window-functions")`. -->
+1.  Which plane (`tailnum`) has the worst on-time record?
 
-<!-- ### Exercises -->
+1.  What time of day should you fly if you want to avoid delays as much
+    as possible?
 
-<!-- 1.  Refer back to the lists of useful mutate and filtering functions.  -->
-<!--     Describe how each operation changes when you combine it with grouping. -->
+1.  For each destination, compute the total minutes of delay. For each
+    flight, compute the proportion of the total delay for its destination.
 
-<!-- 1.  Which plane (`tailnum`) has the worst on-time record? -->
+1.  Delays are typically temporally correlated: even once the problem that
+    caused the initial delay has been resolved, later flights are delayed
+    to allow earlier flights to leave. Explore how the delay
+    of a flight is related to the delay of the immediately preceding flight.
 
-<!-- 1.  What time of day should you fly if you want to avoid delays as much -->
-<!--     as possible? -->
+1.  Look at each destination. Can you find flights that are suspiciously
+    fast? (i.e. flights that represent a potential data entry error). Compute
+    the air time of a flight relative to the shortest flight to that destination.
+    Which flights were most delayed in the air?
 
-<!-- 1.  For each destination, compute the total minutes of delay. For each  -->
-<!--     flight, compute the proportion of the total delay for its destination. -->
+1.  Find all destinations that are flown by at least two carriers. Use that
+    information to rank the carriers.
 
-<!-- 1.  Delays are typically temporally correlated: even once the problem that -->
-<!--     caused the initial delay has been resolved, later flights are delayed  -->
-<!--     to allow earlier flights to leave. Using `lag()`, explore how the delay -->
-<!--     of a flight is related to the delay of the immediately preceding flight. -->
-
-<!-- 1.  Look at each destination. Can you find flights that are suspiciously -->
-<!--     fast? (i.e. flights that represent a potential data entry error). Compute -->
-<!--     the air time of a flight relative to the shortest flight to that destination. -->
-<!--     Which flights were most delayed in the air? -->
-
-<!-- 1.  Find all destinations that are flown by at least two carriers. Use that -->
-<!--     information to rank the carriers. -->
-
-<!-- 1.  For each plane, count the number of flights before the first delay  -->
-<!--     of greater than 1 hour. -->
+1.  For each plane, count the number of flights before the first delay
+    of greater than 1 hour.

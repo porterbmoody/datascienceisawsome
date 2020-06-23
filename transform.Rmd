@@ -350,7 +350,7 @@ Besides selecting sets of existing columns, it's often useful to add new columns
 
 `assign()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. 
 
-```{python}
+```{python, cache=FALSE}
 
 flights_sml = (flights.
     filter(regex = "^year$|^month$|^day$|delay$|^distance$|^air_time$")
@@ -807,11 +807,22 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     <!-- These functions are complementary to filtering on ranks. Filtering gives -->
     <!-- you all variables, with each observation in a separate row: -->
 
-    <!-- ```{r} -->
-    <!-- not_cancelled %>% -->
-    <!--   group_by(year, month, day) %>% -->
-    <!--   mutate(r = min_rank(desc(dep_time))) %>% -->
-    <!--   filter(r %in% range(r)) -->
+    <!-- ```{python} -->
+    <!-- not_cancelled['f'] = not_cancelled.assign( -->
+    <!--         r = lambda x: (x. -->
+    <!--                         groupby(['year', 'month','day']). -->
+    <!--                         dep_time.agg('rank', method = 'min')) -->
+    <!--     ).groupby(['year', 'month','day']).r.transform( -->
+    <!--         lambda x: (x == np.min(x)) | (x == np.max(x)) -->
+    <!--     ) -->
+
+    <!-- not_cancelled.query('f == True').drop(columns = 'f') -->
+
+    <!-- # The pandas way to do this -->
+    <!-- df['min_c'] = df.groupby('A')['C'].transform('min') -->
+    <!-- df['max_c'] = df.groupby('A')['C'].transform('max') -->
+
+    <!-- df.query(' (C == min_c) or (C == max_c) ').filter(['A', 'B', 'C']) -->
     <!-- ``` -->
 
 *   Counts: You've seen `size()`, which takes no arguments, and returns the
@@ -911,65 +922,60 @@ dat.reset_index().head()
     effects of bad airports vs. bad carriers? Why/why not? (Hint: think about
     `flights.groupby(['carrier', 'dest']).agg(n = ('dep_time', 'size'))`)
 
-## Grouped mutates (and filters)
+## Grouped transforms (and filters)
 
-Grouping is most useful in conjunction with `agg()`, but you can also do convenient operations with `transform()` and `filter()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `assign()` and the best equivalent is `transform()`.
+Grouping is most useful in conjunction with `agg()`, but you can also do convenient operations with `transform()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `assign()` and the best equivalent is `transform()`. Following pandas [groupby guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html) on 'split-apply-combine', we would assign our transfomred variables to our data frame and then perform filters on the full data frame.
 
-<!-- *   Find the worst members of each group: -->
+*   Find the worst members of each group:
 
-<!--     ```{r} -->
-<!--     flights_sml %>% -->
-<!--       group_by(year, month, day) %>% -->
-<!--       filter(rank(desc(arr_delay)) < 10) -->
-<!--     ``` -->
+    ```{python}
+    flights_sml['ranks'] = (flights_sml.
+                            groupby(['year', 'month','day']).
+                            arr_delay.rank(ascending = False))
+    flights_sml.query('ranks < 10').drop(columns = 'ranks')
+    ```
 
-<!-- *   Find all groups bigger than a threshold: -->
+*   Find all groups bigger than a threshold:
 
-<!--     ```{r} -->
-<!--     popular_dests <- flights %>% -->
-<!--       group_by(dest) %>% -->
-<!--       filter(n() > 365) -->
-<!--     popular_dests -->
-<!--     ``` -->
+    ```{python}
+    popular_dests = flights
+    popular_dests['n'] = popular_dests.groupby('dest').arr_delay.transform('size')
+    popular_dests = flights.query('n > 365').drop(columns = 'n')
+    popular_dests
+    ```
 
-<!-- *   Standardise to compute per group metrics: -->
+*   Standardise to compute per group metrics:
 
-<!--     ```{r} -->
-<!--     popular_dests %>% -->
-<!--       filter(arr_delay > 0) %>% -->
-<!--       mutate(prop_delay = arr_delay / sum(arr_delay)) %>% -->
-<!--       select(year:day, dest, arr_delay, prop_delay) -->
-<!--     ``` -->
+    ```{python}
+    (popular_dests.
+    query('arr_delay > 0').
+    assign(prop_delay = lambda x: x.arr_delay / x.groupby('dest').arr_delay.transform('sum')).
+    filter(['year', 'month', 'day', 'dest', 'arr_delay', 'prop_delay'])
+    )
+    ```
 
-<!-- A grouped filter is a grouped mutate followed by an ungrouped filter. I generally avoid them except for quick and dirty manipulations: otherwise it's hard to check that you've done the manipulation correctly. -->
+### Exercises
 
-<!-- Functions that work most naturally in grouped mutates and filters are known as  window functions (vs. the summary functions used for summaries). You can learn more about useful window functions in the corresponding vignette: `vignette("window-functions")`. -->
+1.  Which plane (`tailnum`) has the worst on-time record?
 
-<!-- ### Exercises -->
+1.  What time of day should you fly if you want to avoid delays as much
+    as possible?
 
-<!-- 1.  Refer back to the lists of useful mutate and filtering functions.  -->
-<!--     Describe how each operation changes when you combine it with grouping. -->
+1.  For each destination, compute the total minutes of delay. For each
+    flight, compute the proportion of the total delay for its destination.
 
-<!-- 1.  Which plane (`tailnum`) has the worst on-time record? -->
+1.  Delays are typically temporally correlated: even once the problem that
+    caused the initial delay has been resolved, later flights are delayed
+    to allow earlier flights to leave. Explore how the delay
+    of a flight is related to the delay of the immediately preceding flight.
 
-<!-- 1.  What time of day should you fly if you want to avoid delays as much -->
-<!--     as possible? -->
+1.  Look at each destination. Can you find flights that are suspiciously
+    fast? (i.e. flights that represent a potential data entry error). Compute
+    the air time of a flight relative to the shortest flight to that destination.
+    Which flights were most delayed in the air?
 
-<!-- 1.  For each destination, compute the total minutes of delay. For each  -->
-<!--     flight, compute the proportion of the total delay for its destination. -->
+1.  Find all destinations that are flown by at least two carriers. Use that
+    information to rank the carriers.
 
-<!-- 1.  Delays are typically temporally correlated: even once the problem that -->
-<!--     caused the initial delay has been resolved, later flights are delayed  -->
-<!--     to allow earlier flights to leave. Using `lag()`, explore how the delay -->
-<!--     of a flight is related to the delay of the immediately preceding flight. -->
-
-<!-- 1.  Look at each destination. Can you find flights that are suspiciously -->
-<!--     fast? (i.e. flights that represent a potential data entry error). Compute -->
-<!--     the air time of a flight relative to the shortest flight to that destination. -->
-<!--     Which flights were most delayed in the air? -->
-
-<!-- 1.  Find all destinations that are flown by at least two carriers. Use that -->
-<!--     information to rank the carriers. -->
-
-<!-- 1.  For each plane, count the number of flights before the first delay  -->
-<!--     of greater than 1 hour. -->
+1.  For each plane, count the number of flights before the first delay
+    of greater than 1 hour.

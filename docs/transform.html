@@ -252,7 +252,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
 <li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped mutates (and filters)</a></li>
+<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
 <ul>
@@ -260,7 +263,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>8</b> Workflow: projects</a>
 <ul>
@@ -30112,11 +30123,19 @@ find the first and last departure for each day:</p>
 <span id="cb105-23"><a href="transform.html#cb105-23"></a><span class="co">#&gt; [365 rows x 2 columns]</span></span></code></pre></div>
 <!-- These functions are complementary to filtering on ranks. Filtering gives -->
 <!-- you all variables, with each observation in a separate row: -->
-<!-- ```{r} -->
-<!-- not_cancelled %>% -->
-<!--   group_by(year, month, day) %>% -->
-<!--   mutate(r = min_rank(desc(dep_time))) %>% -->
-<!--   filter(r %in% range(r)) -->
+<!-- ```{python} -->
+<!-- not_cancelled['f'] = not_cancelled.assign( -->
+<!--         r = lambda x: (x. -->
+<!--                         groupby(['year', 'month','day']). -->
+<!--                         dep_time.agg('rank', method = 'min')) -->
+<!--     ).groupby(['year', 'month','day']).r.transform( -->
+<!--         lambda x: (x == np.min(x)) | (x == np.max(x)) -->
+<!--     ) -->
+<!-- not_cancelled.query('f == True').drop(columns = 'f') -->
+<!-- # The pandas way to do this -->
+<!-- df['min_c'] = df.groupby('A')['C'].transform('min') -->
+<!-- df['max_c'] = df.groupby('A')['C'].transform('max') -->
+<!-- df.query(' (C == min_c) or (C == max_c) ').filter(['A', 'B', 'C']) -->
 <!-- ``` --></li>
 <li><p>Counts: You’ve seen <code>size()</code>, which takes no arguments, and returns the
 size of the current group. To count the number of non-missing values, use
@@ -30268,52 +30287,97 @@ effects of bad airports vs. bad carriers? Why/why not? (Hint: think about
 </ol>
 </div>
 </div>
-<div id="grouped-mutates-and-filters" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> Grouped mutates (and filters)</h2>
-<p>Grouping is most useful in conjunction with <code>agg()</code>, but you can also do convenient operations with <code>transform()</code> and <code>filter()</code>. This is a difference in pandas as compared to dplyr. Once you create a <code>.groupby()</code> object you cannot use <code>assign()</code> and the best equivalent is <code>transform()</code>.</p>
-<!-- *   Find the worst members of each group: -->
-<!--     ```{r} -->
-<!--     flights_sml %>% -->
-<!--       group_by(year, month, day) %>% -->
-<!--       filter(rank(desc(arr_delay)) < 10) -->
-<!--     ``` -->
-<!-- *   Find all groups bigger than a threshold: -->
-<!--     ```{r} -->
-<!--     popular_dests <- flights %>% -->
-<!--       group_by(dest) %>% -->
-<!--       filter(n() > 365) -->
-<!--     popular_dests -->
-<!--     ``` -->
-<!-- *   Standardise to compute per group metrics: -->
-<!--     ```{r} -->
-<!--     popular_dests %>% -->
-<!--       filter(arr_delay > 0) %>% -->
-<!--       mutate(prop_delay = arr_delay / sum(arr_delay)) %>% -->
-<!--       select(year:day, dest, arr_delay, prop_delay) -->
-<!--     ``` -->
-<!-- A grouped filter is a grouped mutate followed by an ungrouped filter. I generally avoid them except for quick and dirty manipulations: otherwise it's hard to check that you've done the manipulation correctly. -->
-<!-- Functions that work most naturally in grouped mutates and filters are known as  window functions (vs. the summary functions used for summaries). You can learn more about useful window functions in the corresponding vignette: `vignette("window-functions")`. -->
-<!-- ### Exercises -->
-<!-- 1.  Refer back to the lists of useful mutate and filtering functions.  -->
-<!--     Describe how each operation changes when you combine it with grouping. -->
-<!-- 1.  Which plane (`tailnum`) has the worst on-time record? -->
-<!-- 1.  What time of day should you fly if you want to avoid delays as much -->
-<!--     as possible? -->
-<!-- 1.  For each destination, compute the total minutes of delay. For each  -->
-<!--     flight, compute the proportion of the total delay for its destination. -->
-<!-- 1.  Delays are typically temporally correlated: even once the problem that -->
-<!--     caused the initial delay has been resolved, later flights are delayed  -->
-<!--     to allow earlier flights to leave. Using `lag()`, explore how the delay -->
-<!--     of a flight is related to the delay of the immediately preceding flight. -->
-<!-- 1.  Look at each destination. Can you find flights that are suspiciously -->
-<!--     fast? (i.e. flights that represent a potential data entry error). Compute -->
-<!--     the air time of a flight relative to the shortest flight to that destination. -->
-<!--     Which flights were most delayed in the air? -->
-<!-- 1.  Find all destinations that are flown by at least two carriers. Use that -->
-<!--     information to rank the carriers. -->
-<!-- 1.  For each plane, count the number of flights before the first delay  -->
-<!--     of greater than 1 hour. -->
+<div id="grouped-transforms-and-filters" class="section level2" number="5.7">
+<h2><span class="header-section-number">5.7</span> Grouped transforms (and filters)</h2>
+<p>Grouping is most useful in conjunction with <code>agg()</code>, but you can also do convenient operations with <code>transform()</code>. This is a difference in pandas as compared to dplyr. Once you create a <code>.groupby()</code> object you cannot use <code>assign()</code> and the best equivalent is <code>transform()</code>. Following pandas <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html">groupby guide</a> on ‘split-apply-combine’, we would assign our transfomred variables to our data frame and then perform filters on the full data frame.</p>
+<ul>
+<li><p>Find the worst members of each group:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="transform.html#cb110-1"></a>flights_sml[<span class="st">&#39;ranks&#39;</span>] <span class="op">=</span> (flights_sml.</span>
+<span id="cb110-2"><a href="transform.html#cb110-2"></a>                        groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>]).</span>
+<span id="cb110-3"><a href="transform.html#cb110-3"></a>                        arr_delay.rank(ascending <span class="op">=</span> <span class="va">False</span>))</span>
+<span id="cb110-4"><a href="transform.html#cb110-4"></a><span class="co">#&gt; /usr/local/bin/python3:3: SettingWithCopyWarning: </span></span>
+<span id="cb110-5"><a href="transform.html#cb110-5"></a><span class="co">#&gt; A value is trying to be set on a copy of a slice from a DataFrame.</span></span>
+<span id="cb110-6"><a href="transform.html#cb110-6"></a><span class="co">#&gt; Try using .loc[row_indexer,col_indexer] = value instead</span></span>
+<span id="cb110-7"><a href="transform.html#cb110-7"></a><span class="co">#&gt; </span></span>
+<span id="cb110-8"><a href="transform.html#cb110-8"></a><span class="co">#&gt; See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</span></span>
+<span id="cb110-9"><a href="transform.html#cb110-9"></a>flights_sml.query(<span class="st">&#39;ranks &lt; 10&#39;</span>).drop(columns <span class="op">=</span> <span class="st">&#39;ranks&#39;</span>)</span>
+<span id="cb110-10"><a href="transform.html#cb110-10"></a><span class="co">#&gt;         year  month  day  dep_delay  arr_delay  air_time  distance</span></span>
+<span id="cb110-11"><a href="transform.html#cb110-11"></a><span class="co">#&gt; 151     2013      1    1      853.0      851.0      41.0       184</span></span>
+<span id="cb110-12"><a href="transform.html#cb110-12"></a><span class="co">#&gt; 649     2013      1    1      290.0      338.0     213.0      1134</span></span>
+<span id="cb110-13"><a href="transform.html#cb110-13"></a><span class="co">#&gt; 673     2013      1    1      260.0      263.0      46.0       266</span></span>
+<span id="cb110-14"><a href="transform.html#cb110-14"></a><span class="co">#&gt; 729     2013      1    1      157.0      174.0      60.0       213</span></span>
+<span id="cb110-15"><a href="transform.html#cb110-15"></a><span class="co">#&gt; 746     2013      1    1      216.0      222.0     121.0       708</span></span>
+<span id="cb110-16"><a href="transform.html#cb110-16"></a><span class="co">#&gt; ...      ...    ...  ...        ...        ...       ...       ...</span></span>
+<span id="cb110-17"><a href="transform.html#cb110-17"></a><span class="co">#&gt; 336579  2013      9   30      158.0      121.0      95.0       765</span></span>
+<span id="cb110-18"><a href="transform.html#cb110-18"></a><span class="co">#&gt; 336668  2013      9   30      182.0      174.0      95.0       708</span></span>
+<span id="cb110-19"><a href="transform.html#cb110-19"></a><span class="co">#&gt; 336724  2013      9   30      158.0      136.0      91.0       746</span></span>
+<span id="cb110-20"><a href="transform.html#cb110-20"></a><span class="co">#&gt; 336757  2013      9   30      194.0      194.0      50.0       301</span></span>
+<span id="cb110-21"><a href="transform.html#cb110-21"></a><span class="co">#&gt; 336763  2013      9   30      154.0      130.0     123.0       944</span></span>
+<span id="cb110-22"><a href="transform.html#cb110-22"></a><span class="co">#&gt; </span></span>
+<span id="cb110-23"><a href="transform.html#cb110-23"></a><span class="co">#&gt; [3306 rows x 7 columns]</span></span></code></pre></div></li>
+<li><p>Find all groups bigger than a threshold:</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="transform.html#cb111-1"></a>popular_dests <span class="op">=</span> flights</span>
+<span id="cb111-2"><a href="transform.html#cb111-2"></a>popular_dests[<span class="st">&#39;n&#39;</span>] <span class="op">=</span> popular_dests.groupby(<span class="st">&#39;dest&#39;</span>).arr_delay.transform(<span class="st">&#39;size&#39;</span>)</span>
+<span id="cb111-3"><a href="transform.html#cb111-3"></a>popular_dests <span class="op">=</span> flights.query(<span class="st">&#39;n &gt; 365&#39;</span>).drop(columns <span class="op">=</span> <span class="st">&#39;n&#39;</span>)</span>
+<span id="cb111-4"><a href="transform.html#cb111-4"></a>popular_dests</span>
+<span id="cb111-5"><a href="transform.html#cb111-5"></a><span class="co">#&gt;         year  month  day  ...  hour  minute                 time_hour</span></span>
+<span id="cb111-6"><a href="transform.html#cb111-6"></a><span class="co">#&gt; 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb111-7"><a href="transform.html#cb111-7"></a><span class="co">#&gt; 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb111-8"><a href="transform.html#cb111-8"></a><span class="co">#&gt; 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb111-9"><a href="transform.html#cb111-9"></a><span class="co">#&gt; 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00</span></span>
+<span id="cb111-10"><a href="transform.html#cb111-10"></a><span class="co">#&gt; 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00</span></span>
+<span id="cb111-11"><a href="transform.html#cb111-11"></a><span class="co">#&gt; ...      ...    ...  ...  ...   ...     ...                       ...</span></span>
+<span id="cb111-12"><a href="transform.html#cb111-12"></a><span class="co">#&gt; 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00</span></span>
+<span id="cb111-13"><a href="transform.html#cb111-13"></a><span class="co">#&gt; 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00</span></span>
+<span id="cb111-14"><a href="transform.html#cb111-14"></a><span class="co">#&gt; 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00</span></span>
+<span id="cb111-15"><a href="transform.html#cb111-15"></a><span class="co">#&gt; 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00</span></span>
+<span id="cb111-16"><a href="transform.html#cb111-16"></a><span class="co">#&gt; 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00</span></span>
+<span id="cb111-17"><a href="transform.html#cb111-17"></a><span class="co">#&gt; </span></span>
+<span id="cb111-18"><a href="transform.html#cb111-18"></a><span class="co">#&gt; [332577 rows x 19 columns]</span></span></code></pre></div></li>
+<li><p>Standardise to compute per group metrics:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="transform.html#cb112-1"></a>(popular_dests.</span>
+<span id="cb112-2"><a href="transform.html#cb112-2"></a>query(<span class="st">&#39;arr_delay &gt; 0&#39;</span>).</span>
+<span id="cb112-3"><a href="transform.html#cb112-3"></a>assign(prop_delay <span class="op">=</span> <span class="kw">lambda</span> x: x.arr_delay <span class="op">/</span> x.groupby(<span class="st">&#39;dest&#39;</span>).arr_delay.transform(<span class="st">&#39;sum&#39;</span>)).</span>
+<span id="cb112-4"><a href="transform.html#cb112-4"></a><span class="bu">filter</span>([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>, <span class="st">&#39;dest&#39;</span>, <span class="st">&#39;arr_delay&#39;</span>, <span class="st">&#39;prop_delay&#39;</span>])</span>
+<span id="cb112-5"><a href="transform.html#cb112-5"></a>)</span>
+<span id="cb112-6"><a href="transform.html#cb112-6"></a><span class="co">#&gt;         year  month  day dest  arr_delay  prop_delay</span></span>
+<span id="cb112-7"><a href="transform.html#cb112-7"></a><span class="co">#&gt; 0       2013      1    1  IAH       11.0    0.000111</span></span>
+<span id="cb112-8"><a href="transform.html#cb112-8"></a><span class="co">#&gt; 1       2013      1    1  IAH       20.0    0.000201</span></span>
+<span id="cb112-9"><a href="transform.html#cb112-9"></a><span class="co">#&gt; 2       2013      1    1  MIA       33.0    0.000235</span></span>
+<span id="cb112-10"><a href="transform.html#cb112-10"></a><span class="co">#&gt; 5       2013      1    1  ORD       12.0    0.000042</span></span>
+<span id="cb112-11"><a href="transform.html#cb112-11"></a><span class="co">#&gt; 6       2013      1    1  FLL       19.0    0.000094</span></span>
+<span id="cb112-12"><a href="transform.html#cb112-12"></a><span class="co">#&gt; ...      ...    ...  ...  ...        ...         ...</span></span>
+<span id="cb112-13"><a href="transform.html#cb112-13"></a><span class="co">#&gt; 336759  2013      9   30  BNA        7.0    0.000057</span></span>
+<span id="cb112-14"><a href="transform.html#cb112-14"></a><span class="co">#&gt; 336760  2013      9   30  STL       57.0    0.000717</span></span>
+<span id="cb112-15"><a href="transform.html#cb112-15"></a><span class="co">#&gt; 336762  2013      9   30  SFO       42.0    0.000204</span></span>
+<span id="cb112-16"><a href="transform.html#cb112-16"></a><span class="co">#&gt; 336763  2013      9   30  MCO      130.0    0.000631</span></span>
+<span id="cb112-17"><a href="transform.html#cb112-17"></a><span class="co">#&gt; 336768  2013      9   30  BOS        1.0    0.000005</span></span>
+<span id="cb112-18"><a href="transform.html#cb112-18"></a><span class="co">#&gt; </span></span>
+<span id="cb112-19"><a href="transform.html#cb112-19"></a><span class="co">#&gt; [131106 rows x 6 columns]</span></span></code></pre></div></li>
+</ul>
+<div id="exercises-10" class="section level3" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Which plane (<code>tailnum</code>) has the worst on-time record?</p></li>
+<li><p>What time of day should you fly if you want to avoid delays as much
+as possible?</p></li>
+<li><p>For each destination, compute the total minutes of delay. For each
+flight, compute the proportion of the total delay for its destination.</p></li>
+<li><p>Delays are typically temporally correlated: even once the problem that
+caused the initial delay has been resolved, later flights are delayed
+to allow earlier flights to leave. Explore how the delay
+of a flight is related to the delay of the immediately preceding flight.</p></li>
+<li><p>Look at each destination. Can you find flights that are suspiciously
+fast? (i.e. flights that represent a potential data entry error). Compute
+the air time of a flight relative to the shortest flight to that destination.
+Which flights were most delayed in the air?</p></li>
+<li><p>Find all destinations that are flown by at least two carriers. Use that
+information to rank the carriers.</p></li>
+<li><p>For each plane, count the number of flights before the first delay
+of greater than 1 hour.</p></li>
+</ol>
 
+</div>
 </div>
 </div>
             </section>

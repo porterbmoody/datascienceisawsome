@@ -1,5 +1,7 @@
 # Exploratory Data Analysis
 
+
+
 ## Introduction
 
 This chapter will show you how to use visualisation and transformation to explore your data in a systematic way, a task that statisticians call exploratory data analysis, or EDA for short. EDA is an iterative cycle. You:
@@ -14,110 +16,184 @@ EDA is not a formal process with a strict set of rules. More than anything, EDA 
 
 EDA is an important part of any data analysis, even if the questions are handed to you on a platter, because you always need to investigate the quality of your data. Data cleaning is just one application of EDA: you ask questions about whether your data meets your expectations or not. To do data cleaning, you'll need to deploy all the tools of EDA: visualisation, transformation, and modelling.
 
-<!-- ### Prerequisites -->
+### Prerequisites
 
-<!-- In this chapter we'll combine what you've learned about dplyr and ggplot2 to interactively ask questions, answer them with data, and then ask new questions. -->
+In this chapter we'll combine what you've learned about pandas and Altair to interactively ask questions, answer them with data, and then ask new questions.
 
-<!-- ```{r setup, message = FALSE} -->
-<!-- library(tidyverse) -->
-<!-- ``` -->
 
-<!-- ## Questions -->
+```python
+import pandas as pd
+import altair as alt
+import numpy as np
+from scipy import stats
 
-<!-- > "There are no routine statistical questions, only questionable statistical -->
-<!-- > routines." --- Sir David Cox -->
+alt.data_transformers.enable('json')
+#> DataTransformerRegistry.enable('json')
+```
 
-<!-- > "Far better an approximate answer to the right question, which is often -->
-<!-- > vague, than an exact answer to the wrong question, which can always be made -->
-<!-- > precise." --- John Tukey -->
+Then make sure you have the diamonds data loaded.
 
-<!-- Your goal during EDA is to develop an understanding of your data. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make. -->
 
-<!-- EDA is fundamentally a creative process. And like most creative processes, the key to asking _quality_ questions is to generate a large _quantity_ of questions. It is difficult to ask revealing questions at the start of your analysis because you do not know what insights are contained in your dataset. On the other hand, each new question that you ask will expose you to a new aspect of your data and increase your chance of making a discovery. You can quickly drill down into the most interesting parts of your data---and develop a set of thought-provoking questions---if you follow up each question with a new question based on what you find. -->
+```python
 
-<!-- There is no rule about which questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries within your data. You can loosely word these questions as: -->
+diamonds = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv")
 
-<!-- 1. What type of variation occurs within my variables? -->
+diamonds['cut'] = pd.Categorical(diamonds.cut, 
+  ordered = True, 
+  categories =  ["Fair", "Good", "Very Good", "Premium", "Ideal" ])
 
-<!-- 1. What type of covariation occurs between my variables? -->
+diamonds['color'] = pd.Categorical(diamonds.color, 
+  ordered = True, 
+  categories =  ["D", "E", "F", "G", "H", "I", "J"])
 
-<!-- The rest of this chapter will look at these two questions. I'll explain what variation and covariation are, and I'll show you several ways to answer each question. To make the discussion easier, let's define some terms:  -->
 
-<!-- *   A __variable__ is a quantity, quality, or property that you can measure.  -->
+diamonds['clarity'] = pd.Categorical(diamonds.clarity, 
+  ordered = True, 
+  categories =  ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"])
 
-<!-- *   A __value__ is the state of a variable when you measure it. The value of a -->
-<!--     variable may change from measurement to measurement. -->
+```
 
-<!-- *   An __observation__ is a set of measurements made under similar conditions -->
-<!--     (you usually make all of the measurements in an observation at the same  -->
-<!--     time and on the same object). An observation will contain several values,  -->
-<!--     each associated with a different variable. I'll sometimes refer to  -->
-<!--     an observation as a data point. -->
+## Questions
 
-<!-- *   __Tabular data__ is a set of values, each associated with a variable and an -->
-<!--     observation. Tabular data is _tidy_ if each value is placed in its own -->
-<!--     "cell", each variable in its own column, and each observation in its own  -->
-<!--     row.  -->
+> "There are no routine statistical questions, only questionable statistical
+> routines." --- Sir David Cox
 
-<!-- So far, all of the data that you've seen has been tidy. In real-life, most data isn't tidy, so we'll come back to these ideas again in [tidy data]. -->
+> "Far better an approximate answer to the right question, which is often
+> vague, than an exact answer to the wrong question, which can always be made
+> precise." --- John Tukey
 
-<!-- ## Variation -->
+Your goal during EDA is to develop an understanding of your data. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
 
-<!-- **Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Categorical variables can also vary if you measure across different subjects (e.g. the eye colors of different people), or different times (e.g. the energy levels of an electron at different moments).  -->
-<!-- Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable's values. -->
+EDA is fundamentally a creative process. And like most creative processes, the key to asking _quality_ questions is to generate a large _quantity_ of questions. It is difficult to ask revealing questions at the start of your analysis because you do not know what insights are contained in your dataset. On the other hand, each new question that you ask will expose you to a new aspect of your data and increase your chance of making a discovery. You can quickly drill down into the most interesting parts of your data---and develop a set of thought-provoking questions---if you follow up each question with a new question based on what you find.
 
-<!-- ### Visualising distributions -->
+There is no rule about which questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries within your data. You can loosely word these questions as:
 
-<!-- How you visualise the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is **categorical** if it can only take one of a small set of values. In R, categorical variables are usually saved as factors or character vectors. To examine the distribution of a categorical variable, use a bar chart: -->
+1. What type of variation occurs within my variables?
 
-<!-- ```{r} -->
-<!-- ggplot(data = diamonds) + -->
-<!--   geom_bar(mapping = aes(x = cut)) -->
-<!-- ``` -->
+1. What type of covariation occurs between my variables?
 
-<!-- The height of the bars displays how many observations occurred with each x value. You can compute these values manually with `dplyr::count()`: -->
+The rest of this chapter will look at these two questions. I'll explain what variation and covariation are, and I'll show you several ways to answer each question. To make the discussion easier, let's define some terms:
 
-<!-- ```{r} -->
-<!-- diamonds %>%  -->
-<!--   count(cut) -->
-<!-- ``` -->
+*   A __variable__ is a quantity, quality, or property that you can measure.
 
-<!-- A variable is **continuous** if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram: -->
+*   A __value__ is the state of a variable when you measure it. The value of a
+    variable may change from measurement to measurement.
 
-<!-- ```{r} -->
-<!-- ggplot(data = diamonds) + -->
-<!--   geom_histogram(mapping = aes(x = carat), binwidth = 0.5) -->
-<!-- ``` -->
+*   An __observation__ is a set of measurements made under similar conditions
+    (you usually make all of the measurements in an observation at the same
+    time and on the same object). An observation will contain several values,
+    each associated with a different variable. I'll sometimes refer to
+    an observation as a data point.
 
-<!-- You can compute this by hand by combining `dplyr::count()` and `ggplot2::cut_width()`: -->
+*   __Tabular data__ is a set of values, each associated with a variable and an
+    observation. Tabular data is _tidy_ if each value is placed in its own
+    "cell", each variable in its own column, and each observation in its own
+    row.
 
-<!-- ```{r} -->
-<!-- diamonds %>%  -->
-<!--   count(cut_width(carat, 0.5)) -->
-<!-- ``` -->
+So far, all of the data that you've seen has been tidy. In real-life, most data isn't tidy, so we'll come back to these ideas again in [tidy data].
 
-<!-- A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a `carat` value between 0.25 and 0.75, which are the left and right edges of the bar.  -->
+## Variation
 
-<!-- You can set the width of the intervals in a histogram with the `binwidth` argument, which is measured in the units of the `x` variable. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns. For example, here is how the graph above looks when we zoom into just the diamonds with a size of less than three carats and choose a smaller binwidth. -->
+**Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Categorical variables can also vary if you measure across different subjects (e.g. the eye colors of different people), or different times (e.g. the energy levels of an electron at different moments).
+Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable's values.
 
-<!-- ```{r} -->
-<!-- smaller <- diamonds %>%  -->
-<!--   filter(carat < 3) -->
+### Visualising distributions
 
-<!-- ggplot(data = smaller, mapping = aes(x = carat)) + -->
-<!--   geom_histogram(binwidth = 0.1) -->
-<!-- ``` -->
+How you visualise the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is **categorical** if it can only take one of a small set of values. In R, categorical variables are usually saved as factors or character vectors. To examine the distribution of a categorical variable, use a bar chart:
 
-<!-- If you wish to overlay multiple histograms in the same plot, I recommend using `geom_freqpoly()` instead of `geom_histogram()`. `geom_freqpoly()` performs the same calculation as `geom_histogram()`, but instead of displaying the counts with bars, uses lines instead. It's much easier to understand overlapping lines than bars. -->
+We want the height of the bars to display how many observations occurred with each x value. You can compute these values with `size()`:
 
-<!-- ```{r} -->
-<!-- ggplot(data = smaller, mapping = aes(x = carat, colour = cut)) + -->
-<!--   geom_freqpoly(binwidth = 0.1) -->
-<!-- ``` -->
 
-<!-- There are a few challenges with this type of plot, which we will come back to in [visualising a categorical and a continuous variable](#cat-cont). -->
+```python
+chart_dat = (diamonds.
+              groupby('cut').
+              agg(count = ('carat', 'size')).
+              reset_index())
+```
 
-<!-- Now that you can visualise variation, what should you look for in your plots? And what type of follow-up questions should you ask? I've put together a list below of the most useful types of information that you will find in your graphs, along with some follow-up questions for each type of information. The key to asking good follow-up questions will be to rely on your curiosity (What do you want to learn more about?) as well as your skepticism (How could this be misleading?). -->
+
+
+```python
+chart = (alt.Chart(chart_dat).
+    encode(
+        x = 'cut',
+        y = 'count'
+    ).
+    mark_bar().
+    properties(width = 400)
+)
+```
+
+
+```
+#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-645db9d8c01cf01dd924319c5ef7d635.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:14556)\n    at Object.en [as load] (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:13663)\n    at async wB.Jr.request (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:42319)\n    at async wB.Jr.preload (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:42165)\nWARN Infinite extent for field \"count\": [Infinity, -Infinity]\n"
+```
+
+A variable is **continuous** if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram:
+
+
+```python
+chart = (alt.Chart(diamonds).
+    encode(
+        x = alt.X('carat', bin = alt.Bin(step = 0.5)), 
+        y = 'count()').
+        mark_bar()
+)
+```
+
+
+```
+#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-9f071a27ef076cd8a1d55d74a1b153c6.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:14556)\n    at Object.en [as load] (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:13663)\n    at async wB.Jr.request (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:42319)\n    at async wB.Jr.preload (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:42165)\nWARN Infinite extent for field \"carat\": [Infinity, -Infinity]\nWARN Infinite extent for field \"__count\": [Infinity, -Infinity]\n"
+```
+
+
+A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a `carat` value between 0.25 and 0.75, which are the left and right edges of the bar.
+
+You can set the width of the intervals in a histogram with the `alt.Bin()` and the `step` argument, which is measured in the units of the `x` variable. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns. For example, here is how the graph above looks when we zoom into just the diamonds with a size of less than three carats and choose a smaller binwidth.
+
+
+```python
+smaller = diamonds.query('carat < 3')
+
+chart = (alt.Chart(smaller).
+    encode(
+        x = alt.X('carat', bin = alt.Bin(step = 0.1)), 
+        y = 'count()').
+        mark_bar()
+)
+```
+
+
+```
+#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-3830d9a099bc3159772fdf4a0cfd43bf.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:14556)\n    at Object.en [as load] (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:13663)\n    at async wB.Jr.request (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:42319)\n    at async wB.Jr.preload (/Library/Frameworks/R.framework/Versions/3.6/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:42165)\nWARN Infinite extent for field \"carat\": [Infinity, -Infinity]\nWARN Infinite extent for field \"__count\": [Infinity, -Infinity]\n"
+```
+
+
+If you wish to see multiple histograms, Altair doesn't have a straightforward way to overly histograms. We recommend using `facet()`. `facet()` performs the same calculation for each group within the facet varaible.
+
+
+```python
+chart = (alt.Chart(smaller).
+    encode(
+        x = alt.X('carat', bin = alt.Bin(step = 0.1)), 
+        y = 'count()',
+        color = 'cut').
+        mark_bar().
+        facet(facet = 'cut', columns = 2)
+)
+
+chart.save("screenshots/altair_diamonds_facet_hist.png")
+```
+
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_facet_hist} \end{flushleft}
+
+There are a few challenges with this type of plot, which we will come back to in [visualising a categorical and a continuous variable](#cat-cont).
+
+Now that you can visualise variation, what should you look for in your plots? And what type of follow-up questions should you ask? I've put together a list below of the most useful types of information that you will find in your graphs, along with some follow-up questions for each type of information. The key to asking good follow-up questions will be to rely on your curiosity (What do you want to learn more about?) as well as your skepticism (How could this be misleading?).
 
 <!-- ### Typical values -->
 
