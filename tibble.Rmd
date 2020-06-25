@@ -1,72 +1,68 @@
-# Tibbles
+# DataFrame
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(python.reticulate = TRUE)
+library(reticulate)
+library(ggplot2)
+library(vegawidget)
+use_python("usr/local/bin/python3")
+```
+
 
 ## Introduction
 
-Throughout this book we work with "tibbles" instead of R's traditional `data.frame`. Tibbles _are_ data frames, but they tweak some older behaviours to make life a little easier. R is an old language, and some things that were useful 10 or 20 years ago now get in your way. It's difficult to change base R without breaking existing code, so most innovation occurs in packages. Here we will describe the __tibble__ package, which provides opinionated data frames that make working in the tidyverse a little easier. In most places, I'll use the term tibble and data frame interchangeably; when I want to draw particular attention to R's built-in data frame, I'll call them `data.frame`s. 
+Throughout this book we work with pandas _DataFrame__. Python is an old language, and the tools for data in Python that were useful 10 or 20 years ago now get in your way. Here we will describe the __DataFrame__ data structure, which provides opinionated data frames that make working in with data easier. In most places, I'll use the term data frame.
 
-If this chapter leaves you wanting to learn more about tibbles, you might enjoy `vignette("tibble")`.
+If this chapter leaves you wanting to learn more about data frames, you might enjoy reading [the documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
 
 ### Prerequisites
 
-In this chapter we'll explore the __tibble__ package, part of the core tidyverse.
+In this chapter we'll explore the __DataFrame__, a foundational element of pandas.
 
-```{r setup, message = FALSE}
-library(tidyverse)
+```{python setup, message = FALSE}
+import pandas as pd
+import pandas as pd
+import altair as alt
+import numpy as np
 ```
 
 ## Creating tibbles
 
-Almost all of the functions that you'll use in this book produce tibbles, as tibbles are one of the unifying features of the tidyverse. Most other R packages use regular data frames, so you might want to coerce a data frame to a tibble. You can do that with `as_tibble()`:
+Almost all of the functions that you'll use in this book produce data frames, as data frames are one of the unifying features of pandas. 
 
-```{r}
-as_tibble(iris)
+You can create a new data frames from individual vectors with `pd.DataFrame()`. `pd.DataFrame()` will automatically recycle inputs of length 1 but does not allow you to refer to variables that you just created.
+
+```{python}
+pd.DataFrame({
+  'x': [1, 2, 3, 4, 5],
+  'y': 1}
+).assign(z = lambda x: x.x**2 + x.y)
+
 ```
 
-You can create a new tibble from individual vectors with `tibble()`. `tibble()` will automatically recycle inputs of length 1, and allows you to refer to variables that you just created, as shown below.
+Unlike R data frames, pandas data frames can have column names that are not valid R variable names, aka __non-syntactic__ names. For example, they might not start with a letter, or they might contain unusual characters like a space. Notice the use of index as we are passing all scalar values:
 
-```{r}
-tibble(
-  x = 1:5, 
-  y = 1, 
-  z = x ^ 2 + y
-)
-```
-
-If you're already familiar with `data.frame()`, note that `tibble()` does much less: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, and it never creates row names.
-
-It's possible for a tibble to have column names that are not valid R variable names, aka __non-syntactic__ names. For example, they might not start with a letter, or they might contain unusual characters like a space. To refer to these variables, you need to surround them with backticks, `` ` ``:
-
-```{r}
-tb <- tibble(
-  `:)` = "smile", 
-  ` ` = "space",
-  `2000` = "number"
-)
+```{python}
+tb = pd.DataFrame({
+  ':)': 'smile',
+  ' ' : 'space',
+  '2000': 'number'},index=[0])
+  
 tb
 ```
 
-You'll also need the backticks when working with these variables in other packages, like ggplot2, dplyr, and tidyr.
+Another way to create a tibble is with `np.arrray()`.  Sometimes `np.array()` makes it possible to lay out small amounts of data in easy to read form.
 
-Another way to create a tibble is with `tribble()`, short for **tr**ansposed tibble.  `tribble()` is customised for data entry in code: column headings are defined by formulas (i.e. they start with `~`), and entries are separated by commas. This makes it possible to lay out small amounts of data in easy to read form.
-
-```{r}
-tribble(
-  ~x, ~y, ~z,
-  #--|--|----
-  "a", 2, 3.6,
-  "b", 1, 8.5
-)
+```{python}
+pd.DataFrame(np.array(
+  [["a", 2, 3.6], 
+  ["b", 1, 8.5]]), columns = 
+  ['x', 'y', 'z'])
 ```
 
-I often add a comment (the line starting with `#`), to make it really clear where the header is.
+## Printing
 
-## Tibbles vs. data.frame
-
-There are two main differences in the usage of a tibble vs. a classic `data.frame`: printing and subsetting.
-
-### Printing
-
-Tibbles have a refined print method that shows only the first 10 rows, and all the columns that fit on screen. This makes it much easier to work with large data. In addition to its name, each column reports its type, a nice feature borrowed from `str()`:
+Data frames have a refined print method that shows only the first and last 5 rows, and all the columns that fit on screen. This makes it much easier to work with large data. 
 
 ```{r}
 tibble(
@@ -78,85 +74,46 @@ tibble(
 )
 ```
 
-Tibbles are designed so that you don't accidentally overwhelm your console when you print large data frames. But sometimes you need more output than the default display. There are a few options that can help.
+Data frames are designed so that you don't accidentally overwhelm your console when you print large data frames. But sometimes you need more output than the default display. There are a few options that can help.
 
-First, you can explicitly `print()` the data frame and control the number of rows (`n`) and the `width` of the display. `width = Inf` will display all columns:
+First, you can return the data frame using  `.head()` on the data frame and control the number of rows (`n`) of the display. In the interactive Python viewer in VS Code you can scroll to see the other columns.
 
-```{r, eval = FALSE}
-nycflights13::flights %>% 
-  print(n = 10, width = Inf)
+```{python, eval = FALSE}
+flights.head(20)
 ```
 
-You can also control the default print behaviour by setting options:
+You can also control the default print behaviour by [setting options](https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html):
 
-* `options(tibble.print_max = n, tibble.print_min = m)`: if more than `n`
-  rows, print only `m` rows. Use `options(tibble.print_min = Inf)` to always
-  show all rows.
+* `pd.set_option("display.max_rows", 101)`: if more than `101`
+  rows, print only `n` rows. 
+  
+* `pd.set_option('precision', 5)` will set the number of decimals that are shown. 
 
-* Use `options(tibble.width = Inf)` to always print all columns, regardless
-  of the width of the screen.
-
-You can see a complete list of options by looking at the package help with `package?tibble`.
-
-A final option is to use RStudio's built-in data viewer to get a scrollable view of the complete dataset. This is also often useful at the end of a long chain of manipulations.
-
-```{r, eval = FALSE}
-nycflights13::flights %>% 
-  View()
-```
+You can see a complete list of options by looking at the [pandas help](https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html).
 
 ### Subsetting
 
-So far all the tools you've learned have worked with complete data frames. If you want to pull out a single variable, you need some new tools, `$` and `[[`. `[[` can extract by name or position; `$` only extracts by name but is a little less typing.
+So far all the tools you've learned have worked with complete data frames. If you want to pull out a single variable, you need some new tools, `[`. `[` can extract by name or position.
 
-```{r}
-df <- tibble(
-  x = runif(5),
-  y = rnorm(5)
-)
+```{python}
+df = pd.DataFrame({
+  'x': np.random.uniform(size = 5),
+  'y': np.random.normal(size = 5)})
 
-# Extract by name
-df$x
+# Extract by name as pandas data frame
 df[["x"]]
-
+# Extract by name as array
+df["x"]
 # Extract by position
-df[[1]]
+df.iloc[:, 1]
+df[df.columns[1]]
+
 ```
 
-To use these in a pipe, you'll need to use the special placeholder `.`:
 
-```{r}
-df %>% .$x
-df %>% .[["x"]]
-```
-
-Compared to a `data.frame`, tibbles are more strict: they never do partial matching, and they will generate a warning if the column you are trying to access does not exist.
-
-## Interacting with older code
-
-Some older functions don't work with tibbles. If you encounter one of these functions, use `as.data.frame()` to turn a tibble back to a `data.frame`:
-
-```{r}
-class(as.data.frame(tb))
-```
-
-The main reason that some older functions don't work with tibble is the `[` function.  We don't use `[` much in this book because `dplyr::filter()` and `dplyr::select()` allow you to solve the same problems with clearer code (but you will learn a little about it in [vector subsetting](#vector-subsetting)). With base R data frames, `[` sometimes returns a data frame, and sometimes returns a vector. With tibbles, `[` always returns another tibble.
 
 ## Exercises
 
-1.  How can you tell if an object is a tibble? (Hint: try printing `mtcars`,
-    which is a regular data frame). 
-
-1.  Compare and contrast the following operations on a `data.frame` and 
-    equivalent tibble. What is different? Why might the default data frame
-    behaviours cause you frustration?
-    
-    ```{r, eval = FALSE}
-    df <- data.frame(abc = 1, xyz = "a")
-    df$x
-    df[, "xyz"]
-    df[, c("abc", "xyz")]
-    ```
 
 1.  If you have the name of a variable stored in an object, e.g. `var <- "mpg"`,
     how can you extract the reference variable from a tibble?
@@ -178,7 +135,3 @@ The main reason that some older functions don't work with tibble is the `[` func
     )
     ```
 
-1.  What does `tibble::enframe()` do? When might you use it?
-
-1.  What option controls how many additional column names are printed
-    at the footer of a tibble?

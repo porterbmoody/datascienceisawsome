@@ -96,7 +96,7 @@ chart = (alt.Chart(mpg).
   encode(
     x='displ', 
     y='hwy').
-  mark_point()
+  mark_circle()
 )
 ```
 
@@ -164,7 +164,7 @@ You can convey information about your data by mapping the encodings in your plot
 ```python
 
 chart = (alt.Chart(mpg).
-  mark_point().
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -187,7 +187,7 @@ In the above example, we mapped `class` to the color encoding, but we could have
 
 ```python
 chart = (alt.Chart(mpg).
-  mark_point().
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -205,7 +205,7 @@ Or we could have mapped `class` to the _opacity_ encoding, which controls the tr
 ```python
 # First
 chart1 = (alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -215,7 +215,7 @@ chart1 = (alt.Chart(mpg).
 
 # Second
 chart2 = (alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -227,6 +227,7 @@ chart1.save("screenshots/altair_opacity.png")
 #> WARN Channel opacity should not be used with an unsorted discrete field.
 chart2.save("screenshots/altair_shape.png")
   
+#> WARN shape dropped as it is incompatible with "circle".
 ```
 
 
@@ -247,7 +248,7 @@ You can also _configure_ the encoding properties of your mark manually. For exam
 ```python
 
 chart = (alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -294,14 +295,14 @@ One common problem when creating Altair graphics as shown in this book, is to pu
 For example the code below works in Python. 
 
 ```python
-alt.Chart(mpg).mark_point(filled = True).encode(x = "displ", y = "hwy")
+alt.Chart(mpg).mark_circle().encode(x = "displ", y = "hwy")
 ```
 
 However, the complexity of the more details graphics necessicates placing the code on multiple lines. When using multiple lines we need the enclosing `()`. Make sure you haven't accidentally excluded a `(` or `)` like this
 
 ```Python
 (alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy")
@@ -311,7 +312,7 @@ or placed the `()` incorrectly like this
 
 ```Python
 (chart = alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy")
@@ -329,7 +330,7 @@ To facet your plot by a single variable, use `facet()`. The first argument of `f
 
 ```python
 chart_f = (alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -352,7 +353,7 @@ To facet your plot on the combination of two variables, The first argument of `f
 
 ```python
 chart_f2 = (alt.Chart(mpg).
-  mark_point(filled = True).
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy",
@@ -382,7 +383,7 @@ If you prefer to not facet in the rows or columns dimension, simply remove that 
     
     ```python
     (alt.Chart(mpg).
-      mark_point().
+      mark_circle().
       encode(
         x = "drv",
         y = "cyl")
@@ -394,7 +395,7 @@ If you prefer to not facet in the rows or columns dimension, simply remove that 
     
     ```python
     (alt.Chart(mpg).
-      mark_point(filled = True).
+      mark_circle().
       encode(
         x = "displ",
         y = "hwy").
@@ -402,7 +403,7 @@ If you prefer to not facet in the rows or columns dimension, simply remove that 
     )
     
     (alt.Chart(mpg).
-      mark_point(filled = True).
+      mark_circle().
       encode(
         x = "displ",
         y = "hwy").
@@ -426,7 +427,7 @@ How are these two plots similar?
 
 ```python
 chartp = (alt.Chart(mpg).
-  mark_point().
+  mark_circle().
   encode(
     x = "displ",
     y = "hwy"
@@ -549,7 +550,7 @@ chartp = (alt.Chart(mpg).
     x = "displ",
     y = "hwy"
   ).
-  mark_point()
+  mark_circle()
 )
 
 chart = chartp + chartleft  
@@ -573,7 +574,7 @@ base =(alt.Chart(mpg).
   )
 )
 
-chart = base.mark_point() + base.transform_loess("displ", "hwy").mark_line()
+chart = base.mark_circle() + base.transform_loess("displ", "hwy").mark_line()
 
 chart.save("screenshots/altair_combine_clean.png")
   
@@ -593,7 +594,7 @@ base =(alt.Chart(mpg).
   )
 )
 
-chart = base.encode(color = "drv").mark_point() + base.transform_loess("displ", "hwy").mark_line()
+chart = base.encode(color = "drv").mark_circle() + base.transform_loess("displ", "hwy").mark_line()
 
 chart.save("screenshots/altair_combine_clean_color.png")
 ```
@@ -622,7 +623,7 @@ chart_smooth_sub = (base.
   mark_line()
 )  
 
-chart = base.encode(color = "class1").mark_point() + chart_smooth_sub
+chart = base.encode(color = "class1").mark_circle() + chart_smooth_sub
 
 chart.save("screenshots/altair_combine_clean_color_filter.png")
 ```
@@ -757,7 +758,7 @@ chart = (alt.Chart(diamonds).
     x ="cut"
   ).
   mark_boxplot(size = 25).
-  properties(width = 200)
+  properties(width = 300)
 )
 
 chart.save("screenshots/altair_boxplot.png")

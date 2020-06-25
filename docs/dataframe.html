@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 DataFrame | Python for Data Science</title>
+  <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
+  <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 DataFrame | Python for Data Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
+  <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta property="og:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
+  <meta name="github-repo" content="byuidatascience/python4ds" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 DataFrame | Python for Data Science" />
+  <meta name="twitter:site" content="@byuidss" />
+  <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
+  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+
+<meta name="author" content="J. Hathaway" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="wrangle-intro.html"/>
+
+<script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/vega-5.9.0/vega.min.js"></script>
+<script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
+<link href="libs/vega-embed-6.2.0/vega-embed.css" rel="stylesheet" />
+<script src="libs/vega-embed-6.2.0/vega-embed.js"></script>
+<script src="libs/vegawidget-binding-0.3.1.9003/vegawidget.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115082821-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="r4ds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Python for Data Science</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#what-you-will-learn"><i class="fa fa-check"></i><b>1.1</b> What you will learn</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#how-this-book-is-organised"><i class="fa fa-check"></i><b>1.2</b> How this book is organised</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-you-wont-learn"><i class="fa fa-check"></i><b>1.3</b> What you won’t learn</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#big-data"><i class="fa fa-check"></i><b>1.3.1</b> Big data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#r-julia-and-friends"><i class="fa fa-check"></i><b>1.3.2</b> R, Julia, and friends</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#non-rectangular-data"><i class="fa fa-check"></i><b>1.3.3</b> Non-rectangular data</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#hypothesis-confirmation"><i class="fa fa-check"></i><b>1.3.4</b> Hypothesis confirmation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>1.4</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#python"><i class="fa fa-check"></i><b>1.4.1</b> Python</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#visual-studio-code-vs-code"><i class="fa fa-check"></i><b>1.4.2</b> Visual Studio Code (VS Code)</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction.html"><a href="introduction.html#package-management-pip"><i class="fa fa-check"></i><b>1.4.3</b> Package Management (pip)</a></li>
+<li class="chapter" data-level="1.4.4" data-path="introduction.html"><a href="introduction.html#the-data-science-packages"><i class="fa fa-check"></i><b>1.4.4</b> The Data Science Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#running-python-code"><i class="fa fa-check"></i><b>1.5</b> Running Python code</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#getting-help-and-learning-more"><i class="fa fa-check"></i><b>1.6</b> Getting help and learning more</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#datasets-access"><i class="fa fa-check"></i><b>1.7</b> Datasets access</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#acknowledgements"><i class="fa fa-check"></i><b>1.8</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction.html"><a href="introduction.html#colophon"><i class="fa fa-check"></i><b>1.9</b> Colophon</a></li>
+</ul></li>
+<li class="part"><span><b>I Explore</b></span></li>
+<li class="chapter" data-level="2" data-path="explore-intro.html"><a href="explore-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data visualisation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-visualisation.html"><a href="data-visualisation.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-visualisation.html"><a href="data-visualisation.html#altair-data-management"><i class="fa fa-check"></i><b>3.1.2</b> Altair data management</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#the-mpg-data-frame"><i class="fa fa-check"></i><b>3.2.1</b> The <code>mpg</code> data frame</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-an-altair-plot"><i class="fa fa-check"></i><b>3.2.2</b> Creating an Altair plot</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-visualisation.html"><a href="data-visualisation.html#a-graphing-template"><i class="fa fa-check"></i><b>3.2.3</b> A graphing template</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>3.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-visualisation.html"><a href="data-visualisation.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.3</b> Aesthetic mappings</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#common-problems"><i class="fa fa-check"></i><b>3.4</b> Common problems</a></li>
+<li class="chapter" data-level="3.5" data-path="data-visualisation.html"><a href="data-visualisation.html#facets"><i class="fa fa-check"></i><b>3.5</b> Facets</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-visualisation.html"><a href="data-visualisation.html#geometric-objects"><i class="fa fa-check"></i><b>3.6</b> Geometric objects</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-visualisation.html"><a href="data-visualisation.html#statistical-transformations"><i class="fa fa-check"></i><b>3.7</b> Statistical transformations</a></li>
+<li class="chapter" data-level="3.8" data-path="data-visualisation.html"><a href="data-visualisation.html#position-adjustments"><i class="fa fa-check"></i><b>3.8</b> Position adjustments</a></li>
+<li class="chapter" data-level="3.9" data-path="data-visualisation.html"><a href="data-visualisation.html#coordinate-systems-maps"><i class="fa fa-check"></i><b>3.9</b> Coordinate systems (maps)</a></li>
+<li class="chapter" data-level="3.10" data-path="data-visualisation.html"><a href="data-visualisation.html#the-layered-grammar-of-graphics"><i class="fa fa-check"></i><b>3.10</b> The layered grammar of graphics</a></li>
+<li class="chapter" data-level="3.11" data-path="data-visualisation.html"><a href="data-visualisation.html#altairs-grammar-of-graphics"><i class="fa fa-check"></i><b>3.11</b> Altair’s grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-basics.html"><a href="workflow-basics.html"><i class="fa fa-check"></i><b>4</b> Workflow: basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
+<li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#exercises-4"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
+<li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="transform.html"><a href="transform.html#filter-rows-with-query"><i class="fa fa-check"></i><b>5.2</b> Filter rows with <code>query()</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+<li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>sort_values()</code></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>filter()</code> or <code>loc[]</code></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>assign()</code></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>agg()</code></a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#combining-multiple-operations"><i class="fa fa-check"></i><b>5.6.1</b> Combining multiple operations</a></li>
+<li class="chapter" data-level="5.6.2" data-path="transform.html"><a href="transform.html#missing-values-1"><i class="fa fa-check"></i><b>5.6.2</b> Missing values</a></li>
+<li class="chapter" data-level="5.6.3" data-path="transform.html"><a href="transform.html#counts"><i class="fa fa-check"></i><b>5.6.3</b> Counts</a></li>
+<li class="chapter" data-level="5.6.4" data-path="transform.html"><a href="transform.html#summarise-funs"><i class="fa fa-check"></i><b>5.6.4</b> Useful summary functions</a></li>
+<li class="chapter" data-level="5.6.5" data-path="transform.html"><a href="transform.html#grouping-by-multiple-variables"><i class="fa fa-check"></i><b>5.6.5</b> Grouping by multiple variables</a></li>
+<li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
+<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="workflow-scripts.html"><a href="workflow-scripts.html#running-code"><i class="fa fa-check"></i><b>6.1</b> Running code</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
+<li class="chapter" data-level="7.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#typical-values"><i class="fa fa-check"></i><b>7.3.2</b> Typical values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#unusual-values"><i class="fa fa-check"></i><b>7.3.3</b> Unusual values</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-11"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values-2"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-12"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#cat-cont"><i class="fa fa-check"></i><b>7.5.1</b> A categorical and continuous variable</a></li>
+<li class="chapter" data-level="7.5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-categorical-variables"><i class="fa fa-check"></i><b>7.5.2</b> Two categorical variables</a></li>
+<li class="chapter" data-level="7.5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.5.3</b> Two continuous variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#altair-calls"><i class="fa fa-check"></i><b>7.7</b> Altair calls</a></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>7.8</b> Learning more</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>8</b> Workflow: projects</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="workflow-projects.html"><a href="workflow-projects.html#what-is-real"><i class="fa fa-check"></i><b>8.1</b> What is real?</a></li>
+<li class="chapter" data-level="8.2" data-path="workflow-projects.html"><a href="workflow-projects.html#where-does-your-analysis-live"><i class="fa fa-check"></i><b>8.2</b> Where does your analysis live?</a></li>
+<li class="chapter" data-level="8.3" data-path="workflow-projects.html"><a href="workflow-projects.html#paths-and-directories"><i class="fa fa-check"></i><b>8.3</b> Paths and directories</a></li>
+<li class="chapter" data-level="8.4" data-path="workflow-projects.html"><a href="workflow-projects.html#vs-code-workspaces"><i class="fa fa-check"></i><b>8.4</b> VS Code workspaces</a></li>
+<li class="chapter" data-level="8.5" data-path="workflow-projects.html"><a href="workflow-projects.html#summary"><i class="fa fa-check"></i><b>8.5</b> Summary</a></li>
+</ul></li>
+<li class="part"><span><b>II Wrangle</b></span></li>
+<li class="chapter" data-level="9" data-path="wrangle-intro.html"><a href="wrangle-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
+<li class="chapter" data-level="10" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="dataframe.html"><a href="dataframe.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="dataframe.html"><a href="dataframe.html#prerequisites-4"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="dataframe.html"><a href="dataframe.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="10.3" data-path="dataframe.html"><a href="dataframe.html#printing"><i class="fa fa-check"></i><b>10.3</b> Printing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="dataframe.html"><a href="dataframe.html#subsetting"><i class="fa fa-check"></i><b>10.3.1</b> Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dataframe" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> DataFrame</h1>
+<div id="introduction-4" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Introduction</h2>
+<p>Throughout this book we work with pandas _DataFrame__. Python is an old language, and the tools for data in Python that were useful 10 or 20 years ago now get in your way. Here we will describe the <strong>DataFrame</strong> data structure, which provides opinionated data frames that make working in with data easier. In most places, I’ll use the term data frame.</p>
+<p>If this chapter leaves you wanting to learn more about data frames, you might enjoy reading <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">the documentation</a>.</p>
+<div id="prerequisites-4" class="section level3" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Prerequisites</h3>
+<p>In this chapter we’ll explore the <strong>DataFrame</strong>, a foundational element of pandas.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="dataframe.html#cb157-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb157-2"><a href="dataframe.html#cb157-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb157-3"><a href="dataframe.html#cb157-3"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb157-4"><a href="dataframe.html#cb157-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+</div>
+</div>
+<div id="creating-tibbles" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Creating tibbles</h2>
+<p>Almost all of the functions that you’ll use in this book produce data frames, as data frames are one of the unifying features of pandas.</p>
+<p>You can create a new data frames from individual vectors with <code>pd.DataFrame()</code>. <code>pd.DataFrame()</code> will automatically recycle inputs of length 1 but does not allow you to refer to variables that you just created.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="dataframe.html#cb158-1"></a>pd.DataFrame({</span>
+<span id="cb158-2"><a href="dataframe.html#cb158-2"></a>  <span class="st">&#39;x&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb158-3"><a href="dataframe.html#cb158-3"></a>  <span class="st">&#39;y&#39;</span>: <span class="dv">1</span>}</span>
+<span id="cb158-4"><a href="dataframe.html#cb158-4"></a>).assign(z <span class="op">=</span> <span class="kw">lambda</span> x: x.x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x.y)</span>
+<span id="cb158-5"><a href="dataframe.html#cb158-5"></a><span class="co">#&gt;    x  y   z</span></span>
+<span id="cb158-6"><a href="dataframe.html#cb158-6"></a><span class="co">#&gt; 0  1  1   2</span></span>
+<span id="cb158-7"><a href="dataframe.html#cb158-7"></a><span class="co">#&gt; 1  2  1   5</span></span>
+<span id="cb158-8"><a href="dataframe.html#cb158-8"></a><span class="co">#&gt; 2  3  1  10</span></span>
+<span id="cb158-9"><a href="dataframe.html#cb158-9"></a><span class="co">#&gt; 3  4  1  17</span></span>
+<span id="cb158-10"><a href="dataframe.html#cb158-10"></a><span class="co">#&gt; 4  5  1  26</span></span></code></pre></div>
+<p>Unlike R data frames, pandas data frames can have column names that are not valid R variable names, aka <strong>non-syntactic</strong> names. For example, they might not start with a letter, or they might contain unusual characters like a space. Notice the use of index as we are passing all scalar values:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb159-1"><a href="dataframe.html#cb159-1"></a>tb <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb159-2"><a href="dataframe.html#cb159-2"></a>  <span class="st">&#39;:)&#39;</span>: <span class="st">&#39;smile&#39;</span>,</span>
+<span id="cb159-3"><a href="dataframe.html#cb159-3"></a>  <span class="st">&#39; &#39;</span> : <span class="st">&#39;space&#39;</span>,</span>
+<span id="cb159-4"><a href="dataframe.html#cb159-4"></a>  <span class="st">&#39;2000&#39;</span>: <span class="st">&#39;number&#39;</span>},index<span class="op">=</span>[<span class="dv">0</span>])</span>
+<span id="cb159-5"><a href="dataframe.html#cb159-5"></a>  </span>
+<span id="cb159-6"><a href="dataframe.html#cb159-6"></a>tb</span>
+<span id="cb159-7"><a href="dataframe.html#cb159-7"></a><span class="co">#&gt;       :)           2000</span></span>
+<span id="cb159-8"><a href="dataframe.html#cb159-8"></a><span class="co">#&gt; 0  smile  space  number</span></span></code></pre></div>
+<p>Another way to create a tibble is with <code>np.arrray()</code>. Sometimes <code>np.array()</code> makes it possible to lay out small amounts of data in easy to read form.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="dataframe.html#cb160-1"></a>pd.DataFrame(np.array(</span>
+<span id="cb160-2"><a href="dataframe.html#cb160-2"></a>  [[<span class="st">&quot;a&quot;</span>, <span class="dv">2</span>, <span class="fl">3.6</span>], </span>
+<span id="cb160-3"><a href="dataframe.html#cb160-3"></a>  [<span class="st">&quot;b&quot;</span>, <span class="dv">1</span>, <span class="fl">8.5</span>]]), columns <span class="op">=</span> </span>
+<span id="cb160-4"><a href="dataframe.html#cb160-4"></a>  [<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;z&#39;</span>])</span>
+<span id="cb160-5"><a href="dataframe.html#cb160-5"></a><span class="co">#&gt;    x  y    z</span></span>
+<span id="cb160-6"><a href="dataframe.html#cb160-6"></a><span class="co">#&gt; 0  a  2  3.6</span></span>
+<span id="cb160-7"><a href="dataframe.html#cb160-7"></a><span class="co">#&gt; 1  b  1  8.5</span></span></code></pre></div>
+</div>
+<div id="printing" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Printing</h2>
+<p>Data frames have a refined print method that shows only the first and last 5 rows, and all the columns that fit on screen. This makes it much easier to work with large data.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="dataframe.html#cb161-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb161-2"><a href="dataframe.html#cb161-2"></a>  <span class="dt">a =</span> lubridate<span class="op">::</span><span class="kw">now</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">86400</span>,</span>
+<span id="cb161-3"><a href="dataframe.html#cb161-3"></a>  <span class="dt">b =</span> lubridate<span class="op">::</span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span>,</span>
+<span id="cb161-4"><a href="dataframe.html#cb161-4"></a>  <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e3</span>,</span>
+<span id="cb161-5"><a href="dataframe.html#cb161-5"></a>  <span class="dt">d =</span> <span class="kw">runif</span>(<span class="fl">1e3</span>),</span>
+<span id="cb161-6"><a href="dataframe.html#cb161-6"></a>  <span class="dt">e =</span> <span class="kw">sample</span>(letters, <span class="fl">1e3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb161-7"><a href="dataframe.html#cb161-7"></a>)</span>
+<span id="cb161-8"><a href="dataframe.html#cb161-8"></a><span class="co">#&gt; # A tibble: 1,000 x 5</span></span>
+<span id="cb161-9"><a href="dataframe.html#cb161-9"></a><span class="co">#&gt;   a                   b              c     d e    </span></span>
+<span id="cb161-10"><a href="dataframe.html#cb161-10"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;</span></span>
+<span id="cb161-11"><a href="dataframe.html#cb161-11"></a><span class="co">#&gt; 1 2020-06-24 20:39:53 2020-07-01     1 0.368 n    </span></span>
+<span id="cb161-12"><a href="dataframe.html#cb161-12"></a><span class="co">#&gt; 2 2020-06-25 14:45:03 2020-07-06     2 0.612 l    </span></span>
+<span id="cb161-13"><a href="dataframe.html#cb161-13"></a><span class="co">#&gt; 3 2020-06-25 09:08:42 2020-07-16     3 0.415 p    </span></span>
+<span id="cb161-14"><a href="dataframe.html#cb161-14"></a><span class="co">#&gt; 4 2020-06-24 22:29:59 2020-07-15     4 0.212 m    </span></span>
+<span id="cb161-15"><a href="dataframe.html#cb161-15"></a><span class="co">#&gt; 5 2020-06-24 18:54:16 2020-07-12     5 0.733 i    </span></span>
+<span id="cb161-16"><a href="dataframe.html#cb161-16"></a><span class="co">#&gt; 6 2020-06-25 05:55:13 2020-07-08     6 0.460 n    </span></span>
+<span id="cb161-17"><a href="dataframe.html#cb161-17"></a><span class="co">#&gt; # … with 994 more rows</span></span></code></pre></div>
+<p>Data frames are designed so that you don’t accidentally overwhelm your console when you print large data frames. But sometimes you need more output than the default display. There are a few options that can help.</p>
+<p>First, you can return the data frame using <code>.head()</code> on the data frame and control the number of rows (<code>n</code>) of the display. In the interactive Python viewer in VS Code you can scroll to see the other columns.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="dataframe.html#cb162-1"></a>flights.head(<span class="dv">20</span>)</span></code></pre></div>
+<p>You can also control the default print behaviour by <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html">setting options</a>:</p>
+<ul>
+<li><p><code>pd.set_option("display.max_rows", 101)</code>: if more than <code>101</code>
+rows, print only <code>n</code> rows.</p></li>
+<li><p><code>pd.set_option('precision', 5)</code> will set the number of decimals that are shown.</p></li>
+</ul>
+<p>You can see a complete list of options by looking at the <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html">pandas help</a>.</p>
+<div id="subsetting" class="section level3" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Subsetting</h3>
+<p>So far all the tools you’ve learned have worked with complete data frames. If you want to pull out a single variable, you need some new tools, <code>[</code>. <code>[</code> can extract by name or position.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="dataframe.html#cb163-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb163-2"><a href="dataframe.html#cb163-2"></a>  <span class="st">&#39;x&#39;</span>: np.random.uniform(size <span class="op">=</span> <span class="dv">5</span>),</span>
+<span id="cb163-3"><a href="dataframe.html#cb163-3"></a>  <span class="st">&#39;y&#39;</span>: np.random.normal(size <span class="op">=</span> <span class="dv">5</span>)})</span>
+<span id="cb163-4"><a href="dataframe.html#cb163-4"></a></span>
+<span id="cb163-5"><a href="dataframe.html#cb163-5"></a><span class="co"># Extract by name as pandas data frame</span></span>
+<span id="cb163-6"><a href="dataframe.html#cb163-6"></a>df[[<span class="st">&quot;x&quot;</span>]]</span>
+<span id="cb163-7"><a href="dataframe.html#cb163-7"></a><span class="co"># Extract by name as array</span></span>
+<span id="cb163-8"><a href="dataframe.html#cb163-8"></a><span class="co">#&gt;           x</span></span>
+<span id="cb163-9"><a href="dataframe.html#cb163-9"></a><span class="co">#&gt; 0  0.325624</span></span>
+<span id="cb163-10"><a href="dataframe.html#cb163-10"></a><span class="co">#&gt; 1  0.136056</span></span>
+<span id="cb163-11"><a href="dataframe.html#cb163-11"></a><span class="co">#&gt; 2  0.444913</span></span>
+<span id="cb163-12"><a href="dataframe.html#cb163-12"></a><span class="co">#&gt; 3  0.414994</span></span>
+<span id="cb163-13"><a href="dataframe.html#cb163-13"></a><span class="co">#&gt; 4  0.350474</span></span>
+<span id="cb163-14"><a href="dataframe.html#cb163-14"></a>df[<span class="st">&quot;x&quot;</span>]</span>
+<span id="cb163-15"><a href="dataframe.html#cb163-15"></a><span class="co"># Extract by position</span></span>
+<span id="cb163-16"><a href="dataframe.html#cb163-16"></a><span class="co">#&gt; 0    0.325624</span></span>
+<span id="cb163-17"><a href="dataframe.html#cb163-17"></a><span class="co">#&gt; 1    0.136056</span></span>
+<span id="cb163-18"><a href="dataframe.html#cb163-18"></a><span class="co">#&gt; 2    0.444913</span></span>
+<span id="cb163-19"><a href="dataframe.html#cb163-19"></a><span class="co">#&gt; 3    0.414994</span></span>
+<span id="cb163-20"><a href="dataframe.html#cb163-20"></a><span class="co">#&gt; 4    0.350474</span></span>
+<span id="cb163-21"><a href="dataframe.html#cb163-21"></a><span class="co">#&gt; Name: x, dtype: float64</span></span>
+<span id="cb163-22"><a href="dataframe.html#cb163-22"></a>df.iloc[:, <span class="dv">1</span>]</span>
+<span id="cb163-23"><a href="dataframe.html#cb163-23"></a><span class="co">#&gt; 0   -1.851640</span></span>
+<span id="cb163-24"><a href="dataframe.html#cb163-24"></a><span class="co">#&gt; 1   -0.152508</span></span>
+<span id="cb163-25"><a href="dataframe.html#cb163-25"></a><span class="co">#&gt; 2   -2.425987</span></span>
+<span id="cb163-26"><a href="dataframe.html#cb163-26"></a><span class="co">#&gt; 3   -0.851618</span></span>
+<span id="cb163-27"><a href="dataframe.html#cb163-27"></a><span class="co">#&gt; 4    0.108888</span></span>
+<span id="cb163-28"><a href="dataframe.html#cb163-28"></a><span class="co">#&gt; Name: y, dtype: float64</span></span>
+<span id="cb163-29"><a href="dataframe.html#cb163-29"></a>df[df.columns[<span class="dv">1</span>]]</span>
+<span id="cb163-30"><a href="dataframe.html#cb163-30"></a><span class="co">#&gt; 0   -1.851640</span></span>
+<span id="cb163-31"><a href="dataframe.html#cb163-31"></a><span class="co">#&gt; 1   -0.152508</span></span>
+<span id="cb163-32"><a href="dataframe.html#cb163-32"></a><span class="co">#&gt; 2   -2.425987</span></span>
+<span id="cb163-33"><a href="dataframe.html#cb163-33"></a><span class="co">#&gt; 3   -0.851618</span></span>
+<span id="cb163-34"><a href="dataframe.html#cb163-34"></a><span class="co">#&gt; 4    0.108888</span></span>
+<span id="cb163-35"><a href="dataframe.html#cb163-35"></a><span class="co">#&gt; Name: y, dtype: float64</span></span></code></pre></div>
+</div>
+</div>
+<div id="exercises-16" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li><p>If you have the name of a variable stored in an object, e.g. <code>var &lt;- "mpg"</code>,
+how can you extract the reference variable from a tibble?</p></li>
+<li><p>Practice referring to non-syntactic names in the following data frame by:</p>
+<ol style="list-style-type: decimal">
+<li><p>Extracting the variable called <code>1</code>.</p></li>
+<li><p>Plotting a scatterplot of <code>1</code> vs <code>2</code>.</p></li>
+<li><p>Creating a new column called <code>3</code> which is <code>2</code> divided by <code>1</code>.</p></li>
+<li><p>Renaming the columns to <code>one</code>, <code>two</code> and <code>three</code>.</p></li>
+</ol>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="dataframe.html#cb164-1"></a>annoying &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
+<span id="cb164-2"><a href="dataframe.html#cb164-2"></a>  <span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</span>
+<span id="cb164-3"><a href="dataframe.html#cb164-3"></a>  <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span>))</span>
+<span id="cb164-4"><a href="dataframe.html#cb164-4"></a>)</span></code></pre></div></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="wrangle-intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/byuidatascience/python4ds/edit/master/tibble.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

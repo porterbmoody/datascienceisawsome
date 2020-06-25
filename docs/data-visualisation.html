@@ -271,7 +271,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
 <ul>
 <li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
+<li class="chapter" data-level="7.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#typical-values"><i class="fa fa-check"></i><b>7.3.2</b> Typical values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#unusual-values"><i class="fa fa-check"></i><b>7.3.3</b> Unusual values</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-11"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values-2"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-12"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#cat-cont"><i class="fa fa-check"></i><b>7.5.1</b> A categorical and continuous variable</a></li>
+<li class="chapter" data-level="7.5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-categorical-variables"><i class="fa fa-check"></i><b>7.5.2</b> Two categorical variables</a></li>
+<li class="chapter" data-level="7.5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.5.3</b> Two continuous variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#altair-calls"><i class="fa fa-check"></i><b>7.7</b> Altair calls</a></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>7.8</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>8</b> Workflow: projects</a>
 <ul>
@@ -283,6 +299,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Wrangle</b></span></li>
 <li class="chapter" data-level="9" data-path="wrangle-intro.html"><a href="wrangle-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
+<li class="chapter" data-level="10" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="dataframe.html"><a href="dataframe.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="dataframe.html"><a href="dataframe.html#prerequisites-4"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="dataframe.html"><a href="dataframe.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="10.3" data-path="dataframe.html"><a href="dataframe.html#printing"><i class="fa fa-check"></i><b>10.3</b> Printing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="dataframe.html"><a href="dataframe.html#subsetting"><i class="fa fa-check"></i><b>10.3.1</b> Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -365,7 +394,7 @@ fuel efficiency when they travel the same distance.</p></li>
 <span id="cb15-3"><a href="data-visualisation.html#cb15-3"></a>  encode(</span>
 <span id="cb15-4"><a href="data-visualisation.html#cb15-4"></a>    x<span class="op">=</span><span class="st">&#39;displ&#39;</span>, </span>
 <span id="cb15-5"><a href="data-visualisation.html#cb15-5"></a>    y<span class="op">=</span><span class="st">&#39;hwy&#39;</span>).</span>
-<span id="cb15-6"><a href="data-visualisation.html#cb15-6"></a>  mark_point()</span>
+<span id="cb15-6"><a href="data-visualisation.html#cb15-6"></a>  mark_circle()</span>
 <span id="cb15-7"><a href="data-visualisation.html#cb15-7"></a>)</span></code></pre></div>
 <div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:auto;height:auto;" class="vegawidget html-widget"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{
@@ -3482,7 +3511,7 @@ never expected to see.” — John Tukey</p>
 <p>You can convey information about your data by mapping the encodings in your plot to the variables in your dataset. For example, you can map the colors of your points to the <code>class</code> variable to reveal the class of each car.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="data-visualisation.html#cb17-1"></a></span>
 <span id="cb17-2"><a href="data-visualisation.html#cb17-2"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb17-3"><a href="data-visualisation.html#cb17-3"></a>  mark_point().</span>
+<span id="cb17-3"><a href="data-visualisation.html#cb17-3"></a>  mark_circle().</span>
 <span id="cb17-4"><a href="data-visualisation.html#cb17-4"></a>  encode(</span>
 <span id="cb17-5"><a href="data-visualisation.html#cb17-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb17-6"><a href="data-visualisation.html#cb17-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -6574,7 +6603,7 @@ never expected to see.” — John Tukey</p>
 <p>The colors reveal that many of the unusual points are two-seater cars. These cars don’t seem like hybrids, and are, in fact, sports cars! Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines.</p>
 <p>In the above example, we mapped <code>class</code> to the color encoding, but we could have mapped <code>class</code> to the size encoding in the same way. In this case, the exact size of each point would reveal its class affiliation. Mapping an unordered variable (<code>class</code>) to an ordered aesthetic (<code>size</code>) is not a good idea.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="data-visualisation.html#cb18-1"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb18-2"><a href="data-visualisation.html#cb18-2"></a>  mark_point().</span>
+<span id="cb18-2"><a href="data-visualisation.html#cb18-2"></a>  mark_circle().</span>
 <span id="cb18-3"><a href="data-visualisation.html#cb18-3"></a>  encode(</span>
 <span id="cb18-4"><a href="data-visualisation.html#cb18-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb18-5"><a href="data-visualisation.html#cb18-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -9664,7 +9693,7 @@ never expected to see.” — John Tukey</p>
 <p>Or we could have mapped <code>class</code> to the <em>opacity</em> encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="data-visualisation.html#cb19-1"></a><span class="co"># First</span></span>
 <span id="cb19-2"><a href="data-visualisation.html#cb19-2"></a>chart1 <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb19-3"><a href="data-visualisation.html#cb19-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb19-3"><a href="data-visualisation.html#cb19-3"></a>  mark_circle().</span>
 <span id="cb19-4"><a href="data-visualisation.html#cb19-4"></a>  encode(</span>
 <span id="cb19-5"><a href="data-visualisation.html#cb19-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb19-6"><a href="data-visualisation.html#cb19-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -9674,7 +9703,7 @@ never expected to see.” — John Tukey</p>
 <span id="cb19-10"><a href="data-visualisation.html#cb19-10"></a></span>
 <span id="cb19-11"><a href="data-visualisation.html#cb19-11"></a><span class="co"># Second</span></span>
 <span id="cb19-12"><a href="data-visualisation.html#cb19-12"></a>chart2 <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb19-13"><a href="data-visualisation.html#cb19-13"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb19-13"><a href="data-visualisation.html#cb19-13"></a>  mark_circle().</span>
 <span id="cb19-14"><a href="data-visualisation.html#cb19-14"></a>  encode(</span>
 <span id="cb19-15"><a href="data-visualisation.html#cb19-15"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb19-16"><a href="data-visualisation.html#cb19-16"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -9685,7 +9714,8 @@ never expected to see.” — John Tukey</p>
 <span id="cb19-21"><a href="data-visualisation.html#cb19-21"></a>chart1.save(<span class="st">&quot;screenshots/altair_opacity.png&quot;</span>)</span>
 <span id="cb19-22"><a href="data-visualisation.html#cb19-22"></a><span class="co">#&gt; WARN Channel opacity should not be used with an unsorted discrete field.</span></span>
 <span id="cb19-23"><a href="data-visualisation.html#cb19-23"></a>chart2.save(<span class="st">&quot;screenshots/altair_shape.png&quot;</span>)</span>
-<span id="cb19-24"><a href="data-visualisation.html#cb19-24"></a>  </span></code></pre></div>
+<span id="cb19-24"><a href="data-visualisation.html#cb19-24"></a>  </span>
+<span id="cb19-25"><a href="data-visualisation.html#cb19-25"></a><span class="co">#&gt; WARN shape dropped as it is incompatible with &quot;circle&quot;.</span></span></code></pre></div>
 <p><img src="screenshots/altair_opacity.png" width="50%" /><img src="screenshots/altair_shape.png" width="50%" /></p>
 <p>Altair will only use 8 shapes for one chart. Charting more than 8 shapes is not recommended as the shapes simply recycle.</p>
 <p>For each encoding, you use <code>encode()</code> to associate the name of the encoding with a variable to display. The <code>encode()</code> function gathers together each of the encoded mappings used by a layer and passes them to the layer’s mapping argument. The syntax highlights a useful insight about <code>x</code> and <code>y</code>: the x and y locations of a point are themselves encodings, visual properties that you can map to variables to display information about the data.</p>
@@ -9693,7 +9723,7 @@ never expected to see.” — John Tukey</p>
 <p>You can also <em>configure</em> the encoding properties of your mark manually. For example, we can make all of the points in our plot blue:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="data-visualisation.html#cb20-1"></a></span>
 <span id="cb20-2"><a href="data-visualisation.html#cb20-2"></a>chart <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb20-3"><a href="data-visualisation.html#cb20-3"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb20-3"><a href="data-visualisation.html#cb20-3"></a>  mark_circle().</span>
 <span id="cb20-4"><a href="data-visualisation.html#cb20-4"></a>  encode(</span>
 <span id="cb20-5"><a href="data-visualisation.html#cb20-5"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb20-6"><a href="data-visualisation.html#cb20-6"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -12809,16 +12839,16 @@ variables?</p></li>
 <p>Start by carefully comparing the code that you’re running to the code in the book. Python is extremely picky, and a misplaced character can make all the difference. Make sure that every <code>(</code> is matched with a <code>)</code> and every <code>"</code> is paired with another <code>"</code>.</p>
 <p>One common problem when creating Altair graphics as shown in this book, is to put the <code>()</code> in the wrong place: the <code>(</code> comes before the <code>alt.chart()</code> command and the <code>)</code> has to come at the end of the command.</p>
 <p>For example the code below works in Python.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="data-visualisation.html#cb21-1"></a>alt.Chart(mpg).mark_point(filled <span class="op">=</span> <span class="va">True</span>).encode(x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>, y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="data-visualisation.html#cb21-1"></a>alt.Chart(mpg).mark_circle().encode(x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>, y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
 <p>However, the complexity of the more details graphics necessicates placing the code on multiple lines. When using multiple lines we need the enclosing <code>()</code>. Make sure you haven’t accidentally excluded a <code>(</code> or <code>)</code> like this</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="data-visualisation.html#cb22-1"></a>(alt.Chart(mpg).</span>
-<span id="cb22-2"><a href="data-visualisation.html#cb22-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb22-2"><a href="data-visualisation.html#cb22-2"></a>  mark_circle().</span>
 <span id="cb22-3"><a href="data-visualisation.html#cb22-3"></a>  encode(</span>
 <span id="cb22-4"><a href="data-visualisation.html#cb22-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb22-5"><a href="data-visualisation.html#cb22-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span></code></pre></div>
 <p>or placed the <code>()</code> incorrectly like this</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="data-visualisation.html#cb23-1"></a>(chart <span class="op">=</span> alt.Chart(mpg).</span>
-<span id="cb23-2"><a href="data-visualisation.html#cb23-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb23-2"><a href="data-visualisation.html#cb23-2"></a>  mark_circle().</span>
 <span id="cb23-3"><a href="data-visualisation.html#cb23-3"></a>  encode(</span>
 <span id="cb23-4"><a href="data-visualisation.html#cb23-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb23-5"><a href="data-visualisation.html#cb23-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>)</span>
@@ -12830,7 +12860,7 @@ variables?</p></li>
 <p>One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into <strong>facets</strong>, subplots that each display one subset of the data.</p>
 <p>To facet your plot by a single variable, use <code>facet()</code>. The first argument of <code>facet()</code> is . The variable that you pass to <code>facet_wrap()</code> should be discrete.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="data-visualisation.html#cb24-1"></a>chart_f <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb24-2"><a href="data-visualisation.html#cb24-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb24-2"><a href="data-visualisation.html#cb24-2"></a>  mark_circle().</span>
 <span id="cb24-3"><a href="data-visualisation.html#cb24-3"></a>  encode(</span>
 <span id="cb24-4"><a href="data-visualisation.html#cb24-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb24-5"><a href="data-visualisation.html#cb24-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -12845,7 +12875,7 @@ variables?</p></li>
 <p><img src="screenshots/altair_facet_1.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>To facet your plot on the combination of two variables, The first argument of <code>facet()</code> is also <code>column</code> and the second is <code>row</code>. This time the formula should contain two variable names.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="data-visualisation.html#cb25-1"></a>chart_f2 <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb25-2"><a href="data-visualisation.html#cb25-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb25-2"><a href="data-visualisation.html#cb25-2"></a>  mark_circle().</span>
 <span id="cb25-3"><a href="data-visualisation.html#cb25-3"></a>  encode(</span>
 <span id="cb25-4"><a href="data-visualisation.html#cb25-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb25-5"><a href="data-visualisation.html#cb25-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>,</span>
@@ -12867,14 +12897,14 @@ variables?</p></li>
 <li><p>What do the empty cells in plot with <code>facet(column = "drv", row = "cyl")</code> mean?
 How do they relate to this plot?</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="data-visualisation.html#cb26-1"></a>(alt.Chart(mpg).</span>
-<span id="cb26-2"><a href="data-visualisation.html#cb26-2"></a>  mark_point().</span>
+<span id="cb26-2"><a href="data-visualisation.html#cb26-2"></a>  mark_circle().</span>
 <span id="cb26-3"><a href="data-visualisation.html#cb26-3"></a>  encode(</span>
 <span id="cb26-4"><a href="data-visualisation.html#cb26-4"></a>    x <span class="op">=</span> <span class="st">&quot;drv&quot;</span>,</span>
 <span id="cb26-5"><a href="data-visualisation.html#cb26-5"></a>    y <span class="op">=</span> <span class="st">&quot;cyl&quot;</span>)</span>
 <span id="cb26-6"><a href="data-visualisation.html#cb26-6"></a>)</span></code></pre></div></li>
 <li><p>What plots does the following code make? What does <code>.</code> do?</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="data-visualisation.html#cb27-1"></a>(alt.Chart(mpg).</span>
-<span id="cb27-2"><a href="data-visualisation.html#cb27-2"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb27-2"><a href="data-visualisation.html#cb27-2"></a>  mark_circle().</span>
 <span id="cb27-3"><a href="data-visualisation.html#cb27-3"></a>  encode(</span>
 <span id="cb27-4"><a href="data-visualisation.html#cb27-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb27-5"><a href="data-visualisation.html#cb27-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>).</span>
@@ -12882,7 +12912,7 @@ How do they relate to this plot?</p>
 <span id="cb27-7"><a href="data-visualisation.html#cb27-7"></a>)</span>
 <span id="cb27-8"><a href="data-visualisation.html#cb27-8"></a></span>
 <span id="cb27-9"><a href="data-visualisation.html#cb27-9"></a>(alt.Chart(mpg).</span>
-<span id="cb27-10"><a href="data-visualisation.html#cb27-10"></a>  mark_point(filled <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb27-10"><a href="data-visualisation.html#cb27-10"></a>  mark_circle().</span>
 <span id="cb27-11"><a href="data-visualisation.html#cb27-11"></a>  encode(</span>
 <span id="cb27-12"><a href="data-visualisation.html#cb27-12"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb27-13"><a href="data-visualisation.html#cb27-13"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span>).</span>
@@ -12901,7 +12931,7 @@ unique levels in the columns. Why?</p></li>
 <h2><span class="header-section-number">3.6</span> Geometric objects</h2>
 <p>How are these two plots similar?</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="data-visualisation.html#cb28-1"></a>chartp <span class="op">=</span> (alt.Chart(mpg).</span>
-<span id="cb28-2"><a href="data-visualisation.html#cb28-2"></a>  mark_point().</span>
+<span id="cb28-2"><a href="data-visualisation.html#cb28-2"></a>  mark_circle().</span>
 <span id="cb28-3"><a href="data-visualisation.html#cb28-3"></a>  encode(</span>
 <span id="cb28-4"><a href="data-visualisation.html#cb28-4"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb28-5"><a href="data-visualisation.html#cb28-5"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span></span>
@@ -12983,7 +13013,7 @@ unique levels in the columns. Why?</p></li>
 <span id="cb31-3"><a href="data-visualisation.html#cb31-3"></a>    x <span class="op">=</span> <span class="st">&quot;displ&quot;</span>,</span>
 <span id="cb31-4"><a href="data-visualisation.html#cb31-4"></a>    y <span class="op">=</span> <span class="st">&quot;hwy&quot;</span></span>
 <span id="cb31-5"><a href="data-visualisation.html#cb31-5"></a>  ).</span>
-<span id="cb31-6"><a href="data-visualisation.html#cb31-6"></a>  mark_point()</span>
+<span id="cb31-6"><a href="data-visualisation.html#cb31-6"></a>  mark_circle()</span>
 <span id="cb31-7"><a href="data-visualisation.html#cb31-7"></a>)</span>
 <span id="cb31-8"><a href="data-visualisation.html#cb31-8"></a></span>
 <span id="cb31-9"><a href="data-visualisation.html#cb31-9"></a>chart <span class="op">=</span> chartp <span class="op">+</span> chartleft  </span>
@@ -12999,7 +13029,7 @@ unique levels in the columns. Why?</p></li>
 <span id="cb32-5"><a href="data-visualisation.html#cb32-5"></a>  )</span>
 <span id="cb32-6"><a href="data-visualisation.html#cb32-6"></a>)</span>
 <span id="cb32-7"><a href="data-visualisation.html#cb32-7"></a></span>
-<span id="cb32-8"><a href="data-visualisation.html#cb32-8"></a>chart <span class="op">=</span> base.mark_point() <span class="op">+</span> base.transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).mark_line()</span>
+<span id="cb32-8"><a href="data-visualisation.html#cb32-8"></a>chart <span class="op">=</span> base.mark_circle() <span class="op">+</span> base.transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).mark_line()</span>
 <span id="cb32-9"><a href="data-visualisation.html#cb32-9"></a></span>
 <span id="cb32-10"><a href="data-visualisation.html#cb32-10"></a>chart.save(<span class="st">&quot;screenshots/altair_combine_clean.png&quot;</span>)</span>
 <span id="cb32-11"><a href="data-visualisation.html#cb32-11"></a>  </span></code></pre></div>
@@ -13012,7 +13042,7 @@ If you place encodings in an encode function, Altair will treat them as local ma
 <span id="cb33-5"><a href="data-visualisation.html#cb33-5"></a>  )</span>
 <span id="cb33-6"><a href="data-visualisation.html#cb33-6"></a>)</span>
 <span id="cb33-7"><a href="data-visualisation.html#cb33-7"></a></span>
-<span id="cb33-8"><a href="data-visualisation.html#cb33-8"></a>chart <span class="op">=</span> base.encode(color <span class="op">=</span> <span class="st">&quot;drv&quot;</span>).mark_point() <span class="op">+</span> base.transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).mark_line()</span>
+<span id="cb33-8"><a href="data-visualisation.html#cb33-8"></a>chart <span class="op">=</span> base.encode(color <span class="op">=</span> <span class="st">&quot;drv&quot;</span>).mark_circle() <span class="op">+</span> base.transform_loess(<span class="st">&quot;displ&quot;</span>, <span class="st">&quot;hwy&quot;</span>).mark_line()</span>
 <span id="cb33-9"><a href="data-visualisation.html#cb33-9"></a></span>
 <span id="cb33-10"><a href="data-visualisation.html#cb33-10"></a>chart.save(<span class="st">&quot;screenshots/altair_combine_clean_color.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_combine_clean_color.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -13034,7 +13064,7 @@ If you place encodings in an encode function, Altair will treat them as local ma
 <span id="cb34-15"><a href="data-visualisation.html#cb34-15"></a>  mark_line()</span>
 <span id="cb34-16"><a href="data-visualisation.html#cb34-16"></a>)  </span>
 <span id="cb34-17"><a href="data-visualisation.html#cb34-17"></a></span>
-<span id="cb34-18"><a href="data-visualisation.html#cb34-18"></a>chart <span class="op">=</span> base.encode(color <span class="op">=</span> <span class="st">&quot;class1&quot;</span>).mark_point() <span class="op">+</span> chart_smooth_sub</span>
+<span id="cb34-18"><a href="data-visualisation.html#cb34-18"></a>chart <span class="op">=</span> base.encode(color <span class="op">=</span> <span class="st">&quot;class1&quot;</span>).mark_circle() <span class="op">+</span> chart_smooth_sub</span>
 <span id="cb34-19"><a href="data-visualisation.html#cb34-19"></a></span>
 <span id="cb34-20"><a href="data-visualisation.html#cb34-20"></a>chart.save(<span class="st">&quot;screenshots/altair_combine_clean_color_filter.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_combine_clean_color_filter.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -13122,7 +13152,7 @@ specially formatted box.</p></li>
 <span id="cb39-5"><a href="data-visualisation.html#cb39-5"></a>    x <span class="op">=</span><span class="st">&quot;cut&quot;</span></span>
 <span id="cb39-6"><a href="data-visualisation.html#cb39-6"></a>  ).</span>
 <span id="cb39-7"><a href="data-visualisation.html#cb39-7"></a>  mark_boxplot(size <span class="op">=</span> <span class="dv">25</span>).</span>
-<span id="cb39-8"><a href="data-visualisation.html#cb39-8"></a>  properties(width <span class="op">=</span> <span class="dv">200</span>)</span>
+<span id="cb39-8"><a href="data-visualisation.html#cb39-8"></a>  properties(width <span class="op">=</span> <span class="dv">300</span>)</span>
 <span id="cb39-9"><a href="data-visualisation.html#cb39-9"></a>)</span>
 <span id="cb39-10"><a href="data-visualisation.html#cb39-10"></a></span>
 <span id="cb39-11"><a href="data-visualisation.html#cb39-11"></a>chart.save(<span class="st">&quot;screenshots/altair_boxplot.png&quot;</span>)</span></code></pre></div>
