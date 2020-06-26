@@ -89,6 +89,40 @@ There are three other common types of variables that aren't used in this dataset
 * `category` stands for factors, which pandas uses to represent categorical variables
   with fixed possible values.
 
+Using `flights.info()` also provides a print out of data types on other useful information about your pandas data frame.
+
+
+```python
+flights.info()
+#> <class 'pandas.core.frame.DataFrame'>
+#> RangeIndex: 336776 entries, 0 to 336775
+#> Data columns (total 19 columns):
+#>  #   Column          Non-Null Count   Dtype              
+#> ---  ------          --------------   -----              
+#>  0   year            336776 non-null  int64              
+#>  1   month           336776 non-null  int64              
+#>  2   day             336776 non-null  int64              
+#>  3   dep_time        328521 non-null  float64            
+#>  4   sched_dep_time  336776 non-null  int64              
+#>  5   dep_delay       328521 non-null  float64            
+#>  6   arr_time        328063 non-null  float64            
+#>  7   sched_arr_time  336776 non-null  int64              
+#>  8   arr_delay       327346 non-null  float64            
+#>  9   carrier         336776 non-null  object             
+#>  10  flight          336776 non-null  int64              
+#>  11  tailnum         334264 non-null  object             
+#>  12  origin          336776 non-null  object             
+#>  13  dest            336776 non-null  object             
+#>  14  air_time        327346 non-null  float64            
+#>  15  distance        336776 non-null  int64              
+#>  16  hour            336776 non-null  int64              
+#>  17  minute          336776 non-null  int64              
+#>  18  time_hour       336776 non-null  datetime64[ns, UTC]
+#> dtypes: datetime64[ns, UTC](1), float64(5), int64(9), object(4)
+#> memory usage: 48.8+ MB
+```
+
+
 
 ### pandas data manipulation basics
 
@@ -879,7 +913,7 @@ chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').ma
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-36-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-37-1} 
 
 There are three steps to prepare this data:
 
@@ -956,7 +990,7 @@ chart = (alt.Chart(delays).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-40-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-41-1} 
 
 Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)!
 
@@ -982,7 +1016,7 @@ chart = (alt.Chart(delays).
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-42-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-43-1} 
 
 Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases.
 
@@ -1300,8 +1334,8 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     #> BOS    15022
     #> MCO    13967
     #>        ...  
-    #> MTJ       14
     #> HDN       14
+    #> MTJ       14
     #> SBN       10
     #> ANC        8
     #> LEX        1

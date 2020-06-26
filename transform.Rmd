@@ -61,6 +61,13 @@ There are three other common types of variables that aren't used in this dataset
 * `category` stands for factors, which pandas uses to represent categorical variables
   with fixed possible values.
 
+Using `flights.info()` also provides a print out of data types on other useful information about your pandas data frame.
+
+```{python}
+flights.info()
+```
+
+
 
 ### pandas data manipulation basics
 

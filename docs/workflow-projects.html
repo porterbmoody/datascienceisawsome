@@ -312,6 +312,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data import</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-5"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="data-import.html"><a href="data-import.html#prerequisites-5"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-17"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="data-import.html"><a href="data-import.html#numbers"><i class="fa fa-check"></i><b>11.3.1</b> Numbers</a></li>
+<li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
+<li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -346,12 +363,12 @@ lasting record of what happened?</p></li>
 <h2><span class="header-section-number">8.2</span> Where does your analysis live?</h2>
 <p>VS Code’s interactive Python has a powerful notion of the <strong>working directory</strong>. This is where Python looks for files that you ask it to load, and where it will put any files that you ask it to save. The interactive console will default the working directory to the location of your <code>.py</code> script.</p>
 <p>And you can print this out in Python code by running <code>os.getcwd()</code>:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb153-1"><a href="workflow-projects.html#cb153-1"></a><span class="im">import</span> os</span>
-<span id="cb153-2"><a href="workflow-projects.html#cb153-2"></a>os.getcwd()</span>
-<span id="cb153-3"><a href="workflow-projects.html#cb153-3"></a><span class="co">#&gt; &#39;/Users/hathawayj/git/byuidatascience/python4ds&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="workflow-projects.html#cb154-1"></a><span class="im">import</span> os</span>
+<span id="cb154-2"><a href="workflow-projects.html#cb154-2"></a>os.getcwd()</span>
+<span id="cb154-3"><a href="workflow-projects.html#cb154-3"></a><span class="co">#&gt; &#39;/Users/hathawayj/git/byuidatascience/python4ds&#39;</span></span></code></pre></div>
 <p>As a beginning Python user, it’s OK to let your home directory, documents directory, or any other weird directory on your computer be Python’s working directory. But you’re six chapters into this book, and you’re no longer a rank beginner. Very soon now you should evolve to organising your analytical projects into directories and, when working on a project, setting Python’s working directory to the associated directory.</p>
 <p><strong>I do not recommend it</strong>, but you can also set the working directory from within Python:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="workflow-projects.html#cb154-1"></a>os.chdir(<span class="st">&quot;/path/to/my/CoolProject&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="workflow-projects.html#cb155-1"></a>os.chdir(<span class="st">&quot;/path/to/my/CoolProject&quot;</span>)</span></code></pre></div>
 <p>But you should never do this because there’s a better way; a way that also puts you on the path to managing your Python data science work like an expert.</p>
 </div>
 <div id="paths-and-directories" class="section level2" number="8.3">
@@ -385,32 +402,32 @@ directory.</p></li>
 <p>Name your folder <code>python4ds</code> and think carefully about which <em>subdirectory</em> you put the folder in. If you don’t store it somewhere sensible, it will be hard to find it in the future!</p>
 <p>Once this process is complete, you’ll get a new VS Code workspace just for this book. Under the Welcome screen select ‘New File’ and save the file, calling it “diamonds.py”. Upon saving the file as a Python file VS Code will make sure your workspace is setup to work with Python with a few prompts.</p>
 <p>Check that the “home” directory of your workspace is the current working directory:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="workflow-projects.html#cb155-1"></a><span class="im">import</span> os</span>
-<span id="cb155-2"><a href="workflow-projects.html#cb155-2"></a>os.getcwd()</span>
-<span id="cb155-3"><a href="workflow-projects.html#cb155-3"></a><span class="co">#&gt; &#39;/Users/hathawayj/Downloads/python4ds&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="workflow-projects.html#cb156-1"></a><span class="im">import</span> os</span>
+<span id="cb156-2"><a href="workflow-projects.html#cb156-2"></a>os.getcwd()</span>
+<span id="cb156-3"><a href="workflow-projects.html#cb156-3"></a><span class="co">#&gt; &#39;/Users/hathawayj/Downloads/python4ds&#39;</span></span></code></pre></div>
 <p>Whenever you refer to a file with a relative path it will look for it here.</p>
 <p>Now enter the following commands in the script editor, and save the file, calling it “diamonds.py”. Next, run the complete script which will save a PNG, CSV, and JSON file into your project directory. Don’t worry about the details, you’ll learn them later in the book.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="workflow-projects.html#cb156-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb156-2"><a href="workflow-projects.html#cb156-2"></a><span class="im">import</span> altair <span class="im">as</span> alt </span>
-<span id="cb156-3"><a href="workflow-projects.html#cb156-3"></a></span>
-<span id="cb156-4"><a href="workflow-projects.html#cb156-4"></a>alt.data_transformers.enable(<span class="st">&#39;json&#39;</span>)</span>
-<span id="cb156-5"><a href="workflow-projects.html#cb156-5"></a></span>
-<span id="cb156-6"><a href="workflow-projects.html#cb156-6"></a>url_path <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv&quot;</span></span>
-<span id="cb156-7"><a href="workflow-projects.html#cb156-7"></a></span>
-<span id="cb156-8"><a href="workflow-projects.html#cb156-8"></a>diamonds <span class="op">=</span> pd.read_csv(url_path)</span>
-<span id="cb156-9"><a href="workflow-projects.html#cb156-9"></a></span>
-<span id="cb156-10"><a href="workflow-projects.html#cb156-10"></a>chart <span class="op">=</span> (alt.Chart(diamonds).</span>
-<span id="cb156-11"><a href="workflow-projects.html#cb156-11"></a>    mark_circle().</span>
-<span id="cb156-12"><a href="workflow-projects.html#cb156-12"></a>    encode(</span>
-<span id="cb156-13"><a href="workflow-projects.html#cb156-13"></a>        x <span class="op">=</span> alt.X(<span class="st">&quot;carat&quot;</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb156-14"><a href="workflow-projects.html#cb156-14"></a>        y <span class="op">=</span> alt.Y(<span class="st">&quot;price&quot;</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb156-15"><a href="workflow-projects.html#cb156-15"></a>        size <span class="op">=</span> <span class="st">&quot;count()&quot;</span></span>
-<span id="cb156-16"><a href="workflow-projects.html#cb156-16"></a>    )</span>
-<span id="cb156-17"><a href="workflow-projects.html#cb156-17"></a>    )</span>
-<span id="cb156-18"><a href="workflow-projects.html#cb156-18"></a>    </span>
-<span id="cb156-19"><a href="workflow-projects.html#cb156-19"></a>chart.save(<span class="st">&quot;diamonds.png&quot;</span>)</span>
-<span id="cb156-20"><a href="workflow-projects.html#cb156-20"></a></span>
-<span id="cb156-21"><a href="workflow-projects.html#cb156-21"></a>diamonds.to_csv(<span class="st">&quot;diamonds.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="workflow-projects.html#cb157-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb157-2"><a href="workflow-projects.html#cb157-2"></a><span class="im">import</span> altair <span class="im">as</span> alt </span>
+<span id="cb157-3"><a href="workflow-projects.html#cb157-3"></a></span>
+<span id="cb157-4"><a href="workflow-projects.html#cb157-4"></a>alt.data_transformers.enable(<span class="st">&#39;json&#39;</span>)</span>
+<span id="cb157-5"><a href="workflow-projects.html#cb157-5"></a></span>
+<span id="cb157-6"><a href="workflow-projects.html#cb157-6"></a>url_path <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv&quot;</span></span>
+<span id="cb157-7"><a href="workflow-projects.html#cb157-7"></a></span>
+<span id="cb157-8"><a href="workflow-projects.html#cb157-8"></a>diamonds <span class="op">=</span> pd.read_csv(url_path)</span>
+<span id="cb157-9"><a href="workflow-projects.html#cb157-9"></a></span>
+<span id="cb157-10"><a href="workflow-projects.html#cb157-10"></a>chart <span class="op">=</span> (alt.Chart(diamonds).</span>
+<span id="cb157-11"><a href="workflow-projects.html#cb157-11"></a>    mark_circle().</span>
+<span id="cb157-12"><a href="workflow-projects.html#cb157-12"></a>    encode(</span>
+<span id="cb157-13"><a href="workflow-projects.html#cb157-13"></a>        x <span class="op">=</span> alt.X(<span class="st">&quot;carat&quot;</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb157-14"><a href="workflow-projects.html#cb157-14"></a>        y <span class="op">=</span> alt.Y(<span class="st">&quot;price&quot;</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb157-15"><a href="workflow-projects.html#cb157-15"></a>        size <span class="op">=</span> <span class="st">&quot;count()&quot;</span></span>
+<span id="cb157-16"><a href="workflow-projects.html#cb157-16"></a>    )</span>
+<span id="cb157-17"><a href="workflow-projects.html#cb157-17"></a>    )</span>
+<span id="cb157-18"><a href="workflow-projects.html#cb157-18"></a>    </span>
+<span id="cb157-19"><a href="workflow-projects.html#cb157-19"></a>chart.save(<span class="st">&quot;diamonds.png&quot;</span>)</span>
+<span id="cb157-20"><a href="workflow-projects.html#cb157-20"></a></span>
+<span id="cb157-21"><a href="workflow-projects.html#cb157-21"></a>diamonds.to_csv(<span class="st">&quot;diamonds.csv&quot;</span>)</span></code></pre></div>
 <p>Inspect the folder associated with your project — notice the <code>.vscode</code> folder. Double-click that folder to see the default workspace settings for your project. You can <a href="https://code.visualstudio.com/docs/editor/multi-root-workspaces">read more about VS code workspaces</a> to understand the other available options.</p>
 <p>In your favorite OS-specific way, search your computer for <code>diamonds.png</code> and you will find the PNG (no surprise) but <em>also the script that created it</em> (<code>diamonds.py</code>). This is huge win! One day you will want to remake a figure or just understand where it came from. If you rigorously save figures to files <strong>with Python code</strong> and never with the mouse or the clipboard, you will be able to reproduce old work with ease!</p>
 </div>
@@ -420,7 +437,7 @@ directory.</p></li>
 <ul>
 <li><p>Create an workspace for each data analysis project.</p></li>
 <li><p>Keep data files there; we’ll talk about loading them into Python in
-[data import].</p></li>
+<a href="data-import.html#data-import">data import</a>.</p></li>
 <li><p>Keep scripts there; edit them, run them in bits or as a whole.</p></li>
 <li><p>Save your outputs (plots and cleaned data) there.</p></li>
 <li><p>Only ever use relative paths, not absolute paths.</p></li>

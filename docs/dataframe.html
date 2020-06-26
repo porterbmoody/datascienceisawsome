@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="wrangle-intro.html"/>
-
+<link rel="next" href="data-import.html"/>
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -312,6 +312,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data import</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-5"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="data-import.html"><a href="data-import.html#prerequisites-5"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-17"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="data-import.html"><a href="data-import.html#numbers"><i class="fa fa-check"></i><b>11.3.1</b> Numbers</a></li>
+<li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
+<li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -338,67 +355,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="prerequisites-4" class="section level3" number="10.1.1">
 <h3><span class="header-section-number">10.1.1</span> Prerequisites</h3>
 <p>In this chapter we’ll explore the <strong>DataFrame</strong>, a foundational element of pandas.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="dataframe.html#cb157-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb157-2"><a href="dataframe.html#cb157-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb157-3"><a href="dataframe.html#cb157-3"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb157-4"><a href="dataframe.html#cb157-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="dataframe.html#cb158-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb158-2"><a href="dataframe.html#cb158-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb158-3"><a href="dataframe.html#cb158-3"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb158-4"><a href="dataframe.html#cb158-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="creating-tibbles" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Creating tibbles</h2>
 <p>Almost all of the functions that you’ll use in this book produce data frames, as data frames are one of the unifying features of pandas.</p>
 <p>You can create a new data frames from individual vectors with <code>pd.DataFrame()</code>. <code>pd.DataFrame()</code> will automatically recycle inputs of length 1 but does not allow you to refer to variables that you just created.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="dataframe.html#cb158-1"></a>pd.DataFrame({</span>
-<span id="cb158-2"><a href="dataframe.html#cb158-2"></a>  <span class="st">&#39;x&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
-<span id="cb158-3"><a href="dataframe.html#cb158-3"></a>  <span class="st">&#39;y&#39;</span>: <span class="dv">1</span>}</span>
-<span id="cb158-4"><a href="dataframe.html#cb158-4"></a>).assign(z <span class="op">=</span> <span class="kw">lambda</span> x: x.x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x.y)</span>
-<span id="cb158-5"><a href="dataframe.html#cb158-5"></a><span class="co">#&gt;    x  y   z</span></span>
-<span id="cb158-6"><a href="dataframe.html#cb158-6"></a><span class="co">#&gt; 0  1  1   2</span></span>
-<span id="cb158-7"><a href="dataframe.html#cb158-7"></a><span class="co">#&gt; 1  2  1   5</span></span>
-<span id="cb158-8"><a href="dataframe.html#cb158-8"></a><span class="co">#&gt; 2  3  1  10</span></span>
-<span id="cb158-9"><a href="dataframe.html#cb158-9"></a><span class="co">#&gt; 3  4  1  17</span></span>
-<span id="cb158-10"><a href="dataframe.html#cb158-10"></a><span class="co">#&gt; 4  5  1  26</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb159-1"><a href="dataframe.html#cb159-1"></a>pd.DataFrame({</span>
+<span id="cb159-2"><a href="dataframe.html#cb159-2"></a>  <span class="st">&#39;x&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb159-3"><a href="dataframe.html#cb159-3"></a>  <span class="st">&#39;y&#39;</span>: <span class="dv">1</span>}</span>
+<span id="cb159-4"><a href="dataframe.html#cb159-4"></a>).assign(z <span class="op">=</span> <span class="kw">lambda</span> x: x.x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x.y)</span>
+<span id="cb159-5"><a href="dataframe.html#cb159-5"></a><span class="co">#&gt;    x  y   z</span></span>
+<span id="cb159-6"><a href="dataframe.html#cb159-6"></a><span class="co">#&gt; 0  1  1   2</span></span>
+<span id="cb159-7"><a href="dataframe.html#cb159-7"></a><span class="co">#&gt; 1  2  1   5</span></span>
+<span id="cb159-8"><a href="dataframe.html#cb159-8"></a><span class="co">#&gt; 2  3  1  10</span></span>
+<span id="cb159-9"><a href="dataframe.html#cb159-9"></a><span class="co">#&gt; 3  4  1  17</span></span>
+<span id="cb159-10"><a href="dataframe.html#cb159-10"></a><span class="co">#&gt; 4  5  1  26</span></span></code></pre></div>
 <p>Unlike R data frames, pandas data frames can have column names that are not valid R variable names, aka <strong>non-syntactic</strong> names. For example, they might not start with a letter, or they might contain unusual characters like a space. Notice the use of index as we are passing all scalar values:</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb159-1"><a href="dataframe.html#cb159-1"></a>tb <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb159-2"><a href="dataframe.html#cb159-2"></a>  <span class="st">&#39;:)&#39;</span>: <span class="st">&#39;smile&#39;</span>,</span>
-<span id="cb159-3"><a href="dataframe.html#cb159-3"></a>  <span class="st">&#39; &#39;</span> : <span class="st">&#39;space&#39;</span>,</span>
-<span id="cb159-4"><a href="dataframe.html#cb159-4"></a>  <span class="st">&#39;2000&#39;</span>: <span class="st">&#39;number&#39;</span>},index<span class="op">=</span>[<span class="dv">0</span>])</span>
-<span id="cb159-5"><a href="dataframe.html#cb159-5"></a>  </span>
-<span id="cb159-6"><a href="dataframe.html#cb159-6"></a>tb</span>
-<span id="cb159-7"><a href="dataframe.html#cb159-7"></a><span class="co">#&gt;       :)           2000</span></span>
-<span id="cb159-8"><a href="dataframe.html#cb159-8"></a><span class="co">#&gt; 0  smile  space  number</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="dataframe.html#cb160-1"></a>tb <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb160-2"><a href="dataframe.html#cb160-2"></a>  <span class="st">&#39;:)&#39;</span>: <span class="st">&#39;smile&#39;</span>,</span>
+<span id="cb160-3"><a href="dataframe.html#cb160-3"></a>  <span class="st">&#39; &#39;</span> : <span class="st">&#39;space&#39;</span>,</span>
+<span id="cb160-4"><a href="dataframe.html#cb160-4"></a>  <span class="st">&#39;2000&#39;</span>: <span class="st">&#39;number&#39;</span>},index<span class="op">=</span>[<span class="dv">0</span>])</span>
+<span id="cb160-5"><a href="dataframe.html#cb160-5"></a>  </span>
+<span id="cb160-6"><a href="dataframe.html#cb160-6"></a>tb</span>
+<span id="cb160-7"><a href="dataframe.html#cb160-7"></a><span class="co">#&gt;       :)           2000</span></span>
+<span id="cb160-8"><a href="dataframe.html#cb160-8"></a><span class="co">#&gt; 0  smile  space  number</span></span></code></pre></div>
 <p>Another way to create a tibble is with <code>np.arrray()</code>. Sometimes <code>np.array()</code> makes it possible to lay out small amounts of data in easy to read form.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="dataframe.html#cb160-1"></a>pd.DataFrame(np.array(</span>
-<span id="cb160-2"><a href="dataframe.html#cb160-2"></a>  [[<span class="st">&quot;a&quot;</span>, <span class="dv">2</span>, <span class="fl">3.6</span>], </span>
-<span id="cb160-3"><a href="dataframe.html#cb160-3"></a>  [<span class="st">&quot;b&quot;</span>, <span class="dv">1</span>, <span class="fl">8.5</span>]]), columns <span class="op">=</span> </span>
-<span id="cb160-4"><a href="dataframe.html#cb160-4"></a>  [<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;z&#39;</span>])</span>
-<span id="cb160-5"><a href="dataframe.html#cb160-5"></a><span class="co">#&gt;    x  y    z</span></span>
-<span id="cb160-6"><a href="dataframe.html#cb160-6"></a><span class="co">#&gt; 0  a  2  3.6</span></span>
-<span id="cb160-7"><a href="dataframe.html#cb160-7"></a><span class="co">#&gt; 1  b  1  8.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb161-1"><a href="dataframe.html#cb161-1"></a>pd.DataFrame(np.array(</span>
+<span id="cb161-2"><a href="dataframe.html#cb161-2"></a>  [[<span class="st">&quot;a&quot;</span>, <span class="dv">2</span>, <span class="fl">3.6</span>], </span>
+<span id="cb161-3"><a href="dataframe.html#cb161-3"></a>  [<span class="st">&quot;b&quot;</span>, <span class="dv">1</span>, <span class="fl">8.5</span>]]), columns <span class="op">=</span> </span>
+<span id="cb161-4"><a href="dataframe.html#cb161-4"></a>  [<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;z&#39;</span>])</span>
+<span id="cb161-5"><a href="dataframe.html#cb161-5"></a><span class="co">#&gt;    x  y    z</span></span>
+<span id="cb161-6"><a href="dataframe.html#cb161-6"></a><span class="co">#&gt; 0  a  2  3.6</span></span>
+<span id="cb161-7"><a href="dataframe.html#cb161-7"></a><span class="co">#&gt; 1  b  1  8.5</span></span></code></pre></div>
 </div>
 <div id="printing" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Printing</h2>
 <p>Data frames have a refined print method that shows only the first and last 5 rows, and all the columns that fit on screen. This makes it much easier to work with large data.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="dataframe.html#cb161-1"></a><span class="kw">tibble</span>(</span>
-<span id="cb161-2"><a href="dataframe.html#cb161-2"></a>  <span class="dt">a =</span> lubridate<span class="op">::</span><span class="kw">now</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">86400</span>,</span>
-<span id="cb161-3"><a href="dataframe.html#cb161-3"></a>  <span class="dt">b =</span> lubridate<span class="op">::</span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span>,</span>
-<span id="cb161-4"><a href="dataframe.html#cb161-4"></a>  <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e3</span>,</span>
-<span id="cb161-5"><a href="dataframe.html#cb161-5"></a>  <span class="dt">d =</span> <span class="kw">runif</span>(<span class="fl">1e3</span>),</span>
-<span id="cb161-6"><a href="dataframe.html#cb161-6"></a>  <span class="dt">e =</span> <span class="kw">sample</span>(letters, <span class="fl">1e3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb161-7"><a href="dataframe.html#cb161-7"></a>)</span>
-<span id="cb161-8"><a href="dataframe.html#cb161-8"></a><span class="co">#&gt; # A tibble: 1,000 x 5</span></span>
-<span id="cb161-9"><a href="dataframe.html#cb161-9"></a><span class="co">#&gt;   a                   b              c     d e    </span></span>
-<span id="cb161-10"><a href="dataframe.html#cb161-10"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;</span></span>
-<span id="cb161-11"><a href="dataframe.html#cb161-11"></a><span class="co">#&gt; 1 2020-06-24 20:39:53 2020-07-01     1 0.368 n    </span></span>
-<span id="cb161-12"><a href="dataframe.html#cb161-12"></a><span class="co">#&gt; 2 2020-06-25 14:45:03 2020-07-06     2 0.612 l    </span></span>
-<span id="cb161-13"><a href="dataframe.html#cb161-13"></a><span class="co">#&gt; 3 2020-06-25 09:08:42 2020-07-16     3 0.415 p    </span></span>
-<span id="cb161-14"><a href="dataframe.html#cb161-14"></a><span class="co">#&gt; 4 2020-06-24 22:29:59 2020-07-15     4 0.212 m    </span></span>
-<span id="cb161-15"><a href="dataframe.html#cb161-15"></a><span class="co">#&gt; 5 2020-06-24 18:54:16 2020-07-12     5 0.733 i    </span></span>
-<span id="cb161-16"><a href="dataframe.html#cb161-16"></a><span class="co">#&gt; 6 2020-06-25 05:55:13 2020-07-08     6 0.460 n    </span></span>
-<span id="cb161-17"><a href="dataframe.html#cb161-17"></a><span class="co">#&gt; # … with 994 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="dataframe.html#cb162-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb162-2"><a href="dataframe.html#cb162-2"></a>  <span class="dt">a =</span> lubridate<span class="op">::</span><span class="kw">now</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">86400</span>,</span>
+<span id="cb162-3"><a href="dataframe.html#cb162-3"></a>  <span class="dt">b =</span> lubridate<span class="op">::</span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span>,</span>
+<span id="cb162-4"><a href="dataframe.html#cb162-4"></a>  <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e3</span>,</span>
+<span id="cb162-5"><a href="dataframe.html#cb162-5"></a>  <span class="dt">d =</span> <span class="kw">runif</span>(<span class="fl">1e3</span>),</span>
+<span id="cb162-6"><a href="dataframe.html#cb162-6"></a>  <span class="dt">e =</span> <span class="kw">sample</span>(letters, <span class="fl">1e3</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb162-7"><a href="dataframe.html#cb162-7"></a>)</span>
+<span id="cb162-8"><a href="dataframe.html#cb162-8"></a><span class="co">#&gt; # A tibble: 1,000 x 5</span></span>
+<span id="cb162-9"><a href="dataframe.html#cb162-9"></a><span class="co">#&gt;   a                   b              c     d e    </span></span>
+<span id="cb162-10"><a href="dataframe.html#cb162-10"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;</span></span>
+<span id="cb162-11"><a href="dataframe.html#cb162-11"></a><span class="co">#&gt; 1 2020-06-25 19:21:49 2020-07-02     1 0.368 n    </span></span>
+<span id="cb162-12"><a href="dataframe.html#cb162-12"></a><span class="co">#&gt; 2 2020-06-26 13:26:59 2020-07-07     2 0.612 l    </span></span>
+<span id="cb162-13"><a href="dataframe.html#cb162-13"></a><span class="co">#&gt; 3 2020-06-26 07:50:38 2020-07-17     3 0.415 p    </span></span>
+<span id="cb162-14"><a href="dataframe.html#cb162-14"></a><span class="co">#&gt; 4 2020-06-25 21:11:55 2020-07-16     4 0.212 m    </span></span>
+<span id="cb162-15"><a href="dataframe.html#cb162-15"></a><span class="co">#&gt; 5 2020-06-25 17:36:12 2020-07-13     5 0.733 i    </span></span>
+<span id="cb162-16"><a href="dataframe.html#cb162-16"></a><span class="co">#&gt; 6 2020-06-26 04:37:09 2020-07-09     6 0.460 n    </span></span>
+<span id="cb162-17"><a href="dataframe.html#cb162-17"></a><span class="co">#&gt; # … with 994 more rows</span></span></code></pre></div>
 <p>Data frames are designed so that you don’t accidentally overwhelm your console when you print large data frames. But sometimes you need more output than the default display. There are a few options that can help.</p>
 <p>First, you can return the data frame using <code>.head()</code> on the data frame and control the number of rows (<code>n</code>) of the display. In the interactive Python viewer in VS Code you can scroll to see the other columns.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="dataframe.html#cb162-1"></a>flights.head(<span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="dataframe.html#cb163-1"></a>flights.head(<span class="dv">20</span>)</span></code></pre></div>
 <p>You can also control the default print behaviour by <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html">setting options</a>:</p>
 <ul>
 <li><p><code>pd.set_option("display.max_rows", 101)</code>: if more than <code>101</code>
@@ -409,41 +426,41 @@ rows, print only <code>n</code> rows.</p></li>
 <div id="subsetting" class="section level3" number="10.3.1">
 <h3><span class="header-section-number">10.3.1</span> Subsetting</h3>
 <p>So far all the tools you’ve learned have worked with complete data frames. If you want to pull out a single variable, you need some new tools, <code>[</code>. <code>[</code> can extract by name or position.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="dataframe.html#cb163-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb163-2"><a href="dataframe.html#cb163-2"></a>  <span class="st">&#39;x&#39;</span>: np.random.uniform(size <span class="op">=</span> <span class="dv">5</span>),</span>
-<span id="cb163-3"><a href="dataframe.html#cb163-3"></a>  <span class="st">&#39;y&#39;</span>: np.random.normal(size <span class="op">=</span> <span class="dv">5</span>)})</span>
-<span id="cb163-4"><a href="dataframe.html#cb163-4"></a></span>
-<span id="cb163-5"><a href="dataframe.html#cb163-5"></a><span class="co"># Extract by name as pandas data frame</span></span>
-<span id="cb163-6"><a href="dataframe.html#cb163-6"></a>df[[<span class="st">&quot;x&quot;</span>]]</span>
-<span id="cb163-7"><a href="dataframe.html#cb163-7"></a><span class="co"># Extract by name as array</span></span>
-<span id="cb163-8"><a href="dataframe.html#cb163-8"></a><span class="co">#&gt;           x</span></span>
-<span id="cb163-9"><a href="dataframe.html#cb163-9"></a><span class="co">#&gt; 0  0.325624</span></span>
-<span id="cb163-10"><a href="dataframe.html#cb163-10"></a><span class="co">#&gt; 1  0.136056</span></span>
-<span id="cb163-11"><a href="dataframe.html#cb163-11"></a><span class="co">#&gt; 2  0.444913</span></span>
-<span id="cb163-12"><a href="dataframe.html#cb163-12"></a><span class="co">#&gt; 3  0.414994</span></span>
-<span id="cb163-13"><a href="dataframe.html#cb163-13"></a><span class="co">#&gt; 4  0.350474</span></span>
-<span id="cb163-14"><a href="dataframe.html#cb163-14"></a>df[<span class="st">&quot;x&quot;</span>]</span>
-<span id="cb163-15"><a href="dataframe.html#cb163-15"></a><span class="co"># Extract by position</span></span>
-<span id="cb163-16"><a href="dataframe.html#cb163-16"></a><span class="co">#&gt; 0    0.325624</span></span>
-<span id="cb163-17"><a href="dataframe.html#cb163-17"></a><span class="co">#&gt; 1    0.136056</span></span>
-<span id="cb163-18"><a href="dataframe.html#cb163-18"></a><span class="co">#&gt; 2    0.444913</span></span>
-<span id="cb163-19"><a href="dataframe.html#cb163-19"></a><span class="co">#&gt; 3    0.414994</span></span>
-<span id="cb163-20"><a href="dataframe.html#cb163-20"></a><span class="co">#&gt; 4    0.350474</span></span>
-<span id="cb163-21"><a href="dataframe.html#cb163-21"></a><span class="co">#&gt; Name: x, dtype: float64</span></span>
-<span id="cb163-22"><a href="dataframe.html#cb163-22"></a>df.iloc[:, <span class="dv">1</span>]</span>
-<span id="cb163-23"><a href="dataframe.html#cb163-23"></a><span class="co">#&gt; 0   -1.851640</span></span>
-<span id="cb163-24"><a href="dataframe.html#cb163-24"></a><span class="co">#&gt; 1   -0.152508</span></span>
-<span id="cb163-25"><a href="dataframe.html#cb163-25"></a><span class="co">#&gt; 2   -2.425987</span></span>
-<span id="cb163-26"><a href="dataframe.html#cb163-26"></a><span class="co">#&gt; 3   -0.851618</span></span>
-<span id="cb163-27"><a href="dataframe.html#cb163-27"></a><span class="co">#&gt; 4    0.108888</span></span>
-<span id="cb163-28"><a href="dataframe.html#cb163-28"></a><span class="co">#&gt; Name: y, dtype: float64</span></span>
-<span id="cb163-29"><a href="dataframe.html#cb163-29"></a>df[df.columns[<span class="dv">1</span>]]</span>
-<span id="cb163-30"><a href="dataframe.html#cb163-30"></a><span class="co">#&gt; 0   -1.851640</span></span>
-<span id="cb163-31"><a href="dataframe.html#cb163-31"></a><span class="co">#&gt; 1   -0.152508</span></span>
-<span id="cb163-32"><a href="dataframe.html#cb163-32"></a><span class="co">#&gt; 2   -2.425987</span></span>
-<span id="cb163-33"><a href="dataframe.html#cb163-33"></a><span class="co">#&gt; 3   -0.851618</span></span>
-<span id="cb163-34"><a href="dataframe.html#cb163-34"></a><span class="co">#&gt; 4    0.108888</span></span>
-<span id="cb163-35"><a href="dataframe.html#cb163-35"></a><span class="co">#&gt; Name: y, dtype: float64</span></span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="dataframe.html#cb164-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb164-2"><a href="dataframe.html#cb164-2"></a>  <span class="st">&#39;x&#39;</span>: np.random.uniform(size <span class="op">=</span> <span class="dv">5</span>),</span>
+<span id="cb164-3"><a href="dataframe.html#cb164-3"></a>  <span class="st">&#39;y&#39;</span>: np.random.normal(size <span class="op">=</span> <span class="dv">5</span>)})</span>
+<span id="cb164-4"><a href="dataframe.html#cb164-4"></a></span>
+<span id="cb164-5"><a href="dataframe.html#cb164-5"></a><span class="co"># Extract by name as pandas data frame</span></span>
+<span id="cb164-6"><a href="dataframe.html#cb164-6"></a>df[[<span class="st">&quot;x&quot;</span>]]</span>
+<span id="cb164-7"><a href="dataframe.html#cb164-7"></a><span class="co"># Extract by name as array</span></span>
+<span id="cb164-8"><a href="dataframe.html#cb164-8"></a><span class="co">#&gt;           x</span></span>
+<span id="cb164-9"><a href="dataframe.html#cb164-9"></a><span class="co">#&gt; 0  0.024984</span></span>
+<span id="cb164-10"><a href="dataframe.html#cb164-10"></a><span class="co">#&gt; 1  0.033701</span></span>
+<span id="cb164-11"><a href="dataframe.html#cb164-11"></a><span class="co">#&gt; 2  0.275419</span></span>
+<span id="cb164-12"><a href="dataframe.html#cb164-12"></a><span class="co">#&gt; 3  0.523895</span></span>
+<span id="cb164-13"><a href="dataframe.html#cb164-13"></a><span class="co">#&gt; 4  0.305597</span></span>
+<span id="cb164-14"><a href="dataframe.html#cb164-14"></a>df[<span class="st">&quot;x&quot;</span>]</span>
+<span id="cb164-15"><a href="dataframe.html#cb164-15"></a><span class="co"># Extract by position</span></span>
+<span id="cb164-16"><a href="dataframe.html#cb164-16"></a><span class="co">#&gt; 0    0.024984</span></span>
+<span id="cb164-17"><a href="dataframe.html#cb164-17"></a><span class="co">#&gt; 1    0.033701</span></span>
+<span id="cb164-18"><a href="dataframe.html#cb164-18"></a><span class="co">#&gt; 2    0.275419</span></span>
+<span id="cb164-19"><a href="dataframe.html#cb164-19"></a><span class="co">#&gt; 3    0.523895</span></span>
+<span id="cb164-20"><a href="dataframe.html#cb164-20"></a><span class="co">#&gt; 4    0.305597</span></span>
+<span id="cb164-21"><a href="dataframe.html#cb164-21"></a><span class="co">#&gt; Name: x, dtype: float64</span></span>
+<span id="cb164-22"><a href="dataframe.html#cb164-22"></a>df.iloc[:, <span class="dv">1</span>]</span>
+<span id="cb164-23"><a href="dataframe.html#cb164-23"></a><span class="co">#&gt; 0   -0.357907</span></span>
+<span id="cb164-24"><a href="dataframe.html#cb164-24"></a><span class="co">#&gt; 1    0.558153</span></span>
+<span id="cb164-25"><a href="dataframe.html#cb164-25"></a><span class="co">#&gt; 2   -1.630738</span></span>
+<span id="cb164-26"><a href="dataframe.html#cb164-26"></a><span class="co">#&gt; 3   -0.203377</span></span>
+<span id="cb164-27"><a href="dataframe.html#cb164-27"></a><span class="co">#&gt; 4    0.414008</span></span>
+<span id="cb164-28"><a href="dataframe.html#cb164-28"></a><span class="co">#&gt; Name: y, dtype: float64</span></span>
+<span id="cb164-29"><a href="dataframe.html#cb164-29"></a>df[df.columns[<span class="dv">1</span>]]</span>
+<span id="cb164-30"><a href="dataframe.html#cb164-30"></a><span class="co">#&gt; 0   -0.357907</span></span>
+<span id="cb164-31"><a href="dataframe.html#cb164-31"></a><span class="co">#&gt; 1    0.558153</span></span>
+<span id="cb164-32"><a href="dataframe.html#cb164-32"></a><span class="co">#&gt; 2   -1.630738</span></span>
+<span id="cb164-33"><a href="dataframe.html#cb164-33"></a><span class="co">#&gt; 3   -0.203377</span></span>
+<span id="cb164-34"><a href="dataframe.html#cb164-34"></a><span class="co">#&gt; 4    0.414008</span></span>
+<span id="cb164-35"><a href="dataframe.html#cb164-35"></a><span class="co">#&gt; Name: y, dtype: float64</span></span></code></pre></div>
 </div>
 </div>
 <div id="exercises-16" class="section level2" number="10.4">
@@ -456,12 +473,7 @@ how can you extract the reference variable from a tibble?</p></li>
 <li><p>Extracting the variable called <code>1</code>.</p></li>
 <li><p>Plotting a scatterplot of <code>1</code> vs <code>2</code>.</p></li>
 <li><p>Creating a new column called <code>3</code> which is <code>2</code> divided by <code>1</code>.</p></li>
-<li><p>Renaming the columns to <code>one</code>, <code>two</code> and <code>three</code>.</p></li>
-</ol>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="dataframe.html#cb164-1"></a>annoying &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
-<span id="cb164-2"><a href="dataframe.html#cb164-2"></a>  <span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</span>
-<span id="cb164-3"><a href="dataframe.html#cb164-3"></a>  <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span>))</span>
-<span id="cb164-4"><a href="dataframe.html#cb164-4"></a>)</span></code></pre></div></li>
+</ol></li>
 </ol>
 
 </div>
@@ -471,8 +483,8 @@ how can you extract the reference variable from a tibble?</p></li>
           </div>
         </div>
       </div>
-<a href="wrangle-intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="wrangle-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-import.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

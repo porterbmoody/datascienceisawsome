@@ -126,12 +126,4 @@ df[df.columns[1]]
 
     1.  Creating a new column called `3` which is `2` divided by `1`.
         
-    1.  Renaming the columns to `one`, `two` and `three`. 
-    
-    ```{r}
-    annoying <- tibble(
-      `1` = 1:10,
-      `2` = `1` * 2 + rnorm(length(`1`))
-    )
-    ```
 

@@ -11,7 +11,8 @@ rmd_files: [
   "EDA.Rmd",
   "workflow-projects.Rmd",
   "wrangle.Rmd",
-  "tibble.Rmd"
+  "tibble.Rmd",
+  "import.Rmd"
 ]
 
 before_chapter_script: "_common.R"
@@ -19,7 +20,6 @@ output_dir: "docs"
 
 
 
-#  "import.Rmd",
 #  "tidy.Rmd",
 #  "relational-data.Rmd",
 #  "strings.Rmd",

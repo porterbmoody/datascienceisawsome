@@ -1,12 +1,6 @@
 # Data import
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-use_python("usr/local/bin/python3")
-```
+
 
 
 ## Introduction
@@ -17,7 +11,8 @@ In this chapter, you'll learn how to read plain-text rectangular files into Pyth
 
 In this chapter, you'll learn how to load flat files in R with the __pandas__ package.
 
-```{python setup, message = FALSE}
+
+```python
 import pandas as pd
 import pandas as pd
 import altair as alt
@@ -39,13 +34,15 @@ These functions all have similar syntax: once you've mastered one, you can use t
 
 The first argument to `pd.read_csv()` is the most important: it's the path to the file to read.
 
-```{python, message = TRUE}
+
+```python
 heights = pd.read_csv("data/heights.csv")
 ```
 
 You can also supply an inline csv file with the use of `StringIO` in the `io` package. StringIO creates a buffer from a string. This is useful for experimenting with pandas and for creating reproducible examples to share with others:
 
-```{python}
+
+```python
 from io import StringIO
 
 data = StringIO("""a,b,c
@@ -53,7 +50,9 @@ data = StringIO("""a,b,c
 4,5,6""")
 
 pd.read_csv(data)
-
+#>    a  b  c
+#> 0  1  2  3
+#> 1  4  5  6
 ```
 
 
@@ -66,7 +65,8 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     all lines that start with (e.g.) `#`. Both arguments have other methods that 
     can be used - see [the pandas documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html).
     
-    ```{pandas}
+    
+    ```pandas
     
     data_metada = StringIO("""The first line of metadata
       The second line of metadata
@@ -87,9 +87,13 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     tell `read_csv()` not to treat the first row as headings, and instead
     label them sequentially from `1` to `n`:
     
-    ```{python}
+    
+    ```python
     data_nonames = StringIO("""1,2,3\n4,5,6""")
     pd.read_csv(data_nonames, header = None)
+    #>    0  1  2
+    #> 0  1  2  3
+    #> 1  4  5  6
     ```
     
     (`"\n"` is a convenient shortcut for adding a new line. You'll learn more
@@ -98,16 +102,23 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     Alternatively you can pass `names` an list of names which will be
     used as the column names:
     
-    ```{python}
+    
+    ```python
     data_nonames = StringIO("""1,2,3\n4,5,6""")
     pd.read_csv(data_nonames, names = ["x", "y", "z"], header = None)
+    #>    x  y  z
+    #> 0  1  2  3
+    #> 1  4  5  6
     ```
 
 Another option that commonly needs tweaking is `na`: this specifies the value (or values) that are used to represent missing values in your file:
 
-```{python}
+
+```python
 data_missing = StringIO("""a,b,c\n1,2,.""")
 pd.read_csv(data_missing, na_values = ".")
+#>    a  b   c
+#> 0  1  2 NaN
 ```
 
 This is all you need to know to read ~75% of CSV files that you'll encounter in practice. You can also easily adapt what you've learned to read fixed width files with `pd.read_fwf()`. To read in more challenging files, you'll need to learn more about how pandas parses each column, turning them into `DataFrame` objects.
@@ -128,7 +139,8 @@ This is all you need to know to read ~75% of CSV files that you'll encounter in 
     character will be `"`. What argument to `pd.read_csv()` do you need to specify
     to read the following text into a data frame?
     
-    ```{r, eval = FALSE}
+    
+    ```r
     "x,y\n1,'a,b'"
     ```
     
@@ -136,11 +148,27 @@ This is all you need to know to read ~75% of CSV files that you'll encounter in 
 
 Before we get into the details of how pandas reads files from disk, we need to take a little detour to talk about the `astype()` function. This function casts a pandas object to a more specialised data type like a logical or integer. The pandas package has a special `.to_datetime()` function to convert dates:
 
-```{python}
+
+```python
 pd.Series(["TRUE", "FALSE", np.nan]).astype('bool')
+#> 0    True
+#> 1    True
+#> 2    True
+#> dtype: bool
 pd.Series(["TRUE", "FALSE", "FALSE"]).astype('bool')
+#> 0    True
+#> 1    True
+#> 2    True
+#> dtype: bool
 pd.Series(["1", "2", "3"]).astype("int")
+#> 0    1
+#> 1    2
+#> 2    3
+#> dtype: int64
 pd.to_datetime(pd.Series(['2010-01-01', '1970-10-14']), infer_datetime_format=True)
+#> 0   2010-01-01
+#> 1   1970-10-14
+#> dtype: datetime64[ns]
 ```
 
 These functions are useful in their own right, but are also an important building block for pandas. Once you've learned how the individual parsers work in this section, we'll circle back and see how they fit together to parse a complete file in the next section.
@@ -164,8 +192,15 @@ Using arsers is mostly a matter of understanding what's available and how they d
 1.  `to_numeric()` allows you to coerce mixed value columns to numeric using 
     `errors = coerce`
     
-    ```{python}
+    
+    ```python
     pd.to_numeric(pd.Series(["bb", "1", "True", "9", np.nan]), errors = 'coerce')
+    #> 0    NaN
+    #> 1    1.0
+    #> 2    NaN
+    #> 3    9.0
+    #> 4    NaN
+    #> dtype: float64
     ```
 
 The following sections describe these parsers in more detail.
@@ -192,10 +227,13 @@ float.
 
 It seems like strings should be really simple. Unfortunately life isn't so simple, as there are multiple ways to represent the same string. To understand what's going on, we need to dive into the details of how computers represent strings. In Python, we can get at the underlying representation of a string using `hex()` on a binary object:
 
-```{python}
+
+```python
 b'Hathaway'.hex()
 # and convert it back
+#> '4861746861776179'
 bytes.fromhex('4861746861776179').decode()
+#> 'Hathaway'
 ```
 
 Each hexadecimal number represents a byte of information: `48` is H, `61` is a, and so on. The mapping from hexadecimal number to character is called the encoding, and in this case the encoding is called ASCII. ASCII does a great job of representing English characters, because it's the __American__ Standard Code for Information Interchange.
@@ -210,10 +248,12 @@ Encodings are a rich and complex topic, and I've only scratched the surface here
 
 Pandas uses category to represent categorical variables that have a known set of possible values. Give `pd.Categorical()` a Series of known `levels` to convert other unexpected value that are present to `nan`:
 
-```{python}
+
+```python
 fruit =  ["apple", "banana"]
 pd.Categorical(["apple", "banana", "bananana"], categories = fruit)
-
+#> [apple, banana, NaN]
+#> Categories (2, object): [apple, banana]
 ```
 
 But if you have many problematic entries, it's often easier to leave as character vectors and then use the tools you'll learn about in [strings] and [factors] to clean them up.
