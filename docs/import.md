@@ -432,5 +432,5 @@ This makes CSVs a little unreliable for caching interim results---you need to re
 
 ## Other types of data
 
-To get other types of data into Python, we recommend reviews pandas [IO tools](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html). 
+To get other types of data into Python, we recommend you review pandas [IO tools](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html). 
 
