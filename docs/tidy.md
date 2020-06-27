@@ -1,12 +1,6 @@
 # Tidy data
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-use_python("usr/local/bin/python3")
-```
+
 
 
 ## Introduction
@@ -27,7 +21,8 @@ In this chapter we'll focus on pandas, a package that provides a bunch of tools 
 
 <!-- http://shzhangji.com/blog/2017/09/30/pandas-and-tidy-data/ -->
 
-```{python setup, message = FALSE}
+
+```python
 import pandas as pd
 import altair as alt
 import numpy as np

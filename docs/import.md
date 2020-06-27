@@ -14,10 +14,8 @@ In this chapter, you'll learn how to load flat files in R with the __pandas__ pa
 
 ```python
 import pandas as pd
-import pandas as pd
 import altair as alt
 import numpy as np
-import tempfile
 ```
 
 ## Getting started
@@ -258,342 +256,181 @@ pd.Categorical(["apple", "banana", "bananana"], categories = fruit)
 
 But if you have many problematic entries, it's often easier to leave as character vectors and then use the tools you'll learn about in [strings] and [factors] to clean them up.
 
-<!-- ### Dates, date-times, and times {#readr-datetimes} -->
-
-<!-- You pick between three parsers depending on whether you want a date (the number of days since 1970-01-01), a date-time (the number of seconds since midnight 1970-01-01), or a time (the number of seconds since midnight). When called without any additional arguments: -->
+### Dates and times {#readr-datetimes}
 
-<!-- *   `parse_datetime()` expects an ISO8601 date-time. ISO8601 is an -->
-<!--     international standard in which the components of a date are -->
-<!--     organised from biggest to smallest: year, month, day, hour, minute,  -->
-<!--     second. -->
+Pandas provides an extensive set of capabilities for working with time using NumPy's `datetime64` and `timedelta64` dtypes. You primarily use `pd.to_datetime()` whether you want a date or a date and time. When called without any additional arguments:
 
-<!--     ```{r} -->
-<!--     parse_datetime("2010-10-01T2010") -->
-<!--     # If time is omitted, it will be set to midnight -->
-<!--     parse_datetime("20101010") -->
-<!--     ``` -->
-
-<!--     This is the most important date/time standard, and if you work with -->
-<!--     dates and times frequently, I recommend reading -->
-<!--     <https://en.wikipedia.org/wiki/ISO_8601> -->
-
-<!-- *   `parse_date()` expects a four digit year, a `-` or `/`, the month, a `-`  -->
-<!--     or `/`, then the day: -->
-
-<!--     ```{r} -->
-<!--     parse_date("2010-10-01") -->
-<!--     ``` -->
-
-<!-- *   `parse_time()` expects the hour, `:`, minutes, optionally `:` and seconds,  -->
-<!--     and an optional am/pm specifier: -->
+*   `pd.to_datetime()` expects an ISO8601 date-time. ISO8601 is an
+    international standard in which the components of a date are
+    organised from biggest to smallest: year, month, day, hour, minute,
+    second.
 
-<!--     ```{r} -->
-<!--     library(hms) -->
-<!--     parse_time("01:10 am") -->
-<!--     parse_time("20:10:01") -->
-<!--     ``` -->
+    
+    ```python
+    pd.to_datetime(["2010-10-01T2010"])
+    # If time is omitted, it will be set to midnight and only print date.
+    #> DatetimeIndex(['2010-10-01 20:10:00'], dtype='datetime64[ns]', freq=None)
+    pd.to_datetime(["2010-10-01"])
+    #> DatetimeIndex(['2010-10-01'], dtype='datetime64[ns]', freq=None)
+    ```
 
-<!--     Base R doesn't have a great built in class for time data, so we use  -->
-<!--     the one provided in the hms package. -->
+    This is the most important date/time standard, and if you work with
+    dates and times frequently, I recommend reading
+    <https://en.wikipedia.org/wiki/ISO_8601>
 
-<!-- If these defaults don't work for your data you can supply your own date-time `format`, built up of the following pieces: -->
+If these defaults don't work for your data you can supply your own date-time `format`, built up of the following pieces:
 
-<!-- Year -->
-<!-- : `%Y` (4 digits).  -->
-<!-- : `%y` (2 digits); 00-69 -> 2000-2069, 70-99 -> 1970-1999. -->
+Year
+: `%Y` (4 digits).
+: `%y` (2 digits); 00-69 -> 2000-2069, 70-99 -> 1970-1999.
 
-<!-- Month -->
-<!-- : `%m` (2 digits). -->
-<!-- : `%b` (abbreviated name, like "Jan"). -->
-<!-- : `%B` (full name, "January"). -->
+Month
+: `%m` (2 digits).
+: `%b` (abbreviated name, like "Jan").
+: `%B` (full name, "January").
 
-<!-- Day -->
-<!-- : `%d` (2 digits). -->
-<!-- : `%e` (optional leading space). -->
+Day
+: `%d` (2 digits).
+: `%e` (optional leading space).
 
-<!-- Time -->
-<!-- : `%H` 0-23 hour. -->
-<!-- : `%I` 0-12, must be used with `%p`. -->
-<!-- : `%p` AM/PM indicator. -->
-<!-- : `%M` minutes. -->
-<!-- : `%S` integer seconds. -->
-<!-- : `%OS` real seconds.  -->
-<!-- : `%Z` Time zone (as name, e.g. `America/Chicago`). Beware of abbreviations: -->
-<!--   if you're American, note that "EST" is a Canadian time zone that does not -->
-<!--   have daylight savings time. It is _not_ Eastern Standard Time! We'll -->
-<!--   come back to this [time zones]. -->
-<!-- : `%z` (as offset from UTC, e.g. `+0800`).  -->
+Time
+: `%H` 0-23 hour.
+: `%I` 0-12, must be used with `%p`.
+: `%p` AM/PM indicator.
+: `%M` minutes.
+: `%S` integer seconds.
+: `%OS` real seconds.
+: `%Z` Time zone (as name, e.g. `America/Chicago`). Beware of abbreviations:
+  if you're American, note that "EST" is a Canadian time zone that does not
+  have daylight savings time. It is _not_ Eastern Standard Time! We'll
+  come back to this in [time zones].
+: `%z` (as offset from UTC, e.g. `+0800`).
 
-<!-- Non-digits -->
-<!-- : `%.` skips one non-digit character. -->
-<!-- : `%*` skips any number of non-digits. -->
+Non-digits
+: `%.` skips one non-digit character.
+: `%*` skips any number of non-digits.
 
-<!-- The best way to figure out the correct format is to create a few examples in a character vector, and test with one of the parsing functions. For example: -->
+The best way to figure out the correct format is to create a few examples in a character vector, and test with one of the parsing functions. For example:
 
-<!-- ```{r} -->
-<!-- parse_date("01/02/15", "%m/%d/%y") -->
-<!-- parse_date("01/02/15", "%d/%m/%y") -->
-<!-- parse_date("01/02/15", "%y/%m/%d") -->
-<!-- ``` -->
 
-<!-- If you're using `%b` or `%B` with non-English month names, you'll need to set the  `lang` argument to `locale()`. See the list of built-in languages in `date_names_langs()`, or if your language is not already included, create your own with `date_names()`. -->
+```python
+pd.to_datetime(["01/02/15"], format = "%m/%d/%y")
+#> DatetimeIndex(['2015-01-02'], dtype='datetime64[ns]', freq=None)
+pd.to_datetime(["01/02/15"], format = "%d/%m/%y")
+#> DatetimeIndex(['2015-02-01'], dtype='datetime64[ns]', freq=None)
+pd.to_datetime(["01/02/15"], format = "%y/%m/%d")
+#> DatetimeIndex(['2001-02-15'], dtype='datetime64[ns]', freq=None)
+```
 
-<!-- ```{r} -->
-<!-- parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr")) -->
-<!-- ``` -->
+The `pd.to_datetime()` function has a handy argument `infer_datetime_format` which can often allow you to avoid entring format strings.
 
-<!-- ### Exercises -->
 
-<!-- 1.  What are the most important arguments to `locale()`?  -->
+```python
+pd.to_datetime(["01/02/15"], infer_datetime_format = True)
+#> DatetimeIndex(['2015-01-02'], dtype='datetime64[ns]', freq=None)
+```
 
-<!-- 1.  What happens if you try and set `decimal_mark` and `grouping_mark`  -->
-<!--     to the same character? What happens to the default value of  -->
-<!--     `grouping_mark` when you set `decimal_mark` to ","? What happens -->
-<!--     to the default value of `decimal_mark` when you set the `grouping_mark` -->
-<!--     to "."? -->
+<!-- https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.month_name.html -->
 
-<!-- 1.  I didn't discuss the `date_format` and `time_format` options to -->
-<!--     `locale()`. What do they do? Construct an example that shows when  -->
-<!--     they might be useful. -->
+### Exercises
 
-<!-- 1.  If you live outside the US, create a new locale object that encapsulates  -->
-<!--     the settings for the types of file you read most commonly. -->
 
-<!-- 1.  What's the difference between `read_csv()` and `read_csv2()`? -->
+1.  What are the most common encodings used in Europe? What are the
+    most common encodings used in Asia? Do some googling to find out.
 
-<!-- 1.  What are the most common encodings used in Europe? What are the -->
-<!--     most common encodings used in Asia? Do some googling to find out. -->
+1.  Generate the correct format string to parse each of the following
+    dates and times:
 
-<!-- 1.  Generate the correct format string to parse each of the following  -->
-<!--     dates and times: -->
+    
+    ```python
+    d1 = ["January 1, 2010"]
+    d2 = ["2015-Mar-07"]
+    d3 = ["06-Jun-2017"]
+    d4 = ["August 19 (2015)", "July 1 (2015)"]
+    d5 = ["12/30/14"] # Dec 30, 2014
+    ```
 
-<!--     ```{r} -->
-<!--     d1 <- "January 1, 2010" -->
-<!--     d2 <- "2015-Mar-07" -->
-<!--     d3 <- "06-Jun-2017" -->
-<!--     d4 <- c("August 19 (2015)", "July 1 (2015)") -->
-<!--     d5 <- "12/30/14" # Dec 30, 2014 -->
-<!--     t1 <- "1705" -->
-<!--     t2 <- "11:15:10.12 PM" -->
-<!--     ``` -->
+## Parsing a file
 
-<!-- ## Parsing a file -->
+Now that you've learned how to parse an Series, it's time to return to the beginning and explore how pandas parses a file. There are two new things that you'll learn about in this section:
 
-<!-- Now that you've learned how to parse an individual vector, it's time to return to the beginning and explore how readr parses a file. There are two new things that you'll learn about in this section: -->
+1. How pandas automatically guesses the type of each column.
+1. How to override the default specification.
 
-<!-- 1. How readr automatically guesses the type of each column. -->
-<!-- 1. How to override the default specification. -->
+### Strategy
 
-<!-- ### Strategy -->
+Pandas uses a heuristic to figure out the type of each column: at first it tries to 
+convert all values to an integer. If there is an error then it moves to the next
+data type.  The last data type is an `object` which a Series of strings. The heuristic tries each of the following types in the listed order, stopping when it finds a match:
 
-<!-- readr uses a heuristic to figure out the type of each column: it reads the first 1000 rows and uses some (moderately conservative) heuristics to figure out the type of each column. You can emulate this process with a character vector using `guess_parser()`, which returns readr's best guess, and `parse_guess()` which uses that guess to parse the column: -->
+1. integer: contains only numeric characters (and `-`).
+1. float: contains only valid doubles (including numbers like `4.5e-5`).
+1. bool: contains only "F", "T", "FALSE", "TRUE", "False" or "True".
 
-<!-- ```{r} -->
-<!-- guess_parser("2010-10-01") -->
-<!-- guess_parser("15:01") -->
-<!-- guess_parser(c("TRUE", "FALSE")) -->
-<!-- guess_parser(c("1", "5", "9")) -->
-<!-- guess_parser(c("12,352,561")) -->
+In addition, you can use the `parse_dates` argument to to parse datetime columns 
+during parsing.  See the [read_csv documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html) for guidance.
 
-<!-- str(parse_guess("2010-10-10")) -->
-<!-- ``` -->
+If none of these rules apply, then the column will stay as a Series of strings.
 
-<!-- The heuristic tries each of the following types, stopping when it finds a match: -->
+When using `pd.read_csv()`, I highly recommend always supplying `dtypes`. This 
+ensures that you have a consistent, reproducible, and fast data import script. 
+If you rely on the default guesses and your data changes, pandas will continue to 
+read it in. 
 
-<!-- * logical: contains only "F", "T", "FALSE", or "TRUE". -->
-<!-- * integer: contains only numeric characters (and `-`). -->
-<!-- * double: contains only valid doubles (including numbers like `4.5e-5`). -->
-<!-- * number: contains valid doubles with the grouping mark inside. -->
-<!-- * time: matches the default `time_format`. -->
-<!-- * date: matches the default `date_format`. -->
-<!-- * date-time: any ISO8601 date. -->
+If you're having major parsing problems, sometimes it's easier to just read into 
+a character vector of lines with `readlines()`.Then you can use the string parsing
+skills you'll learn later to parse more exotic formats. You can read more about 
+[Python's Input/Output](https://docs.python.org/3/tutorial/inputoutput.html) understand `readlines()`.
 
-<!-- If none of these rules apply, then the column will stay as a vector of strings. -->
+## Writing to a file
 
-<!-- ### Problems -->
+pandas also comes with a useful function for writing data back to disk: `to_csv()`.
+`to_csv()` increase the chances of the output file being read back in correctly by:
 
-<!-- These defaults don't always work for larger files. There are two basic problems: -->
+* Always encoding strings in UTF-8.
 
-<!-- 1.  The first thousand rows might be a special case, and readr guesses -->
-<!--     a type that is not sufficiently general. For example, you might have  -->
-<!--     a column of doubles that only contains integers in the first 1000 rows.  -->
+* Saving dates and date-times in ISO8601 format so they are easily
+  parsed elsewhere.
 
-<!-- 1.  The column might contain a lot of missing values. If the first 1000 -->
-<!--     rows contain only `NA`s, readr will guess that it's a logical  -->
-<!--     vector, whereas you probably want to parse it as something more -->
-<!--     specific. -->
+If you want to export a csv file to Excel, use `to_excel()`.
 
-<!-- readr contains a challenging CSV that illustrates both of these problems: -->
+The most important argument is `path` (the location to save it). You can also 
+specify how missing values are written with `na_rep` and if the index is included
+in the export `index = False`.
 
-<!-- ```{r} -->
-<!-- challenge <- read_csv(readr_example("challenge.csv")) -->
-<!-- ``` -->
 
-<!-- (Note the use of `readr_example()` which finds the path to one of the files included with the package) -->
+```python
+df = pd.DataFrame({'name': ['Raphael', 'Donatello'],
+                   'mask': ['red', 'purple'],
+                   'weapon': ['sai', 'bo staff']})
+df.to_csv("my_file.csv", index=False)
+```
 
-<!-- There are two printed outputs: the column specification generated by looking at the first 1000 rows, and the first five parsing failures. It's always a good idea to explicitly pull out the `problems()`, so you can explore them in more depth: -->
+Note that the type information is lost when you save to csv:
 
-<!-- ```{r} -->
-<!-- problems(challenge) -->
-<!-- ``` -->
+This makes CSVs a little unreliable for caching interim results---you need to recreate the column specification every time you load in. We recommend the feather format:
 
-<!-- A good strategy is to work column by column until there are no problems remaining. Here we can see that there are a lot of parsing problems with the `y` column. If we look at the last few rows, you'll see that they're dates stored in a character vector:   -->
+1.  The feather format implements a fast binary file format that can
+    be shared across programming languages:
+    
+    
+    ```python
+    df = pd.DataFrame({'name': ['Raphael', 'Donatello'],
+                   'mask': ['red', 'purple'],
+                   'weapon': ['sai', 'bo staff']})
+    df.to_feather("my_file.ftr")
+    ```
+    
+    There is a feather package in R to share files quickly between the two tools.
 
-<!-- ```{r} -->
-<!-- tail(challenge) -->
-<!-- ``` -->
+    
+    ```r
+    library(feather)
+    write_feather(challenge, "challenge.feather")
+    read_feather("challenge.feather")
+    ```
 
-<!-- That suggests we need to use a date parser instead. To fix the call, start by copying and pasting the column specification into your original call: -->
+## Other types of data
 
-<!-- ```{r, eval = FALSE} -->
-<!-- challenge <- read_csv( -->
-<!--   readr_example("challenge.csv"),  -->
-<!--   col_types = cols( -->
-<!--     x = col_double(), -->
-<!--     y = col_logical() -->
-<!--   ) -->
-<!-- ) -->
-<!-- ``` -->
+To get other types of data into Python, we recommend reviews pandas [IO tools](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html). 
 
-<!-- Then you can fix the type of the `y` column by specifying that `y` is a date column: -->
-
-<!-- ```{r} -->
-<!-- challenge <- read_csv( -->
-<!--   readr_example("challenge.csv"),  -->
-<!--   col_types = cols( -->
-<!--     x = col_double(), -->
-<!--     y = col_date() -->
-<!--   ) -->
-<!-- ) -->
-<!-- tail(challenge) -->
-<!-- ``` -->
-
-<!-- Every `parse_xyz()` function has a corresponding `col_xyz()` function. You use `parse_xyz()` when the data is in a character vector in R already; you use `col_xyz()` when you want to tell readr how to load the data. -->
-
-<!-- I highly recommend always supplying `col_types`, building up from the print-out provided by readr. This ensures that you have a consistent and reproducible data import script. If you rely on the default guesses and your data changes, readr will continue to read it in. If you want to be really strict, use `stop_for_problems()`: that will throw an error and stop your script if there are any parsing problems. -->
-
-<!-- ### Other strategies -->
-
-<!-- There are a few other general strategies to help you parse files: -->
-
-<!-- *   In the previous example, we just got unlucky: if we look at just -->
-<!--     one more row than the default, we can correctly parse in one shot: -->
-
-<!--     ```{r} -->
-<!--     challenge2 <- read_csv(readr_example("challenge.csv"), guess_max = 1001) -->
-<!--     challenge2 -->
-<!--     ``` -->
-
-<!-- *   Sometimes it's easier to diagnose problems if you just read in all -->
-<!--     the columns as character vectors: -->
-
-<!--     ```{r} -->
-<!--     challenge2 <- read_csv(readr_example("challenge.csv"),  -->
-<!--       col_types = cols(.default = col_character()) -->
-<!--     ) -->
-<!--     ``` -->
-
-<!--     This is particularly useful in conjunction with `type_convert()`, -->
-<!--     which applies the parsing heuristics to the character columns in a data -->
-<!--     frame. -->
-
-<!--     ```{r} -->
-<!--     df <- tribble( -->
-<!--       ~x,  ~y, -->
-<!--       "1", "1.21", -->
-<!--       "2", "2.32", -->
-<!--       "3", "4.56" -->
-<!--     ) -->
-<!--     df -->
-
-<!--     # Note the column types -->
-<!--     type_convert(df) -->
-<!--     ``` -->
-
-<!-- *   If you're reading a very large file, you might want to set `n_max` to -->
-<!--     a smallish number like 10,000 or 100,000. That will accelerate your  -->
-<!--     iterations while you eliminate common problems. -->
-
-<!-- *   If you're having major parsing problems, sometimes it's easier -->
-<!--     to just read into a character vector of lines with `read_lines()`, -->
-<!--     or even a character vector of length 1 with `read_file()`. Then you -->
-<!--     can use the string parsing skills you'll learn later to parse -->
-<!--     more exotic formats. -->
-
-<!-- ## Writing to a file -->
-
-<!-- readr also comes with two useful functions for writing data back to disk: `write_csv()` and `write_tsv()`. Both functions increase the chances of the output file being read back in correctly by: -->
-
-<!-- * Always encoding strings in UTF-8. -->
-
-<!-- * Saving dates and date-times in ISO8601 format so they are easily -->
-<!--   parsed elsewhere. -->
-
-<!-- If you want to export a csv file to Excel, use `write_excel_csv()` --- this writes a special character (a "byte order mark") at the start of the file which tells Excel that you're using the UTF-8 encoding. -->
-
-<!-- The most important arguments are `x` (the data frame to save), and `path` (the location to save it). You can also specify how missing values are written with `na`, and if you want to `append` to an existing file. -->
-
-<!-- ```{r, eval = FALSE} -->
-<!-- write_csv(challenge, "challenge.csv") -->
-<!-- ``` -->
-
-<!-- Note that the type information is lost when you save to csv: -->
-
-<!-- ```{r, warning = FALSE} -->
-<!-- challenge -->
-<!-- write_csv(challenge, "challenge-2.csv") -->
-<!-- read_csv("challenge-2.csv") -->
-<!-- ``` -->
-
-<!-- This makes CSVs a little unreliable for caching interim results---you need to recreate the column specification every time you load in. There are two alternatives: -->
-
-<!-- 1.  `write_rds()` and `read_rds()` are uniform wrappers around the base  -->
-<!--     functions `readRDS()` and `saveRDS()`. These store data in R's custom  -->
-<!--     binary format called RDS: -->
-
-<!--     ```{r} -->
-<!--     write_rds(challenge, "challenge.rds") -->
-<!--     read_rds("challenge.rds") -->
-<!--     ``` -->
-
-<!-- 1.  The feather package implements a fast binary file format that can -->
-<!--     be shared across programming languages: -->
-
-<!--     ```{r, eval = FALSE} -->
-<!--     library(feather) -->
-<!--     write_feather(challenge, "challenge.feather") -->
-<!--     read_feather("challenge.feather") -->
-<!--     #> # A tibble: 2,000 x 2 -->
-<!--     #>       x      y -->
-<!--     #>   <dbl> <date> -->
-<!--     #> 1   404   <NA> -->
-<!--     #> 2  4172   <NA> -->
-<!--     #> 3  3004   <NA> -->
-<!--     #> 4   787   <NA> -->
-<!--     #> 5    37   <NA> -->
-<!--     #> 6  2332   <NA> -->
-<!--     #> # ... with 1,994 more rows -->
-<!--     ``` -->
-
-<!-- Feather tends to be faster than RDS and is usable outside of R. RDS supports list-columns (which you'll learn about in [many models]); feather currently does not. -->
-
-<!-- ```{r, include = FALSE} -->
-<!-- file.remove("challenge-2.csv") -->
-<!-- file.remove("challenge.rds") -->
-<!-- ``` -->
-
-<!-- ## Other types of data -->
-
-<!-- To get other types of data into R, we recommend starting with the tidyverse packages listed below. They're certainly not perfect, but they are a good place to start. For rectangular data: -->
-
-<!-- * __haven__ reads SPSS, Stata, and SAS files. -->
-
-<!-- * __readxl__ reads excel files (both `.xls` and `.xlsx`). -->
-
-<!-- * __DBI__, along with a database specific backend (e.g. __RMySQL__,  -->
-<!--   __RSQLite__, __RPostgreSQL__ etc) allows you to run SQL queries against a  -->
-<!--   database and return a data frame. -->
-
-<!-- For hierarchical data: use __jsonlite__ (by Jeroen Ooms) for json, and __xml2__ for XML. Jenny Bryan has some excellent worked examples at <https://jennybc.github.io/purrr-tutorial/>. -->
-
-<!-- For other file types, try the [R data import/export manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html) and the [__rio__](https://github.com/leeper/rio) package. -->

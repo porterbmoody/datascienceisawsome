@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="dataframe.html"/>
-
+<link rel="next" href="tidy-data.html"/>
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -327,6 +327,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.1" data-path="data-import.html"><a href="data-import.html#numbers"><i class="fa fa-check"></i><b>11.3.1</b> Numbers</a></li>
 <li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
 <li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
+<li class="chapter" data-level="11.3.4" data-path="data-import.html"><a href="data-import.html#readr-datetimes"><i class="fa fa-check"></i><b>11.3.4</b> Dates and times</a></li>
+<li class="chapter" data-level="11.3.5" data-path="data-import.html"><a href="data-import.html#exercises-18"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="data-import.html"><a href="data-import.html#parsing-a-file"><i class="fa fa-check"></i><b>11.4</b> Parsing a file</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="data-import.html"><a href="data-import.html#strategy"><i class="fa fa-check"></i><b>11.4.1</b> Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="data-import.html"><a href="data-import.html#writing-to-a-file"><i class="fa fa-check"></i><b>11.5</b> Writing to a file</a></li>
+<li class="chapter" data-level="11.6" data-path="data-import.html"><a href="data-import.html#other-types-of-data"><i class="fa fa-check"></i><b>11.6</b> Other types of data</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-6"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#prerequisites-6"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -355,10 +370,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">11.1.1</span> Prerequisites</h3>
 <p>In this chapter, you’ll learn how to load flat files in R with the <strong>pandas</strong> package.</p>
 <div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="data-import.html#cb165-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb165-2"><a href="data-import.html#cb165-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb165-3"><a href="data-import.html#cb165-3"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb165-4"><a href="data-import.html#cb165-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb165-5"><a href="data-import.html#cb165-5"></a><span class="im">import</span> tempfile</span></code></pre></div>
+<span id="cb165-2"><a href="data-import.html#cb165-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb165-3"><a href="data-import.html#cb165-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="getting-started" class="section level2" number="11.2">
@@ -526,258 +539,162 @@ float.</p>
 <span id="cb176-3"><a href="data-import.html#cb176-3"></a><span class="co">#&gt; [apple, banana, NaN]</span></span>
 <span id="cb176-4"><a href="data-import.html#cb176-4"></a><span class="co">#&gt; Categories (2, object): [apple, banana]</span></span></code></pre></div>
 <p>But if you have many problematic entries, it’s often easier to leave as character vectors and then use the tools you’ll learn about in <a href="data-import.html#readr-strings">strings</a> and [factors] to clean them up.</p>
-<!-- ### Dates, date-times, and times {#readr-datetimes} -->
-<!-- You pick between three parsers depending on whether you want a date (the number of days since 1970-01-01), a date-time (the number of seconds since midnight 1970-01-01), or a time (the number of seconds since midnight). When called without any additional arguments: -->
-<!-- *   `parse_datetime()` expects an ISO8601 date-time. ISO8601 is an -->
-<!--     international standard in which the components of a date are -->
-<!--     organised from biggest to smallest: year, month, day, hour, minute,  -->
-<!--     second. -->
-<!--     ```{r} -->
-<!--     parse_datetime("2010-10-01T2010") -->
-<!--     # If time is omitted, it will be set to midnight -->
-<!--     parse_datetime("20101010") -->
-<!--     ``` -->
-<!--     This is the most important date/time standard, and if you work with -->
-<!--     dates and times frequently, I recommend reading -->
-<!--     <https://en.wikipedia.org/wiki/ISO_8601> -->
-<!-- *   `parse_date()` expects a four digit year, a `-` or `/`, the month, a `-`  -->
-<!--     or `/`, then the day: -->
-<!--     ```{r} -->
-<!--     parse_date("2010-10-01") -->
-<!--     ``` -->
-<!-- *   `parse_time()` expects the hour, `:`, minutes, optionally `:` and seconds,  -->
-<!--     and an optional am/pm specifier: -->
-<!--     ```{r} -->
-<!--     library(hms) -->
-<!--     parse_time("01:10 am") -->
-<!--     parse_time("20:10:01") -->
-<!--     ``` -->
-<!--     Base R doesn't have a great built in class for time data, so we use  -->
-<!--     the one provided in the hms package. -->
-<!-- If these defaults don't work for your data you can supply your own date-time `format`, built up of the following pieces: -->
-<!-- Year -->
-<!-- : `%Y` (4 digits).  -->
-<!-- : `%y` (2 digits); 00-69 -> 2000-2069, 70-99 -> 1970-1999. -->
-<!-- Month -->
-<!-- : `%m` (2 digits). -->
-<!-- : `%b` (abbreviated name, like "Jan"). -->
-<!-- : `%B` (full name, "January"). -->
-<!-- Day -->
-<!-- : `%d` (2 digits). -->
-<!-- : `%e` (optional leading space). -->
-<!-- Time -->
-<!-- : `%H` 0-23 hour. -->
-<!-- : `%I` 0-12, must be used with `%p`. -->
-<!-- : `%p` AM/PM indicator. -->
-<!-- : `%M` minutes. -->
-<!-- : `%S` integer seconds. -->
-<!-- : `%OS` real seconds.  -->
-<!-- : `%Z` Time zone (as name, e.g. `America/Chicago`). Beware of abbreviations: -->
-<!--   if you're American, note that "EST" is a Canadian time zone that does not -->
-<!--   have daylight savings time. It is _not_ Eastern Standard Time! We'll -->
-<!--   come back to this [time zones]. -->
-<!-- : `%z` (as offset from UTC, e.g. `+0800`).  -->
-<!-- Non-digits -->
-<!-- : `%.` skips one non-digit character. -->
-<!-- : `%*` skips any number of non-digits. -->
-<!-- The best way to figure out the correct format is to create a few examples in a character vector, and test with one of the parsing functions. For example: -->
-<!-- ```{r} -->
-<!-- parse_date("01/02/15", "%m/%d/%y") -->
-<!-- parse_date("01/02/15", "%d/%m/%y") -->
-<!-- parse_date("01/02/15", "%y/%m/%d") -->
-<!-- ``` -->
-<!-- If you're using `%b` or `%B` with non-English month names, you'll need to set the  `lang` argument to `locale()`. See the list of built-in languages in `date_names_langs()`, or if your language is not already included, create your own with `date_names()`. -->
-<!-- ```{r} -->
-<!-- parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr")) -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  What are the most important arguments to `locale()`?  -->
-<!-- 1.  What happens if you try and set `decimal_mark` and `grouping_mark`  -->
-<!--     to the same character? What happens to the default value of  -->
-<!--     `grouping_mark` when you set `decimal_mark` to ","? What happens -->
-<!--     to the default value of `decimal_mark` when you set the `grouping_mark` -->
-<!--     to "."? -->
-<!-- 1.  I didn't discuss the `date_format` and `time_format` options to -->
-<!--     `locale()`. What do they do? Construct an example that shows when  -->
-<!--     they might be useful. -->
-<!-- 1.  If you live outside the US, create a new locale object that encapsulates  -->
-<!--     the settings for the types of file you read most commonly. -->
-<!-- 1.  What's the difference between `read_csv()` and `read_csv2()`? -->
-<!-- 1.  What are the most common encodings used in Europe? What are the -->
-<!--     most common encodings used in Asia? Do some googling to find out. -->
-<!-- 1.  Generate the correct format string to parse each of the following  -->
-<!--     dates and times: -->
-<!--     ```{r} -->
-<!--     d1 <- "January 1, 2010" -->
-<!--     d2 <- "2015-Mar-07" -->
-<!--     d3 <- "06-Jun-2017" -->
-<!--     d4 <- c("August 19 (2015)", "July 1 (2015)") -->
-<!--     d5 <- "12/30/14" # Dec 30, 2014 -->
-<!--     t1 <- "1705" -->
-<!--     t2 <- "11:15:10.12 PM" -->
-<!--     ``` -->
-<!-- ## Parsing a file -->
-<!-- Now that you've learned how to parse an individual vector, it's time to return to the beginning and explore how readr parses a file. There are two new things that you'll learn about in this section: -->
-<!-- 1. How readr automatically guesses the type of each column. -->
-<!-- 1. How to override the default specification. -->
-<!-- ### Strategy -->
-<!-- readr uses a heuristic to figure out the type of each column: it reads the first 1000 rows and uses some (moderately conservative) heuristics to figure out the type of each column. You can emulate this process with a character vector using `guess_parser()`, which returns readr's best guess, and `parse_guess()` which uses that guess to parse the column: -->
-<!-- ```{r} -->
-<!-- guess_parser("2010-10-01") -->
-<!-- guess_parser("15:01") -->
-<!-- guess_parser(c("TRUE", "FALSE")) -->
-<!-- guess_parser(c("1", "5", "9")) -->
-<!-- guess_parser(c("12,352,561")) -->
-<!-- str(parse_guess("2010-10-10")) -->
-<!-- ``` -->
-<!-- The heuristic tries each of the following types, stopping when it finds a match: -->
-<!-- * logical: contains only "F", "T", "FALSE", or "TRUE". -->
-<!-- * integer: contains only numeric characters (and `-`). -->
-<!-- * double: contains only valid doubles (including numbers like `4.5e-5`). -->
-<!-- * number: contains valid doubles with the grouping mark inside. -->
-<!-- * time: matches the default `time_format`. -->
-<!-- * date: matches the default `date_format`. -->
-<!-- * date-time: any ISO8601 date. -->
-<!-- If none of these rules apply, then the column will stay as a vector of strings. -->
-<!-- ### Problems -->
-<!-- These defaults don't always work for larger files. There are two basic problems: -->
-<!-- 1.  The first thousand rows might be a special case, and readr guesses -->
-<!--     a type that is not sufficiently general. For example, you might have  -->
-<!--     a column of doubles that only contains integers in the first 1000 rows.  -->
-<!-- 1.  The column might contain a lot of missing values. If the first 1000 -->
-<!--     rows contain only `NA`s, readr will guess that it's a logical  -->
-<!--     vector, whereas you probably want to parse it as something more -->
-<!--     specific. -->
-<!-- readr contains a challenging CSV that illustrates both of these problems: -->
-<!-- ```{r} -->
-<!-- challenge <- read_csv(readr_example("challenge.csv")) -->
-<!-- ``` -->
-<!-- (Note the use of `readr_example()` which finds the path to one of the files included with the package) -->
-<!-- There are two printed outputs: the column specification generated by looking at the first 1000 rows, and the first five parsing failures. It's always a good idea to explicitly pull out the `problems()`, so you can explore them in more depth: -->
-<!-- ```{r} -->
-<!-- problems(challenge) -->
-<!-- ``` -->
-<!-- A good strategy is to work column by column until there are no problems remaining. Here we can see that there are a lot of parsing problems with the `y` column. If we look at the last few rows, you'll see that they're dates stored in a character vector:   -->
-<!-- ```{r} -->
-<!-- tail(challenge) -->
-<!-- ``` -->
-<!-- That suggests we need to use a date parser instead. To fix the call, start by copying and pasting the column specification into your original call: -->
-<!-- ```{r, eval = FALSE} -->
-<!-- challenge <- read_csv( -->
-<!--   readr_example("challenge.csv"),  -->
-<!--   col_types = cols( -->
-<!--     x = col_double(), -->
-<!--     y = col_logical() -->
-<!--   ) -->
-<!-- ) -->
-<!-- ``` -->
-<!-- Then you can fix the type of the `y` column by specifying that `y` is a date column: -->
-<!-- ```{r} -->
-<!-- challenge <- read_csv( -->
-<!--   readr_example("challenge.csv"),  -->
-<!--   col_types = cols( -->
-<!--     x = col_double(), -->
-<!--     y = col_date() -->
-<!--   ) -->
-<!-- ) -->
-<!-- tail(challenge) -->
-<!-- ``` -->
-<!-- Every `parse_xyz()` function has a corresponding `col_xyz()` function. You use `parse_xyz()` when the data is in a character vector in R already; you use `col_xyz()` when you want to tell readr how to load the data. -->
-<!-- I highly recommend always supplying `col_types`, building up from the print-out provided by readr. This ensures that you have a consistent and reproducible data import script. If you rely on the default guesses and your data changes, readr will continue to read it in. If you want to be really strict, use `stop_for_problems()`: that will throw an error and stop your script if there are any parsing problems. -->
-<!-- ### Other strategies -->
-<!-- There are a few other general strategies to help you parse files: -->
-<!-- *   In the previous example, we just got unlucky: if we look at just -->
-<!--     one more row than the default, we can correctly parse in one shot: -->
-<!--     ```{r} -->
-<!--     challenge2 <- read_csv(readr_example("challenge.csv"), guess_max = 1001) -->
-<!--     challenge2 -->
-<!--     ``` -->
-<!-- *   Sometimes it's easier to diagnose problems if you just read in all -->
-<!--     the columns as character vectors: -->
-<!--     ```{r} -->
-<!--     challenge2 <- read_csv(readr_example("challenge.csv"),  -->
-<!--       col_types = cols(.default = col_character()) -->
-<!--     ) -->
-<!--     ``` -->
-<!--     This is particularly useful in conjunction with `type_convert()`, -->
-<!--     which applies the parsing heuristics to the character columns in a data -->
-<!--     frame. -->
-<!--     ```{r} -->
-<!--     df <- tribble( -->
-<!--       ~x,  ~y, -->
-<!--       "1", "1.21", -->
-<!--       "2", "2.32", -->
-<!--       "3", "4.56" -->
-<!--     ) -->
-<!--     df -->
-<!--     # Note the column types -->
-<!--     type_convert(df) -->
-<!--     ``` -->
-<!-- *   If you're reading a very large file, you might want to set `n_max` to -->
-<!--     a smallish number like 10,000 or 100,000. That will accelerate your  -->
-<!--     iterations while you eliminate common problems. -->
-<!-- *   If you're having major parsing problems, sometimes it's easier -->
-<!--     to just read into a character vector of lines with `read_lines()`, -->
-<!--     or even a character vector of length 1 with `read_file()`. Then you -->
-<!--     can use the string parsing skills you'll learn later to parse -->
-<!--     more exotic formats. -->
-<!-- ## Writing to a file -->
-<!-- readr also comes with two useful functions for writing data back to disk: `write_csv()` and `write_tsv()`. Both functions increase the chances of the output file being read back in correctly by: -->
-<!-- * Always encoding strings in UTF-8. -->
-<!-- * Saving dates and date-times in ISO8601 format so they are easily -->
-<!--   parsed elsewhere. -->
-<!-- If you want to export a csv file to Excel, use `write_excel_csv()` --- this writes a special character (a "byte order mark") at the start of the file which tells Excel that you're using the UTF-8 encoding. -->
-<!-- The most important arguments are `x` (the data frame to save), and `path` (the location to save it). You can also specify how missing values are written with `na`, and if you want to `append` to an existing file. -->
-<!-- ```{r, eval = FALSE} -->
-<!-- write_csv(challenge, "challenge.csv") -->
-<!-- ``` -->
-<!-- Note that the type information is lost when you save to csv: -->
-<!-- ```{r, warning = FALSE} -->
-<!-- challenge -->
-<!-- write_csv(challenge, "challenge-2.csv") -->
-<!-- read_csv("challenge-2.csv") -->
-<!-- ``` -->
-<!-- This makes CSVs a little unreliable for caching interim results---you need to recreate the column specification every time you load in. There are two alternatives: -->
-<!-- 1.  `write_rds()` and `read_rds()` are uniform wrappers around the base  -->
-<!--     functions `readRDS()` and `saveRDS()`. These store data in R's custom  -->
-<!--     binary format called RDS: -->
-<!--     ```{r} -->
-<!--     write_rds(challenge, "challenge.rds") -->
-<!--     read_rds("challenge.rds") -->
-<!--     ``` -->
-<!-- 1.  The feather package implements a fast binary file format that can -->
-<!--     be shared across programming languages: -->
-<!--     ```{r, eval = FALSE} -->
-<!--     library(feather) -->
-<!--     write_feather(challenge, "challenge.feather") -->
-<!--     read_feather("challenge.feather") -->
-<!--     #> # A tibble: 2,000 x 2 -->
-<!--     #>       x      y -->
-<!--     #>   <dbl> <date> -->
-<!--     #> 1   404   <NA> -->
-<!--     #> 2  4172   <NA> -->
-<!--     #> 3  3004   <NA> -->
-<!--     #> 4   787   <NA> -->
-<!--     #> 5    37   <NA> -->
-<!--     #> 6  2332   <NA> -->
-<!--     #> # ... with 1,994 more rows -->
-<!--     ``` -->
-<!-- Feather tends to be faster than RDS and is usable outside of R. RDS supports list-columns (which you'll learn about in [many models]); feather currently does not. -->
-<!-- ```{r, include = FALSE} -->
-<!-- file.remove("challenge-2.csv") -->
-<!-- file.remove("challenge.rds") -->
-<!-- ``` -->
-<!-- ## Other types of data -->
-<!-- To get other types of data into R, we recommend starting with the tidyverse packages listed below. They're certainly not perfect, but they are a good place to start. For rectangular data: -->
-<!-- * __haven__ reads SPSS, Stata, and SAS files. -->
-<!-- * __readxl__ reads excel files (both `.xls` and `.xlsx`). -->
-<!-- * __DBI__, along with a database specific backend (e.g. __RMySQL__,  -->
-<!--   __RSQLite__, __RPostgreSQL__ etc) allows you to run SQL queries against a  -->
-<!--   database and return a data frame. -->
-<!-- For hierarchical data: use __jsonlite__ (by Jeroen Ooms) for json, and __xml2__ for XML. Jenny Bryan has some excellent worked examples at <https://jennybc.github.io/purrr-tutorial/>. -->
-<!-- For other file types, try the [R data import/export manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html) and the [__rio__](https://github.com/leeper/rio) package. -->
-
 </div>
+<div id="readr-datetimes" class="section level3" number="11.3.4">
+<h3><span class="header-section-number">11.3.4</span> Dates and times</h3>
+<p>Pandas provides an extensive set of capabilities for working with time using NumPy’s <code>datetime64</code> and <code>timedelta64</code> dtypes. You primarily use <code>pd.to_datetime()</code> whether you want a date or a date and time. When called without any additional arguments:</p>
+<ul>
+<li><p><code>pd.to_datetime()</code> expects an ISO8601 date-time. ISO8601 is an
+international standard in which the components of a date are
+organised from biggest to smallest: year, month, day, hour, minute,
+second.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="data-import.html#cb177-1"></a>pd.to_datetime([<span class="st">&quot;2010-10-01T2010&quot;</span>])</span>
+<span id="cb177-2"><a href="data-import.html#cb177-2"></a><span class="co"># If time is omitted, it will be set to midnight and only print date.</span></span>
+<span id="cb177-3"><a href="data-import.html#cb177-3"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01 20:10:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb177-4"><a href="data-import.html#cb177-4"></a>pd.to_datetime([<span class="st">&quot;2010-10-01&quot;</span>])</span>
+<span id="cb177-5"><a href="data-import.html#cb177-5"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<p>This is the most important date/time standard, and if you work with
+dates and times frequently, I recommend reading
+<a href="https://en.wikipedia.org/wiki/ISO_8601" class="uri">https://en.wikipedia.org/wiki/ISO_8601</a></p></li>
+</ul>
+<p>If these defaults don’t work for your data you can supply your own date-time <code>format</code>, built up of the following pieces:</p>
+<dl>
+<dt>Year</dt>
+<dd><code>%Y</code> (4 digits).
+</dd>
+<dd><code>%y</code> (2 digits); 00-69 -&gt; 2000-2069, 70-99 -&gt; 1970-1999.
+</dd>
+<dt>Month</dt>
+<dd><code>%m</code> (2 digits).
+</dd>
+<dd><code>%b</code> (abbreviated name, like “Jan”).
+</dd>
+<dd><code>%B</code> (full name, “January”).
+</dd>
+<dt>Day</dt>
+<dd><code>%d</code> (2 digits).
+</dd>
+<dd><code>%e</code> (optional leading space).
+</dd>
+<dt>Time</dt>
+<dd><code>%H</code> 0-23 hour.
+</dd>
+<dd><code>%I</code> 0-12, must be used with <code>%p</code>.
+</dd>
+<dd><code>%p</code> AM/PM indicator.
+</dd>
+<dd><code>%M</code> minutes.
+</dd>
+<dd><code>%S</code> integer seconds.
+</dd>
+<dd><code>%OS</code> real seconds.
+</dd>
+<dd><code>%Z</code> Time zone (as name, e.g. <code>America/Chicago</code>). Beware of abbreviations:
+if you’re American, note that “EST” is a Canadian time zone that does not
+have daylight savings time. It is <em>not</em> Eastern Standard Time! We’ll
+come back to this in [time zones].
+</dd>
+<dd><code>%z</code> (as offset from UTC, e.g. <code>+0800</code>).
+</dd>
+<dt>Non-digits</dt>
+<dd><code>%.</code> skips one non-digit character.
+</dd>
+<dd><code>%*</code> skips any number of non-digits.
+</dd>
+</dl>
+<p>The best way to figure out the correct format is to create a few examples in a character vector, and test with one of the parsing functions. For example:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="data-import.html#cb178-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb178-2"><a href="data-import.html#cb178-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb178-3"><a href="data-import.html#cb178-3"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">/%m/%y&quot;</span>)</span>
+<span id="cb178-4"><a href="data-import.html#cb178-4"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-02-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb178-5"><a href="data-import.html#cb178-5"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%y/%m/</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
+<span id="cb178-6"><a href="data-import.html#cb178-6"></a><span class="co">#&gt; DatetimeIndex([&#39;2001-02-15&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<p>The <code>pd.to_datetime()</code> function has a handy argument <code>infer_datetime_format</code> which can often allow you to avoid entring format strings.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="data-import.html#cb179-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], infer_datetime_format <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb179-2"><a href="data-import.html#cb179-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<!-- https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.month_name.html -->
+</div>
+<div id="exercises-18" class="section level3" number="11.3.5">
+<h3><span class="header-section-number">11.3.5</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>What are the most common encodings used in Europe? What are the
+most common encodings used in Asia? Do some googling to find out.</p></li>
+<li><p>Generate the correct format string to parse each of the following
+dates and times:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="data-import.html#cb180-1"></a>d1 <span class="op">=</span> [<span class="st">&quot;January 1, 2010&quot;</span>]</span>
+<span id="cb180-2"><a href="data-import.html#cb180-2"></a>d2 <span class="op">=</span> [<span class="st">&quot;2015-Mar-07&quot;</span>]</span>
+<span id="cb180-3"><a href="data-import.html#cb180-3"></a>d3 <span class="op">=</span> [<span class="st">&quot;06-Jun-2017&quot;</span>]</span>
+<span id="cb180-4"><a href="data-import.html#cb180-4"></a>d4 <span class="op">=</span> [<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>]</span>
+<span id="cb180-5"><a href="data-import.html#cb180-5"></a>d5 <span class="op">=</span> [<span class="st">&quot;12/30/14&quot;</span>] <span class="co"># Dec 30, 2014</span></span></code></pre></div></li>
+</ol>
+</div>
+</div>
+<div id="parsing-a-file" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> Parsing a file</h2>
+<p>Now that you’ve learned how to parse an Series, it’s time to return to the beginning and explore how pandas parses a file. There are two new things that you’ll learn about in this section:</p>
+<ol style="list-style-type: decimal">
+<li>How pandas automatically guesses the type of each column.</li>
+<li>How to override the default specification.</li>
+</ol>
+<div id="strategy" class="section level3" number="11.4.1">
+<h3><span class="header-section-number">11.4.1</span> Strategy</h3>
+<p>Pandas uses a heuristic to figure out the type of each column: at first it tries to
+convert all values to an integer. If there is an error then it moves to the next
+data type. The last data type is an <code>object</code> which a Series of strings. The heuristic tries each of the following types in the listed order, stopping when it finds a match:</p>
+<ol style="list-style-type: decimal">
+<li>integer: contains only numeric characters (and <code>-</code>).</li>
+<li>float: contains only valid doubles (including numbers like <code>4.5e-5</code>).</li>
+<li>bool: contains only “F”, “T”, “FALSE”, “TRUE”, “False” or “True”.</li>
+</ol>
+<p>In addition, you can use the <code>parse_dates</code> argument to to parse datetime columns
+during parsing. See the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">read_csv documentation</a> for guidance.</p>
+<p>If none of these rules apply, then the column will stay as a Series of strings.</p>
+<p>When using <code>pd.read_csv()</code>, I highly recommend always supplying <code>dtypes</code>. This
+ensures that you have a consistent, reproducible, and fast data import script.
+If you rely on the default guesses and your data changes, pandas will continue to
+read it in.</p>
+<p>If you’re having major parsing problems, sometimes it’s easier to just read into
+a character vector of lines with <code>readlines()</code>.Then you can use the string parsing
+skills you’ll learn later to parse more exotic formats. You can read more about
+<a href="https://docs.python.org/3/tutorial/inputoutput.html">Python’s Input/Output</a> understand <code>readlines()</code>.</p>
+</div>
+</div>
+<div id="writing-to-a-file" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Writing to a file</h2>
+<p>pandas also comes with a useful function for writing data back to disk: <code>to_csv()</code>.
+<code>to_csv()</code> increase the chances of the output file being read back in correctly by:</p>
+<ul>
+<li><p>Always encoding strings in UTF-8.</p></li>
+<li><p>Saving dates and date-times in ISO8601 format so they are easily
+parsed elsewhere.</p></li>
+</ul>
+<p>If you want to export a csv file to Excel, use <code>to_excel()</code>.</p>
+<p>The most important argument is <code>path</code> (the location to save it). You can also
+specify how missing values are written with <code>na_rep</code> and if the index is included
+in the export <code>index = False</code>.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="data-import.html#cb181-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
+<span id="cb181-2"><a href="data-import.html#cb181-2"></a>                   <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
+<span id="cb181-3"><a href="data-import.html#cb181-3"></a>                   <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
+<span id="cb181-4"><a href="data-import.html#cb181-4"></a>df.to_csv(<span class="st">&quot;my_file.csv&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<p>Note that the type information is lost when you save to csv:</p>
+<p>This makes CSVs a little unreliable for caching interim results—you need to recreate the column specification every time you load in. We recommend the feather format:</p>
+<ol style="list-style-type: decimal">
+<li><p>The feather format implements a fast binary file format that can
+be shared across programming languages:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="data-import.html#cb182-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
+<span id="cb182-2"><a href="data-import.html#cb182-2"></a>               <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
+<span id="cb182-3"><a href="data-import.html#cb182-3"></a>               <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
+<span id="cb182-4"><a href="data-import.html#cb182-4"></a>df.to_feather(<span class="st">&quot;my_file.ftr&quot;</span>)</span></code></pre></div>
+<p>There is a feather package in R to share files quickly between the two tools.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-import.html#cb183-1"></a><span class="kw">library</span>(feather)</span>
+<span id="cb183-2"><a href="data-import.html#cb183-2"></a><span class="kw">write_feather</span>(challenge, <span class="st">&quot;challenge.feather&quot;</span>)</span>
+<span id="cb183-3"><a href="data-import.html#cb183-3"></a><span class="kw">read_feather</span>(<span class="st">&quot;challenge.feather&quot;</span>)</span></code></pre></div></li>
+</ol>
+</div>
+<div id="other-types-of-data" class="section level2" number="11.6">
+<h2><span class="header-section-number">11.6</span> Other types of data</h2>
+<p>To get other types of data into Python, we recommend reviews pandas <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">IO tools</a>.</p>
+
 </div>
 </div>
             </section>
@@ -785,8 +702,8 @@ float.</p>
           </div>
         </div>
       </div>
-<a href="dataframe.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="dataframe.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidy-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
