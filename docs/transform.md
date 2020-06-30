@@ -141,15 +141,31 @@ In this chapter you are going to learn five key pandas functions or object metho
 The pandas package can handle all of the same functionality of dplyr in R.  You can read [pandas mapping guide](https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html) and [this towards data science article](https://towardsdatascience.com/tidying-up-pandas-4572bfa38776) to get more details on the following brief table. 
 
 
-|R dplyr function | Python pandas function|
-|_________________|_______________________|
-|`filter()`       |  `query()`            |
-|`arrange()`      |  `sort_values()`      |
-|`select()`       |  `filter()` or `loc[]`|
-|`rename ()`      |  `rename()`           |
-|`mutate()`       |  `assign()` (see note)|
-|`group_by ()`    |  `groupby()`          |
-|`summarise()`    |  `agg()`              |
+\begin{table}
+
+\caption{(\#tab:unnamed-chunk-5)Comparable functions in R-Dplyr and Python-Pandas}
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+R dplyr function & Python pandas function\\
+\hline
+`filter()` & `query()`\\
+\hline
+`arrange()` & `sort\_values()`\\
+\hline
+`select()` & `filter()` or `loc[]`\\
+\hline
+`rename ()` & `rename()`\\
+\hline
+`mutate()` & `assign()` (see note)\\
+\hline
+`group\_by ()` & `groupby()`\\
+\hline
+`summarise()` & `agg()`\\
+\hline
+\end{tabular}
+\end{table}
+
 
 **Note:** The `dpylr::mutate()` function works similar to `assign()` in pandas on data frames.  But you cannot use `assign()` on grouped data frame in pandas like you would use `dplyr::mutate()` on a grouped object. In that case you would use `transform()` and even then the functionality is not quite the same.
 
@@ -913,7 +929,7 @@ chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').ma
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-37-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-38-1} 
 
 There are three steps to prepare this data:
 
@@ -990,7 +1006,7 @@ chart = (alt.Chart(delays).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-41-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-42-1} 
 
 Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)!
 
@@ -1016,7 +1032,7 @@ chart = (alt.Chart(delays).
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-43-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-44-1} 
 
 Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases.
 

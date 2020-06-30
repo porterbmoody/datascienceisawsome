@@ -86,15 +86,18 @@ In this chapter you are going to learn five key pandas functions or object metho
 The pandas package can handle all of the same functionality of dplyr in R.  You can read [pandas mapping guide](https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html) and [this towards data science article](https://towardsdatascience.com/tidying-up-pandas-4572bfa38776) to get more details on the following brief table. 
 
 
-|R dplyr function | Python pandas function|
-|_________________|_______________________|
-|`filter()`       |  `query()`            |
-|`arrange()`      |  `sort_values()`      |
-|`select()`       |  `filter()` or `loc[]`|
-|`rename ()`      |  `rename()`           |
-|`mutate()`       |  `assign()` (see note)|
-|`group_by ()`    |  `groupby()`          |
-|`summarise()`    |  `agg()`              |
+```{r, echo=FALSE}
+library(tidyverse)
+dat <- tibble(`R dplyr function` = c('`filter()`', '`arrange()`', '`select()`',
+                                     '`rename ()`', '`mutate()`', '`group_by ()`',
+                                     '`summarise()`'), 
+              `Python pandas function` = c('`query()`', '`sort_values()`',
+                                          '`filter()` or `loc[]`', '`rename()`', 
+                                          '`assign()` (see note)', '`groupby()`', 
+                                          '`agg()`'))
+knitr::kable(dat, caption = "Comparable functions in R-Dplyr and Python-Pandas")
+```
+
 
 **Note:** The `dpylr::mutate()` function works similar to `assign()` in pandas on data frames.  But you cannot use `assign()` on grouped data frame in pandas like you would use `dplyr::mutate()` on a grouped object. In that case you would use `transform()` and even then the functionality is not quite the same.
 
