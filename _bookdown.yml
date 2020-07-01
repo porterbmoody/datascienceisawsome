@@ -13,7 +13,8 @@ rmd_files: [
   "wrangle.Rmd",
   "tibble.Rmd",
   "import.Rmd",
-  "tidy.Rmd"
+  "tidy.Rmd",
+  "relational-data.Rmd"
 ]
 
 before_chapter_script: "_common.R"
@@ -22,7 +23,7 @@ output_dir: "docs"
 
 
 
-#  "relational-data.Rmd",
+
 #  "strings.Rmd",
 #  "factors.Rmd",
 #  "datetimes.Rmd",

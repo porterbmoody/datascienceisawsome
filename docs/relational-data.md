@@ -1,12 +1,6 @@
 # Relational data
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-use_python("usr/local/bin/python3")
-```
+
 
 
 ## Introduction

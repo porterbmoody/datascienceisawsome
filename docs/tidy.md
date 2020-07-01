@@ -28,412 +28,550 @@ import altair as alt
 import numpy as np
 ```
 
-<!-- ## Tidy data -->
+## Tidy data
+
+You can represent the same underlying data in multiple ways. The example below shows the same data organised in four different ways. Each dataset shows the same values of four variables *country*, *year*, *population*, and *cases*, but each dataset organises the values in a different way.
+
+
+```python
+base_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/"
+table1 = pd.read_csv("{}table1/table1.csv".format(base_url))
+table2 = pd.read_csv("{}table2/table2.csv".format(base_url))
+table3 = pd.read_csv("{}table3/table3.csv".format(base_url))
+table4a = pd.read_csv("{}table4a/table4a.csv".format(base_url))
+table4b = pd.read_csv("{}table4b/table4b.csv".format(base_url))
+table5 = pd.read_csv("{}table5/table5.csv".format(base_url), dtype = 'object')
+```
+
+
+
+
+```python
+table1
+#>        country  year   cases  population
+#> 0  Afghanistan  1999     745    19987071
+#> 1  Afghanistan  2000    2666    20595360
+#> 2       Brazil  1999   37737   172006362
+#> 3       Brazil  2000   80488   174504898
+#> 4        China  1999  212258  1272915272
+#> 5        China  2000  213766  1280428583
+table2
+#>         country  year        type       count
+#> 0   Afghanistan  1999       cases         745
+#> 1   Afghanistan  1999  population    19987071
+#> 2   Afghanistan  2000       cases        2666
+#> 3   Afghanistan  2000  population    20595360
+#> 4        Brazil  1999       cases       37737
+#> 5        Brazil  1999  population   172006362
+#> 6        Brazil  2000       cases       80488
+#> 7        Brazil  2000  population   174504898
+#> 8         China  1999       cases      212258
+#> 9         China  1999  population  1272915272
+#> 10        China  2000       cases      213766
+#> 11        China  2000  population  1280428583
+table3
+
+# Spread across two tibbles
+#>        country  year               rate
+#> 0  Afghanistan  1999       745/19987071
+#> 1  Afghanistan  2000      2666/20595360
+#> 2       Brazil  1999    37737/172006362
+#> 3       Brazil  2000    80488/174504898
+#> 4        China  1999  212258/1272915272
+#> 5        China  2000  213766/1280428583
+table4a  # cases
+#>        country    1999    2000
+#> 0  Afghanistan     745    2666
+#> 1       Brazil   37737   80488
+#> 2        China  212258  213766
+table4b  # population
+#>        country        1999        2000
+#> 0  Afghanistan    19987071    20595360
+#> 1       Brazil   172006362   174504898
+#> 2        China  1272915272  1280428583
+```
+
+These are all representations of the same underlying data, but they are not equally easy to use. One dataset, the tidy dataset, will be much easier to work with inside the tidyverse.
 
-<!-- You can represent the same underlying data in multiple ways. The example below shows the same data organised in four different ways. Each dataset shows the same values of four variables *country*, *year*, *population*, and *cases*, but each dataset organises the values in a different way. -->
+There are three interrelated rules which make a dataset tidy:
+
+1.  Each variable must have its own column.
+1.  Each observation must have its own row.
+1.  Each value must have its own cell.
 
-<!-- ```{r} -->
-<!-- table1 -->
-<!-- table2 -->
-<!-- table3 -->
+Figure \@ref(fig:tidy-structure) shows the rules visually.
 
-<!-- # Spread across two tibbles -->
-<!-- table4a  # cases -->
-<!-- table4b  # population -->
-<!-- ``` -->
+\begin{figure}
 
-<!-- These are all representations of the same underlying data, but they are not equally easy to use. One dataset, the tidy dataset, will be much easier to work with inside the tidyverse.  -->
+{\centering \includegraphics[width=1\linewidth]{images/tidy-1} 
 
-<!-- There are three interrelated rules which make a dataset tidy: -->
+}
 
-<!-- 1.  Each variable must have its own column. -->
-<!-- 1.  Each observation must have its own row. -->
-<!-- 1.  Each value must have its own cell. -->
+\caption{Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells.}(\#fig:tidy-structure)
+\end{figure}
 
-<!-- Figure \@ref(fig:tidy-structure) shows the rules visually. -->
+These three rules are interrelated because it's impossible to only satisfy two of the three. That interrelationship leads to an even simpler set of practical instructions:
 
-<!-- ```{r tidy-structure, echo = FALSE, out.width = "100%", fig.cap = "Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells."} -->
-<!-- knitr::include_graphics("images/tidy-1.png") -->
-<!-- ``` -->
+1.  Put each dataset in a tibble.
+1.  Put each variable in a column.
 
-<!-- These three rules are interrelated because it's impossible to only satisfy two of the three. That interrelationship leads to an even simpler set of practical instructions: -->
+In this example, only `table1` is tidy. It's the only representation where each column is a variable.
 
-<!-- 1.  Put each dataset in a tibble. -->
-<!-- 1.  Put each variable in a column. -->
+Why ensure that your data is tidy? There are two main advantages:
 
-<!-- In this example, only `table1` is tidy. It's the only representation where each column is a variable. -->
+1.  There's a general advantage to picking one consistent way of storing
+    data. If you have a consistent data structure, it's easier to learn the
+    tools that work with it because they have an underlying uniformity.
 
-<!-- Why ensure that your data is tidy? There are two main advantages: -->
+1.  There's a specific advantage to placing variables in columns because
+    it allows pandas' and NumPy's vectorised nature to shine. As you learned in
+    [assign](#mutate-funs) and [aggregate functions](#summary-funs), most
+    built-in R functions work with vectors of values. That makes transforming
+    tidy data feel particularly natural.
 
-<!-- 1.  There's a general advantage to picking one consistent way of storing -->
-<!--     data. If you have a consistent data structure, it's easier to learn the -->
-<!--     tools that work with it because they have an underlying uniformity. -->
+Altair and pandas work well with tidy data. Here are a couple of small examples showing how you might work with `table1`.
 
-<!-- 1.  There's a specific advantage to placing variables in columns because -->
-<!--     it allows R's vectorised nature to shine. As you learned in -->
-<!--     [mutate](#mutate-funs) and [summary functions](#summary-funs), most  -->
-<!--     built-in R functions work with vectors of values. That makes transforming  -->
-<!--     tidy data feel particularly natural. -->
 
-<!-- dplyr, ggplot2, and all the other packages in the tidyverse are designed to work with tidy data. Here are a couple of small examples showing how you might work with `table1`. -->
+```python
+# Compute rate per 10,000
+table1.assign(
+    rate = lambda x: x.cases / x.population * 1000
+)
+# Compute cases per year
+#>        country  year   cases  population      rate
+#> 0  Afghanistan  1999     745    19987071  0.037274
+#> 1  Afghanistan  2000    2666    20595360  0.129447
+#> 2       Brazil  1999   37737   172006362  0.219393
+#> 3       Brazil  2000   80488   174504898  0.461236
+#> 4        China  1999  212258  1272915272  0.166750
+#> 5        China  2000  213766  1280428583  0.166949
+(table1.
+  groupby('year').
+  agg(n = ('cases', 'sum')).
+  reset_index())
 
-<!-- ```{r, out.width = "50%"} -->
-<!-- # Compute rate per 10,000 -->
-<!-- table1 %>%  -->
-<!--   mutate(rate = cases / population * 10000) -->
+# Visualise changes over time
+# import altair as alt
+#>    year       n
+#> 0  1999  250740
+#> 1  2000  296920
+base_chart = (alt.Chart(table1).
+  encode(alt.X('year'), alt.Y('cases'), detail = 'country'))
 
-<!-- # Compute cases per year -->
-<!-- table1 %>%  -->
-<!--   count(year, wt = cases) -->
+chart = base_chart.mark_line() + base_chart.encode(color = 'country').mark_circle()
 
-<!-- # Visualise changes over time -->
-<!-- library(ggplot2) -->
-<!-- ggplot(table1, aes(year, cases)) +  -->
-<!--   geom_line(aes(group = country), colour = "grey50") +  -->
-<!--   geom_point(aes(colour = country)) -->
-<!-- ``` -->
+chart.save("screenshots/altair_table1.png")
+```
 
-<!-- ### Exercises -->
 
-<!-- 1.  Using prose, describe how the variables and observations are organised in -->
-<!--     each of the sample tables. -->
+\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_table1} \end{center}
 
-<!-- 1.  Compute the `rate` for `table2`, and `table4a` + `table4b`.  -->
-<!--     You will need to perform four operations: -->
 
-<!--     1.  Extract the number of TB cases per country per year. -->
-<!--     1.  Extract the matching population per country per year. -->
-<!--     1.  Divide cases by population, and multiply by 10000. -->
-<!--     1.  Store back in the appropriate place. -->
+### Exercises
 
-<!--     Which representation is easiest to work with? Which is hardest? Why? -->
+1.  Using prose, describe how the variables and observations are organised in
+    each of the sample tables.
 
-<!-- 1.  Recreate the plot showing change in cases over time using `table2` -->
-<!--     instead of `table1`. What do you need to do first? -->
+1.  Compute the `rate` for `table2`, and `table4a` + `table4b`.
+    You will need to perform four operations:
 
-<!-- ## Pivoting -->
+    1.  Extract the number of TB cases per country per year.
+    1.  Extract the matching population per country per year.
+    1.  Divide cases by population, and multiply by 10000.
+    1.  Store back in the appropriate place.
 
-<!-- The principles of tidy data seem so obvious that you might wonder if you'll ever encounter a dataset that isn't tidy. Unfortunately, however, most data that you will encounter will be untidy. There are two main reasons: -->
+    Which representation is easiest to work with? Which is hardest? Why?
 
-<!-- 1.  Most people aren't familiar with the principles of tidy data, and it's hard -->
-<!--     to derive them yourself unless you spend a _lot_ of time working with data. -->
+1.  Recreate the plot showing change in cases over time using `table2`
+    instead of `table1`. What do you need to do first?
 
-<!-- 1.  Data is often organised to facilitate some use other than analysis. For  -->
-<!--     example, data is often organised to make entry as easy as possible. -->
+## Pivoting
 
-<!-- This means for most real analyses, you'll need to do some tidying. The first step is always to figure out what the variables and observations are. Sometimes this is easy; other times you'll need to consult with the people who originally generated the data.  -->
-<!-- The second step is to resolve one of two common problems: -->
+The principles of tidy data seem so obvious that you might wonder if you'll ever encounter a dataset that isn't tidy. Unfortunately, however, most data that you will encounter will be untidy. There are two main reasons:
 
-<!-- 1. One variable might be spread across multiple columns. -->
+1.  Most people aren't familiar with the principles of tidy data, and it's hard
+    to derive them yourself unless you spend a _lot_ of time working with data.
 
-<!-- 1. One observation might be scattered across multiple rows. -->
+1.  Data is often organised to facilitate some use other than analysis. For
+    example, data is often organised to make entry as easy as possible.
 
-<!-- Typically a dataset will only suffer from one of these problems; it'll only suffer from both if you're really unlucky! To fix these problems, you'll need the two most important functions in tidyr: `pivot_longer()` and `pivot_wider()`. -->
+This means for most real analyses, you'll need to do some tidying. The first step is always to figure out what the variables and observations are. Sometimes this is easy; other times you'll need to consult with the people who originally generated the data.
 
-<!-- ### Longer -->
+The second step is to resolve one of two common problems:
 
-<!-- A common problem is a dataset where some of the column names are not names of variables, but _values_ of a variable. Take `table4a`: the column names `1999` and `2000` represent values of the `year` variable, the values in the `1999` and `2000` columns represent values of the `cases` variable, and each row represents two observations, not one. -->
+1. One variable might be spread across multiple columns.
 
-<!-- ```{r} -->
-<!-- table4a -->
-<!-- ``` -->
+1. One observation might be scattered across multiple rows.
 
-<!-- To tidy a dataset like this, we need to __pivot__ the offending columns into a new pair of variables. To describe that operation we need three parameters: -->
+Typically a dataset will only suffer from one of these problems; it'll only suffer from both if you're really unlucky! To fix these problems, you'll need two functions in pandas: `melt()`, `pivot()`, and `pivot_table()`. There are two additional functions called `stack()` and `unstack()` that use multi-index columns and rows. Pandas provides a guide to [reshaping and pivot tables](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html#reshaping) in their user guide.
 
-<!-- * The set of columns whose names are values, not variables. In this example,  -->
-<!--   those are the columns `1999` and `2000`. -->
+### Longer (`melt()`)
 
-<!-- * The name of the variable to move the column names to. Here it is `year`. -->
+A common problem is a dataset where some of the column names are not names of variables, but _values_ of a variable. Take `table4a`: the column names `1999` and `2000` represent values of the `year` variable, the values in the `1999` and `2000` columns represent values of the `cases` variable, and each row represents two observations, not one.
 
-<!-- * The name of the variable to move the column values to. Here it's `cases`. -->
 
-<!-- Together those parameters generate the call to `pivot_longer()`: -->
+```python
+table4a
+#>        country    1999    2000
+#> 0  Afghanistan     745    2666
+#> 1       Brazil   37737   80488
+#> 2        China  212258  213766
+```
 
-<!-- ```{r} -->
-<!-- table4a %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "cases") -->
-<!-- ``` -->
+To tidy a dataset like this, we need to __stack__ the offending columns into a new pair of variables. To describe that operation we need three parameters:
 
-<!-- The columns to pivot are specified with `dplyr::select()` style notation. Here there are only two columns, so we list them individually. Note that "1999" and "2000" are non-syntactic names (because they don't start with a letter) so we have to surround them in backticks. To refresh your memory of the other ways to select columns, see [select](#select). -->
+* The set of columns whose names are identifier variables, not values. In this example,
+  `country` is the identifier column and the value columns are `1999` and `2000`.
 
-<!-- `year` and `cases` do not exist in `table4a` so we put their names in quotes. -->
+* The name of the variable to move the column names to. Here it is `year`.
 
-<!-- ```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Pivoting `table4` into a longer, tidy form."} -->
-<!-- knitr::include_graphics("images/tidy-9.png") -->
-<!-- ``` -->
+* The name of the variable to move the column values to. Here it's `cases`.
 
-<!-- In the final result, the pivoted columns are dropped, and we get new `year` and `cases` columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure \@ref(fig:tidy-gather).  -->
+Together those parameters generate the call to `melt()`:
 
-<!-- `pivot_longer()` makes datasets longer by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say (e.g.) that dataset A is longer than dataset B. -->
 
-<!-- We can use `pivot_longer()` to tidy `table4b` in a similar fashion. The only difference is the variable stored in the cell values: -->
+```python
+table4a.melt(['country'], var_name = "year", value_name = "cases")
+#>        country  year   cases
+#> 0  Afghanistan  1999     745
+#> 1       Brazil  1999   37737
+#> 2        China  1999  212258
+#> 3  Afghanistan  2000    2666
+#> 4       Brazil  2000   80488
+#> 5        China  2000  213766
+```
 
-<!-- ```{r} -->
-<!-- table4b %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "population") -->
-<!-- ``` -->
+`year` and `cases` do not exist in `table4a` so we put their names in quotes.
 
-<!-- To combine the tidied versions of `table4a` and `table4b` into a single tibble, we need to use `dplyr::left_join()`, which you'll learn about in [relational data]. -->
+\begin{figure}
 
-<!-- ```{r} -->
-<!-- tidy4a <- table4a %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "cases") -->
-<!-- tidy4b <- table4b %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "population") -->
-<!-- left_join(tidy4a, tidy4b) -->
-<!-- ``` -->
+{\centering \includegraphics[width=1\linewidth]{images/tidy-9} 
 
-<!-- ### Wider -->
+}
 
-<!-- `pivot_wider()` is the opposite of `pivot_longer()`. You use it when an observation is scattered across multiple rows. For example, take `table2`: an observation is a country in a year, but each observation is spread across two rows. -->
+\caption{Pivoting `table4` into a longer, tidy form.}(\#fig:tidy-gather)
+\end{figure}
 
-<!-- ```{r} -->
-<!-- table2 -->
-<!-- ``` -->
+In the final result, the pivoted columns are dropped, and we get new `year` and `cases` columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure \@ref(fig:tidy-gather).
 
-<!-- To tidy this up, we first analyse the representation in similar way to `pivot_longer()`. This time, however, we only need two parameters: -->
+`melt()` makes datasets longer (imagine melting icecream down the cone) by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say (e.g.) that dataset A is longer than dataset B.
 
-<!-- * The column to take variable names from. Here, it's `type`. -->
+We can use `melt()` to tidy `table4b` in a similar fashion. The only difference is the variable stored in the cell values:
 
-<!-- * The column to take values from. Here it's `count`. -->
 
-<!-- Once we've figured that out, we can use `pivot_wider()`, as shown programmatically below, and visually in Figure \@ref(fig:tidy-spread). -->
+```python
+table4b.melt(['country'], var_name = 'year', value_name = 'population')
+#>        country  year  population
+#> 0  Afghanistan  1999    19987071
+#> 1       Brazil  1999   172006362
+#> 2        China  1999  1272915272
+#> 3  Afghanistan  2000    20595360
+#> 4       Brazil  2000   174504898
+#> 5        China  2000  1280428583
+```
 
-<!-- ```{r} -->
-<!-- table2 %>% -->
-<!--     pivot_wider(names_from = type, values_from = count) -->
-<!-- ``` -->
+To combine the tidied versions of `table4a` and `table4b` into a single tibble, we need to use `merge()`, which you'll learn about in [relational data].
 
-<!-- ```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Pivoting `table2` into a \"wider\", tidy form."} -->
-<!-- knitr::include_graphics("images/tidy-8.png") -->
-<!-- ``` -->
 
-<!-- As you might have guessed from their names, `pivot_wider()` and `pivot_longer()` are complements. `pivot_longer()` makes wide tables narrower and longer; `pivot_wider()` makes long tables shorter and wider. -->
+```python
+tidy4a = table4a.melt(['country'], var_name = "year", value_name = "cases")
+tidy4b = table4b.melt(['country'], var_name = 'year', value_name = 'population')
+pd.merge(tidy4a, tidy4b, on = ['country', 'year'])
+#>        country  year   cases  population
+#> 0  Afghanistan  1999     745    19987071
+#> 1       Brazil  1999   37737   172006362
+#> 2        China  1999  212258  1272915272
+#> 3  Afghanistan  2000    2666    20595360
+#> 4       Brazil  2000   80488   174504898
+#> 5        China  2000  213766  1280428583
+```
 
-<!-- ### Exercises -->
+### Wider
 
-<!-- 1.  Why are `pivot_longer()` and `pivot_wider()` not perfectly symmetrical?   -->
-<!--     Carefully consider the following example: -->
+`pivot()` is the opposite of `melt()`. You use it when an observation is scattered across multiple rows. For example, take `table2`: an observation is a country in a year, but each observation is spread across two rows.
 
-<!--     ```{r, eval = FALSE} -->
-<!--     stocks <- tibble( -->
-<!--       year   = c(2015, 2015, 2016, 2016), -->
-<!--       half  = c(   1,    2,     1,    2), -->
-<!--       return = c(1.88, 0.59, 0.92, 0.17) -->
-<!--     ) -->
-<!--     stocks %>%  -->
-<!--       pivot_wider(names_from = year, values_from = return) %>%  -->
-<!--       pivot_longer(`2015`:`2016`, names_to = "year", values_to = "return") -->
-<!--     ``` -->
 
-<!--     (Hint: look at the variable types and think about column _names_.) -->
+```python
+table2
+#>         country  year        type       count
+#> 0   Afghanistan  1999       cases         745
+#> 1   Afghanistan  1999  population    19987071
+#> 2   Afghanistan  2000       cases        2666
+#> 3   Afghanistan  2000  population    20595360
+#> 4        Brazil  1999       cases       37737
+#> 5        Brazil  1999  population   172006362
+#> 6        Brazil  2000       cases       80488
+#> 7        Brazil  2000  population   174504898
+#> 8         China  1999       cases      212258
+#> 9         China  1999  population  1272915272
+#> 10        China  2000       cases      213766
+#> 11        China  2000  population  1280428583
+```
 
-<!--     `pivot_longer()` has a `names_ptype` argument, e.g.  -->
-<!--     `names_ptype = list(year = double())`. What does it do? -->
+To tidy this up, we first analyse the representation in similar way to `melt()`. This time, however, we only need two parameters:
 
-<!-- 1.  Why does this code fail? -->
+* The column to take variable names from. Here, it's `type`.
 
-<!--     ```{r, error = TRUE} -->
-<!--     table4a %>%  -->
-<!--       pivot_longer(c(1999, 2000), names_to = "year", values_to = "cases") -->
-<!--     ``` -->
+* The column to take values from. Here it's `count`.
 
-<!-- 1.  What would happen if you widen this table? Why? How could you add a  -->
-<!--     new column to uniquely identify each value? -->
+Once we've figured that out, we can use `pivot()`, as shown programmatically below, and visually in Figure \@ref(fig:tidy-spread).
 
-<!--     ```{r} -->
-<!--     people <- tribble( -->
-<!--       ~name,             ~names,  ~values, -->
-<!--       #-----------------|--------|------ -->
-<!--       "Phillip Woods",   "age",       45, -->
-<!--       "Phillip Woods",   "height",   186, -->
-<!--       "Phillip Woods",   "age",       50, -->
-<!--       "Jessica Cordero", "age",       37, -->
-<!--       "Jessica Cordero", "height",   156 -->
-<!--     ) -->
-<!--     ``` -->
+In this example, we have a multi-column `index` argument and will need to use `pivot_table()`.  With a single column index `pivot()` can be used.
 
-<!-- 1.  Tidy the simple tibble below. Do you need to make it wider or longer? -->
-<!--     What are the variables? -->
 
-<!--     ```{r} -->
-<!--     preg <- tribble( -->
-<!--       ~pregnant, ~male, ~female, -->
-<!--       "yes",     NA,    10, -->
-<!--       "no",      20,    12 -->
-<!--     ) -->
-<!--     ``` -->
+```python
+table2.pivot_table(
+    index = ['country', 'year'], 
+    columns = 'type', 
+    values = 'count').reset_index()
+#> type      country  year   cases  population
+#> 0     Afghanistan  1999     745    19987071
+#> 1     Afghanistan  2000    2666    20595360
+#> 2          Brazil  1999   37737   172006362
+#> 3          Brazil  2000   80488   174504898
+#> 4           China  1999  212258  1272915272
+#> 5           China  2000  213766  1280428583
+```
 
-<!-- ## Separating and uniting -->
+\begin{figure}
 
-<!-- So far you've learned how to tidy `table2` and `table4`, but not `table3`. `table3` has a different problem: we have one column (`rate`) that contains two variables (`cases` and `population`). To fix this problem, we'll need the `separate()` function. You'll also learn about the complement of `separate()`: `unite()`, which you use if a single variable is spread across multiple columns. -->
+{\centering \includegraphics[width=1\linewidth]{images/tidy-8} 
 
-<!-- ### Separate -->
+}
 
-<!-- `separate()` pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take `table3`: -->
+\caption{Pivoting `table2` into a "wider", tidy form.}(\#fig:tidy-spread)
+\end{figure}
 
-<!-- ```{r} -->
-<!-- table3 -->
-<!-- ``` -->
+As you might have guessed from their names, `pivot()` and `pivot_table()` are complements to `melt()`. `melt()` makes wide tables narrower and longer; `pivot()` and `pivot_table()` makes long tables shorter and wider.
 
-<!-- The `rate` column contains both `cases` and `population` variables, and we need to split it into two variables. `separate()` takes the name of the column to separate, and the names of the columns to separate into, as shown in Figure \@ref(fig:tidy-separate) and the code below. -->
+### Exercises
 
-<!-- ```{r} -->
-<!-- table3 %>%  -->
-<!--   separate(rate, into = c("cases", "population")) -->
-<!-- ``` -->
+1.  Why are `melt()` and `pivot()` not perfectly symmetrical?
+    Carefully consider the following example:
 
-<!-- ```{r tidy-separate, echo = FALSE, out.width = "75%", fig.cap = "Separating `table3` makes it tidy"} -->
-<!-- knitr::include_graphics("images/tidy-17.png") -->
-<!-- ``` -->
+    
+    ```python
+    stocks = pd.DataFrame({
+      'year': [2015, 2015, 2016, 2016],
+      'half':  [1,    2,     1,    2],
+      'return': [1.88, 0.59, 0.92, 0.17]
+    })
+    (stocks.
+      pivot(
+        index = 'half', 
+        columns = 'year', 
+        values = 'return').
+      melt(
+        var_name = 'year', 
+        value_name = 'return')
+      )
+    ```
 
-<!-- By default, `separate()` will split values wherever it sees a non-alphanumeric character (i.e. a character that isn't a number or letter). For example, in the code above, `separate()` split the values of `rate` at the forward slash characters. If you wish to use a specific character to separate a column, you can pass the character to the `sep` argument of `separate()`. For example, we could rewrite the code above as: -->
+    (Hint: look at the variable types and think about column _names_.)
 
-<!-- ```{r eval = FALSE} -->
-<!-- table3 %>%  -->
-<!--   separate(rate, into = c("cases", "population"), sep = "/") -->
-<!-- ``` -->
+## Separating and uniting
 
-<!-- (Formally, `sep` is a regular expression, which you'll learn more about in [strings].) -->
+So far you've learned how to tidy `table2` and `table4`, but not `table3`. `table3` has a different problem: we have one column (`rate`) that contains two variables (`cases` and `population`). To fix this problem, we'll need the pandas `str.split()` function. You'll also learn about the complement of `str.split()`: `str.join()`, which you use if a single variable is spread across multiple columns.
 
-<!-- Look carefully at the column types: you'll notice that `cases` and `population` are character columns. This is the default behaviour in `separate()`: it leaves the type of the column as is. Here, however, it's not very useful as those really are numbers. We can ask `separate()` to try and convert to better types using `convert = TRUE`: -->
+### Split (Separate)
 
-<!-- ```{r} -->
-<!-- table3 %>%  -->
-<!--   separate(rate, into = c("cases", "population"), convert = TRUE) -->
-<!-- ``` -->
+`str.split()` pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take `table3`:
 
-<!-- You can also pass a vector of integers to `sep`. `separate()` will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings; negative value start at -1 on the far-right of the strings. When using integers to separate strings, the length of `sep` should be one less than the number of names in `into`.  -->
 
-<!-- You can use this arrangement to separate the last two digits of each year. This make this data less tidy, but is useful in other cases, as you'll see in a little bit. -->
+```python
+table3
+#>        country  year               rate
+#> 0  Afghanistan  1999       745/19987071
+#> 1  Afghanistan  2000      2666/20595360
+#> 2       Brazil  1999    37737/172006362
+#> 3       Brazil  2000    80488/174504898
+#> 4        China  1999  212258/1272915272
+#> 5        China  2000  213766/1280428583
+```
 
-<!-- ```{r} -->
-<!-- table3 %>%  -->
-<!--   separate(year, into = c("century", "year"), sep = 2) -->
-<!-- ``` -->
+The `rate` column contains both `cases` and `population` variables, and we need to split it into two variables. `str.split()` takes the name of the column to split. The names of the columns to separate into can be names using `rename()`, as shown in Figure \@ref(fig:tidy-separate) and the code below.
 
-<!-- ### Unite -->
+By default, `str.split()` will split values on white spaces. If you wish to use a specific character to separate a column, you can pass the character to the `pat` or first argument of `str.split()`. 
 
-<!-- `unite()` is the inverse of `separate()`: it combines multiple columns into a single column. You'll need it much less frequently than `separate()`, but it's still a useful tool to have in your back pocket. -->
+Unlike `tidyr::separate()` in R, you will need to append the new columns back onto your data set with a `pd.concat()` with the argument `axis = 1` 
 
-<!-- ```{r tidy-unite, echo = FALSE, out.width = "75%", fig.cap = "Uniting `table5` makes it tidy"} -->
-<!-- knitr::include_graphics("images/tidy-18.png") -->
-<!-- ``` -->
 
-<!-- We can use `unite()` to rejoin the *century* and *year* columns that we created in the last example. That data is saved as `tidyr::table5`. `unite()` takes a data frame, the name of the new variable to create, and a set of columns to combine, again specified in `dplyr::select()` style: -->
 
-<!-- ```{r} -->
-<!-- table5 %>%  -->
-<!--   unite(new, century, year) -->
-<!-- ``` -->
+```python
+new_columns = (table3.
+  rate.str.split("/", expand = True).
+  rename(columns = {0: "cases", 1: "population"})
+  )
+  
+pd.concat([table3.drop(columns = 'rate'), new_columns], axis = 1)
+#>        country  year   cases  population
+#> 0  Afghanistan  1999     745    19987071
+#> 1  Afghanistan  2000    2666    20595360
+#> 2       Brazil  1999   37737   172006362
+#> 3       Brazil  2000   80488   174504898
+#> 4        China  1999  212258  1272915272
+#> 5        China  2000  213766  1280428583
+```
 
-<!-- In this case we also need to use the `sep` argument. The default will place an underscore (`_`) between the values from different columns. Here we don't want any separator so we use `""`: -->
+\begin{figure}
 
-<!-- ```{r} -->
-<!-- table5 %>%  -->
-<!--   unite(new, century, year, sep = "") -->
-<!-- ``` -->
+{\centering \includegraphics[width=0.75\linewidth]{images/tidy-17} 
 
-<!-- ### Exercises -->
+}
 
-<!-- 1.  What do the `extra` and `fill` arguments do in `separate()`?  -->
-<!--     Experiment with the various options for the following two toy datasets. -->
+\caption{Separating `table3` makes it tidy}(\#fig:tidy-separate)
+\end{figure}
 
-<!--     ```{r, eval = FALSE} -->
-<!--     tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%  -->
-<!--       separate(x, c("one", "two", "three")) -->
+(Formally, `pat` is a regular expression, which you'll learn more about in [strings].)
 
-<!--     tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%  -->
-<!--       separate(x, c("one", "two", "three")) -->
-<!--     ``` -->
+Look carefully at the column types: you'll notice that `cases` and `population` are objects or strings. This is the default behaviour in `str.split()`: it only works on object types and returns objects. Here, however, it's not very useful as those really are numbers. We can ask use `astype()` to convert to better types:
 
-<!-- 1.  Both `unite()` and `separate()` have a `remove` argument. What does it -->
-<!--     do? Why would you set it to `FALSE`? -->
 
-<!-- 1.  Compare and contrast `separate()` and `extract()`.  Why are there -->
-<!--     three variations of separation (by position, by separator, and with -->
-<!--     groups), but only one unite? -->
+```python
+pd.concat([
+  table3.drop(columns = 'rate'), 
+  new_columns.astype('float')],
+  axis = 1)
+#>        country  year     cases    population
+#> 0  Afghanistan  1999     745.0  1.998707e+07
+#> 1  Afghanistan  2000    2666.0  2.059536e+07
+#> 2       Brazil  1999   37737.0  1.720064e+08
+#> 3       Brazil  2000   80488.0  1.745049e+08
+#> 4        China  1999  212258.0  1.272915e+09
+#> 5        China  2000  213766.0  1.280429e+09
+```
 
-<!-- ## Missing values -->
+To split on integers you would use `str[]`. `str[]` will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings and are entered `:2`; negative value start at -1 on the far-right of the strings are entered `-2:`. 
 
-<!-- Changing the representation of a dataset brings up an important subtlety of missing values. Surprisingly, a value can be missing in one of two possible ways: -->
+You can use this arrangement to separate the last two digits of each year. This make this data less tidy, but is useful in other cases, as you'll see in a little bit.
 
-<!-- * __Explicitly__, i.e. flagged with `NA`. -->
-<!-- * __Implicitly__, i.e. simply not present in the data. -->
 
-<!-- Let's illustrate this idea with a very simple data set: -->
+```python
+cent_year = pd.DataFrame({
+    'century': table3.year.astype(str).str[:2],
+    'year': table3.year.astype(str).str[-2:]
+})
 
-<!-- ```{r} -->
-<!-- stocks <- tibble( -->
-<!--   year   = c(2015, 2015, 2015, 2015, 2016, 2016, 2016), -->
-<!--   qtr    = c(   1,    2,    3,    4,    2,    3,    4), -->
-<!--   return = c(1.88, 0.59, 0.35,   NA, 0.92, 0.17, 2.66) -->
-<!-- ) -->
-<!-- ``` -->
+pd.concat([table3.drop(columns = 'year'), cent_year], axis = 1)
 
-<!-- There are two missing values in this dataset: -->
+#>        country               rate century year
+#> 0  Afghanistan       745/19987071      19   99
+#> 1  Afghanistan      2666/20595360      20   00
+#> 2       Brazil    37737/172006362      19   99
+#> 3       Brazil    80488/174504898      20   00
+#> 4        China  212258/1272915272      19   99
+#> 5        China  213766/1280428583      20   00
+```
 
-<!-- * The return for the fourth quarter of 2015 is explicitly missing, because -->
-<!--   the cell where its value should be instead contains `NA`. -->
+### Unite
 
-<!-- * The return for the first quarter of 2016 is implicitly missing, because it -->
-<!--   simply does not appear in the dataset. -->
+For two string series the inverse of `str.split()` can be done with `+`: it combines multiple columns into a single column. You'll need it much less frequently than `str.split()`, but it's still a useful tool to have in your back pocket.
 
-<!-- One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence. -->
+\begin{figure}
 
-<!-- The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting years in the columns: -->
+{\centering \includegraphics[width=0.75\linewidth]{images/tidy-18} 
 
-<!-- ```{r} -->
-<!-- stocks %>%  -->
-<!--   pivot_wider(names_from = year, values_from = return) -->
-<!-- ``` -->
+}
 
-<!-- Because these explicit missing values may not be important in other representations of the data, you can set `values_drop_na = TRUE` in `pivot_longer()` to turn explicit missing values implicit: -->
+\caption{Uniting `table5` makes it tidy}(\#fig:tidy-unite)
+\end{figure}
 
-<!-- ```{r} -->
-<!-- stocks %>%  -->
-<!--   pivot_wider(names_from = year, values_from = return) %>%  -->
-<!--   pivot_longer( -->
-<!--     cols = c(`2015`, `2016`),  -->
-<!--     names_to = "year",  -->
-<!--     values_to = "return",  -->
-<!--     values_drop_na = TRUE -->
-<!--   ) -->
-<!-- ``` -->
+We can use `+` to rejoin the *century* and *year* string columns that we created in the last example. That data is saved as `table5`. `+` takes a two series and can be assigned to the name of the new variable to create:
 
-<!-- Another important tool for making missing values explicit in tidy data is `complete()`: -->
 
-<!-- ```{r} -->
-<!-- stocks %>%  -->
-<!--   complete(year, qtr) -->
-<!-- ``` -->
+```python
+table5.assign(new = table5['century'] + table5['year'])
+#>        country century year               rate   new
+#> 0  Afghanistan      19   99       745/19987071  1999
+#> 1  Afghanistan      20   00      2666/20595360  2000
+#> 2       Brazil      19   99    37737/172006362  1999
+#> 3       Brazil      20   00    80488/174504898  2000
+#> 4        China      19   99  212258/1272915272  1999
+#> 5        China      20   00  213766/1280428583  2000
+```
 
-<!-- `complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit `NA`s where necessary. -->
+If you want join the strings with a specified string or more than two columns you can use agg with `axis = 1`.
 
-<!-- There's one other important tool that you should know for working with missing values. Sometimes when a data source has primarily been used for data entry, missing values indicate that the previous value should be carried forward: -->
 
-<!-- ```{r} -->
-<!-- treatment <- tribble( -->
-<!--   ~ person,           ~ treatment, ~response, -->
-<!--   "Derrick Whitmore", 1,           7, -->
-<!--   NA,                 2,           10, -->
-<!--   NA,                 3,           9, -->
-<!--   "Katherine Burke",  1,           4 -->
-<!-- ) -->
-<!-- ``` -->
+```python
+table5.assign(new = table5[['century', 'year']].agg("_".join, axis = 1))
+#>        country century year               rate    new
+#> 0  Afghanistan      19   99       745/19987071  19_99
+#> 1  Afghanistan      20   00      2666/20595360  20_00
+#> 2       Brazil      19   99    37737/172006362  19_99
+#> 3       Brazil      20   00    80488/174504898  20_00
+#> 4        China      19   99  212258/1272915272  19_99
+#> 5        China      20   00  213766/1280428583  20_00
+```
 
-<!-- You can fill in these missing values with `fill()`. It takes a set of columns where you want missing values to be replaced by the most recent non-missing value (sometimes called last observation carried forward). -->
+### Exercises
 
-<!-- ```{r} -->
-<!-- treatment %>%  -->
-<!--   fill(person) -->
-<!-- ``` -->
+1.  Compare and contrast `str.split()` and `str.extract()`.  Why are there
+    three variations of separation (by position, by separator, and with
+    groups?
 
-<!-- ### Exercises -->
+## Missing values
 
-<!-- 1.  Compare and contrast the `fill` arguments to `pivot_wider()` and `complete()`.  -->
+Changing the representation of a dataset brings up an important subtlety of missing values. Surprisingly, a value can be missing in one of two possible ways:
 
-<!-- 1.  What does the direction argument to `fill()` do? -->
+* __Explicitly__, i.e. flagged with `nan`.
+* __Implicitly__, i.e. simply not present in the data.
+
+Let's illustrate this idea with a very simple data set:
+
+
+```python
+stocks = pd.DataFrame({
+    'year': [2015, 2015, 2015, 2015, 2016, 2016, 2016],
+    'qtr': [   1,    2,    3,    4,    2,    3,    4],
+    'return': [1.88, 0.59, 0.35,   np.nan, 0.92, 0.17, 2.66]
+    }) 
+```
+
+There are two missing values in this dataset:
+
+* The return for the fourth quarter of 2015 is explicitly missing, because
+  the cell where its value should be instead contains `nan`.
+
+* The return for the first quarter of 2016 is implicitly missing, because it
+  simply does not appear in the dataset.
+
+One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence.
+
+The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting years in the columns:
+
+
+```python
+stocks.pivot(
+  index = 'qtr', 
+  columns = 'year', 
+  values = 'return').reset_index()
+#> year  qtr  2015  2016
+#> 0       1  1.88   NaN
+#> 1       2  0.59  0.92
+#> 2       3  0.35  0.17
+#> 3       4   NaN  2.66
+```
+
+Because these explicit missing values may not be important in other representations of the data, you turn explicit missing values implicit with `.dropna()`:
+
+
+```python
+stocks.pivot(
+  index = 'qtr', 
+  columns = 'year', 
+  values = 'return').reset_index().melt(id_vars = ['qtr']).dropna()
+#>    qtr  year  value
+#> 0    1  2015   1.88
+#> 1    2  2015   0.59
+#> 2    3  2015   0.35
+#> 5    2  2016   0.92
+#> 6    3  2016   0.17
+#> 7    4  2016   2.66
+```
+
+`tidyr::complete()` in R takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit missingness where necessary. You can use `stack()` and `unstack()` with `set_index()`.  See [this stackoverflow](https://stackoverflow.com/questions/44287445/pandas-or-python-equivalent-of-tidyr-complete) for an example.
+
 
 <!-- ## Case Study -->
 
@@ -576,16 +714,16 @@ import numpy as np
 <!-- 1.  For each country, year, and sex compute the total number of cases of  -->
 <!--     TB. Make an informative visualisation of the data. -->
 
-<!-- ## Non-tidy data -->
+## Non-tidy data
 
-<!-- Before we continue on to other topics, it's worth talking briefly about non-tidy data. Earlier in the chapter, I used the pejorative term "messy" to refer to non-tidy data. That's an oversimplification: there are lots of useful and well-founded data structures that are not tidy data. There are two main reasons to use other data structures: -->
+Before we continue on to other topics, it's worth talking briefly about non-tidy data. Earlier in the chapter, I used the pejorative term "messy" to refer to non-tidy data. That's an oversimplification: there are lots of useful and well-founded data structures that are not tidy data. There are two main reasons to use other data structures:
 
-<!-- * Alternative representations may have substantial performance or space  -->
-<!--   advantages. -->
+* Alternative representations may have substantial performance or space
+  advantages.
 
-<!-- * Specialised fields have evolved their own conventions for storing data -->
-<!--   that may be quite different to the conventions of  tidy data. -->
+* Specialised fields have evolved their own conventions for storing data
+  that may be quite different to the conventions of  tidy data.
 
-<!-- Either of these reasons means you'll need something other than a tibble (or data frame). If your data does fit naturally into a rectangular structure composed of observations and variables, I think tidy data should be your default choice. But there are good reasons to use other structures; tidy data is not the only way. -->
+Either of these reasons means you'll need something other than a tibble (or data frame). If your data does fit naturally into a rectangular structure composed of observations and variables, I think tidy data should be your default choice. But there are good reasons to use other structures; tidy data is not the only way.
 
-<!-- If you'd like to learn more about non-tidy data, I'd highly recommend this thoughtful blog post by Jeff Leek: <http://simplystatistics.org/2016/02/17/non-tidy-data/> -->
+If you'd like to learn more about non-tidy data, I'd highly recommend this thoughtful blog post by Jeff Leek: <http://simplystatistics.org/2016/02/17/non-tidy-data/>

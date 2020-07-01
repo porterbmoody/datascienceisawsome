@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="data-import.html"/>
-
+<link rel="next" href="relational-data.html"/>
 <script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -368,6 +368,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#prerequisites-6"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
 </ul></li>
+<li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.2</b> Tidy data</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-19"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#pivoting"><i class="fa fa-check"></i><b>12.3</b> Pivoting</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#longer-melt"><i class="fa fa-check"></i><b>12.3.1</b> Longer (<code>melt()</code>)</a></li>
+<li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider"><i class="fa fa-check"></i><b>12.3.2</b> Wider</a></li>
+<li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-20"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#split-separate"><i class="fa fa-check"></i><b>12.4.1</b> Split (Separate)</a></li>
+<li class="chapter" data-level="12.4.2" data-path="tidy-data.html"><a href="tidy-data.html#unite"><i class="fa fa-check"></i><b>12.4.2</b> Unite</a></li>
+<li class="chapter" data-level="12.4.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-21"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#missing-values-3"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
+<li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#non-tidy-data"><i class="fa fa-check"></i><b>12.6</b> Non-tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>13</b> Relational data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="relational-data.html"><a href="relational-data.html#introduction-7"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
 </ul></li>
 </ul>
 
@@ -407,289 +429,423 @@ own way.” –– Hadley Wickham</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="tidy-data.html#cb184-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb184-2"><a href="tidy-data.html#cb184-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb184-3"><a href="tidy-data.html#cb184-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<!-- ## Tidy data -->
-<!-- You can represent the same underlying data in multiple ways. The example below shows the same data organised in four different ways. Each dataset shows the same values of four variables *country*, *year*, *population*, and *cases*, but each dataset organises the values in a different way. -->
-<!-- ```{r} -->
-<!-- table1 -->
-<!-- table2 -->
-<!-- table3 -->
-<!-- # Spread across two tibbles -->
-<!-- table4a  # cases -->
-<!-- table4b  # population -->
-<!-- ``` -->
-<!-- These are all representations of the same underlying data, but they are not equally easy to use. One dataset, the tidy dataset, will be much easier to work with inside the tidyverse.  -->
-<!-- There are three interrelated rules which make a dataset tidy: -->
-<!-- 1.  Each variable must have its own column. -->
-<!-- 1.  Each observation must have its own row. -->
-<!-- 1.  Each value must have its own cell. -->
-<!-- Figure \@ref(fig:tidy-structure) shows the rules visually. -->
-<!-- ```{r tidy-structure, echo = FALSE, out.width = "100%", fig.cap = "Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells."} -->
-<!-- knitr::include_graphics("images/tidy-1.png") -->
-<!-- ``` -->
-<!-- These three rules are interrelated because it's impossible to only satisfy two of the three. That interrelationship leads to an even simpler set of practical instructions: -->
-<!-- 1.  Put each dataset in a tibble. -->
-<!-- 1.  Put each variable in a column. -->
-<!-- In this example, only `table1` is tidy. It's the only representation where each column is a variable. -->
-<!-- Why ensure that your data is tidy? There are two main advantages: -->
-<!-- 1.  There's a general advantage to picking one consistent way of storing -->
-<!--     data. If you have a consistent data structure, it's easier to learn the -->
-<!--     tools that work with it because they have an underlying uniformity. -->
-<!-- 1.  There's a specific advantage to placing variables in columns because -->
-<!--     it allows R's vectorised nature to shine. As you learned in -->
-<!--     [mutate](#mutate-funs) and [summary functions](#summary-funs), most  -->
-<!--     built-in R functions work with vectors of values. That makes transforming  -->
-<!--     tidy data feel particularly natural. -->
-<!-- dplyr, ggplot2, and all the other packages in the tidyverse are designed to work with tidy data. Here are a couple of small examples showing how you might work with `table1`. -->
-<!-- ```{r, out.width = "50%"} -->
-<!-- # Compute rate per 10,000 -->
-<!-- table1 %>%  -->
-<!--   mutate(rate = cases / population * 10000) -->
-<!-- # Compute cases per year -->
-<!-- table1 %>%  -->
-<!--   count(year, wt = cases) -->
-<!-- # Visualise changes over time -->
-<!-- library(ggplot2) -->
-<!-- ggplot(table1, aes(year, cases)) +  -->
-<!--   geom_line(aes(group = country), colour = "grey50") +  -->
-<!--   geom_point(aes(colour = country)) -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  Using prose, describe how the variables and observations are organised in -->
-<!--     each of the sample tables. -->
-<!-- 1.  Compute the `rate` for `table2`, and `table4a` + `table4b`.  -->
-<!--     You will need to perform four operations: -->
-<!--     1.  Extract the number of TB cases per country per year. -->
-<!--     1.  Extract the matching population per country per year. -->
-<!--     1.  Divide cases by population, and multiply by 10000. -->
-<!--     1.  Store back in the appropriate place. -->
-<!--     Which representation is easiest to work with? Which is hardest? Why? -->
-<!-- 1.  Recreate the plot showing change in cases over time using `table2` -->
-<!--     instead of `table1`. What do you need to do first? -->
-<!-- ## Pivoting -->
-<!-- The principles of tidy data seem so obvious that you might wonder if you'll ever encounter a dataset that isn't tidy. Unfortunately, however, most data that you will encounter will be untidy. There are two main reasons: -->
-<!-- 1.  Most people aren't familiar with the principles of tidy data, and it's hard -->
-<!--     to derive them yourself unless you spend a _lot_ of time working with data. -->
-<!-- 1.  Data is often organised to facilitate some use other than analysis. For  -->
-<!--     example, data is often organised to make entry as easy as possible. -->
-<!-- This means for most real analyses, you'll need to do some tidying. The first step is always to figure out what the variables and observations are. Sometimes this is easy; other times you'll need to consult with the people who originally generated the data.  -->
-<!-- The second step is to resolve one of two common problems: -->
-<!-- 1. One variable might be spread across multiple columns. -->
-<!-- 1. One observation might be scattered across multiple rows. -->
-<!-- Typically a dataset will only suffer from one of these problems; it'll only suffer from both if you're really unlucky! To fix these problems, you'll need the two most important functions in tidyr: `pivot_longer()` and `pivot_wider()`. -->
-<!-- ### Longer -->
-<!-- A common problem is a dataset where some of the column names are not names of variables, but _values_ of a variable. Take `table4a`: the column names `1999` and `2000` represent values of the `year` variable, the values in the `1999` and `2000` columns represent values of the `cases` variable, and each row represents two observations, not one. -->
-<!-- ```{r} -->
-<!-- table4a -->
-<!-- ``` -->
-<!-- To tidy a dataset like this, we need to __pivot__ the offending columns into a new pair of variables. To describe that operation we need three parameters: -->
-<!-- * The set of columns whose names are values, not variables. In this example,  -->
-<!--   those are the columns `1999` and `2000`. -->
-<!-- * The name of the variable to move the column names to. Here it is `year`. -->
-<!-- * The name of the variable to move the column values to. Here it's `cases`. -->
-<!-- Together those parameters generate the call to `pivot_longer()`: -->
-<!-- ```{r} -->
-<!-- table4a %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "cases") -->
-<!-- ``` -->
-<!-- The columns to pivot are specified with `dplyr::select()` style notation. Here there are only two columns, so we list them individually. Note that "1999" and "2000" are non-syntactic names (because they don't start with a letter) so we have to surround them in backticks. To refresh your memory of the other ways to select columns, see [select](#select). -->
-<!-- `year` and `cases` do not exist in `table4a` so we put their names in quotes. -->
-<!-- ```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Pivoting `table4` into a longer, tidy form."} -->
-<!-- knitr::include_graphics("images/tidy-9.png") -->
-<!-- ``` -->
-<!-- In the final result, the pivoted columns are dropped, and we get new `year` and `cases` columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure \@ref(fig:tidy-gather).  -->
-<!-- `pivot_longer()` makes datasets longer by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say (e.g.) that dataset A is longer than dataset B. -->
-<!-- We can use `pivot_longer()` to tidy `table4b` in a similar fashion. The only difference is the variable stored in the cell values: -->
-<!-- ```{r} -->
-<!-- table4b %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "population") -->
-<!-- ``` -->
-<!-- To combine the tidied versions of `table4a` and `table4b` into a single tibble, we need to use `dplyr::left_join()`, which you'll learn about in [relational data]. -->
-<!-- ```{r} -->
-<!-- tidy4a <- table4a %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "cases") -->
-<!-- tidy4b <- table4b %>%  -->
-<!--   pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "population") -->
-<!-- left_join(tidy4a, tidy4b) -->
-<!-- ``` -->
-<!-- ### Wider -->
-<!-- `pivot_wider()` is the opposite of `pivot_longer()`. You use it when an observation is scattered across multiple rows. For example, take `table2`: an observation is a country in a year, but each observation is spread across two rows. -->
-<!-- ```{r} -->
-<!-- table2 -->
-<!-- ``` -->
-<!-- To tidy this up, we first analyse the representation in similar way to `pivot_longer()`. This time, however, we only need two parameters: -->
-<!-- * The column to take variable names from. Here, it's `type`. -->
-<!-- * The column to take values from. Here it's `count`. -->
-<!-- Once we've figured that out, we can use `pivot_wider()`, as shown programmatically below, and visually in Figure \@ref(fig:tidy-spread). -->
-<!-- ```{r} -->
-<!-- table2 %>% -->
-<!--     pivot_wider(names_from = type, values_from = count) -->
-<!-- ``` -->
-<!-- ```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Pivoting `table2` into a \"wider\", tidy form."} -->
-<!-- knitr::include_graphics("images/tidy-8.png") -->
-<!-- ``` -->
-<!-- As you might have guessed from their names, `pivot_wider()` and `pivot_longer()` are complements. `pivot_longer()` makes wide tables narrower and longer; `pivot_wider()` makes long tables shorter and wider. -->
-<!-- ### Exercises -->
-<!-- 1.  Why are `pivot_longer()` and `pivot_wider()` not perfectly symmetrical?   -->
-<!--     Carefully consider the following example: -->
-<!--     ```{r, eval = FALSE} -->
-<!--     stocks <- tibble( -->
-<!--       year   = c(2015, 2015, 2016, 2016), -->
-<!--       half  = c(   1,    2,     1,    2), -->
-<!--       return = c(1.88, 0.59, 0.92, 0.17) -->
-<!--     ) -->
-<!--     stocks %>%  -->
-<!--       pivot_wider(names_from = year, values_from = return) %>%  -->
-<!--       pivot_longer(`2015`:`2016`, names_to = "year", values_to = "return") -->
-<!--     ``` -->
-<!--     (Hint: look at the variable types and think about column _names_.) -->
-<!--     `pivot_longer()` has a `names_ptype` argument, e.g.  -->
-<!--     `names_ptype = list(year = double())`. What does it do? -->
-<!-- 1.  Why does this code fail? -->
-<!--     ```{r, error = TRUE} -->
-<!--     table4a %>%  -->
-<!--       pivot_longer(c(1999, 2000), names_to = "year", values_to = "cases") -->
-<!--     ``` -->
-<!-- 1.  What would happen if you widen this table? Why? How could you add a  -->
-<!--     new column to uniquely identify each value? -->
-<!--     ```{r} -->
-<!--     people <- tribble( -->
-<!--       ~name,             ~names,  ~values, -->
-<!--       #-----------------|--------|------ -->
-<!--       "Phillip Woods",   "age",       45, -->
-<!--       "Phillip Woods",   "height",   186, -->
-<!--       "Phillip Woods",   "age",       50, -->
-<!--       "Jessica Cordero", "age",       37, -->
-<!--       "Jessica Cordero", "height",   156 -->
-<!--     ) -->
-<!--     ``` -->
-<!-- 1.  Tidy the simple tibble below. Do you need to make it wider or longer? -->
-<!--     What are the variables? -->
-<!--     ```{r} -->
-<!--     preg <- tribble( -->
-<!--       ~pregnant, ~male, ~female, -->
-<!--       "yes",     NA,    10, -->
-<!--       "no",      20,    12 -->
-<!--     ) -->
-<!--     ``` -->
-<!-- ## Separating and uniting -->
-<!-- So far you've learned how to tidy `table2` and `table4`, but not `table3`. `table3` has a different problem: we have one column (`rate`) that contains two variables (`cases` and `population`). To fix this problem, we'll need the `separate()` function. You'll also learn about the complement of `separate()`: `unite()`, which you use if a single variable is spread across multiple columns. -->
-<!-- ### Separate -->
-<!-- `separate()` pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take `table3`: -->
-<!-- ```{r} -->
-<!-- table3 -->
-<!-- ``` -->
-<!-- The `rate` column contains both `cases` and `population` variables, and we need to split it into two variables. `separate()` takes the name of the column to separate, and the names of the columns to separate into, as shown in Figure \@ref(fig:tidy-separate) and the code below. -->
-<!-- ```{r} -->
-<!-- table3 %>%  -->
-<!--   separate(rate, into = c("cases", "population")) -->
-<!-- ``` -->
-<!-- ```{r tidy-separate, echo = FALSE, out.width = "75%", fig.cap = "Separating `table3` makes it tidy"} -->
-<!-- knitr::include_graphics("images/tidy-17.png") -->
-<!-- ``` -->
-<!-- By default, `separate()` will split values wherever it sees a non-alphanumeric character (i.e. a character that isn't a number or letter). For example, in the code above, `separate()` split the values of `rate` at the forward slash characters. If you wish to use a specific character to separate a column, you can pass the character to the `sep` argument of `separate()`. For example, we could rewrite the code above as: -->
-<!-- ```{r eval = FALSE} -->
-<!-- table3 %>%  -->
-<!--   separate(rate, into = c("cases", "population"), sep = "/") -->
-<!-- ``` -->
-<!-- (Formally, `sep` is a regular expression, which you'll learn more about in [strings].) -->
-<!-- Look carefully at the column types: you'll notice that `cases` and `population` are character columns. This is the default behaviour in `separate()`: it leaves the type of the column as is. Here, however, it's not very useful as those really are numbers. We can ask `separate()` to try and convert to better types using `convert = TRUE`: -->
-<!-- ```{r} -->
-<!-- table3 %>%  -->
-<!--   separate(rate, into = c("cases", "population"), convert = TRUE) -->
-<!-- ``` -->
-<!-- You can also pass a vector of integers to `sep`. `separate()` will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings; negative value start at -1 on the far-right of the strings. When using integers to separate strings, the length of `sep` should be one less than the number of names in `into`.  -->
-<!-- You can use this arrangement to separate the last two digits of each year. This make this data less tidy, but is useful in other cases, as you'll see in a little bit. -->
-<!-- ```{r} -->
-<!-- table3 %>%  -->
-<!--   separate(year, into = c("century", "year"), sep = 2) -->
-<!-- ``` -->
-<!-- ### Unite -->
-<!-- `unite()` is the inverse of `separate()`: it combines multiple columns into a single column. You'll need it much less frequently than `separate()`, but it's still a useful tool to have in your back pocket. -->
-<!-- ```{r tidy-unite, echo = FALSE, out.width = "75%", fig.cap = "Uniting `table5` makes it tidy"} -->
-<!-- knitr::include_graphics("images/tidy-18.png") -->
-<!-- ``` -->
-<!-- We can use `unite()` to rejoin the *century* and *year* columns that we created in the last example. That data is saved as `tidyr::table5`. `unite()` takes a data frame, the name of the new variable to create, and a set of columns to combine, again specified in `dplyr::select()` style: -->
-<!-- ```{r} -->
-<!-- table5 %>%  -->
-<!--   unite(new, century, year) -->
-<!-- ``` -->
-<!-- In this case we also need to use the `sep` argument. The default will place an underscore (`_`) between the values from different columns. Here we don't want any separator so we use `""`: -->
-<!-- ```{r} -->
-<!-- table5 %>%  -->
-<!--   unite(new, century, year, sep = "") -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  What do the `extra` and `fill` arguments do in `separate()`?  -->
-<!--     Experiment with the various options for the following two toy datasets. -->
-<!--     ```{r, eval = FALSE} -->
-<!--     tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%  -->
-<!--       separate(x, c("one", "two", "three")) -->
-<!--     tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%  -->
-<!--       separate(x, c("one", "two", "three")) -->
-<!--     ``` -->
-<!-- 1.  Both `unite()` and `separate()` have a `remove` argument. What does it -->
-<!--     do? Why would you set it to `FALSE`? -->
-<!-- 1.  Compare and contrast `separate()` and `extract()`.  Why are there -->
-<!--     three variations of separation (by position, by separator, and with -->
-<!--     groups), but only one unite? -->
-<!-- ## Missing values -->
-<!-- Changing the representation of a dataset brings up an important subtlety of missing values. Surprisingly, a value can be missing in one of two possible ways: -->
-<!-- * __Explicitly__, i.e. flagged with `NA`. -->
-<!-- * __Implicitly__, i.e. simply not present in the data. -->
-<!-- Let's illustrate this idea with a very simple data set: -->
-<!-- ```{r} -->
-<!-- stocks <- tibble( -->
-<!--   year   = c(2015, 2015, 2015, 2015, 2016, 2016, 2016), -->
-<!--   qtr    = c(   1,    2,    3,    4,    2,    3,    4), -->
-<!--   return = c(1.88, 0.59, 0.35,   NA, 0.92, 0.17, 2.66) -->
-<!-- ) -->
-<!-- ``` -->
-<!-- There are two missing values in this dataset: -->
-<!-- * The return for the fourth quarter of 2015 is explicitly missing, because -->
-<!--   the cell where its value should be instead contains `NA`. -->
-<!-- * The return for the first quarter of 2016 is implicitly missing, because it -->
-<!--   simply does not appear in the dataset. -->
-<!-- One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence. -->
-<!-- The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting years in the columns: -->
-<!-- ```{r} -->
-<!-- stocks %>%  -->
-<!--   pivot_wider(names_from = year, values_from = return) -->
-<!-- ``` -->
-<!-- Because these explicit missing values may not be important in other representations of the data, you can set `values_drop_na = TRUE` in `pivot_longer()` to turn explicit missing values implicit: -->
-<!-- ```{r} -->
-<!-- stocks %>%  -->
-<!--   pivot_wider(names_from = year, values_from = return) %>%  -->
-<!--   pivot_longer( -->
-<!--     cols = c(`2015`, `2016`),  -->
-<!--     names_to = "year",  -->
-<!--     values_to = "return",  -->
-<!--     values_drop_na = TRUE -->
-<!--   ) -->
-<!-- ``` -->
-<!-- Another important tool for making missing values explicit in tidy data is `complete()`: -->
-<!-- ```{r} -->
-<!-- stocks %>%  -->
-<!--   complete(year, qtr) -->
-<!-- ``` -->
-<!-- `complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit `NA`s where necessary. -->
-<!-- There's one other important tool that you should know for working with missing values. Sometimes when a data source has primarily been used for data entry, missing values indicate that the previous value should be carried forward: -->
-<!-- ```{r} -->
-<!-- treatment <- tribble( -->
-<!--   ~ person,           ~ treatment, ~response, -->
-<!--   "Derrick Whitmore", 1,           7, -->
-<!--   NA,                 2,           10, -->
-<!--   NA,                 3,           9, -->
-<!--   "Katherine Burke",  1,           4 -->
-<!-- ) -->
-<!-- ``` -->
-<!-- You can fill in these missing values with `fill()`. It takes a set of columns where you want missing values to be replaced by the most recent non-missing value (sometimes called last observation carried forward). -->
-<!-- ```{r} -->
-<!-- treatment %>%  -->
-<!--   fill(person) -->
-<!-- ``` -->
-<!-- ### Exercises -->
-<!-- 1.  Compare and contrast the `fill` arguments to `pivot_wider()` and `complete()`.  -->
-<!-- 1.  What does the direction argument to `fill()` do? -->
+</div>
+</div>
+<div id="tidy-data-1" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Tidy data</h2>
+<p>You can represent the same underlying data in multiple ways. The example below shows the same data organised in four different ways. Each dataset shows the same values of four variables <em>country</em>, <em>year</em>, <em>population</em>, and <em>cases</em>, but each dataset organises the values in a different way.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb185-1"><a href="tidy-data.html#cb185-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
+<span id="cb185-2"><a href="tidy-data.html#cb185-2"></a>table1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table1/table1.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb185-3"><a href="tidy-data.html#cb185-3"></a>table2 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table2/table2.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb185-4"><a href="tidy-data.html#cb185-4"></a>table3 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table3/table3.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb185-5"><a href="tidy-data.html#cb185-5"></a>table4a <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table4a/table4a.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb185-6"><a href="tidy-data.html#cb185-6"></a>table4b <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table4b/table4b.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb185-7"><a href="tidy-data.html#cb185-7"></a>table5 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table5/table5.csv&quot;</span>.<span class="bu">format</span>(base_url), dtype <span class="op">=</span> <span class="st">&#39;object&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="tidy-data.html#cb186-1"></a>table1</span>
+<span id="cb186-2"><a href="tidy-data.html#cb186-2"></a><span class="co">#&gt;        country  year   cases  population</span></span>
+<span id="cb186-3"><a href="tidy-data.html#cb186-3"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
+<span id="cb186-4"><a href="tidy-data.html#cb186-4"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360</span></span>
+<span id="cb186-5"><a href="tidy-data.html#cb186-5"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362</span></span>
+<span id="cb186-6"><a href="tidy-data.html#cb186-6"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898</span></span>
+<span id="cb186-7"><a href="tidy-data.html#cb186-7"></a><span class="co">#&gt; 4        China  1999  212258  1272915272</span></span>
+<span id="cb186-8"><a href="tidy-data.html#cb186-8"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span>
+<span id="cb186-9"><a href="tidy-data.html#cb186-9"></a>table2</span>
+<span id="cb186-10"><a href="tidy-data.html#cb186-10"></a><span class="co">#&gt;         country  year        type       count</span></span>
+<span id="cb186-11"><a href="tidy-data.html#cb186-11"></a><span class="co">#&gt; 0   Afghanistan  1999       cases         745</span></span>
+<span id="cb186-12"><a href="tidy-data.html#cb186-12"></a><span class="co">#&gt; 1   Afghanistan  1999  population    19987071</span></span>
+<span id="cb186-13"><a href="tidy-data.html#cb186-13"></a><span class="co">#&gt; 2   Afghanistan  2000       cases        2666</span></span>
+<span id="cb186-14"><a href="tidy-data.html#cb186-14"></a><span class="co">#&gt; 3   Afghanistan  2000  population    20595360</span></span>
+<span id="cb186-15"><a href="tidy-data.html#cb186-15"></a><span class="co">#&gt; 4        Brazil  1999       cases       37737</span></span>
+<span id="cb186-16"><a href="tidy-data.html#cb186-16"></a><span class="co">#&gt; 5        Brazil  1999  population   172006362</span></span>
+<span id="cb186-17"><a href="tidy-data.html#cb186-17"></a><span class="co">#&gt; 6        Brazil  2000       cases       80488</span></span>
+<span id="cb186-18"><a href="tidy-data.html#cb186-18"></a><span class="co">#&gt; 7        Brazil  2000  population   174504898</span></span>
+<span id="cb186-19"><a href="tidy-data.html#cb186-19"></a><span class="co">#&gt; 8         China  1999       cases      212258</span></span>
+<span id="cb186-20"><a href="tidy-data.html#cb186-20"></a><span class="co">#&gt; 9         China  1999  population  1272915272</span></span>
+<span id="cb186-21"><a href="tidy-data.html#cb186-21"></a><span class="co">#&gt; 10        China  2000       cases      213766</span></span>
+<span id="cb186-22"><a href="tidy-data.html#cb186-22"></a><span class="co">#&gt; 11        China  2000  population  1280428583</span></span>
+<span id="cb186-23"><a href="tidy-data.html#cb186-23"></a>table3</span>
+<span id="cb186-24"><a href="tidy-data.html#cb186-24"></a></span>
+<span id="cb186-25"><a href="tidy-data.html#cb186-25"></a><span class="co"># Spread across two tibbles</span></span>
+<span id="cb186-26"><a href="tidy-data.html#cb186-26"></a><span class="co">#&gt;        country  year               rate</span></span>
+<span id="cb186-27"><a href="tidy-data.html#cb186-27"></a><span class="co">#&gt; 0  Afghanistan  1999       745/19987071</span></span>
+<span id="cb186-28"><a href="tidy-data.html#cb186-28"></a><span class="co">#&gt; 1  Afghanistan  2000      2666/20595360</span></span>
+<span id="cb186-29"><a href="tidy-data.html#cb186-29"></a><span class="co">#&gt; 2       Brazil  1999    37737/172006362</span></span>
+<span id="cb186-30"><a href="tidy-data.html#cb186-30"></a><span class="co">#&gt; 3       Brazil  2000    80488/174504898</span></span>
+<span id="cb186-31"><a href="tidy-data.html#cb186-31"></a><span class="co">#&gt; 4        China  1999  212258/1272915272</span></span>
+<span id="cb186-32"><a href="tidy-data.html#cb186-32"></a><span class="co">#&gt; 5        China  2000  213766/1280428583</span></span>
+<span id="cb186-33"><a href="tidy-data.html#cb186-33"></a>table4a  <span class="co"># cases</span></span>
+<span id="cb186-34"><a href="tidy-data.html#cb186-34"></a><span class="co">#&gt;        country    1999    2000</span></span>
+<span id="cb186-35"><a href="tidy-data.html#cb186-35"></a><span class="co">#&gt; 0  Afghanistan     745    2666</span></span>
+<span id="cb186-36"><a href="tidy-data.html#cb186-36"></a><span class="co">#&gt; 1       Brazil   37737   80488</span></span>
+<span id="cb186-37"><a href="tidy-data.html#cb186-37"></a><span class="co">#&gt; 2        China  212258  213766</span></span>
+<span id="cb186-38"><a href="tidy-data.html#cb186-38"></a>table4b  <span class="co"># population</span></span>
+<span id="cb186-39"><a href="tidy-data.html#cb186-39"></a><span class="co">#&gt;        country        1999        2000</span></span>
+<span id="cb186-40"><a href="tidy-data.html#cb186-40"></a><span class="co">#&gt; 0  Afghanistan    19987071    20595360</span></span>
+<span id="cb186-41"><a href="tidy-data.html#cb186-41"></a><span class="co">#&gt; 1       Brazil   172006362   174504898</span></span>
+<span id="cb186-42"><a href="tidy-data.html#cb186-42"></a><span class="co">#&gt; 2        China  1272915272  1280428583</span></span></code></pre></div>
+<p>These are all representations of the same underlying data, but they are not equally easy to use. One dataset, the tidy dataset, will be much easier to work with inside the tidyverse.</p>
+<p>There are three interrelated rules which make a dataset tidy:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+<li>Each value must have its own cell.</li>
+</ol>
+<p>Figure <a href="tidy-data.html#fig:tidy-structure">12.1</a> shows the rules visually.</p>
+<div class="figure" style="text-align: center"><span id="fig:tidy-structure"></span>
+<img src="images/tidy-1.png" alt="Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells." width="100%" />
+<p class="caption">
+Figure 12.1: Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells.
+</p>
+</div>
+<p>These three rules are interrelated because it’s impossible to only satisfy two of the three. That interrelationship leads to an even simpler set of practical instructions:</p>
+<ol style="list-style-type: decimal">
+<li>Put each dataset in a tibble.</li>
+<li>Put each variable in a column.</li>
+</ol>
+<p>In this example, only <code>table1</code> is tidy. It’s the only representation where each column is a variable.</p>
+<p>Why ensure that your data is tidy? There are two main advantages:</p>
+<ol style="list-style-type: decimal">
+<li><p>There’s a general advantage to picking one consistent way of storing
+data. If you have a consistent data structure, it’s easier to learn the
+tools that work with it because they have an underlying uniformity.</p></li>
+<li><p>There’s a specific advantage to placing variables in columns because
+it allows pandas’ and NumPy’s vectorised nature to shine. As you learned in
+<a href="transform.html#mutate-funs">assign</a> and <a href="#summary-funs">aggregate functions</a>, most
+built-in R functions work with vectors of values. That makes transforming
+tidy data feel particularly natural.</p></li>
+</ol>
+<p>Altair and pandas work well with tidy data. Here are a couple of small examples showing how you might work with <code>table1</code>.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb187-1"><a href="tidy-data.html#cb187-1"></a><span class="co"># Compute rate per 10,000</span></span>
+<span id="cb187-2"><a href="tidy-data.html#cb187-2"></a>table1.assign(</span>
+<span id="cb187-3"><a href="tidy-data.html#cb187-3"></a>    rate <span class="op">=</span> <span class="kw">lambda</span> x: x.cases <span class="op">/</span> x.population <span class="op">*</span> <span class="dv">1000</span></span>
+<span id="cb187-4"><a href="tidy-data.html#cb187-4"></a>)</span>
+<span id="cb187-5"><a href="tidy-data.html#cb187-5"></a><span class="co"># Compute cases per year</span></span>
+<span id="cb187-6"><a href="tidy-data.html#cb187-6"></a><span class="co">#&gt;        country  year   cases  population      rate</span></span>
+<span id="cb187-7"><a href="tidy-data.html#cb187-7"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071  0.037274</span></span>
+<span id="cb187-8"><a href="tidy-data.html#cb187-8"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360  0.129447</span></span>
+<span id="cb187-9"><a href="tidy-data.html#cb187-9"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362  0.219393</span></span>
+<span id="cb187-10"><a href="tidy-data.html#cb187-10"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898  0.461236</span></span>
+<span id="cb187-11"><a href="tidy-data.html#cb187-11"></a><span class="co">#&gt; 4        China  1999  212258  1272915272  0.166750</span></span>
+<span id="cb187-12"><a href="tidy-data.html#cb187-12"></a><span class="co">#&gt; 5        China  2000  213766  1280428583  0.166949</span></span>
+<span id="cb187-13"><a href="tidy-data.html#cb187-13"></a>(table1.</span>
+<span id="cb187-14"><a href="tidy-data.html#cb187-14"></a>  groupby(<span class="st">&#39;year&#39;</span>).</span>
+<span id="cb187-15"><a href="tidy-data.html#cb187-15"></a>  agg(n <span class="op">=</span> (<span class="st">&#39;cases&#39;</span>, <span class="st">&#39;sum&#39;</span>)).</span>
+<span id="cb187-16"><a href="tidy-data.html#cb187-16"></a>  reset_index())</span>
+<span id="cb187-17"><a href="tidy-data.html#cb187-17"></a></span>
+<span id="cb187-18"><a href="tidy-data.html#cb187-18"></a><span class="co"># Visualise changes over time</span></span>
+<span id="cb187-19"><a href="tidy-data.html#cb187-19"></a><span class="co"># import altair as alt</span></span>
+<span id="cb187-20"><a href="tidy-data.html#cb187-20"></a><span class="co">#&gt;    year       n</span></span>
+<span id="cb187-21"><a href="tidy-data.html#cb187-21"></a><span class="co">#&gt; 0  1999  250740</span></span>
+<span id="cb187-22"><a href="tidy-data.html#cb187-22"></a><span class="co">#&gt; 1  2000  296920</span></span>
+<span id="cb187-23"><a href="tidy-data.html#cb187-23"></a>base_chart <span class="op">=</span> (alt.Chart(table1).</span>
+<span id="cb187-24"><a href="tidy-data.html#cb187-24"></a>  encode(alt.X(<span class="st">&#39;year&#39;</span>), alt.Y(<span class="st">&#39;cases&#39;</span>), detail <span class="op">=</span> <span class="st">&#39;country&#39;</span>))</span>
+<span id="cb187-25"><a href="tidy-data.html#cb187-25"></a></span>
+<span id="cb187-26"><a href="tidy-data.html#cb187-26"></a>chart <span class="op">=</span> base_chart.mark_line() <span class="op">+</span> base_chart.encode(color <span class="op">=</span> <span class="st">&#39;country&#39;</span>).mark_circle()</span>
+<span id="cb187-27"><a href="tidy-data.html#cb187-27"></a></span>
+<span id="cb187-28"><a href="tidy-data.html#cb187-28"></a>chart.save(<span class="st">&quot;screenshots/altair_table1.png&quot;</span>)</span></code></pre></div>
+<p><img src="screenshots/altair_table1.png" width="50%" style="display: block; margin: auto;" /></p>
+<div id="exercises-19" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Using prose, describe how the variables and observations are organised in
+each of the sample tables.</p></li>
+<li><p>Compute the <code>rate</code> for <code>table2</code>, and <code>table4a</code> + <code>table4b</code>.
+You will need to perform four operations:</p>
+<ol style="list-style-type: decimal">
+<li>Extract the number of TB cases per country per year.</li>
+<li>Extract the matching population per country per year.</li>
+<li>Divide cases by population, and multiply by 10000.</li>
+<li>Store back in the appropriate place.</li>
+</ol>
+<p>Which representation is easiest to work with? Which is hardest? Why?</p></li>
+<li><p>Recreate the plot showing change in cases over time using <code>table2</code>
+instead of <code>table1</code>. What do you need to do first?</p></li>
+</ol>
+</div>
+</div>
+<div id="pivoting" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> Pivoting</h2>
+<p>The principles of tidy data seem so obvious that you might wonder if you’ll ever encounter a dataset that isn’t tidy. Unfortunately, however, most data that you will encounter will be untidy. There are two main reasons:</p>
+<ol style="list-style-type: decimal">
+<li><p>Most people aren’t familiar with the principles of tidy data, and it’s hard
+to derive them yourself unless you spend a <em>lot</em> of time working with data.</p></li>
+<li><p>Data is often organised to facilitate some use other than analysis. For
+example, data is often organised to make entry as easy as possible.</p></li>
+</ol>
+<p>This means for most real analyses, you’ll need to do some tidying. The first step is always to figure out what the variables and observations are. Sometimes this is easy; other times you’ll need to consult with the people who originally generated the data.</p>
+<p>The second step is to resolve one of two common problems:</p>
+<ol style="list-style-type: decimal">
+<li><p>One variable might be spread across multiple columns.</p></li>
+<li><p>One observation might be scattered across multiple rows.</p></li>
+</ol>
+<p>Typically a dataset will only suffer from one of these problems; it’ll only suffer from both if you’re really unlucky! To fix these problems, you’ll need two functions in pandas: <code>melt()</code>, <code>pivot()</code>, and <code>pivot_table()</code>. There are two additional functions called <code>stack()</code> and <code>unstack()</code> that use multi-index columns and rows. Pandas provides a guide to <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html#reshaping">reshaping and pivot tables</a> in their user guide.</p>
+<div id="longer-melt" class="section level3" number="12.3.1">
+<h3><span class="header-section-number">12.3.1</span> Longer (<code>melt()</code>)</h3>
+<p>A common problem is a dataset where some of the column names are not names of variables, but <em>values</em> of a variable. Take <code>table4a</code>: the column names <code>1999</code> and <code>2000</code> represent values of the <code>year</code> variable, the values in the <code>1999</code> and <code>2000</code> columns represent values of the <code>cases</code> variable, and each row represents two observations, not one.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb188-1"><a href="tidy-data.html#cb188-1"></a>table4a</span>
+<span id="cb188-2"><a href="tidy-data.html#cb188-2"></a><span class="co">#&gt;        country    1999    2000</span></span>
+<span id="cb188-3"><a href="tidy-data.html#cb188-3"></a><span class="co">#&gt; 0  Afghanistan     745    2666</span></span>
+<span id="cb188-4"><a href="tidy-data.html#cb188-4"></a><span class="co">#&gt; 1       Brazil   37737   80488</span></span>
+<span id="cb188-5"><a href="tidy-data.html#cb188-5"></a><span class="co">#&gt; 2        China  212258  213766</span></span></code></pre></div>
+<p>To tidy a dataset like this, we need to <strong>stack</strong> the offending columns into a new pair of variables. To describe that operation we need three parameters:</p>
+<ul>
+<li><p>The set of columns whose names are identifier variables, not values. In this example,
+<code>country</code> is the identifier column and the value columns are <code>1999</code> and <code>2000</code>.</p></li>
+<li><p>The name of the variable to move the column names to. Here it is <code>year</code>.</p></li>
+<li><p>The name of the variable to move the column values to. Here it’s <code>cases</code>.</p></li>
+</ul>
+<p>Together those parameters generate the call to <code>melt()</code>:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a href="tidy-data.html#cb189-1"></a>table4a.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&quot;year&quot;</span>, value_name <span class="op">=</span> <span class="st">&quot;cases&quot;</span>)</span>
+<span id="cb189-2"><a href="tidy-data.html#cb189-2"></a><span class="co">#&gt;        country  year   cases</span></span>
+<span id="cb189-3"><a href="tidy-data.html#cb189-3"></a><span class="co">#&gt; 0  Afghanistan  1999     745</span></span>
+<span id="cb189-4"><a href="tidy-data.html#cb189-4"></a><span class="co">#&gt; 1       Brazil  1999   37737</span></span>
+<span id="cb189-5"><a href="tidy-data.html#cb189-5"></a><span class="co">#&gt; 2        China  1999  212258</span></span>
+<span id="cb189-6"><a href="tidy-data.html#cb189-6"></a><span class="co">#&gt; 3  Afghanistan  2000    2666</span></span>
+<span id="cb189-7"><a href="tidy-data.html#cb189-7"></a><span class="co">#&gt; 4       Brazil  2000   80488</span></span>
+<span id="cb189-8"><a href="tidy-data.html#cb189-8"></a><span class="co">#&gt; 5        China  2000  213766</span></span></code></pre></div>
+<p><code>year</code> and <code>cases</code> do not exist in <code>table4a</code> so we put their names in quotes.</p>
+<div class="figure" style="text-align: center"><span id="fig:tidy-gather"></span>
+<img src="images/tidy-9.png" alt="Pivoting `table4` into a longer, tidy form." width="100%" />
+<p class="caption">
+Figure 12.2: Pivoting <code>table4</code> into a longer, tidy form.
+</p>
+</div>
+<p>In the final result, the pivoted columns are dropped, and we get new <code>year</code> and <code>cases</code> columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure <a href="tidy-data.html#fig:tidy-gather">12.2</a>.</p>
+<p><code>melt()</code> makes datasets longer (imagine melting icecream down the cone) by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say (e.g.) that dataset A is longer than dataset B.</p>
+<p>We can use <code>melt()</code> to tidy <code>table4b</code> in a similar fashion. The only difference is the variable stored in the cell values:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="tidy-data.html#cb190-1"></a>table4b.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;population&#39;</span>)</span>
+<span id="cb190-2"><a href="tidy-data.html#cb190-2"></a><span class="co">#&gt;        country  year  population</span></span>
+<span id="cb190-3"><a href="tidy-data.html#cb190-3"></a><span class="co">#&gt; 0  Afghanistan  1999    19987071</span></span>
+<span id="cb190-4"><a href="tidy-data.html#cb190-4"></a><span class="co">#&gt; 1       Brazil  1999   172006362</span></span>
+<span id="cb190-5"><a href="tidy-data.html#cb190-5"></a><span class="co">#&gt; 2        China  1999  1272915272</span></span>
+<span id="cb190-6"><a href="tidy-data.html#cb190-6"></a><span class="co">#&gt; 3  Afghanistan  2000    20595360</span></span>
+<span id="cb190-7"><a href="tidy-data.html#cb190-7"></a><span class="co">#&gt; 4       Brazil  2000   174504898</span></span>
+<span id="cb190-8"><a href="tidy-data.html#cb190-8"></a><span class="co">#&gt; 5        China  2000  1280428583</span></span></code></pre></div>
+<p>To combine the tidied versions of <code>table4a</code> and <code>table4b</code> into a single tibble, we need to use <code>merge()</code>, which you’ll learn about in <a href="relational-data.html#relational-data">relational data</a>.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb191-1"><a href="tidy-data.html#cb191-1"></a>tidy4a <span class="op">=</span> table4a.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&quot;year&quot;</span>, value_name <span class="op">=</span> <span class="st">&quot;cases&quot;</span>)</span>
+<span id="cb191-2"><a href="tidy-data.html#cb191-2"></a>tidy4b <span class="op">=</span> table4b.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;population&#39;</span>)</span>
+<span id="cb191-3"><a href="tidy-data.html#cb191-3"></a>pd.merge(tidy4a, tidy4b, on <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>])</span>
+<span id="cb191-4"><a href="tidy-data.html#cb191-4"></a><span class="co">#&gt;        country  year   cases  population</span></span>
+<span id="cb191-5"><a href="tidy-data.html#cb191-5"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
+<span id="cb191-6"><a href="tidy-data.html#cb191-6"></a><span class="co">#&gt; 1       Brazil  1999   37737   172006362</span></span>
+<span id="cb191-7"><a href="tidy-data.html#cb191-7"></a><span class="co">#&gt; 2        China  1999  212258  1272915272</span></span>
+<span id="cb191-8"><a href="tidy-data.html#cb191-8"></a><span class="co">#&gt; 3  Afghanistan  2000    2666    20595360</span></span>
+<span id="cb191-9"><a href="tidy-data.html#cb191-9"></a><span class="co">#&gt; 4       Brazil  2000   80488   174504898</span></span>
+<span id="cb191-10"><a href="tidy-data.html#cb191-10"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
+</div>
+<div id="wider" class="section level3" number="12.3.2">
+<h3><span class="header-section-number">12.3.2</span> Wider</h3>
+<p><code>pivot()</code> is the opposite of <code>melt()</code>. You use it when an observation is scattered across multiple rows. For example, take <code>table2</code>: an observation is a country in a year, but each observation is spread across two rows.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="tidy-data.html#cb192-1"></a>table2</span>
+<span id="cb192-2"><a href="tidy-data.html#cb192-2"></a><span class="co">#&gt;         country  year        type       count</span></span>
+<span id="cb192-3"><a href="tidy-data.html#cb192-3"></a><span class="co">#&gt; 0   Afghanistan  1999       cases         745</span></span>
+<span id="cb192-4"><a href="tidy-data.html#cb192-4"></a><span class="co">#&gt; 1   Afghanistan  1999  population    19987071</span></span>
+<span id="cb192-5"><a href="tidy-data.html#cb192-5"></a><span class="co">#&gt; 2   Afghanistan  2000       cases        2666</span></span>
+<span id="cb192-6"><a href="tidy-data.html#cb192-6"></a><span class="co">#&gt; 3   Afghanistan  2000  population    20595360</span></span>
+<span id="cb192-7"><a href="tidy-data.html#cb192-7"></a><span class="co">#&gt; 4        Brazil  1999       cases       37737</span></span>
+<span id="cb192-8"><a href="tidy-data.html#cb192-8"></a><span class="co">#&gt; 5        Brazil  1999  population   172006362</span></span>
+<span id="cb192-9"><a href="tidy-data.html#cb192-9"></a><span class="co">#&gt; 6        Brazil  2000       cases       80488</span></span>
+<span id="cb192-10"><a href="tidy-data.html#cb192-10"></a><span class="co">#&gt; 7        Brazil  2000  population   174504898</span></span>
+<span id="cb192-11"><a href="tidy-data.html#cb192-11"></a><span class="co">#&gt; 8         China  1999       cases      212258</span></span>
+<span id="cb192-12"><a href="tidy-data.html#cb192-12"></a><span class="co">#&gt; 9         China  1999  population  1272915272</span></span>
+<span id="cb192-13"><a href="tidy-data.html#cb192-13"></a><span class="co">#&gt; 10        China  2000       cases      213766</span></span>
+<span id="cb192-14"><a href="tidy-data.html#cb192-14"></a><span class="co">#&gt; 11        China  2000  population  1280428583</span></span></code></pre></div>
+<p>To tidy this up, we first analyse the representation in similar way to <code>melt()</code>. This time, however, we only need two parameters:</p>
+<ul>
+<li><p>The column to take variable names from. Here, it’s <code>type</code>.</p></li>
+<li><p>The column to take values from. Here it’s <code>count</code>.</p></li>
+</ul>
+<p>Once we’ve figured that out, we can use <code>pivot()</code>, as shown programmatically below, and visually in Figure <a href="tidy-data.html#fig:tidy-spread">12.3</a>.</p>
+<p>In this example, we have a multi-column <code>index</code> argument and will need to use <code>pivot_table()</code>. With a single column index <code>pivot()</code> can be used.</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb193-1"><a href="tidy-data.html#cb193-1"></a>table2.pivot_table(</span>
+<span id="cb193-2"><a href="tidy-data.html#cb193-2"></a>    index <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
+<span id="cb193-3"><a href="tidy-data.html#cb193-3"></a>    columns <span class="op">=</span> <span class="st">&#39;type&#39;</span>, </span>
+<span id="cb193-4"><a href="tidy-data.html#cb193-4"></a>    values <span class="op">=</span> <span class="st">&#39;count&#39;</span>).reset_index()</span>
+<span id="cb193-5"><a href="tidy-data.html#cb193-5"></a><span class="co">#&gt; type      country  year   cases  population</span></span>
+<span id="cb193-6"><a href="tidy-data.html#cb193-6"></a><span class="co">#&gt; 0     Afghanistan  1999     745    19987071</span></span>
+<span id="cb193-7"><a href="tidy-data.html#cb193-7"></a><span class="co">#&gt; 1     Afghanistan  2000    2666    20595360</span></span>
+<span id="cb193-8"><a href="tidy-data.html#cb193-8"></a><span class="co">#&gt; 2          Brazil  1999   37737   172006362</span></span>
+<span id="cb193-9"><a href="tidy-data.html#cb193-9"></a><span class="co">#&gt; 3          Brazil  2000   80488   174504898</span></span>
+<span id="cb193-10"><a href="tidy-data.html#cb193-10"></a><span class="co">#&gt; 4           China  1999  212258  1272915272</span></span>
+<span id="cb193-11"><a href="tidy-data.html#cb193-11"></a><span class="co">#&gt; 5           China  2000  213766  1280428583</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:tidy-spread"></span>
+<img src="images/tidy-8.png" alt="Pivoting `table2` into a &quot;wider&quot;, tidy form." width="100%" />
+<p class="caption">
+Figure 12.3: Pivoting <code>table2</code> into a “wider”, tidy form.
+</p>
+</div>
+<p>As you might have guessed from their names, <code>pivot()</code> and <code>pivot_table()</code> are complements to <code>melt()</code>. <code>melt()</code> makes wide tables narrower and longer; <code>pivot()</code> and <code>pivot_table()</code> makes long tables shorter and wider.</p>
+</div>
+<div id="exercises-20" class="section level3" number="12.3.3">
+<h3><span class="header-section-number">12.3.3</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Why are <code>melt()</code> and <code>pivot()</code> not perfectly symmetrical?
+Carefully consider the following example:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb194-1"><a href="tidy-data.html#cb194-1"></a>stocks <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb194-2"><a href="tidy-data.html#cb194-2"></a>  <span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>],</span>
+<span id="cb194-3"><a href="tidy-data.html#cb194-3"></a>  <span class="st">&#39;half&#39;</span>:  [<span class="dv">1</span>,    <span class="dv">2</span>,     <span class="dv">1</span>,    <span class="dv">2</span>],</span>
+<span id="cb194-4"><a href="tidy-data.html#cb194-4"></a>  <span class="st">&#39;return&#39;</span>: [<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.92</span>, <span class="fl">0.17</span>]</span>
+<span id="cb194-5"><a href="tidy-data.html#cb194-5"></a>})</span>
+<span id="cb194-6"><a href="tidy-data.html#cb194-6"></a>(stocks.</span>
+<span id="cb194-7"><a href="tidy-data.html#cb194-7"></a>  pivot(</span>
+<span id="cb194-8"><a href="tidy-data.html#cb194-8"></a>    index <span class="op">=</span> <span class="st">&#39;half&#39;</span>, </span>
+<span id="cb194-9"><a href="tidy-data.html#cb194-9"></a>    columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb194-10"><a href="tidy-data.html#cb194-10"></a>    values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).</span>
+<span id="cb194-11"><a href="tidy-data.html#cb194-11"></a>  melt(</span>
+<span id="cb194-12"><a href="tidy-data.html#cb194-12"></a>    var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb194-13"><a href="tidy-data.html#cb194-13"></a>    value_name <span class="op">=</span> <span class="st">&#39;return&#39;</span>)</span>
+<span id="cb194-14"><a href="tidy-data.html#cb194-14"></a>  )</span></code></pre></div>
+<p>(Hint: look at the variable types and think about column <em>names</em>.)</p></li>
+</ol>
+</div>
+</div>
+<div id="separating-and-uniting" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> Separating and uniting</h2>
+<p>So far you’ve learned how to tidy <code>table2</code> and <code>table4</code>, but not <code>table3</code>. <code>table3</code> has a different problem: we have one column (<code>rate</code>) that contains two variables (<code>cases</code> and <code>population</code>). To fix this problem, we’ll need the pandas <code>str.split()</code> function. You’ll also learn about the complement of <code>str.split()</code>: <code>str.join()</code>, which you use if a single variable is spread across multiple columns.</p>
+<div id="split-separate" class="section level3" number="12.4.1">
+<h3><span class="header-section-number">12.4.1</span> Split (Separate)</h3>
+<p><code>str.split()</code> pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take <code>table3</code>:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb195-1"><a href="tidy-data.html#cb195-1"></a>table3</span>
+<span id="cb195-2"><a href="tidy-data.html#cb195-2"></a><span class="co">#&gt;        country  year               rate</span></span>
+<span id="cb195-3"><a href="tidy-data.html#cb195-3"></a><span class="co">#&gt; 0  Afghanistan  1999       745/19987071</span></span>
+<span id="cb195-4"><a href="tidy-data.html#cb195-4"></a><span class="co">#&gt; 1  Afghanistan  2000      2666/20595360</span></span>
+<span id="cb195-5"><a href="tidy-data.html#cb195-5"></a><span class="co">#&gt; 2       Brazil  1999    37737/172006362</span></span>
+<span id="cb195-6"><a href="tidy-data.html#cb195-6"></a><span class="co">#&gt; 3       Brazil  2000    80488/174504898</span></span>
+<span id="cb195-7"><a href="tidy-data.html#cb195-7"></a><span class="co">#&gt; 4        China  1999  212258/1272915272</span></span>
+<span id="cb195-8"><a href="tidy-data.html#cb195-8"></a><span class="co">#&gt; 5        China  2000  213766/1280428583</span></span></code></pre></div>
+<p>The <code>rate</code> column contains both <code>cases</code> and <code>population</code> variables, and we need to split it into two variables. <code>str.split()</code> takes the name of the column to split. The names of the columns to separate into can be names using <code>rename()</code>, as shown in Figure <a href="tidy-data.html#fig:tidy-separate">12.4</a> and the code below.</p>
+<p>By default, <code>str.split()</code> will split values on white spaces. If you wish to use a specific character to separate a column, you can pass the character to the <code>pat</code> or first argument of <code>str.split()</code>.</p>
+<p>Unlike <code>tidyr::separate()</code> in R, you will need to append the new columns back onto your data set with a <code>pd.concat()</code> with the argument <code>axis = 1</code></p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb196-1"><a href="tidy-data.html#cb196-1"></a>new_columns <span class="op">=</span> (table3.</span>
+<span id="cb196-2"><a href="tidy-data.html#cb196-2"></a>  rate.<span class="bu">str</span>.split(<span class="st">&quot;/&quot;</span>, expand <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb196-3"><a href="tidy-data.html#cb196-3"></a>  rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;cases&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;population&quot;</span>})</span>
+<span id="cb196-4"><a href="tidy-data.html#cb196-4"></a>  )</span>
+<span id="cb196-5"><a href="tidy-data.html#cb196-5"></a>  </span>
+<span id="cb196-6"><a href="tidy-data.html#cb196-6"></a>pd.concat([table3.drop(columns <span class="op">=</span> <span class="st">&#39;rate&#39;</span>), new_columns], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb196-7"><a href="tidy-data.html#cb196-7"></a><span class="co">#&gt;        country  year   cases  population</span></span>
+<span id="cb196-8"><a href="tidy-data.html#cb196-8"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
+<span id="cb196-9"><a href="tidy-data.html#cb196-9"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360</span></span>
+<span id="cb196-10"><a href="tidy-data.html#cb196-10"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362</span></span>
+<span id="cb196-11"><a href="tidy-data.html#cb196-11"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898</span></span>
+<span id="cb196-12"><a href="tidy-data.html#cb196-12"></a><span class="co">#&gt; 4        China  1999  212258  1272915272</span></span>
+<span id="cb196-13"><a href="tidy-data.html#cb196-13"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:tidy-separate"></span>
+<img src="images/tidy-17.png" alt="Separating `table3` makes it tidy" width="75%" />
+<p class="caption">
+Figure 12.4: Separating <code>table3</code> makes it tidy
+</p>
+</div>
+<p>(Formally, <code>pat</code> is a regular expression, which you’ll learn more about in <a href="data-import.html#readr-strings">strings</a>.)</p>
+<p>Look carefully at the column types: you’ll notice that <code>cases</code> and <code>population</code> are objects or strings. This is the default behaviour in <code>str.split()</code>: it only works on object types and returns objects. Here, however, it’s not very useful as those really are numbers. We can ask use <code>astype()</code> to convert to better types:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb197-1"><a href="tidy-data.html#cb197-1"></a>pd.concat([</span>
+<span id="cb197-2"><a href="tidy-data.html#cb197-2"></a>  table3.drop(columns <span class="op">=</span> <span class="st">&#39;rate&#39;</span>), </span>
+<span id="cb197-3"><a href="tidy-data.html#cb197-3"></a>  new_columns.astype(<span class="st">&#39;float&#39;</span>)],</span>
+<span id="cb197-4"><a href="tidy-data.html#cb197-4"></a>  axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb197-5"><a href="tidy-data.html#cb197-5"></a><span class="co">#&gt;        country  year     cases    population</span></span>
+<span id="cb197-6"><a href="tidy-data.html#cb197-6"></a><span class="co">#&gt; 0  Afghanistan  1999     745.0  1.998707e+07</span></span>
+<span id="cb197-7"><a href="tidy-data.html#cb197-7"></a><span class="co">#&gt; 1  Afghanistan  2000    2666.0  2.059536e+07</span></span>
+<span id="cb197-8"><a href="tidy-data.html#cb197-8"></a><span class="co">#&gt; 2       Brazil  1999   37737.0  1.720064e+08</span></span>
+<span id="cb197-9"><a href="tidy-data.html#cb197-9"></a><span class="co">#&gt; 3       Brazil  2000   80488.0  1.745049e+08</span></span>
+<span id="cb197-10"><a href="tidy-data.html#cb197-10"></a><span class="co">#&gt; 4        China  1999  212258.0  1.272915e+09</span></span>
+<span id="cb197-11"><a href="tidy-data.html#cb197-11"></a><span class="co">#&gt; 5        China  2000  213766.0  1.280429e+09</span></span></code></pre></div>
+<p>To split on integers you would use <code>str[]</code>. <code>str[]</code> will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings and are entered <code>:2</code>; negative value start at -1 on the far-right of the strings are entered <code>-2:</code>.</p>
+<p>You can use this arrangement to separate the last two digits of each year. This make this data less tidy, but is useful in other cases, as you’ll see in a little bit.</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="tidy-data.html#cb198-1"></a>cent_year <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb198-2"><a href="tidy-data.html#cb198-2"></a>    <span class="st">&#39;century&#39;</span>: table3.year.astype(<span class="bu">str</span>).<span class="bu">str</span>[:<span class="dv">2</span>],</span>
+<span id="cb198-3"><a href="tidy-data.html#cb198-3"></a>    <span class="st">&#39;year&#39;</span>: table3.year.astype(<span class="bu">str</span>).<span class="bu">str</span>[<span class="op">-</span><span class="dv">2</span>:]</span>
+<span id="cb198-4"><a href="tidy-data.html#cb198-4"></a>})</span>
+<span id="cb198-5"><a href="tidy-data.html#cb198-5"></a></span>
+<span id="cb198-6"><a href="tidy-data.html#cb198-6"></a>pd.concat([table3.drop(columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>), cent_year], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb198-7"><a href="tidy-data.html#cb198-7"></a></span>
+<span id="cb198-8"><a href="tidy-data.html#cb198-8"></a><span class="co">#&gt;        country               rate century year</span></span>
+<span id="cb198-9"><a href="tidy-data.html#cb198-9"></a><span class="co">#&gt; 0  Afghanistan       745/19987071      19   99</span></span>
+<span id="cb198-10"><a href="tidy-data.html#cb198-10"></a><span class="co">#&gt; 1  Afghanistan      2666/20595360      20   00</span></span>
+<span id="cb198-11"><a href="tidy-data.html#cb198-11"></a><span class="co">#&gt; 2       Brazil    37737/172006362      19   99</span></span>
+<span id="cb198-12"><a href="tidy-data.html#cb198-12"></a><span class="co">#&gt; 3       Brazil    80488/174504898      20   00</span></span>
+<span id="cb198-13"><a href="tidy-data.html#cb198-13"></a><span class="co">#&gt; 4        China  212258/1272915272      19   99</span></span>
+<span id="cb198-14"><a href="tidy-data.html#cb198-14"></a><span class="co">#&gt; 5        China  213766/1280428583      20   00</span></span></code></pre></div>
+</div>
+<div id="unite" class="section level3" number="12.4.2">
+<h3><span class="header-section-number">12.4.2</span> Unite</h3>
+<p>For two string series the inverse of <code>str.split()</code> can be done with <code>+</code>: it combines multiple columns into a single column. You’ll need it much less frequently than <code>str.split()</code>, but it’s still a useful tool to have in your back pocket.</p>
+<div class="figure" style="text-align: center"><span id="fig:tidy-unite"></span>
+<img src="images/tidy-18.png" alt="Uniting `table5` makes it tidy" width="75%" />
+<p class="caption">
+Figure 12.5: Uniting <code>table5</code> makes it tidy
+</p>
+</div>
+<p>We can use <code>+</code> to rejoin the <em>century</em> and <em>year</em> string columns that we created in the last example. That data is saved as <code>table5</code>. <code>+</code> takes a two series and can be assigned to the name of the new variable to create:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb199-1"><a href="tidy-data.html#cb199-1"></a>table5.assign(new <span class="op">=</span> table5[<span class="st">&#39;century&#39;</span>] <span class="op">+</span> table5[<span class="st">&#39;year&#39;</span>])</span>
+<span id="cb199-2"><a href="tidy-data.html#cb199-2"></a><span class="co">#&gt;        country  century  year               rate  new</span></span>
+<span id="cb199-3"><a href="tidy-data.html#cb199-3"></a><span class="co">#&gt; 0  Afghanistan       19    99       745/19987071  118</span></span>
+<span id="cb199-4"><a href="tidy-data.html#cb199-4"></a><span class="co">#&gt; 1  Afghanistan       20     0      2666/20595360   20</span></span>
+<span id="cb199-5"><a href="tidy-data.html#cb199-5"></a><span class="co">#&gt; 2       Brazil       19    99    37737/172006362  118</span></span>
+<span id="cb199-6"><a href="tidy-data.html#cb199-6"></a><span class="co">#&gt; 3       Brazil       20     0    80488/174504898   20</span></span>
+<span id="cb199-7"><a href="tidy-data.html#cb199-7"></a><span class="co">#&gt; 4        China       19    99  212258/1272915272  118</span></span>
+<span id="cb199-8"><a href="tidy-data.html#cb199-8"></a><span class="co">#&gt; 5        China       20     0  213766/1280428583   20</span></span></code></pre></div>
+<p>If you want join the strings with a specified string or more than two columns you can use agg with <code>axis = 1</code>.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="tidy-data.html#cb200-1"></a>table5.assign(new <span class="op">=</span> table5[[<span class="st">&#39;century&#39;</span>, <span class="st">&#39;year&#39;</span>]].agg(<span class="st">&quot;_&quot;</span>.join, axis <span class="op">=</span> <span class="dv">1</span>))</span>
+<span id="cb200-2"><a href="tidy-data.html#cb200-2"></a><span class="co">#&gt;        country century year               rate    new</span></span>
+<span id="cb200-3"><a href="tidy-data.html#cb200-3"></a><span class="co">#&gt; 0  Afghanistan      19   99       745/19987071  19_99</span></span>
+<span id="cb200-4"><a href="tidy-data.html#cb200-4"></a><span class="co">#&gt; 1  Afghanistan      20   00      2666/20595360  20_00</span></span>
+<span id="cb200-5"><a href="tidy-data.html#cb200-5"></a><span class="co">#&gt; 2       Brazil      19   99    37737/172006362  19_99</span></span>
+<span id="cb200-6"><a href="tidy-data.html#cb200-6"></a><span class="co">#&gt; 3       Brazil      20   00    80488/174504898  20_00</span></span>
+<span id="cb200-7"><a href="tidy-data.html#cb200-7"></a><span class="co">#&gt; 4        China      19   99  212258/1272915272  19_99</span></span>
+<span id="cb200-8"><a href="tidy-data.html#cb200-8"></a><span class="co">#&gt; 5        China      20   00  213766/1280428583  20_00</span></span></code></pre></div>
+</div>
+<div id="exercises-21" class="section level3" number="12.4.3">
+<h3><span class="header-section-number">12.4.3</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li>Compare and contrast <code>str.split()</code> and <code>str.extract()</code>. Why are there
+three variations of separation (by position, by separator, and with
+groups?</li>
+</ol>
+</div>
+</div>
+<div id="missing-values-3" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> Missing values</h2>
+<p>Changing the representation of a dataset brings up an important subtlety of missing values. Surprisingly, a value can be missing in one of two possible ways:</p>
+<ul>
+<li><strong>Explicitly</strong>, i.e. flagged with <code>nan</code>.</li>
+<li><strong>Implicitly</strong>, i.e. simply not present in the data.</li>
+</ul>
+<p>Let’s illustrate this idea with a very simple data set:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb201-1"><a href="tidy-data.html#cb201-1"></a>stocks <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb201-2"><a href="tidy-data.html#cb201-2"></a>    <span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>, <span class="dv">2016</span>],</span>
+<span id="cb201-3"><a href="tidy-data.html#cb201-3"></a>    <span class="st">&#39;qtr&#39;</span>: [   <span class="dv">1</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">4</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">4</span>],</span>
+<span id="cb201-4"><a href="tidy-data.html#cb201-4"></a>    <span class="st">&#39;return&#39;</span>: [<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.35</span>,   np.nan, <span class="fl">0.92</span>, <span class="fl">0.17</span>, <span class="fl">2.66</span>]</span>
+<span id="cb201-5"><a href="tidy-data.html#cb201-5"></a>    }) </span></code></pre></div>
+<p>There are two missing values in this dataset:</p>
+<ul>
+<li><p>The return for the fourth quarter of 2015 is explicitly missing, because
+the cell where its value should be instead contains <code>nan</code>.</p></li>
+<li><p>The return for the first quarter of 2016 is implicitly missing, because it
+simply does not appear in the dataset.</p></li>
+</ul>
+<p>One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence.</p>
+<p>The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting years in the columns:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb202-1"><a href="tidy-data.html#cb202-1"></a>stocks.pivot(</span>
+<span id="cb202-2"><a href="tidy-data.html#cb202-2"></a>  index <span class="op">=</span> <span class="st">&#39;qtr&#39;</span>, </span>
+<span id="cb202-3"><a href="tidy-data.html#cb202-3"></a>  columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb202-4"><a href="tidy-data.html#cb202-4"></a>  values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).reset_index()</span>
+<span id="cb202-5"><a href="tidy-data.html#cb202-5"></a><span class="co">#&gt; year  qtr  2015  2016</span></span>
+<span id="cb202-6"><a href="tidy-data.html#cb202-6"></a><span class="co">#&gt; 0       1  1.88   NaN</span></span>
+<span id="cb202-7"><a href="tidy-data.html#cb202-7"></a><span class="co">#&gt; 1       2  0.59  0.92</span></span>
+<span id="cb202-8"><a href="tidy-data.html#cb202-8"></a><span class="co">#&gt; 2       3  0.35  0.17</span></span>
+<span id="cb202-9"><a href="tidy-data.html#cb202-9"></a><span class="co">#&gt; 3       4   NaN  2.66</span></span></code></pre></div>
+<p>Because these explicit missing values may not be important in other representations of the data, you turn explicit missing values implicit with <code>.dropna()</code>:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="tidy-data.html#cb203-1"></a>stocks.pivot(</span>
+<span id="cb203-2"><a href="tidy-data.html#cb203-2"></a>  index <span class="op">=</span> <span class="st">&#39;qtr&#39;</span>, </span>
+<span id="cb203-3"><a href="tidy-data.html#cb203-3"></a>  columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb203-4"><a href="tidy-data.html#cb203-4"></a>  values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).reset_index().melt(id_vars <span class="op">=</span> [<span class="st">&#39;qtr&#39;</span>]).dropna()</span>
+<span id="cb203-5"><a href="tidy-data.html#cb203-5"></a><span class="co">#&gt;    qtr  year  value</span></span>
+<span id="cb203-6"><a href="tidy-data.html#cb203-6"></a><span class="co">#&gt; 0    1  2015   1.88</span></span>
+<span id="cb203-7"><a href="tidy-data.html#cb203-7"></a><span class="co">#&gt; 1    2  2015   0.59</span></span>
+<span id="cb203-8"><a href="tidy-data.html#cb203-8"></a><span class="co">#&gt; 2    3  2015   0.35</span></span>
+<span id="cb203-9"><a href="tidy-data.html#cb203-9"></a><span class="co">#&gt; 5    2  2016   0.92</span></span>
+<span id="cb203-10"><a href="tidy-data.html#cb203-10"></a><span class="co">#&gt; 6    3  2016   0.17</span></span>
+<span id="cb203-11"><a href="tidy-data.html#cb203-11"></a><span class="co">#&gt; 7    4  2016   2.66</span></span></code></pre></div>
+<p><code>tidyr::complete()</code> in R takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit missingness where necessary. You can use <code>stack()</code> and <code>unstack()</code> with <code>set_index()</code>. See <a href="https://stackoverflow.com/questions/44287445/pandas-or-python-equivalent-of-tidyr-complete">this stackoverflow</a> for an example.</p>
 <!-- ## Case Study -->
 <!-- To finish off the chapter, let's pull together everything you've learned to tackle a realistic data tidying problem. The `tidyr::who` dataset contains tuberculosis (TB) cases broken down by year, country, age, gender, and diagnosis method. The data comes from the *2014 World Health Organization Global Tuberculosis Report*, available at <http://www.who.int/tb/country/data/download/en/>. -->
 <!-- There's a wealth of epidemiological information in this dataset, but it's challenging to work with the data in the form that it's provided: -->
@@ -795,16 +951,19 @@ own way.” –– Hadley Wickham</p>
 <!--     Confirm this claim. -->
 <!-- 1.  For each country, year, and sex compute the total number of cases of  -->
 <!--     TB. Make an informative visualisation of the data. -->
-<!-- ## Non-tidy data -->
-<!-- Before we continue on to other topics, it's worth talking briefly about non-tidy data. Earlier in the chapter, I used the pejorative term "messy" to refer to non-tidy data. That's an oversimplification: there are lots of useful and well-founded data structures that are not tidy data. There are two main reasons to use other data structures: -->
-<!-- * Alternative representations may have substantial performance or space  -->
-<!--   advantages. -->
-<!-- * Specialised fields have evolved their own conventions for storing data -->
-<!--   that may be quite different to the conventions of  tidy data. -->
-<!-- Either of these reasons means you'll need something other than a tibble (or data frame). If your data does fit naturally into a rectangular structure composed of observations and variables, I think tidy data should be your default choice. But there are good reasons to use other structures; tidy data is not the only way. -->
-<!-- If you'd like to learn more about non-tidy data, I'd highly recommend this thoughtful blog post by Jeff Leek: <http://simplystatistics.org/2016/02/17/non-tidy-data/> -->
-
 </div>
+<div id="non-tidy-data" class="section level2" number="12.6">
+<h2><span class="header-section-number">12.6</span> Non-tidy data</h2>
+<p>Before we continue on to other topics, it’s worth talking briefly about non-tidy data. Earlier in the chapter, I used the pejorative term “messy” to refer to non-tidy data. That’s an oversimplification: there are lots of useful and well-founded data structures that are not tidy data. There are two main reasons to use other data structures:</p>
+<ul>
+<li><p>Alternative representations may have substantial performance or space
+advantages.</p></li>
+<li><p>Specialised fields have evolved their own conventions for storing data
+that may be quite different to the conventions of tidy data.</p></li>
+</ul>
+<p>Either of these reasons means you’ll need something other than a tibble (or data frame). If your data does fit naturally into a rectangular structure composed of observations and variables, I think tidy data should be your default choice. But there are good reasons to use other structures; tidy data is not the only way.</p>
+<p>If you’d like to learn more about non-tidy data, I’d highly recommend this thoughtful blog post by Jeff Leek: <a href="http://simplystatistics.org/2016/02/17/non-tidy-data/" class="uri">http://simplystatistics.org/2016/02/17/non-tidy-data/</a></p>
+
 </div>
 </div>
             </section>
@@ -812,8 +971,8 @@ own way.” –– Hadley Wickham</p>
           </div>
         </div>
       </div>
-<a href="data-import.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="data-import.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="relational-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
