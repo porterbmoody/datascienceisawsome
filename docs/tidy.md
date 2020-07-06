@@ -570,149 +570,227 @@ stocks.pivot(
 #> 7    4  2016   2.66
 ```
 
-`tidyr::complete()` in R takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit missingness where necessary. You can use `stack()` and `unstack()` with `set_index()`.  See [this stackoverflow](https://stackoverflow.com/questions/44287445/pandas-or-python-equivalent-of-tidyr-complete) for an example.
+You can use the pandas functions `stack()` and `unstack()` with `set_index()` to take a set of columns and find all unique combinations. This ensures the original dataset contains all values by filling in explicit missingness where necessary. See [this stackoverflow](https://stackoverflow.com/questions/44287445/pandas-or-python-equivalent-of-tidyr-complete) for an example. `tidyr::complete()` in R performs a similar function.
 
 
-<!-- ## Case Study -->
+## Case Study
 
-<!-- To finish off the chapter, let's pull together everything you've learned to tackle a realistic data tidying problem. The `tidyr::who` dataset contains tuberculosis (TB) cases broken down by year, country, age, gender, and diagnosis method. The data comes from the *2014 World Health Organization Global Tuberculosis Report*, available at <http://www.who.int/tb/country/data/download/en/>. -->
+To finish off the chapter, let's pull together everything you've learned to tackle a realistic data tidying problem. The `tidyr::who` dataset contains tuberculosis (TB) cases broken down by year, country, age, gender, and diagnosis method. The data comes from the *2014 World Health Organization Global Tuberculosis Report*, available at <http://www.who.int/tb/country/data/download/en/>.
 
-<!-- There's a wealth of epidemiological information in this dataset, but it's challenging to work with the data in the form that it's provided: -->
+There's a wealth of epidemiological information in this dataset, but it's challenging to work with the data in the form that it's provided:
 
-<!-- ```{r} -->
-<!-- who -->
-<!-- ``` -->
 
-<!-- This is a very typical real-life example dataset. It contains redundant columns, odd variable codes, and many missing values. In short, `who` is messy, and we'll need multiple steps to tidy it. Like dplyr, tidyr is designed so that each function does one thing well. That means in real-life situations you'll usually need to string together multiple verbs into a pipeline.  -->
+```python
+who = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/who/who.csv")
+# Fix the Namibia NA iso code.
+who.loc[who.iso2.isna(),'iso2'] = "NA"
+```
 
-<!-- The best place to start is almost always to gather together the columns that are not variables. Let's have a look at what we've got:  -->
+This is a very typical real-life example dataset. It contains redundant columns, odd variable codes, and many missing values. In short, `who` is messy, and we'll need multiple steps to tidy it. Pandas is designed so that each function does one thing well. That means in real-life situations you'll usually need to string together multiple verbs into a pipeline.
 
-<!-- * It looks like `country`, `iso2`, and `iso3` are three variables that  -->
-<!--   redundantly specify the country. -->
+The best place to start is almost always to gather together the columns that are not variables. Let's have a look at what we've got:
 
-<!-- * `year` is clearly also a variable. -->
+* It looks like `country`, `iso2`, and `iso3` are three variables that
+  redundantly specify the country.
 
-<!-- * We don't know what all the other columns are yet, but given the structure  -->
-<!--   in the variable names (e.g. `new_sp_m014`, `new_ep_m014`, `new_ep_f014`)  -->
-<!--   these are likely to be values, not variables. -->
+* `year` is clearly also a variable.
 
-<!-- So we need to gather together all the columns from `new_sp_m014` to `newrel_f65`. We don't know what those values represent yet, so we'll give them the generic name `"key"`. We know the cells represent the count of cases, so we'll use the variable `cases`. There are a lot of missing values in the current representation, so for now we'll use `na.rm` just so we can focus on the values that are present. -->
+* We don't know what all the other columns are yet, but given the structure
+  in the variable names (e.g. `new_sp_m014`, `new_ep_m014`, `new_ep_f014`)
+  these are likely to be values, not variables.
 
-<!-- ```{r} -->
-<!-- who1 <- who %>%  -->
-<!--   pivot_longer( -->
-<!--     cols = new_sp_m014:newrel_f65,  -->
-<!--     names_to = "key",  -->
-<!--     values_to = "cases",  -->
-<!--     values_drop_na = TRUE -->
-<!--   ) -->
-<!-- who1 -->
-<!-- ``` -->
+So we need to gather together all the columns from `new_sp_m014` to `newrel_f65`. We don't know what those values represent yet, so we'll give them the generic name `"key"`. We know the cells represent the count of cases, so we'll use the variable `cases`. There are a lot of missing values in the current representation, so for now we'll use `na.rm` just so we can focus on the values that are present.
 
-<!-- We can get some hint of the structure of the values in the new `key` column by counting them: -->
 
-<!-- ```{r} -->
-<!-- who1 %>%  -->
-<!--   count(key) -->
-<!-- ``` -->
+```python
+who1 = who.melt(
+    id_vars = ['country', 'iso2', 'iso3', 'year'], 
+    var_name = 'key', 
+    value_name = 'cases').dropna()
+```
 
-<!-- You might be able to parse this out by yourself with a little thought and some experimentation, but luckily we have the data dictionary handy. It tells us: -->
+We can get some hint of the structure of the values in the new `key` column by counting them:
 
-<!-- 1.  The first three letters of each column denote whether the column  -->
-<!--     contains new or old cases of TB. In this dataset, each column contains  -->
-<!--     new cases. -->
 
-<!-- 1.  The next two letters describe the type of TB: -->
+```python
+who1.key.value_counts().head(25)
+#> new_sp_m4554    3223
+#> new_sp_m3544    3219
+#> new_sp_m5564    3218
+#> new_sp_m1524    3209
+#> new_sp_m65      3209
+#> new_sp_m2534    3206
+#> new_sp_f4554    3204
+#> new_sp_f2534    3200
+#> new_sp_f3544    3199
+#> new_sp_f65      3197
+#> new_sp_f5564    3195
+#> new_sp_f1524    3194
+#> new_sp_f014     3174
+#> new_sp_m014     3173
+#> new_sn_m014     1045
+#> new_sn_f014     1040
+#> new_ep_m014     1038
+#> new_ep_f014     1032
+#> new_sn_m1524    1030
+#> new_sn_m4554    1027
+#> new_ep_m1524    1026
+#> new_sn_m3544    1025
+#> new_ep_m3544    1024
+#> new_sn_m2534    1022
+#> new_sn_f1524    1022
+#> Name: key, dtype: int64
+```
 
-<!--     *   `rel` stands for cases of relapse -->
-<!--     *   `ep` stands for cases of extrapulmonary TB -->
-<!--     *   `sn` stands for cases of pulmonary TB that could not be diagnosed by  -->
-<!--         a pulmonary smear (smear negative) -->
-<!--     *   `sp` stands for cases of pulmonary TB that could be diagnosed be  -->
-<!--         a pulmonary smear (smear positive) -->
+You might be able to parse this out by yourself with a little thought and some experimentation, but luckily we have the data dictionary handy. It tells us:
 
-<!-- 3.  The sixth letter gives the sex of TB patients. The dataset groups  -->
-<!--     cases by males (`m`) and females (`f`). -->
+1.  The first three letters of each column denote whether the column
+    contains new or old cases of TB. In this dataset, each column contains
+    new cases.
 
-<!-- 4.  The remaining numbers gives the age group. The dataset groups cases into  -->
-<!--     seven age groups: -->
+1.  The next two letters describe the type of TB:
 
-<!--     * `014` = 0 -- 14 years old -->
-<!--     * `1524` = 15 -- 24 years old -->
-<!--     * `2534` = 25 -- 34 years old -->
-<!--     * `3544` = 35 -- 44 years old -->
-<!--     * `4554` = 45 -- 54 years old -->
-<!--     * `5564` = 55 -- 64 years old -->
-<!--     * `65` = 65 or older -->
+    *   `rel` stands for cases of relapse
+    *   `ep` stands for cases of extrapulmonary TB
+    *   `sn` stands for cases of pulmonary TB that could not be diagnosed by
+        a pulmonary smear (smear negative)
+    *   `sp` stands for cases of pulmonary TB that could be diagnosed be
+        a pulmonary smear (smear positive)
 
-<!-- We need to make a minor fix to the format of the column names: unfortunately the names are slightly inconsistent because instead of `new_rel` we have `newrel` (it's hard to spot this here but if you don't fix it we'll get errors in subsequent steps). You'll learn about `str_replace()` in [strings], but the basic idea is pretty simple: replace the characters "newrel" with "new_rel". This makes all variable names consistent. -->
+3.  The sixth letter gives the sex of TB patients. The dataset groups
+    cases by males (`m`) and females (`f`).
 
-<!-- ```{r} -->
-<!-- who2 <- who1 %>%  -->
-<!--   mutate(names_from = stringr::str_replace(key, "newrel", "new_rel")) -->
-<!-- who2 -->
-<!-- ``` -->
+4.  The remaining numbers gives the age group. The dataset groups cases into
+    seven age groups:
 
-<!-- We can separate the values in each code with two passes of `separate()`. The first pass will split the codes at each underscore. -->
+    * `014` = 0 -- 14 years old
+    * `1524` = 15 -- 24 years old
+    * `2534` = 25 -- 34 years old
+    * `3544` = 35 -- 44 years old
+    * `4554` = 45 -- 54 years old
+    * `5564` = 55 -- 64 years old
+    * `65` = 65 or older
 
-<!-- ```{r} -->
-<!-- who3 <- who2 %>%  -->
-<!--   separate(key, c("new", "type", "sexage"), sep = "_") -->
-<!-- who3 -->
-<!-- ``` -->
+We need to make a minor fix to the format of the column names: unfortunately the names are slightly inconsistent because instead of `new_rel` we have `newrel` (it's hard to spot this here but if you don't fix it we'll get errors in subsequent steps). You'll learn about `str.replace()` in [strings], but the basic idea is pretty simple: replace the characters "newrel" with "new_rel". This makes all variable names consistent.
 
-<!-- Then we might as well drop the `new` column because it's constant in this dataset. While we're dropping columns, let's also drop `iso2` and `iso3` since they're redundant. -->
 
-<!-- ```{r} -->
-<!-- who3 %>%  -->
-<!--   count(new) -->
-<!-- who4 <- who3 %>%  -->
-<!--   select(-new, -iso2, -iso3) -->
-<!-- ``` -->
+```python
+who2 = who1.assign(names_from = lambda x: x.key.str.replace('newrel', 'new_rel'))
+who2
+#>                           country iso2 iso3  ...          key   cases   names_from
+#> 17                    Afghanistan   AF  AFG  ...  new_sp_m014     0.0  new_sp_m014
+#> 18                    Afghanistan   AF  AFG  ...  new_sp_m014    30.0  new_sp_m014
+#> 19                    Afghanistan   AF  AFG  ...  new_sp_m014     8.0  new_sp_m014
+#> 20                    Afghanistan   AF  AFG  ...  new_sp_m014    52.0  new_sp_m014
+#> 21                    Afghanistan   AF  AFG  ...  new_sp_m014   129.0  new_sp_m014
+#> ...                           ...  ...  ...  ...          ...     ...          ...
+#> 405269                   Viet Nam   VN  VNM  ...   newrel_f65  3110.0  new_rel_f65
+#> 405303  Wallis and Futuna Islands   WF  WLF  ...   newrel_f65     2.0  new_rel_f65
+#> 405371                      Yemen   YE  YEM  ...   newrel_f65   360.0  new_rel_f65
+#> 405405                     Zambia   ZM  ZMB  ...   newrel_f65   669.0  new_rel_f65
+#> 405439                   Zimbabwe   ZW  ZWE  ...   newrel_f65   725.0  new_rel_f65
+#> 
+#> [76046 rows x 7 columns]
+```
 
-<!-- Next we'll separate `sexage` into `sex` and `age` by splitting after the first character: -->
+We can separate the values in each code with two passes of `str.split()`. The first pass will split the codes at each underscore.
 
-<!-- ```{r} -->
-<!-- who5 <- who4 %>%  -->
-<!--   separate(sexage, c("sex", "age"), sep = 1) -->
-<!-- who5 -->
-<!-- ``` -->
 
-<!-- The `who` dataset is now tidy! -->
+```python
+new_columns = (who2.names_from.
+    str.split("_",expand = True).
+    rename(columns = {0: "new", 1: "type", 2: "sexage"}))
+new_columns
+#>         new type sexage
+#> 17      new   sp   m014
+#> 18      new   sp   m014
+#> 19      new   sp   m014
+#> 20      new   sp   m014
+#> 21      new   sp   m014
+#> ...     ...  ...    ...
+#> 405269  new  rel    f65
+#> 405303  new  rel    f65
+#> 405371  new  rel    f65
+#> 405405  new  rel    f65
+#> 405439  new  rel    f65
+#> 
+#> [76046 rows x 3 columns]
+```
 
-<!-- I've shown you the code a piece at a time, assigning each interim result to a new variable. This typically isn't how you'd work interactively. Instead, you'd gradually build up a complex pipe: -->
+Then we might as well drop the `new` column because it's constant in this dataset. While we're dropping columns, let's also drop `iso2` and `iso3` since they're redundant.
 
-<!-- ```{r, results = "hide"} -->
-<!-- who %>% -->
-<!--   pivot_longer( -->
-<!--     cols = new_sp_m014:newrel_f65,  -->
-<!--     names_to = "key",  -->
-<!--     values_to = "cases",  -->
-<!--     values_drop_na = TRUE -->
-<!--   ) %>%  -->
-<!--   mutate( -->
-<!--     key = stringr::str_replace(key, "newrel", "new_rel") -->
-<!--   ) %>% -->
-<!--   separate(key, c("new", "var", "sexage")) %>%  -->
-<!--   select(-new, -iso2, -iso3) %>%  -->
-<!--   separate(sexage, c("sex", "age"), sep = 1) -->
-<!-- ``` -->
 
-<!-- ### Exercises -->
+```python
+# who3 is in R process. They also have an error and they are not using the names_from column.
+who4 = pd.concat([
+  who2.filter(items = ['country', 'year']),
+  new_columns.filter(items = ['type'])], axis = 1)
+```
 
-<!-- 1.  In this case study I set `values_drop_na = TRUE` just to make it easier to -->
-<!--     check that we had the correct values. Is this reasonable? Think about -->
-<!--     how missing values are represented in this dataset. Are there implicit -->
-<!--     missing values? What's the difference between an `NA` and zero?  -->
+Next we'll separate `sexage` into `sex` and `age` by splitting after the first character:
 
-<!-- 1.  What happens if you neglect the `mutate()` step? -->
-<!--     (`mutate(names_from = stringr::str_replace(key, "newrel", "new_rel"))`) -->
 
-<!-- 1.  I claimed that `iso2` and `iso3` were redundant with `country`.  -->
-<!--     Confirm this claim. -->
+```python
+who5 = who4.assign(
+  sex = new_columns.sexage.str[:1],
+  age = new_columns.sexage.str.slice(1)
+)
 
-<!-- 1.  For each country, year, and sex compute the total number of cases of  -->
-<!--     TB. Make an informative visualisation of the data. -->
+who5
+#>                           country  year type sex  age
+#> 17                    Afghanistan  1997   sp   m  014
+#> 18                    Afghanistan  1998   sp   m  014
+#> 19                    Afghanistan  1999   sp   m  014
+#> 20                    Afghanistan  2000   sp   m  014
+#> 21                    Afghanistan  2001   sp   m  014
+#> ...                           ...   ...  ...  ..  ...
+#> 405269                   Viet Nam  2013  rel   f   65
+#> 405303  Wallis and Futuna Islands  2013  rel   f   65
+#> 405371                      Yemen  2013  rel   f   65
+#> 405405                     Zambia  2013  rel   f   65
+#> 405439                   Zimbabwe  2013  rel   f   65
+#> 
+#> [76046 rows x 5 columns]
+```
+
+The `who` dataset is now 'kinda' tidy! We have left the age range as age for simplicity.
+
+I've shown you the code a piece at a time, assigning each interim result to a new variable. This typically isn't how you'd work interactively. Instead, you'd use as little assignment as possible:
+
+
+```python
+# assigned fixed values back into key this time.
+who_melt = who.melt(
+    id_vars = ['country', 'iso2', 'iso3', 'year'], 
+    var_name = 'key', 
+    value_name = 'cases').dropna().assign(
+        key = lambda x: x.key.str.replace('newrel', 'new_rel')
+    )
+
+new_columns = (who_melt.key.
+    str.split("_",expand = True).
+    rename(columns = {0: "new", 1: "type", 2: "sexage"}))
+
+# Chose to assing type instead of using pd.concat.
+who_melt.assign(
+    type = new_columns.type,
+    sex = new_columns.sexage.str[:1],
+    age = new_columns.sexage.str.slice(1)
+)
+```
+
+### Exercises
+
+1.  In this case study I set `dropna()` just to make it easier to
+    check that we had the correct values. Is this reasonable? Think about
+    how missing values are represented in this dataset. Are there implicit
+    missing values? What's the difference between an `NA` and zero?
+
+1.  I claimed that `iso2` and `iso3` were redundant with `country`.
+    Confirm this claim.
+
+1.  For each country, year, and sex compute the total number of cases of
+    TB. Make an informative visualisation of the data.
 
 ## Non-tidy data
 

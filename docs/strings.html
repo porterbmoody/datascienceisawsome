@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>14 Strings | Python for Data Science</title>
+  <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
+  <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="14 Strings | Python for Data Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
+  <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta property="og:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
+  <meta name="github-repo" content="byuidatascience/python4ds" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="14 Strings | Python for Data Science" />
+  <meta name="twitter:site" content="@byuidss" />
+  <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
+  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+
+<meta name="author" content="J. Hathaway" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="relational-data.html"/>
+
+<script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/vega-5.9.0/vega.min.js"></script>
+<script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
+<link href="libs/vega-embed-6.2.0/vega-embed.css" rel="stylesheet" />
+<script src="libs/vega-embed-6.2.0/vega-embed.js"></script>
+<script src="libs/vegawidget-binding-0.3.1.9003/vegawidget.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132356198-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132356198-3');
+</script>
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="icons/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="icons/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="icons/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="icons/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="icons/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="icons/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="icons/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="icons/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="icons/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="icons/favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="icons/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="icons/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="icons/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="icons/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="icons/mstile-310x310.png" />
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="r4ds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">Python for Data Science</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#what-you-will-learn"><i class="fa fa-check"></i><b>1.1</b> What you will learn</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#how-this-book-is-organised"><i class="fa fa-check"></i><b>1.2</b> How this book is organised</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-you-wont-learn"><i class="fa fa-check"></i><b>1.3</b> What you won’t learn</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#big-data"><i class="fa fa-check"></i><b>1.3.1</b> Big data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#r-julia-and-friends"><i class="fa fa-check"></i><b>1.3.2</b> R, Julia, and friends</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#non-rectangular-data"><i class="fa fa-check"></i><b>1.3.3</b> Non-rectangular data</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#hypothesis-confirmation"><i class="fa fa-check"></i><b>1.3.4</b> Hypothesis confirmation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>1.4</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#python"><i class="fa fa-check"></i><b>1.4.1</b> Python</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#visual-studio-code-vs-code"><i class="fa fa-check"></i><b>1.4.2</b> Visual Studio Code (VS Code)</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction.html"><a href="introduction.html#package-management-pip"><i class="fa fa-check"></i><b>1.4.3</b> Package Management (pip)</a></li>
+<li class="chapter" data-level="1.4.4" data-path="introduction.html"><a href="introduction.html#the-data-science-packages"><i class="fa fa-check"></i><b>1.4.4</b> The Data Science Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#running-python-code"><i class="fa fa-check"></i><b>1.5</b> Running Python code</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#getting-help-and-learning-more"><i class="fa fa-check"></i><b>1.6</b> Getting help and learning more</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#datasets-access"><i class="fa fa-check"></i><b>1.7</b> Datasets access</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#acknowledgements"><i class="fa fa-check"></i><b>1.8</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction.html"><a href="introduction.html#colophon"><i class="fa fa-check"></i><b>1.9</b> Colophon</a></li>
+</ul></li>
+<li class="part"><span><b>I Explore</b></span></li>
+<li class="chapter" data-level="2" data-path="explore-intro.html"><a href="explore-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data visualisation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-visualisation.html"><a href="data-visualisation.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-visualisation.html"><a href="data-visualisation.html#altair-data-management"><i class="fa fa-check"></i><b>3.1.2</b> Altair data management</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#the-mpg-data-frame"><i class="fa fa-check"></i><b>3.2.1</b> The <code>mpg</code> data frame</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-visualisation.html"><a href="data-visualisation.html#creating-an-altair-plot"><i class="fa fa-check"></i><b>3.2.2</b> Creating an Altair plot</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-visualisation.html"><a href="data-visualisation.html#a-graphing-template"><i class="fa fa-check"></i><b>3.2.3</b> A graphing template</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>3.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-visualisation.html"><a href="data-visualisation.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.3</b> Aesthetic mappings</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#common-problems"><i class="fa fa-check"></i><b>3.4</b> Common problems</a></li>
+<li class="chapter" data-level="3.5" data-path="data-visualisation.html"><a href="data-visualisation.html#facets"><i class="fa fa-check"></i><b>3.5</b> Facets</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-visualisation.html"><a href="data-visualisation.html#geometric-objects"><i class="fa fa-check"></i><b>3.6</b> Geometric objects</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-visualisation.html"><a href="data-visualisation.html#statistical-transformations"><i class="fa fa-check"></i><b>3.7</b> Statistical transformations</a></li>
+<li class="chapter" data-level="3.8" data-path="data-visualisation.html"><a href="data-visualisation.html#position-adjustments"><i class="fa fa-check"></i><b>3.8</b> Position adjustments</a></li>
+<li class="chapter" data-level="3.9" data-path="data-visualisation.html"><a href="data-visualisation.html#coordinate-systems-maps"><i class="fa fa-check"></i><b>3.9</b> Coordinate systems (maps)</a></li>
+<li class="chapter" data-level="3.10" data-path="data-visualisation.html"><a href="data-visualisation.html#the-layered-grammar-of-graphics"><i class="fa fa-check"></i><b>3.10</b> The layered grammar of graphics</a></li>
+<li class="chapter" data-level="3.11" data-path="data-visualisation.html"><a href="data-visualisation.html#altairs-grammar-of-graphics"><i class="fa fa-check"></i><b>3.11</b> Altair’s grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-basics.html"><a href="workflow-basics.html"><i class="fa fa-check"></i><b>4</b> Workflow: basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
+<li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#exercises-4"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
+<li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="transform.html"><a href="transform.html#filter-rows-with-query"><i class="fa fa-check"></i><b>5.2</b> Filter rows with <code>query()</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+<li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>sort_values()</code></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>filter()</code> or <code>loc[]</code></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>assign()</code></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>agg()</code></a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#combining-multiple-operations"><i class="fa fa-check"></i><b>5.6.1</b> Combining multiple operations</a></li>
+<li class="chapter" data-level="5.6.2" data-path="transform.html"><a href="transform.html#missing-values-1"><i class="fa fa-check"></i><b>5.6.2</b> Missing values</a></li>
+<li class="chapter" data-level="5.6.3" data-path="transform.html"><a href="transform.html#counts"><i class="fa fa-check"></i><b>5.6.3</b> Counts</a></li>
+<li class="chapter" data-level="5.6.4" data-path="transform.html"><a href="transform.html#summarise-funs"><i class="fa fa-check"></i><b>5.6.4</b> Useful summary functions</a></li>
+<li class="chapter" data-level="5.6.5" data-path="transform.html"><a href="transform.html#grouping-by-multiple-variables"><i class="fa fa-check"></i><b>5.6.5</b> Grouping by multiple variables</a></li>
+<li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
+<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="workflow-scripts.html"><a href="workflow-scripts.html#running-code"><i class="fa fa-check"></i><b>6.1</b> Running code</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
+<li class="chapter" data-level="7.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#typical-values"><i class="fa fa-check"></i><b>7.3.2</b> Typical values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#unusual-values"><i class="fa fa-check"></i><b>7.3.3</b> Unusual values</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-11"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values-2"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-12"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#cat-cont"><i class="fa fa-check"></i><b>7.5.1</b> A categorical and continuous variable</a></li>
+<li class="chapter" data-level="7.5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-categorical-variables"><i class="fa fa-check"></i><b>7.5.2</b> Two categorical variables</a></li>
+<li class="chapter" data-level="7.5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.5.3</b> Two continuous variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#altair-calls"><i class="fa fa-check"></i><b>7.7</b> Altair calls</a></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>7.8</b> Learning more</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>8</b> Workflow: projects</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="workflow-projects.html"><a href="workflow-projects.html#what-is-real"><i class="fa fa-check"></i><b>8.1</b> What is real?</a></li>
+<li class="chapter" data-level="8.2" data-path="workflow-projects.html"><a href="workflow-projects.html#where-does-your-analysis-live"><i class="fa fa-check"></i><b>8.2</b> Where does your analysis live?</a></li>
+<li class="chapter" data-level="8.3" data-path="workflow-projects.html"><a href="workflow-projects.html#paths-and-directories"><i class="fa fa-check"></i><b>8.3</b> Paths and directories</a></li>
+<li class="chapter" data-level="8.4" data-path="workflow-projects.html"><a href="workflow-projects.html#vs-code-workspaces"><i class="fa fa-check"></i><b>8.4</b> VS Code workspaces</a></li>
+<li class="chapter" data-level="8.5" data-path="workflow-projects.html"><a href="workflow-projects.html#summary"><i class="fa fa-check"></i><b>8.5</b> Summary</a></li>
+</ul></li>
+<li class="part"><span><b>II Wrangle</b></span></li>
+<li class="chapter" data-level="9" data-path="wrangle-intro.html"><a href="wrangle-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
+<li class="chapter" data-level="10" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="dataframe.html"><a href="dataframe.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="dataframe.html"><a href="dataframe.html#prerequisites-4"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="dataframe.html"><a href="dataframe.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="10.3" data-path="dataframe.html"><a href="dataframe.html#printing"><i class="fa fa-check"></i><b>10.3</b> Printing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="dataframe.html"><a href="dataframe.html#subsetting"><i class="fa fa-check"></i><b>10.3.1</b> Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data import</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-5"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="data-import.html"><a href="data-import.html#prerequisites-5"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-17"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="data-import.html"><a href="data-import.html#numbers"><i class="fa fa-check"></i><b>11.3.1</b> Numbers</a></li>
+<li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
+<li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
+<li class="chapter" data-level="11.3.4" data-path="data-import.html"><a href="data-import.html#readr-datetimes"><i class="fa fa-check"></i><b>11.3.4</b> Dates and times</a></li>
+<li class="chapter" data-level="11.3.5" data-path="data-import.html"><a href="data-import.html#exercises-18"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="data-import.html"><a href="data-import.html#parsing-a-file"><i class="fa fa-check"></i><b>11.4</b> Parsing a file</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="data-import.html"><a href="data-import.html#strategy"><i class="fa fa-check"></i><b>11.4.1</b> Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="data-import.html"><a href="data-import.html#writing-to-a-file"><i class="fa fa-check"></i><b>11.5</b> Writing to a file</a></li>
+<li class="chapter" data-level="11.6" data-path="data-import.html"><a href="data-import.html#other-types-of-data"><i class="fa fa-check"></i><b>11.6</b> Other types of data</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-6"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#prerequisites-6"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.2</b> Tidy data</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-19"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#pivoting"><i class="fa fa-check"></i><b>12.3</b> Pivoting</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#longer-melt"><i class="fa fa-check"></i><b>12.3.1</b> Longer (<code>melt()</code>)</a></li>
+<li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider"><i class="fa fa-check"></i><b>12.3.2</b> Wider</a></li>
+<li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-20"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#split-separate"><i class="fa fa-check"></i><b>12.4.1</b> Split (Separate)</a></li>
+<li class="chapter" data-level="12.4.2" data-path="tidy-data.html"><a href="tidy-data.html#unite"><i class="fa fa-check"></i><b>12.4.2</b> Unite</a></li>
+<li class="chapter" data-level="12.4.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-21"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#missing-values-3"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
+<li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#case-study"><i class="fa fa-check"></i><b>12.6</b> Case Study</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-22"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="tidy-data.html"><a href="tidy-data.html#non-tidy-data"><i class="fa fa-check"></i><b>12.7</b> Non-tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>13</b> Relational data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="relational-data.html"><a href="relational-data.html#introduction-7"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="relational-data.html"><a href="relational-data.html#prerequisites-7"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="relational-data.html"><a href="relational-data.html#nycflights13-relational"><i class="fa fa-check"></i><b>13.2</b> nycflights13</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="relational-data.html"><a href="relational-data.html#exercises-23"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="relational-data.html"><a href="relational-data.html#keys"><i class="fa fa-check"></i><b>13.3</b> Keys</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="relational-data.html"><a href="relational-data.html#exercises-24"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="relational-data.html"><a href="relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>13.4</b> Mutating joins</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="relational-data.html"><a href="relational-data.html#understanding-joins"><i class="fa fa-check"></i><b>13.4.1</b> Understanding joins</a></li>
+<li class="chapter" data-level="13.4.2" data-path="relational-data.html"><a href="relational-data.html#inner-join"><i class="fa fa-check"></i><b>13.4.2</b> Inner join</a></li>
+<li class="chapter" data-level="13.4.3" data-path="relational-data.html"><a href="relational-data.html#outer-join"><i class="fa fa-check"></i><b>13.4.3</b> Outer joins</a></li>
+<li class="chapter" data-level="13.4.4" data-path="relational-data.html"><a href="relational-data.html#join-matches"><i class="fa fa-check"></i><b>13.4.4</b> Duplicate keys</a></li>
+<li class="chapter" data-level="13.4.5" data-path="relational-data.html"><a href="relational-data.html#join-by"><i class="fa fa-check"></i><b>13.4.5</b> Defining the key columns</a></li>
+<li class="chapter" data-level="13.4.6" data-path="relational-data.html"><a href="relational-data.html#exercises-25"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
+<li class="chapter" data-level="13.4.7" data-path="relational-data.html"><a href="relational-data.html#other-implementations"><i class="fa fa-check"></i><b>13.4.7</b> Other implementations</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="relational-data.html"><a href="relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>13.5</b> Filtering joins</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="relational-data.html"><a href="relational-data.html#exercises-26"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="relational-data.html"><a href="relational-data.html#join-problems"><i class="fa fa-check"></i><b>13.6</b> Join problems</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>14</b> Strings</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="strings.html"><a href="strings.html#introduction-8"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="strings.html"><a href="strings.html#prerequisites-8"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="strings.html"><a href="strings.html#string-basics"><i class="fa fa-check"></i><b>14.2</b> String basics</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="strings.html"><a href="strings.html#string-length"><i class="fa fa-check"></i><b>14.2.1</b> String length</a></li>
+<li class="chapter" data-level="14.2.2" data-path="strings.html"><a href="strings.html#combining-strings"><i class="fa fa-check"></i><b>14.2.2</b> Combining strings</a></li>
+<li class="chapter" data-level="14.2.3" data-path="strings.html"><a href="strings.html#subsetting-strings"><i class="fa fa-check"></i><b>14.2.3</b> Subsetting strings</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="strings.html"><a href="strings.html#matching-patterns-with-regular-expressions"><i class="fa fa-check"></i><b>14.3</b> Matching patterns with regular expressions</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="strings.html"><a href="strings.html#basic-matches"><i class="fa fa-check"></i><b>14.3.1</b> Basic matches</a></li>
+<li class="chapter" data-level="14.3.2" data-path="strings.html"><a href="strings.html#anchors"><i class="fa fa-check"></i><b>14.3.2</b> Anchors</a></li>
+<li class="chapter" data-level="14.3.3" data-path="strings.html"><a href="strings.html#character-classes-and-alternatives"><i class="fa fa-check"></i><b>14.3.3</b> Character classes and alternatives</a></li>
+<li class="chapter" data-level="14.3.4" data-path="strings.html"><a href="strings.html#repetition"><i class="fa fa-check"></i><b>14.3.4</b> Repetition</a></li>
+<li class="chapter" data-level="14.3.5" data-path="strings.html"><a href="strings.html#grouping-and-backreferences"><i class="fa fa-check"></i><b>14.3.5</b> Grouping and backreferences</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="strings.html"><a href="strings.html#tools"><i class="fa fa-check"></i><b>14.4</b> Tools</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="strings.html"><a href="strings.html#detect-matches"><i class="fa fa-check"></i><b>14.4.1</b> Detect matches</a></li>
+<li class="chapter" data-level="14.4.2" data-path="strings.html"><a href="strings.html#extract-matches"><i class="fa fa-check"></i><b>14.4.2</b> Extract matches</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="strings" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> Strings</h1>
+<div id="introduction-8" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Introduction</h2>
+<p>This chapter introduces you to string manipulation in R. You’ll learn the basics of how strings work and how to create them by hand, but the focus of this chapter will be on regular expressions, or regexps for short. Regular expressions are useful because strings usually contain unstructured or semi-structured data, and regexps are a concise language for describing patterns in strings. When you first look at a regexp, you’ll think a cat walked across your keyboard, but as your understanding improves they will soon start to make sense.</p>
+<div id="prerequisites-8" class="section level3" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Prerequisites</h3>
+<p>This chapter will focus on the <strong>stringr</strong> package for string manipulation, which is part of the core tidyverse.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb230-1"><a href="strings.html#cb230-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb230-2"><a href="strings.html#cb230-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb230-3"><a href="strings.html#cb230-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+</div>
+</div>
+<div id="string-basics" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> String basics</h2>
+<p>You can create strings with either single quotes or double quotes. You can read the pandas user guide on <a href="https://pandas.pydata.org/docs/user_guide/text.html">working with text data</a> for more details.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb231-1"><a href="strings.html#cb231-1"></a>string1 <span class="op">=</span> <span class="st">&quot;This is a string&quot;</span></span>
+<span id="cb231-2"><a href="strings.html#cb231-2"></a>string2 <span class="op">=</span> <span class="st">&#39;If I want to include a &quot;quote&quot; inside a string, I use single quotes&#39;</span></span></code></pre></div>
+<p>To include a literal single or double quote in a string you can use <code>\</code> to “escape” it:</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb232-1"><a href="strings.html#cb232-1"></a>double_quote <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span> <span class="co"># or &#39;&quot;&#39;</span></span>
+<span id="cb232-2"><a href="strings.html#cb232-2"></a>single_quote <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\&#39;</span><span class="st">&#39;</span> <span class="co"># or &quot;&#39;&quot;</span></span></code></pre></div>
+<p>That means if you want to include a literal backslash, you’ll need to double it up: <code>"\\"</code>.</p>
+<p>Beware that the printed representation of a string is not the same as string itself, because the printed representation shows the escapes:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb233-1"><a href="strings.html#cb233-1"></a>x <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st"> </span><span class="ch">\\</span><span class="st">&quot;</span></span>
+<span id="cb233-2"><a href="strings.html#cb233-2"></a>x</span>
+<span id="cb233-3"><a href="strings.html#cb233-3"></a><span class="co">#&gt; &#39;&quot; \\&#39;</span></span>
+<span id="cb233-4"><a href="strings.html#cb233-4"></a><span class="bu">print</span>(x)</span>
+<span id="cb233-5"><a href="strings.html#cb233-5"></a><span class="co">#&gt; &quot; \</span></span></code></pre></div>
+<p>There are a handful of other special characters. The most common are <code>"\n"</code>, newline, and <code>"\t"</code>, tab, but you can see the complete list in the <a href="https://docs.python.org/2.0/ref/strings.html">Python reference manual</a>. You’ll also sometimes see strings like <code>"\u00b5"</code>, this is a way of writing non-English characters that works on all platforms:</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb234-1"><a href="strings.html#cb234-1"></a>x <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\u00b5</span><span class="st">&quot;</span></span>
+<span id="cb234-2"><a href="strings.html#cb234-2"></a>x</span>
+<span id="cb234-3"><a href="strings.html#cb234-3"></a><span class="co">#&gt; &#39;µ&#39;</span></span></code></pre></div>
+<p>Multiple strings are often stored in a object series, which you can create with <code>[]</code>:</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb235-1"><a href="strings.html#cb235-1"></a>pd.Series([<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>])</span>
+<span id="cb235-2"><a href="strings.html#cb235-2"></a><span class="co">#&gt; 0      one</span></span>
+<span id="cb235-3"><a href="strings.html#cb235-3"></a><span class="co">#&gt; 1      two</span></span>
+<span id="cb235-4"><a href="strings.html#cb235-4"></a><span class="co">#&gt; 2    three</span></span>
+<span id="cb235-5"><a href="strings.html#cb235-5"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div id="string-length" class="section level3" number="14.2.1">
+<h3><span class="header-section-number">14.2.1</span> String length</h3>
+<p>Python contains many functions to work with strings. We’ll use the functions from pandas for use on series. These all start with <code>str</code>. For example, <code>str.length()</code> tells you the number of characters in a string:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb236-1"><a href="strings.html#cb236-1"></a>pd.Series([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;R for data science&quot;</span>, np.nan]).<span class="bu">str</span>.<span class="bu">len</span>()</span>
+<span id="cb236-2"><a href="strings.html#cb236-2"></a><span class="co">#&gt; 0     1.0</span></span>
+<span id="cb236-3"><a href="strings.html#cb236-3"></a><span class="co">#&gt; 1    18.0</span></span>
+<span id="cb236-4"><a href="strings.html#cb236-4"></a><span class="co">#&gt; 2     NaN</span></span>
+<span id="cb236-5"><a href="strings.html#cb236-5"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div>
+</div>
+<div id="combining-strings" class="section level3" number="14.2.2">
+<h3><span class="header-section-number">14.2.2</span> Combining strings</h3>
+<p>To combine two or more strings, use <code>str_c()</code>:</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb237-1"><a href="strings.html#cb237-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>]).<span class="bu">str</span>.cat()</span>
+<span id="cb237-2"><a href="strings.html#cb237-2"></a><span class="co">#&gt; &#39;xy&#39;</span></span>
+<span id="cb237-3"><a href="strings.html#cb237-3"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>]).<span class="bu">str</span>.cat()</span>
+<span id="cb237-4"><a href="strings.html#cb237-4"></a><span class="co">#&gt; &#39;xyz&#39;</span></span></code></pre></div>
+<p>Use the <code>sep</code> argument to control how they’re separated:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb238-1"><a href="strings.html#cb238-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>]).<span class="bu">str</span>.cat(sep <span class="op">=</span> <span class="st">&#39;_&#39;</span>)</span>
+<span id="cb238-2"><a href="strings.html#cb238-2"></a><span class="co">#&gt; &#39;x_y&#39;</span></span></code></pre></div>
+<p>Like most other functions in Python, missing values are contagious. If you want them to print as <code>"NA"</code>, use <code>fillna()</code> or <code>na_rep = 'NA'</code>:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb239-1"><a href="strings.html#cb239-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;abc&quot;</span>, np.nan])</span>
+<span id="cb239-2"><a href="strings.html#cb239-2"></a>x.<span class="bu">str</span>.cat()</span>
+<span id="cb239-3"><a href="strings.html#cb239-3"></a><span class="co">#&gt; &#39;abc&#39;</span></span>
+<span id="cb239-4"><a href="strings.html#cb239-4"></a>x.<span class="bu">str</span>.cat(na_rep <span class="op">=</span> <span class="st">&quot;NA&quot;</span>)</span>
+<span id="cb239-5"><a href="strings.html#cb239-5"></a><span class="co">#&gt; &#39;abcNA&#39;</span></span>
+<span id="cb239-6"><a href="strings.html#cb239-6"></a>x.fillna(<span class="st">&#39;NA&#39;</span>).<span class="bu">str</span>.cat()</span>
+<span id="cb239-7"><a href="strings.html#cb239-7"></a><span class="co">#&gt; &#39;abcNA&#39;</span></span></code></pre></div>
+</div>
+<div id="subsetting-strings" class="section level3" number="14.2.3">
+<h3><span class="header-section-number">14.2.3</span> Subsetting strings</h3>
+<p>You can extract parts of a string using <code>str[]</code>. As well as the string, <code>str[]</code> takes <code>start:end</code> arguments which give the (inclusive) position of the substring:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb240-1"><a href="strings.html#cb240-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;Pear&quot;</span>])</span>
+<span id="cb240-2"><a href="strings.html#cb240-2"></a>x.<span class="bu">str</span>[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb240-3"><a href="strings.html#cb240-3"></a><span class="co"># negative numbers count backwards from end</span></span>
+<span id="cb240-4"><a href="strings.html#cb240-4"></a><span class="co">#&gt; 0    App</span></span>
+<span id="cb240-5"><a href="strings.html#cb240-5"></a><span class="co">#&gt; 1    Ban</span></span>
+<span id="cb240-6"><a href="strings.html#cb240-6"></a><span class="co">#&gt; 2    Pea</span></span>
+<span id="cb240-7"><a href="strings.html#cb240-7"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb240-8"><a href="strings.html#cb240-8"></a>x.<span class="bu">str</span>[<span class="op">-</span><span class="dv">3</span>:]</span>
+<span id="cb240-9"><a href="strings.html#cb240-9"></a><span class="co">#&gt; 0    ple</span></span>
+<span id="cb240-10"><a href="strings.html#cb240-10"></a><span class="co">#&gt; 1    ana</span></span>
+<span id="cb240-11"><a href="strings.html#cb240-11"></a><span class="co">#&gt; 2    ear</span></span>
+<span id="cb240-12"><a href="strings.html#cb240-12"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>Note that <code>str[]</code> won’t fail if the string is too short: it will just return as much as possible:</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb241-1"><a href="strings.html#cb241-1"></a>pd.Series([<span class="st">&quot;a&quot;</span>]).<span class="bu">str</span>[<span class="dv">0</span>:<span class="dv">5</span>]</span>
+<span id="cb241-2"><a href="strings.html#cb241-2"></a><span class="co">#&gt; 0    a</span></span>
+<span id="cb241-3"><a href="strings.html#cb241-3"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>You can also use the assign strings using <code>str.slice_replace()</code> to modify strings:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb242-1"><a href="strings.html#cb242-1"></a>x.<span class="bu">str</span>.slice_replace(<span class="dv">0</span>,<span class="dv">0</span>, repl <span class="op">=</span> <span class="st">&quot;5&quot;</span>)</span>
+<span id="cb242-2"><a href="strings.html#cb242-2"></a><span class="co">#&gt; 0    5abc</span></span>
+<span id="cb242-3"><a href="strings.html#cb242-3"></a><span class="co">#&gt; 1     NaN</span></span>
+<span id="cb242-4"><a href="strings.html#cb242-4"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+</div>
+</div>
+<div id="matching-patterns-with-regular-expressions" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Matching patterns with regular expressions</h2>
+<p>Regexps are a very terse language that allow you to describe patterns in strings. They take a little while to get your head around, but once you understand them, you’ll find them extremely useful.</p>
+<div id="basic-matches" class="section level3" number="14.3.1">
+<h3><span class="header-section-number">14.3.1</span> Basic matches</h3>
+<p>The simplest patterns match exact strings:</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb243-1"><a href="strings.html#cb243-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb243-2"><a href="strings.html#cb243-2"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;an&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb243-3"><a href="strings.html#cb243-3"></a><span class="co">#&gt; 0       apple</span></span>
+<span id="cb243-4"><a href="strings.html#cb243-4"></a><span class="co">#&gt; 1    b-M--M-a</span></span>
+<span id="cb243-5"><a href="strings.html#cb243-5"></a><span class="co">#&gt; 2        pear</span></span>
+<span id="cb243-6"><a href="strings.html#cb243-6"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>The next step up in complexity is <code>.</code>, which matches any character (except a newline):</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb244-1"><a href="strings.html#cb244-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;.a.&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb244-2"><a href="strings.html#cb244-2"></a><span class="co">#&gt; 0     Apple</span></span>
+<span id="cb244-3"><a href="strings.html#cb244-3"></a><span class="co">#&gt; 1    -M-ana</span></span>
+<span id="cb244-4"><a href="strings.html#cb244-4"></a><span class="co">#&gt; 2      P-M-</span></span>
+<span id="cb244-5"><a href="strings.html#cb244-5"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>But if “<code>.</code>” matches any character, how do you match the character “<code>.</code>”? You need to use an “escape” to tell the regular expression you want to match it exactly, not use its special behaviour. Like strings, regexps use the backslash, <code>\</code>, to escape special behaviour. So to match an <code>.</code>, you need the regexp <code>\.</code>. Unfortunately this creates a problem. We use strings to represent regular expressions, and <code>\</code> is also used as an escape symbol in strings. So to create the regular expression <code>\.</code> we need the string <code>"\\."</code>.</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb245-1"><a href="strings.html#cb245-1"></a><span class="co"># To create the regular expression, we need \\</span></span>
+<span id="cb245-2"><a href="strings.html#cb245-2"></a>dot <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span></span>
+<span id="cb245-3"><a href="strings.html#cb245-3"></a></span>
+<span id="cb245-4"><a href="strings.html#cb245-4"></a><span class="co"># But the expression itself only contains one:</span></span>
+<span id="cb245-5"><a href="strings.html#cb245-5"></a><span class="bu">print</span>(dot)</span>
+<span id="cb245-6"><a href="strings.html#cb245-6"></a></span>
+<span id="cb245-7"><a href="strings.html#cb245-7"></a><span class="co"># And this tells pandas to look for an explicit .</span></span>
+<span id="cb245-8"><a href="strings.html#cb245-8"></a><span class="co">#&gt; \.</span></span>
+<span id="cb245-9"><a href="strings.html#cb245-9"></a>pd.Series([<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;a.c&quot;</span>, <span class="st">&quot;bef&quot;</span>]).replace(<span class="st">&#39;a</span><span class="ch">\\</span><span class="st">.c&#39;</span>, <span class="st">&#39;-M-&#39;</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb245-10"><a href="strings.html#cb245-10"></a><span class="co">#&gt; 0    abc</span></span>
+<span id="cb245-11"><a href="strings.html#cb245-11"></a><span class="co">#&gt; 1    -M-</span></span>
+<span id="cb245-12"><a href="strings.html#cb245-12"></a><span class="co">#&gt; 2    bef</span></span>
+<span id="cb245-13"><a href="strings.html#cb245-13"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>If <code>\</code> is used as an escape character in regular expressions, how do you match a literal <code>\</code>? Well you need to escape it, creating the regular expression <code>\\</code>. To create that regular expression, you need to use a string, which also needs to escape <code>\</code>. That means to match a literal <code>\</code> you need to write <code>"\\\\"</code> — you need four backslashes to match one!</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb246-1"><a href="strings.html#cb246-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;a</span><span class="ch">\\</span><span class="st">b&quot;</span>])</span>
+<span id="cb246-2"><a href="strings.html#cb246-2"></a><span class="bu">print</span>(x)</span>
+<span id="cb246-3"><a href="strings.html#cb246-3"></a><span class="co">#&gt; 0    a\b</span></span>
+<span id="cb246-4"><a href="strings.html#cb246-4"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb246-5"><a href="strings.html#cb246-5"></a>x.replace(<span class="st">&#39;</span><span class="ch">\\\\</span><span class="st">&#39;</span>, <span class="st">&#39;-M-&#39;</span>, regex <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb246-6"><a href="strings.html#cb246-6"></a><span class="co">#&gt; 0    a-M-b</span></span>
+<span id="cb246-7"><a href="strings.html#cb246-7"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>In this book, I’ll write regular expression as <code>\.</code> and strings that represent the regular expression as <code>"\\."</code>.</p>
+<div id="exercises-27" class="section level4" number="14.3.1.1">
+<h4><span class="header-section-number">14.3.1.1</span> Exercises</h4>
+<ol style="list-style-type: decimal">
+<li><p>Explain why each of these strings don’t match a <code>\</code>: <code>"\"</code>, <code>"\\"</code>, <code>"\\\"</code>.</p></li>
+<li><p>How would you match the sequence <code>"'\</code>?</p></li>
+</ol>
+</div>
+</div>
+<div id="anchors" class="section level3" number="14.3.2">
+<h3><span class="header-section-number">14.3.2</span> Anchors</h3>
+<p>By default, regular expressions will match any part of a string. It’s often useful to <em>anchor</em> the regular expression so that it matches from the start or end of the string. You can use:</p>
+<ul>
+<li><code>^</code> to match the start of the string.</li>
+<li><code>$</code> to match the end of the string.</li>
+</ul>
+<p>You can also use pandas <code>startwith()</code> and <code>endswith()</code> that work similiar but return booleans.</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb247-1"><a href="strings.html#cb247-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb247-2"><a href="strings.html#cb247-2"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;^a&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb247-3"><a href="strings.html#cb247-3"></a><span class="co">#&gt; 0    -M-pple</span></span>
+<span id="cb247-4"><a href="strings.html#cb247-4"></a><span class="co">#&gt; 1     banana</span></span>
+<span id="cb247-5"><a href="strings.html#cb247-5"></a><span class="co">#&gt; 2       pear</span></span>
+<span id="cb247-6"><a href="strings.html#cb247-6"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb247-7"><a href="strings.html#cb247-7"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a$&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb247-8"><a href="strings.html#cb247-8"></a><span class="co">#&gt; 0       apple</span></span>
+<span id="cb247-9"><a href="strings.html#cb247-9"></a><span class="co">#&gt; 1    banan-M-</span></span>
+<span id="cb247-10"><a href="strings.html#cb247-10"></a><span class="co">#&gt; 2        pear</span></span>
+<span id="cb247-11"><a href="strings.html#cb247-11"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>To remember which is which, try this mnemonic which I learned from <a href="https://twitter.com/emisshula/status/323863393167613953">Evan Misshula</a>: if you begin with power (<code>^</code>), you end up with money (<code>$</code>).</p>
+<p>To force a regular expression to only match a complete string, anchor it with both <code>^</code> and <code>$</code>:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb248-1"><a href="strings.html#cb248-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple pie&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;apple cake&quot;</span>])</span>
+<span id="cb248-2"><a href="strings.html#cb248-2"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb248-3"><a href="strings.html#cb248-3"></a><span class="co">#&gt; 0     -M- pie</span></span>
+<span id="cb248-4"><a href="strings.html#cb248-4"></a><span class="co">#&gt; 1         -M-</span></span>
+<span id="cb248-5"><a href="strings.html#cb248-5"></a><span class="co">#&gt; 2    -M- cake</span></span>
+<span id="cb248-6"><a href="strings.html#cb248-6"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb248-7"><a href="strings.html#cb248-7"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;^apple$&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb248-8"><a href="strings.html#cb248-8"></a><span class="co">#&gt; 0     apple pie</span></span>
+<span id="cb248-9"><a href="strings.html#cb248-9"></a><span class="co">#&gt; 1           -M-</span></span>
+<span id="cb248-10"><a href="strings.html#cb248-10"></a><span class="co">#&gt; 2    apple cake</span></span>
+<span id="cb248-11"><a href="strings.html#cb248-11"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>You can also match the boundary between words with <code>\b</code>. I don’t often use this in Python, but I will sometimes use it when I’m doing a search to find the name of a function that’s a component of other functions. For example, I’ll search for <code>\bsum\b</code> to avoid matching <code>summarise</code>, <code>summary</code>, <code>rowsum</code> and so on.</p>
+<div id="exercises-28" class="section level4" number="14.3.2.1">
+<h4><span class="header-section-number">14.3.2.1</span> Exercises</h4>
+<ol style="list-style-type: decimal">
+<li>How would you match the literal string <code>"$^$"</code>?</li>
+</ol>
+</div>
+</div>
+<div id="character-classes-and-alternatives" class="section level3" number="14.3.3">
+<h3><span class="header-section-number">14.3.3</span> Character classes and alternatives</h3>
+<p>There are a number of special patterns that match more than one character. You’ve already seen <code>.</code>, which matches any character apart from a newline. There are four other useful tools:</p>
+<ul>
+<li><code>\d</code>: matches any digit.</li>
+<li><code>\s</code>: matches any whitespace (e.g. space, tab, newline).</li>
+<li><code>[abc]</code>: matches a, b, or c.</li>
+<li><code>[^abc]</code>: matches anything except a, b, or c.</li>
+</ul>
+<p>Remember, to create a regular expression containing <code>\d</code> or <code>\s</code>, you’ll need to escape the <code>\</code> for the string, so you’ll type <code>"\\d"</code> or <code>"\\s"</code>.</p>
+<p>A character class containing a single character is a nice alternative to backslash escapes when you want to include a single metacharacter in a regex. Many people find this more readable.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb249-1"><a href="strings.html#cb249-1"></a><span class="co"># Look for a literal character that normally has special meaning in a regex</span></span>
+<span id="cb249-2"><a href="strings.html#cb249-2"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;a.c&quot;</span>, <span class="st">&quot;a*c&quot;</span>, <span class="st">&quot;a c&quot;</span>])</span>
+<span id="cb249-3"><a href="strings.html#cb249-3"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a[.]c&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb249-4"><a href="strings.html#cb249-4"></a><span class="co">#&gt; 0    abc</span></span>
+<span id="cb249-5"><a href="strings.html#cb249-5"></a><span class="co">#&gt; 1    -M-</span></span>
+<span id="cb249-6"><a href="strings.html#cb249-6"></a><span class="co">#&gt; 2    a*c</span></span>
+<span id="cb249-7"><a href="strings.html#cb249-7"></a><span class="co">#&gt; 3    a c</span></span>
+<span id="cb249-8"><a href="strings.html#cb249-8"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb249-9"><a href="strings.html#cb249-9"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;.[*]c&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb249-10"><a href="strings.html#cb249-10"></a><span class="co">#&gt; 0    abc</span></span>
+<span id="cb249-11"><a href="strings.html#cb249-11"></a><span class="co">#&gt; 1    a.c</span></span>
+<span id="cb249-12"><a href="strings.html#cb249-12"></a><span class="co">#&gt; 2    -M-</span></span>
+<span id="cb249-13"><a href="strings.html#cb249-13"></a><span class="co">#&gt; 3    a c</span></span>
+<span id="cb249-14"><a href="strings.html#cb249-14"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb249-15"><a href="strings.html#cb249-15"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a[ ]&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb249-16"><a href="strings.html#cb249-16"></a><span class="co">#&gt; 0     abc</span></span>
+<span id="cb249-17"><a href="strings.html#cb249-17"></a><span class="co">#&gt; 1     a.c</span></span>
+<span id="cb249-18"><a href="strings.html#cb249-18"></a><span class="co">#&gt; 2     a*c</span></span>
+<span id="cb249-19"><a href="strings.html#cb249-19"></a><span class="co">#&gt; 3    -M-c</span></span>
+<span id="cb249-20"><a href="strings.html#cb249-20"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>This works for most (but not all) regex metacharacters: <code>$</code> <code>.</code> <code>|</code> <code>?</code> <code>*</code> <code>+</code> <code>(</code> <code>)</code> <code>[</code> <code>{</code>. Unfortunately, a few characters have special meaning even inside a character class and must be handled with backslash escapes: <code>]</code> <code>\</code> <code>^</code> and <code>-</code>.</p>
+<p>You can use <em>alternation</em> to pick between one or more alternative patterns. For example, <code>abc|d..f</code> will match either ‘“abc”’, or <code>"deaf"</code>. Note that the precedence for <code>|</code> is low, so that <code>abc|xyz</code> matches <code>abc</code> or <code>xyz</code> not <code>abcyz</code> or <code>abxyz</code>. Like with mathematical expressions, if precedence ever gets confusing, use parentheses to make it clear what you want:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb250-1"><a href="strings.html#cb250-1"></a>pd.Series([<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;gray&quot;</span>]).<span class="bu">str</span>.replace(<span class="st">&quot;r(e|a)&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb250-2"><a href="strings.html#cb250-2"></a><span class="co">#&gt; 0    g-M-y</span></span>
+<span id="cb250-3"><a href="strings.html#cb250-3"></a><span class="co">#&gt; 1    g-M-y</span></span>
+<span id="cb250-4"><a href="strings.html#cb250-4"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div id="exercises-29" class="section level4" number="14.3.3.1">
+<h4><span class="header-section-number">14.3.3.1</span> Exercises</h4>
+<ol style="list-style-type: decimal">
+<li><p>Create regular expressions to find all words that:</p>
+<ol style="list-style-type: decimal">
+<li><p>Start with a vowel.</p></li>
+<li><p>That only contain consonants. (Hint: thinking about matching
+“not”-vowels.)</p></li>
+<li><p>End with <code>ed</code>, but not with <code>eed</code>.</p></li>
+<li><p>End with <code>ing</code> or <code>ise</code>.</p></li>
+</ol></li>
+<li><p>Is “q” always followed by a “u”?</p></li>
+<li><p>Write a regular expression that matches a word if it’s probably written
+in British English, not American English.</p></li>
+<li><p>Create a regular expression that will match telephone numbers as commonly
+written in your country.</p></li>
+</ol>
+</div>
+</div>
+<div id="repetition" class="section level3" number="14.3.4">
+<h3><span class="header-section-number">14.3.4</span> Repetition</h3>
+<p>The next step up in power involves controlling how many times a pattern matches:</p>
+<ul>
+<li><code>?</code>: 0 or 1</li>
+<li><code>+</code>: 1 or more</li>
+<li><code>*</code>: 0 or more</li>
+</ul>
+<p>Notice the use of <code>n = 1</code> which functions like the R package <code>stringr::str_&lt;TYPE&gt;</code> the default argument for <code>str.replace()</code> of <code>n = -1</code> functions like <code>stringr::str_&lt;TYPE&gt;_all</code>.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb251-1"><a href="strings.html#cb251-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;1888 in Roman numerals: MDCCCLXXXVIII&quot;</span>])</span>
+<span id="cb251-2"><a href="strings.html#cb251-2"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;CC?&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb251-3"><a href="strings.html#cb251-3"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
+<span id="cb251-4"><a href="strings.html#cb251-4"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb251-5"><a href="strings.html#cb251-5"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;CC+&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb251-6"><a href="strings.html#cb251-6"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
+<span id="cb251-7"><a href="strings.html#cb251-7"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb251-8"><a href="strings.html#cb251-8"></a>x.<span class="bu">str</span>.replace(<span class="st">&#39;C[LX]+&#39;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb251-9"><a href="strings.html#cb251-9"></a><span class="co">#&gt; 0    1888 in Roman numerals: MDCC-M-VIII</span></span>
+<span id="cb251-10"><a href="strings.html#cb251-10"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>Note that the precedence of these operators is high, so you can write: <code>colou?r</code> to match either American or British spellings. That means most uses will need parentheses, like <code>bana(na)+</code>.</p>
+<p>You can also specify the number of matches precisely:</p>
+<ul>
+<li><code>{n}</code>: exactly n</li>
+<li><code>{n,}</code>: n or more</li>
+<li><code>{,m}</code>: at most m</li>
+<li><code>{n,m}</code>: between n and m</li>
+</ul>
+<div class="sourceCode" id="cb252"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb252-1"><a href="strings.html#cb252-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C</span><span class="sc">{2}</span><span class="st">&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb252-2"><a href="strings.html#cb252-2"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
+<span id="cb252-3"><a href="strings.html#cb252-3"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb252-4"><a href="strings.html#cb252-4"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,}&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb252-5"><a href="strings.html#cb252-5"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
+<span id="cb252-6"><a href="strings.html#cb252-6"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb252-7"><a href="strings.html#cb252-7"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,3}&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb252-8"><a href="strings.html#cb252-8"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
+<span id="cb252-9"><a href="strings.html#cb252-9"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>By default these matches are “greedy”: they will match the longest string possible. You can make them “lazy”, matching the shortest string possible by putting a <code>?</code> after them. This is an advanced feature of regular expressions, but it’s useful to know that it exists:</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb253-1"><a href="strings.html#cb253-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,3}?&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb253-2"><a href="strings.html#cb253-2"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
+<span id="cb253-3"><a href="strings.html#cb253-3"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb253-4"><a href="strings.html#cb253-4"></a>x.<span class="bu">str</span>.replace(<span class="st">&#39;C[LX]+?&#39;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb253-5"><a href="strings.html#cb253-5"></a><span class="co">#&gt; 0    1888 in Roman numerals: MDCC-M-XXXVIII</span></span>
+<span id="cb253-6"><a href="strings.html#cb253-6"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div id="exercises-30" class="section level4" number="14.3.4.1">
+<h4><span class="header-section-number">14.3.4.1</span> Exercises</h4>
+<ol style="list-style-type: decimal">
+<li><p>Describe the equivalents of <code>?</code>, <code>+</code>, <code>*</code> in <code>{m,n}</code> form.</p></li>
+<li><p>Describe in words what these regular expressions match:
+(read carefully to see if I’m using a regular expression or a string
+that defines a regular expression.)</p>
+<ol style="list-style-type: decimal">
+<li><code>^.*$</code></li>
+<li><code>"\\{.+\\}"</code></li>
+<li><code>\d{4}-\d{2}-\d{2}</code></li>
+<li><code>"\\\\{4}"</code></li>
+</ol></li>
+<li><p>Create regular expressions to find all words that:</p>
+<ol style="list-style-type: decimal">
+<li>Start with three consonants.</li>
+<li>Have three or more vowels in a row.</li>
+<li>Have two or more vowel-consonant pairs in a row.</li>
+</ol></li>
+<li><p>Solve the beginner regexp crosswords at
+<a href="https://regexcrossword.com/challenges/beginner" class="uri">https://regexcrossword.com/challenges/beginner</a>.</p></li>
+</ol>
+</div>
+</div>
+<div id="grouping-and-backreferences" class="section level3" number="14.3.5">
+<h3><span class="header-section-number">14.3.5</span> Grouping and backreferences</h3>
+<p>We will use a few csv files that contain one column labeld <code>name</code>. The <code>fruit</code> names and <code>words</code> as taken from the <code>stringr::fruit</code> character vectors.</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb254-1"><a href="strings.html#cb254-1"></a>fruit <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/fruit/fruit.csv&quot;</span>)</span>
+<span id="cb254-2"><a href="strings.html#cb254-2"></a>words <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/words/words.csv&quot;</span>)</span>
+<span id="cb254-3"><a href="strings.html#cb254-3"></a>fruit</span>
+<span id="cb254-4"><a href="strings.html#cb254-4"></a><span class="co">#&gt;            name</span></span>
+<span id="cb254-5"><a href="strings.html#cb254-5"></a><span class="co">#&gt; 0         apple</span></span>
+<span id="cb254-6"><a href="strings.html#cb254-6"></a><span class="co">#&gt; 1       apricot</span></span>
+<span id="cb254-7"><a href="strings.html#cb254-7"></a><span class="co">#&gt; 2       avocado</span></span>
+<span id="cb254-8"><a href="strings.html#cb254-8"></a><span class="co">#&gt; 3        banana</span></span>
+<span id="cb254-9"><a href="strings.html#cb254-9"></a><span class="co">#&gt; 4   bell pepper</span></span>
+<span id="cb254-10"><a href="strings.html#cb254-10"></a><span class="co">#&gt; ..          ...</span></span>
+<span id="cb254-11"><a href="strings.html#cb254-11"></a><span class="co">#&gt; 75   strawberry</span></span>
+<span id="cb254-12"><a href="strings.html#cb254-12"></a><span class="co">#&gt; 76    tamarillo</span></span>
+<span id="cb254-13"><a href="strings.html#cb254-13"></a><span class="co">#&gt; 77    tangerine</span></span>
+<span id="cb254-14"><a href="strings.html#cb254-14"></a><span class="co">#&gt; 78   ugli fruit</span></span>
+<span id="cb254-15"><a href="strings.html#cb254-15"></a><span class="co">#&gt; 79   watermelon</span></span>
+<span id="cb254-16"><a href="strings.html#cb254-16"></a><span class="co">#&gt; </span></span>
+<span id="cb254-17"><a href="strings.html#cb254-17"></a><span class="co">#&gt; [80 rows x 1 columns]</span></span>
+<span id="cb254-18"><a href="strings.html#cb254-18"></a>words</span>
+<span id="cb254-19"><a href="strings.html#cb254-19"></a><span class="co">#&gt;           name</span></span>
+<span id="cb254-20"><a href="strings.html#cb254-20"></a><span class="co">#&gt; 0            a</span></span>
+<span id="cb254-21"><a href="strings.html#cb254-21"></a><span class="co">#&gt; 1         able</span></span>
+<span id="cb254-22"><a href="strings.html#cb254-22"></a><span class="co">#&gt; 2        about</span></span>
+<span id="cb254-23"><a href="strings.html#cb254-23"></a><span class="co">#&gt; 3     absolute</span></span>
+<span id="cb254-24"><a href="strings.html#cb254-24"></a><span class="co">#&gt; 4       accept</span></span>
+<span id="cb254-25"><a href="strings.html#cb254-25"></a><span class="co">#&gt; ..         ...</span></span>
+<span id="cb254-26"><a href="strings.html#cb254-26"></a><span class="co">#&gt; 975        yes</span></span>
+<span id="cb254-27"><a href="strings.html#cb254-27"></a><span class="co">#&gt; 976  yesterday</span></span>
+<span id="cb254-28"><a href="strings.html#cb254-28"></a><span class="co">#&gt; 977        yet</span></span>
+<span id="cb254-29"><a href="strings.html#cb254-29"></a><span class="co">#&gt; 978        you</span></span>
+<span id="cb254-30"><a href="strings.html#cb254-30"></a><span class="co">#&gt; 979      young</span></span>
+<span id="cb254-31"><a href="strings.html#cb254-31"></a><span class="co">#&gt; </span></span>
+<span id="cb254-32"><a href="strings.html#cb254-32"></a><span class="co">#&gt; [980 rows x 1 columns]</span></span></code></pre></div>
+<p>Earlier, you learned about parentheses as a way to disambiguate complex expressions. Parentheses also create a <em>numbered</em> capturing group (number 1, 2 etc.). A capturing group stores <em>the part of the string</em> matched by the part of the regular expression inside the parentheses. You can refer to the same text as previously matched by a capturing group with <em>backreferences</em>, like <code>\1</code>, <code>\2</code> etc. For example, the following regular expression finds all fruits that have a repeated pair of letters.</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb255-1"><a href="strings.html#cb255-1"></a>fruit[fruit[<span class="st">&#39;name&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&#39;(..)</span><span class="ch">\\</span><span class="st">1&#39;</span>)]</span>
+<span id="cb255-2"><a href="strings.html#cb255-2"></a><span class="co">#&gt;            name</span></span>
+<span id="cb255-3"><a href="strings.html#cb255-3"></a><span class="co">#&gt; 3        banana</span></span>
+<span id="cb255-4"><a href="strings.html#cb255-4"></a><span class="co">#&gt; 19      coconut</span></span>
+<span id="cb255-5"><a href="strings.html#cb255-5"></a><span class="co">#&gt; 21     cucumber</span></span>
+<span id="cb255-6"><a href="strings.html#cb255-6"></a><span class="co">#&gt; 40       jujube</span></span>
+<span id="cb255-7"><a href="strings.html#cb255-7"></a><span class="co">#&gt; 55       papaya</span></span>
+<span id="cb255-8"><a href="strings.html#cb255-8"></a><span class="co">#&gt; 72  salal berry</span></span>
+<span id="cb255-9"><a href="strings.html#cb255-9"></a><span class="co">#&gt; </span></span>
+<span id="cb255-10"><a href="strings.html#cb255-10"></a><span class="co">#&gt; /usr/local/lib/python3.7/site-packages/pandas/core/strings.py:1954: UserWarning: This pattern has match groups. To actually get the groups, use str.extract.</span></span>
+<span id="cb255-11"><a href="strings.html#cb255-11"></a><span class="co">#&gt;   return func(self, *args, **kwargs)</span></span></code></pre></div>
+<div id="exercises-31" class="section level4" number="14.3.5.1">
+<h4><span class="header-section-number">14.3.5.1</span> Exercises</h4>
+<ol style="list-style-type: decimal">
+<li><p>Describe, in words, what these expressions will match:</p>
+<ol style="list-style-type: decimal">
+<li><code>(.)\1\1</code></li>
+<li><code>"(.)(.)\\2\\1"</code></li>
+<li><code>(..)\1</code></li>
+<li><code>"(.).\\1.\\1"</code></li>
+<li><code>"(.)(.)(.).*\\3\\2\\1"</code></li>
+</ol></li>
+<li><p>Construct regular expressions to match words that:</p>
+<ol style="list-style-type: decimal">
+<li><p>Start and end with the same character.</p></li>
+<li><p>Contain a repeated pair of letters
+(e.g. “church” contains “ch” repeated twice.)</p></li>
+<li><p>Contain one letter repeated in at least three places
+(e.g. “eleven” contains three “e”s.)</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="tools" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> Tools</h2>
+<p>Now that you’ve learned the basics of regular expressions, it’s time to learn how to apply them to real problems. In this section you’ll learn a wide array of string functions that let you:</p>
+<ul>
+<li>Determine which strings match a pattern.</li>
+<li>Find the positions of matches.</li>
+<li>Extract the content of matches.</li>
+<li>Replace matches with new values.</li>
+<li>Split a string based on a match.</li>
+</ul>
+<p>A word of caution before we continue: because regular expressions are so powerful, it’s easy to try and solve every problem with a single regular expression. In the words of Jamie Zawinski:</p>
+<blockquote>
+<p>Some people, when confronted with a problem, think “I know, I’ll use regular
+expressions.” Now they have two problems.</p>
+</blockquote>
+<p>As a cautionary tale, check out this regular expression that checks if a email address is valid:</p>
+<pre><code>(?:(?:\r\n)?[ \t])*(?:(?:(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t]
+)+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:
+\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(
+?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[
+\t]))*&quot;(?:(?:\r\n)?[ \t])*))*@(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\0
+31]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\
+](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+
+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:
+(?:\r\n)?[ \t])*))*|(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z
+|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)
+?[ \t])*)*\&lt;(?:(?:\r\n)?[ \t])*(?:@(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\
+r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[
+ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)
+?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t]
+)*))*(?:,@(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[
+ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*
+)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t]
+)+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*)
+*:(?:(?:\r\n)?[ \t])*)?(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+
+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r
+\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:
+\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t
+]))*&quot;(?:(?:\r\n)?[ \t])*))*@(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031
+]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](
+?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?
+:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?
+:\r\n)?[ \t])*))*\&gt;(?:(?:\r\n)?[ \t])*)|(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?
+:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?
+[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)*:(?:(?:\r\n)?[ \t])*(?:(?:(?:[^()&lt;&gt;@,;:\\&quot;.\[\]
+\000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|
+\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;
+@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;
+(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*))*@(?:(?:\r\n)?[ \t]
+)*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\
+&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?
+:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[
+\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*|(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-
+\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(
+?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)*\&lt;(?:(?:\r\n)?[ \t])*(?:@(?:[^()&lt;&gt;@,;
+:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([
+^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;
+.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\
+]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*(?:,@(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\
+[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\
+r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\]
+\000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]
+|\\.)*\](?:(?:\r\n)?[ \t])*))*)*:(?:(?:\r\n)?[ \t])*)?(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \0
+00-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\
+.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,
+;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?
+:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*))*@(?:(?:\r\n)?[ \t])*
+(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.
+\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[
+^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]
+]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*\&gt;(?:(?:\r\n)?[ \t])*)(?:,\s*(
+?:(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\
+&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)(?:\.(?:(
+?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[
+\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t
+])*))*@(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t
+])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?
+:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|
+\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*|(?:
+[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\
+]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)*\&lt;(?:(?:\r\n)
+?[ \t])*(?:@(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;
+()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)
+?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;
+@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*(?:,@(?:(?:\r\n)?[
+ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,
+;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t]
+)*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\
+&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*)*:(?:(?:\r\n)?[ \t])*)?
+(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.
+\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])*)(?:\.(?:(?:
+\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\[
+&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|&quot;(?:[^\&quot;\r\\]|\\.|(?:(?:\r\n)?[ \t]))*&quot;(?:(?:\r\n)?[ \t])
+*))*@(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])
++|\Z|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\
+.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&quot;.\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z
+|(?=[\[&quot;()&lt;&gt;@,;:\\&quot;.\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*\&gt;(?:(
+?:\r\n)?[ \t])*))*)?;\s*)</code></pre>
+<p>This is a somewhat pathological example (because email addresses are actually surprisingly complex), but is used in real code. See the stackoverflow discussion at <a href="http://stackoverflow.com/a/201378" class="uri">http://stackoverflow.com/a/201378</a> for more details.</p>
+<p>Don’t forget that you’re in a programming language and you have other tools at your disposal. Instead of creating one complex regular expression, it’s often easier to write a series of simpler regexps. If you get stuck trying to create a single regexp that solves your problem, take a step back and think if you could break the problem down into smaller pieces, solving each challenge before moving onto the next one.</p>
+<div id="detect-matches" class="section level3" number="14.4.1">
+<h3><span class="header-section-number">14.4.1</span> Detect matches</h3>
+<p>To determine if a character vector matches a pattern, use <code>str.contains()</code>. It returns a logical vector the same length as the input:</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb257-1"><a href="strings.html#cb257-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb257-2"><a href="strings.html#cb257-2"></a>x.<span class="bu">str</span>.contains(<span class="st">&quot;e&quot;</span>)</span>
+<span id="cb257-3"><a href="strings.html#cb257-3"></a><span class="co">#&gt; 0     True</span></span>
+<span id="cb257-4"><a href="strings.html#cb257-4"></a><span class="co">#&gt; 1    False</span></span>
+<span id="cb257-5"><a href="strings.html#cb257-5"></a><span class="co">#&gt; 2     True</span></span>
+<span id="cb257-6"><a href="strings.html#cb257-6"></a><span class="co">#&gt; dtype: bool</span></span></code></pre></div>
+<p>Remember that when you use a logical vector in a numeric context, <code>FALSE</code> becomes 0 and <code>TRUE</code> becomes 1. That makes <code>sum()</code> and <code>mean()</code> useful if you want to answer questions about matches across a larger vector:</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb258-1"><a href="strings.html#cb258-1"></a><span class="co"># How many common words start with t?</span></span>
+<span id="cb258-2"><a href="strings.html#cb258-2"></a>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;^t&quot;</span>).<span class="bu">sum</span>()</span>
+<span id="cb258-3"><a href="strings.html#cb258-3"></a><span class="co"># What proportion of common words end with a vowel?</span></span>
+<span id="cb258-4"><a href="strings.html#cb258-4"></a><span class="co">#&gt; 65</span></span>
+<span id="cb258-5"><a href="strings.html#cb258-5"></a>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;[aeiou]$&quot;</span>).mean()</span>
+<span id="cb258-6"><a href="strings.html#cb258-6"></a><span class="co">#&gt; 0.27653061224489794</span></span></code></pre></div>
+<p>When you have complex logical conditions (e.g. match a or b but not c unless d) it’s often easier to combine multiple <code>str.contains()</code> calls with logical operators, rather than trying to create a single regular expression. For example, here are two ways to find all words that don’t contain any vowels:</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb259-1"><a href="strings.html#cb259-1"></a><span class="co"># Find all words containing at least one vowel, and negate</span></span>
+<span id="cb259-2"><a href="strings.html#cb259-2"></a>no_vowels_1 <span class="op">=</span> <span class="op">~</span>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;[aeiou]&quot;</span>)</span>
+<span id="cb259-3"><a href="strings.html#cb259-3"></a><span class="co"># Find all words consisting only of consonants (non-vowels)</span></span>
+<span id="cb259-4"><a href="strings.html#cb259-4"></a>no_vowels_2 <span class="op">=</span> words.name.<span class="bu">str</span>.contains(<span class="st">&quot;^[^aeiou]+$&quot;</span>)</span>
+<span id="cb259-5"><a href="strings.html#cb259-5"></a>no_vowels_1.tolist() <span class="op">==</span> no_vowels_2.tolist()</span>
+<span id="cb259-6"><a href="strings.html#cb259-6"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<p>The results are identical, but I think the first approach is significantly easier to understand. If your regular expression gets overly complicated, try breaking it up into smaller pieces, giving each piece a name, and then combining the pieces with logical operations.</p>
+<p>As you saw above, a common use of <code>str.containst()</code> is to select the elements that match a pattern:</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb260-1"><a href="strings.html#cb260-1"></a>words[words[<span class="st">&#39;name&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&quot;x$&quot;</span>)]</span>
+<span id="cb260-2"><a href="strings.html#cb260-2"></a><span class="co">#&gt;     name</span></span>
+<span id="cb260-3"><a href="strings.html#cb260-3"></a><span class="co">#&gt; 107  box</span></span>
+<span id="cb260-4"><a href="strings.html#cb260-4"></a><span class="co">#&gt; 746  sex</span></span>
+<span id="cb260-5"><a href="strings.html#cb260-5"></a><span class="co">#&gt; 771  six</span></span>
+<span id="cb260-6"><a href="strings.html#cb260-6"></a><span class="co">#&gt; 840  tax</span></span></code></pre></div>
+<p>Typically, however, your strings will be one column of a data frame, and you’ll want to use filter instead:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb261-1"><a href="strings.html#cb261-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb261-2"><a href="strings.html#cb261-2"></a>    <span class="st">&#39;words&#39;</span>: words.name,</span>
+<span id="cb261-3"><a href="strings.html#cb261-3"></a>    <span class="st">&#39;i&#39;</span>: words.index})</span>
+<span id="cb261-4"><a href="strings.html#cb261-4"></a>df.query(<span class="st">&#39;words.str.contains(&quot;x$&quot;)&#39;</span>)</span>
+<span id="cb261-5"><a href="strings.html#cb261-5"></a><span class="co">#&gt;     words    i</span></span>
+<span id="cb261-6"><a href="strings.html#cb261-6"></a><span class="co">#&gt; 107   box  107</span></span>
+<span id="cb261-7"><a href="strings.html#cb261-7"></a><span class="co">#&gt; 746   sex  746</span></span>
+<span id="cb261-8"><a href="strings.html#cb261-8"></a><span class="co">#&gt; 771   six  771</span></span>
+<span id="cb261-9"><a href="strings.html#cb261-9"></a><span class="co">#&gt; 840   tax  840</span></span></code></pre></div>
+<p>A variation on <code>str.contains()</code> is <code>str_count()</code>: rather than a simple yes or no, it tells you how many matches there are in a string:</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb262-1"><a href="strings.html#cb262-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb262-2"><a href="strings.html#cb262-2"></a>x.<span class="bu">str</span>.count(<span class="st">&quot;a&quot;</span>)</span>
+<span id="cb262-3"><a href="strings.html#cb262-3"></a></span>
+<span id="cb262-4"><a href="strings.html#cb262-4"></a><span class="co"># On average, how many vowels per word?</span></span>
+<span id="cb262-5"><a href="strings.html#cb262-5"></a><span class="co">#&gt; 0    1</span></span>
+<span id="cb262-6"><a href="strings.html#cb262-6"></a><span class="co">#&gt; 1    3</span></span>
+<span id="cb262-7"><a href="strings.html#cb262-7"></a><span class="co">#&gt; 2    1</span></span>
+<span id="cb262-8"><a href="strings.html#cb262-8"></a><span class="co">#&gt; dtype: int64</span></span>
+<span id="cb262-9"><a href="strings.html#cb262-9"></a>words.name.<span class="bu">str</span>.count(<span class="st">&quot;[aeiou]&quot;</span>).mean()</span>
+<span id="cb262-10"><a href="strings.html#cb262-10"></a><span class="co">#&gt; 1.9918367346938775</span></span></code></pre></div>
+<p>You can use <code>str.count()</code> with <code>assign()</code>:</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb263-1"><a href="strings.html#cb263-1"></a>df.assign(</span>
+<span id="cb263-2"><a href="strings.html#cb263-2"></a>    vowels <span class="op">=</span> words.name.<span class="bu">str</span>.count(<span class="st">&quot;[aeiou]&quot;</span>),</span>
+<span id="cb263-3"><a href="strings.html#cb263-3"></a>    consonants <span class="op">=</span> words.name.<span class="bu">str</span>.count(<span class="st">&quot;[^aeiou]&quot;</span>)</span>
+<span id="cb263-4"><a href="strings.html#cb263-4"></a>)</span>
+<span id="cb263-5"><a href="strings.html#cb263-5"></a><span class="co">#&gt;          words    i  vowels  consonants</span></span>
+<span id="cb263-6"><a href="strings.html#cb263-6"></a><span class="co">#&gt; 0            a    0       1           0</span></span>
+<span id="cb263-7"><a href="strings.html#cb263-7"></a><span class="co">#&gt; 1         able    1       2           2</span></span>
+<span id="cb263-8"><a href="strings.html#cb263-8"></a><span class="co">#&gt; 2        about    2       3           2</span></span>
+<span id="cb263-9"><a href="strings.html#cb263-9"></a><span class="co">#&gt; 3     absolute    3       4           4</span></span>
+<span id="cb263-10"><a href="strings.html#cb263-10"></a><span class="co">#&gt; 4       accept    4       2           4</span></span>
+<span id="cb263-11"><a href="strings.html#cb263-11"></a><span class="co">#&gt; ..         ...  ...     ...         ...</span></span>
+<span id="cb263-12"><a href="strings.html#cb263-12"></a><span class="co">#&gt; 975        yes  975       1           2</span></span>
+<span id="cb263-13"><a href="strings.html#cb263-13"></a><span class="co">#&gt; 976  yesterday  976       3           6</span></span>
+<span id="cb263-14"><a href="strings.html#cb263-14"></a><span class="co">#&gt; 977        yet  977       1           2</span></span>
+<span id="cb263-15"><a href="strings.html#cb263-15"></a><span class="co">#&gt; 978        you  978       2           1</span></span>
+<span id="cb263-16"><a href="strings.html#cb263-16"></a><span class="co">#&gt; 979      young  979       2           3</span></span>
+<span id="cb263-17"><a href="strings.html#cb263-17"></a><span class="co">#&gt; </span></span>
+<span id="cb263-18"><a href="strings.html#cb263-18"></a><span class="co">#&gt; [980 rows x 4 columns]</span></span></code></pre></div>
+<p>Note that matches never overlap. For example, in <code>"abababa"</code>, how many times will the pattern <code>"aba"</code> match? Regular expressions say two, not three:</p>
+<pre class="ppython"><code>pd.Series([&quot;abababa&quot;]).str.count(&quot;aba&quot;)
+</code></pre>
+<div id="exercises-32" class="section level4" number="14.4.1.1">
+<h4><span class="header-section-number">14.4.1.1</span> Exercises</h4>
+<ol style="list-style-type: decimal">
+<li><p>For each of the following challenges, try solving it by using both a single
+regular expression, and a combination of multiple <code>str.contains()</code> calls.</p>
+<ol style="list-style-type: decimal">
+<li><p>Find all words that start or end with <code>x</code>.</p></li>
+<li><p>Find all words that start with a vowel and end with a consonant.</p></li>
+<li><p>Are there any words that contain at least one of each different
+vowel?</p></li>
+</ol></li>
+<li><p>What word has the highest number of vowels? What word has the highest
+proportion of vowels? (Hint: what is the denominator?)</p></li>
+</ol>
+</div>
+</div>
+<div id="extract-matches" class="section level3" number="14.4.2">
+<h3><span class="header-section-number">14.4.2</span> Extract matches</h3>
+<p>To extract the actual text of a match, use <code>str.extract()</code>. To show that off, we’re going to need a more complicated example. I’m going to use the <a href="https://en.wikipedia.org/wiki/Harvard_sentences">Harvard sentences</a>, which were designed to test VOIP systems, but are also useful for practicing regexps. These are provided in <code>stringr::sentences</code>:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb265-1"><a href="strings.html#cb265-1"></a>sentences <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/sentences/sentences.csv&quot;</span>)</span>
+<span id="cb265-2"><a href="strings.html#cb265-2"></a>sentences.count</span>
+<span id="cb265-3"><a href="strings.html#cb265-3"></a><span class="co">#&gt; &lt;bound method DataFrame.count of                                             name</span></span>
+<span id="cb265-4"><a href="strings.html#cb265-4"></a><span class="co">#&gt; 0     The birch canoe slid on the smooth planks.</span></span>
+<span id="cb265-5"><a href="strings.html#cb265-5"></a><span class="co">#&gt; 1    Glue the sheet to the dark blue background.</span></span>
+<span id="cb265-6"><a href="strings.html#cb265-6"></a><span class="co">#&gt; 2         It&#39;s easy to tell the depth of a well.</span></span>
+<span id="cb265-7"><a href="strings.html#cb265-7"></a><span class="co">#&gt; 3       These days a chicken leg is a rare dish.</span></span>
+<span id="cb265-8"><a href="strings.html#cb265-8"></a><span class="co">#&gt; 4           Rice is often served in round bowls.</span></span>
+<span id="cb265-9"><a href="strings.html#cb265-9"></a><span class="co">#&gt; ..                                           ...</span></span>
+<span id="cb265-10"><a href="strings.html#cb265-10"></a><span class="co">#&gt; 715      The grass and bushes were wet with dew.</span></span>
+<span id="cb265-11"><a href="strings.html#cb265-11"></a><span class="co">#&gt; 716         The blind man counted his old coins.</span></span>
+<span id="cb265-12"><a href="strings.html#cb265-12"></a><span class="co">#&gt; 717           A severe storm tore down the barn.</span></span>
+<span id="cb265-13"><a href="strings.html#cb265-13"></a><span class="co">#&gt; 718              She called his name many times.</span></span>
+<span id="cb265-14"><a href="strings.html#cb265-14"></a><span class="co">#&gt; 719        When you hear the bell, come quickly.</span></span>
+<span id="cb265-15"><a href="strings.html#cb265-15"></a><span class="co">#&gt; </span></span>
+<span id="cb265-16"><a href="strings.html#cb265-16"></a><span class="co">#&gt; [720 rows x 1 columns]&gt;</span></span></code></pre></div>
+<p>Imagine we want to find all sentences that contain a colour. We first create a vector of colour names, and then turn it into a single regular expression:</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb266-1"><a href="strings.html#cb266-1"></a>colours <span class="op">=</span> pd.Series([<span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>])</span>
+<span id="cb266-2"><a href="strings.html#cb266-2"></a>colour_match <span class="op">=</span> colours.<span class="bu">str</span>.cat(sep <span class="op">=</span> <span class="st">&quot;|&quot;</span>)</span>
+<span id="cb266-3"><a href="strings.html#cb266-3"></a>colour_match</span>
+<span id="cb266-4"><a href="strings.html#cb266-4"></a><span class="co">#&gt; &#39;red|orange|yellow|green|blue|purple&#39;</span></span></code></pre></div>
+<!-- Now we can select the sentences that contain a colour, and then extract the colour to figure out which one it is: -->
+<!-- ```{r} -->
+<!-- has_colour <- str_subset(sentences, colour_match) -->
+<!-- matches <- str_extract(has_colour, colour_match) -->
+<!-- head(matches) -->
+<!-- ``` -->
+<!-- Note that `str_extract()` only extracts the first match. We can see that most easily by first selecting all the sentences that have more than 1 match: -->
+<!-- ```{r} -->
+<!-- more <- sentences[str_count(sentences, colour_match) > 1] -->
+<!-- str_view_all(more, colour_match) -->
+<!-- str_extract(more, colour_match) -->
+<!-- ``` -->
+<!-- This is a common pattern for stringr functions, because working with a single match allows you to use much simpler data structures. To get all matches, use `str_extract_all()`. It returns a list: -->
+<!-- ```{r} -->
+<!-- str_extract_all(more, colour_match) -->
+<!-- ``` -->
+<!-- You'll learn more about lists in [lists](#lists) and [iteration]. -->
+<!-- If you use `simplify = TRUE`, `str_extract_all()` will return a matrix with short matches expanded to the same length as the longest: -->
+<!-- ```{r} -->
+<!-- str_extract_all(more, colour_match, simplify = TRUE) -->
+<!-- x <- c("a", "a b", "a b c") -->
+<!-- str_extract_all(x, "[a-z]", simplify = TRUE) -->
+<!-- ``` -->
+<!-- #### Exercises -->
+<!-- 1.  In the previous example, you might have noticed that the regular -->
+<!--     expression matched "flickered", which is not a colour. Modify the -->
+<!--     regex to fix the problem. -->
+<!-- 1.  From the Harvard sentences data, extract: -->
+<!--     1. The first word from each sentence. -->
+<!--     1. All words ending in `ing`. -->
+<!--     1. All plurals. -->
+<!-- ### Grouped matches -->
+<!-- Earlier in this chapter we talked about the use of parentheses for clarifying precedence and for backreferences when matching. You can also use parentheses to extract parts of a complex match. For example, imagine we want to extract nouns from the sentences. As a heuristic, we'll look for any word that comes after "a" or "the". Defining a "word" in a regular expression is a little tricky, so here I use a simple approximation: a sequence of at least one character that isn't a space. -->
+<!-- ```{r} -->
+<!-- noun <- "(a|the) ([^ ]+)" -->
+<!-- has_noun <- sentences %>% -->
+<!--   str_subset(noun) %>% -->
+<!--   head(10) -->
+<!-- has_noun %>%  -->
+<!--   str_extract(noun) -->
+<!-- ``` -->
+<!-- `str_extract()` gives us the complete match; `str_match()` gives each individual component. Instead of a character vector, it returns a matrix, with one column for the complete match followed by one column for each group: -->
+<!-- ```{r} -->
+<!-- has_noun %>%  -->
+<!--   str_match(noun) -->
+<!-- ``` -->
+<!-- (Unsurprisingly, our heuristic for detecting nouns is poor, and also picks up adjectives like smooth and parked.) -->
+<!-- If your data is in a tibble, it's often easier to use `tidyr::extract()`. It works like `str_match()` but requires you to name the matches, which are then placed in new columns: -->
+<!-- ```{r} -->
+<!-- tibble(sentence = sentences) %>%  -->
+<!--   tidyr::extract( -->
+<!--     sentence, c("article", "noun"), "(a|the) ([^ ]+)",  -->
+<!--     remove = FALSE -->
+<!--   ) -->
+<!-- ``` -->
+<!-- Like `str_extract()`, if you want all matches for each string, you'll need `str_match_all()`. -->
+<!-- #### Exercises -->
+<!-- 1. Find all words that come after a "number" like "one", "two", "three" etc. -->
+<!--    Pull out both the number and the word. -->
+<!-- 1. Find all contractions. Separate out the pieces before and after the  -->
+<!--    apostrophe. -->
+<!-- ### Replacing matches -->
+<!-- `str_replace()` and `str_replace_all()` allow you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string: -->
+<!-- ```{r} -->
+<!-- x <- c("apple", "pear", "banana") -->
+<!-- str_replace(x, "[aeiou]", "-") -->
+<!-- str_replace_all(x, "[aeiou]", "-") -->
+<!-- ``` -->
+<!-- With `str_replace_all()` you can perform multiple replacements by supplying a named vector: -->
+<!-- ```{r} -->
+<!-- x <- c("1 house", "2 cars", "3 people") -->
+<!-- str_replace_all(x, c("1" = "one", "2" = "two", "3" = "three")) -->
+<!-- ``` -->
+<!-- Instead of replacing with a fixed string you can use backreferences to insert components of the match. In the following code, I flip the order of the second and third words. -->
+<!-- ```{r} -->
+<!-- sentences %>%  -->
+<!--   str_replace("([^ ]+) ([^ ]+) ([^ ]+)", "\\1 \\3 \\2") %>%  -->
+<!--   head(5) -->
+<!-- ``` -->
+<!-- #### Exercises -->
+<!-- 1.   Replace all forward slashes in a string with backslashes. -->
+<!-- 1.   Implement a simple version of `str_to_lower()` using `replace_all()`. -->
+<!-- 1.   Switch the first and last letters in `words`. Which of those strings -->
+<!--      are still words? -->
+<!-- ### Splitting -->
+<!-- Use `str_split()` to split a string up into pieces. For example, we could split sentences into words: -->
+<!-- ```{r} -->
+<!-- sentences %>% -->
+<!--   head(5) %>%  -->
+<!--   str_split(" ") -->
+<!-- ``` -->
+<!-- Because each component might contain a different number of pieces, this returns a list. If you're working with a length-1 vector, the easiest thing is to just extract the first element of the list: -->
+<!-- ```{r} -->
+<!-- "a|b|c|d" %>%  -->
+<!--   str_split("\\|") %>%  -->
+<!--   .[[1]] -->
+<!-- ``` -->
+<!-- Otherwise, like the other stringr functions that return a list, you can use `simplify = TRUE` to return a matrix: -->
+<!-- ```{r} -->
+<!-- sentences %>% -->
+<!--   head(5) %>%  -->
+<!--   str_split(" ", simplify = TRUE) -->
+<!-- ``` -->
+<!-- You can also request a maximum number of pieces: -->
+<!-- ```{r} -->
+<!-- fields <- c("Name: Hadley", "Country: NZ", "Age: 35") -->
+<!-- fields %>% str_split(": ", n = 2, simplify = TRUE) -->
+<!-- ``` -->
+<!-- Instead of splitting up strings by patterns, you can also split up by character, line, sentence and word `boundary()`s: -->
+<!-- ```{r} -->
+<!-- x <- "This is a sentence.  This is another sentence." -->
+<!-- str_view_all(x, boundary("word")) -->
+<!-- str_split(x, " ")[[1]] -->
+<!-- str_split(x, boundary("word"))[[1]] -->
+<!-- ``` -->
+<!-- #### Exercises -->
+<!-- 1.  Split up a string like `"apples, pears, and bananas"` into individual -->
+<!--     components. -->
+<!-- 1.  Why is it better to split up by `boundary("word")` than `" "`? -->
+<!-- 1.  What does splitting with an empty string (`""`) do? Experiment, and -->
+<!--     then read the documentation. -->
+<!-- ### Find matches -->
+<!-- `str_locate()` and `str_locate_all()` give you the starting and ending positions of each match. These are particularly useful when none of the other functions does exactly what you want. You can use `str_locate()` to find the matching pattern, `str_sub()` to extract and/or modify them. -->
+<!-- ## Other types of pattern -->
+<!-- When you use a pattern that's a string, it's automatically wrapped into a call to `regex()`: -->
+<!-- ```{r, eval = FALSE} -->
+<!-- # The regular call: -->
+<!-- str_view(fruit, "nana") -->
+<!-- # Is shorthand for -->
+<!-- str_view(fruit, regex("nana")) -->
+<!-- ``` -->
+<!-- You can use the other arguments of `regex()` to control details of the match: -->
+<!-- *   `ignore_case = TRUE` allows characters to match either their uppercase or  -->
+<!--     lowercase forms. This always uses the current locale. -->
+<!--     ```{r} -->
+<!--     bananas <- c("banana", "Banana", "BANANA") -->
+<!--     str_view(bananas, "banana") -->
+<!--     str_view(bananas, regex("banana", ignore_case = TRUE)) -->
+<!--     ``` -->
+<!-- *   `multiline = TRUE` allows `^` and `$` to match the start and end of each -->
+<!--     line rather than the start and end of the complete string. -->
+<!--     ```{r} -->
+<!--     x <- "Line 1\nLine 2\nLine 3" -->
+<!--     str_extract_all(x, "^Line")[[1]] -->
+<!--     str_extract_all(x, regex("^Line", multiline = TRUE))[[1]] -->
+<!--     ``` -->
+<!-- *   `comments = TRUE` allows you to use comments and white space to make  -->
+<!--     complex regular expressions more understandable. Spaces are ignored, as is  -->
+<!--     everything after `#`. To match a literal space, you'll need to escape it:  -->
+<!--     `"\\ "`. -->
+<!--     ```{r} -->
+<!--     phone <- regex(" -->
+<!--       \\(?     # optional opening parens -->
+<!--       (\\d{3}) # area code -->
+<!--       [) -]?   # optional closing parens, space, or dash -->
+<!--       (\\d{3}) # another three numbers -->
+<!--       [ -]?    # optional space or dash -->
+<!--       (\\d{3}) # three more numbers -->
+<!--       ", comments = TRUE) -->
+<!--     str_match("514-791-8141", phone) -->
+<!--     ``` -->
+<!-- *   `dotall = TRUE` allows `.` to match everything, including `\n`. -->
+<!-- There are three other functions you can use instead of `regex()`: -->
+<!-- *   `fixed()`: matches exactly the specified sequence of bytes. It ignores -->
+<!--     all special regular expressions and operates at a very low level.  -->
+<!--     This allows you to avoid complex escaping and can be much faster than  -->
+<!--     regular expressions. The following microbenchmark shows that it's about -->
+<!--     3x faster for a simple example. -->
+<!--     ```{r} -->
+<!--     microbenchmark::microbenchmark( -->
+<!--       fixed = str_detect(sentences, fixed("the")), -->
+<!--       regex = str_detect(sentences, "the"), -->
+<!--       times = 20 -->
+<!--     ) -->
+<!--     ``` -->
+<!--     Beware using `fixed()` with non-English data. It is problematic because  -->
+<!--     there are often multiple ways of representing the same character. For  -->
+<!--     example, there are two ways to define "á": either as a single character or  -->
+<!--     as an "a" plus an accent: -->
+<!--     ```{r} -->
+<!--     a1 <- "\u00e1" -->
+<!--     a2 <- "a\u0301" -->
+<!--     c(a1, a2) -->
+<!--     a1 == a2 -->
+<!--     ``` -->
+<!--     They render identically, but because they're defined differently,  -->
+<!--     `fixed()` doesn't find a match. Instead, you can use `coll()`, defined -->
+<!--     next, to respect human character comparison rules: -->
+<!--     ```{r} -->
+<!--     str_detect(a1, fixed(a2)) -->
+<!--     str_detect(a1, coll(a2)) -->
+<!--     ``` -->
+<!-- *   `coll()`: compare strings using standard **coll**ation rules. This is  -->
+<!--     useful for doing case insensitive matching. Note that `coll()` takes a -->
+<!--     `locale` parameter that controls which rules are used for comparing -->
+<!--     characters. Unfortunately different parts of the world use different rules! -->
+<!--     ```{r} -->
+<!--     # That means you also need to be aware of the difference -->
+<!--     # when doing case insensitive matches: -->
+<!--     i <- c("I", "İ", "i", "ı") -->
+<!--     i -->
+<!--     str_subset(i, coll("i", ignore_case = TRUE)) -->
+<!--     str_subset(i, coll("i", ignore_case = TRUE, locale = "tr")) -->
+<!--     ``` -->
+<!--     Both `fixed()` and `regex()` have `ignore_case` arguments, but they -->
+<!--     do not allow you to pick the locale: they always use the default locale. -->
+<!--     You can see what that is with the following code; more on stringi -->
+<!--     later. -->
+<!--     ```{r} -->
+<!--     stringi::stri_locale_info() -->
+<!--     ``` -->
+<!--     The downside of `coll()` is speed; because the rules for recognising which -->
+<!--     characters are the same are complicated, `coll()` is relatively slow -->
+<!--     compared to `regex()` and `fixed()`. -->
+<!-- *   As you saw with `str_split()` you can use `boundary()` to match boundaries. -->
+<!--     You can also use it with the other functions:  -->
+<!--     ```{r} -->
+<!--     x <- "This is a sentence." -->
+<!--     str_view_all(x, boundary("word")) -->
+<!--     str_extract_all(x, boundary("word")) -->
+<!--     ``` -->
+<!-- ### Exercises -->
+<!-- 1.  How would you find all strings containing `\` with `regex()` vs. -->
+<!--     with `fixed()`? -->
+<!-- 1.  What are the five most common words in `sentences`? -->
+<!-- ## Other uses of regular expressions -->
+<!-- There are two useful function in base R that also use regular expressions: -->
+<!-- *   `apropos()` searches all objects available from the global environment. This -->
+<!--     is useful if you can't quite remember the name of the function. -->
+<!--     ```{r} -->
+<!--     apropos("replace") -->
+<!--     ``` -->
+<!-- *   `dir()` lists all the files in a directory. The `pattern` argument takes -->
+<!--     a regular expression and only returns file names that match the pattern. -->
+<!--     For example, you can find all the R Markdown files in the current -->
+<!--     directory with: -->
+<!--     ```{r} -->
+<!--     head(dir(pattern = "\\.Rmd$")) -->
+<!--     ``` -->
+<!--     (If you're more comfortable with "globs" like `*.Rmd`, you can convert -->
+<!--     them to regular expressions with `glob2rx()`): -->
+<!-- ## stringi -->
+<!-- stringr is built on top of the __stringi__ package. stringr is useful when you're learning because it exposes a minimal set of functions, which have been carefully picked to handle the most common string manipulation functions. stringi, on the other hand, is designed to be comprehensive. It contains almost every function you might ever need: stringi has 244 functions to stringr's 49. -->
+<!-- If you find yourself struggling to do something in stringr, it's worth taking a look at stringi. The packages work very similarly, so you should be able to translate your stringr knowledge in a natural way. The main difference is the prefix: `str_` vs. `stri_`. -->
+<!-- ### Exercises -->
+<!-- 1.  Find the stringi functions that: -->
+<!--     1. Count the number of words. -->
+<!--     1. Find duplicated strings. -->
+<!--     1. Generate random text. -->
+<!-- 1.  How do you control the language that `stri_sort()` uses for  -->
+<!--     sorting? -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="relational-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/byuidatascience/python4ds/edit/master/strings.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

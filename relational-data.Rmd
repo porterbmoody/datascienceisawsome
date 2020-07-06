@@ -27,584 +27,439 @@ To work with relational data you need verbs that work with pairs of tables. Ther
 
 The most common place to find relational data is in a _relational_ database management system (or RDBMS), a term that encompasses almost all modern databases. If you've used a database before, you've almost certainly used SQL. If so, you should find the concepts in this chapter familiar, although their expression in pandas is a little different. Generally, pandas is a little easier to use than SQL because pandas is specialised to do data analysis: it makes common data analysis operations easier, at the expense of making it more difficult to do other things that aren't commonly needed for data analysis.
 
-<!-- ### Prerequisites -->
+### Prerequisites
 
-<!-- We will explore relational data from `nycflights13` using the two-table verbs from dplyr. -->
+We will explore relational data from `nycflights13` using the two-table verbs from dplyr.
 
-<!-- ```{r setup, message = FALSE} -->
-<!-- library(tidyverse) -->
-<!-- library(nycflights13) -->
-<!-- ``` -->
+```{python setup, message = FALSE, cache=FALSE}
+import pandas as pd
+import altair as alt
+import numpy as np
+```
 
-<!-- ## nycflights13 {#nycflights13-relational} -->
+## nycflights13 {#nycflights13-relational}
 
-<!-- We will use the nycflights13 package to learn about relational data. nycflights13 contains four tibbles that are related to the `flights` table that you used in [data transformation]: -->
+We will use the nycflights13 package to learn about relational data. nycflights13 contains four tibbles that are related to the `flights` table that you used in [data transformation]:
 
-<!-- *   `airlines` lets you look up the full carrier name from its abbreviated -->
-<!--     code: -->
+```{python, cache=FALSE}
+base_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/"
+flights = pd.read_csv("{}flights/flights.csv".format(base_url))
+airlines = pd.read_csv("{}airlines/airlines.csv".format(base_url))
+airports = pd.read_csv("{}airports/airports.csv".format(base_url))
+planes = pd.read_csv("{}planes/planes.csv".format(base_url))
+weather = pd.read_csv("{}weather/weather.csv".format(base_url))
+```
 
-<!--     ```{r} -->
-<!--     airlines -->
-<!--     ``` -->
 
-<!-- *   `airports` gives information about each airport, identified by the `faa` -->
-<!--     airport code: -->
+*   `airlines` lets you look up the full carrier name from its abbreviated
+    code:
 
-<!--     ```{r} -->
-<!--     airports -->
-<!--     ``` -->
+    ```{python}
+    airlines.head()
+    ```
 
-<!-- *   `planes` gives information about each plane, identified by its `tailnum`: -->
+*   `airports` gives information about each airport, identified by the `faa`
+    airport code:
 
-<!--     ```{r} -->
-<!--     planes -->
-<!--     ``` -->
+    ```{python}
+    airports.head()
+    ```
 
-<!-- *   `weather` gives the weather at each NYC airport for each hour: -->
+*   `planes` gives information about each plane, identified by its `tailnum`:
 
-<!--     ```{r} -->
-<!--     weather -->
-<!--     ``` -->
+    ```{python}
+    planes.head()
+    ```
 
-<!-- One way to show the relationships between the different tables is with a drawing: -->
+*   `weather` gives the weather at each NYC airport for each hour:
 
-<!-- ```{r, echo = FALSE} -->
-<!-- knitr::include_graphics("diagrams/relational-nycflights.png") -->
-<!-- ``` -->
+    ```{python}
+    weather.head()
+    ```
 
-<!-- This diagram is a little overwhelming, but it's simple compared to some you'll see in the wild! The key to understanding diagrams like this is to remember each relation always concerns a pair of tables. You don't need to understand the whole thing; you just need to understand the chain of relations between the tables that you are interested in. -->
+One way to show the relationships between the different tables is with a drawing:
 
-<!-- For nycflights13: -->
+```{r, echo = FALSE}
+knitr::include_graphics("diagrams/relational-nycflights.png")
+```
 
-<!-- * `flights` connects to `planes` via a single variable, `tailnum`.  -->
+This diagram is a little overwhelming, but it's simple compared to some you'll see in the wild! The key to understanding diagrams like this is to remember each relation always concerns a pair of tables. You don't need to understand the whole thing; you just need to understand the chain of relations between the tables that you are interested in.
 
-<!-- * `flights` connects to `airlines` through the `carrier` variable. -->
+For nycflights13:
 
-<!-- * `flights` connects to `airports` in two ways: via the `origin` and -->
-<!--   `dest` variables. -->
+* `flights` connects to `planes` via a single variable, `tailnum`.
 
-<!-- * `flights` connects to `weather` via `origin` (the location), and -->
-<!--   `year`, `month`, `day` and `hour` (the time). -->
+* `flights` connects to `airlines` through the `carrier` variable.
 
-<!-- ### Exercises -->
+* `flights` connects to `airports` in two ways: via the `origin` and
+  `dest` variables.
 
-<!-- 1.  Imagine you wanted to draw (approximately) the route each plane flies from -->
-<!--     its origin to its destination. What variables would you need? What tables -->
-<!--     would you need to combine? -->
+* `flights` connects to `weather` via `origin` (the location), and
+  `year`, `month`, `day` and `hour` (the time).
 
-<!-- 1.  I forgot to draw the relationship between `weather` and `airports`. -->
-<!--     What is the relationship and how should it appear in the diagram? -->
+### Exercises
 
-<!-- 1.  `weather` only contains information for the origin (NYC) airports. If -->
-<!--     it contained weather records for all airports in the USA, what additional -->
-<!--     relation would it define with `flights`? -->
+1.  Imagine you wanted to draw (approximately) the route each plane flies from
+    its origin to its destination. What variables would you need? What tables
+    would you need to combine?
 
-<!-- 1.  We know that some days of the year are "special", and fewer people than -->
-<!--     usual fly on them. How might you represent that data as a data frame? -->
-<!--     What would be the primary keys of that table? How would it connect to the -->
-<!--     existing tables? -->
+1.  I forgot to draw the relationship between `weather` and `airports`.
+    What is the relationship and how should it appear in the diagram?
 
-<!-- ## Keys -->
+1.  `weather` only contains information for the origin (NYC) airports. If
+    it contained weather records for all airports in the USA, what additional
+    relation would it define with `flights`?
 
-<!-- The variables used to connect each pair of tables are called __keys__. A key is a variable (or set of variables) that uniquely identifies an observation. In simple cases, a single variable is sufficient to identify an observation. For example, each plane is uniquely identified by its `tailnum`. In other cases, multiple variables may be needed. For example, to identify an observation in `weather` you need five variables: `year`, `month`, `day`, `hour`, and `origin`. -->
+1.  We know that some days of the year are "special", and fewer people than
+    usual fly on them. How might you represent that data as a data frame?
+    What would be the primary keys of that table? How would it connect to the
+    existing tables?
 
-<!-- There are two types of keys: -->
+## Keys
 
-<!-- * A __primary key__ uniquely identifies an observation in its own table. -->
-<!--   For example, `planes$tailnum` is a primary key because it uniquely identifies -->
-<!--   each plane in the `planes` table. -->
+The variables used to connect each pair of tables are called __keys__. A key is a variable (or set of variables) that uniquely identifies an observation. In simple cases, a single variable is sufficient to identify an observation. For example, each plane is uniquely identified by its `tailnum`. In other cases, multiple variables may be needed. For example, to identify an observation in `weather` you need five variables: `year`, `month`, `day`, `hour`, and `origin`.
 
-<!-- * A __foreign key__ uniquely identifies an observation in another table. -->
-<!--   For example, `flights$tailnum` is a foreign key because it appears in the  -->
-<!--   `flights` table where it matches each flight to a unique plane. -->
+There are two types of keys:
 
-<!-- A variable can be both a primary key _and_ a foreign key. For example, `origin` is part of the `weather` primary key, and is also a foreign key for the `airport` table. -->
+* A __primary key__ uniquely identifies an observation in its own table.
+  For example, `planes.tailnum` is a primary key because it uniquely identifies
+  each plane in the `planes` table.
 
-<!-- Once you've identified the primary keys in your tables, it's good practice to verify that they do indeed uniquely identify each observation. One way to do that is to `count()` the primary keys and look for entries where `n` is greater than one: -->
+* A __foreign key__ uniquely identifies an observation in another table.
+  For example, `flights.tailnum` is a foreign key because it appears in the
+  `flights` table where it matches each flight to a unique plane.
 
-<!-- ```{r} -->
-<!-- planes %>%  -->
-<!--   count(tailnum) %>%  -->
-<!--   filter(n > 1) -->
+A variable can be both a primary key _and_ a foreign key. For example, `origin` is part of the `weather` primary key, and is also a foreign key for the `airport` table.
 
-<!-- weather %>%  -->
-<!--   count(year, month, day, hour, origin) %>%  -->
-<!--   filter(n > 1) -->
-<!-- ``` -->
+Once you've identified the primary keys in your tables, it's good practice to verify that they do indeed uniquely identify each observation. One way to do that is to `value_counts()` the primary keys and look for entries where the count is greater than one:
 
-<!-- Sometimes a table doesn't have an explicit primary key: each row is an observation, but no combination of variables reliably identifies it. For example, what's the primary key in the `flights` table? You might think it would be the date plus the flight or tail number, but neither of those are unique: -->
+```{python}
+planes.tailnum.value_counts().value_counts()
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   count(year, month, day, flight) %>%  -->
-<!--   filter(n > 1) -->
+(weather.
+    groupby(['year', 'month','day','hour', 'origin']).
+    size().reset_index(name = 'n').n.value_counts())
+```
 
-<!-- flights %>%  -->
-<!--   count(year, month, day, tailnum) %>%  -->
-<!--   filter(n > 1) -->
-<!-- ``` -->
+Sometimes a table doesn't have an explicit primary key: each row is an observation, but no combination of variables reliably identifies it. For example, what's the primary key in the `flights` table? You might think it would be the date plus the flight or tail number, but neither of those are unique:
 
-<!-- When starting to work with this data, I had naively assumed that each flight number would be only used once per day: that would make it much easier to communicate problems with a specific flight. Unfortunately that is not the case! If a table lacks a primary key, it's sometimes useful to add one with `mutate()` and `row_number()`. That makes it easier to match observations if you've done some filtering and want to check back in with the original data. This is called a __surrogate key__. -->
+```{python}
+(flights.
+  groupby(['year', 'month','day', 'flight']).
+  size().reset_index(name = 'n').n.value_counts())
 
-<!-- A primary key and the corresponding foreign key in another table form a __relation__. Relations are typically one-to-many. For example, each flight has one plane, but each plane has many flights. In other data, you'll occasionally see a 1-to-1 relationship. You can think of this as a special case of 1-to-many. You can model many-to-many relations with a many-to-1 relation plus a 1-to-many relation. For example, in this data there's a many-to-many relationship between airlines and airports: each airline flies to many airports; each airport hosts many airlines. -->
+(flights.
+  groupby(['year', 'month','day', 'tailnum']).
+  size().reset_index(name = 'n').n.value_counts())
 
-<!-- ### Exercises -->
+```
 
-<!-- 1.  Add a surrogate key to `flights`. -->
+When starting to work with this data, I had naively assumed that each flight number would be only used once per day: that would make it much easier to communicate problems with a specific flight. Unfortunately that is not the case! If a table lacks a primary key, it's sometimes useful to add one with `mutate()` and `row_number()`. That makes it easier to match observations if you've done some filtering and want to check back in with the original data. This is called a __surrogate key__.
 
-<!-- 1.  Identify the keys in the following datasets -->
+A primary key and the corresponding foreign key in another table form a __relation__. Relations are typically one-to-many. For example, each flight has one plane, but each plane has many flights. In other data, you'll occasionally see a 1-to-1 relationship. You can think of this as a special case of 1-to-many. You can model many-to-many relations with a many-to-1 relation plus a 1-to-many relation. For example, in this data there's a many-to-many relationship between airlines and airports: each airline flies to many airports; each airport hosts many airlines.
 
-<!--     1.  `Lahman::Batting`, -->
-<!--     1.  `babynames::babynames` -->
-<!--     1.  `nasaweather::atmos` -->
-<!--     1.  `fueleconomy::vehicles` -->
-<!--     1.  `ggplot2::diamonds` -->
+### Exercises
 
-<!--     (You might need to install some packages and read some documentation.) -->
+1.  Add a surrogate key to `flights`.
 
-<!-- 1.  Draw a diagram illustrating the connections between the `Batting`, -->
-<!--     `Master`, and `Salaries` tables in the Lahman package. Draw another diagram -->
-<!--     that shows the relationship between `Master`, `Managers`, `AwardsManagers`. -->
+## Mutating joins {#mutating-joins}
 
-<!--     How would you characterise the relationship between the `Batting`, -->
-<!--     `Pitching`, and `Fielding` tables? -->
+The first tool we'll look at for combining a pair of tables is the __mutating join__. A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.
 
-<!-- ## Mutating joins {#mutating-joins} -->
+Like `assign()`, the join functions add variables to the right, so if you have a lot of variables already, the new variables won't get printed out. For these examples, we'll make it easier to see what's going on in the examples by creating a narrower dataset:
 
-<!-- The first tool we'll look at for combining a pair of tables is the __mutating join__. A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other. -->
+```{python, cache =FALSE}
+flights2 = flights.filter(['year','month', 'day','hour', 'origin', 'dest', 'tailnum', 'carrier'])
+flights2
+```
 
-<!-- Like `mutate()`, the join functions add variables to the right, so if you have a lot of variables already, the new variables won't get printed out. For these examples, we'll make it easier to see what's going on in the examples by creating a narrower dataset: -->
+(Remember, when you're in VS Code, you can also use the data viewer to avoid this problem.)
 
-<!-- ```{r} -->
-<!-- flights2 <- flights %>%  -->
-<!--   select(year:day, hour, origin, dest, tailnum, carrier) -->
-<!-- flights2 -->
-<!-- ``` -->
+Imagine you want to add the full airline name to the `flights2` data. You can combine the `airlines` and `flights2` data frames with `merge()` using `how = 'left'`:
 
-<!-- (Remember, when you're in RStudio, you can also use `View()` to avoid this problem.) -->
+```{python}
+(flights2.
+  merge(airlines, on = 'carrier').
+  drop(columns = ['origin', 'dest']))
+```
 
-<!-- Imagine you want to add the full airline name to the `flights2` data. You can combine the `airlines` and `flights2` data frames with `left_join()`: -->
+The result of joining airlines to flights2 is an additional variable: `name`. The following sections explain, in detail, how mutating joins work. You'll start by learning a useful visual representation of joins. We'll then use that to explain the four mutating join functions: the inner join, and the three outer joins. When working with real data, keys don't always uniquely identify observations, so next we'll talk about what happens when there isn't a unique match. Finally, you'll learn how to tell dplyr which variables are the keys for a given join.
 
-<!-- ```{r} -->
-<!-- flights2 %>% -->
-<!--   select(-origin, -dest) %>%  -->
-<!--   left_join(airlines, by = "carrier") -->
-<!-- ``` -->
+### Understanding joins
 
-<!-- The result of joining airlines to flights2 is an additional variable: `name`. This is why I call this type of join a mutating join. In this case, you could have got to the same place using `mutate()` and R's base subsetting: -->
+To help you learn how joins work, I'm going to use a visual representation:
 
-<!-- ```{r} -->
-<!-- flights2 %>% -->
-<!--   select(-origin, -dest) %>%  -->
-<!--   mutate(name = airlines$name[match(carrier, airlines$carrier)]) -->
-<!-- ``` -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-setup.png")
+```
+```{python}
+x = pd.DataFrame({
+    'key': [1,2,3],
+    'val_x': ['x1', 'x2', 'x3']})
 
-<!-- But this is hard to generalise when you need to match multiple variables, and takes close reading to figure out the overall intent. -->
 
-<!-- The following sections explain, in detail, how mutating joins work. You'll start by learning a useful visual representation of joins. We'll then use that to explain the four mutating join functions: the inner join, and the three outer joins. When working with real data, keys don't always uniquely identify observations, so next we'll talk about what happens when there isn't a unique match. Finally, you'll learn how to tell dplyr which variables are the keys for a given join. -->
+y = pd.DataFrame({
+    'key': [1,2,3],
+    'val_y': ['y1', 'y2', 'y3']})
 
-<!-- ### Understanding joins -->
+```
 
-<!-- To help you learn how joins work, I'm going to use a visual representation: -->
+The coloured column represents the "key" variable: these are used to match the rows between the tables. The grey column represents the "value" column that is carried along for the ride. In these examples I'll show a single key variable, but the idea generalises in a straightforward way to multiple keys and multiple values.
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-setup.png") -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- x <- tribble( -->
-<!--   ~key, ~val_x, -->
-<!--      1, "x1", -->
-<!--      2, "x2", -->
-<!--      3, "x3" -->
-<!-- ) -->
-<!-- y <- tribble( -->
-<!--   ~key, ~val_y, -->
-<!--      1, "y1", -->
-<!--      2, "y2", -->
-<!--      4, "y3" -->
-<!-- ) -->
-<!-- ``` -->
+A join is a way of connecting each row in `x` to zero, one, or more rows in `y`. The following diagram shows each potential match as an intersection of a pair of lines.
 
-<!-- The coloured column represents the "key" variable: these are used to match the rows between the tables. The grey column represents the "value" column that is carried along for the ride. In these examples I'll show a single key variable, but the idea generalises in a straightforward way to multiple keys and multiple values. -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-setup2.png")
+```
 
-<!-- A join is a way of connecting each row in `x` to zero, one, or more rows in `y`. The following diagram shows each potential match as an intersection of a pair of lines. -->
+(If you look closely, you might notice that we've switched the order of the key and value columns in `x`. This is to emphasise that joins match based on the key; the value is just carried along for the ride.)
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-setup2.png") -->
-<!-- ``` -->
+In an actual join, matches will be indicated with dots. The number of dots = the number of matches = the number of rows in the output.
 
-<!-- (If you look closely, you might notice that we've switched the order of the key and value columns in `x`. This is to emphasise that joins match based on the key; the value is just carried along for the ride.) -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-inner.png")
+```
 
-<!-- In an actual join, matches will be indicated with dots. The number of dots = the number of matches = the number of rows in the output. -->
+### Inner join {#inner-join}
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-inner.png") -->
-<!-- ``` -->
+The simplest type of join is the __inner join__. An inner join matches pairs of observations whenever their keys are equal using the argument `how = 'inner'`:
 
-<!-- ### Inner join {#inner-join} -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-inner.png")
+```
 
-<!-- The simplest type of join is the __inner join__. An inner join matches pairs of observations whenever their keys are equal: -->
+(To be precise, this is an inner __equijoin__ because the keys are matched using the equality operator. Since most joins are equijoins we usually drop that specification.)
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-inner.png") -->
-<!-- ``` -->
+The output of an inner join is a new data frame that contains the key, the x values, and the y values. We use `by` to tell dplyr which variable is the key:
 
-<!-- (To be precise, this is an inner __equijoin__ because the keys are matched using the equality operator. Since most joins are equijoins we usually drop that specification.) -->
+```{python}
+x.merge(y, on = 'key', how = 'inner')
+```
 
-<!-- The output of an inner join is a new data frame that contains the key, the x values, and the y values. We use `by` to tell dplyr which variable is the key: -->
+The most important property of an inner join is that unmatched rows are not included in the result. This means that generally inner joins are usually not appropriate for use in analysis because it's too easy to lose observations.
 
-<!-- ```{r} -->
-<!-- x %>%  -->
-<!--   inner_join(y, by = "key") -->
-<!-- ``` -->
+### Outer joins {#outer-join}
 
-<!-- The most important property of an inner join is that unmatched rows are not included in the result. This means that generally inner joins are usually not appropriate for use in analysis because it's too easy to lose observations. -->
+An inner join keeps observations that appear in both tables. An __outer join__ keeps observations that appear in at least one of the tables. There are three types of outer joins:
 
-<!-- ### Outer joins {#outer-join} -->
+* A __left join__ keeps all observations in `x` using `how = 'left'`.
+* A __right join__ keeps all observations in `y` using `how = 'right'`.
+* A __full join__ keeps all observations in `x` and `y` using `how = 'full'`.
 
-<!-- An inner join keeps observations that appear in both tables. An __outer join__ keeps observations that appear in at least one of the tables. There are three types of outer joins: -->
+These joins work by adding an additional "virtual" observation to each table. This observation has a key that always matches (if no other key matches), and a value filled with `NA`.
 
-<!-- * A __left join__ keeps all observations in `x`. -->
-<!-- * A __right join__ keeps all observations in `y`. -->
-<!-- * A __full join__ keeps all observations in `x` and `y`. -->
+Graphically, that looks like:
 
-<!-- These joins work by adding an additional "virtual" observation to each table. This observation has a key that always matches (if no other key matches), and a value filled with `NA`. -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-outer.png")
+```
 
-<!-- Graphically, that looks like: -->
+The most commonly used join is the left join: you use this whenever you look up additional data from another table, because it preserves the original observations even when there isn't a match. The left join should be your default join: use it unless you have a strong reason to prefer one of the others.
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-outer.png") -->
-<!-- ``` -->
+Another way to depict the different types of joins is with a Venn diagram:
 
-<!-- The most commonly used join is the left join: you use this whenever you look up additional data from another table, because it preserves the original observations even when there isn't a match. The left join should be your default join: use it unless you have a strong reason to prefer one of the others. -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-venn.png")
+```
 
-<!-- Another way to depict the different types of joins is with a Venn diagram: -->
+However, this is not a great representation. It might jog your memory about which join preserves the observations in which table, but it suffers from a major limitation: a Venn diagram can't show what happens when keys don't uniquely identify an observation.
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-venn.png") -->
-<!-- ``` -->
+### Duplicate keys {#join-matches}
 
-<!-- However, this is not a great representation. It might jog your memory about which join preserves the observations in which table, but it suffers from a major limitation: a Venn diagram can't show what happens when keys don't uniquely identify an observation. -->
+So far all the diagrams have assumed that the keys are unique. But that's not always the case. This section explains what happens when the keys are not unique. There are two possibilities:
 
-<!-- ### Duplicate keys {#join-matches} -->
+1.  One table has duplicate keys. This is useful when you want to
+    add in additional information as there is typically a one-to-many
+    relationship.
 
-<!-- So far all the diagrams have assumed that the keys are unique. But that's not always the case. This section explains what happens when the keys are not unique. There are two possibilities: -->
+    ```{r, echo = FALSE, out.width = NULL}
+    knitr::include_graphics("diagrams/join-one-to-many.png")
+    ```
 
-<!-- 1.  One table has duplicate keys. This is useful when you want to -->
-<!--     add in additional information as there is typically a one-to-many -->
-<!--     relationship. -->
+    Note that I've put the key column in a slightly different position
+    in the output. This reflects that the key is a primary key in `y`
+    and a foreign key in `x`.
 
-<!--     ```{r, echo = FALSE, out.width = NULL} -->
-<!--     knitr::include_graphics("diagrams/join-one-to-many.png") -->
-<!--     ``` -->
+    ```{python}
+    x = pd.DataFrame({
+    'key': [1, 2, 2, 1],
+    'val_x': ['x1', 'x2', 'x3', 'x4']})
 
-<!--     Note that I've put the key column in a slightly different position -->
-<!--     in the output. This reflects that the key is a primary key in `y` -->
-<!--     and a foreign key in `x`. -->
 
-<!--     ```{r} -->
-<!--     x <- tribble( -->
-<!--       ~key, ~val_x, -->
-<!--          1, "x1", -->
-<!--          2, "x2", -->
-<!--          2, "x3", -->
-<!--          1, "x4" -->
-<!--     ) -->
-<!--     y <- tribble( -->
-<!--       ~key, ~val_y, -->
-<!--          1, "y1", -->
-<!--          2, "y2" -->
-<!--     ) -->
-<!--     left_join(x, y, by = "key") -->
-<!--     ``` -->
+    y = pd.DataFrame({
+    'key': [1,2],
+    'val_y': ['y1', 'y2']})
 
-<!-- 1.  Both tables have duplicate keys. This is usually an error because in -->
-<!--     neither table do the keys uniquely identify an observation. When you join -->
-<!--     duplicated keys, you get all possible combinations, the Cartesian product: -->
+    x.merge(y, on = 'key', how = 'left')
+    ```
 
-<!--     ```{r, echo = FALSE, out.width = NULL} -->
-<!--     knitr::include_graphics("diagrams/join-many-to-many.png") -->
-<!--     ``` -->
+1.  Both tables have duplicate keys. This is usually an error because in
+    neither table do the keys uniquely identify an observation. When you join
+    duplicated keys, you get all possible combinations, the Cartesian product:
 
-<!--     ```{r} -->
-<!--     x <- tribble( -->
-<!--       ~key, ~val_x, -->
-<!--          1, "x1", -->
-<!--          2, "x2", -->
-<!--          2, "x3", -->
-<!--          3, "x4" -->
-<!--     ) -->
-<!--     y <- tribble( -->
-<!--       ~key, ~val_y, -->
-<!--          1, "y1", -->
-<!--          2, "y2", -->
-<!--          2, "y3", -->
-<!--          3, "y4" -->
-<!--     ) -->
-<!--     left_join(x, y, by = "key") -->
-<!--     ``` -->
+    ```{r, echo = FALSE, out.width = NULL}
+    knitr::include_graphics("diagrams/join-many-to-many.png")
+    ```
 
-<!-- ### Defining the key columns {#join-by} -->
+    ```{python}
+    x = pd.DataFrame({
+    'key': [1, 2, 2, 1],
+    'val_x': ['x1', 'x2', 'x3', 'x4']})
 
-<!-- So far, the pairs of tables have always been joined by a single variable, and that variable has the same name in both tables. That constraint was encoded by `by = "key"`. You can use other values for `by` to connect the tables in other ways: -->
+    y = pd.DataFrame({
+    'key': [1,2],
+    'val_y': ['y1', 'y2']})
 
-<!--   * The default, `by = NULL`, uses all variables that appear in both tables, -->
-<!--     the so called __natural__ join. For example, the flights and weather tables -->
-<!--     match on their common variables: `year`, `month`, `day`, `hour` and -->
-<!--     `origin`. -->
+    x.merge(y, on = 'key', how = 'left')
+    ```
 
-<!--     ```{r} -->
-<!--     flights2 %>%  -->
-<!--       left_join(weather) -->
-<!--     ``` -->
+### Defining the key columns {#join-by}
 
-<!--   * A character vector, `by = "x"`. This is like a natural join, but uses only -->
-<!--     some of the common variables. For example, `flights` and `planes` have -->
-<!--     `year` variables, but they mean different things so we only want to join by -->
-<!--     `tailnum`. -->
+So far, the pairs of tables have always been joined by a single variable, and that variable has the same name in both tables. That constraint was encoded by `on = "key"`. You can use other values for `on` to connect the tables in other ways:
 
-<!--     ```{r} -->
-<!--     flights2 %>%  -->
-<!--       left_join(planes, by = "tailnum") -->
-<!--     ``` -->
+  * The default, `by = NULL`, uses all variables that appear in both tables,
+    the so called __natural__ join. The default `how` is __left join__. For example, 
+    the flights and weather tables match on their common variables:
+    `year`, `month`, `day`, `hour` and `origin`.
 
-<!--     Note that the `year` variables (which appear in both input data frames, -->
-<!--     but are not constrained to be equal) are disambiguated in the output with -->
-<!--     a suffix. -->
+    ```{python}
+    flights2.merge(weather)
+    ```
 
-<!--   * A named character vector: `by = c("a" = "b")`. This will -->
-<!--     match variable `a` in table `x` to variable `b` in table `y`. The -->
-<!--     variables from `x` will be used in the output. -->
+  * A character vector, `on = "x"`. This is like a natural join, but uses only
+    some of the common variables. For example, `flights` and `planes` have
+    `year` variables, but they mean different things so we only want to join by
+    `tailnum`.
 
-<!--     For example, if we want to draw a map we need to combine the flights data -->
-<!--     with the airports data which contains the location (`lat` and `lon`) of -->
-<!--     each airport. Each flight has an origin and destination `airport`, so we -->
-<!--     need to specify which one we want to join to: -->
+    ```{python}
+    flights2.merge(planes, on = 'tailnum')
+    ```
 
-<!--     ```{r} -->
-<!--     flights2 %>%  -->
-<!--       left_join(airports, c("dest" = "faa")) -->
+    Note that the `year` variables (which appear in both input data frames,
+    but are not constrained to be equal) are disambiguated in the output with
+    a suffix.
 
-<!--     flights2 %>%  -->
-<!--       left_join(airports, c("origin" = "faa")) -->
-<!--     ``` -->
+  * A named character vector: `by = c("a" = "b")`. This will
+    match variable `a` in table `x` to variable `b` in table `y`. The
+    variables from `x` will be used in the output.
 
-<!-- ### Exercises -->
+    For example, if we want to draw a map we need to combine the flights data
+    with the airports data which contains the location (`lat` and `lon`) of
+    each airport. Each flight has an origin and destination `airport`, so we
+    need to specify which one we want to join to:
 
-<!-- 1.  Compute the average delay by destination, then join on the `airports` -->
-<!--     data frame so you can show the spatial distribution of delays. Here's an -->
-<!--     easy way to draw a map of the United States: -->
+    ```{python}
+    flights2.merge(airports, left_on = 'dest', right_on = 'faa')
 
-<!--     ```{r, eval = FALSE} -->
-<!--     airports %>% -->
-<!--       semi_join(flights, c("faa" = "dest")) %>% -->
-<!--       ggplot(aes(lon, lat)) + -->
-<!--         borders("state") + -->
-<!--         geom_point() + -->
-<!--         coord_quickmap() -->
-<!--     ``` -->
+    flights2.merge(airports, left_on = 'origin', right_on = 'faa')
+    ```
 
-<!--     (Don't worry if you don't understand what `semi_join()` does --- you'll -->
-<!--     learn about it next.) -->
+### Exercises
 
-<!--     You might want to use the `size` or `colour` of the points to display -->
-<!--     the average delay for each airport. -->
+1.  Add the location of the origin _and_ destination (i.e. the `lat` and `lon`)
+    to `flights`.
 
-<!-- 1.  Add the location of the origin _and_ destination (i.e. the `lat` and `lon`) -->
-<!--     to `flights`. -->
+1.  Is there a relationship between the age of a plane and its delays?
 
-<!-- 1.  Is there a relationship between the age of a plane and its delays? -->
+1.  What weather conditions make it more likely to see a delay?
 
-<!-- 1.  What weather conditions make it more likely to see a delay? -->
+### Other implementations
 
-<!-- 1.  What happened on June 13 2013? Display the spatial pattern of delays, -->
-<!--     and then use Google to cross-reference with the weather. -->
+The pandas user guide on [Merge, join, and concatenate](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html#database-style-dataframe-or-named-series-joining-merging) provides documentation on [joining using and index](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html#joining-on-index).
 
-<!--     ```{r, eval = FALSE, include = FALSE} -->
-<!--     worst <- filter(flights, !is.na(dep_time), month == 6, day == 13) -->
-<!--     worst %>% -->
-<!--       group_by(dest) %>% -->
-<!--       summarise(delay = mean(arr_delay), n = n()) %>% -->
-<!--       filter(n > 5) %>% -->
-<!--       inner_join(airports, by = c("dest" = "faa")) %>% -->
-<!--       ggplot(aes(lon, lat)) + -->
-<!--         borders("state") + -->
-<!--         geom_point(aes(size = n, colour = delay)) + -->
-<!--         coord_quickmap() -->
-<!--     ``` -->
+SQL is the inspiration for pandas `merge()` function, so the translation is straightforward:
 
-<!-- ### Other implementations -->
+dplyr                                | SQL
+-------------------------------------|-------------------------------------------
+`x.merge(y, on = 'z', how = 'inner')`| `SELECT * FROM x INNER JOIN y USING (z)`
+`x.merge(y, on = 'z', how = 'left')` | `SELECT * FROM x LEFT OUTER JOIN y USING (z)`
+`x.merge(y, on = 'z', how = 'right')`| `SELECT * FROM x RIGHT OUTER JOIN y USING (z)`
+`x.merge(y, on = 'z', how = 'outer')`| `SELECT * FROM x FULL OUTER JOIN y USING (z)`
 
-<!-- `base::merge()` can perform all four types of mutating join: -->
+Note that "INNER" and "OUTER" are optional, and often omitted.
 
-<!-- dplyr              | merge -->
-<!-- -------------------|------------------------------------------- -->
-<!-- `inner_join(x, y)` | `merge(x, y)` -->
-<!-- `left_join(x, y)`  | `merge(x, y, all.x = TRUE)` -->
-<!-- `right_join(x, y)` | `merge(x, y, all.y = TRUE)`, -->
-<!-- `full_join(x, y)`  | `merge(x, y, all.x = TRUE, all.y = TRUE)` -->
+Joining different variables between the tables, e.g. `x.merge(y, how = 'inner', left_on = 'a', right_on = 'b')` uses a slightly different syntax in SQL: `SELECT * FROM x INNER JOIN y ON x.a = y.b`. As this syntax suggests, SQL supports a wider  range of join types than pandas because you can connect the tables using constraints other than equality (sometimes called non-equijoins).
 
-<!-- The advantages of the specific dplyr verbs is that they more clearly convey the intent of your code: the difference between the joins is really important but concealed in the arguments of `merge()`. dplyr's joins are considerably faster and don't mess with the order of the rows. -->
+## Filtering joins {#filtering-joins}
 
-<!-- SQL is the inspiration for dplyr's conventions, so the translation is straightforward: -->
+Filtering joins match observations in the same way as mutating joins, but affect the observations, not the variables. There are two types:
 
-<!-- dplyr                        | SQL -->
-<!-- -----------------------------|------------------------------------------- -->
-<!-- `inner_join(x, y, by = "z")` | `SELECT * FROM x INNER JOIN y USING (z)` -->
-<!-- `left_join(x, y, by = "z")`  | `SELECT * FROM x LEFT OUTER JOIN y USING (z)` -->
-<!-- `right_join(x, y, by = "z")` | `SELECT * FROM x RIGHT OUTER JOIN y USING (z)` -->
-<!-- `full_join(x, y, by = "z")`  | `SELECT * FROM x FULL OUTER JOIN y USING (z)` -->
+* semi joins __keeps__ all observations in `x` that have a match in `y`.
+* anti joins __drops__ all observations in `x` that have a match in `y`.
 
-<!-- Note that "INNER" and "OUTER" are optional, and often omitted. -->
+Semi-joins are useful for matching filtered summary tables back to the original rows. For example, imagine that you'd found the 10 days with highest average delays. How would you construct the filter statement that used `year`, `month`, and `day` to match it back to `flights`?
 
-<!-- Joining different variables between the tables, e.g. `inner_join(x, y, by = c("a" = "b"))` uses a slightly different syntax in SQL: `SELECT * FROM x INNER JOIN y ON x.a = y.b`. As this syntax suggests, SQL supports a wider  range of join types than dplyr because you can connect the tables using constraints other than equality (sometimes called non-equijoins). -->
+Instead you can use a semi-joins, which connects the two tables like a mutating join, but instead of adding new columns, only keeps the rows in `x` that have a match in `y`:
 
-<!-- ## Filtering joins {#filtering-joins} -->
 
-<!-- Filtering joins match observations in the same way as mutating joins, but affect the observations, not the variables. There are two types: -->
+Graphically, a semi-join looks like this:
 
-<!-- * `semi_join(x, y)` __keeps__ all observations in `x` that have a match in `y`. -->
-<!-- * `anti_join(x, y)` __drops__ all observations in `x` that have a match in `y`. -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-semi.png")
+```
 
-<!-- Semi-joins are useful for matching filtered summary tables back to the original rows. For example, imagine you've found the top ten most popular destinations: -->
+Only the existence of a match is important; it doesn't matter which observation is matched. This means that filtering joins never duplicate rows like mutating joins do:
 
-<!-- ```{r} -->
-<!-- top_dest <- flights %>% -->
-<!--   count(dest, sort = TRUE) %>% -->
-<!--   head(10) -->
-<!-- top_dest -->
-<!-- ``` -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-semi-many.png")
+```
 
-<!-- Now you want to find each flight that went to one of those destinations. You could construct a filter yourself: -->
+The inverse of a semi-join is an anti-join. An anti-join keeps the rows that _don't_ have a match:
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   filter(dest %in% top_dest$dest) -->
-<!-- ``` -->
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/join-anti.png")
+```
 
-<!-- But it's difficult to extend that approach to multiple variables. For example, imagine that you'd found the 10 days with highest average delays. How would you construct the filter statement that used `year`, `month`, and `day` to match it back to `flights`? -->
+Anti-joins are useful for diagnosing join mismatches. For example, when connecting `flights` and `planes`, you might be interested to know that there are many `flights` that don't have a match in `planes`:
 
-<!-- Instead you can use a semi-join, which connects the two tables like a mutating join, but instead of adding new columns, only keeps the rows in `x` that have a match in `y`: -->
+the pandas merge arguments don't handle these two types of joins.  However you can use pandas to get the same results. [Anti-Join Pandas on stackoverflow](https://stackoverflow.com/questions/38516664/anti-join-pandas) provides a guide. 
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   semi_join(top_dest) -->
-<!-- ``` -->
+### Exercises
 
-<!-- Graphically, a semi-join looks like this: -->
+1.  What does it mean for a flight to have a missing `tailnum`? What do the
+    tail numbers that don't have a matching record in `planes` have in common?
+    (Hint: one variable explains ~90% of the problems.)
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-semi.png") -->
-<!-- ``` -->
+1.  Filter flights to only show flights with planes that have flown at least 100
+    flights.
 
-<!-- Only the existence of a match is important; it doesn't matter which observation is matched. This means that filtering joins never duplicate rows like mutating joins do: -->
+1.  Find the 48 hours (over the course of the whole year) that have the worst
+    delays. Cross-reference it with the `weather` data. Can you see any
+    patterns?
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-semi-many.png") -->
-<!-- ``` -->
+1.  You might expect that there's an implicit relationship between plane
+    and airline, because each plane is flown by a single airline. Confirm
+    or reject this hypothesis using the tools you've learned above.
 
-<!-- The inverse of a semi-join is an anti-join. An anti-join keeps the rows that _don't_ have a match: -->
+## Join problems
 
-<!-- ```{r, echo = FALSE, out.width = NULL} -->
-<!-- knitr::include_graphics("diagrams/join-anti.png") -->
-<!-- ``` -->
+The data you've been working with in this chapter has been cleaned up so that you'll have as few problems as possible. Your own data is unlikely to be so nice, so there are a few things that you should do with your own data to make your joins go smoothly.
 
-<!-- Anti-joins are useful for diagnosing join mismatches. For example, when connecting `flights` and `planes`, you might be interested to know that there are many `flights` that don't have a match in `planes`: -->
+1.  Start by identifying the variables that form the primary key in each table.
+    You should usually do this based on your understanding of the data, not
+    empirically by looking for a combination of variables that give a
+    unique identifier. If you just look for variables without thinking about
+    what they mean, you might get (un)lucky and find a combination that's
+    unique in your current data but the relationship might not be true in
+    general.
 
-<!-- ```{r} -->
-<!-- flights %>% -->
-<!--   anti_join(planes, by = "tailnum") %>% -->
-<!--   count(tailnum, sort = TRUE) -->
-<!-- ``` -->
+    For example, the altitude and longitude uniquely identify each airport,
+    but they are not good identifiers!
 
-<!-- ### Exercises -->
+    ```{python}
+    airports.groupby(['alt', 'lon']).size().value_counts()
+    ```
 
-<!-- 1.  What does it mean for a flight to have a missing `tailnum`? What do the -->
-<!--     tail numbers that don't have a matching record in `planes` have in common? -->
-<!--     (Hint: one variable explains ~90% of the problems.) -->
+1.  Check that none of the variables in the primary key are missing. If
+    a value is missing then it can't identify an observation!
 
-<!-- 1.  Filter flights to only show flights with planes that have flown at least 100 -->
-<!--     flights. -->
+1.  Check that your foreign keys match primary keys in another table. It's 
+    common for keys not to match because of data entry errors. Fixing these
+    is often a lot of work.
 
-<!-- 1.  Combine `fueleconomy::vehicles` and `fueleconomy::common` to find only the -->
-<!--     records for the most common models. -->
+    If you do have missing keys, you'll need to be thoughtful about your
+    use of inner vs. outer joins, carefully considering whether or not you
+    want to drop rows that don't have a match.
 
-<!-- 1.  Find the 48 hours (over the course of the whole year) that have the worst -->
-<!--     delays. Cross-reference it with the `weather` data. Can you see any -->
-<!--     patterns? -->
+Be aware that simply checking the number of rows before and after the join is not sufficient to ensure that your join has gone smoothly. If you have an inner join with duplicate keys in both tables, you might get unlucky as the number of dropped rows might exactly equal the number of duplicated rows!
 
-<!-- 1.  What does `anti_join(flights, airports, by = c("dest" = "faa"))` tell you? -->
-<!--     What does `anti_join(airports, flights, by = c("faa" = "dest"))` tell you? -->
-
-<!-- 1.  You might expect that there's an implicit relationship between plane -->
-<!--     and airline, because each plane is flown by a single airline. Confirm -->
-<!--     or reject this hypothesis using the tools you've learned above. -->
-
-<!-- ## Join problems -->
-
-<!-- The data you've been working with in this chapter has been cleaned up so that you'll have as few problems as possible. Your own data is unlikely to be so nice, so there are a few things that you should do with your own data to make your joins go smoothly. -->
-
-<!-- 1.  Start by identifying the variables that form the primary key in each table. -->
-<!--     You should usually do this based on your understanding of the data, not -->
-<!--     empirically by looking for a combination of variables that give a -->
-<!--     unique identifier. If you just look for variables without thinking about -->
-<!--     what they mean, you might get (un)lucky and find a combination that's -->
-<!--     unique in your current data but the relationship might not be true in -->
-<!--     general. -->
-
-<!--     For example, the altitude and longitude uniquely identify each airport, -->
-<!--     but they are not good identifiers! -->
-
-<!--     ```{r} -->
-<!--     airports %>% count(alt, lon) %>% filter(n > 1) -->
-<!--     ``` -->
-
-<!-- 1.  Check that none of the variables in the primary key are missing. If -->
-<!--     a value is missing then it can't identify an observation! -->
-
-<!-- 1.  Check that your foreign keys match primary keys in another table. The -->
-<!--     best way to do this is with an `anti_join()`. It's common for keys -->
-<!--     not to match because of data entry errors. Fixing these is often a lot of -->
-<!--     work. -->
-
-<!--     If you do have missing keys, you'll need to be thoughtful about your -->
-<!--     use of inner vs. outer joins, carefully considering whether or not you -->
-<!--     want to drop rows that don't have a match. -->
-
-<!-- Be aware that simply checking the number of rows before and after the join is not sufficient to ensure that your join has gone smoothly. If you have an inner join with duplicate keys in both tables, you might get unlucky as the number of dropped rows might exactly equal the number of duplicated rows! -->
-
-<!-- ## Set operations {#set-operations} -->
-
-<!-- The final type of two-table verb are the set operations. Generally, I use these the least frequently, but they are occasionally useful when you want to break a single complex filter into simpler pieces. All these operations work with a complete row, comparing the values of every variable. These expect the `x` and `y` inputs to have the same variables, and treat the observations like sets: -->
-
-<!-- * `intersect(x, y)`: return only observations in both `x` and `y`. -->
-<!-- * `union(x, y)`: return unique observations in `x` and `y`. -->
-<!-- * `setdiff(x, y)`: return observations in `x`, but not in `y`. -->
-
-<!-- Given this simple data: -->
-
-<!-- ```{r} -->
-<!-- df1 <- tribble( -->
-<!--   ~x, ~y, -->
-<!--    1,  1, -->
-<!--    2,  1 -->
-<!-- ) -->
-<!-- df2 <- tribble( -->
-<!--   ~x, ~y, -->
-<!--    1,  1, -->
-<!--    1,  2 -->
-<!-- ) -->
-<!-- ``` -->
-
-<!-- The four possibilities are: -->
-
-<!-- ```{r} -->
-<!-- intersect(df1, df2) -->
-
-<!-- # Note that we get 3 rows, not 4 -->
-<!-- union(df1, df2) -->
-
-<!-- setdiff(df1, df2) -->
-
-<!-- setdiff(df2, df1) -->
-<!-- ``` -->

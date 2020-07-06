@@ -14,7 +14,8 @@ rmd_files: [
   "tibble.Rmd",
   "import.Rmd",
   "tidy.Rmd",
-  "relational-data.Rmd"
+  "relational-data.Rmd",
+  "strings.Rmd"
 ]
 
 before_chapter_script: "_common.R"
@@ -24,7 +25,7 @@ output_dir: "docs"
 
 
 
-#  "strings.Rmd",
+
 #  "factors.Rmd",
 #  "datetimes.Rmd",
 #
