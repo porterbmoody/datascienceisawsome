@@ -272,7 +272,7 @@ Throughout the book we use a consistent set of conventions to refer to code:
 * Functions are in a code font and followed by parentheses, like `sum()`,
   or `mean()`.
 
-* Other R objects (like data or function arguments) are in a code font,
+* Other Python objects (like data or function arguments) are in a code font,
   without parentheses, like `flights` or `x`.
 
 ## Getting help and learning more
