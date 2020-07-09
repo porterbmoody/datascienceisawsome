@@ -1,5 +1,14 @@
 # Strings
 
+```{r, echo=FALSE}
+knitr::opts_chunk$set(python.reticulate = TRUE)
+library(reticulate)
+library(ggplot2)
+library(vegawidget)
+use_python("usr/local/bin/python3")
+```
+
+
 ## Introduction
 
 This chapter introduces you to string manipulation in R. You'll learn the basics of how strings work and how to create them by hand, but the focus of this chapter will be on regular expressions, or regexps for short. Regular expressions are useful because strings usually contain unstructured or semi-structured data, and regexps are a concise language for describing patterns in strings. When you first look at a regexp, you'll think a cat walked across your keyboard, but as your understanding improves they will soon start to make sense.
@@ -512,7 +521,7 @@ df.assign(
 
 Note that matches never overlap. For example, in `"abababa"`, how many times will the pattern `"aba"` match? Regular expressions say two, not three:
 
-```{ppython}
+```{python}
 pd.Series(["abababa"]).str.count("aba")
 
 ```
@@ -534,369 +543,147 @@ pd.Series(["abababa"]).str.count("aba")
 
 ### Extract matches
 
-To extract the actual text of a match, use `str.extract()`. To show that off, we're going to need a more complicated example. I'm going to use the [Harvard sentences](https://en.wikipedia.org/wiki/Harvard_sentences), which were designed to test VOIP systems, but are also useful for practicing regexps. These are provided in `stringr::sentences`:
+To extract the actual text of a match, use `str.findall()`. To show that off, we're going to need a more complicated example. I'm going to use the [Harvard sentences](https://en.wikipedia.org/wiki/Harvard_sentences), which were designed to test VOIP systems, but are also useful for practicing regexps. These are provided in `stringr::sentences`:
 
-```{python}
+```{python, cache = FALSE}
 sentences = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/sentences/sentences.csv")
 sentences.count
 ```
 
 Imagine we want to find all sentences that contain a colour. We first create a vector of colour names, and then turn it into a single regular expression:
 
-```{python}
+```{python, cache=FALSE}
 colours = pd.Series(["red", "orange", "yellow", "green", "blue", "purple"])
 colour_match = colours.str.cat(sep = "|")
 colour_match
 ```
 
-<!-- Now we can select the sentences that contain a colour, and then extract the colour to figure out which one it is: -->
+Now we can select the sentences that contain a colour, and then extract the colour to figure out which one it is:
 
-<!-- ```{r} -->
-<!-- has_colour <- str_subset(sentences, colour_match) -->
-<!-- matches <- str_extract(has_colour, colour_match) -->
-<!-- head(matches) -->
-<!-- ``` -->
+```{python}
+has_colour = sentences.query('name.str.contains(@colour_match)')
+matches = has_colour.name.str.findall(colour_match)
+matches.head()
+```
 
-<!-- Note that `str_extract()` only extracts the first match. We can see that most easily by first selecting all the sentences that have more than 1 match: -->
+Note that `str.findall()` extracts all matches. You'll learn more about lists in [lists](#lists) and [iteration].
 
-<!-- ```{r} -->
-<!-- more <- sentences[str_count(sentences, colour_match) > 1] -->
-<!-- str_view_all(more, colour_match) -->
+#### Exercises
 
-<!-- str_extract(more, colour_match) -->
-<!-- ``` -->
+1.  In the previous example, you might have noticed that the regular
+    expression matched "flickered", which is not a colour. Modify the
+    regex to fix the problem.
 
-<!-- This is a common pattern for stringr functions, because working with a single match allows you to use much simpler data structures. To get all matches, use `str_extract_all()`. It returns a list: -->
+1.  From the Harvard sentences data, extract:
 
-<!-- ```{r} -->
-<!-- str_extract_all(more, colour_match) -->
-<!-- ``` -->
+    1. The first word from each sentence.
+    1. All words ending in `ing`.
+    1. All plurals.
 
-<!-- You'll learn more about lists in [lists](#lists) and [iteration]. -->
+### Grouped matches
 
-<!-- If you use `simplify = TRUE`, `str_extract_all()` will return a matrix with short matches expanded to the same length as the longest: -->
+Earlier in this chapter we talked about the use of parentheses for clarifying precedence and for backreferences when matching. You can also use parentheses to extract parts of a complex match. For example, imagine we want to extract nouns from the sentences. As a heuristic, we'll look for any word that comes after "a" or "the". Defining a "word" in a regular expression is a little tricky, so here I use a simple approximation: a sequence of at least one character that isn't a space. `str.findall()` gives us the complete match:
 
-<!-- ```{r} -->
-<!-- str_extract_all(more, colour_match, simplify = TRUE) -->
+```{python}
+noun = '(a|the) ([^ ]+)'
+has_noun = sentences.query('name.str.contains(@noun)')
+has_noun.name.str.findall(noun).head()
+```
 
-<!-- x <- c("a", "a b", "a b c") -->
-<!-- str_extract_all(x, "[a-z]", simplify = TRUE) -->
-<!-- ``` -->
+(Unsurprisingly, our heuristic for detecting nouns is poor, and also picks up adjectives like smooth and parked.)
 
-<!-- #### Exercises -->
+#### Exercises
 
-<!-- 1.  In the previous example, you might have noticed that the regular -->
-<!--     expression matched "flickered", which is not a colour. Modify the -->
-<!--     regex to fix the problem. -->
+1. Find all words that come after a "number" like "one", "two", "three" etc.
+   Pull out both the number and the word.
 
-<!-- 1.  From the Harvard sentences data, extract: -->
+1. Find all contractions. Separate out the pieces before and after the
+   apostrophe.
 
-<!--     1. The first word from each sentence. -->
-<!--     1. All words ending in `ing`. -->
-<!--     1. All plurals. -->
+### Replacing matches
 
-<!-- ### Grouped matches -->
+`str.replace()` allows you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string:
 
-<!-- Earlier in this chapter we talked about the use of parentheses for clarifying precedence and for backreferences when matching. You can also use parentheses to extract parts of a complex match. For example, imagine we want to extract nouns from the sentences. As a heuristic, we'll look for any word that comes after "a" or "the". Defining a "word" in a regular expression is a little tricky, so here I use a simple approximation: a sequence of at least one character that isn't a space. -->
+```{python}
+x = pd.Series(["apple", "banana", "pear"])
+x.str.replace( "[aeiou]", "-", n = 1)
+x.str.replace( "[aeiou]", "-")
+```
 
-<!-- ```{r} -->
-<!-- noun <- "(a|the) ([^ ]+)" -->
+Instead of replacing with a fixed string you can use backreferences to insert components of the match. In the following code, I flip the order of the second and third words.
 
-<!-- has_noun <- sentences %>% -->
-<!--   str_subset(noun) %>% -->
-<!--   head(10) -->
-<!-- has_noun %>%  -->
-<!--   str_extract(noun) -->
-<!-- ``` -->
+```{python}
+sentences.name.str.replace("([^ ]+) ([^ ]+) ([^ ]+)", "\\1 \\3 \\2").head()
+```
 
-<!-- `str_extract()` gives us the complete match; `str_match()` gives each individual component. Instead of a character vector, it returns a matrix, with one column for the complete match followed by one column for each group: -->
+#### Exercises
 
-<!-- ```{r} -->
-<!-- has_noun %>%  -->
-<!--   str_match(noun) -->
-<!-- ``` -->
+1.   Replace all forward slashes in a string with backslashes.
 
-<!-- (Unsurprisingly, our heuristic for detecting nouns is poor, and also picks up adjectives like smooth and parked.) -->
+1.   Implement a simple version of `str_to_lower()` using `replace_all()`.
 
-<!-- If your data is in a tibble, it's often easier to use `tidyr::extract()`. It works like `str_match()` but requires you to name the matches, which are then placed in new columns: -->
+1.   Switch the first and last letters in `words`. Which of those strings
+     are still words?
 
-<!-- ```{r} -->
-<!-- tibble(sentence = sentences) %>%  -->
-<!--   tidyr::extract( -->
-<!--     sentence, c("article", "noun"), "(a|the) ([^ ]+)",  -->
-<!--     remove = FALSE -->
-<!--   ) -->
-<!-- ``` -->
+### Splitting
 
-<!-- Like `str_extract()`, if you want all matches for each string, you'll need `str_match_all()`. -->
+Use `str.split()` to split a string up into pieces. For example, we could split sentences into words:
 
-<!-- #### Exercises -->
+```{python}
+sentences.name.str.split(" ").head()
+```
 
-<!-- 1. Find all words that come after a "number" like "one", "two", "three" etc. -->
-<!--    Pull out both the number and the word. -->
+Because each component might contain a different number of pieces, this returns an object with list elements. If you want all items in each list to a row you can use `explode()`:
 
-<!-- 1. Find all contractions. Separate out the pieces before and after the  -->
-<!--    apostrophe. -->
+```{python}
+sentences.name.str.split(" ").explode()
+```
 
-<!-- ### Replacing matches -->
+You can also request a maximum number of pieces:
 
-<!-- `str_replace()` and `str_replace_all()` allow you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string: -->
+```{python}
+fields = pd.Series(["Name: Hadley", "Country: NZ", "Age: 35"])
+fields.str.split(": ", n = 2)
+```
 
-<!-- ```{r} -->
-<!-- x <- c("apple", "pear", "banana") -->
-<!-- str_replace(x, "[aeiou]", "-") -->
-<!-- str_replace_all(x, "[aeiou]", "-") -->
-<!-- ``` -->
+#### Exercises
 
-<!-- With `str_replace_all()` you can perform multiple replacements by supplying a named vector: -->
+1.  Split up a string like `"apples, pears, and bananas"` into individual
+    components.
 
-<!-- ```{r} -->
-<!-- x <- c("1 house", "2 cars", "3 people") -->
-<!-- str_replace_all(x, c("1" = "one", "2" = "two", "3" = "three")) -->
-<!-- ``` -->
+1.  What does splitting with an empty string (`""`) do? Experiment, and
+    then read the documentation.
 
-<!-- Instead of replacing with a fixed string you can use backreferences to insert components of the match. In the following code, I flip the order of the second and third words. -->
+### Find matches
 
-<!-- ```{r} -->
-<!-- sentences %>%  -->
-<!--   str_replace("([^ ]+) ([^ ]+) ([^ ]+)", "\\1 \\3 \\2") %>%  -->
-<!--   head(5) -->
-<!-- ``` -->
+`str.find()` gives you the starting positions of each match and a `-1` for non-matches. This is particularly useful when none of the other functions does exactly what you want. 
 
-<!-- #### Exercises -->
+## Other types of pattern
 
-<!-- 1.   Replace all forward slashes in a string with backslashes. -->
+When you use a pattern that's a string, the default is for the `str.` functions to use the pattern as a regex. For some `str.` functions you can change this by using the `regex = False` argument:
 
-<!-- 1.   Implement a simple version of `str_to_lower()` using `replace_all()`. -->
 
-<!-- 1.   Switch the first and last letters in `words`. Which of those strings -->
-<!--      are still words? -->
+You can use the other arguments to control details of the match:
 
-<!-- ### Splitting -->
+*   `case = False` allows characters to match either their uppercase or
+    lowercase forms. The default is `case = True` if the pattern is a string.
 
-<!-- Use `str_split()` to split a string up into pieces. For example, we could split sentences into words: -->
+    ```{python}
+    bananas = pd.Series(["banana", "Banana", "BANANA"])
+    bananas.str.replace('banana', "-R-")
+    bananas.str.replace('banana', "-R-", case = True)
+    bananas.str.replace('banana', "-R-", case = False)
+    ```
 
-<!-- ```{r} -->
-<!-- sentences %>% -->
-<!--   head(5) %>%  -->
-<!--   str_split(" ") -->
-<!-- ``` -->
 
-<!-- Because each component might contain a different number of pieces, this returns a list. If you're working with a length-1 vector, the easiest thing is to just extract the first element of the list: -->
+### Exercises
 
-<!-- ```{r} -->
-<!-- "a|b|c|d" %>%  -->
-<!--   str_split("\\|") %>%  -->
-<!--   .[[1]] -->
-<!-- ``` -->
+1.  What are the five most common words in `sentences`?
 
-<!-- Otherwise, like the other stringr functions that return a list, you can use `simplify = TRUE` to return a matrix: -->
+## stringi
 
-<!-- ```{r} -->
-<!-- sentences %>% -->
-<!--   head(5) %>%  -->
-<!--   str_split(" ", simplify = TRUE) -->
-<!-- ``` -->
+<!-- https://jakevdp.github.io/WhirlwindTourOfPython/14-strings-and-regular-expressions.html -->
 
-<!-- You can also request a maximum number of pieces: -->
+The pandas `str.` functions are built using the Python string functions. Jake VanderPlas' [Whirlwind Tour of Python](https://github.com/jakevdp/WhirlwindTourOfPython) provides examples of [string manipulation](https://jakevdp.github.io/WhirlwindTourOfPython/14-strings-and-regular-expressions.html) using Python's built in methods.
 
-<!-- ```{r} -->
-<!-- fields <- c("Name: Hadley", "Country: NZ", "Age: 35") -->
-<!-- fields %>% str_split(": ", n = 2, simplify = TRUE) -->
-<!-- ``` -->
-
-<!-- Instead of splitting up strings by patterns, you can also split up by character, line, sentence and word `boundary()`s: -->
-
-<!-- ```{r} -->
-<!-- x <- "This is a sentence.  This is another sentence." -->
-<!-- str_view_all(x, boundary("word")) -->
-
-<!-- str_split(x, " ")[[1]] -->
-<!-- str_split(x, boundary("word"))[[1]] -->
-<!-- ``` -->
-
-<!-- #### Exercises -->
-
-<!-- 1.  Split up a string like `"apples, pears, and bananas"` into individual -->
-<!--     components. -->
-
-<!-- 1.  Why is it better to split up by `boundary("word")` than `" "`? -->
-
-<!-- 1.  What does splitting with an empty string (`""`) do? Experiment, and -->
-<!--     then read the documentation. -->
-
-<!-- ### Find matches -->
-
-<!-- `str_locate()` and `str_locate_all()` give you the starting and ending positions of each match. These are particularly useful when none of the other functions does exactly what you want. You can use `str_locate()` to find the matching pattern, `str_sub()` to extract and/or modify them. -->
-
-<!-- ## Other types of pattern -->
-
-<!-- When you use a pattern that's a string, it's automatically wrapped into a call to `regex()`: -->
-
-<!-- ```{r, eval = FALSE} -->
-<!-- # The regular call: -->
-<!-- str_view(fruit, "nana") -->
-<!-- # Is shorthand for -->
-<!-- str_view(fruit, regex("nana")) -->
-<!-- ``` -->
-
-<!-- You can use the other arguments of `regex()` to control details of the match: -->
-
-<!-- *   `ignore_case = TRUE` allows characters to match either their uppercase or  -->
-<!--     lowercase forms. This always uses the current locale. -->
-
-<!--     ```{r} -->
-<!--     bananas <- c("banana", "Banana", "BANANA") -->
-<!--     str_view(bananas, "banana") -->
-<!--     str_view(bananas, regex("banana", ignore_case = TRUE)) -->
-<!--     ``` -->
-
-<!-- *   `multiline = TRUE` allows `^` and `$` to match the start and end of each -->
-<!--     line rather than the start and end of the complete string. -->
-
-<!--     ```{r} -->
-<!--     x <- "Line 1\nLine 2\nLine 3" -->
-<!--     str_extract_all(x, "^Line")[[1]] -->
-<!--     str_extract_all(x, regex("^Line", multiline = TRUE))[[1]] -->
-<!--     ``` -->
-
-<!-- *   `comments = TRUE` allows you to use comments and white space to make  -->
-<!--     complex regular expressions more understandable. Spaces are ignored, as is  -->
-<!--     everything after `#`. To match a literal space, you'll need to escape it:  -->
-<!--     `"\\ "`. -->
-
-<!--     ```{r} -->
-<!--     phone <- regex(" -->
-<!--       \\(?     # optional opening parens -->
-<!--       (\\d{3}) # area code -->
-<!--       [) -]?   # optional closing parens, space, or dash -->
-<!--       (\\d{3}) # another three numbers -->
-<!--       [ -]?    # optional space or dash -->
-<!--       (\\d{3}) # three more numbers -->
-<!--       ", comments = TRUE) -->
-
-<!--     str_match("514-791-8141", phone) -->
-<!--     ``` -->
-
-<!-- *   `dotall = TRUE` allows `.` to match everything, including `\n`. -->
-
-<!-- There are three other functions you can use instead of `regex()`: -->
-
-<!-- *   `fixed()`: matches exactly the specified sequence of bytes. It ignores -->
-<!--     all special regular expressions and operates at a very low level.  -->
-<!--     This allows you to avoid complex escaping and can be much faster than  -->
-<!--     regular expressions. The following microbenchmark shows that it's about -->
-<!--     3x faster for a simple example. -->
-
-<!--     ```{r} -->
-<!--     microbenchmark::microbenchmark( -->
-<!--       fixed = str_detect(sentences, fixed("the")), -->
-<!--       regex = str_detect(sentences, "the"), -->
-<!--       times = 20 -->
-<!--     ) -->
-<!--     ``` -->
-
-<!--     Beware using `fixed()` with non-English data. It is problematic because  -->
-<!--     there are often multiple ways of representing the same character. For  -->
-<!--     example, there are two ways to define "á": either as a single character or  -->
-<!--     as an "a" plus an accent: -->
-
-<!--     ```{r} -->
-<!--     a1 <- "\u00e1" -->
-<!--     a2 <- "a\u0301" -->
-<!--     c(a1, a2) -->
-<!--     a1 == a2 -->
-<!--     ``` -->
-
-<!--     They render identically, but because they're defined differently,  -->
-<!--     `fixed()` doesn't find a match. Instead, you can use `coll()`, defined -->
-<!--     next, to respect human character comparison rules: -->
-
-<!--     ```{r} -->
-<!--     str_detect(a1, fixed(a2)) -->
-<!--     str_detect(a1, coll(a2)) -->
-<!--     ``` -->
-
-<!-- *   `coll()`: compare strings using standard **coll**ation rules. This is  -->
-<!--     useful for doing case insensitive matching. Note that `coll()` takes a -->
-<!--     `locale` parameter that controls which rules are used for comparing -->
-<!--     characters. Unfortunately different parts of the world use different rules! -->
-
-<!--     ```{r} -->
-<!--     # That means you also need to be aware of the difference -->
-<!--     # when doing case insensitive matches: -->
-<!--     i <- c("I", "İ", "i", "ı") -->
-<!--     i -->
-
-<!--     str_subset(i, coll("i", ignore_case = TRUE)) -->
-<!--     str_subset(i, coll("i", ignore_case = TRUE, locale = "tr")) -->
-<!--     ``` -->
-
-<!--     Both `fixed()` and `regex()` have `ignore_case` arguments, but they -->
-<!--     do not allow you to pick the locale: they always use the default locale. -->
-<!--     You can see what that is with the following code; more on stringi -->
-<!--     later. -->
-
-<!--     ```{r} -->
-<!--     stringi::stri_locale_info() -->
-<!--     ``` -->
-
-<!--     The downside of `coll()` is speed; because the rules for recognising which -->
-<!--     characters are the same are complicated, `coll()` is relatively slow -->
-<!--     compared to `regex()` and `fixed()`. -->
-
-<!-- *   As you saw with `str_split()` you can use `boundary()` to match boundaries. -->
-<!--     You can also use it with the other functions:  -->
-
-<!--     ```{r} -->
-<!--     x <- "This is a sentence." -->
-<!--     str_view_all(x, boundary("word")) -->
-<!--     str_extract_all(x, boundary("word")) -->
-<!--     ``` -->
-
-<!-- ### Exercises -->
-
-<!-- 1.  How would you find all strings containing `\` with `regex()` vs. -->
-<!--     with `fixed()`? -->
-
-<!-- 1.  What are the five most common words in `sentences`? -->
-
-<!-- ## Other uses of regular expressions -->
-
-<!-- There are two useful function in base R that also use regular expressions: -->
-
-<!-- *   `apropos()` searches all objects available from the global environment. This -->
-<!--     is useful if you can't quite remember the name of the function. -->
-
-<!--     ```{r} -->
-<!--     apropos("replace") -->
-<!--     ``` -->
-
-<!-- *   `dir()` lists all the files in a directory. The `pattern` argument takes -->
-<!--     a regular expression and only returns file names that match the pattern. -->
-<!--     For example, you can find all the R Markdown files in the current -->
-<!--     directory with: -->
-
-<!--     ```{r} -->
-<!--     head(dir(pattern = "\\.Rmd$")) -->
-<!--     ``` -->
-
-<!--     (If you're more comfortable with "globs" like `*.Rmd`, you can convert -->
-<!--     them to regular expressions with `glob2rx()`): -->
-
-<!-- ## stringi -->
-
-<!-- stringr is built on top of the __stringi__ package. stringr is useful when you're learning because it exposes a minimal set of functions, which have been carefully picked to handle the most common string manipulation functions. stringi, on the other hand, is designed to be comprehensive. It contains almost every function you might ever need: stringi has `r length(getNamespaceExports("stringi"))` functions to stringr's `r length(getNamespaceExports("stringr"))`. -->
-
-<!-- If you find yourself struggling to do something in stringr, it's worth taking a look at stringi. The packages work very similarly, so you should be able to translate your stringr knowledge in a natural way. The main difference is the prefix: `str_` vs. `stri_`. -->
-
-<!-- ### Exercises -->
-
-<!-- 1.  Find the stringi functions that: -->
-
-<!--     1. Count the number of words. -->
-<!--     1. Find duplicated strings. -->
-<!--     1. Generate random text. -->
-
-<!-- 1.  How do you control the language that `stri_sort()` uses for  -->
-<!--     sorting? -->
+If you find yourself struggling to do something with `str.` in pandas, it's worth taking a look at the built in tools. 

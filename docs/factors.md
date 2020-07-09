@@ -1,12 +1,6 @@
 # Factors
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-use_python("usr/local/bin/python3")
-```
+
 
 
 ## Introduction
@@ -17,19 +11,21 @@ In pandas, categorical variables (factors in R) are variables that have a fixed 
 
 To work with categorical variables, we'll use the __category__ data type in pandas. It supports tools for dealing with categorical variables using a wide range of helper methods. 
 
-```{python setup, message = FALSE, cache=FALSE}
+
+```python
 import pandas as pd
 import altair as alt
 import numpy as np
 alt.data_transformers.enable('json')
-
+#> DataTransformerRegistry.enable('json')
 ```
 
 ## Creating categories
 
 Imagine that you have a variable that records month:
 
-```{python}
+
+```python
 x1 = pd.Series(["Dec", "Apr", "Jan", "Mar"])
 ```
 
@@ -38,19 +34,27 @@ Using a string to record this variable has two problems:
 1.  There are only twelve possible months, and there's nothing saving you
     from typos:
      
-    ```{python}
+    
+    ```python
     x2 = pd.Series(["Dec", "Apr", "Jam", "Mar"])
     ```
     
 1.  It doesn't sort in a useful way:
 
-    ```{python}
+    
+    ```python
     x1.sort_values()
+    #> 1    Apr
+    #> 0    Dec
+    #> 2    Jan
+    #> 3    Mar
+    #> dtype: object
     ```
 
 You can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid __levels__:
 
-```{python}
+
+```python
 month_levels = pd.Series([
   "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -59,37 +63,51 @@ month_levels = pd.Series([
 
 Now you can create a factor:
 
-```{python}
+
+```python
 y1 = pd.Categorical(x1, categories=month_levels)
 y1
+#> [Dec, Apr, Jan, Mar]
+#> Categories (12, object): [Jan, Feb, Mar, Apr, ..., Sep, Oct, Nov, Dec]
 y1.sort_values()
+#> [Jan, Mar, Apr, Dec]
+#> Categories (12, object): [Jan, Feb, Mar, Apr, ..., Sep, Oct, Nov, Dec]
 ```
 
 And any values not in the set will be silently converted to `nan`:
 
-```{python}
+
+```python
 y2 = pd.Categorical(x2, categories=month_levels)
 y2
+#> [Dec, Apr, NaN, Mar]
+#> Categories (12, object): [Jan, Feb, Mar, Apr, ..., Sep, Oct, Nov, Dec]
 ```
 
 Sometimes you'd prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to `pd.unique(x)`:
 
-```{python}
+
+```python
 f1 = pd.Categorical(x1, categories=pd.unique(x1))
 f1
+#> [Dec, Apr, Jan, Mar]
+#> Categories (4, object): [Dec, Apr, Jan, Mar]
 ```
 
 If you ever need to access the set of valid levels directly, you can do so with `levels()`:
 
-```{python}
+
+```python
 pd.Series(f1).cat.categories
+#> Index(['Dec', 'Apr', 'Jan', 'Mar'], dtype='object')
 ```
 
 ## General Social Survey
 
 For the rest of this chapter, we're going to focus on `gss_cat` data found in the `forcats` R package. It's a sample of data from the [General Social Survey](http://gss.norc.org), which is a long-running US survey conducted by the independent research organization NORC at the University of Chicago. The survey has thousands of questions, so in `gss_cat` I've selected a handful that will illustrate some common challenges you'll encounter when working with factors.
 
-```{python, cache = FALSE}
+
+```python
 gss_cat = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/gss_cat/gss_cat.csv")
 
 marital_levels = ["No answer", "Never married", "Separated", "Divorced", "Widowed", "Married"]
@@ -129,32 +147,41 @@ gss_cat = gss_cat.assign(
 
 When factors are stored in a tibble, you can't see their levels so easily. One way to see them is with `value_counts()` or you can get a high level summary with `describe()`:
 
-```{python}
+
+```python
 gss_cat.race.value_counts()
+#> White             16395
+#> Black              3129
+#> Other              1959
+#> Not applicable        0
+#> Name: race, dtype: int64
 gss_cat.race.describe()
+#> count     21483
+#> unique        3
+#> top       White
+#> freq      16395
+#> Name: race, dtype: object
 ```
 
 Or with a bar chart:
 
-```{python, cache =FALSE}
+
+```python
 chart = (alt.Chart(gss_cat).
   encode(alt.X('race'), alt.Y('count()')).
   mark_bar().
   properties(width = 400))
 
 chart.save("screenshots/altair_cat_1.png")
-
 ```
 
-```{R, echo=FALSE, fig.align="left"}
 
-knitr::include_graphics("screenshots/altair_cat_1.png")
-
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_1} \end{flushleft}
 
 By default, ggplot2 will drop levels that don't have any values. You can force them to display with:
 
-```{python, cache =FALSE}
+
+```python
 levels_use = gss_cat.race.cat.categories.to_list()
 
 chart = (alt.Chart(gss_cat).
@@ -165,14 +192,10 @@ chart = (alt.Chart(gss_cat).
     properties(width = 400))
 
 chart.save("screenshots/altair_cat_2.png")
-
 ```
 
-```{R, echo=FALSE, fig.align="left"}
 
-knitr::include_graphics("screenshots/altair_cat_2.png")
-
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_2} \end{flushleft}
 
 These levels represent valid values that simply did not occur in this dataset. When working with factors, the two most common operations are changing the order of the levels, and changing the values of the levels. Those operations are described in the sections below.
 
@@ -191,7 +214,8 @@ These levels represent valid values that simply did not occur in this dataset. W
 
 It's often useful to change the order of the factor levels in a visualisation. For example, imagine you want to explore the average number of hours spent watching TV per day across religions:
 
-```{python, cache =FALSE}
+
+```python
 relig_summary = gss_cat.groupby('relig').agg(
     age = ('age', np.mean),
     tvhours = ('tvhours', np.mean),
@@ -203,14 +227,10 @@ chart = (alt.Chart(relig_summary).
           mark_circle())
 
 chart.save("screenshots/altair_cat_3.png")
-
 ```
 
-```{R, echo=FALSE, fig.align="left"}
 
-knitr::include_graphics("screenshots/altair_cat_3.png")
-
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_3} \end{flushleft}
 
 It is difficult to interpret this plot because there's no overall pattern. We can improve it by reordering the levels of `relig` using the `sort` argument in `alt.Y()`. The `sort` argument uses `-x` to sort largest at the top and `x` to sort with the largest at the bottom of the y-axis. If you would like to implement more intricate sortings using `alt.EncodingSortField()` with the following arguments.
 
@@ -222,35 +242,34 @@ It is difficult to interpret this plot because there's no overall pattern. We ca
 Thus, if we were going to implement more detailed sorting we would use 
 `alt.EncodingSortField(field = 'tvhours', op = 'sum', order = 'ascending'))`. Note that sorting within Altair for boxplots is not very functional.  You would need to use `pd.Categorical()` to put the categories in your prefered order.
 
-```{python, cache =FALSE}
+
+```python
 chart = (alt.Chart(relig_summary).
   encode(alt.X('tvhours'), alt.Y('relig')).
   mark_circle())
 
 
 chart.save("screenshots/altair_cat_4.png")
-
 ```
 
-```{R, echo=FALSE, fig.align="left"}
 
-knitr::include_graphics("screenshots/altair_cat_4.png")
-
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_4} \end{flushleft}
 
 
 Reordering religion makes it much easier to see that people in the "Don't know" category watch much more TV, and Hinduism & Other Eastern religions watch much less.
 
 As you start making more complicated transformations, I'd recommend moving them out of Altair and into a new variable using pandas. 
 
-```{python, eval = FALSE}
+
+```python
 chart = (alt.Chart(relig_summary).
     encode(alt.X('tvhours'), alt.Y('relig', sort = '-x')).
     mark_circle())
 ```
 As you start making more complicated transformations, I'd recommend moving them out of Altair and into a new variable using pandas. What if we create a similar plot looking at how average age varies across reported income level?
 
-```{python, cache =FALSE}
+
+```python
 rincome_summary = gss_cat.groupby('rincome').agg(
     age = ('age', np.mean),
         tvhours = ('tvhours', np.mean),
@@ -263,14 +282,10 @@ chart = (alt.Chart(rincome_summary).
 
 
 chart.save("screenshots/altair_cat_5.png")
-
 ```
 
-```{R, echo=FALSE, fig.align="left"}
 
-knitr::include_graphics("screenshots/altair_cat_5.png")
-
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_5} \end{flushleft}
 
 
 Here, arbitrarily reordering the levels isn't a good idea! That's because `rincome` already has a principled order that we shouldn't mess with. Reserve sorting for factors whose levels are arbitrarily ordered.
