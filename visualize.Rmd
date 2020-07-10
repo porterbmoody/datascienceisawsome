@@ -254,7 +254,7 @@ chart1 = (alt.Chart(mpg).
 
 # Second
 chart2 = (alt.Chart(mpg).
-  mark_circle().
+  mark_point().
   encode(
     x = "displ",
     y = "hwy",
