@@ -104,7 +104,7 @@ Every variable has its own pattern of variation, which can reveal interesting in
 
 ### Visualising distributions
 
-How you visualise the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is **categorical** if it can only take one of a small set of values. In R, categorical variables are usually saved as factors or character vectors. To examine the distribution of a categorical variable, use a bar chart:
+How you visualise the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is **categorical** if it can only take one of a small set of values. In Python, categorical variables are usually saved as Category or object datatypes. To examine the distribution of a categorical variable, use a bar chart:
 
 We want the height of the bars to display how many observations occurred with each x value. You can compute these values with `size()`:
 
