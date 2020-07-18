@@ -25,4 +25,4 @@ In this part of the book you will learn some useful tools that have an immediate
 
 Modelling is an important part of the exploratory process, but you don't have the skills to effectively learn or apply it yet. We'll come back to it in [modelling](#model-intro), once you're better equipped with more data wrangling and programming tools.
 
-Nestled among these three chapters that teach you the tools of exploration are three chapters that focus on your Python workflow. In [workflow: basics], [workflow: scripts], and [workflow: projects] you'll learn good practices for writing and organising your R code. These will set you up for success in the long run, as they'll give you the tools to stay organised when you tackle real projects.
+Nestled among these three chapters that teach you the tools of exploration are three chapters that focus on your Python workflow. In [workflow: basics], [workflow: scripts], and [workflow: projects] you'll learn good practices for writing and organising your Python code. These will set you up for success in the long run, as they'll give you the tools to stay organised when you tackle real projects.

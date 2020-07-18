@@ -30,31 +30,14 @@ rmd_files: [
   "model-building.Rmd",
   "model-many.Rmd",
 
-  "communicate.Rmd"
+  "communicate.Rmd",
+  "rmarkdown.Rmd",
 
 ]
 
 before_chapter_script: "_common.R"
 output_dir: "docs"
 
-
-
-
-
-
-
-
-
-
-
-#
-
-
-
-
-#
-
-#  "rmarkdown.Rmd",
 #  "communicate-plots.Rmd",
 #  "rmarkdown-formats.Rmd",
 #  "rmarkdown-workflow.Rmd",#

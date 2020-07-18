@@ -471,18 +471,6 @@ There are many functions for creating new variables that you can use with `assig
 
 ### Exercises
 
-```{r, eval = FALSE, echo = FALSE}
-flights <- flights %>% mutate(
-  dep_time = hour * 60 + minute,
-  arr_time = (arr_time %/% 100) * 60 + (arr_time %% 100),
-  airtime2 = arr_time - dep_time,
-  dep_sched = dep_time + dep_delay
-)
-
-ggplot(flights, aes(dep_sched)) + geom_histogram(binwidth = 60)
-ggplot(flights, aes(dep_sched %% 60)) + geom_histogram(binwidth = 1)
-ggplot(flights, aes(air_time - airtime2)) + geom_histogram()
-```
 
 1.  Currently `dep_time` and `sched_dep_time` are convenient to look at, but
     hard to compute with because they're not really continuous numbers.

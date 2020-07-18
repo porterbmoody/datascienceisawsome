@@ -1,5 +1,9 @@
 # Dates and times
 
+<!-- https://creativecommons.org/2020/04/21/academic-publications-under-no-derivatives-licenses-is-misguided/ -->
+
+
+
 ## Introduction
 
 This chapter will show you how to work with dates and times in pandas. At first glance, dates and times seem simple. You use them all the time in your regular life, and they don't seem to cause much confusion. However, the more you learn about dates and times, the more complicated they seem to get. To warm up, try these three seemingly simple questions:
@@ -12,560 +16,774 @@ I'm sure you know that not every year has 365 days, but do you know the full rul
 
 Dates and times are hard because they have to reconcile two physical phenomena (the rotation of the Earth and its orbit around the sun) with a whole raft of geopolitical phenomena including months, time zones, and DST. This chapter won't teach you every last detail about dates and times, but it will give you a solid grounding of practical skills that will help you with common data analysis challenges.
 
-<!-- ### Prerequisites -->
+### Prerequisites
 
-<!-- This chapter will focus on the __lubridate__ package, which makes it easier to work with dates and times in R. lubridate is not part of core tidyverse because you only need it when you're working with dates/times. We will also need nycflights13 for practice data. -->
+This chapter will focus on the [pandas time series functionality](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) and the [Timestamp](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html) methods in pandas, which makes it easier to work with dates and times in Python. We will also need nycflights13 for practice data.
 
-<!-- ```{r setup, message = FALSE} -->
-<!-- library(tidyverse) -->
 
-<!-- library(lubridate) -->
-<!-- library(nycflights13) -->
-<!-- ``` -->
+```python
+import pandas as pd
+import altair as alt
+import numpy as np
+import datetime
 
-<!-- ## Creating date/times -->
+alt.data_transformers.enable('json')
+#> DataTransformerRegistry.enable('json')
+flights = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/flights/flights.csv")
+```
 
-<!-- There are three types of date/time data that refer to an instant in time: -->
+## Creating date/times
+
+pandas has two primary types of date/time data that refers to an instant in time:
 
-<!-- * A __date__. Tibbles print this as `<date>`. -->
+* A __datetime__ is a date plus a time: it uniquely identifies an
+  instant in time (typically to the nearest second). pandas reports these types
+  as `datetime64`. The NumPy team established this native time series data type. 
+  Being encoded as 64-bit integers allows arrays of dates to be represented very 
+  compactly [ref](https://jakevdp.github.io/PythonDataScienceHandbook/03.11-working-with-time-series.html).
+* A __Timestamp__ is a subclass of a datetime.datetime object. This pandas class 
+  provides the speed and ease of use in handling complex time handling.
 
-<!-- * A __time__ within a day. Tibbles print this as `<time>`. -->
+In this chapter we are only going to focus on dates and date-times. We will focus on the pandas tools for dates and times and use the `datetime` python module for some elements of handling time in Python.
 
-<!-- * A __date-time__ is a date plus a time: it uniquely identifies an -->
-<!--   instant in time (typically to the nearest second). Tibbles print this -->
-<!--   as `<dttm>`. Elsewhere in R these are called POSIXct, but I don't think -->
-<!--   that's a very useful name. -->
+To get the current date or date-time you can use `date.today()` or `datetime.now()`:
 
-<!-- In this chapter we are only going to focus on dates and date-times as R doesn't have a native class for storing times. If you need one, you can use the __hms__ package. -->
 
-<!-- You should always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones, which we'll come back to at the end of the chapter. -->
+```python
+# using datetime
+datetime.datetime.today()
+#> datetime.datetime(2020, 7, 16, 16, 48, 36, 690361)
+datetime.datetime.now()
+#> datetime.datetime(2020, 7, 16, 16, 48, 36, 694555)
+datetime.datetime.utcnow()
+# using pandas
+#> datetime.datetime(2020, 7, 16, 22, 48, 36, 698724)
+pd.to_datetime('today')
+#> Timestamp('2020-07-16 16:48:36.703199')
+pd.to_datetime('now')
+#> Timestamp('2020-07-16 22:48:36.710417')
+```
+
+Otherwise, there are three ways you're likely to create a date/time:
+
+* From a string.
+* From individual date-time components.
+* From an existing date/time object.
+
+They work as follows.
+
+### From strings
+
+Date/time data often comes as strings. You've seen one approach to parsing strings into date-times in [date-times](#readr-datetimes). Another approach is to use the helpers provided by pandas. They can work out the format of unambiguous dates. For example:
+
+
+```python
+pd.to_datetime("2017-01-31")
+#> Timestamp('2017-01-31 00:00:00')
+pd.to_datetime("January 31st, 2017")
+#> Timestamp('2017-01-31 00:00:00')
+pd.to_datetime("31-Jan-2017")
+
+# using timestamp
+#> Timestamp('2017-01-31 00:00:00')
+pd.Timestamp("2017-01-31")
+#> Timestamp('2017-01-31 00:00:00')
+pd.Timestamp("January 31st, 2017")
+#> Timestamp('2017-01-31 00:00:00')
+pd.Timestamp("31-Jan-2017")
+#> Timestamp('2017-01-31 00:00:00')
+```
+
+You can specify component order for ambiguous dates with `pd.to_datetime()`. For example:
+
+
+```python
+pd.to_datetime('10-11-09')
+#> Timestamp('2009-10-11 00:00:00')
+pd.to_datetime('10-11-09', yearfirst=True)
+#> Timestamp('2010-11-09 00:00:00')
+pd.to_datetime('10-11-09', dayfirst=True)
+#> Timestamp('2009-11-10 00:00:00')
+pd.to_datetime('10-11-09', format = '%d-%y-%m')
+#> Timestamp('2011-09-10 00:00:00')
+```
+
+
+If you use numbers in `pd.to_datetime()` it is interpreted as the number of nanoseconds from 1970-01-01. However, the unit can be changed.
+
+
+```python
+pd.to_datetime(100000000)
+#> Timestamp('1970-01-01 00:00:00.100000')
+pd.to_datetime(100000000, unit = 'ns')
+#> Timestamp('1970-01-01 00:00:00.100000')
+pd.to_datetime(1, unit = 's')
+#> Timestamp('1970-01-01 00:00:01')
+```
+
+To input time into a datetime add the `hh:mm:ss` format into the string of the parsing function:
+
+
+```python
+pd.to_datetime("2017-01-31 20:11:59")
+#> Timestamp('2017-01-31 20:11:59')
+pd.to_datetime("01/31/2017 08:01")
+#> Timestamp('2017-01-31 08:01:00')
+pd.Timestamp("2017-01-31 20:11:59")
+#> Timestamp('2017-01-31 20:11:59')
+pd.Timestamp("01/31/2017 08:01")
+#> Timestamp('2017-01-31 08:01:00')
+```
+
+### From individual components
+
+Instead of a single string, sometimes you'll have the individual components of the date-time spread across multiple columns. This is what we have in the flights data:
+
+
+```python
+flights.filter(['year', 'month', 'day', 'hour', 'minute']).head()
+#>    year  month  day  hour  minute
+#> 0  2013      1    1     5      15
+#> 1  2013      1    1     5      29
+#> 2  2013      1    1     5      40
+#> 3  2013      1    1     5      45
+#> 4  2013      1    1     6       0
+```
+
+To create a date/time from this sort of input, use `Timestamp()`:
+
+
+```python
+(flights.
+    filter(['year', 'month', 'day', 'hour', 'minute']).
+    assign(departure = pd.to_datetime(flights[['year', 'month', 'day', 'hour', 'minute']]))
+    )
+#>         year  month  day  hour  minute           departure
+#> 0       2013      1    1     5      15 2013-01-01 05:15:00
+#> 1       2013      1    1     5      29 2013-01-01 05:29:00
+#> 2       2013      1    1     5      40 2013-01-01 05:40:00
+#> 3       2013      1    1     5      45 2013-01-01 05:45:00
+#> 4       2013      1    1     6       0 2013-01-01 06:00:00
+#> ...      ...    ...  ...   ...     ...                 ...
+#> 336771  2013      9   30    14      55 2013-09-30 14:55:00
+#> 336772  2013      9   30    22       0 2013-09-30 22:00:00
+#> 336773  2013      9   30    12      10 2013-09-30 12:10:00
+#> 336774  2013      9   30    11      59 2013-09-30 11:59:00
+#> 336775  2013      9   30     8      40 2013-09-30 08:40:00
+#> 
+#> [336776 rows x 6 columns]
+```
+
+Let's do the same thing for each of the four time columns in `flights`. The times are represented in a slightly odd format, so we use modulus arithmetic to pull out the hour and minute components. Once I've created the date-time variables, I focus in on the variables we'll explore in the rest of the chapter.
+
+
+
+```python
+# parsing function
+def make_datetime_100(data, time):
+    date_data = (data[['year', 'month', 'day', time]].
+        assign(
+            hour = lambda x: x[time] // 100,
+            minute = lambda x: x[time] % 100).
+        filter(['year', 'month', 'day', 'hour', 'minute'])
+    )
+    
+    out = pd.to_datetime(date_data)
+
+    return out
+# data table
+flights_dt = (flights.
+    query('(dep_time.notna()) & (arr_time.notna())').
+    assign(
+        dep_time = lambda x: make_datetime_100(x, 'dep_time'),
+        arr_time = lambda x: make_datetime_100(x, 'arr_time'),
+        sched_dep_time = lambda x: make_datetime_100(x, 'sched_dep_time'),
+        sched_arr_time = lambda x: make_datetime_100(x, 'sched_arr_time')
+    ).
+    filter( regex = 'origin|dest|delay$|time$')
+)
+
+flights_dt
+#>                   dep_time      sched_dep_time  dep_delay  ... origin dest  air_time
+#> 0      2013-01-01 05:17:00 2013-01-01 05:15:00        2.0  ...    EWR  IAH     227.0
+#> 1      2013-01-01 05:33:00 2013-01-01 05:29:00        4.0  ...    LGA  IAH     227.0
+#> 2      2013-01-01 05:42:00 2013-01-01 05:40:00        2.0  ...    JFK  MIA     160.0
+#> 3      2013-01-01 05:44:00 2013-01-01 05:45:00       -1.0  ...    JFK  BQN     183.0
+#> 4      2013-01-01 05:54:00 2013-01-01 06:00:00       -6.0  ...    LGA  ATL     116.0
+#> ...                    ...                 ...        ...  ...    ...  ...       ...
+#> 336765 2013-09-30 22:40:00 2013-09-30 22:45:00       -5.0  ...    JFK  SYR      41.0
+#> 336766 2013-09-30 22:40:00 2013-09-30 22:50:00      -10.0  ...    JFK  BUF      52.0
+#> 336767 2013-09-30 22:41:00 2013-09-30 22:46:00       -5.0  ...    JFK  ROC      47.0
+#> 336768 2013-09-30 23:07:00 2013-09-30 22:55:00       12.0  ...    JFK  BOS      33.0
+#> 336769 2013-09-30 23:49:00 2013-09-30 23:59:00      -10.0  ...    JFK  PSE     196.0
+#> 
+#> [328063 rows x 9 columns]
+```
+
+With this data, I can visualise the distribution of departure times across the year:
+
+
+```python
+dat_plot = (flights_dt.
+    filter(['dep_time']).
+    assign(dpd = flights_dt.dep_time.dt.floor("D")).
+    groupby(['dpd'], as_index = False).
+    count())
+
+chart = (alt.Chart(dat_plot).
+          encode(x = 'dpd', y = 'dep_time').
+          mark_line()) 
+          
+chart.save("screenshots/altair_datetimes_1.png")
+```
+
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_1} \end{flushleft}
+
+
+Or within a single day:
+
+
+```python
+dat_plot = (flights_dt.filter(['dep_time']).query("dep_time < 20130102").
+    assign(dpd = flights_dt.dep_time.dt.floor("10min")).
+    groupby(['dpd'], as_index = False).
+    count())
+
+chart = (alt.Chart(dat_plot).
+    encode(x = 'dpd', y = 'dep_time').
+    mark_line())
+
+chart.save("screenshots/altair_datetimes_2.png")
+```
+
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_2} \end{flushleft}
+
+### From other types
+
+Sometimes you'll get date/times as numeric offsets from the "Unix Epoch", 1970-01-01. If the offset is in seconds, use `as_datetime()`; if it's in days, use `as_date()`.
+
+
+```python
+pd.to_datetime(60 * 60 * 10, unit = 's')
+#> Timestamp('1970-01-01 10:00:00')
+pd.to_datetime(365 * 10 + 2, unit = 'd')
+#> Timestamp('1980-01-01 00:00:00')
+```
+
+### Exercises
+
+1.  What happens if you parse a string that contains invalid dates?
+
+    
+    ```python
+    pd.to_datetime(['2010-10-10', 'bananas'])
+    pd.to_datetime(['2010-10-10', 'bananas'], errors = 'coerce')
+    ```
+
+## Date-time components
+
+Now that you know how to get date-time data into Python's datetime data structures, let's explore what you can do with them. This section will focus on the [Timestamp properites](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#time-date-components) that let you get and set individual components. The next section will look at how arithmetic works with datetimes.
+
+### Getting components
+
+You can pull out individual parts of the date with the accessor properties `.year`, `.month`, `.day()` (day of the month), `.dayofyear` (day of the year), `.dayofweek` (day of the week), `.hour`, `.minute`, and `.second`. When using these properties on a pandas series you must include `.dt.` as in `<PANDAS SERIES>.dt.month`. 
+
+
+```python
+datetime = pd.to_datetime("2016-07-08 12:34:56")
+
+datetime.year
+#> 2016
+datetime.month
+#> 7
+datetime.day
+#> 8
+datetime.dayofyear
+#> 190
+datetime.dayofweek
+#> 4
+```
 
-<!-- To get the current date or date-time you can use `today()` or `now()`: -->
+To return the name of the month or day of the week use the two name methods `.day_name()` and `month_name()`.
 
-<!-- ```{r} -->
-<!-- today() -->
-<!-- now() -->
-<!-- ``` -->
 
-<!-- Otherwise, there are three ways you're likely to create a date/time: -->
+```pandas
+datetime.month_name()
+datetime.day_name()
+```
 
-<!-- * From a string. -->
-<!-- * From individual date-time components. -->
-<!-- * From an existing date/time object. -->
+We can use `.day_name()` in pandas to create a new variable for your chart or use `day()` in Altair to build the date variable only for the chart using the [TimeUnit transforms](https://altair-viz.github.io/user_guide/transform/timeunit.html)  to see that more flights depart during the week than on the weekend:
 
-<!-- They work as follows. -->
 
-<!-- ### From strings -->
+```python
+flights_dt.dep_time.dt.day_name()
+#> 0         Tuesday
+#> 1         Tuesday
+#> 2         Tuesday
+#> 3         Tuesday
+#> 4         Tuesday
+#>            ...   
+#> 336765     Monday
+#> 336766     Monday
+#> 336767     Monday
+#> 336768     Monday
+#> 336769     Monday
+#> Name: dep_time, Length: 328063, dtype: object
+chart = (alt.Chart(flights_dt).
+  encode(alt.X('day(dep_time):O'), alt.Y('count()')).
+  mark_bar().
+  properties(width = 400))
+  
+chart.save("screenshots/altair_datetimes_3.png")
+```
 
-<!-- Date/time data often comes as strings. You've seen one approach to parsing strings into date-times in [date-times](#readr-datetimes). Another approach is to use the helpers provided by lubridate. They automatically work out the format once you specify the order of the component. To use them, identify the order in which year, month, and day appear in your dates, then arrange "y", "m", and "d" in the same order. That gives you the name of the lubridate function that will parse your date. For example: -->
 
-<!-- ```{r} -->
-<!-- ymd("2017-01-31") -->
-<!-- mdy("January 31st, 2017") -->
-<!-- dmy("31-Jan-2017") -->
-<!-- ``` -->
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_3} \end{flushleft}
 
-<!-- These functions also take unquoted numbers. This is the most concise way to create a single date/time object, as you might need when filtering date/time data. `ymd()` is short and unambiguous: -->
 
-<!-- ```{r} -->
-<!-- ymd(20170131) -->
-<!-- ``` -->
+There's an interesting pattern if we look at the average departure delay by minute within the hour. It looks like flights leaving in minutes 20-30 and 50-60 have much lower delays than the rest of the hour!
 
-<!-- `ymd()` and friends create dates. To create a date-time, add an underscore and one or more of "h", "m", and "s" to the name of the parsing function: -->
 
-<!-- ```{r} -->
-<!-- ymd_hms("2017-01-31 20:11:59") -->
-<!-- mdy_hm("01/31/2017 08:01") -->
-<!-- ``` -->
+```python
+plot_dat = (flights_dt.assign(
+    minute = lambda x: x.dep_time.dt.minute).
+    groupby('minute').
+    agg(
+        avg_delay = ('arr_delay', np.mean),
+        n = ('arr_delay', 'size')
+    ).reset_index()
+)
 
-<!-- You can also force the creation of a date-time from a date by supplying a timezone: -->
+chart = (alt.Chart(plot_dat).
+  encode(alt.X('minute'), alt.Y('avg_delay')).
+  mark_line())
+  
+chart.save("screenshots/altair_datetimes_4.png")
+```
 
-<!-- ```{r} -->
-<!-- ymd(20170131, tz = "UTC") -->
-<!-- ``` -->
 
-<!-- ### From individual components -->
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_4} \end{flushleft}
 
-<!-- Instead of a single string, sometimes you'll have the individual components of the date-time spread across multiple columns. This is what we have in the flights data: -->
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   select(year, month, day, hour, minute) -->
-<!-- ``` -->
+Interestingly, if we look at the _scheduled_ departure time we don't see such a strong pattern:
 
-<!-- To create a date/time from this sort of input, use `make_date()` for dates, or `make_datetime()` for date-times: -->
 
-<!-- ```{r} -->
-<!-- flights %>%  -->
-<!--   select(year, month, day, hour, minute) %>%  -->
-<!--   mutate(departure = make_datetime(year, month, day, hour, minute)) -->
-<!-- ``` -->
+```python
+sched_dep = (flights_dt.assign(
+    minute = lambda x: x.sched_dep_time.dt.minute).
+    groupby('minute').
+    agg(
+        avg_delay = ('arr_delay', np.mean),
+        n = ('arr_delay', 'size')
+    ).reset_index()
+)
 
-<!-- Let's do the same thing for each of the four time columns in `flights`. The times are represented in a slightly odd format, so we use modulus arithmetic to pull out the hour and minute components. Once I've created the date-time variables, I focus in on the variables we'll explore in the rest of the chapter. -->
+chart = (alt.Chart(sched_dep).
+  encode(alt.X('minute'), alt.Y('avg_delay')).
+  mark_line())
+  
+chart.save("screenshots/altair_datetimes_5.png")
+```
 
-<!-- ```{r} -->
-<!-- make_datetime_100 <- function(year, month, day, time) { -->
-<!--   make_datetime(year, month, day, time %/% 100, time %% 100) -->
-<!-- } -->
 
-<!-- flights_dt <- flights %>%  -->
-<!--   filter(!is.na(dep_time), !is.na(arr_time)) %>%  -->
-<!--   mutate( -->
-<!--     dep_time = make_datetime_100(year, month, day, dep_time), -->
-<!--     arr_time = make_datetime_100(year, month, day, arr_time), -->
-<!--     sched_dep_time = make_datetime_100(year, month, day, sched_dep_time), -->
-<!--     sched_arr_time = make_datetime_100(year, month, day, sched_arr_time) -->
-<!--   ) %>%  -->
-<!--   select(origin, dest, ends_with("delay"), ends_with("time")) -->
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_5} \end{flushleft}
 
-<!-- flights_dt -->
-<!-- ``` -->
 
-<!-- With this data, I can visualise the distribution of departure times across the year: -->
+So why do we see that pattern with the actual departure times? Well, like much data collected by humans, there's a strong bias towards flights leaving at "nice" departure times. Always be alert for this sort of pattern whenever you work with data that involves human judgement!
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   ggplot(aes(dep_time)) +  -->
-<!--   geom_freqpoly(binwidth = 86400) # 86400 seconds = 1 day -->
-<!-- ``` -->
 
-<!-- Or within a single day: -->
+```python
+chart = (alt.Chart(sched_dep).
+  encode(alt.X('minute'), alt.Y('n')).
+  mark_line())
+  
+chart.save("screenshots/altair_datetimes_6.png")
+```
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   filter(dep_time < ymd(20130102)) %>%  -->
-<!--   ggplot(aes(dep_time)) +  -->
-<!--   geom_freqpoly(binwidth = 600) # 600 s = 10 minutes -->
-<!-- ``` -->
 
-<!-- Note that when you use date-times in a numeric context (like in a histogram), 1 means 1 second, so a binwidth of 86400 means one day. For dates, 1 means 1 day. -->
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_6} \end{flushleft}
 
-<!-- ### From other types -->
+### Rounding
 
-<!-- You may want to switch between a date-time and a date. That's the job of `as_datetime()` and `as_date()`: -->
+An alternative approach to plotting individual components is to round the date to a nearby unit of time, with `.dt.floor()`, `.dt.round()`, and `.dt.ceiling()`. However, these methods don't work well for coarser roundings. For example, finding the floor of week does not work using `dt.floor()` and the recommended approach is to use `.dt.to_period()` in tandem with `.dt.to_timestep()` as we do in the following example. Each method takes a Series of datetimes to adjust and then the name of the unit round down (floor), round up (ceiling), or round to. This, for example, allows us to plot the number of flights per week:
 
-<!-- ```{r} -->
-<!-- as_datetime(today()) -->
-<!-- as_date(now()) -->
-<!-- ``` -->
+https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-offset-aliases
 
-<!-- Sometimes you'll get date/times as numeric offsets from the "Unix Epoch", 1970-01-01. If the offset is in seconds, use `as_datetime()`; if it's in days, use `as_date()`. -->
 
-<!-- ```{r} -->
-<!-- as_datetime(60 * 60 * 10) -->
-<!-- as_date(365 * 10 + 2) -->
-<!-- ``` -->
+```python
+plot_dat = flights_dt.assign(
+    week = lambda x: x.dep_time.dt.to_period("W").dt.to_timestamp()
+    ).groupby('week').agg(
+        n = ('dep_time', 'size')
+    ).reset_index()
 
-<!-- ### Exercises -->
+chart = (alt.Chart(plot_dat).
+  encode(alt.X('week'), alt.Y('n')).
+  mark_line())
 
-<!-- 1.  What happens if you parse a string that contains invalid dates? -->
+chart.save("screenshots/altair_datetimes_7.png")
+```
 
-<!--     ```{r, eval = FALSE} -->
-<!--     ymd(c("2010-10-10", "bananas")) -->
-<!--     ``` -->
 
-<!-- 1.  What does the `tzone` argument to `today()` do? Why is it important? -->
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_7} \end{flushleft}
 
-<!-- 1.  Use the appropriate lubridate function to parse each of the following dates: -->
+Computing the difference between a rounded and unrounded date can be particularly useful.
 
-<!--     ```{r} -->
-<!--     d1 <- "January 1, 2010" -->
-<!--     d2 <- "2015-Mar-07" -->
-<!--     d3 <- "06-Jun-2017" -->
-<!--     d4 <- c("August 19 (2015)", "July 1 (2015)") -->
-<!--     d5 <- "12/30/14" # Dec 30, 2014 -->
-<!--     ``` -->
+### Setting components
 
-<!-- ## Date-time components -->
+You can also use each accessor function to set the components of a date/time:
 
-<!-- Now that you know how to get date-time data into R's date-time data structures, let's explore what you can do with them. This section will focus on the accessor functions that let you get and set individual components. The next section will look at how arithmetic works with date-times. -->
 
-<!-- ### Getting components -->
+```python
+datetime = pd.Timestamp("2016-07-08 12:34:56")
+datetime.replace(year = 2020)
+#> Timestamp('2020-07-08 12:34:56')
+datetime.replace(month = 1)
+#> Timestamp('2016-01-08 12:34:56')
+datetime.replace(hour = datetime.hour + 1)
+#> Timestamp('2016-07-08 13:34:56')
+```
 
-<!-- You can pull out individual parts of the date with the accessor functions `year()`, `month()`, `mday()` (day of the month), `yday()` (day of the year), `wday()` (day of the week), `hour()`, `minute()`, and `second()`.  -->
+Alternatively, Rather than modifying each separately, you can create a new date-time with `replace()` using all of the arguments. This allows you to set multiple values at once.
 
-<!-- ```{r} -->
-<!-- datetime <- ymd_hms("2016-07-08 12:34:56") -->
 
-<!-- year(datetime) -->
-<!-- month(datetime) -->
-<!-- mday(datetime) -->
+```python
+datetime.replace(year = 2020, month = 2, day = 2, hour = 2)
+#> Timestamp('2020-02-02 02:34:56')
+```
 
-<!-- yday(datetime) -->
-<!-- wday(datetime) -->
-<!-- ``` -->
+If values are too big, you will see an error:
 
-<!-- For `month()` and `wday()` you can set `label = TRUE` to return the abbreviated name of the month or day of the week. Set `abbr = FALSE` to return the full name. -->
 
-<!-- ```{r} -->
-<!-- month(datetime, label = TRUE) -->
-<!-- wday(datetime, label = TRUE, abbr = FALSE) -->
-<!-- ``` -->
+```python
+pd.Timestamp("2015-02-01").replace(day = 30)
+#> Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: day is out of range for month
+#> 
+#> Detailed traceback: 
+#>   File "<string>", line 1, in <module>
+#>   File "pandas/_libs/tslibs/timestamps.pyx", line 950, in pandas._libs.tslibs.timestamps.Timestamp.replace
+```
 
-<!-- We can use `wday()` to see that more flights depart during the week than on the weekend: -->
+You can use `replace()` to show the distribution of flights across the course of the day for every day of the year:
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   mutate(wday = wday(dep_time, label = TRUE)) %>%  -->
-<!--   ggplot(aes(x = wday)) + -->
-<!--     geom_bar() -->
-<!-- ``` -->
+__Note:__ The `Timestamp.replace()` method does not have an equivalent method that can be used on pandas Series so you will need to use an `apply()` method on the datetime series. We have avoided the use of `apply()` in this book up to this point.  `apply()` is a powerful technique within pandas that is worth your time to master. You can read [the pandas documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html) to find additional help.
 
-<!-- There's an interesting pattern if we look at the average departure delay by minute within the hour. It looks like flights leaving in minutes 20-30 and 50-60 have much lower delays than the rest of the hour! -->
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   mutate(minute = minute(dep_time)) %>%  -->
-<!--   group_by(minute) %>%  -->
-<!--   summarise( -->
-<!--     avg_delay = mean(arr_delay, na.rm = TRUE), -->
-<!--     n = n()) %>%  -->
-<!--   ggplot(aes(minute, avg_delay)) + -->
-<!--     geom_line() -->
-<!-- ``` -->
+```python
+plot_dat = flights_dt.assign(
+    dep_hour = lambda x: x.dep_time.apply(lambda y: y.replace(month = 1, day = 1))
+    )
 
-<!-- Interestingly, if we look at the _scheduled_ departure time we don't see such a strong pattern: -->
+chart = (alt.Chart(plot_dat).
+  encode(alt.X('dep_hour'), alt.Y('count()')).
+  mark_line())
 
-<!-- ```{r} -->
-<!-- sched_dep <- flights_dt %>%  -->
-<!--   mutate(minute = minute(sched_dep_time)) %>%  -->
-<!--   group_by(minute) %>%  -->
-<!--   summarise( -->
-<!--     avg_delay = mean(arr_delay, na.rm = TRUE), -->
-<!--     n = n()) -->
+chart.save("screenshots/altair_datetimes_8.png")
+```
 
-<!-- ggplot(sched_dep, aes(minute, avg_delay)) + -->
-<!--   geom_line() -->
-<!-- ``` -->
 
-<!-- So why do we see that pattern with the actual departure times? Well, like much data collected by humans, there's a strong bias towards flights leaving at "nice" departure times. Always be alert for this sort of pattern whenever you work with data that involves human judgement! -->
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_8} \end{flushleft}
 
-<!-- ```{r} -->
-<!-- ggplot(sched_dep, aes(minute, n)) + -->
-<!--   geom_line() -->
-<!-- ``` -->
+Setting larger components of a date to a constant is a powerful technique that allows you to explore patterns in the smaller components.
 
-<!-- ### Rounding -->
+### Exercises
 
-<!-- An alternative approach to plotting individual components is to round the date to a nearby unit of time, with `floor_date()`, `round_date()`, and `ceiling_date()`. Each function takes a vector of dates to adjust and then the name of the unit round down (floor), round up (ceiling), or round to. This, for example, allows us to plot the number of flights per week: -->
+1.  How does the distribution of flight times within a day change over the
+    course of the year?
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   count(week = floor_date(dep_time, "week")) %>%  -->
-<!--   ggplot(aes(week, n)) + -->
-<!--     geom_line() -->
-<!-- ``` -->
+1.  Compare `dep_time`, `sched_dep_time` and `dep_delay`. Are they consistent?
+    Explain your findings.
 
-<!-- Computing the difference between a rounded and unrounded date can be particularly useful. -->
+1.  Compare `air_time` with the duration between the departure and arrival.
+    Explain your findings. (Hint: consider the location of the airport.)
 
-<!-- ### Setting components -->
+1.  How does the average delay time change over the course of a day?
+    Should you use `dep_time` or `sched_dep_time`? Why?
 
-<!-- You can also use each accessor function to set the components of a date/time:  -->
+1.  On what day of the week should you leave if you want to minimise the
+    chance of a delay?
 
-<!-- ```{r} -->
-<!-- (datetime <- ymd_hms("2016-07-08 12:34:56")) -->
+1.  What makes the distribution of `diamonds.carat` and
+    `flights.sched_dep_time` similar?
 
-<!-- year(datetime) <- 2020 -->
-<!-- datetime -->
-<!-- month(datetime) <- 01 -->
-<!-- datetime -->
-<!-- hour(datetime) <- hour(datetime) + 1 -->
-<!-- datetime -->
-<!-- ``` -->
+1.  Confirm my hypothesis that the early departures of flights in minutes
+    20-30 and 50-60 are caused by scheduled flights that leave early.
+    Hint: create a binary variable that tells you whether or not a flight
+    was delayed.
 
-<!-- Alternatively, rather than modifying in place, you can create a new date-time with `update()`. This also allows you to set multiple values at once. -->
+## Time spans (Deltas)
 
-<!-- ```{r} -->
-<!-- update(datetime, year = 2020, month = 2, mday = 2, hour = 2) -->
-<!-- ``` -->
+Next you'll learn about how arithmetic with dates work, including subtraction, addition, and division. Along the way, you'll learn about pandas tools for representing time spans. In Python, when you subtract two dates, you get a Timedelta object:
 
-<!-- If values are too big, they will roll-over: -->
 
-<!-- ```{r} -->
-<!-- ymd("2015-02-01") %>%  -->
-<!--   update(mday = 30) -->
-<!-- ymd("2015-02-01") %>%  -->
-<!--   update(hour = 400) -->
-<!-- ``` -->
+```python
+# How old is Hathaway?
+h_age = pd.Timestamp.now() - pd.Timestamp("19770907")
+h_age
+#> Timedelta('15653 days 16:48:53.718845')
+```
 
-<!-- You can use `update()` to show the distribution of flights across the course of the day for every day of the year:  -->
+A Timedelta object records a time span in nanoseconds using 64 bit integers which can make Timedeltas a little painful to work with, so Timedelta provides access to the number of days with `.days` and the number of seconds with `.total_seconds()`.
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   mutate(dep_hour = update(dep_time, yday = 1)) %>%  -->
-<!--   ggplot(aes(dep_hour)) + -->
-<!--     geom_freqpoly(binwidth = 300) -->
-<!-- ``` -->
 
-<!-- Setting larger components of a date to a constant is a powerful technique that allows you to explore patterns in the smaller components. -->
+```python
+h_age.days
+h_age.days // 365 # to get years
+h_age.total_seconds()
+```
 
-<!-- ### Exercises -->
+Timedeltas come with a bunch of convenient constructors:
 
-<!-- 1.  How does the distribution of flight times within a day change over the  -->
-<!--     course of the year? -->
 
-<!-- 1.  Compare `dep_time`, `sched_dep_time` and `dep_delay`. Are they consistent? -->
-<!--     Explain your findings. -->
+```python
+pd.Timedelta(seconds = 15)
+#> Timedelta('0 days 00:00:15')
+pd.Timedelta(minutes = 10)
+#> Timedelta('0 days 00:10:00')
+pd.Timedelta(hours = 12)
+#> Timedelta('0 days 12:00:00')
+pd.Timedelta(hours = 24)
+#> Timedelta('1 days 00:00:00')
+pd.Timedelta(days = 5)
+#> Timedelta('5 days 00:00:00')
+pd.Timedelta(weeks = 3)
+# to create a series of Timedeltas you can use a for loop.
+#> Timedelta('21 days 00:00:00')
+pd.Series([pd.Timedelta(days=i) for i in range(5)])
+#> 0   0 days
+#> 1   1 days
+#> 2   2 days
+#> 3   3 days
+#> 4   4 days
+#> dtype: timedelta64[ns]
+```
 
-<!-- 1.  Compare `air_time` with the duration between the departure and arrival. -->
-<!--     Explain your findings. (Hint: consider the location of the airport.) -->
 
-<!-- 1.  How does the average delay time change over the course of a day? -->
-<!--     Should you use `dep_time` or `sched_dep_time`? Why? -->
+```python
+2*pd.Timedelta(days = 365)
+#> Timedelta('730 days 00:00:00')
+pd.Timedelta(days = 365) + pd.Timedelta(weeks = 12) + pd.Timedelta(hours = 15)
+#> Timedelta('449 days 15:00:00')
+```
 
-<!-- 1.  On what day of the week should you leave if you want to minimise the -->
-<!--     chance of a delay? -->
+You can add and subtract Timedeltas to and from days:
 
-<!-- 1.  What makes the distribution of `diamonds$carat` and  -->
-<!--     `flights$sched_dep_time` similar? -->
 
-<!-- 1.  Confirm my hypothesis that the early departures of flights in minutes -->
-<!--     20-30 and 50-60 are caused by scheduled flights that leave early.  -->
-<!--     Hint: create a binary variable that tells you whether or not a flight  -->
-<!--     was delayed. -->
+```python
+tomorrow = pd.Timestamp.today() + pd.Timedelta(days = 1)
+last_year = pd.Timestamp.today() - pd.Timedelta(days = 365)
+```
 
-<!-- ## Time spans -->
+And of course, add them to dates. Timedeltas are strict durations based on the arguments.  Those durations do work across the various novelties of daylight savings time and leaps in the calendar like February 29th.
 
-<!-- Next you'll learn about how arithmetic with dates works, including subtraction, addition, and division. Along the way, you'll learn about three important classes that represent time spans: -->
 
-<!-- * __durations__, which represent an exact number of seconds. -->
-<!-- * __periods__, which represent human units like weeks and months. -->
-<!-- * __intervals__, which represent a starting and ending point. -->
+```python
+# A leap year
+pd.Timestamp("2020-02-01") + pd.Timedelta(days = 30)
+# Not a leap year
+#> Timestamp('2020-03-02 00:00:00')
+pd.Timestamp("2019-02-01") + pd.Timedelta(days = 30)
+# Daylight Savings Time
+#> Timestamp('2019-03-03 00:00:00')
+one_pm = pd.Timestamp('2016-03-12 13:00:00', tz = 'America/New_York')
+# Day two 1pm 
+one_pm_d2 = pd.Timestamp('2016-03-13 13:00:00', tz = 'America/New_York')
 
-<!-- ### Durations -->
 
-<!-- In R, when you subtract two dates, you get a difftime object: -->
+one_pm + pd.Timedelta(days = 1)
+#> Timestamp('2016-03-13 14:00:00-0400', tz='America/New_York')
+one_pm + pd.Timedelta(hours = 24)
 
-<!-- ```{r} -->
-<!-- # How old is Hadley? -->
-<!-- h_age <- today() - ymd(19791014) -->
-<!-- h_age -->
-<!-- ``` -->
+# Notice that it correctly represents that only 23 hours had passed. 
+#> Timestamp('2016-03-13 14:00:00-0400', tz='America/New_York')
+one_pm_d2 - one_pm
+#> Timedelta('0 days 23:00:00')
+```
 
-<!-- A difftime class object records a time span of seconds, minutes, hours, days, or weeks. This ambiguity can make difftimes a little painful to work with, so lubridate provides an alternative which always uses seconds: the __duration__. -->
+Let's use Timedeltas to fix an oddity related to our flight dates. Some planes appear to have arrived at their destination _before_ they departed from New York City.
 
-<!-- ```{r} -->
-<!-- as.duration(h_age) -->
-<!-- ``` -->
 
-<!-- Durations come with a bunch of convenient constructors: -->
+```python
+flights_dt.query('arr_time < dep_time')
+#>                   dep_time      sched_dep_time  dep_delay  ... origin dest  air_time
+#> 719    2013-01-01 19:29:00 2013-01-01 19:20:00        9.0  ...    EWR  BQN     192.0
+#> 725    2013-01-01 19:39:00 2013-01-01 18:40:00       59.0  ...    JFK  DFW       NaN
+#> 791    2013-01-01 20:58:00 2013-01-01 21:00:00       -2.0  ...    EWR  TPA     159.0
+#> 794    2013-01-01 21:02:00 2013-01-01 21:08:00       -6.0  ...    EWR  SJU     199.0
+#> 797    2013-01-01 21:08:00 2013-01-01 20:57:00       11.0  ...    EWR  SFO     354.0
+#> ...                    ...                 ...        ...  ...    ...  ...       ...
+#> 336753 2013-09-30 21:45:00 2013-09-30 21:45:00        0.0  ...    JFK  SJU     192.0
+#> 336754 2013-09-30 21:47:00 2013-09-30 21:37:00       10.0  ...    LGA  FLL     139.0
+#> 336762 2013-09-30 22:33:00 2013-09-30 21:13:00       80.0  ...    EWR  SFO     318.0
+#> 336763 2013-09-30 22:35:00 2013-09-30 20:01:00      154.0  ...    JFK  MCO     123.0
+#> 336769 2013-09-30 23:49:00 2013-09-30 23:59:00      -10.0  ...    JFK  PSE     196.0
+#> 
+#> [10633 rows x 9 columns]
+```
 
-<!-- ```{r} -->
-<!-- dseconds(15) -->
-<!-- dminutes(10) -->
-<!-- dhours(c(12, 24)) -->
-<!-- ddays(0:5) -->
-<!-- dweeks(3) -->
-<!-- dyears(1) -->
-<!-- ``` -->
+These are overnight flights. We used the same date information for both the departure and the arrival times, but these flights arrived on the following day. We can fix this by adding `days(1)` to the arrival time of each overnight flight.
 
-<!-- Durations always record the time span in seconds. Larger units are created by converting minutes, hours, days, weeks, and years to seconds at the standard rate (60 seconds in a minute, 60 minutes in an hour, 24 hours in day, 7 days in a week, 365 days in a year). -->
 
-<!-- You can add and multiply durations: -->
+```python
+flights_dt = flights_dt.assign(
+    overnight_TF = lambda x: x.arr_time < x.dep_time,
+    overnight = lambda x: x.overnight_TF.astype('int').apply(lambda y: pd.Timedelta(days = y)),
+    arr_time = lambda x: x.arr_time + x.overnight,
+    sched_arr_time = lambda x: x.sched_arr_time + x.overnight
+)
+```
 
-<!-- ```{r} -->
-<!-- 2 * dyears(1) -->
-<!-- dyears(1) + dweeks(12) + dhours(15) -->
-<!-- ``` -->
+Now all of our flights obey the laws of physics.
 
-<!-- You can add and subtract durations to and from days: -->
 
-<!-- ```{r} -->
-<!-- tomorrow <- today() + ddays(1) -->
-<!-- last_year <- today() - dyears(1) -->
-<!-- ``` -->
+```python
+flights_dt.query('arr_time < dep_time')
+#> Empty DataFrame
+#> Columns: [dep_time, sched_dep_time, dep_delay, arr_time, sched_arr_time, arr_delay, origin, dest, air_time, overnight_TF, overnight]
+#> Index: []
+```
 
-<!-- However, because durations represent an exact number of seconds, sometimes you might get an unexpected result: -->
+## Time zones
 
-<!-- ```{r} -->
-<!-- one_pm <- ymd_hms("2016-03-12 13:00:00", tz = "America/New_York") -->
+Time zones are an enormously complicated topic because of their interaction with geopolitical entities. Fortunately we don't need to dig into all the details as they're not all important for data analysis, but there are a few challenges we'll need to tackle head on.
 
-<!-- one_pm -->
-<!-- one_pm + ddays(1) -->
-<!-- ``` -->
+The first challenge is that everyday names of time zones tend to be ambiguous. For example, if you're American you're probably familiar with EST, or Eastern Standard Time. However, both Australia and Canada also have EST! To avoid confusion, The Python package [pytz](https://pypi.org/project/pytz/) uses the international standard IANA time zones. These use a consistent naming scheme "<area>/<location>", typically in the form "\<continent\>/\<city\>" (there are a few exceptions because not every country lies on a continent). Examples include "America/New_York", "Europe/Paris", and "Pacific/Auckland".  Pandas leverages the pytz package to handle time zones.
 
-<!-- Why is one day after 1pm on March 12, 2pm on March 13?! If you look carefully at the date you might also notice that the time zones have changed. Because of DST, March 12 only has 23 hours, so if we add a full days worth of seconds we end up with a different time. -->
+You might wonder why the time zone uses a city, when typically you think of time zones as associated with a country or region within a country. This is because the IANA database has to record decades worth of time zone rules. In the course of decades, countries change names (or break apart) fairly frequently, but city names tend to stay the same. Another problem is that name needs to reflect not only to the current behaviour, but also the complete history. For example, there are time zones for both "America/New_York" and "America/Detroit". These cities both currently use Eastern Standard Time but in 1969-1972 Michigan (the state in which Detroit is located), did not follow DST, so it needs a different name. It's worth reading the raw time zone database (available at <http://www.iana.org/time-zones>) just to read some of these stories!
 
-<!-- ### Periods -->
+You can find out what Python thinks your current time zone is with `Sys.timezone()`:
 
-<!-- To solve this problem, lubridate provides __periods__. Periods are time spans but don't have a fixed length in seconds, instead they work with "human" times, like days and months. That allows them work in a more intuitive way: -->
 
-<!-- ```{r} -->
-<!-- one_pm -->
-<!-- one_pm + days(1) -->
-<!-- ``` -->
+```python
+import time
+time.tzname
+#> ('MST', 'MDT')
+```
 
-<!-- Like durations, periods can be created with a number of friendly constructor functions.  -->
+To see the complete list of all time zone Olson names for a country use `pytz.country_timezones()`:
 
-<!-- ```{r} -->
-<!-- seconds(15) -->
-<!-- minutes(10) -->
-<!-- hours(c(12, 24)) -->
-<!-- days(7) -->
-<!-- months(1:6) -->
-<!-- weeks(3) -->
-<!-- years(1) -->
-<!-- ``` -->
 
-<!-- You can add and multiply periods: -->
+```python
+import pytz
+pytz.country_timezones('US')
+# pytz.all_timezones()
+#> ['America/New_York', 'America/Detroit', 'America/Kentucky/Louisville', 'America/Kentucky/Monticello', 'America/Indiana/Indianapolis', 'America/Indiana/Vincennes', 'America/Indiana/Winamac', 'America/Indiana/Marengo', 'America/Indiana/Petersburg', 'America/Indiana/Vevay', 'America/Chicago', 'America/Indiana/Tell_City', 'America/Indiana/Knox', 'America/Menominee', 'America/North_Dakota/Center', 'America/North_Dakota/New_Salem', 'America/North_Dakota/Beulah', 'America/Denver', 'America/Boise', 'America/Phoenix', 'America/Los_Angeles', 'America/Anchorage', 'America/Juneau', 'America/Sitka', 'America/Metlakatla', 'America/Yakutat', 'America/Nome', 'America/Adak', 'Pacific/Honolulu']
+```
 
-<!-- ```{r} -->
-<!-- 10 * (months(6) + days(1)) -->
-<!-- days(50) + hours(25) + minutes(2) -->
-<!-- ``` -->
+In Python, the time zone is an attribute of the date-time that only controls printing. For example, these three objects represent the same instant in time:
 
-<!-- And of course, add them to dates. Compared to durations, periods are more likely to do what you expect: -->
 
-<!-- ```{r} -->
-<!-- # A leap year -->
-<!-- ymd("2016-01-01") + dyears(1) -->
-<!-- ymd("2016-01-01") + years(1) -->
+```python
+x1 = pd.Timestamp("2015-06-01 12:00:00", tz = 'America/New_York')
+x2 = pd.Timestamp("2015-06-01 18:00:00", tz = 'Europe/Copenhagen')
+x3 = pd.Timestamp("2015-06-01 04:00:00", tz = 'Pacific/Auckland')
+```
 
-<!-- # Daylight Savings Time -->
-<!-- one_pm + ddays(1) -->
-<!-- one_pm + days(1) -->
-<!-- ``` -->
+You can verify that they're the same time by converting to UTC and comparing the offsets
 
-<!-- Let's use periods to fix an oddity related to our flight dates. Some planes appear to have arrived at their destination _before_ they departed from New York City. -->
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   filter(arr_time < dep_time)  -->
-<!-- ``` -->
+```python
+x1.tz_convert('utc')
+#> Timestamp('2015-06-01 16:00:00+0000', tz='UTC')
+x2.tz_convert('utc')
+#> Timestamp('2015-06-01 16:00:00+0000', tz='UTC')
+x3.tz_convert('utc')
+#> Timestamp('2015-05-31 16:00:00+0000', tz='UTC')
+```
 
-<!-- These are overnight flights. We used the same date information for both the departure and the arrival times, but these flights arrived on the following day. We can fix this by adding `days(1)` to the arrival time of each overnight flight. -->
+You can't do subtraction with Timestamps of different time zones:
 
-<!-- ```{r} -->
-<!-- flights_dt <- flights_dt %>%  -->
-<!--   mutate( -->
-<!--     overnight = arr_time < dep_time, -->
-<!--     arr_time = arr_time + days(overnight * 1), -->
-<!--     sched_arr_time = sched_arr_time + days(overnight * 1) -->
-<!--   ) -->
-<!-- ``` -->
 
-<!-- Now all of our flights obey the laws of physics. -->
+```python
+x1 - x2
+#> Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: Timestamp subtraction must have the same timezones or no timezones
+#> 
+#> Detailed traceback: 
+#>   File "<string>", line 1, in <module>
+#>   File "pandas/_libs/tslibs/c_timestamp.pyx", line 300, in pandas._libs.tslibs.c_timestamp._Timestamp.__sub__
+x1 - x3
+#> Error in py_call_impl(callable, dots$args, dots$keywords): TypeError: Timestamp subtraction must have the same timezones or no timezones
+#> 
+#> Detailed traceback: 
+#>   File "<string>", line 1, in <module>
+#>   File "pandas/_libs/tslibs/c_timestamp.pyx", line 300, in pandas._libs.tslibs.c_timestamp._Timestamp.__sub__
+```
 
-<!-- ```{r} -->
-<!-- flights_dt %>%  -->
-<!--   filter(overnight, arr_time < dep_time)  -->
-<!-- ``` -->
+But Timedeltas can be calculated after using `.tz_convert()`:
 
-<!-- ### Intervals -->
 
-<!-- It's obvious what `dyears(1) / ddays(365)` should return: one, because durations are always represented by a number of seconds, and a duration of a year is defined as 365 days worth of seconds. -->
+```python
+x1.tz_convert('utc') - x2.tz_convert('utc')
+#> Timedelta('0 days 00:00:00')
+```
 
-<!-- What should `years(1) / days(1)` return? Well, if the year was 2015 it should return 365, but if it was 2016, it should return 366! There's not quite enough information for lubridate to give a single clear answer. What it does instead is give an estimate, with a warning: -->
 
-<!-- ```{r} -->
-<!-- years(1) / days(1) -->
-<!-- ``` -->
+Unless otherwise specified, `pd.Timestampe()` is not timezone aware.  UTC (Coordinated Universal Time) is the standard time zone used by the scientific community and roughly equivalent to its predecessor GMT (Greenwich Mean Time). It does not have DST, which makes a convenient representation for computation. Operations that combine date-times into a Series will often convert the time zone to UTC and then return the Series as an object or character string.
 
-<!-- If you want a more accurate measurement, you'll have to use an __interval__. An interval is a duration with a starting point: that makes it precise so you can determine exactly how long it is: -->
 
-<!-- ```{r} -->
-<!-- next_year <- today() + years(1) -->
-<!-- (today() %--% next_year) / ddays(1) -->
-<!-- ``` -->
+```python
+x4 = pd.Series([x1, x2, x3])
+x4
+#> 0    2015-06-01 12:00:00-04:00
+#> 1    2015-06-01 18:00:00+02:00
+#> 2    2015-06-01 04:00:00+12:00
+#> dtype: object
+```
 
-<!-- To find out how many periods fall into an interval, you need to use integer division: -->
+Combining elements that all have the same time zone will return a datetime object with that specified time zone:
 
-<!-- ```{r} -->
-<!-- (today() %--% next_year) %/% days(1) -->
-<!-- ``` -->
 
-<!-- ### Summary -->
+```python
+x5 = pd.Series([x1.tz_convert('utc'), x2.tz_convert('utc'), x3.tz_convert('utc')])
+x5
+#> 0   2015-06-01 16:00:00+00:00
+#> 1   2015-06-01 16:00:00+00:00
+#> 2   2015-05-31 16:00:00+00:00
+#> dtype: datetime64[ns, UTC]
+```
 
-<!-- How do you pick between duration, periods, and intervals? As always, pick the simplest data structure that solves your problem. If you only care about physical time, use a duration; if you need to add human times, use a period; if you need to figure out how long a span is in human units, use an interval. -->
+Finally, Timestamp objects that don't have a specified time zone will state ase datetime objects:
 
-<!-- Figure \@ref(fig:dt-algebra) summarises permitted arithmetic operations between the different data types. -->
 
-<!-- ```{r dt-algebra, echo = FALSE, fig.cap = "The allowed arithmetic operations between pairs of date/time classes."} -->
-<!-- knitr::include_graphics("diagrams/datetimes-arithmetic.png") -->
-<!-- ``` -->
+```python
+pd.Series([pd.Timestamp("2015-06-01 04:00:00"), pd.Timestamp("2015-06-01 04:00:00")])
+#> 0   2015-06-01 04:00:00
+#> 1   2015-06-01 04:00:00
+#> dtype: datetime64[ns]
+```
 
-<!-- ### Exercises -->
 
-<!-- 1.  Why is there `months()` but no `dmonths()`? -->
+You can change the time zone in two ways:
 
-<!-- 1.  Explain `days(overnight * 1)` to someone who has just started  -->
-<!--     learning R. How does it work? -->
+*   Keep the instant in time the same, and change how it's displayed.
+    Use this when the instant is correct, but you want a more natural
+    display.
 
-<!-- 1.  Create a vector of dates giving the first day of every month in 2015. -->
-<!--     Create a vector of dates giving the first day of every month -->
-<!--     in the _current_ year. -->
+    
+    ```python
+    x5a = x5.dt.tz_convert('Australia/Lord_Howe')
+    x5a
+    #> 0   2015-06-02 02:30:00+10:30
+    #> 1   2015-06-02 02:30:00+10:30
+    #> 2   2015-06-01 02:30:00+10:30
+    #> dtype: datetime64[ns, Australia/Lord_Howe]
+    ```
 
-<!-- 1.  Write a function that given your birthday (as a date), returns  -->
-<!--     how old you are in years. -->
+    (This also illustrates another challenge of times zones: they're not
+    all integer hour offsets!)
 
-<!-- 1.  Why can't `(today() %--% (today() + years(1))) / months(1)` work? -->
+*   Change the underlying instant in time. Use `None` to strip the time zone
+    when you have an instant that has been labelled with the incorrect time 
+    zone, and you need to fix it.
 
-<!-- ## Time zones  -->
-
-<!-- Time zones are an enormously complicated topic because of their interaction with geopolitical entities. Fortunately we don't need to dig into all the details as they're not all important for data analysis, but there are a few challenges we'll need to tackle head on. -->
-
-<!-- The first challenge is that everyday names of time zones tend to be ambiguous. For example, if you're American you're probably familiar with EST, or Eastern Standard Time. However, both Australia and Canada also have EST! To avoid confusion, R uses the international standard IANA time zones. These use a consistent naming scheme "<area>/<location>", typically in the form "\<continent\>/\<city\>" (there are a few exceptions because not every country lies on a continent). Examples include "America/New_York", "Europe/Paris", and "Pacific/Auckland". -->
-
-<!-- You might wonder why the time zone uses a city, when typically you think of time zones as associated with a country or region within a country. This is because the IANA database has to record decades worth of time zone rules. In the course of decades, countries change names (or break apart) fairly frequently, but city names tend to stay the same. Another problem is that name needs to reflect not only to the current behaviour, but also the complete history. For example, there are time zones for both "America/New_York" and "America/Detroit". These cities both currently use Eastern Standard Time but in 1969-1972 Michigan (the state in which Detroit is located), did not follow DST, so it needs a different name. It's worth reading the raw time zone database (available at <http://www.iana.org/time-zones>) just to read some of these stories! -->
-
-<!-- You can find out what R thinks your current time zone is with `Sys.timezone()`: -->
-
-<!-- ```{r} -->
-<!-- Sys.timezone() -->
-<!-- ``` -->
-
-<!-- (If R doesn't know, you'll get an `NA`.) -->
-
-<!-- And see the complete list of all time zone names with `OlsonNames()`: -->
-
-<!-- ```{r} -->
-<!-- length(OlsonNames()) -->
-<!-- head(OlsonNames()) -->
-<!-- ``` -->
-
-<!-- In R, the time zone is an attribute of the date-time that only controls printing. For example, these three objects represent the same instant in time: -->
-
-<!-- ```{r} -->
-<!-- (x1 <- ymd_hms("2015-06-01 12:00:00", tz = "America/New_York")) -->
-<!-- (x2 <- ymd_hms("2015-06-01 18:00:00", tz = "Europe/Copenhagen")) -->
-<!-- (x3 <- ymd_hms("2015-06-02 04:00:00", tz = "Pacific/Auckland")) -->
-<!-- ``` -->
-
-<!-- You can verify that they're the same time using subtraction: -->
-
-<!-- ```{r} -->
-<!-- x1 - x2 -->
-<!-- x1 - x3 -->
-<!-- ``` -->
-
-<!-- Unless otherwise specified, lubridate always uses UTC. UTC (Coordinated Universal Time) is the standard time zone used by the scientific community and roughly equivalent to its predecessor GMT (Greenwich Mean Time). It does not have DST, which makes a convenient representation for computation. Operations that combine date-times, like `c()`, will often drop the time zone. In that case, the date-times will display in your local time zone: -->
-
-<!-- ```{r} -->
-<!-- x4 <- c(x1, x2, x3) -->
-<!-- x4 -->
-<!-- ``` -->
-
-<!-- You can change the time zone in two ways: -->
-
-<!-- *   Keep the instant in time the same, and change how it's displayed. -->
-<!--     Use this when the instant is correct, but you want a more natural -->
-<!--     display. -->
-
-<!--     ```{r} -->
-<!--     x4a <- with_tz(x4, tzone = "Australia/Lord_Howe") -->
-<!--     x4a -->
-<!--     x4a - x4 -->
-<!--     ``` -->
-
-<!--     (This also illustrates another challenge of times zones: they're not -->
-<!--     all integer hour offsets!) -->
-
-<!-- *   Change the underlying instant in time. Use this when you have an -->
-<!--     instant that has been labelled with the incorrect time zone, and you -->
-<!--     need to fix it. -->
-
-<!--     ```{r} -->
-<!--     x4b <- force_tz(x4, tzone = "Australia/Lord_Howe") -->
-<!--     x4b -->
-<!--     x4b - x4 -->
-<!--     ``` -->
+    
+    ```python
+    x5b = x5.dt.tz_localize(None).dt.tz_localize('Australia/Lord_Howe')
+    x5b
+    #> 0   2015-06-01 16:00:00+10:30
+    #> 1   2015-06-01 16:00:00+10:30
+    #> 2   2015-05-31 16:00:00+10:30
+    #> dtype: datetime64[ns, Australia/Lord_Howe]
+    ```

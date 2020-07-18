@@ -1,4 +1,6 @@
-# R Markdown workflow
+# R Markdown workflow (and Jupyter)
+
+Python has a similar tool to R Markdown called Jupyter Notebooks <https://jupyter.org/>. Like R Markdown it can handle various programming languages. It is used heavily within the scientific community. Nature's 2018 article [Why Jupyter is data scientists’ computational notebook of choice](https://www.nature.com/articles/d41586-018-07196-1) provides a good summary. The discussion below focuses on syntax for R Markdown but the arguments hold for Jupyter notebooks as well.
 
 Earlier, we discussed a basic workflow for capturing your R code where you work  interactively in the _console_, then capture what works in the _script editor_. R Markdown brings together the console and the script editor, blurring the lines between interactive exploration and long-term code capture. You can rapidly iterate within a chunk, editing and re-executing with Cmd/Ctrl + Shift + Enter. When you're happy, you move on and start a new chunk.
 

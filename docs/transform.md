@@ -846,7 +846,6 @@ There are many functions for creating new variables that you can use with `assig
 ### Exercises
 
 
-
 1.  Currently `dep_time` and `sched_dep_time` are convenient to look at, but
     hard to compute with because they're not really continuous numbers.
     Convert them to a more convenient representation of number of minutes
@@ -929,7 +928,7 @@ chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').ma
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-38-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-37-1} 
 
 There are three steps to prepare this data:
 
@@ -1006,7 +1005,7 @@ chart = (alt.Chart(delays).
 ```
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-42-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-41-1} 
 
 Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)!
 
@@ -1032,7 +1031,7 @@ chart = (alt.Chart(delays).
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-44-1} 
+\begin{center}\includegraphics[width=0.7\linewidth]{transform_files/figure-latex/unnamed-chunk-43-1} 
 
 Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases.
 
@@ -1350,8 +1349,8 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     #> BOS    15022
     #> MCO    13967
     #>        ...  
-    #> HDN       14
     #> MTJ       14
+    #> HDN       14
     #> SBN       10
     #> ANC        8
     #> LEX        1

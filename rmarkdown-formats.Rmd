@@ -1,5 +1,25 @@
 # R Markdown formats
 
+As Python and pandas has established a footprint in the data science space, RStudio has incorporated full access to Python with R markdown documents and inside their RStudio IDE. To access the full potential of what we describe below you will need to be comfortable with elements of the R programming language and formats of the R markdown `.Rmd` structure.
+
+R Markdown provides an unified authoring framework for data science, combining your code, its results, and your prose commentary. R Markdown documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
+
+R Markdown files are designed to be used in three ways:
+
+1. For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.
+
+1. For collaborating with other data scientists (including future you!), who are interested in both your conclusions, and how you reached them ( i.e. the code).
+
+1. As an environment in which to do data science, as a modern day lab notebook where you can capture not only what you did, but also what you were thinking.
+
+R Markdown integrates a number of R packages and external tools. This means that help is, by-and-large, not available through ?. Instead, as you work through this chapter, and use R Markdown in the future, keep these resources close to hand:
+
+R Markdown Cheat Sheet: Help > Cheatsheets > R Markdown Cheat Sheet,
+
+R Markdown Reference Guide: Help > Cheatsheets > R Markdown Reference Guide.
+
+Both cheatsheets are also available at <http://rstudio.com/cheatsheets>.
+
 ## Introduction
 
 So far you've seen R Markdown used to produce HTML documents. This chapter gives a brief overview of some of the many other types of output you can produce with R Markdown. There are two ways to set the output of a document:

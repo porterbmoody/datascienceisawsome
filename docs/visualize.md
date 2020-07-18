@@ -215,7 +215,7 @@ chart1 = (alt.Chart(mpg).
 
 # Second
 chart2 = (alt.Chart(mpg).
-  mark_circle().
+  mark_point().
   encode(
     x = "displ",
     y = "hwy",
@@ -227,7 +227,6 @@ chart1.save("screenshots/altair_opacity.png")
 #> WARN Channel opacity should not be used with an unsorted discrete field.
 chart2.save("screenshots/altair_shape.png")
   
-#> WARN shape dropped as it is incompatible with "circle".
 ```
 
 
