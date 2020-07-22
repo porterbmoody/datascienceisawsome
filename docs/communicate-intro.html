@@ -56,6 +56,13 @@
 <link href="libs/vega-embed-6.2.0/vega-embed.css" rel="stylesheet" />
 <script src="libs/vega-embed-6.2.0/vega-embed.js"></script>
 <script src="libs/vegawidget-binding-0.3.1.9003/vegawidget.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132356198-3"></script>
 <script>
@@ -553,6 +560,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="27.5" data-path="markdown.html"><a href="markdown.html#learning-more-2"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
 </ul></li>
+<li class="chapter" data-level="28" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html"><i class="fa fa-check"></i><b>28</b> Graphics for communication</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#introduction-19"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#prerequisites-11"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#label"><i class="fa fa-check"></i><b>28.2</b> Label</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-43"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>28.3</b> Annotations</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html"><i class="fa fa-check"></i><b>29</b> R Markdown formats</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#introduction-20"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
+<li class="chapter" data-level="29.2" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#output-options"><i class="fa fa-check"></i><b>29.2</b> Output options</a></li>
+<li class="chapter" data-level="29.3" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#documents"><i class="fa fa-check"></i><b>29.3</b> Documents</a></li>
+<li class="chapter" data-level="29.4" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#notebooks"><i class="fa fa-check"></i><b>29.4</b> Notebooks</a></li>
+<li class="chapter" data-level="29.5" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#presentations"><i class="fa fa-check"></i><b>29.5</b> Presentations</a></li>
+<li class="chapter" data-level="29.6" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#dashboards"><i class="fa fa-check"></i><b>29.6</b> Dashboards</a></li>
+<li class="chapter" data-level="29.7" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#interactivity"><i class="fa fa-check"></i><b>29.7</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="29.7.1" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#htmlwidgets"><i class="fa fa-check"></i><b>29.7.1</b> htmlwidgets</a></li>
+<li class="chapter" data-level="29.7.2" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#shiny"><i class="fa fa-check"></i><b>29.7.2</b> Shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="29.8" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#websites"><i class="fa fa-check"></i><b>29.8</b> Websites</a></li>
+<li class="chapter" data-level="29.9" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#other-formats"><i class="fa fa-check"></i><b>29.9</b> Other formats</a></li>
+<li class="chapter" data-level="29.10" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#learning-more-3"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="r-markdown-workflow-and-jupyter.html"><a href="r-markdown-workflow-and-jupyter.html"><i class="fa fa-check"></i><b>30</b> R Markdown workflow (and Jupyter)</a></li>
 </ul>
 
       </nav>
@@ -578,7 +615,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p>In <a href="markdown.html#markdown">Markdown</a>, you will learn about Markdown, a simple tool for prose and
 results. You can use Markdown in VS Code to cumminicate.</p></li>
-<li><p>In [Graphics for communication], you will learn how to take your exploratory
+<li><p>In <a href="graphics-for-communication.html#graphics-for-communication">Graphics for communication</a>, you will learn how to take your exploratory
 graphics and turn them into expository graphics, graphics that help the
 newcomer to your analysis understand what’s going on as quickly and
 easily as possible.</p></li>
