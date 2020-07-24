@@ -854,17 +854,18 @@ you know more about the data.</p></li>
 <span id="cb351-15"><a href="graphics-for-communication.html#cb351-15"></a>        alt.X(<span class="st">&#39;start&#39;</span>, </span>
 <span id="cb351-16"><a href="graphics-for-communication.html#cb351-16"></a>            axis <span class="op">=</span> alt.Axis(</span>
 <span id="cb351-17"><a href="graphics-for-communication.html#cb351-17"></a>                values <span class="op">=</span> presidential.start.to_list(),</span>
-<span id="cb351-18"><a href="graphics-for-communication.html#cb351-18"></a>                <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&#39;%y&quot;</span>,</span>
-<span id="cb351-19"><a href="graphics-for-communication.html#cb351-19"></a>                labelOverlap <span class="op">=</span> <span class="va">False</span>,</span>
-<span id="cb351-20"><a href="graphics-for-communication.html#cb351-20"></a>                labelSeparation <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>),</span>
-<span id="cb351-21"><a href="graphics-for-communication.html#cb351-21"></a>                title <span class="op">=</span> <span class="va">None</span>),</span>
-<span id="cb351-22"><a href="graphics-for-communication.html#cb351-22"></a>        alt.Y(<span class="st">&#39;id&#39;</span>, scale <span class="op">=</span> alt.Scale(zero <span class="op">=</span> <span class="va">False</span>)),</span>
-<span id="cb351-23"><a href="graphics-for-communication.html#cb351-23"></a>    ).</span>
-<span id="cb351-24"><a href="graphics-for-communication.html#cb351-24"></a>    mark_circle())</span>
-<span id="cb351-25"><a href="graphics-for-communication.html#cb351-25"></a></span>
-<span id="cb351-26"><a href="graphics-for-communication.html#cb351-26"></a>chart <span class="op">=</span> lines <span class="op">+</span> points</span>
-<span id="cb351-27"><a href="graphics-for-communication.html#cb351-27"></a></span>
-<span id="cb351-28"><a href="graphics-for-communication.html#cb351-28"></a>chart.save(<span class="st">&quot;screenshots/altair_communicate_9.png&quot;</span>)</span></code></pre></div>
+<span id="cb351-18"><a href="graphics-for-communication.html#cb351-18"></a>                <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%y&quot;</span>,</span>
+<span id="cb351-19"><a href="graphics-for-communication.html#cb351-19"></a>                tickCount<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb351-20"><a href="graphics-for-communication.html#cb351-20"></a>                labelOverlap <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb351-21"><a href="graphics-for-communication.html#cb351-21"></a>                labelSeparation <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>),</span>
+<span id="cb351-22"><a href="graphics-for-communication.html#cb351-22"></a>                title <span class="op">=</span> <span class="va">None</span>),</span>
+<span id="cb351-23"><a href="graphics-for-communication.html#cb351-23"></a>        alt.Y(<span class="st">&#39;id&#39;</span>, scale <span class="op">=</span> alt.Scale(zero <span class="op">=</span> <span class="va">False</span>)),</span>
+<span id="cb351-24"><a href="graphics-for-communication.html#cb351-24"></a>    ).</span>
+<span id="cb351-25"><a href="graphics-for-communication.html#cb351-25"></a>    mark_circle())</span>
+<span id="cb351-26"><a href="graphics-for-communication.html#cb351-26"></a></span>
+<span id="cb351-27"><a href="graphics-for-communication.html#cb351-27"></a>chart <span class="op">=</span> lines <span class="op">+</span> points</span>
+<span id="cb351-28"><a href="graphics-for-communication.html#cb351-28"></a></span>
+<span id="cb351-29"><a href="graphics-for-communication.html#cb351-29"></a>chart.save(<span class="st">&quot;screenshots/altair_communicate_9.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_communicate_9.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Note that the specification of breaks and labels for date and datetime scales is a little different.</p>
 </div>

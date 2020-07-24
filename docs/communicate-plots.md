@@ -317,7 +317,8 @@ points = (alt.Chart(presidential).
         alt.X('start', 
             axis = alt.Axis(
                 values = presidential.start.to_list(),
-                format = "\\'%y",
+                format = "%y",
+                tickCount=0,
                 labelOverlap = False,
                 labelSeparation = -1),
                 title = None),
