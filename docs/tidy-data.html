@@ -382,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#pivoting"><i class="fa fa-check"></i><b>12.3</b> Pivoting</a>
 <ul>
 <li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#longer-melt"><i class="fa fa-check"></i><b>12.3.1</b> Longer (<code>melt()</code>)</a></li>
-<li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider"><i class="fa fa-check"></i><b>12.3.2</b> Wider</a></li>
+<li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider-pivot"><i class="fa fa-check"></i><b>12.3.2</b> Wider (<code>pivot()</code>)</a></li>
 <li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-20"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a>
@@ -846,8 +846,8 @@ Figure 12.2: Pivoting <code>table4</code> into a longer, tidy form.
 <span id="cb191-9"><a href="tidy-data.html#cb191-9"></a><span class="co">#&gt; 4       Brazil  2000   80488   174504898</span></span>
 <span id="cb191-10"><a href="tidy-data.html#cb191-10"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
 </div>
-<div id="wider" class="section level3" number="12.3.2">
-<h3><span class="header-section-number">12.3.2</span> Wider</h3>
+<div id="wider-pivot" class="section level3" number="12.3.2">
+<h3><span class="header-section-number">12.3.2</span> Wider (<code>pivot()</code>)</h3>
 <p><code>pivot()</code> is the opposite of <code>melt()</code>. You use it when an observation is scattered across multiple rows. For example, take <code>table2</code>: an observation is a country in a year, but each observation is spread across two rows.</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="tidy-data.html#cb192-1"></a>table2</span>
 <span id="cb192-2"><a href="tidy-data.html#cb192-2"></a><span class="co">#&gt;         country  year        type       count</span></span>

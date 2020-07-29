@@ -286,7 +286,7 @@ pd.merge(tidy4a, tidy4b, on = ['country', 'year'])
 #> 5        China  2000  213766  1280428583
 ```
 
-### Wider
+### Wider (`pivot()`)
 
 `pivot()` is the opposite of `melt()`. You use it when an observation is scattered across multiple rows. For example, take `table2`: an observation is a country in a year, but each observation is spread across two rows.
 

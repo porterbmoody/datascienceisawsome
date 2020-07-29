@@ -156,7 +156,7 @@ Let's hypothesize that the cars are hybrids. One way to test this hypothesis is 
 You can add a third variable, like `class`, to a two dimensional scatterplot by mapping it to an __encoding__. An encoding is a visual property of the objects in your plot. Encodings include things like the size, the shape, or the color of your points. You can display a point (like the one below) in different ways by changing the values of its encoded properties. Since we already use the word "value" to describe data, let's use the word "level" to describe encoded properties. Here we change the levels of a point's size, shape, and color to make the point small, triangular, or blue:
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-11-1} \end{center}
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{images/encode_example} \end{flushleft}
 
 You can convey information about your data by mapping the encodings in your plot to the variables in your dataset. For example, you can map the colors of your points to the `class` variable to reveal the class of each car.
 
