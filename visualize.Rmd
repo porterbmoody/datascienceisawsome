@@ -1034,7 +1034,7 @@ Visualizing data on maps can get complicated quickly.  Altair has a some [mappin
 
 ## The layered grammar of graphics
 
-In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with ggplot2. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
+In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with Altair. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
 
 ```
 (alt.Chart(<DATA>).
