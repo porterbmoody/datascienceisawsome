@@ -361,7 +361,7 @@ If you're still stuck, try the help. You can get help about any Altair function 
 
 One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.
 
-To facet your plot by a single variable, use `facet()`. The first argument of `facet()` is . The variable that you pass to `facet_wrap()` should be discrete.
+To facet your plot by a single variable, use `facet()`. Assign a discrete variable to the `facet` argument and adjust the size of your facet grid using the `columns` argument.
 
 ```{python, cache=FALSE}
 chart_f = (alt.Chart(mpg).
@@ -387,7 +387,7 @@ knitr::include_graphics("screenshots/altair_facet_1.png")
 ```
 
 
-To facet your plot on the combination of two variables, The first argument of `facet()` is also `column` and the second is `row`. This time the formula should contain two variable names.
+To facet your plot on the combination of two variables, the first argument of `facet()` is `column` and the second is `row`. This time the formula should contain two discrete variable names.
 
 ```{python, cache=FALSE}
 chart_f2 = (alt.Chart(mpg).
@@ -668,7 +668,7 @@ knitr::include_graphics("screenshots/altair_combine_clean_color.png")
 
 ```
 
-You can use the same idea to specify different `data` for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only.
+You can use the same idea to specify different data for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The `transform_filter` method overrides the global data from the base chart for that layer only.
 
 ```{python, cache=FALSE}
 #column name of class does not work nicely with Altair filter.
