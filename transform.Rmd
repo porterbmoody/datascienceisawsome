@@ -459,7 +459,7 @@ There are many functions for creating new variables that you can use with `assig
     y.rank(ascending=False, method = 'min')
     ```
 
-    If `method = 'min'`` doesn't do what you need, look at the variants
+    If `method = 'min'` doesn't do what you need, look at the variants
     `method = 'first'`, `method = 'dense'`, `method = 'percent'`, `pct = True`.
     See the rank [help page](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rank.html) for more details.
 
