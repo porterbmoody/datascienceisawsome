@@ -662,7 +662,7 @@ chart_dat = (diamonds.
 chart_dat.head()
 ```
 
-Then visualise with `geom_tile()` and the fill aesthetic:
+Then visualise with `mark_rect()` and the color aesthetic:
 
 ```{python}
 chart = (alt.Chart(chart_dat).
