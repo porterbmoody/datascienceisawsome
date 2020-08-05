@@ -170,7 +170,7 @@ The following code finds all flights that departed in November or December:
 flights.query('month == 11 | month == 12')
 ```
 
-The order of operations doesn't work like English. You can't write `filter(flights, month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `True`. In a numeric context (like here), `True` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
+The order of operations doesn't work like English. You can't write `flights.query(month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `True`. In a numeric context (like here), `True` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
 
 A useful short-hand for this problem is `x in y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above:
 
@@ -459,7 +459,7 @@ There are many functions for creating new variables that you can use with `assig
     y.rank(ascending=False, method = 'min')
     ```
 
-    If `method = 'min'`` doesn't do what you need, look at the variants
+    If `method = 'min'` doesn't do what you need, look at the variants
     `method = 'first'`, `method = 'dense'`, `method = 'percent'`, `pct = True`.
     See the rank [help page](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rank.html) for more details.
 

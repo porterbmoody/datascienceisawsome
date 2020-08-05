@@ -353,7 +353,7 @@ If you're still stuck, try the help. You can get help about any Altair function 
 
 One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.
 
-To facet your plot by a single variable, use `facet()`. The first argument of `facet()` is . The variable that you pass to `facet_wrap()` should be discrete.
+To facet your plot by a single variable, use `facet()`. Assign a discrete variable to the `facet` argument and adjust the size of your facet grid using the `columns` argument.
 
 ```{python, cache=FALSE}
 chart_f = (alt.Chart(mpg).
@@ -379,7 +379,7 @@ knitr::include_graphics("screenshots/altair_facet_1.png")
 ```
 
 
-To facet your plot on the combination of two variables, The first argument of `facet()` is also `column` and the second is `row`. This time the formula should contain two variable names.
+To facet your plot on the combination of two variables, the first argument of `facet()` is `column` and the second is `row`. This time the formula should contain two discrete variable names.
 
 ```{python, cache=FALSE}
 chart_f2 = (alt.Chart(mpg).
@@ -660,7 +660,7 @@ knitr::include_graphics("screenshots/altair_combine_clean_color.png")
 
 ```
 
-You can use the same idea to specify different `data` for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only.
+You can use the same idea to specify different data for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The `transform_filter` method overrides the global data from the base chart for that layer only.
 
 ```{python, cache=FALSE}
 #column name of class does not work nicely with Altair filter.
@@ -1026,7 +1026,7 @@ Visualizing data on maps can get complicated quickly.  Altair has a some [mappin
 
 ## The layered grammar of graphics
 
-In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with ggplot2. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
+In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with Altair. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
 
 ```
 (alt.Chart(<DATA>).
@@ -1070,7 +1070,7 @@ You could use this method to build _any_ plot that you imagine. In other words, 
 
 ## Altair's grammar of graphics
 
-[Plotnine](https://plotnine.readthedocs.io/en/stable/index.html) is a Python implementation of [ggplot2 in R's](https://ggplot2.tidyverse.org/) grammar of graphics using [matplotlib](https://matplotlib.org/) as the plotting backend. Altair's implementation of the grammar of graphics, much like ggplot2 or plotnine at a high level.  However, it uses the [Vega-Lite](https://vega.github.io/vega-lite/) grammar of graphics constructs and plotting backend. 
+[Plotnine](https://plotnine.readthedocs.io/en/stable/index.html) is a Python implementation of [ggplot2 in R's](https://ggplot2.tidyverse.org/) grammar of graphics using [matplotlib](https://matplotlib.org/) as the plotting backend. Altair's implementation of the grammar of graphics is much like ggplot2 or plotnine at a high level.  However, it uses the [Vega-Lite](https://vega.github.io/vega-lite/) grammar of graphics constructs and plotting backend. 
 
 Below are some useful links that will help you dig deeper into the Altair implementation of the grammar of graphics.
 
