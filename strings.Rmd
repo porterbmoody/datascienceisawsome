@@ -680,7 +680,7 @@ You can use the other arguments to control details of the match:
 
 1.  What are the five most common words in `sentences`?
 
-## stringi
+## strings in Python
 
 <!-- https://jakevdp.github.io/WhirlwindTourOfPython/14-strings-and-regular-expressions.html -->
 
