@@ -22,6 +22,7 @@
   <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
 
 <meta name="author" content="J. Hathaway" />
+<meta name="author" content="Katie Larson" />
 
 
 
@@ -254,14 +255,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
 <li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="transform.html"><a href="transform.html#filter-rows-with-query"><i class="fa fa-check"></i><b>5.2</b> Filter rows with <code>query()</code></a>
+<li class="chapter" data-level="5.2" data-path="transform.html"><a href="transform.html#filter-rows-with-.query"><i class="fa fa-check"></i><b>5.2</b> Filter rows with <code>.query()</code></a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
 <li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
 <li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
 <li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>sort_values()</code></a>
+<li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-.sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>.sort_values()</code></a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
 </ul></li>
@@ -269,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>assign()</code></a>
+<li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-.assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>.assign()</code></a>
 <ul>
 <li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
 <li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
@@ -461,7 +462,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-37"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="strings.html"><a href="strings.html#stringi"><i class="fa fa-check"></i><b>14.6</b> stringi</a></li>
+<li class="chapter" data-level="14.6" data-path="strings.html"><a href="strings.html#strings-in-python"><i class="fa fa-check"></i><b>14.6</b> strings in Python</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>15</b> Factors</a>
 <ul>
@@ -663,7 +664,8 @@ chart.save(&#39;markdown/diamonds_25.png&#39;)
 <li><strong>Chunks</strong> of code surrounded by <code>```</code>.</li>
 <li>Text mixed with simple text formatting like <code># heading</code> and <code>_italics_</code>.</li>
 </ol>
-<p>When you open a <code>.md</code> in VS code, you see a text file where code and output can be interleaved. To produce a complete pdf report containing the text, formatted code chunks, and charts you can install the <a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF extension</a> for VS Code (note their instructions about installation if you run into any errors). Once installed, you can create a pdf, html or png report by using the VS code command pallete hotkey <code>Ctrl + Shift + P</code> (<code>Cmd + Shift + P</code> for Mac) and then search using the keyword <code>export</code>. This will create a report in the same folder of the <code>.md</code> file with the same file name and the chosen export extension.</p>
+<p>When you open a <code>.md</code> in VS code, you see a text file where code and output can be interleaved. To produce a complete pdf report containing the text, formatted code chunks, and charts you can install the <a href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced">Markdown Prieveiw Enhanced</a> for VS Code (you can read <a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/">their manual</a>). Once installed, you can view an html rendedered preview in VS code by using the hot key <code>cmd-k v or ctrl-k v</code>.</p>
+<p>Within the preview window you can right click to see an export menu and use the <code>Chrome(Puppeteer)</code> menu to find the export options. This will create a report in the same folder of the <code>.md</code> file with the same file name and the chosen export extension.</p>
 <p><img src="markdown/diamond-sizes-report.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>When you <strong>export</strong> the document, the Markdown PDF extension sends the .md file to <strong>chromium</strong>, which then builds the report. To get started with your own <code>.md</code> file, simply create a new file and use the extension <code>.md</code>. The following sections dive into the two components of a Markdown document in more details: the markdown text, the code chunks.</p>
 </div>

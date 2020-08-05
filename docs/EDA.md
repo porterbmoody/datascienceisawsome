@@ -36,7 +36,8 @@ Then make sure you have the diamonds data loaded.
 
 ```python
 
-diamonds = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv"
+diamonds = pd.read_csv(url)
 
 diamonds['cut'] = pd.Categorical(diamonds.cut, 
   ordered = True, 
@@ -105,23 +106,22 @@ We want the height of the bars to display how many observations occurred with ea
 
 
 ```python
-chart_dat = (diamonds.
-              groupby('cut').
-              agg(count = ('carat', 'size')).
-              reset_index())
+chart_dat = (diamonds
+              .groupby('cut')
+              .agg(count = ('carat', 'size'))
+              .reset_index())
 ```
 
 
 
 ```python
-chart = (alt.Chart(chart_dat).
-    encode(
-        x = 'cut',
-        y = 'count'
-    ).
-    mark_bar().
-    properties(width = 400)
-)
+chart = (alt.Chart(chart_dat)
+    .encode(
+      x = 'cut',
+      y = 'count'
+      )
+    .mark_bar()
+    .properties(width = 400))
 
 chart.save("screenshots/altair_diamonds_barchart.png")
 ```
@@ -133,12 +133,11 @@ A variable is **continuous** if it can take any of an infinite set of ordered va
 
 
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
-        x = alt.X('carat', bin = alt.Bin(step = 0.5)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X('carat', bin = alt.Bin(step = 0.5)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_hist_bin.png")
 ```
@@ -155,12 +154,11 @@ You can set the width of the intervals in a histogram with the `alt.Bin()` and t
 ```python
 smaller = diamonds.query('carat < 3')
 
-chart = (alt.Chart(smaller).
-    encode(
-        x = alt.X('carat', bin = alt.Bin(step = 0.1)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(smaller)
+    .encode(
+      x = alt.X('carat', bin = alt.Bin(step = 0.1)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_hist_smallbin.png")
 ```
@@ -168,8 +166,7 @@ chart.save("screenshots/altair_diamonds_hist_smallbin.png")
 
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_hist_smallbin} \end{flushleft}
 
-
-If you wish to see multiple histograms, Altair doesn't have a straightforward way to overly histograms. We recommend using `facet()`. `facet()` performs the same calculation for each group within the facet varaible.
+If you wish to see multiple histograms, Altair doesn't have a straightforward way to overly histograms. We recommend using `.facet()`. `.facet()` performs the same calculation for each group within the facet varaible.
 
 
 ```python
@@ -213,19 +210,17 @@ As an example, the histogram below suggests several interesting questions:
 
 
 ```python
-chart = (alt.Chart(smaller).
-    encode(
-        x = alt.X('carat', bin = alt.Bin(step = 0.01)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(smaller)
+    .encode(
+      x = alt.X('carat', bin = alt.Bin(step = 0.01)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_hist_smallestbin.png")
 ```
 
 
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_hist_smallestbin} \end{flushleft}
-
 
 Clusters of similar values suggest that subgroups exist in your data. To understand the subgroups, ask:
 
@@ -241,14 +236,14 @@ The histogram below shows the length (in minutes) of 272 eruptions of the Old Fa
 
 
 ```python
-faithful = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/faithful/faithful.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/faithful/faithful.csv"
+faithful = pd.read_csv(url)
 
-chart = (alt.Chart(faithful).
-    encode(
-        x = alt.X('eruptions', bin = alt.Bin(step = 0.25)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(faithful)
+    .encode(
+      x = alt.X('eruptions', bin = alt.Bin(step = 0.25)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_faithful_hist.png")
 ```
@@ -264,12 +259,11 @@ Outliers are observations that are unusual; data points that don't seem to fit t
 
 
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
-        x = alt.X('y', bin = alt.Bin(step = 0.5)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X('y', bin = alt.Bin(step = 0.5)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_y_hist.png")
 ```
@@ -277,16 +271,15 @@ chart.save("screenshots/altair_diamonds_y_hist.png")
 
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_y_hist} \end{flushleft}
 
-There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `alt.Scale()` and the argument `clip` set to `True` within `mark_bar()` (note that [Altair has other axis options](https://altair-viz.github.io/user_guide/customization.html#adjusting-axis-limits)):
+There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `alt.Scale()` and the argument `clip` set to `True` within `.mark_bar()` (note that [Altair has other axis options](https://altair-viz.github.io/user_guide/customization.html#adjusting-axis-limits)):
 
 
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
-        x = alt.X('y', bin = alt.Bin(step = 0.5)), 
-        y = alt.Y('count()', scale = alt.Scale(domain = (0, 50)))).
-        mark_bar(clip = True)
-)
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X('y', bin = alt.Bin(step = 0.5)), 
+      y = alt.Y('count()', scale = alt.Scale(domain = (0, 50))))
+    .mark_bar(clip = True))
 
 chart.save("screenshots/altair_diamonds_y_hist_domain.png")
 ```
@@ -300,11 +293,11 @@ This allows us to see that there are three unusual values: 0, ~30, and ~60. We p
 
 
 ```python
-unusual = (diamonds.
-            query('y < 3 | y > 20').
-            filter(['price', 'x', 'y', 'z']).
-            sort_values('y')
-          )
+unusual = (diamonds
+            .query('y < 3 | y > 20')
+            .filter(['price', 'x', 'y', 'z'])
+            .sort_values('y'))
+            
 unusual
 #>        price     x     y     z
 #> 11963   5139  0.00   0.0  0.00
@@ -370,12 +363,11 @@ Altair has two ways to handled missing values, `np.nan`. It's not obvious where 
 
 
 ```python
-chart = (alt.Chart(diamonds2).
-          encode(
+chart = (alt.Chart(diamonds2)
+          .encode(
             x = 'x', 
-            y = 'y').
-            mark_point()
-            )
+            y = 'y')
+          .mark_point())
             
 chart.save("screenshots/altair_diamonds2_missing.png")            
 ```
@@ -387,12 +379,11 @@ To plot `np.nan` as `0` then set `invalid = None`:
 
 
 ```python
-chart = (alt.Chart(diamonds2).
-    encode(
+chart = (alt.Chart(diamonds2)
+    .encode(
       x = 'x', 
-      y = 'y').
-      mark_circle(invalid = None)
-    )
+      y = 'y')
+    .mark_circle(invalid = None))
 
 chart.save("screenshots/altair_diamonds2_zero.png")            
 ```
@@ -416,13 +407,12 @@ pdat = flights.assign(
   sched_dep_time = lambda x: x.sched_hour + x.sched_minute / 60  
   )
 
-chart = (alt.Chart(pdat).
-      encode(
+chart = (alt.Chart(pdat)
+      .encode(
         x = alt.X('sched_dep_time', bin = alt.Bin(step = .25)), 
         y = 'count()',
-        color = 'cancelled').
-        mark_bar()
-        )
+        color = 'cancelled')
+      .mark_bar())
 
 chart.save("screenshots/altair_flights_scheduled.png")
 ```
@@ -441,17 +431,16 @@ If variation describes the behavior _within_ a variable, covariation describes t
 
 ### A categorical and continuous variable {#cat-cont}
 
-It's common to want to explore the distribution of a continuous variable broken down by a categorical variable, as in the previous frequency polygon. The default appearance of `geom_freqpoly()` is not that useful for that sort of comparison because the height is given by the count. That means if one of the groups is much smaller than the others, it's hard to see the differences in shape. For example, let's explore how the price of a diamond varies with its quality:
+It's common to want to explore the distribution of a continuous variable broken down by a categorical variable. The default appearance of `mark_bar()` is not that useful for that sort of comparison because the height is given by the count. That means if one of the groups is much smaller than the others, it's hard to see the differences in shape. For example, let's explore how the price of a diamond varies with its quality:
 
 
 ```python
-chart = (alt.Chart(diamonds).
-  encode(
-     x= alt.X('price', bin = alt.Bin(step = 500)), 
-     y = 'count()', 
-     color = 'cut').
-     mark_bar()
-     )
+chart = (alt.Chart(diamonds)
+  .encode(
+    x = alt.X('price', bin = alt.Bin(step = 500)), 
+    y = 'count()', 
+    color = 'cut')
+  .mark_bar())
 
 chart.save("screenshots/altair_diamonds_price_cut.png")
 ```
@@ -463,12 +452,13 @@ It's hard to see the difference in distribution because the overall counts diffe
 
 
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = alt.X('cut:O', scale=alt.Scale(domain=['Fair', 'Good', 'Very Good', 'Premium', 'Ideal'])), 
-      y = 'count()').
-      mark_bar().
-      properties(width = 400))
+      y = 'count()'
+      )
+    .mark_bar()
+    .properties(width = 400))
 
 chart.save("screenshots/altair_diamonds_price_cut_bar.png")
 ```
@@ -480,22 +470,21 @@ To make the comparison easier we need to create a chart with __density__ display
 
 
 ```python
-chart = (alt.Chart(diamonds).
-  transform_density(
+chart = (alt.Chart(diamonds)
+  .transform_density(
     density = 'price', 
     bandwidth = 500,
     counts = True,
     steps = 500,
     as_ = ['price', 'density'],
-    groupby = ['cut']).
-  encode(
+    groupby = ['cut'])
+  .encode(
     x = 'price', 
     y = alt.Y('density:Q', stack = 'zero'),
     color = alt.Color('cut:O', 
           scale=alt.Scale(scheme='dark2', domain=['Fair', 'Good', 'Very Good', 'Premium', 'Ideal']), 
-          )).
-  mark_bar(opacity = .20)
-)
+          ))
+  .mark_bar(opacity = .20))
 
 chart.save("screenshots/altair_diamonds_price_density.png")
 ```
@@ -527,24 +516,19 @@ Another alternative to display the distribution of a continuous variable broken 
 Let's take a look at the distribution of price by cut using `geom_boxplot()`:
 
 
-
-
-
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = 'cut', 
-      y = 'price').
-    mark_boxplot(size = 25).
-    properties(width = 300)
-)
+      y = 'price')
+    .mark_boxplot(size = 25)
+    .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot_2.png")
 ```
 
 
 \begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_boxplot_2} \end{center}
-
 
 We see much less information about the distribution, but the boxplots are much more compact so we can more easily compare them (and fit more on one plot). It supports the counterintuitive finding that better quality diamonds are cheaper on average! In the exercises, you'll be challenged to figure out why.
 
@@ -554,15 +538,15 @@ For example, take the `class` variable in the `mpg` dataset. You might be intere
 
 
 ```python
-mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv"
+mpg = pd.read_csv(url)
 
-chart = (alt.Chart(mpg).
-      encode(
+chart = (alt.Chart(mpg)
+      .encode(
         x = 'class', 
-        y = 'hwy').
-      mark_boxplot(size = 25).
-      properties(width = 300)
-)
+        y = 'hwy')
+      .mark_boxplot(size = 25)
+      .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot_3.png")
 ```
@@ -576,13 +560,13 @@ To make the trend easier to see, we can reorder `class` based on the median valu
 ```python
 index = list(mpg.groupby('class').median().sort_values('hwy').index)
 
-chart = (alt.Chart(mpg).
-      encode(
+chart = (alt.Chart(mpg)
+      .encode(
         x = alt.X('class', scale = alt.Scale(domain = index)), 
-        y = 'hwy').
-      mark_boxplot(size = 25).
-      properties(width = 300)
-)
+        y = 'hwy'
+        )
+      .mark_boxplot(size = 25)
+      .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot_4.png")
 ```
@@ -594,13 +578,12 @@ If you have long variable names, `mark_boxplot()` will work better if you flip i
 
 
 ```python
-chart = (alt.Chart(mpg).
-      encode(
+chart = (alt.Chart(mpg)
+      .encode(
         y = alt.Y('class', scale = alt.Scale(domain = index)), 
-        x = 'hwy').
-      mark_boxplot(size = 25).
-      properties(height = 300)
-)
+        x = 'hwy')
+      .mark_boxplot(size = 25)
+      .properties(height = 300))
 
 chart.save("screenshots/altair_boxplot_5.png")
 ```
@@ -624,11 +607,10 @@ To visualise the covariation between categorical variables, you'll need to count
 
 
 ```python
-chart_dat = (diamonds.
-    groupby(['color', 'cut']).
-    size().
-    reset_index(name = 'n')
-    )
+chart_dat = (diamonds
+    .groupby(['color', 'cut'])
+    .size()
+    .reset_index(name = 'n'))
     
 chart_dat.head()
 #>   color        cut     n
@@ -639,18 +621,18 @@ chart_dat.head()
 #> 4     D      Ideal  2834
 ```
 
-Then visualise with `geom_tile()` and the fill aesthetic:
+Then visualise with `mark_rect()` and the color aesthetic:
 
 
 ```python
-chart = (alt.Chart(chart_dat).
-  encode(
+chart = (alt.Chart(chart_dat)
+  .encode(
     x = 'color', 
     y = 'cut', 
     color = 'n',
-    stroke = alt.value('grey')).
-    mark_rect()
+    stroke = alt.value('grey')
     )
+  .mark_rect())
 
 chart.save("screenshots/altair_heatmap.png")
 ```
@@ -665,22 +647,22 @@ If the categorical variables are unordered, you might want to simultaneously reo
 1.  How could you rescale the count dataset above to more clearly show
     the distribution of cut within colour, or colour within cut?
 
-1.  Use `mark_rect()` together with pandas to explore how average flight
+1.  Use `.mark_rect()` together with pandas to explore how average flight
     delays vary by destination and month of year.  What makes the
     plot difficult to read? How could you improve it?
 
 ### Two continuous variables
 
-You've already seen one great way to visualise the covariation between two continuous variables: draw a scatterplot with `mark_point()`. You can see covariation as a pattern in the points. For example, you can see an exponential relationship between the carat size and price of a diamond.
+You've already seen one great way to visualise the covariation between two continuous variables: draw a scatterplot with `.mark_point()`. You can see covariation as a pattern in the points. For example, you can see an exponential relationship between the carat size and price of a diamond.
 
 
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = 'carat', 
-      y = 'price').
-    mark_circle()
-    )
+      y = 'price'
+      )
+    .mark_circle())
 
 chart.save("screenshots/altair_diamonds_scatter_eda.png")
 ```
@@ -693,12 +675,12 @@ You've already seen one way to fix the problem: using the `opacity` argument to 
 
 
 ```python
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = 'carat', 
-      y = 'price').
-    mark_circle(opacity = 1/100)
-    )
+      y = 'price'
+      )
+    .mark_circle(opacity = 1/100))
 
 chart.save("screenshots/altair_diamonds_scatter_eda_2.png")
 ```
@@ -710,8 +692,8 @@ But using transparency can be challenging for very large datasets. Another solut
 
 
 ```python
-chart_dat = (smaller.
-    assign(
+chart_dat = (smaller
+    .assign(
       price_cut = lambda x: pd.cut(x.price, 
                         bins = np.arange(0, 20000, step = 1000), 
                         labels = np.arange(0, 19000, step = 1000)), 
@@ -735,10 +717,10 @@ Then create the binned counts and replace all zero counts with `np.nan`.
 
 
 ```python
-chart_dat_binned = (chart_dat.
-    groupby(['carat_cut', 'price_cut']).
-    size().
-    reset_index(name = 'n'))
+chart_dat_binned = (chart_dat
+    .groupby(['carat_cut', 'price_cut'])
+    .size()
+    .reset_index(name = 'n'))
 
 chart_dat_binned['n'].replace(to_replace = 0, value = np.nan, inplace = True)
 
@@ -755,13 +737,13 @@ chart_dat_binned.head()
 
 
 ```python
-chart = (alt.Chart(chart_dat_binned).
-    encode(
+chart = (alt.Chart(chart_dat_binned)
+    .encode(
       x = 'carat_cut', 
       y = alt.Y('price_cut', sort = '-y'), 
-      color = 'n:Q').
-      mark_rect()
-    )
+      color = 'n:Q'
+      )
+    .mark_rect())
 
 chart.save("screenshots/altair_diamonds_scatter_binned.png")
 ```
@@ -773,13 +755,13 @@ Another option is to bin one continuous variable so it acts like a categorical v
 
 
 ```python
-chart = (alt.Chart(chart_dat).
-    encode(
+chart = (alt.Chart(chart_dat)
+    .encode(
       x = 'carat_cut:O', 
-      y = 'price').
-      mark_boxplot().
-      properties(width = 300)
+      y = 'price'
       )
+    .mark_boxplot()
+    .properties(width = 300))
 
 chart.save("screenshots/altair_diamonds_scatter_binned_boxplot.png")
 ```
@@ -793,15 +775,14 @@ chart.save("screenshots/altair_diamonds_scatter_binned_boxplot.png")
 ```python
 chart_dat = smaller.assign(carat_cut = lambda x: pd.qcut(x.carat,10, labels = False))
 
-chart = (alt.Chart(chart_dat).
-  encode(
+chart = (alt.Chart(chart_dat)
+  .encode(
     x = 'carat_cut:O', 
-    y = 'price').
-    mark_boxplot().
-    properties(width = 300)
+    y = 'price'
     )
-
-
+  .mark_boxplot()
+  .properties(width = 300))
+  
 chart.save("screenshots/altair_diamonds_scatter_binned_boxplot_quantiles.png")
 ```
 
@@ -825,11 +806,12 @@ chart.save("screenshots/altair_diamonds_scatter_binned_boxplot_quantiles.png")
 
     
     ```python
-    chart = (alt.Chart(diamonds).
-          encode(
+    chart = (alt.Chart(diamonds)
+          .encode(
             x = alt.X('x', scale = alt.Scale(domain = (4, 11))), 
-            y = alt.Y('y', scale = alt.Scale(domain = (4, 11)))).
-          mark_circle(clip = True))
+            y = alt.Y('y', scale = alt.Scale(domain = (4, 11)))
+            )
+          .mark_circle(clip = True))
     
     chart.save("screenshots/altair_diamonds_scatter_clip.png")
     ```
@@ -858,12 +840,12 @@ A scatterplot of Old Faithful eruption lengths versus the wait time between erup
 
 
 ```python
-chart = (alt.Chart(faithful).
-  encode(
+chart = (alt.Chart(faithful)
+  .encode(
     x = alt.X('eruptions', scale=alt.Scale(zero=False)), 
-    y = alt.Y('waiting', scale=alt.Scale(zero=False))).
-    mark_circle()
-)
+    y = alt.Y('waiting', scale=alt.Scale(zero=False))
+    )
+  .mark_circle())
 
 chart.save("screenshots/altair_faithful_scatter_clip.png")
 ```
@@ -883,12 +865,12 @@ mod = smf.ols('np.log(price) ~ np.log(carat)', data = diamonds).fit()
 
 diamonds2 = diamonds.assign(resid = np.exp(mod.resid))
 
-chart = (alt.Chart(diamonds2).
-            encode(
+chart = (alt.Chart(diamonds2)
+            .encode(
               x = 'carat', 
-              y = 'resid').
-              mark_circle()
-          )
+              y = 'resid'
+              )
+            .mark_circle())
 
 chart.save("screenshots/altair_diamonds_model_scatter.png")
 ```
@@ -900,13 +882,12 @@ Once you've removed the strong relationship between carat and price, you can see
 
 
 ```python
-chart = (alt.Chart(diamonds2).
-          encode(
+chart = (alt.Chart(diamonds2)
+          .encode(
             x = 'cut', 
-            y = 'resid').
-          mark_boxplot(size = 25).
-          properties(width = 300)
-        )
+            y = 'resid')
+          .mark_boxplot(size = 25)
+          .properties(width = 300))
 
 chart.save("screenshots/altair_diamonds_model_boxplot.png")
 ```
@@ -922,12 +903,12 @@ As we move on from these introductory chapters, we'll transition to a more conci
 
 
 ```python
-(alt.Chart(faithful).
-  encode(
-      x = alt.X('eruptions'), 
-      y = alt.Y('waiting')).
-      mark_circle()
-  )
+(alt.Chart(faithful)
+  .encode(
+    x = alt.X('eruptions'), 
+    y = alt.Y('waiting')
+    )
+  .mark_circle())
 ```
 
 In the remainder of the book, we won't supply the `x` and `y` names if we are using `alt.X()` and `alt.Y()`. That saves typing, and, by reducing the amount of boilerplate, makes it easier to see what's different between plots. That's a really important programming concern that we'll come back in [functions]. In addition, for less complicated charts, we will not use `()` with each element on it's own line. Altair guidance also often places the `mark_` before the `encode()`.
@@ -936,10 +917,11 @@ Rewriting the previous plot more concisely yields:
 
 
 ```python
-alt.Chart(faithful).encode(
-  alt.X('eruptions'), 
-  alt.Y('waiting')).mark_circle()
-  
+(alt.Chart(faithful)
+  .encode(
+    alt.X('eruptions'), 
+    alt.Y('waiting'))
+  .mark_circle())
 ```
 
 Altair guidance also often places the `mark_` before the `encode()` to allow the final element to be the encoding which can easily be placed on multiple lines without the need of `()` around the entire command.

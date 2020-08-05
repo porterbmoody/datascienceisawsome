@@ -40,7 +40,8 @@ Then make sure you have the diamonds data loaded.
 
 ```{python, cache=FALSE}
 
-diamonds = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv"
+diamonds = pd.read_csv(url)
 
 diamonds['cut'] = pd.Categorical(diamonds.cut, 
   ordered = True, 
@@ -109,51 +110,43 @@ How you visualise the distribution of a variable will depend on whether the vari
 We want the height of the bars to display how many observations occurred with each x value. You can compute these values with `size()`:
 
 ```{python, cache = FALSE}
-chart_dat = (diamonds.
-              groupby('cut').
-              agg(count = ('carat', 'size')).
-              reset_index())
+chart_dat = (diamonds
+              .groupby('cut')
+              .agg(count = ('carat', 'size'))
+              .reset_index())
 ```
 
 
 ```{python, cache = FALSE}
-chart = (alt.Chart(chart_dat).
-    encode(
-        x = 'cut',
-        y = 'count'
-    ).
-    mark_bar().
-    properties(width = 400)
-)
+chart = (alt.Chart(chart_dat)
+    .encode(
+      x = 'cut',
+      y = 'count'
+      )
+    .mark_bar()
+    .properties(width = 400))
 
 chart.save("screenshots/altair_diamonds_barchart.png")
-
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_barchart.png")
-
 ```
 
 A variable is **continuous** if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram:
 
 ```{python, cache = FALSE}
-chart = (alt.Chart(diamonds).
-    encode(
-        x = alt.X('carat', bin = alt.Bin(step = 0.5)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X('carat', bin = alt.Bin(step = 0.5)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_hist_bin.png")
-
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_hist_bin.png")
-
 ```
 
 
@@ -164,25 +157,20 @@ You can set the width of the intervals in a histogram with the `alt.Bin()` and t
 ```{python, cache = FALSE}
 smaller = diamonds.query('carat < 3')
 
-chart = (alt.Chart(smaller).
-    encode(
-        x = alt.X('carat', bin = alt.Bin(step = 0.1)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(smaller)
+    .encode(
+      x = alt.X('carat', bin = alt.Bin(step = 0.1)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_hist_smallbin.png")
-
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_hist_smallbin.png")
-
 ```
 
-
-If you wish to see multiple histograms, Altair doesn't have a straightforward way to overly histograms. We recommend using `facet()`. `facet()` performs the same calculation for each group within the facet varaible.
+If you wish to see multiple histograms, Altair doesn't have a straightforward way to overly histograms. We recommend using `.facet()`. `.facet()` performs the same calculation for each group within the facet varaible.
 
 ```{python}
 chart = (alt.Chart(smaller).
@@ -228,23 +216,18 @@ As an example, the histogram below suggests several interesting questions:
 * Why are there no diamonds bigger than 3 carats?
 
 ```{python}
-chart = (alt.Chart(smaller).
-    encode(
-        x = alt.X('carat', bin = alt.Bin(step = 0.01)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(smaller)
+    .encode(
+      x = alt.X('carat', bin = alt.Bin(step = 0.01)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_hist_smallestbin.png")
-
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_hist_smallestbin.png")
-
 ```
-
 
 Clusters of similar values suggest that subgroups exist in your data. To understand the subgroups, ask:
 
@@ -259,22 +242,20 @@ Clusters of similar values suggest that subgroups exist in your data. To underst
 The histogram below shows the length (in minutes) of 272 eruptions of the Old Faithful Geyser in Yellowstone National Park. Eruption times appear to be clustered into two groups: there are short eruptions (of around 2 minutes) and long eruptions (4-5 minutes), but little in between.
 
 ```{python, cache = FALSE}
-faithful = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/faithful/faithful.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/faithful/faithful.csv"
+faithful = pd.read_csv(url)
 
-chart = (alt.Chart(faithful).
-    encode(
-        x = alt.X('eruptions', bin = alt.Bin(step = 0.25)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(faithful)
+    .encode(
+      x = alt.X('eruptions', bin = alt.Bin(step = 0.25)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_faithful_hist.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_faithful_hist.png")
-
 ```
 
 Many of the questions above will prompt you to explore a relationship *between* variables, for example, to see if the values of one variable can explain the behavior of another variable. We'll get to that shortly.
@@ -284,39 +265,33 @@ Many of the questions above will prompt you to explore a relationship *between* 
 Outliers are observations that are unusual; data points that don't seem to fit the pattern. Sometimes outliers are data entry errors; other times outliers suggest important new science. When you have a lot of data, outliers are sometimes difficult to see in a histogram.  For example, take the distribution of the `y` variable from the diamonds dataset. The only evidence of outliers is the unusually wide limits on the x-axis.
 
 ```{python}
-chart = (alt.Chart(diamonds).
-    encode(
-        x = alt.X('y', bin = alt.Bin(step = 0.5)), 
-        y = 'count()').
-        mark_bar()
-)
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X('y', bin = alt.Bin(step = 0.5)), 
+      y = 'count()')
+    .mark_bar())
 
 chart.save("screenshots/altair_diamonds_y_hist.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_y_hist.png")
-
 ```
 
-There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `alt.Scale()` and the argument `clip` set to `True` within `mark_bar()` (note that [Altair has other axis options](https://altair-viz.github.io/user_guide/customization.html#adjusting-axis-limits)):
+There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `alt.Scale()` and the argument `clip` set to `True` within `.mark_bar()` (note that [Altair has other axis options](https://altair-viz.github.io/user_guide/customization.html#adjusting-axis-limits)):
 
 ```{python}
-chart = (alt.Chart(diamonds).
-    encode(
-        x = alt.X('y', bin = alt.Bin(step = 0.5)), 
-        y = alt.Y('count()', scale = alt.Scale(domain = (0, 50)))).
-        mark_bar(clip = True)
-)
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X('y', bin = alt.Bin(step = 0.5)), 
+      y = alt.Y('count()', scale = alt.Scale(domain = (0, 50))))
+    .mark_bar(clip = True))
 
 chart.save("screenshots/altair_diamonds_y_hist_domain.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_y_hist_domain.png")
-
 ```
 
 (`alt.Scale()` can be used within `alt.Y()` and `alt.X()` for zooming on either axis. Altair also has a `clamp` argument that functions that work slightly differently: it stacks all the data right at the limits. But it does not work with `mark_bar()`)
@@ -324,11 +299,11 @@ knitr::include_graphics("screenshots/altair_diamonds_y_hist_domain.png")
 This allows us to see that there are three unusual values: 0, ~30, and ~60. We pluck them out with dplyr:
 
 ```{python}
-unusual = (diamonds.
-            query('y < 3 | y > 20').
-            filter(['price', 'x', 'y', 'z']).
-            sort_values('y')
-          )
+unusual = (diamonds
+            .query('y < 3 | y > 20')
+            .filter(['price', 'x', 'y', 'z'])
+            .sort_values('y'))
+            
 unusual
 ```
 
@@ -381,39 +356,33 @@ If you've encountered unusual values in your dataset, and simply want to move on
 Altair has two ways to handled missing values, `np.nan`. It's not obvious where you should plot missing values, so Altair excludes them in the plot. If you would like to treat the missing values as `0` then you can use `invalid = None`.
 
 ```{python}
-chart = (alt.Chart(diamonds2).
-          encode(
+chart = (alt.Chart(diamonds2)
+          .encode(
             x = 'x', 
-            y = 'y').
-            mark_point()
-            )
+            y = 'y')
+          .mark_point())
             
 chart.save("screenshots/altair_diamonds2_missing.png")            
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds2_missing.png")
-
 ```
 
 To plot `np.nan` as `0` then set `invalid = None`:
 
 ```{python}
-chart = (alt.Chart(diamonds2).
-    encode(
+chart = (alt.Chart(diamonds2)
+    .encode(
       x = 'x', 
-      y = 'y').
-      mark_circle(invalid = None)
-    )
+      y = 'y')
+    .mark_circle(invalid = None))
 
 chart.save("screenshots/altair_diamonds2_zero.png")            
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds2_zero.png")
-
 ```
 
 Other times you want to understand what makes observations with missing values different to observations with recorded values. For example, in `flights`, missing values in the `dep_time` variable indicate that the flight was cancelled. So you might want to compare the scheduled departure times for cancelled and non-cancelled times. You can do this by making a new variable with `pd.isna()`.
@@ -431,22 +400,18 @@ pdat = flights.assign(
   sched_dep_time = lambda x: x.sched_hour + x.sched_minute / 60  
   )
 
-chart = (alt.Chart(pdat).
-      encode(
+chart = (alt.Chart(pdat)
+      .encode(
         x = alt.X('sched_dep_time', bin = alt.Bin(step = .25)), 
         y = 'count()',
-        color = 'cancelled').
-        mark_bar()
-        )
+        color = 'cancelled')
+      .mark_bar())
 
 chart.save("screenshots/altair_flights_scheduled.png")
-
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_flights_scheduled.png")
-
 ```
 However this plot isn't great because there are many more non-cancelled flights than cancelled flights. In the next section we'll explore some techniques for improving this comparison.
 
@@ -463,69 +428,62 @@ If variation describes the behavior _within_ a variable, covariation describes t
 It's common to want to explore the distribution of a continuous variable broken down by a categorical variable. The default appearance of `mark_bar()` is not that useful for that sort of comparison because the height is given by the count. That means if one of the groups is much smaller than the others, it's hard to see the differences in shape. For example, let's explore how the price of a diamond varies with its quality:
 
 ```{python}
-chart = (alt.Chart(diamonds).
-  encode(
-     x= alt.X('price', bin = alt.Bin(step = 500)), 
-     y = 'count()', 
-     color = 'cut').
-     mark_bar()
-     )
+chart = (alt.Chart(diamonds)
+  .encode(
+    x = alt.X('price', bin = alt.Bin(step = 500)), 
+    y = 'count()', 
+    color = 'cut')
+  .mark_bar())
 
 chart.save("screenshots/altair_diamonds_price_cut.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_diamonds_price_cut.png")
-
 ```
 
 It's hard to see the difference in distribution because the overall counts differ so much:
 
 ```{python}
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = alt.X('cut:O', scale=alt.Scale(domain=['Fair', 'Good', 'Very Good', 'Premium', 'Ideal'])), 
-      y = 'count()').
-      mark_bar().
-      properties(width = 400))
+      y = 'count()'
+      )
+    .mark_bar()
+    .properties(width = 400))
 
 chart.save("screenshots/altair_diamonds_price_cut_bar.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left", fig.width = "50%", fig.width = 4}
-
 knitr::include_graphics("screenshots/altair_diamonds_price_cut_bar.png")
-
 ```
 
 To make the comparison easier we need to create a chart with __density__ displayed on the y-axis, which is the count standardised so that the area under each curve is one. To do this we must use `transform_density` which is one of many `transform_` functions in Altair. 
 
 ```{python}
-chart = (alt.Chart(diamonds).
-  transform_density(
+chart = (alt.Chart(diamonds)
+  .transform_density(
     density = 'price', 
     bandwidth = 500,
     counts = True,
     steps = 500,
     as_ = ['price', 'density'],
-    groupby = ['cut']).
-  encode(
+    groupby = ['cut'])
+  .encode(
     x = 'price', 
     y = alt.Y('density:Q', stack = 'zero'),
     color = alt.Color('cut:O', 
           scale=alt.Scale(scheme='dark2', domain=['Fair', 'Good', 'Very Good', 'Premium', 'Ideal']), 
-          )).
-  mark_bar(opacity = .20)
-)
+          ))
+  .mark_bar(opacity = .20))
 
 chart.save("screenshots/altair_diamonds_price_density.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left", fig.width = "50%", fig.width = 4}
-
 knitr::include_graphics("screenshots/altair_diamonds_price_density.png")
-
 ```
 
 There's something rather surprising about this plot - it appears that fair diamonds (the lowest quality) have the highest average price!  But maybe that's because frequency polygons are a little hard to interpret - there's a lot going on in this plot.
@@ -552,26 +510,20 @@ knitr::include_graphics("images/EDA-boxplot.png")
 
 Let's take a look at the distribution of price by cut using `geom_boxplot()`:
 
-
-
-
 ```{python}
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = 'cut', 
-      y = 'price').
-    mark_boxplot(size = 25).
-    properties(width = 300)
-)
+      y = 'price')
+    .mark_boxplot(size = 25)
+    .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot_2.png")
-
 ```
 
 ```{r, echo = FALSE, out.width = "50%"}
 knitr::include_graphics("screenshots/altair_boxplot_2.png")
 ```
-
 
 We see much less information about the distribution, but the boxplots are much more compact so we can more easily compare them (and fit more on one plot). It supports the counterintuitive finding that better quality diamonds are cheaper on average! In the exercises, you'll be challenged to figure out why.
 
@@ -580,18 +532,17 @@ We see much less information about the distribution, but the boxplots are much m
 For example, take the `class` variable in the `mpg` dataset. You might be interested to know how highway mileage varies across classes:
 
 ```{python}
-mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv"
+mpg = pd.read_csv(url)
 
-chart = (alt.Chart(mpg).
-      encode(
+chart = (alt.Chart(mpg)
+      .encode(
         x = 'class', 
-        y = 'hwy').
-      mark_boxplot(size = 25).
-      properties(width = 300)
-)
+        y = 'hwy')
+      .mark_boxplot(size = 25)
+      .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot_3.png")
-
 ```
 
 ```{r, echo = FALSE, out.width = "50%"}
@@ -603,16 +554,15 @@ To make the trend easier to see, we can reorder `class` based on the median valu
 ```{python}
 index = list(mpg.groupby('class').median().sort_values('hwy').index)
 
-chart = (alt.Chart(mpg).
-      encode(
+chart = (alt.Chart(mpg)
+      .encode(
         x = alt.X('class', scale = alt.Scale(domain = index)), 
-        y = 'hwy').
-      mark_boxplot(size = 25).
-      properties(width = 300)
-)
+        y = 'hwy'
+        )
+      .mark_boxplot(size = 25)
+      .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot_4.png")
-
 ```
 
 ```{r, echo = FALSE, out.width = "50%"}
@@ -622,16 +572,14 @@ knitr::include_graphics("screenshots/altair_boxplot_4.png")
 If you have long variable names, `mark_boxplot()` will work better if you flip it 90°. You can do that with changing the `x` and `y` encodings.
 
 ```{python}
-chart = (alt.Chart(mpg).
-      encode(
+chart = (alt.Chart(mpg)
+      .encode(
         y = alt.Y('class', scale = alt.Scale(domain = index)), 
-        x = 'hwy').
-      mark_boxplot(size = 25).
-      properties(height = 300)
-)
+        x = 'hwy')
+      .mark_boxplot(size = 25)
+      .properties(height = 300))
 
 chart.save("screenshots/altair_boxplot_5.png")
-
 ```
 
 ```{r, echo = FALSE, out.width = "50%"}
@@ -653,11 +601,10 @@ knitr::include_graphics("screenshots/altair_boxplot_5.png")
 To visualise the covariation between categorical variables, you'll need to count the number of observations for each combination. One way to do that is to compute the count with pandas:
 
 ```{python}
-chart_dat = (diamonds.
-    groupby(['color', 'cut']).
-    size().
-    reset_index(name = 'n')
-    )
+chart_dat = (diamonds
+    .groupby(['color', 'cut'])
+    .size()
+    .reset_index(name = 'n'))
     
 chart_dat.head()
 ```
@@ -665,17 +612,16 @@ chart_dat.head()
 Then visualise with `mark_rect()` and the color aesthetic:
 
 ```{python}
-chart = (alt.Chart(chart_dat).
-  encode(
+chart = (alt.Chart(chart_dat)
+  .encode(
     x = 'color', 
     y = 'cut', 
     color = 'n',
-    stroke = alt.value('grey')).
-    mark_rect()
+    stroke = alt.value('grey')
     )
+  .mark_rect())
 
 chart.save("screenshots/altair_heatmap.png")
-
 ```
 
 ```{r, echo = FALSE}
@@ -689,24 +635,23 @@ If the categorical variables are unordered, you might want to simultaneously reo
 1.  How could you rescale the count dataset above to more clearly show
     the distribution of cut within colour, or colour within cut?
 
-1.  Use `mark_rect()` together with pandas to explore how average flight
+1.  Use `.mark_rect()` together with pandas to explore how average flight
     delays vary by destination and month of year.  What makes the
     plot difficult to read? How could you improve it?
 
 ### Two continuous variables
 
-You've already seen one great way to visualise the covariation between two continuous variables: draw a scatterplot with `mark_point()`. You can see covariation as a pattern in the points. For example, you can see an exponential relationship between the carat size and price of a diamond.
+You've already seen one great way to visualise the covariation between two continuous variables: draw a scatterplot with `.mark_point()`. You can see covariation as a pattern in the points. For example, you can see an exponential relationship between the carat size and price of a diamond.
 
 ```{python}
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = 'carat', 
-      y = 'price').
-    mark_circle()
-    )
+      y = 'price'
+      )
+    .mark_circle())
 
 chart.save("screenshots/altair_diamonds_scatter_eda.png")
-
 ```
 
 ```{r, echo = FALSE}
@@ -717,15 +662,14 @@ Scatterplots become less useful as the size of your dataset grows, because point
 You've already seen one way to fix the problem: using the `opacity` argument to add transparency.
 
 ```{python}
-chart = (alt.Chart(diamonds).
-    encode(
+chart = (alt.Chart(diamonds)
+    .encode(
       x = 'carat', 
-      y = 'price').
-    mark_circle(opacity = 1/100)
-    )
+      y = 'price'
+      )
+    .mark_circle(opacity = 1/100))
 
 chart.save("screenshots/altair_diamonds_scatter_eda_2.png")
-
 ```
 
 ```{r, echo = FALSE}
@@ -735,8 +679,8 @@ knitr::include_graphics("screenshots/altair_diamonds_scatter_eda_2.png")
 But using transparency can be challenging for very large datasets. Another solution is to use bins. Previously you used `mark_histogram()` to bin in one dimension. We will need to use pandas to bin in two directions. First create two new columns that bin `price` and `carat`.
 
 ```{python, cache=FALSE}
-chart_dat = (smaller.
-    assign(
+chart_dat = (smaller
+    .assign(
       price_cut = lambda x: pd.cut(x.price, 
                         bins = np.arange(0, 20000, step = 1000), 
                         labels = np.arange(0, 19000, step = 1000)), 
@@ -751,10 +695,10 @@ chart_dat.head()
 Then create the binned counts and replace all zero counts with `np.nan`.
 
 ```{python, cache=FALSE}
-chart_dat_binned = (chart_dat.
-    groupby(['carat_cut', 'price_cut']).
-    size().
-    reset_index(name = 'n'))
+chart_dat_binned = (chart_dat
+    .groupby(['carat_cut', 'price_cut'])
+    .size()
+    .reset_index(name = 'n'))
 
 chart_dat_binned['n'].replace(to_replace = 0, value = np.nan, inplace = True)
 
@@ -764,13 +708,13 @@ chart_dat_binned.head()
 `mark_rect` can then use the divided coordinate plane (2d bins) and then use a fill color to display how many points fall into each bin. Notice the use of `sort = 'y'' to reorient the y-axis.
 
 ```{python}
-chart = (alt.Chart(chart_dat_binned).
-    encode(
+chart = (alt.Chart(chart_dat_binned)
+    .encode(
       x = 'carat_cut', 
       y = alt.Y('price_cut', sort = '-y'), 
-      color = 'n:Q').
-      mark_rect()
-    )
+      color = 'n:Q'
+      )
+    .mark_rect())
 
 chart.save("screenshots/altair_diamonds_scatter_binned.png")
 ```
@@ -782,13 +726,13 @@ knitr::include_graphics("screenshots/altair_diamonds_scatter_binned.png")
 Another option is to bin one continuous variable so it acts like a categorical variable. Then you can use one of the techniques for visualising the combination of a categorical and a continuous variable that you learned about. For example, you could bin `carat` and then for each group, display a boxplot:
 
 ```{python}
-chart = (alt.Chart(chart_dat).
-    encode(
+chart = (alt.Chart(chart_dat)
+    .encode(
       x = 'carat_cut:O', 
-      y = 'price').
-      mark_boxplot().
-      properties(width = 300)
+      y = 'price'
       )
+    .mark_boxplot()
+    .properties(width = 300))
 
 chart.save("screenshots/altair_diamonds_scatter_binned_boxplot.png")
 ```
@@ -802,15 +746,14 @@ knitr::include_graphics("screenshots/altair_diamonds_scatter_binned_boxplot.png"
 ```{python}
 chart_dat = smaller.assign(carat_cut = lambda x: pd.qcut(x.carat,10, labels = False))
 
-chart = (alt.Chart(chart_dat).
-  encode(
+chart = (alt.Chart(chart_dat)
+  .encode(
     x = 'carat_cut:O', 
-    y = 'price').
-    mark_boxplot().
-    properties(width = 300)
+    y = 'price'
     )
-
-
+  .mark_boxplot()
+  .properties(width = 300))
+  
 chart.save("screenshots/altair_diamonds_scatter_binned_boxplot_quantiles.png")
 ```
 
@@ -834,11 +777,12 @@ knitr::include_graphics("screenshots/altair_diamonds_scatter_binned_boxplot_quan
    even though their `x` and `y` values appear normal when examined separately.
 
     ```{python}
-    chart = (alt.Chart(diamonds).
-          encode(
+    chart = (alt.Chart(diamonds)
+          .encode(
             x = alt.X('x', scale = alt.Scale(domain = (4, 11))), 
-            y = alt.Y('y', scale = alt.Scale(domain = (4, 11)))).
-          mark_circle(clip = True))
+            y = alt.Y('y', scale = alt.Scale(domain = (4, 11)))
+            )
+          .mark_circle(clip = True))
     
     chart.save("screenshots/altair_diamonds_scatter_clip.png")
     ```
@@ -867,12 +811,12 @@ Patterns in your data provide clues about relationships. If a systematic relatio
 A scatterplot of Old Faithful eruption lengths versus the wait time between eruptions shows a pattern: longer wait times are associated with longer eruptions. The scatterplot also displays the two clusters that we noticed above.
 
 ```{python}
-chart = (alt.Chart(faithful).
-  encode(
+chart = (alt.Chart(faithful)
+  .encode(
     x = alt.X('eruptions', scale=alt.Scale(zero=False)), 
-    y = alt.Y('waiting', scale=alt.Scale(zero=False))).
-    mark_circle()
-)
+    y = alt.Y('waiting', scale=alt.Scale(zero=False))
+    )
+  .mark_circle())
 
 chart.save("screenshots/altair_faithful_scatter_clip.png")
 ```
@@ -892,15 +836,14 @@ mod = smf.ols('np.log(price) ~ np.log(carat)', data = diamonds).fit()
 
 diamonds2 = diamonds.assign(resid = np.exp(mod.resid))
 
-chart = (alt.Chart(diamonds2).
-            encode(
+chart = (alt.Chart(diamonds2)
+            .encode(
               x = 'carat', 
-              y = 'resid').
-              mark_circle()
-          )
+              y = 'resid'
+              )
+            .mark_circle())
 
 chart.save("screenshots/altair_diamonds_model_scatter.png")
-
 ```
 
 ```{r fig.height = 2, echo=FALSE}
@@ -910,13 +853,12 @@ knitr::include_graphics("screenshots/altair_diamonds_model_scatter.png")
 Once you've removed the strong relationship between carat and price, you can see what you expect in the relationship between cut and price: relative to their size, better quality diamonds are more expensive.
 
 ```{python}
-chart = (alt.Chart(diamonds2).
-          encode(
+chart = (alt.Chart(diamonds2)
+          .encode(
             x = 'cut', 
-            y = 'resid').
-          mark_boxplot(size = 25).
-          properties(width = 300)
-        )
+            y = 'resid')
+          .mark_boxplot(size = 25)
+          .properties(width = 300))
 
 chart.save("screenshots/altair_diamonds_model_boxplot.png")
 ```
@@ -932,12 +874,12 @@ You'll learn how models, and the modelr package, work in the final part of the b
 As we move on from these introductory chapters, we'll transition to a more concise expression of Altair code. So far we've been very explicit, which is helpful when you are learning:
 
 ```{python, eval = FALSE}
-(alt.Chart(faithful).
-  encode(
-      x = alt.X('eruptions'), 
-      y = alt.Y('waiting')).
-      mark_circle()
-  )
+(alt.Chart(faithful)
+  .encode(
+    x = alt.X('eruptions'), 
+    y = alt.Y('waiting')
+    )
+  .mark_circle())
 ```
 
 In the remainder of the book, we won't supply the `x` and `y` names if we are using `alt.X()` and `alt.Y()`. That saves typing, and, by reducing the amount of boilerplate, makes it easier to see what's different between plots. That's a really important programming concern that we'll come back in [functions]. In addition, for less complicated charts, we will not use `()` with each element on it's own line. Altair guidance also often places the `mark_` before the `encode()`.
@@ -945,10 +887,11 @@ In the remainder of the book, we won't supply the `x` and `y` names if we are us
 Rewriting the previous plot more concisely yields:
 
 ```{python, eval = FALSE}
-alt.Chart(faithful).encode(
-  alt.X('eruptions'), 
-  alt.Y('waiting')).mark_circle()
-  
+(alt.Chart(faithful)
+  .encode(
+    alt.X('eruptions'), 
+    alt.Y('waiting'))
+  .mark_circle())
 ```
 
 Altair guidance also often places the `mark_` before the `encode()` to allow the final element to be the encoding which can easily be placed on multiple lines without the need of `()` around the entire command.

@@ -181,9 +181,9 @@ All verbs work similarly:
 
 Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let's dive in and see how these verbs work.
 
-## Filter rows with `query()`
+## Filter rows with `.query()`
 
-`query()` allows you to subset observations based on their values. The first argument specifies the rows to be selected. This argument can be label names or a boolean series. The second argument specifies the columns to be selected. The bolean filter on the rows is our focus. For example, we can select all flights on January 1st with:
+`.query()` allows you to subset observations based on their values. The first argument specifies the rows to be selected. This argument can be label names or a boolean series. The second argument specifies the columns to be selected. The bolean filter on the rows is our focus. For example, we can select all flights on January 1st with:
 
 
 ```python
@@ -289,7 +289,7 @@ The following code finds all flights that departed in November or December:
 flights.query('month == 11 | month == 12')
 ```
 
-The order of operations doesn't work like English. You can't write `filter(flights, month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `True`. In a numeric context (like here), `True` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
+The order of operations doesn't work like English. You can't write `flights.query(month == (11 | 12))`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `True`. In a numeric context (like here), `True` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
 
 A useful short-hand for this problem is `x in y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above:
 
@@ -308,7 +308,7 @@ flights.query('arr_delay <= 120 | dep_delay <= 120')
 
 <!-- As well as `&` and `|`, Python also has `&&` and `||`. Don't use them here! You'll learn when you should use them in [conditional execution]. -->
 
-Whenever you start using complicated, multipart expressions in `query()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly.
+Whenever you start using complicated, multipart expressions in `.query()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly.
 
 ### Missing values
 
@@ -399,9 +399,9 @@ df.query('@pd.isna(x) | x > 1')
 1.  How many flights have a missing `dep_time`? What other variables are
     missing? What might these rows represent?
 
-## Arrange or sort rows with `sort_values()`
+## Arrange or sort rows with `.sort_values()`
 
-`sort()` works similarly to `query()` except that instead of selecting rows, it changes their order. It takes a data frame and a column name or a list of column names to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
+`.sort_values()` works similarly to `.query()` except that instead of selecting rows, it changes their order. It takes a data frame and a column name or a list of column names to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 
 
 ```python
@@ -477,9 +477,9 @@ df.sort_values('x', ascending = False)
 
 ## Select columns with `filter()` or `loc[]` {#select}
 
-It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `fliter()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables.
+It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `.fliter()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables.
 
-`filter()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea:
+`.filter()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea:
 
 
 
@@ -609,23 +609,24 @@ flights.rename(columns = {'year': 'YEAR', 'month':'MONTH'})
     flights.filter(regex = "TIME")
     ```
 
-## Add new variables with `assign()`
+## Add new variables with `.assign()`
 
-Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. That's the job of `assign()`.
+Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. That's the job of `.assign()`.
 
-`assign()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. 
+`.assign()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. 
 
 
 ```python
 
-flights_sml = (flights.
-    filter(regex = "^year$|^month$|^day$|delay$|^distance$|^air_time$")
-)
+flights_sml = (flights
+    .filter(regex = "^year$|^month$|^day$|delay$|^distance$|^air_time$"))
 
-flights_sml.assign(
+(flights_sml
+  .assign(
     gain = lambda x: x.dep_delay - x.arr_delay,
     speed = lambda x: x.distance / x.air_time * 60
-    ).head()
+    )
+  .head())
 #>    year  month  day  dep_delay  arr_delay  air_time  distance  gain       speed
 #> 0  2013      1    1        2.0       11.0     227.0      1400  -9.0  370.044053
 #> 1  2013      1    1        4.0       20.0     227.0      1416 -16.0  374.273128
@@ -638,11 +639,13 @@ Note that you can refer to columns that you've just created:
 
 
 ```python
-flights_sml.assign(
+(flights_sml
+  .assign(
     gain = lambda x: x.dep_delay - x.arr_delay,
     hours = lambda x: x.air_time / 60,
     gain_per_hour = lambda x: x.gain / x.hours
-).head()
+    )
+  .head())
 #>    year  month  day  dep_delay  ...  distance  gain     hours  gain_per_hour
 #> 0  2013      1    1        2.0  ...      1400  -9.0  3.783333      -2.378855
 #> 1  2013      1    1        4.0  ...      1416 -16.0  3.783333      -4.229075
@@ -655,7 +658,7 @@ flights_sml.assign(
 
 ### Useful creation functions {#mutate-funs}
 
-There are many functions for creating new variables that you can use with `assign()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. Some arithmetic operators are available in Python without the need for any additional packages. However, many arithmetic functions like `mean()` and `std()` are accessed through importing additional packages. Python comes with a `math` and `statistics` package. However, we recommend the __NumPy__ package for accessing the suite of mathematical functions needed. You would import NumPy with `import numpy as np`. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful:
+There are many functions for creating new variables that you can use with `.assign()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. Some arithmetic operators are available in Python without the need for any additional packages. However, many arithmetic functions like `mean()` and `std()` are accessed through importing additional packages. Python comes with a `math` and `statistics` package. However, we recommend the __NumPy__ package for accessing the suite of mathematical functions needed. You would import NumPy with `import numpy as np`. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful:
 
 *   Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised,
     using the so called "recycling rules". If one parameter is shorter than
@@ -675,12 +678,12 @@ There are many functions for creating new variables that you can use with `assig
 
     
     ```python
-    (flights.
-        filter(['dep_time']).
-        assign(
+    (flights
+        .filter(['dep_time'])
+        .assign(
           hour = lambda x: x.dep_time // 100,
-          minute = lambda x: x.dep_time % 100)
-    )
+          minute = lambda x: x.dep_time % 100
+          ))
     #>         dep_time  hour  minute
     #> 0          517.0   5.0    17.0
     #> 1          533.0   5.0    33.0
@@ -811,7 +814,7 @@ There are many functions for creating new variables that you can use with `assig
     #> dtype: float64
     ```
 
-    If `method = 'min'`` doesn't do what you need, look at the variants
+    If `method = 'min'` doesn't do what you need, look at the variants
     `method = 'first'`, `method = 'dense'`, `method = 'percent'`, `pct = True`.
     See the rank [help page](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rank.html) for more details.
 
@@ -875,7 +878,7 @@ flights.agg({'dep_delay': np.mean})
 
 (Pandas aggregate functions ignores the `np.nan` values like `na.rm = TRUE` in R.)
 
-`agg()` is not terribly useful unless we pair it with `groupby()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they'll be automatically applied "by group". For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the `groupby()` function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called [named aggregation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation) in pandas:
+`agg()` is not terribly useful unless we pair it with `.groupby()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they'll be automatically applied "by group". For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the `.groupby()` function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called [named aggregation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation) in pandas:
 
 
 ```python
@@ -897,9 +900,9 @@ by_day.agg(delay = ('dep_delay', np.mean)).reset_index()
 #> [365 rows x 4 columns]
 ```
 
-Note the use of `reset_index()` to remove pandas creation of a [MultiIndex](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical). You can read more about the use of grouby in pandas with their [Group By: split-apply-combine user Guid documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
+Note the use of `.reset_index()` to remove pandas creation of a [MultiIndex](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical). You can read more about the use of grouby in pandas with their [Group By: split-apply-combine user Guid documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
 
-Together `groupby()` and `agg()` provide one of the tools that you'll use most commonly when working with pandas: grouped summaries. But before we go any further with this, we need to introduce a structure for pandas code when doing data science work. We structure our code much like 'the pipe', `%>%` in the tidyverse packages from R-Studio.
+Together `.groupby()` and `.agg()` provide one of the tools that you'll use most commonly when working with pandas: grouped summaries. But before we go any further with this, we need to introduce a structure for pandas code when doing data science work. We structure our code much like 'the pipe', `%>%` in the tidyverse packages from R-Studio.
 
 ### Combining multiple operations
 
@@ -908,21 +911,23 @@ Imagine that we want to explore the relationship between the distance and averag
 
 ```python
 by_dest = flights.groupby('dest')
+
 delay = by_dest.agg(
     count = ('distance', 'size'),
-  dist = ('distance', np.mean),
-  delay = ('arr_delay', np.mean)
-)
-delay = delay.query('count > 20 & dest != "HNL"')
+    dist = ('distance', np.mean),
+    delay = ('arr_delay', np.mean)
+    )
+
+delay_filter = delay.query('count > 20 & dest != "HNL"')
 
 # It looks like delays increase with distance up to ~750 miles
 # and then decrease. Maybe as flights get longer there's more
 # ability to make up delays in the air?
-chart_base = (alt.Chart(delay).
-  encode(
+chart_base = (alt.Chart(delay_filter)
+  .encode(
     x = 'dist',
     y = 'delay'
-  ))
+    ))
   
 chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').mark_line()  
 ```
@@ -945,14 +950,14 @@ There's another way to tackle the same problem without the additional objects:
 
 
 ```python
-delays = (flights.
-    groupby('dest').
-    agg(
-        count = ('distance', 'size'),
-        dist = ('distance', np.mean),
-        delay = ('arr_delay', np.mean) 
-    ).
-    query('count > 20 & dest != "HNL"'))
+delays = (flights
+    .groupby('dest')
+    .agg(
+      count = ('distance', 'size'),
+      dist = ('distance', np.mean),
+      delay = ('arr_delay', np.mean) 
+      )
+    .query('count > 20 & dest != "HNL"'))
 ```
 
 This focuses on the transformations, not what's being transformed, which makes the code easier to read. You can read it as a series of imperative statements: group, then summarise, then filter. As suggested by this reading, a good way to pronounce `.` when reading pandas code is "then".
@@ -990,18 +995,17 @@ delays = not_cancelled.groupby('tailnum').agg(
     delay = ("arr_delay", np.mean)
 )
 
-chart = (alt.Chart(delays).
-    transform_density(
-        density = 'delay',
-        as_ = ['delay', 'density'],
-        bandwidth=10
-    ).
-    encode(
-    x = 'delay:Q',
-    y = 'density:Q'
-    ).
-    mark_line()
-  )
+chart = (alt.Chart(delays)
+    .transform_density(
+      density = 'delay',
+      as_ = ['delay', 'density'],
+      bandwidth=10
+      )
+    .encode(
+      x = 'delay:Q',
+      y = 'density:Q'
+      )
+    .mark_line())
 ```
 
 
@@ -1013,20 +1017,21 @@ The story is actually a little more nuanced. We can get more insight if we draw 
 
 
 ```python
-delays = not_cancelled.groupby('tailnum').agg(
+delays = (not_cancelled
+  .groupby('tailnum')
+  .agg(
     delay = ("arr_delay", np.mean),
     n = ('arr_delay', 'size')
-)
+    ))
 
-chart = (alt.Chart(delays).
-    encode(
-        x = 'n',
-        y = 'delay'
-    ).
-    mark_point(
-        filled = True, 
-        opacity = 1/10)
-)
+chart = (alt.Chart(delays)
+    .encode(
+      x = 'n',
+      y = 'delay'
+      )
+    .mark_point(
+      filled = True, 
+      opacity = 1/10))
 ```
 
 
@@ -1039,15 +1044,14 @@ When looking at this sort of plot, it's often useful to filter out the groups wi
 
 
 ```python
-chart = (alt.Chart(delays.query("n > 25")).
-    encode(
-        x = 'n',
-        y = 'delay'
-    ).
-    mark_point(
-        filled = True, 
-        opacity = 1/10)
-)
+chart = (alt.Chart(delays.query("n > 25"))
+    .encode(
+      x = 'n',
+      y = 'delay'
+    )
+    .mark_point(
+      filled = True, 
+      opacity = 1/10))
 
 chart.save("screenshots/altair_delays.png")
 ```
@@ -1074,32 +1078,26 @@ alt.data_transformers.enable('json')
 batting_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/batting/batting.csv"
 batting = pd.read_csv(batting_url)
 
-batters = (batting.
-    groupby('playerID').
-    agg(
-        ab = ("AB", "sum"),
-        h = ("H", "sum")
-    ).
-    assign(
-        ba = lambda x: x.h/x.ab
-    )
-  )
+batters = (batting
+    .groupby('playerID')
+    .agg(
+      ab = ("AB", "sum"),
+      h = ("H", "sum")
+      )
+    .assign(ba = lambda x: x.h/x.ab))
 
-chart = (alt.Chart(batters.query('ab > 100')).
-    encode(
-        x = 'ab',
-        y = 'ba'
-    ).
-    mark_point()
-)
-
+chart = (alt.Chart(batters.query('ab > 100'))
+    .encode(
+      x = 'ab',
+      y = 'ba'
+      )
+    .mark_point())
 
 chart.save("screenshots/altair_batters.png")
 ```
 
 
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_batters} \end{flushleft}
-
 
 This also has important implications for ranking. If you naively sort on `desc(ba)`, the people with the best batting averages are clearly lucky, not skilled:
 
@@ -1136,13 +1134,12 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
 
     
     ```python
-    (not_cancelled.
-    groupby(['year', 'month', 'day']).
-    agg(
-        avg_delay1 = ('arr_delay', np.mean),
-        avg_delay2 = ('arr_delay', lambda x: np.mean(x[x > 0]))
-        )
-    )
+    (not_cancelled
+    .groupby(['year', 'month', 'day'])
+    .agg(
+      avg_delay1 = ('arr_delay', np.mean),
+      avg_delay2 = ('arr_delay', lambda x: np.mean(x[x > 0]))
+      ))
     #>                 avg_delay1  avg_delay2
     #> year month day                        
     #> 2013 1     1     12.651023   32.481562
@@ -1169,11 +1166,10 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     
     ```python
     # Why is distance to some destinations more variable than to others?
-    (not_cancelled.
-    groupby(['dest']).
-    agg(distance_sd = ('distance', np.std)).
-    sort_values('distance_sd', ascending = False)
-    )
+    (not_cancelled
+    .groupby(['dest'])
+    .agg(distance_sd = ('distance', np.std))
+    .sort_values('distance_sd', ascending = False))
     #>       distance_sd
     #> dest             
     #> EGE     10.542765
@@ -1199,13 +1195,12 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     
     ```python
     # When do the first and last flights leave each day?
-    (not_cancelled.
-        groupby(['year', 'month', 'day']).
-        agg(
-          first = ('dep_time', np.min),
-          last = ('dep_time', np.max)
-        )
-    )
+    (not_cancelled
+      .groupby(['year', 'month', 'day'])
+      .agg(
+        first = ('dep_time', np.min),
+        last = ('dep_time', np.max)
+        ))
     #>                 first    last
     #> year month day               
     #> 2013 1     1    517.0  2356.0
@@ -1232,13 +1227,12 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     
     ```python
     # using first and last
-    (not_cancelled.
-      groupby(['year', 'month','day']).
-      agg(
+    (not_cancelled
+      .groupby(['year', 'month','day'])
+      .agg(
         first_dep = ('dep_time', 'first'),
         last_dep  = ('dep_time', 'last')
-      )
-    )
+        ))
     #>                 first_dep  last_dep
     #> year month day                     
     #> 2013 1     1        517.0    2356.0
@@ -1259,13 +1253,12 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     
     ```python
     # using position
-    (not_cancelled.
-      groupby(['year', 'month','day']).
-      agg(
+    (not_cancelled
+      .groupby(['year', 'month','day'])
+      .agg(
         first_dep = ('dep_time', lambda x: list(x)[1]),
         last_dep = ('dep_time', lambda x: list(x)[-1])
-        )
-    )
+        ))
     #>                 first_dep  last_dep
     #> year month day                     
     #> 2013 1     1        533.0    2356.0
@@ -1312,14 +1305,13 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     
     ```python
     # Which destinations have the most carriers?
-    (flights.
-      groupby('dest').
-      agg(
+    (flights
+      .groupby('dest')
+      .agg(
         carriers_unique = ('carrier', 'nunique'),
         carriers_count = ('carrier', 'size'),
         missing_time = ('dep_time', lambda x: x.isnull().sum())
-        )
-    )
+        ))
     #>       carriers_unique  carriers_count  missing_time
     #> dest                                               
     #> ABQ                 1             254           0.0
@@ -1366,12 +1358,9 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     ```python
     # How many flights left before 5am? (these usually indicate delayed
     # flights from the previous day)
-    (not_cancelled.
-      groupby(['year', 'month','day']).
-      agg(
-        n_early = ('dep_time', lambda x: np.sum(x < 500))
-        )
-    )
+    (not_cancelled
+      .groupby(['year', 'month','day'])
+      .agg(n_early = ('dep_time', lambda x: np.sum(x < 500))))
     
     # What proportion of flights are delayed by more than an hour?
     #>                 n_early
@@ -1389,12 +1378,9 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     #>            31       4.0
     #> 
     #> [365 rows x 1 columns]
-    (not_cancelled.
-      groupby(['year', 'month','day']).
-      agg(
-        hour_prop = ('arr_delay', lambda x: np.sum(x > 60))
-        )
-    )
+    (not_cancelled
+      .groupby(['year', 'month','day'])
+      .agg(hour_prop = ('arr_delay', lambda x: np.sum(x > 60))))
     #>                 hour_prop
     #> year month day           
     #> 2013 1     1         60.0
@@ -1422,12 +1408,9 @@ If you need to remove grouping and MultiIndex use `reset.index()`. This is a rou
 
 
 ```python
-dat = (not_cancelled.
-        groupby(['year', 'month','day']).
-        agg(
-          hour_prop = ('arr_delay', lambda x: np.sum(x > 60))
-          )
-      )
+dat = (not_cancelled
+        .groupby(['year', 'month','day'])
+        .agg(hour_prop = ('arr_delay', lambda x: np.sum(x > 60))))
 
 dat.head()
 #>                 hour_prop
@@ -1438,7 +1421,6 @@ dat.head()
 #>            4         36.0
 #>            5         25.0
 dat.reset_index().head()
-
 #>    year  month  day  hour_prop
 #> 0  2013      1    1       60.0
 #> 1  2013      1    2       79.0
@@ -1464,8 +1446,8 @@ dat.reset_index().head()
 
     Which is more important: arrival delay or departure delay?
 
-1.  Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`
-    ) is slightly suboptimal. Why? Which is the most important column?
+1.  Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`)
+    is slightly suboptimal. Why? Which is the most important column?
 
 1.  Look at the number of cancelled flights per day. Is there a pattern?
     Is the proportion of cancelled flights related to the average delay?
@@ -1476,15 +1458,16 @@ dat.reset_index().head()
 
 ## Grouped transforms (and filters)
 
-Grouping is most useful in conjunction with `agg()`, but you can also do convenient operations with `transform()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `assign()` and the best equivalent is `transform()`. Following pandas [groupby guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html) on 'split-apply-combine', we would assign our transfomred variables to our data frame and then perform filters on the full data frame.
+Grouping is most useful in conjunction with `.agg()`, but you can also do convenient operations with `.transform()`.  This is a difference in pandas as compared to dplyr.  Once you create a `.groupby()` object you cannot use `.assign()` and the best equivalent is `.transform()`. Following pandas [groupby guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html) on 'split-apply-combine', we would assign our transfomred variables to our data frame and then perform filters on the full data frame.
 
 *   Find the worst members of each group:
 
     
     ```python
-    flights_sml['ranks'] = (flights_sml.
-                            groupby(['year', 'month','day']).
-                            arr_delay.rank(ascending = False))
+    flights_sml['ranks'] = (flights_sml
+                            .groupby(['year', 'month','day']).arr_delay
+                            .rank(ascending = False))
+                            
     #> /usr/local/bin/python3:3: SettingWithCopyWarning: 
     #> A value is trying to be set on a copy of a slice from a DataFrame.
     #> Try using .loc[row_indexer,col_indexer] = value instead
@@ -1535,11 +1518,12 @@ Grouping is most useful in conjunction with `agg()`, but you can also do conveni
 
     
     ```python
-    (popular_dests.
-    query('arr_delay > 0').
-    assign(prop_delay = lambda x: x.arr_delay / x.groupby('dest').arr_delay.transform('sum')).
-    filter(['year', 'month', 'day', 'dest', 'arr_delay', 'prop_delay'])
-    )
+    (popular_dests
+      .query('arr_delay > 0')
+      .assign(
+        prop_delay = lambda x: x.arr_delay / x.groupby('dest').arr_delay.transform('sum')
+        )
+      .filter(['year', 'month', 'day', 'dest', 'arr_delay', 'prop_delay']))
     #>         year  month  day dest  arr_delay  prop_delay
     #> 0       2013      1    1  IAH       11.0    0.000111
     #> 1       2013      1    1  IAH       20.0    0.000201

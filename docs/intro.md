@@ -56,7 +56,7 @@ There are some important topics that this book doesn't cover. We believe it's im
 
 ### Big data
 
-This book proudly focuses on small, in-memory datasets. This is the right place to start because you can't tackle big data unless you have experience with small data. The tools you learn in this book will easily handle hundreds of megabytes of data, and with a little care you can typically use them to work with 1-2 Gb of data. If you're routinely working with larger data (10-100 Gb, say), you should learn more about [data.table](https://github.com/Rdatatable/data.table). This book doesn't teach data.table because it has a very concise interface which makes it harder to learn since it offers fewer linguistic cues. But if you're working with large data, the performance payoff is worth the extra effort required to learn it.
+This book proudly focuses on small, in-memory datasets. This is the right place to start because you can't tackle big data unless you have experience with small data. The tools you learn in this book will easily handle hundreds of megabytes of data, and with a little care you can typically use them to work with 1-2 Gb of data. If you're routinely working with larger data (10-100 Gb, say), you should learn more about [dask](https://dask.org/). This book doesn't teach dask but it is very similar to the pandas workflow. But if you're working with large data, the performance payoff is worth the extra effort required to learn it.
 
 If your data is bigger than this, carefully consider if your big data problem might actually be a small data problem in disguise. While the complete data might be big, often the data needed to answer a specific question is small. You might be able to find a subset, subsample, or summary that fits in memory and still allows you to answer the question that you're interested in. The challenge here is finding the right small data, which often requires a lot of iteration.
 
@@ -120,7 +120,7 @@ VS Code comes with a [simple and intuitive layout](https://code.visualstudio.com
 - **Panels** - You can display different panels below the editor region for output or debug information, errors and warnings, or an integrated terminal. Panel can also be moved to the right for more vertical space.
 Each time you start VS Code, it opens up in the same state it was in when you last closed it. The folder, layout, and opened files are preserved.
 
-**Microsoft provides a [great tutorial](https://code.visualstudio.com/docs/python/data-science-tutorial) to get you through the following sections if you would like to follow their guide.**
+**Microsoft provides a [great python tutorial](https://code.visualstudio.com/docs/python/python-tutorial) and [python data science](https://code.visualstudio.com/docs/python/data-science-tutorial) to get you through the following sections if you would like to follow their guides.**
 
 #### VS Code Python Extension
 
@@ -155,7 +155,7 @@ print(msg)
 
 ### Package Management (pip)
 
-You can install a standard set of data science python packages using [pip](https://pip.pypa.io/en/stable/user_guide/). However, there are some complications using pip on computers with multiple versions of Python.  
+You can install a standard set of data science python packages using [pip](https://pip.pypa.io/en/stable/user_guide/) using your OS command line tools (Mac `Terminal`, Windos - `Command Prompt`). However, there are some complications using pip on computers with multiple versions of Python.  
 
 * **pip**: If your path environment is correct, then a standard `pip install [package]` will work.  This is how most packages direct users to install Python packages.
 * **pip3**: If your OS has Python 2 and Python 3 installed, you may need to use `pip3 install [package]`.
@@ -199,7 +199,7 @@ python -m pip install --user numpy pandas xlrd matplotlib seaborn
 
 ### The Data Science Packages
 
-You'll also need to install some Python packages. A Python __package__ is a collection of functions, data, and documentation that extends the capabilities of base Python. Using packages is key to the successful use of Python for data science. The majority of the packages that you will learn in this book are related to the so-called [tidyverse packages](https://www.tidyverse.org/packages/) in R. There are attempts to port they tidyverse package process into Python.  We are not showing the tools that recreate the tidyverse in Python but those that current Data Scientists use to do equivelent work in Python. You will notice that [pandas](https://pandas.pydata.org/pandas-docs/stable/index.html) is the primary tool with a few packages that come with base Python. Pandas [user guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html) will be referenced heavily as we progress. 
+You'll also need to install some Python packages. A Python __package__ is a collection of functions, data, and documentation that extends the capabilities of base Python. Using packages is key to the successful use of Python for data science.  Note that a Python package can be referred as a Python __library__ as well. The majority of the packages that you will learn in this book are related to the so-called [tidyverse packages](https://www.tidyverse.org/packages/) in R. There are attempts to port they tidyverse package process into Python.  We are not showing the tools that recreate the tidyverse in Python but those that current Data Scientists use to do equivelent work in Python. You will notice that [pandas](https://pandas.pydata.org/pandas-docs/stable/index.html) is the primary tool with a few packages that come with base Python. Pandas [user guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html) will be referenced heavily as we progress. 
 
 R Tidyverse Package                          | Python Package
 -------------                              | -------------

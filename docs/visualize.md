@@ -71,8 +71,8 @@ You can test your answer with the `mpg` __data frame__ found in ggplot2 (aka  `g
 
 
 ```python
-
-mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv"
+mpg = pd.read_csv(url)
 ```
 
 Among the variables in `mpg` are:
@@ -83,7 +83,7 @@ Among the variables in `mpg` are:
   A car with a low fuel efficiency consumes more fuel than a car with a high 
   fuel efficiency when they travel the same distance. 
 
-To learn more about `mpg`, read informat at [data4python4ds](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
+To learn more about `mpg`, read its format at [data4python4ds](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
 
 ### Creating an Altair plot
 
@@ -92,11 +92,11 @@ To plot `mpg`, run this code to put `displ` on the x-axis and `hwy` on the y-axi
 
 ```python
 
-chart = (alt.Chart(mpg).
-  encode(
+chart = (alt.Chart(mpg)
+  .encode(
     x='displ', 
-    y='hwy').
-  mark_circle()
+    y='hwy')
+  .mark_circle()
 )
 ```
 
@@ -108,9 +108,9 @@ The plot shows a negative relationship between engine size (`displ`) and fuel ef
 
 With Altair, you begin a plot with the function `Chart()`. `Chart()` creates a Chart object that you can add layers to. The only argument of `Chart()` is the dataset to use in the graph. So `Chart(mpg)` creates an Chart object upon which we can marks.
 
-You complete your graph by adding one or more marks to `Chart()`. The attribute `mark_point()` adds a layer of points to your plot, which creates a scatterplot. Altair comes with many mark methods that each add a different type of layer to a plot. You'll learn a whole bunch of them throughout this chapter.
+You complete your graph by adding one or more marks to `Chart()`. The attribute `.mark_point()` adds a layer of points to your plot, which creates a scatterplot. Altair comes with many mark methods that each add a different type of layer to a plot. You'll learn a whole bunch of them throughout this chapter.
 
-Each mark method in Altair has an `encode()` attribute. This defines how variables in your dataset are encoded to visual properties. The `encode()` method is always paired with `x` and `y` arguments to specify which variables to map to the x and y axes. Altair looks for the encoded variables in the `data` argument, in this case, `mpg`. For pandas dataframes, Altair automatically determines the appropriate data type for the mapped column.
+Each mark method in Altair has an `.encode()` attribute. This defines how variables in your dataset are encoded to visual properties. The `.encode()` method is always paired with `x` and `y` arguments to specify which variables to map to the x and y axes. Altair looks for the encoded variables in the `data` argument, in this case, `mpg`. For pandas dataframes, Altair automatically determines the appropriate data type for the mapped column.
 
 ### A graphing template
 
@@ -118,9 +118,9 @@ Let's turn this code into a reusable template for making graphs with ggplot2. To
 
 
 ```python
-(alt.Chart(<DATA>).  
-  <mark_*().>
-  encode(<ENCODINGS>))
+(alt.Chart(<DATA>)  
+   .encode(<ENCODINGS>)
+    <.mark_*()>)
 ```
 
 The rest of this chapter will show you how to complete and extend this template to make different types of graphs. We will begin with the `<ENCODINGS>` component.
@@ -163,14 +163,13 @@ You can convey information about your data by mapping the encodings in your plot
 
 ```python
 
-chart = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chart = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     color = "class"
     )
-  )
+  .mark_circle())
 ```
 
 
@@ -178,7 +177,7 @@ chart = (alt.Chart(mpg).
 
 (We don't prefer British English, like Hadley, so don't use `colour` instead of `color`.)
 
-To map an encoding to a variable, associate the name of the encoding to the name of the variable inside `encode()`. Altair will automatically assign a unique level of the encoding (here a unique color) to each unique value of the variable, a process known as __scaling__. Altair will also add a legend that explains which levels correspond to which values.
+To map an encoding to a variable, associate the name of the encoding to the name of the variable inside `.encode()`. Altair will automatically assign a unique level of the encoding (here a unique color) to each unique value of the variable, a process known as __scaling__. Altair will also add a legend that explains which levels correspond to which values.
 
 The colors reveal that many of the unusual points are two-seater cars. These cars don't seem like hybrids, and are, in fact, sports cars! Sports cars have large engines like SUVs and pickup trucks, but small bodies like midsize and compact cars, which improves their gas mileage. In hindsight, these cars were unlikely to be hybrids since they have large engines.
 
@@ -186,14 +185,13 @@ In the above example, we mapped `class` to the color encoding, but we could have
 
 
 ```python
-chart = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chart = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     size = "class"
     )
-  )
+  .mark_circle())
 ```
 
 
@@ -204,24 +202,22 @@ Or we could have mapped `class` to the _opacity_ encoding, which controls the tr
 
 ```python
 # First
-chart1 = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chart1 = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     opacity = "class"
     )
-  )
+  .mark_circle())
 
 # Second
-chart2 = (alt.Chart(mpg).
-  mark_point().
-  encode(
+chart2 = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     shape = "class"
     )
-  )
+  .mark_point())
   
 chart1.save("screenshots/altair_opacity.png")
 #> WARN Channel opacity should not be used with an unsorted discrete field.
@@ -233,11 +229,9 @@ chart2.save("screenshots/altair_shape.png")
 
 \includegraphics[width=0.5\linewidth]{screenshots/altair_opacity} \includegraphics[width=0.5\linewidth]{screenshots/altair_shape} 
 
-
-
 Altair will only use 8 shapes for one chart. Charting more than 8 shapes is not recommended as the shapes simply recycle.
 
-For each encoding, you use `encode()` to associate the name of the encoding with a variable to display. The `encode()` function gathers together each of the encoded mappings used by a layer and passes them to the layer's mapping argument. The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves encodings, visual properties that you can map to variables to display information about the data.
+For each encoding, you use `.encode()` to associate the name of the encoding with a variable to display. The `.encode()` function gathers together each of the encoded mappings used by a layer and passes them to the layer's mapping argument. The syntax highlights a useful insight about `x` and `y`: the x and y locations of a point are themselves encodings, visual properties that you can map to variables to display information about the data.
 
 Once you map an encoding, Altair takes care of the rest. It selects a reasonable scale to use with the encoding, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, Altair does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values.
 
@@ -246,20 +240,19 @@ You can also _configure_ the encoding properties of your mark manually. For exam
 
 ```python
 
-chart = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chart = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     color = alt.value("blue")
     )
-  )
+  .mark_circle())
 ```
 
 
 \begin{center}\includegraphics[width=0.7\linewidth]{visualize_files/figure-latex/unnamed-chunk-19-1} 
 
-Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
+Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `.encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
 
 * The name of a color as a character string.
 
@@ -294,27 +287,27 @@ One common problem when creating Altair graphics as shown in this book, is to pu
 For example the code below works in Python. 
 
 ```python
-alt.Chart(mpg).mark_circle().encode(x = "displ", y = "hwy")
+alt.Chart(mpg).encode(x = "displ", y = "hwy").mark_circle()
 ```
 
-However, the complexity of the more details graphics necessicates placing the code on multiple lines. When using multiple lines we need the enclosing `()`. Make sure you haven't accidentally excluded a `(` or `)` like this
+However, the complexity of the more details graphics necessitates placing the code on multiple lines. When using multiple lines we need the enclosing `()`. Make sure you haven't accidentally excluded a `(` or `)` like this
 
 ```Python
-(alt.Chart(mpg).
-  mark_circle().
-  encode(
+(alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy")
+  .mark_circle()
 ```
 
 or placed the `()` incorrectly like this
 
 ```Python
-(chart = alt.Chart(mpg).
-  mark_circle().
-  encode(
+(chart = alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy")
+  .mark_circle()
 )    
 ```
 
@@ -324,21 +317,20 @@ If you're still stuck, try the help. You can get help about any Altair function 
 
 One way to add additional variables is with encodings. Another way, particularly useful for categorical variables, is to split your plot into __facets__, subplots that each display one subset of the data.
 
-To facet your plot by a single variable, use `facet()`. The first argument of `facet()` is . The variable that you pass to `facet_wrap()` should be discrete.
+To facet your plot by a single variable, use `.facet()`. Assign a discrete variable to the `.facet` argument and adjust the size of your facet grid using the `columns` argument.
 
 
 ```python
-chart_f = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chart_f = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
-   ).
-   facet(
-      facet = "class",
-      columns = 4
-    )
-  )
+   )
+  .mark_circle()
+  .facet(
+    facet = "class",
+    columns = 4
+  ))
   
 chart_f.save("screenshots/altair_facet_1.png")
 ```
@@ -347,21 +339,20 @@ chart_f.save("screenshots/altair_facet_1.png")
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_facet_1} \end{flushleft}
 
 
-To facet your plot on the combination of two variables, The first argument of `facet()` is also `column` and the second is `row`. This time the formula should contain two variable names.
+To facet your plot on the combination of two variables, the first argument of `.facet()` is `column` and the second is `row`. This time the formula should contain two discrete variable names.
 
 
 ```python
-chart_f2 = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chart_f2 = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
-   ).
-   facet(
-      column = "drv",
-      row = "cyl"
     )
-  )
+  .mark_circle()
+  .facet(
+    column = "drv",
+    row = "cyl"
+    ))
   
 chart_f2.save("screenshots/altair_facet_2.png")
 #> WARN row encoding should be discrete (ordinal / nominal / binned).
@@ -376,38 +367,38 @@ If you prefer to not facet in the rows or columns dimension, simply remove that 
 
 1.  What happens if you facet on a continuous variable?
 
-1.  What do the empty cells in plot with `facet(column = "drv", row = "cyl")` mean?
+1.  What do the empty cells in plot with `.facet(column = "drv", row = "cyl")` mean?
     How do they relate to this plot?
 
     
     ```python
-    (alt.Chart(mpg).
-      mark_circle().
-      encode(
+    (alt.Chart(mpg)
+      .encode(
         x = "drv",
-        y = "cyl")
-    )
+        y = "cyl"
+        )
+      .mark_circle())
     ```
 
 1.  What plots does the following code make? What does `.` do?
 
     
     ```python
-    (alt.Chart(mpg).
-      mark_circle().
-      encode(
+    (alt.Chart(mpg)
+      .encode(
         x = "displ",
-        y = "hwy").
-      facet(column = "drv")
-    )
+        y = "hwy"
+        )
+      .mark_circle()
+      .facet(column = "drv"))
     
-    (alt.Chart(mpg).
-      mark_circle().
-      encode(
+    (alt.Chart(mpg)
+      .encode(
         x = "displ",
-        y = "hwy").
-      facet(row = "cyl")
-    )
+        y = "hwy"
+        )
+      .mark_circle()
+      .facet(row = "cyl"))
     ```
 
 1.  Take the first faceted plot in this section:
@@ -425,21 +416,20 @@ How are these two plots similar?
 
 
 ```python
-chartp = (alt.Chart(mpg).
-  mark_circle().
-  encode(
+chartp = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy"
     )
-  )
+  .mark_circle())
 
-chartf = (alt.Chart(mpg).
-  encode(
+chartf = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy"
-    ).
-  transform_loess("displ", "hwy").
-  mark_line()
+    )
+  .transform_loess("displ", "hwy")
+  .mark_line()
   )
 
 chartp.save("screenshots/altair_basic_points.png")  
@@ -456,33 +446,28 @@ Both plots contain the same x variable, the same y variable, and both describe t
 
 A __mark__ is the geometrical object that a plot uses to represent data. People often describe plots by the type of mark that the plot uses. For example, bar charts use bar marks, line charts use line marks, boxplots use boxplot marks, and so on. Scatterplots break the trend; they use the point mark. As we see above, you can use different marks to plot the same data. The first plot uses the point mark, and the second plot uses the line mark, a smooth line fitted to the data is calculated using a transformation. To change the mark in your plot, change the mark function that you add to `Chart()`. 
 
-Every mark function in Altair has `encode` arguments. However, not every encoding works with every mark. You could set the shape of a point, but you couldn't set the "shape" of a line. On the other hand, you _could_ set the type of line. `mark_line()` will draw a different line, with a different `strokeDash`, for each unique value of the variable that you map to `strokeDash`.
+Every mark function in Altair has `encode` arguments. However, not every encoding works with every mark. You could set the shape of a point, but you couldn't set the "shape" of a line. On the other hand, you _could_ set the type of line. `.mark_line()` will draw a different line, with a different `strokeDash`, for each unique value of the variable that you map to `strokeDash`.
 
 
 
 ```python
-chartl = (alt.Chart(mpg).
-  transform_loess("displ", "hwy", groupby = ["drv"]).
-  mark_line().
-  encode(
+chartl = (alt.Chart(mpg)
+  .transform_loess("displ", "hwy", groupby = ["drv"])
+  .encode(
     x = "displ",
     y = "hwy",
     strokeDash = "drv"
     )
-  )
+  .mark_line())
   
-
 chartl.save("screenshots/altair_dashed_lines.png")
-
-  
 ```
 
 
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_dashed_lines} \end{flushleft}
 
 
-
-Here `mark_line()` separates the cars into three lines based on their `drv` value, which describes a car's drivetrain. One line describes all of the points with a `4` value, one line describes all of the points with an `f` value, and one line describes all of the points with an `r` value. Here, `4` stands for four-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive.
+Here `.mark_line()` separates the cars into three lines based on their `drv` value, which describes a car's drivetrain. One line describes all of the points with a `4` value, one line describes all of the points with an `f` value, and one line describes all of the points with an `r` value. Here, `4` stands for four-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive.
 
 If this sounds strange, we can make it more clear by overlaying the lines on top of the raw data and then coloring everything according to `drv`.
 
@@ -495,47 +480,41 @@ Notice that this plot contains two marks in the same graph! If this makes you ex
 
 Altair provides about 15 marks. The best way to get a comprehensive overview is the Altair marks page, which you can find at <https://altair-viz.github.io/user_guide/marks.html>. 
 
-Many marks, like `mark_line()`, use a single mark object to display multiple rows of data. For these marks, you can set the `detail` encoding to a categorical variable to draw multiple objects. Altair will draw a separate object for each unique value of the detail variable. In practice, Altair will automatically group the data for these marks whenever you map an encoding to a discrete variable (as in the `strokeDash` example). It is convenient to rely on this feature because the detail encoding by itself does not add a legend or distinguishing features to the marks.
+Many marks, like `.mark_line()`, use a single mark object to display multiple rows of data. For these marks, you can set the `detail` encoding to a categorical variable to draw multiple objects. Altair will draw a separate object for each unique value of the detail variable. In practice, Altair will automatically group the data for these marks whenever you map an encoding to a discrete variable (as in the `strokeDash` example). It is convenient to rely on this feature because the detail encoding by itself does not add a legend or distinguishing features to the marks.
 
 
 
 ```python
-chartleft = (alt.Chart(mpg).
-  encode(
+chartleft = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
-  ).
-  transform_loess("displ", "hwy").
-  mark_line()
-  
-  )
+    )
+  .transform_loess("displ", "hwy")
+  .mark_line())
 
-chartmiddle = (alt.Chart(mpg).
-  encode(
+chartmiddle = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     detail = "drv"
-    ).
-  transform_loess("displ", "hwy", groupby = ["drv"]).
-  mark_line()
-  )
+    )
+  .transform_loess("displ", "hwy", groupby = ["drv"])
+  .mark_line())
 
-chartright = (alt.Chart(mpg).
-  encode(
+chartright = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     color=alt.Color("drv", legend=None)
-    ).
-  transform_loess("displ", "hwy", groupby = ["drv"]).
-  mark_line()
-  )
+    )
+  .transform_loess("displ", "hwy", groupby = ["drv"])
+  .mark_line())
+  
 chartleft.save("screenshots/altair_chartleft.png")
 chartmiddle.save("screenshots/altair_chartmiddle.png")
 chartright.save("screenshots/altair_chartright.png")
-
 ```
-
-
 
 
 \includegraphics[width=0.33\linewidth]{screenshots/altair_chartleft} \includegraphics[width=0.33\linewidth]{screenshots/altair_chartmiddle} \includegraphics[width=0.33\linewidth]{screenshots/altair_chartright} 
@@ -544,12 +523,12 @@ To display multiple marks in the same plot, you can used [layered charts](https:
 
 
 ```python
-chartp = (alt.Chart(mpg).
-  encode(
+chartp = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy"
-  ).
-  mark_circle()
+  )
+  .mark_circle()
 )
 
 chart = chartp + chartleft  
@@ -559,19 +538,17 @@ chart.save("screenshots/altair_chartcombine.png")
 ```
 
 
-
 \begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_chartcombine} \end{center}
 
 This, however, introduces some duplication in our code. Imagine if you wanted to change the y-axis to display `cty` instead of `hwy`. You'd need to change the variable in two places, and you might forget to update one. You can avoid this type of repetition by passing a set of encodings to a base `alt.Chart()`. Altair will treat these encodings as global encodings that apply to each mark layer in the layered chart.  In other words, this code will produce the same plot as the previous code:
 
 
 ```python
-base =(alt.Chart(mpg).
-  encode(
+base = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy"
-  )
-)
+    ))
 
 chart = base.mark_circle() + base.transform_loess("displ", "hwy").mark_line()
 
@@ -580,18 +557,17 @@ chart.save("screenshots/altair_combine_clean.png")
 ```
 
 
-
 \begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_combine_clean} \end{center}
+
 If you place encodings in an encode function, Altair will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the base encodings _for that layer only_. This makes it possible to display different aesthetics in different layers. Alatair automatically chooses useful plot settings and chart configurations to allow you to think about data instead of the programming mechanics of the chart. You can review their guidance on [customizing visualizations](https://altair-viz.github.io/user_guide/customization.html) to see the varied ways to change the look of your graphic.
 
 
 ```python
-base =(alt.Chart(mpg).
-  encode(
+base =(alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy"
-  )
-)
+  ))
 
 chart = base.encode(color = "drv").mark_circle() + base.transform_loess("displ", "hwy").mark_line()
 
@@ -601,25 +577,22 @@ chart.save("screenshots/altair_combine_clean_color.png")
 
 \begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_combine_clean_color} \end{center}
 
-You can use the same idea to specify different `data` for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only.
+You can use the same idea to specify different data for each layer. Here, our smooth line displays just a subset of the `mpg` dataset, the subcompact cars. The `.transform_filter` method overrides the global data from the base chart for that layer only.
 
 
 ```python
 #column name of class does not work nicely with Altair filter.
 
-base = (alt.Chart(mpg.rename(columns = {"class": "class1"})).
-  encode(
+base = (alt.Chart(mpg.rename(columns = {"class": "class1"}))
+  .encode(
     x = "displ",
     y = "hwy"
-  )
-)
+    ))
 
-chart_smooth_sub = (base.
-  transform_filter(
-  alt.datum.class1 == "subcompact"
-  ).
-  transform_loess("displ", "hwy").
-  mark_line()
+chart_smooth_sub = (base
+  .transform_filter(alt.datum.class1 == "subcompact")
+  .transform_loess("displ", "hwy")
+  .mark_line()
 )  
 
 chart = base.encode(color = "class1").mark_circle() + chart_smooth_sub
@@ -651,12 +624,12 @@ chart.save("screenshots/altair_combine_clean_color_filter.png")
 
 ## Statistical transformations
 
-Next, let's take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with `mark_bar()`. The following chart displays the total number of diamonds in the `diamonds` dataset, grouped by `cut`. The `diamonds` dataset comes in ggplot2 R package and can be used in Python using the following Python command. Note that we also need to use pandas to format a few of the columns as ordered categorical to have the diamonds DataFrame act like it does in R.
+Next, let's take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with `.mark_bar()`. The following chart displays the total number of diamonds in the `diamonds` dataset, grouped by `cut`. The `diamonds` dataset comes in ggplot2 R package and can be used in Python using the following Python command. Note that we also need to use pandas to format a few of the columns as ordered categorical to have the diamonds DataFrame act like it does in R.
 
 
 ```python
-
-diamonds = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv")
+url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv"
+diamonds = pd.read_csv(url)
 
 diamonds['cut'] = pd.Categorical(diamonds.cut, 
   ordered = True, 
@@ -677,14 +650,13 @@ It contains information about ~54,000 diamonds, including the `price`, `carat`, 
 
 
 ```python
-chart = (alt.Chart(diamonds).
-  encode(
+chart = (alt.Chart(diamonds)
+  .encode(
     x = "cut",
     y = alt.Y("count():Q")
-  ).
-  mark_bar().
-  properties(width = 400)
-)
+    )
+  .mark_bar()
+  .properties(width = 400))
 
 chart.save("screenshots/altair_diamond_bar.png")
 ```
@@ -704,22 +676,21 @@ On the x-axis, the chart displays `cut`, a variable from `diamonds`. On the y-ax
 * boxplots compute a robust summary of the distribution and then display a
   specially formatted box.
 
-The algorithm used to calculate new values for a graph is called a __transform__, short for transformation. The figure below describes how this process works with `mark_bar()`.
+The algorithm used to calculate new values for a graph is called a __transform__, short for transformation. The figure below describes how this process works with `.mark_bar()`.
 
 
 \begin{center}\includegraphics[width=1\linewidth]{images/visualization-stat-bar-altair} \end{center}
 
-You must explicitely define the transformation a mark uses through transformations using `alt.Y()` or `alt.X()` function. For example, `mark_bar()` requires the `y` encoding `alt.Y("count():Q")`. A histogram is created using `mark_bar()` with transformations on both the x and y axes. The `bin` argument accepts a boolean or an `alt.Bin()` function where the argument `maxbins` can be used - `bin=alt.Bin(maxbins=100)`.
+You must explicitely define the transformation a mark uses through transformations using `alt.Y()` or `alt.X()` function. For example, `mark_bar()` requires the `y` encoding `alt.Y("count():Q")`. A histogram is created using `.mark_bar()` with transformations on both the x and y axes. The `bin` argument accepts a boolean or an `alt.Bin()` function where the argument `maxbins` can be used - `bin=alt.Bin(maxbins=100)`.
 
 
 ```python
-chart = (alt.Chart(diamonds).
-  encode(
+chart = (alt.Chart(diamonds)
+  .encode(
     x =alt.X("price", bin=True),
     y =alt.Y("count()")
-  ).
-  mark_bar()
-)
+    )
+  .mark_bar())
 
 chart.save("screenshots/altair_histogram.png")
 ```
@@ -727,38 +698,36 @@ chart.save("screenshots/altair_histogram.png")
 
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{screenshots/altair_histogram} \end{center}
 
-For more complicated transformations Altair provides __transform__ functions. We saw one of these transforms previously when we used `mark_line()` to describe each drive type. If you are working with pandas DataFrames then you may want to do these transformations using pandas. [Altair's transformations](https://altair-viz.github.io/user_guide/transform/index.html) can be used with DataFrames as well as JSON files or URL pointers to CSV files. 
+For more complicated transformations Altair provides __transform__ functions. We saw one of these transforms previously when we used `.mark_line()` to describe each drive type. If you are working with pandas DataFrames then you may want to do these transformations using pandas. [Altair's transformations](https://altair-viz.github.io/user_guide/transform/index.html) can be used with DataFrames as well as JSON files or URL pointers to CSV files. 
 
 
 ```python
-chartright = (alt.Chart(mpg).
-  encode(
+chartright = (alt.Chart(mpg)
+  .encode(
     x = "displ",
     y = "hwy",
     color=alt.Color("drv", legend=None)
-    ).
-  transform_loess("displ", "hwy", groupby = ["drv"]).
-  mark_line()
-  )
+    )
+  .transform_loess("displ", "hwy", groupby = ["drv"]).
+  .mark_line())
 ```
 
 
 
 \includegraphics[width=0.7\linewidth]{screenshots/altair_chartright} 
 
-Finally, `mark_boxplot()` is available which does the statistical transformations for you after you specify the encodings for the x and y axes.
+Finally, `.mark_boxplot()` is available which does the statistical transformations for you after you specify the encodings for the x and y axes.
 
 
 ```python
 
-chart = (alt.Chart(diamonds).
-  encode(
+chart = (alt.Chart(diamonds)
+  .encode(
     y ="price",
     x ="cut"
-  ).
-  mark_boxplot(size = 25).
-  properties(width = 300)
-)
+    )
+  .mark_boxplot(size = 25)
+  .properties(width = 300))
 
 chart.save("screenshots/altair_boxplot.png")
 ```
@@ -773,29 +742,26 @@ There's one more piece of magic associated with bar charts. You can colour a bar
 
 
 ```python
-chart_left = (alt.Chart(diamonds).
-  mark_bar().
-  encode(
+chart_left = (alt.Chart(diamonds)
+  .encode(
     x = "cut",
     y = alt.Y("count()"),
     stroke = "cut"
-    ).
-  properties(width = 200)
-  )
+    )
+  .mark_bar()
+  .properties(width = 200))
   
-chart_right = (alt.Chart(diamonds).
-  mark_bar().
-  encode(
+chart_right = (alt.Chart(diamonds)
+  .encode(
     x = "cut",
     y = alt.Y("count()"),
     color = "cut"
-    ).
-  properties(width = 200)
-  ) 
+    )
+  .mark_bar()
+  .properties(width = 200)) 
 
 chart_left.save("screenshots/altair_bar_linecolor.png")
 chart_right.save("screenshots/altair_bar_fillcolor.png")
-
 ```
 
 
@@ -807,16 +773,14 @@ Note what happens if you map the color encoding to another variable, like `clari
 
 
 ```python
-chart = (alt.Chart(diamonds).
-  mark_bar().
-  encode(
+chart = (alt.Chart(diamonds)
+  .encode(
     x = "cut",
     y = alt.Y("count()"),
     color = "clarity"
-
-  ).
-  properties(width = 200)
-  )
+    )
+  .mark_bar()
+  .properties(width = 200))
   
 chart.save("screenshots/stacked_barchart.png")  
 ```
@@ -825,7 +789,7 @@ chart.save("screenshots/stacked_barchart.png")
 
 \begin{center}\includegraphics[width=0.6\linewidth]{screenshots/stacked_barchart} \end{center}
 
-The stacking is performed automatically by `mark_bar()`. If you don't want a stacked bar chart, you can use use the `stack` argument in  `alt.Y()` one of three other options: `"identity"`, `"dodge"` or `"fill"`.
+The stacking is performed automatically by `.mark_bar()`. If you don't want a stacked bar chart, you can use use the `stack` argument in  `alt.Y()` one of three other options: `"identity"`, `"dodge"` or `"fill"`.
 
 *   `position = "identity"` will place each object exactly where it falls in
     the context of the graph. This is not very useful for bars, because it
@@ -835,27 +799,25 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
     
     
     ```python
-    chart_left = (alt.Chart(diamonds).
-        mark_bar().
-        encode(
+    chart_left = (alt.Chart(diamonds)
+        .encode(
           x = "cut",
           y = alt.Y("count()", stack=None),
           color = "clarity",
           opacity = alt.value(1/5)
-        ).
-        properties(width = 200)
-    )
+          )
+        .mark_bar()
+        .properties(width = 200))
     
-    chart_right = (alt.Chart(diamonds).
-        mark_bar().
-        encode(
+    chart_right = (alt.Chart(diamonds)
+        .encode(
           x = "cut",
           y = alt.Y("count()", stack=None),
           stroke = "clarity",
           color = alt.value("none")
-        ).
-        properties(width = 200)
-    )
+          )
+        .mark_bar()
+        .properties(width = 200))
     
     chart_left.save("screenshots/altair_nostack_opacity.png")
     chart_right.save("screenshots/altair_nostack_lines.png")
@@ -871,15 +833,15 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
 
     
     ```python
-    chart = (alt.Chart(diamonds).
-      mark_bar().
-      encode(
+    chart = (alt.Chart(diamonds)
+      .mark_bar()
+      .encode(
         x = "cut",
         y = alt.Y("count()", stack='normalize'),
         color = "clarity"
-      ).
-      properties(width = 200)
-    )
+        )
+      .mark_bar()
+      .properties(width = 200))
     
     chart.save("screenshots/altair_normalize_bar.png")
     ```
@@ -898,15 +860,14 @@ The stacking is performed automatically by `mark_bar()`. If you don't want a sta
     
     
     ```python
-    chart = (alt.Chart(diamonds).
-      mark_bar().
-      encode(
+    chart = (alt.Chart(diamonds)
+      .encode(
         x='clarity',
         y=alt.Y('count()'),
         color='clarity',
         column='cut'
-      )
-    )
+        )
+      .mark_bar())
     
     chart.save("screenshots/altair_position_dodge.png")
     ```
@@ -928,25 +889,25 @@ Visualizing data on maps can get complicated quickly.  Altair has a some [mappin
 
 ## The layered grammar of graphics
 
-In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with ggplot2. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
+In the previous sections, you learned much more than how to make scatterplots, bar charts, and boxplots. You learned a foundation that you can use to make _any_ type of plot with Altair. To see this, let's add position adjustments, stats, coordinate systems, and faceting to our code template:
 
 ```
-(alt.Chart(<DATA>).
-  encoding(
+(alt.Chart(<DATA>)
+  .encoding(
     
-  ).facet(
+    )
+  .facet(
     column = <FACET VARIABLE>
-  ).
-  <TRANFORM_FUNCTION>().
-  <MARK_FUNCTION>().
-  properties(
+    )
+  .<TRANFORM_FUNCTION>()
+  .<MARK_FUNCTION>()
+  .properties(
     width = ,
     height = 
-  )
-  )
+  ))
 ```
 
-Altair's general template takes four main parameters - `alt.Chart()`, `mark_*()`, `encode()`, and `facet()`. In practice, only need to supply the first three parameters to make a chart because Altair will provide useful defaults for everything except the data, the encodings, and the mark function.
+Altair's general template takes four main parameters - `alt.Chart()`, `.mark_*()`, `.encode()`, and `.facet()`. In practice, only need to supply the first three parameters to make a chart because Altair will provide useful defaults for everything except the data, the encodings, and the mark function.
 
 The parameters in the template compose the grammar of graphics, a formal system for building plots. The grammar of graphics is based on the insight that you can uniquely describe _any_ plot as a combination of a dataset, a mark, a set of encodings, a transformation, a position adjustment, and a faceting scheme.
 
@@ -969,7 +930,7 @@ You could use this method to build _any_ plot that you imagine. In other words, 
 
 ## Altair's grammar of graphics
 
-[Plotnine](https://plotnine.readthedocs.io/en/stable/index.html) is a Python implementation of [ggplot2 in R's](https://ggplot2.tidyverse.org/) grammar of graphics using [matplotlib](https://matplotlib.org/) as the plotting backend. Altair's implementation of the grammar of graphics, much like ggplot2 or plotnine at a high level.  However, it uses the [Vega-Lite](https://vega.github.io/vega-lite/) grammar of graphics constructs and plotting backend. 
+[Plotnine](https://plotnine.readthedocs.io/en/stable/index.html) is a Python implementation of [ggplot2 in R's](https://ggplot2.tidyverse.org/) grammar of graphics using [matplotlib](https://matplotlib.org/) as the plotting backend. Altair's implementation of the grammar of graphics is much like ggplot2 or plotnine at a high level.  However, it uses the [Vega-Lite](https://vega.github.io/vega-lite/) grammar of graphics constructs and plotting backend. 
 
 Below are some useful links that will help you dig deeper into the Altair implementation of the grammar of graphics.
 

@@ -52,7 +52,7 @@ Paths and directories are a little complicated because there are two basic style
 1.  Absolute paths (i.e. paths that point to the same place regardless of 
     your working directory) look different. In Windows they start with a drive
     letter (e.g. `C:`) or two backslashes (e.g. `\\servername`) and in
-    Mac/Linux they start with a slash "/" (e.g. `/users/hadley`). You should
+    Mac/Linux they start with a slash "/" (e.g. `/users/hathaway`). You should
     __never__ use absolute paths in your scripts, because they hinder sharing: 
     no one else will have exactly the same directory configuration as you.
 
@@ -65,7 +65,7 @@ Paths and directories are a little complicated because there are two basic style
 
 <!-- https://code.visualstudio.com/docs/python/data-science-tutorial -->
 
-Python experts keep all the files associated with a project together --- input data, R scripts, analytical results, figures. This is such a wise and common practice that VS Code has built-in support for this via __workspaces__.
+Python experts keep all the files associated with a project together --- input data, Python scripts, analytical results, figures. This is such a wise and common practice that VS Code has built-in support for this via __workspaces__.
 
 Let's make a workspace for you to use while you're working through the rest of this book. Click File > Open and select a newly created folder for your work. New Project, then:
 
@@ -97,14 +97,13 @@ url_path = "https://github.com/byuidatascience/data4python4ds/raw/master/data-ra
 
 diamonds = pd.read_csv(url_path)
 
-chart = (alt.Chart(diamonds).
-    mark_circle().
-    encode(
-        x = alt.X("carat", bin=True),
-        y = alt.Y("price", bin=True),
-        size = "count()"
-    )
-    )
+chart = (alt.Chart(diamonds)
+    .encode(
+      x = alt.X("carat", bin=True),
+      y = alt.Y("price", bin=True),
+      size = "count()"
+      )
+    .mark_circle())
     
 chart.save("diamonds.png")
 

@@ -22,17 +22,20 @@ import pandas as pd
 import numpy as np
 alt.data_transformers.enable('json')
 #> DataTransformerRegistry.enable('json')
-mpg = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv")
+url_1 = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/mpg/mpg.csv"
+url_2 = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/presidential/presidential.csv"
+url_3 = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv"
 
-presidential = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/presidential/presidential.csv")
+mpg = pd.read_csv(url_1)
+presidential = pd.read_csv(url_2)
+diamonds = pd.read_csv(url_3)
 
 presidential = presidential.assign(
-    start = lambda x: pd.to_datetime(x.start),
-    end = lambda x: pd.to_datetime(x.end),
-    id = lambda x: 33 + x.index
-)
+    start = pd.to_datetime(presidential.start),
+    end = pd.to_datetime(presidential.end),
+    id = 33 + presidential.index
+    )
 
-diamonds = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/diamonds/diamonds.csv")
 ```
 
 ## Label
@@ -41,10 +44,10 @@ The easiest place to start when turning an exploratory graphic into an expositor
 
 
 ```python
-chart = (alt.Chart(mpg, title = "Fuel efficiency generally decreases with engine size").
-    encode(alt.X('displ'), alt.Y('hwy'), 
-    color = 'class').
-    mark_circle())
+chart = (alt.Chart(mpg, 
+            title = "Fuel efficiency generally decreases with engine size")
+          .encode(alt.X('displ'), alt.Y('hwy'), color = 'class')
+          .mark_circle())
 
 chart.save("screenshots/altair_communicate_1.png")
 ```
@@ -61,17 +64,18 @@ Notice the use of the `.configure_<ELEMENT>()` option that allows us to modify t
 
 
 ```python
-chart = (alt.Chart(mpg).
-    encode(alt.X('displ'), alt.Y('hwy'), 
-    color = 'class').
-    mark_circle().
-    properties(
-        title = { 
-            "text":  "Fuel efficiency generally decreases with engine size",
-            "subtitle": "Two seaters (sports cars) are an exception because of their light weight"        }
-    ).configure_title(fontSize = 15, 
-    anchor = "start", subtitleFontSize = 11))
-
+chart = (alt.Chart(mpg)
+    .encode(alt.X('displ'), alt.Y('hwy'),color = 'class')
+    .mark_circle()
+    .properties(
+      title = {
+        "text":  "Fuel efficiency generally decreases with engine size",
+        "subtitle": "Two seaters (sports cars) are an exception because of their light weight"
+        })
+    .configure_title(
+      fontSize = 15, 
+      anchor = "start", 
+      subtitleFontSize = 11))
 
 chart.save("screenshots/altair_communicate_2.png")
 ```
@@ -83,13 +87,13 @@ You can also use `title` to replace the axis and legend titles. It's usually a g
 
 
 ```python
-chart = (alt.Chart(mpg).
-    encode(
-        alt.X('displ', title = "Engine displacement (L)"), 
-        alt.Y('hwy', title = "Highway fuel economy (mpg)"), 
-        color = alt.Color('class', title = "Car type")).
-    mark_circle())
-    
+chart = (alt.Chart(mpg)
+    .encode(
+      alt.X('displ', title = "Engine displacement (L)"), 
+      alt.Y('hwy', title = "Highway fuel economy (mpg)"), 
+      color = alt.Color('class', title = "Car type")
+      )
+    .mark_circle())
 
 chart.save("screenshots/altair_communicate_3.png")
 ```
@@ -115,24 +119,27 @@ There are two possible sources of labels. First, you might have a tibble that pr
 
 
 ```python
-best_in_class = mpg.assign(
-    hwy_min = lambda x: x.groupby('class').hwy.transform('max')
-).query('(hwy_min == hwy)').drop_duplicates('class', keep = 'first')
+best_in_class = (mpg
+    .assign(
+      hwy_min = lambda x: x.groupby('class').hwy.transform('max'))
+    .query('(hwy_min == hwy)')
+    .drop_duplicates('class', keep = 'first'))
 
-base = (alt.Chart(mpg).
-encode(
+base = (alt.Chart(mpg)
+  .encode(
     alt.X('displ'), 
     alt.Y('hwy'),
-    alt.Color('class')).
-    mark_circle())
+    alt.Color('class')
+    )
+  .mark_circle())
 
-
-text = (alt.Chart(best_in_class).
-    encode(
-    alt.X('displ'), 
-    alt.Y('hwy'),
-    text = 'model').
-    mark_text())
+text = (alt.Chart(best_in_class)
+    .encode(
+      alt.X('displ'), 
+      alt.Y('hwy'),
+      text = 'model'
+      )
+    .mark_text())
 
 chart = base + text
 
@@ -146,25 +153,25 @@ This is hard to read because the labels overlap with each other, and with the po
 
 
 ```python
-text = (alt.Chart(best_in_class).
-    encode(
+text = (alt.Chart(best_in_class)
+    .encode(
+      alt.X('displ'), 
+      alt.Y('hwy'),
+      text = 'model',
+      stroke = alt.value('black')
+      )
+    .mark_text(
+      align = 'left',
+      baseline = 'middle',
+      dy = -10))
+
+highlight = (alt.Chart(best_in_class)
+  .encode(
     alt.X('displ'), 
     alt.Y('hwy'),
-    text = 'model',
-    stroke = alt.value('black')).
-    mark_text(
-        align = 'left',
-        baseline = 'middle',
-        dy = -10
-    ))
-
-highlight = (alt.Chart(best_in_class).
-encode(
-    alt.X('displ'), 
-    alt.Y('hwy'),
-    color = alt.value("black")).
-    mark_point())
-
+    color = alt.value("black")
+    )
+  .mark_point())
 
 chart = highlight + base + text
 
@@ -185,15 +192,15 @@ Alternatively, you might just want to add a single label to the plot, but you'll
 label = pd.DataFrame({
     'displ': [mpg.displ.max()],
     'hwy': [mpg.hwy.max()],
-    'label': "Increasing engine size is related to decreasing fuel economy."
-})
+    'label': "Increasing engine size is related to decreasing fuel economy."})
 
-text_corner = (alt.Chart(label).
-    encode(
-    alt.X('displ'), 
-    alt.Y('hwy'),
-    text = 'label').
-    mark_text(align = 'right'))
+text_corner = (alt.Chart(label)
+    .encode(
+      alt.X('displ'), 
+      alt.Y('hwy'),
+      text = 'label'
+      )
+    .mark_text(align = 'right'))
 
 chart = base + text_corner
 
@@ -203,16 +210,16 @@ chart.save("screenshots/altair_communicate_6.png")
 
 \begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_6} \end{flushleft}
 
-Remember, in addition to `mark_text()`, you can use `mark_rule()` in Altair to help annotate your plot. Use `mark_rule` to add horizontal or vertical reference lines. I often make them thick (`size = 2`) and white (`colour = white`), and draw them underneath the primary data layer. That makes them easy to see, without drawing attention away from the data.
+Remember, in addition to `.mark_text()`, you can use `.mark_rule()` in Altair to help annotate your plot. Use `.mark_rule` to add horizontal or vertical reference lines. I often make them thick (`size = 2`) and white (`colour = white`), and draw them underneath the primary data layer. That makes them easy to see, without drawing attention away from the data.
 
 The only limit is your imagination (and your patience with positioning annotations to be aesthetically pleasing)!
 
 ### Exercises
 
-1.  Use `mark_text()` with infinite positions to place text at the
+1.  Use `.mark_text()` with infinite positions to place text at the
     four corners of the plot.
 
-1.  How do labels with `mark_text()` interact with faceting? How can you
+1.  How do labels with `.mark_text()` interact with faceting? How can you
     add a label to a single facet? How can you put a different label in
     each facet? (Hint: think about the underlying data.)
 
@@ -222,12 +229,13 @@ The third way you can make your plot better for communication is to adjust the s
 
 
 ```python
-(alt.Chart(mpg).
-  encode(
+(alt.Chart(mpg)
+  .encode(
     alt.X('displ'), 
     alt.Y('hwy'), 
-    alt.Color('class')).
-    mark_circle())
+    alt.Color('class')
+    )
+  .mark_circle())
 #> alt.Chart(...)
 ```
 
@@ -235,12 +243,13 @@ Altair automatically adds default scales behind the scenes:
 
 
 ```python
-(alt.Chart(mpg).
-  encode(
+(alt.Chart(mpg)
+  .encode(
     alt.X('displ', scale = alt.Scale(type = 'linear')), 
     alt.Y('hwy', scale = alt.Scale(type = 'linear')), 
-    alt.Color('class', scale = alt.Scale(type = 'linear'))).
-    mark_circle())
+    alt.Color('class', scale = alt.Scale(type = 'linear'))
+    )
+  .mark_circle())
 #> alt.Chart(...)
 ```
 
@@ -262,14 +271,14 @@ There are two primary arguments that affect the appearance of the ticks on the a
 
 
 ```python
-chart = (alt.Chart(mpg).
-  encode(
+chart = (alt.Chart(mpg)
+  .encode(
     alt.X('displ'), 
     alt.Y('hwy', axis = alt.Axis(
-        values = np.arange(15, 40, step = 5).tolist()),
-        scale = alt.Scale(zero = False )), 
-    alt.Color('class')).
-    mark_circle())
+            values = np.arange(15, 40, step = 5).tolist()),
+            scale = alt.Scale(zero = False )), 
+    alt.Color('class'))
+  .mark_circle())
     
 chart.save("screenshots/altair_communicate_7.png")
 ```
@@ -281,12 +290,13 @@ You can also set it to `False` to suppress the labels altogether. This is useful
 
 
 ```python
-chart = (alt.Chart(mpg).
-  encode(
+chart = (alt.Chart(mpg)
+  .encode(
     alt.X('displ', axis = alt.Axis(labels = False)), 
     alt.Y('hwy', axis = alt.Axis(labels = False)), 
-    alt.Color('class')).
-    mark_circle())
+    alt.Color('class')
+    )
+  .mark_circle())
     
 chart.save("screenshots/altair_communicate_8.png")
 ```
@@ -301,20 +311,21 @@ Another use of `breaks` is when you have relatively few data points and want to 
 
 ```python
 presidential_melt = presidential.melt(
-  ['name', 'party', 'id'], 
-  var_name = 'start_end', 
-  value_name = 'date')
+    ['name', 'party', 'id'], 
+    var_name = 'start_end', 
+    value_name = 'date')
 
-lines = (alt.Chart(presidential_melt).
-    encode(
+lines = (alt.Chart(presidential_melt)
+      .encode(
         alt.X('date', axis = alt.Axis(labelOverlap=False)), 
         alt.Y('id', scale = alt.Scale(zero = False)), 
-        detail = 'id').
-    mark_line())
+        detail = 'id'
+        )
+      .mark_line())
 
-points = (alt.Chart(presidential).
-    encode(
-        alt.X('start', 
+points = (alt.Chart(presidential)
+    .encode(
+      alt.X('start', 
             axis = alt.Axis(
                 values = presidential.start.to_list(),
                 format = "%y",
@@ -322,9 +333,9 @@ points = (alt.Chart(presidential).
                 labelOverlap = False,
                 labelSeparation = -1),
                 title = None),
-        alt.Y('id', scale = alt.Scale(zero = False)),
-    ).
-    mark_circle())
+      alt.Y('id', scale = alt.Scale(zero = False)),
+      )
+    .mark_circle())
 
 chart = lines + points
 
@@ -344,12 +355,13 @@ To control the overall position of the legend, you need to use `configure_legend
 
 
 ```python
-base = (alt.Chart(mpg).
-  encode(
+base = (alt.Chart(mpg)
+  .encode(
     alt.X("displ"), 
     alt.Y("hwy"), 
-    alt.Color("class")).
-    mark_circle())
+    alt.Color("class")
+    )
+  .mark_circle())
 
 ch1 = base.configure_legend(orient = 'left')
 ch2 = base.configure_legend(orient = 'top')
@@ -361,8 +373,6 @@ ch2.save("screenshots/altair_communicate_legend2.png")
 ch3.save("screenshots/altair_communicate_legend3.png")
 ch4.save("screenshots/altair_communicate_legend4.png")
 ```
-
-
 
 
 \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend1} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend2} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend3} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend4} 
@@ -390,21 +400,23 @@ It's very useful to plot transformations of your variable. For example, as we've
 
 ```python
 diamonds_log10 = diamonds.assign(
-    carat_log = lambda x: np.log10(x.carat),
-    price_log = lambda x: np.log10(x.price)
+    carat_log = np.log10(diamonds.carat),
+    price_log = np.log10(diamonds.price)
 )
 
-chart1 = (alt.Chart(diamonds_log10).
-      encode(
+chart1 = (alt.Chart(diamonds_log10)
+      .encode(
         alt.X('carat'), 
-        alt.Y('price')).
-        mark_circle())
+        alt.Y('price')
+        )
+      .mark_circle())
 
-chart2 = (alt.Chart(diamonds_log10).
-      encode(
+chart2 = (alt.Chart(diamonds_log10)
+      .encode(
         alt.X('carat_log', scale = alt.Scale(zero = False)), 
-        alt.Y('price_log', scale = alt.Scale(zero = False))).
-        mark_circle())
+        alt.Y('price_log', scale = alt.Scale(zero = False))
+        )
+      .mark_circle())
 
 chart1.save("screenshots/altair_communicate_11a.png")
 chart2.save("screenshots/altair_communicate_11b.png")
@@ -418,11 +430,12 @@ However, the disadvantage of this transformation is that the axes are now labell
 
 
 ```python
-chart = (alt.Chart(diamonds).
-          encode(
+chart = (alt.Chart(diamonds)
+          .encode(
             alt.X('carat', scale = alt.Scale(type = 'log')), 
-            alt.Y('price', scale = alt.Scale(type = 'log'))).
-          mark_circle())
+            alt.Y('price', scale = alt.Scale(type = 'log'))
+            )
+          .mark_circle())
 
 chart.save("screenshots/altair_communicate_12.png")
 ```
@@ -435,24 +448,24 @@ Another scale that is frequently customised is colour. The default categorical s
 
 
 ```python
-chart_default = (alt.Chart(mpg).
-    encode(
-        alt.X('displ'), 
-        alt.Y('hwy'), 
-        alt.Color('drv')).
-    mark_circle())
+chart_default = (alt.Chart(mpg)
+    .encode(
+      alt.X('displ'), 
+      alt.Y('hwy'), 
+      alt.Color('drv')
+      )
+    .mark_circle())
 
-
-chart_cb = (alt.Chart(mpg).
-    encode(
-        alt.X('displ'), 
-        alt.Y('hwy'), 
-        alt.Color('drv', scale = alt.Scale(scheme = 'set1'))).
-    mark_circle())
+chart_cb = (alt.Chart(mpg)
+    .encode(
+      alt.X('displ'), 
+      alt.Y('hwy'), 
+      alt.Color('drv', scale = alt.Scale(scheme = 'set1'))
+      )
+    .mark_circle())
 
 chart_default.save("screenshots/altair_communicate_13a.png")
 chart_cb.save("screenshots/altair_communicate_13b.png")
-    
 ```
 
 
@@ -465,13 +478,14 @@ __Note:__ `mark_circle()` does not take a `shape` encoding.  `mark_point()` uses
 
 
 ```python
-chart = (alt.Chart(mpg).
-    encode(
-        alt.X('displ'), 
-        alt.Y('hwy'), 
-        color = alt.Color('drv', scale = alt.Scale(scheme = 'set1')),
-        shape = alt.Shape('drv:N')).
-    mark_point(filled = True))
+chart = (alt.Chart(mpg)
+    .encode(
+      alt.X('displ'), 
+      alt.Y('hwy'), 
+      color = alt.Color('drv', scale = alt.Scale(scheme = 'set1')),
+      shape = alt.Shape('drv:N')
+      )
+    .mark_point(filled = True))
 
 chart.save("screenshots/altair_communicate_14.png")
 ```
@@ -483,26 +497,30 @@ When you have a predefined mapping between values and colours, use `domain` and 
 
 
 ```python
-lines = (alt.Chart(presidential_melt).
-    encode(
-        alt.X('date', axis = alt.Axis(labelOverlap=False)), 
-        alt.Y('id', scale = alt.Scale(zero = False)), 
-        detail = 'id',
-        color = alt.Color('party', 
-            scale = alt.Scale(
-                domain = ['Republican', 'Democratic'],
-                range = ['red', 'blue']))).
-    mark_line())
+lines = (alt.Chart(presidential_melt)
+    .encode(
+      alt.X('date', axis = alt.Axis(labelOverlap=False)), 
+      alt.Y('id', scale = alt.Scale(zero = False)), 
+      detail = 'id',
+      color = alt.Color('party', 
+        scale = alt.Scale(
+        domain = ['Republican', 'Democratic'],
+        range = ['red', 'blue'])
+        )
+      )
+    .mark_line())
 
-points = (alt.Chart(presidential).
-    encode(
-        alt.X('start'),
-        alt.Y('id', scale = alt.Scale(zero = False)),
-        color = alt.Color('party', 
-            scale = alt.Scale(
-                domain = ['Republican', 'Democratic'],
-                range = ['red', 'blue']))).
-    mark_circle())
+points = (alt.Chart(presidential)
+    .encode(
+      alt.X('start'),
+      alt.Y('id', scale = alt.Scale(zero = False)),
+      color = alt.Color('party', 
+      scale = alt.Scale(
+        domain = ['Republican', 'Democratic'],
+        range = ['red', 'blue'])
+        )
+      )
+    .mark_circle())
 
 chart = lines + points
 
@@ -521,24 +539,25 @@ The viridis schemes are a continuous analog of the categorical ColorBrewer scale
 ```python
 df = pd.DataFrame({
     'x': np.random.normal(0, 1, 10000),
-    'y': np.random.normal(0, 1, 10000)
-})
+    'y': np.random.normal(0, 1, 10000)})
 
-chart1 = (alt.Chart(df).
-    encode(
-        alt.X('x', bin = alt.Bin(extent=[-4, 4], step=0.25)), 
-        alt.Y('y', bin = alt.Bin(extent=[-4, 4], step=0.25)),
-        color = alt.Color('count()'),
-        size = alt.value(75)).
-    mark_square())
+chart1 = (alt.Chart(df)
+    .encode(
+      alt.X('x', bin = alt.Bin(extent=[-4, 4], step=0.25)), 
+      alt.Y('y', bin = alt.Bin(extent=[-4, 4], step=0.25)),
+      color = alt.Color('count()'),
+      size = alt.value(75)
+      )
+    .mark_square())
 
-chart2 = (alt.Chart(df).
-    encode(
-        alt.X('x', bin = alt.Bin(extent=[-4, 4], step=0.25)), 
-        alt.Y('y', bin = alt.Bin(extent=[-4, 4], step=0.25)),
-        color = alt.Color('count()', scale = alt.Scale(scheme = 'viridis')),
-        size = alt.value(75)).
-    mark_square())
+chart2 = (alt.Chart(df)
+    .encode(
+      alt.X('x', bin = alt.Bin(extent=[-4, 4], step=0.25)), 
+      alt.Y('y', bin = alt.Bin(extent=[-4, 4], step=0.25)),
+      color = alt.Color('count()', scale = alt.Scale(scheme = 'viridis')),
+      size = alt.value(75)
+      )
+    .mark_square())
 
 chart1.save("screenshots/altair_communicate_16a.png")
 chart2.save("screenshots/altair_communicate_16b.png")
@@ -566,23 +585,25 @@ There are two ways to control the plot limits:
 1. Adjusting what data are plotted
 1. Setting the limits in each scale
 
-To zoom in on a region of the plot, :
+To zoom in on a region of the plot:
 
 
 ```python
-chart1 = (alt.Chart(mpg).
-    encode(
-        alt.X('displ', scale = alt.Scale(domain = (5, 7))), 
-        alt.Y('hwy', scale = alt.Scale(domain = (10, 30))), 
-        alt.Color('drv')).
-    mark_circle())
+chart1 = (alt.Chart(mpg)
+    .encode(
+      alt.X('displ', scale = alt.Scale(domain = (5, 7))), 
+      alt.Y('hwy', scale = alt.Scale(domain = (10, 30))), 
+      alt.Color('drv')
+      )
+    .mark_circle())
 
-chart2 = (alt.Chart(mpg).
-    encode(
-        alt.X('displ', scale = alt.Scale(domain = (5, 7))), 
-        alt.Y('hwy', scale = alt.Scale(domain = (10, 30))), 
-        alt.Color('drv')).
-    mark_circle(clip = True))
+chart2 = (alt.Chart(mpg)
+    .encode(
+      alt.X('displ', scale = alt.Scale(domain = (5, 7))), 
+      alt.Y('hwy', scale = alt.Scale(domain = (10, 30))), 
+      alt.Color('drv')
+      )
+    .mark_circle(clip = True))
 
 chart1.save("screenshots/altair_communicate_17a.png")
 chart2.save("screenshots/altair_communicate_17b.png")
@@ -601,19 +622,22 @@ __Note:__ Certain column names can't be used in `query()` as they are reserved w
 suv = mpg.rename(columns = {"class":"class1"}).query('class1 == "suv"')
 compact = mpg.rename(columns = {"class":"class1"}).query('class1 == "compact"')
 
-chart1 = (alt.Chart(suv).
-    encode(
-        alt.X('displ', scale = alt.Scale(zero = False)), 
-        alt.Y('hwy', scale = alt.Scale(zero = False)), 
-        alt.Color('drv')).
-    mark_circle())
+chart1 = (alt.Chart(suv)
+    .encode(
+      alt.X('displ', scale = alt.Scale(zero = False)), 
+      alt.Y('hwy', scale = alt.Scale(zero = False)), 
+      alt.Color('drv')
+      )
+    .mark_circle())
 
-chart2 = (alt.Chart(compact).
-    encode(
-        alt.X('displ', scale = alt.Scale(zero = False)), 
-        alt.Y('hwy', scale = alt.Scale(zero = False)), 
-        alt.Color('drv')).
-    mark_circle())
+chart2 = (alt.Chart(compact)
+    .encode(
+      alt.X('displ', scale = alt.Scale(zero = False)), 
+      alt.Y('hwy', scale = alt.Scale(zero = False)), 
+      alt.Color('drv')
+      )
+    .mark_circle())
+    
 chart1.save("screenshots/altair_communicate_18a.png")
 chart2.save("screenshots/altair_communicate_18b.png")
 ```
@@ -622,28 +646,30 @@ chart2.save("screenshots/altair_communicate_18b.png")
 
 \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_18a} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_18b} 
 
-One way to overcome this problem is to share scales across multiple plots using `resolve_scale()`.
+One way to overcome this problem is to share scales across multiple plots using `.resolve_scale()`.
 
 
 ```python
-suv_chart = (alt.Chart(suv).
-    encode(
-        alt.X('displ', scale = alt.Scale(zero = False)), 
-        alt.Y('hwy', scale = alt.Scale(zero = False)), 
-        alt.Color('drv')).
-    mark_circle())
+suv_chart = (alt.Chart(suv)
+    .encode(
+      alt.X('displ', scale = alt.Scale(zero = False)), 
+      alt.Y('hwy', scale = alt.Scale(zero = False)), 
+      alt.Color('drv')
+      )
+    .mark_circle())
 
-compact_chart = (alt.Chart(compact).
-    encode(
-        alt.X('displ', scale = alt.Scale(zero = False)), 
-        alt.Y('hwy', scale = alt.Scale(zero = False)), 
-        alt.Color('drv')).
-    mark_circle())
+compact_chart = (alt.Chart(compact)
+    .encode(
+      alt.X('displ', scale = alt.Scale(zero = False)), 
+      alt.Y('hwy', scale = alt.Scale(zero = False)), 
+      alt.Color('drv')
+      )
+    .mark_circle())
 
 chart = alt.hconcat(
     suv_chart,
     compact_chart
-).resolve_scale(y = 'shared', x = 'shared', color = 'shared')
+    ).resolve_scale(y = 'shared', x = 'shared', color = 'shared')
 
 chart.save("screenshots/altair_communicate_19.png")
 ```
@@ -692,28 +718,30 @@ To get your plots out of Python and into your final write-up use `<CHART>.save()
 
 
 ```python
-(alt.Chart(df).
-    encode(
-        alt.X('letter'), 
-        alt.Y('count'),
-        color = alt.value('black')).
-    mark_bar().
-    properties(width = 425, height = 400).
-    save('my-plot.html'))
+(alt.Chart(df)
+    .encode(
+      alt.X('letter'), 
+      alt.Y('count'),
+      color = alt.value('black')
+      )
+    .mark_bar()
+    .properties(width = 425, height = 400)
+    .save('my-plot.html'))
 ```
 
 You can save an Altair chart object as a PNG, SVG, or PDF image. You will need additional extensions to run the javascript code necessary to interpret the Vega-Lite specification and output it in the form of an image. Altair can do this via the `altair_saver` package. You will need to use `pip install altair_saver` to install the package.
 
 
 ```python
-(alt.Chart(df).
-    encode(
-        alt.X('letter'), 
-        alt.Y('count'),
-        color = alt.value('black')).
-    mark_bar().
-    properties(width = 425, height = 400).
-    save('my-plot.png'))
+(alt.Chart(df)
+  .encode(
+    alt.X('letter'), 
+    alt.Y('count'),
+    color = alt.value('black')
+    )
+  .mark_bar()
+  .properties(width = 425, height = 400)
+  .save('my-plot.png'))
 ```
 
 ## Learning more

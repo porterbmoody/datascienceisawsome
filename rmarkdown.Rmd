@@ -17,7 +17,9 @@ It contains two important types of content:
 1.  __Chunks__ of code surrounded by ```` ``` ````.
 1.  Text mixed with simple text formatting like `# heading` and `_italics_`.
 
-When you open a `.md` in VS code, you see a text file where code and output can be interleaved. To produce a complete pdf report containing the text, formatted code chunks, and charts you can install the [Markdown PDF extension](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) for VS Code (note their instructions about installation if you run into any errors). Once installed, you can create a pdf, html or png report by using the VS code command pallete hotkey `Ctrl + Shift + P` (`Cmd + Shift + P` for Mac) and then search using the keyword `export`. This will create a report in the same folder of the `.md` file with the same file name and the chosen export extension.
+When you open a `.md` in VS code, you see a text file where code and output can be interleaved. To produce a complete pdf report containing the text, formatted code chunks, and charts you can install the [Markdown Prieveiw Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) for VS Code (you can read [their manual](https://shd101wyy.github.io/markdown-preview-enhanced/#/)). Once installed, you can view an html rendedered preview in VS code by using the hot key `cmd-k v or ctrl-k v`. 
+
+Within the preview window you can right click to see an export menu and use the `Chrome(Puppeteer)` menu to find the export options. This will create a report in the same folder of the `.md` file with the same file name and the chosen export extension.
 
 ```{r, echo = FALSE, out.width = "75%"}
 knitr::include_graphics("markdown/diamond-sizes-report.png")
