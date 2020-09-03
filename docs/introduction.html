@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="explore-intro.html"/>
-<script src="libs/header-attrs-2.1.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/vega-5.9.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
@@ -742,7 +743,7 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 </div>
 <div id="package-management-pip" class="section level3" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> Package Management (pip)</h3>
-<p>You can install a standard set of data science python packages using <a href="https://pip.pypa.io/en/stable/user_guide/">pip</a> using your OS command line tools (Mac <code>Terminal</code>, Windos - <code>Command Prompt</code>). However, there are some complications using pip on computers with multiple versions of Python.</p>
+<p>You can install a standard set of data science python packages using <a href="https://pip.pypa.io/en/stable/user_guide/">pip</a> with your OS command line tools (Mac <code>Terminal</code>, Windos - <code>Command Prompt</code> <strong>NOT IN A PYTHON INTERACTIVE ENVIRONMENT</strong>). However, there are some complications using pip on computers with multiple versions of Python.</p>
 <ul>
 <li><strong>pip</strong>: If your path environment is correct, then a standard <code>pip install [package]</code> will work. This is how most packages direct users to install Python packages.</li>
 <li><strong>pip3</strong>: If your OS has Python 2 and Python 3 installed, you may need to use <code>pip3 install [package]</code>.</li>
@@ -839,20 +840,14 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 <p>Notice that the visualization space in Python does not have a force like ggplot2. Chris Moffitt provided an <a href="https://pbpython.com/python-vis-flowchart.html">efficient visualization tools diagram</a> to help Python users with this decision.</p>
 <p>The following packages will give us a broad data science toolset in Python.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="introduction.html#cb5-1"></a><span class="ex">pip</span> install numpy pandas xlrd matplotlib</span>
-<span id="cb5-2"><a href="introduction.html#cb5-2"></a><span class="ex">pip</span> install seaborn plotnine altair vega_datasets</span>
+<span id="cb5-2"><a href="introduction.html#cb5-2"></a><span class="ex">pip</span> install seaborn plotnine altair vega_datasets altair_saver</span>
 <span id="cb5-3"><a href="introduction.html#cb5-3"></a><span class="ex">pip</span> install statsmodels scikit-learn</span>
 <span id="cb5-4"><a href="introduction.html#cb5-4"></a><span class="ex">pip</span> install jupyter</span></code></pre></div>
 <p>On your computer, type that above of code in the command line. The Python package manager pip will download the packages from <a href="https://pypi.org/">PyPi</a> and install them on to your computer. If you have problems installing, make sure that you are connected to the internet.</p>
 <p>You will not be able to use the functions and objects in a package until you load it with <code>import</code>. It is common in Python for each package to have a standard abbreviated name. For example, numpy is imported as ‘np’, and pandas is imported as ‘pd’ in the code chunk below.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="introduction.html#cb6-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href="introduction.html#cb6-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-3"><a href="introduction.html#cb6-3"></a><span class="im">import</span> string</span>
-<span id="cb6-4"><a href="introduction.html#cb6-4"></a><span class="im">import</span> re</span>
-<span id="cb6-5"><a href="introduction.html#cb6-5"></a><span class="im">import</span> matplotlib</span>
-<span id="cb6-6"><a href="introduction.html#cb6-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-7"><a href="introduction.html#cb6-7"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb6-8"><a href="introduction.html#cb6-8"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb6-9"><a href="introduction.html#cb6-9"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="introduction.html#cb6-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="introduction.html#cb6-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb6-3"><a href="introduction.html#cb6-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <p>There are many other excellent packages that are not included here.</p>
 </div>
 </div>
@@ -910,7 +905,7 @@ easier it is to fix.</p></li>
 </div>
 <div id="acknowledgements" class="section level2" number="1.8">
 <h2><span class="header-section-number">1.8</span> Acknowledgements</h2>
-<p>The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code. You can see the original <a href="https://r4ds.had.co.nz/introduction.html#acknowledgements">acknowledgements here</a>.</p>
+<p>The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code with help from Katie Larson. You can see the original <a href="https://r4ds.had.co.nz/introduction.html#acknowledgements">acknowledgements here</a>.</p>
 </div>
 <div id="colophon" class="section level2" number="1.9">
 <h2><span class="header-section-number">1.9</span> Colophon</h2>

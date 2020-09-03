@@ -155,7 +155,7 @@ print(msg)
 
 ### Package Management (pip)
 
-You can install a standard set of data science python packages using [pip](https://pip.pypa.io/en/stable/user_guide/) using your OS command line tools (Mac `Terminal`, Windos - `Command Prompt`). However, there are some complications using pip on computers with multiple versions of Python.  
+You can install a standard set of data science python packages using [pip](https://pip.pypa.io/en/stable/user_guide/) with your OS command line tools (Mac `Terminal`, Windos - `Command Prompt` **NOT IN A PYTHON INTERACTIVE ENVIRONMENT**). However, there are some complications using pip on computers with multiple versions of Python.  
 
 * **pip**: If your path environment is correct, then a standard `pip install [package]` will work.  This is how most packages direct users to install Python packages.
 * **pip3**: If your OS has Python 2 and Python 3 installed, you may need to use `pip3 install [package]`.
@@ -225,7 +225,7 @@ The following packages will give us a broad data science toolset in Python.
 
 ```bash
 pip install numpy pandas xlrd matplotlib
-pip install seaborn plotnine altair vega_datasets
+pip install seaborn plotnine altair vega_datasets altair_saver
 pip install statsmodels scikit-learn
 pip install jupyter
 ```
@@ -236,16 +236,9 @@ You will not be able to use the functions and objects in a package until you loa
 
 
 ```python
-import numpy as np
 import pandas as pd
-import string
-import re
-import matplotlib
-import matplotlib.pyplot as plt
-import seaborn as sns
-from plotnine import *
 import altair as alt
-
+import numpy as np
 ```
 
 There are many other excellent packages that are not included here. 
@@ -324,7 +317,7 @@ The data used in [R for Data Science](https://r4ds.had.co.nz/) is generally with
 
 ## Acknowledgements
 
-The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code.  You can see the original [acknowledgements here](https://r4ds.had.co.nz/introduction.html#acknowledgements). 
+The text of this book is largely the product of Hadley and Garrett. J. Hathaway has ported the code and descriptions for using VS Code with help from Katie Larson.  You can see the original [acknowledgements here](https://r4ds.had.co.nz/introduction.html#acknowledgements). 
 
 ## Colophon
 
