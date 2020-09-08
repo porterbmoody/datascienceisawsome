@@ -78,8 +78,8 @@ flights.info()
 In this chapter you are going to learn five key pandas functions or object methods. Object methods are things the objects can perform. For example, pandas data frames know how to tell you their shape, the pandas object knows how to concatenate two data frames together. The way we tell an object we want it to do something is with the ‘dot operator’. We will refer to these object operators as functions or methods. Below are the five methods that allow you to solve the vast majority of your data manipulation challenges:
 
 * Pick observations by their values (`query()`).
-* Reorder the rows (`sort()`).
-* Pick variables by their names (`select()`).
+* Reorder the rows (`sort_values()`).
+* Pick variables by their names (`filter()`).
 * Create new variables with functions of existing variables (`assign()`).
 * Collapse many values down to a single summary (`groupby()`).
 
@@ -296,7 +296,9 @@ df.sort_values('x', ascending = False)
 
 ## Select columns with `filter()` or `loc[]` {#select}
 
-It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `.fliter()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables.
+It's not uncommon to get datasets with hundreds or even thousands of variables. In this case, the first challenge is often narrowing in on the variables you're actually interested in. `.filter()` allows you to rapidly zoom in on a useful subset using operations based on the names of the variables.
+
+Additionaly, `.loc[]` is often used to select columns by many user of pandas. You can read more about the `.loc[]` method in the [pandas documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.loc.html#pandas.DataFrame.loc)
 
 `.filter()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea:
 
@@ -784,7 +786,7 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     (not_cancelled
       .groupby(['year', 'month','day'])
       .agg(
-        first_dep = ('dep_time', lambda x: list(x)[1]),
+        first_dep = ('dep_time', lambda x: list(x)[0]),
         last_dep = ('dep_time', lambda x: list(x)[-1])
         ))
     ```

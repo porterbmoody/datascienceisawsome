@@ -179,7 +179,7 @@ Imagine you want to add the full airline name to the `flights2` data. You can co
 
 ```{python}
 (flights2.
-  merge(airlines, on = 'carrier').
+  merge(airlines, on = 'carrier', how = 'left').
   drop(columns = ['origin', 'dest']))
 ```
 
@@ -329,7 +329,7 @@ So far, the pairs of tables have always been joined by a single variable, and th
   * A character vector, `on = "x"`. This is like a natural join, but uses only
     some of the common variables. For example, `flights` and `planes` have
     `year` variables, but they mean different things so we only want to join by
-    `tailnum`.
+    `tailnum`. If you have two variables then you can use `on = ["x", "y"]`
 
     ```{python}
     flights2.merge(planes, on = 'tailnum')
@@ -339,7 +339,7 @@ So far, the pairs of tables have always been joined by a single variable, and th
     but are not constrained to be equal) are disambiguated in the output with
     a suffix.
 
-  * A named character vector: `by = c("a" = "b")`. This will
+  * A character vector: `left_on = "a"` and `right_on = "b"``. This will
     match variable `a` in table `x` to variable `b` in table `y`. The
     variables from `x` will be used in the output.
 

@@ -800,20 +800,20 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 <p>(Remember, when you’re in VS Code, you can also use the data viewer to avoid this problem.)</p>
 <p>Imagine you want to add the full airline name to the <code>flights2</code> data. You can combine the <code>airlines</code> and <code>flights2</code> data frames with <code>merge()</code> using <code>how = 'left'</code>:</p>
 <div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="relational-data.html#cb221-1"></a>(flights2.</span>
-<span id="cb221-2"><a href="relational-data.html#cb221-2"></a>  merge(airlines, on <span class="op">=</span> <span class="st">&#39;carrier&#39;</span>).</span>
+<span id="cb221-2"><a href="relational-data.html#cb221-2"></a>  merge(airlines, on <span class="op">=</span> <span class="st">&#39;carrier&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>).</span>
 <span id="cb221-3"><a href="relational-data.html#cb221-3"></a>  drop(columns <span class="op">=</span> [<span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>]))</span>
-<span id="cb221-4"><a href="relational-data.html#cb221-4"></a><span class="co">#&gt;         year  month  day  hour tailnum carrier                   name</span></span>
-<span id="cb221-5"><a href="relational-data.html#cb221-5"></a><span class="co">#&gt; 0       2013      1    1     5  N14228      UA  United Air Lines Inc.</span></span>
-<span id="cb221-6"><a href="relational-data.html#cb221-6"></a><span class="co">#&gt; 1       2013      1    1     5  N24211      UA  United Air Lines Inc.</span></span>
-<span id="cb221-7"><a href="relational-data.html#cb221-7"></a><span class="co">#&gt; 2       2013      1    1     5  N39463      UA  United Air Lines Inc.</span></span>
-<span id="cb221-8"><a href="relational-data.html#cb221-8"></a><span class="co">#&gt; 3       2013      1    1     6  N29129      UA  United Air Lines Inc.</span></span>
-<span id="cb221-9"><a href="relational-data.html#cb221-9"></a><span class="co">#&gt; 4       2013      1    1     6  N53441      UA  United Air Lines Inc.</span></span>
-<span id="cb221-10"><a href="relational-data.html#cb221-10"></a><span class="co">#&gt; ...      ...    ...  ...   ...     ...     ...                    ...</span></span>
-<span id="cb221-11"><a href="relational-data.html#cb221-11"></a><span class="co">#&gt; 336771  2013      9   19    18  N760SK      OO  SkyWest Airlines Inc.</span></span>
-<span id="cb221-12"><a href="relational-data.html#cb221-12"></a><span class="co">#&gt; 336772  2013      9   20    18  N766SK      OO  SkyWest Airlines Inc.</span></span>
-<span id="cb221-13"><a href="relational-data.html#cb221-13"></a><span class="co">#&gt; 336773  2013      9   22    18  N772SK      OO  SkyWest Airlines Inc.</span></span>
-<span id="cb221-14"><a href="relational-data.html#cb221-14"></a><span class="co">#&gt; 336774  2013      9   23    18  N776SK      OO  SkyWest Airlines Inc.</span></span>
-<span id="cb221-15"><a href="relational-data.html#cb221-15"></a><span class="co">#&gt; 336775  2013      9   24    18  N785SK      OO  SkyWest Airlines Inc.</span></span>
+<span id="cb221-4"><a href="relational-data.html#cb221-4"></a><span class="co">#&gt;         year  month  day  hour tailnum carrier                    name</span></span>
+<span id="cb221-5"><a href="relational-data.html#cb221-5"></a><span class="co">#&gt; 0       2013      1    1     5  N14228      UA   United Air Lines Inc.</span></span>
+<span id="cb221-6"><a href="relational-data.html#cb221-6"></a><span class="co">#&gt; 1       2013      1    1     5  N24211      UA   United Air Lines Inc.</span></span>
+<span id="cb221-7"><a href="relational-data.html#cb221-7"></a><span class="co">#&gt; 2       2013      1    1     5  N619AA      AA  American Airlines Inc.</span></span>
+<span id="cb221-8"><a href="relational-data.html#cb221-8"></a><span class="co">#&gt; 3       2013      1    1     5  N804JB      B6         JetBlue Airways</span></span>
+<span id="cb221-9"><a href="relational-data.html#cb221-9"></a><span class="co">#&gt; 4       2013      1    1     6  N668DN      DL    Delta Air Lines Inc.</span></span>
+<span id="cb221-10"><a href="relational-data.html#cb221-10"></a><span class="co">#&gt; ...      ...    ...  ...   ...     ...     ...                     ...</span></span>
+<span id="cb221-11"><a href="relational-data.html#cb221-11"></a><span class="co">#&gt; 336771  2013      9   30    14     NaN      9E       Endeavor Air Inc.</span></span>
+<span id="cb221-12"><a href="relational-data.html#cb221-12"></a><span class="co">#&gt; 336772  2013      9   30    22     NaN      9E       Endeavor Air Inc.</span></span>
+<span id="cb221-13"><a href="relational-data.html#cb221-13"></a><span class="co">#&gt; 336773  2013      9   30    12  N535MQ      MQ               Envoy Air</span></span>
+<span id="cb221-14"><a href="relational-data.html#cb221-14"></a><span class="co">#&gt; 336774  2013      9   30    11  N511MQ      MQ               Envoy Air</span></span>
+<span id="cb221-15"><a href="relational-data.html#cb221-15"></a><span class="co">#&gt; 336775  2013      9   30     8  N839MQ      MQ               Envoy Air</span></span>
 <span id="cb221-16"><a href="relational-data.html#cb221-16"></a><span class="co">#&gt; </span></span>
 <span id="cb221-17"><a href="relational-data.html#cb221-17"></a><span class="co">#&gt; [336776 rows x 7 columns]</span></span></code></pre></div>
 <p>The result of joining airlines to flights2 is an additional variable: <code>name</code>. The following sections explain, in detail, how mutating joins work. You’ll start by learning a useful visual representation of joins. We’ll then use that to explain the four mutating join functions: the inner join, and the three outer joins. When working with real data, keys don’t always uniquely identify observations, so next we’ll talk about what happens when there isn’t a unique match. Finally, you’ll learn how to tell dplyr which variables are the keys for a given join.</p>
@@ -937,7 +937,7 @@ the flights and weather tables match on their common variables:
 <li><p>A character vector, <code>on = "x"</code>. This is like a natural join, but uses only
 some of the common variables. For example, <code>flights</code> and <code>planes</code> have
 <code>year</code> variables, but they mean different things so we only want to join by
-<code>tailnum</code>.</p>
+<code>tailnum</code>. If you have two variables then you can use <code>on = ["x", "y"]</code></p>
 <div class="sourceCode" id="cb227"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="relational-data.html#cb227-1"></a>flights2.merge(planes, on <span class="op">=</span> <span class="st">&#39;tailnum&#39;</span>)</span>
 <span id="cb227-2"><a href="relational-data.html#cb227-2"></a><span class="co">#&gt;         year_x  month  day  hour  ... engines seats speed     engine</span></span>
 <span id="cb227-3"><a href="relational-data.html#cb227-3"></a><span class="co">#&gt; 0         2013      1    1     5  ...       2   149   NaN  Turbo-fan</span></span>
@@ -956,9 +956,7 @@ some of the common variables. For example, <code>flights</code> and <code>planes
 <p>Note that the <code>year</code> variables (which appear in both input data frames,
 but are not constrained to be equal) are disambiguated in the output with
 a suffix.</p></li>
-<li><p>A named character vector: <code>by = c("a" = "b")</code>. This will
-match variable <code>a</code> in table <code>x</code> to variable <code>b</code> in table <code>y</code>. The
-variables from <code>x</code> will be used in the output.</p>
+<li><p>A character vector: <code>left_on = "a"</code> and <code>right_on = "b"``. This will     match variable</code>a<code>in table</code>x<code>to variable</code>b<code>in table</code>y<code>. The     variables from</code>x` will be used in the output.</p>
 <p>For example, if we want to draw a map we need to combine the flights data
 with the airports data which contains the location (<code>lat</code> and <code>lon</code>) of
 each airport. Each flight has an origin and destination <code>airport</code>, so we

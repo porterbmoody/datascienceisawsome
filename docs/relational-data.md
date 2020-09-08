@@ -239,20 +239,20 @@ Imagine you want to add the full airline name to the `flights2` data. You can co
 
 ```python
 (flights2.
-  merge(airlines, on = 'carrier').
+  merge(airlines, on = 'carrier', how = 'left').
   drop(columns = ['origin', 'dest']))
-#>         year  month  day  hour tailnum carrier                   name
-#> 0       2013      1    1     5  N14228      UA  United Air Lines Inc.
-#> 1       2013      1    1     5  N24211      UA  United Air Lines Inc.
-#> 2       2013      1    1     5  N39463      UA  United Air Lines Inc.
-#> 3       2013      1    1     6  N29129      UA  United Air Lines Inc.
-#> 4       2013      1    1     6  N53441      UA  United Air Lines Inc.
-#> ...      ...    ...  ...   ...     ...     ...                    ...
-#> 336771  2013      9   19    18  N760SK      OO  SkyWest Airlines Inc.
-#> 336772  2013      9   20    18  N766SK      OO  SkyWest Airlines Inc.
-#> 336773  2013      9   22    18  N772SK      OO  SkyWest Airlines Inc.
-#> 336774  2013      9   23    18  N776SK      OO  SkyWest Airlines Inc.
-#> 336775  2013      9   24    18  N785SK      OO  SkyWest Airlines Inc.
+#>         year  month  day  hour tailnum carrier                    name
+#> 0       2013      1    1     5  N14228      UA   United Air Lines Inc.
+#> 1       2013      1    1     5  N24211      UA   United Air Lines Inc.
+#> 2       2013      1    1     5  N619AA      AA  American Airlines Inc.
+#> 3       2013      1    1     5  N804JB      B6         JetBlue Airways
+#> 4       2013      1    1     6  N668DN      DL    Delta Air Lines Inc.
+#> ...      ...    ...  ...   ...     ...     ...                     ...
+#> 336771  2013      9   30    14     NaN      9E       Endeavor Air Inc.
+#> 336772  2013      9   30    22     NaN      9E       Endeavor Air Inc.
+#> 336773  2013      9   30    12  N535MQ      MQ               Envoy Air
+#> 336774  2013      9   30    11  N511MQ      MQ               Envoy Air
+#> 336775  2013      9   30     8  N839MQ      MQ               Envoy Air
 #> 
 #> [336776 rows x 7 columns]
 ```
@@ -427,7 +427,7 @@ So far, the pairs of tables have always been joined by a single variable, and th
   * A character vector, `on = "x"`. This is like a natural join, but uses only
     some of the common variables. For example, `flights` and `planes` have
     `year` variables, but they mean different things so we only want to join by
-    `tailnum`.
+    `tailnum`. If you have two variables then you can use `on = ["x", "y"]`
 
     
     ```python
@@ -452,7 +452,7 @@ So far, the pairs of tables have always been joined by a single variable, and th
     but are not constrained to be equal) are disambiguated in the output with
     a suffix.
 
-  * A named character vector: `by = c("a" = "b")`. This will
+  * A character vector: `left_on = "a"` and `right_on = "b"``. This will
     match variable `a` in table `x` to variable `b` in table `y`. The
     variables from `x` will be used in the output.
 
