@@ -100,7 +100,24 @@ There are four things you need to run the code in this book: Python, VS Code, a 
 
 ### Python 
 
-To download Python, go to [python.org](https://www.python.org/) and [download](https://www.python.org/downloads/) Python for your OS. A new major version of Python is released every few years, and there are 5-12 minor releases each year. 
+To download Python, go to [python.org](https://www.python.org/) and [download the 64 bit version](https://www.python.org/downloads/) Python for your OS. A new major version of Python is released every few years, and there are 5-12 minor releases each year. 
+
+#### Windows
+
+- Make sure to check the box that says, "Add Python ## to PATH"
+
+![](images/Windows_add_Python_to_Path.png)
+
+
+- Make sure to click on the "Disable path length limit"
+
+![](images/Windows_Python_disable_path_limits.png)
+
+#### Mac
+
+- Make sure to `Install Certificates` so that we can read files from the web.  You will see the below window at the last step of installation.
+
+![](images/13-install-python-3-9-on-mac-success.png)
 
 ### Visual Studio Code (VS Code)
 

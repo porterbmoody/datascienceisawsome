@@ -131,7 +131,7 @@ The rest of this chapter will show you how to complete and extend this template 
 
 ### Exercises
 
-1.  Run `Chart(mpg).mark_points()`. What do you see?
+1.  Run `Chart(mpg).mark_point()`. What do you see?
 
 1.  How many rows are in `mpg`? How many columns?
 
