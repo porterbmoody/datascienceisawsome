@@ -72,27 +72,6 @@ pd.DataFrame(np.array(
 
 Data frames have a refined print method that shows only the first and last 5 rows, and all the columns that fit on screen. This makes it much easier to work with large data. 
 
-
-```r
-tibble(
-  a = lubridate::now() + runif(1e3) * 86400,
-  b = lubridate::today() + runif(1e3) * 30,
-  c = 1:1e3,
-  d = runif(1e3),
-  e = sample(letters, 1e3, replace = TRUE)
-)
-#> # A tibble: 1,000 x 5
-#>   a                   b              c     d e    
-#>   <dttm>              <date>     <int> <dbl> <chr>
-#> 1 2020-06-25 19:24:08 2020-07-02     1 0.368 n    
-#> 2 2020-06-26 13:29:17 2020-07-07     2 0.612 l    
-#> 3 2020-06-26 07:52:56 2020-07-17     3 0.415 p    
-#> 4 2020-06-25 21:14:13 2020-07-16     4 0.212 m    
-#> 5 2020-06-25 17:38:30 2020-07-13     5 0.733 i    
-#> 6 2020-06-26 04:39:27 2020-07-09     6 0.460 n    
-#> # ... with 994 more rows
-```
-
 Data frames are designed so that you don't accidentally overwhelm your console when you print large data frames. But sometimes you need more output than the default display. There are a few options that can help.
 
 First, you can return the data frame using  `.head()` on the data frame and control the number of rows (`n`) of the display. In the interactive Python viewer in VS Code you can scroll to see the other columns.
@@ -125,32 +104,32 @@ df = pd.DataFrame({
 df[["x"]]
 # Extract by name as array
 #>           x
-#> 0  0.614754
-#> 1  0.972031
-#> 2  0.848065
-#> 3  0.843117
-#> 4  0.485332
+#> 0  0.301687
+#> 1  0.378155
+#> 2  0.550999
+#> 3  0.332235
+#> 4  0.826612
 df["x"]
 # Extract by position
-#> 0    0.614754
-#> 1    0.972031
-#> 2    0.848065
-#> 3    0.843117
-#> 4    0.485332
+#> 0    0.301687
+#> 1    0.378155
+#> 2    0.550999
+#> 3    0.332235
+#> 4    0.826612
 #> Name: x, dtype: float64
 df.iloc[:, 1]
-#> 0   -1.394471
-#> 1   -0.780052
-#> 2    0.990076
-#> 3   -0.219665
-#> 4    0.337708
+#> 0   -0.342634
+#> 1   -0.834539
+#> 2    1.434735
+#> 3   -0.496875
+#> 4    0.576148
 #> Name: y, dtype: float64
 df[df.columns[1]]
-#> 0   -1.394471
-#> 1   -0.780052
-#> 2    0.990076
-#> 3   -0.219665
-#> 4    0.337708
+#> 0   -0.342634
+#> 1   -0.834539
+#> 2    1.434735
+#> 3   -0.496875
+#> 4    0.576148
 #> Name: y, dtype: float64
 ```
 

@@ -33,7 +33,7 @@
   
 <link rel="prev" href="communicate-intro.html"/>
 <link rel="next" href="graphics-for-communication.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +52,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/vega-5.9.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
@@ -762,11 +764,11 @@ jobs/degrees. Highlight the year in bold.</p></li>
 |  3 |    0.29 | Premium | I       | VS2       |
 |  4 |    0.31 | Good    | J       | SI2       |</code></pre>
 <p>When displaying tables from your pandas dataFrames, you can use <code>.to_markdown()</code>. The above Markdown table was generated using the following:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb339-1"><a href="markdown.html#cb339-1"></a><span class="bu">print</span>(smaller.</span>
-<span id="cb339-2"><a href="markdown.html#cb339-2"></a>    <span class="bu">filter</span>([<span class="st">&#39;carat&#39;</span>, <span class="st">&#39;cut&#39;</span>, <span class="st">&#39;color&#39;</span>, <span class="st">&#39;clarity&#39;</span>]).</span>
-<span id="cb339-3"><a href="markdown.html#cb339-3"></a>    rename_axis(<span class="va">None</span>).</span>
-<span id="cb339-4"><a href="markdown.html#cb339-4"></a>    head().</span>
-<span id="cb339-5"><a href="markdown.html#cb339-5"></a>    to_markdown())</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb338-1"><a href="markdown.html#cb338-1"></a><span class="bu">print</span>(smaller.</span>
+<span id="cb338-2"><a href="markdown.html#cb338-2"></a>    <span class="bu">filter</span>([<span class="st">&#39;carat&#39;</span>, <span class="st">&#39;cut&#39;</span>, <span class="st">&#39;color&#39;</span>, <span class="st">&#39;clarity&#39;</span>]).</span>
+<span id="cb338-3"><a href="markdown.html#cb338-3"></a>    rename_axis(<span class="va">None</span>).</span>
+<span id="cb338-4"><a href="markdown.html#cb338-4"></a>    head().</span>
+<span id="cb338-5"><a href="markdown.html#cb338-5"></a>    to_markdown())</span></code></pre></div>
 <p>There is one other way to display Python code in a Markdown document: directly into the text, with: <code>x = 5</code>.</p>
 </div>
 </div>

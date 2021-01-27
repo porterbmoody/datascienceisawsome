@@ -43,8 +43,7 @@ So far you've seen R Markdown used to produce HTML documents. This chapter gives
 
 RStudio's knit button renders a file to the first format listed in its `output` field. You can render to additional formats by clicking the dropdown menu beside the knit button.
 
-
-\begin{center}\includegraphics[width=5.72in]{screenshots/rmarkdown-knit} \end{center}
+<img src="screenshots/rmarkdown-knit.png" width="206" style="display: block; margin: auto;" />
 
 ## Output options
 
@@ -161,8 +160,7 @@ Dashboards are a useful way to communicate large amounts of information visually
 
 For example, you can produce this dashboard:
 
-
-\begin{center}\includegraphics[width=0.75\linewidth]{screenshots/rmarkdown-flexdashboard} \end{center}
+<img src="screenshots/rmarkdown-flexdashboard.png" width="75%" style="display: block; margin: auto;" />
 
 Using this code:
 
@@ -231,9 +229,8 @@ leaflet() %>%
   addMarkers(174.764, -36.877, popup = "Maungawhau") 
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{rmarkdown-formats_files/figure-latex/unnamed-chunk-6-1} 
+<!--html_preserve--><div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:70%;height:415.296px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[-36.877,174.764],16,[]],"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.877,174.764,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Maungawhau",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.877,-36.877],"lng":[174.764,174.764]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 The great thing about htmlwidgets is that you don't need to know anything about HTML or JavaScript to use them. All the details are wrapped inside the package, so you don't need to worry about it.  
 
@@ -272,8 +269,7 @@ library(shiny)
 textInput("name", "What is your name?")
 numericInput("age", "How old are you?", NA, min = 0, max = 150)
 ```
-
-\begin{center}\includegraphics[width=9.92in]{screenshots/rmarkdown-shiny} \end{center}
+<img src="screenshots/rmarkdown-shiny.png" width="357" style="display: block; margin: auto;" />
 You can then refer to the values with `input$name` and `input$age`, and the code that uses them will be automatically re-run whenever they change. 
 
 I can't show you a live shiny app here because shiny interactions occur on the __server-side__. This means that you can write interactive apps without knowing JavaScript, but you need a server to run them on. This introduces a logistical issue: Shiny apps need a Shiny server to be run online. When you run shiny apps on your own computer, shiny automatically sets up a shiny server for you, but you need a public facing shiny server if you want to publish this sort of interactivity online. That's the fundamental trade-off of shiny: you can do anything in a shiny document that you can do in R, but it requires someone to be running R.

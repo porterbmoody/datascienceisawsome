@@ -33,7 +33,7 @@
   
 <link rel="prev" href="dataframe.html"/>
 <link rel="next" href="tidy-data.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +52,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/vega-5.9.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
@@ -631,9 +633,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="prerequisites" class="section level3" number="11.1.1">
 <h3><span class="header-section-number">11.1.1</span> Prerequisites</h3>
 <p>In this chapter, you’ll learn how to load flat files in R with the <strong>pandas</strong> package.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="data-import.html#cb165-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb165-2"><a href="data-import.html#cb165-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb165-3"><a href="data-import.html#cb165-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="data-import.html#cb164-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb164-2"><a href="data-import.html#cb164-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb164-3"><a href="data-import.html#cb164-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="getting-started" class="section level2" number="11.2">
@@ -647,18 +649,18 @@ widths with <code>widths</code> or their position with <code>colspecs</code> arg
 </ul>
 <p>These functions all have similar syntax: once you’ve mastered one, you can use the others with ease. For the rest of this chapter we’ll focus on <code>pd.read_csv()</code>. Not only are csv files one of the most common forms of data storage, but once you understand <code>pd.read_csv()</code>, you can easily apply your knowledge to all the other input/output functions in pandas. You can see the full set of functions by <a href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">reading the pandas documentation</a>.</p>
 <p>The first argument to <code>pd.read_csv()</code> is the most important: it’s the path to the file to read.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="data-import.html#cb166-1"></a>heights <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/heights.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="data-import.html#cb165-1"></a>heights <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/heights.csv&quot;</span>)</span></code></pre></div>
 <p>You can also supply an inline csv file with the use of <code>StringIO</code> in the <code>io</code> package. StringIO creates a buffer from a string. This is useful for experimenting with pandas and for creating reproducible examples to share with others:</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="data-import.html#cb167-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
-<span id="cb167-2"><a href="data-import.html#cb167-2"></a></span>
-<span id="cb167-3"><a href="data-import.html#cb167-3"></a>data <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span></span>
-<span id="cb167-4"><a href="data-import.html#cb167-4"></a><span class="st">1,2,3</span></span>
-<span id="cb167-5"><a href="data-import.html#cb167-5"></a><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
-<span id="cb167-6"><a href="data-import.html#cb167-6"></a></span>
-<span id="cb167-7"><a href="data-import.html#cb167-7"></a>pd.read_csv(data)</span>
-<span id="cb167-8"><a href="data-import.html#cb167-8"></a><span class="co">#&gt;    a  b  c</span></span>
-<span id="cb167-9"><a href="data-import.html#cb167-9"></a><span class="co">#&gt; 0  1  2  3</span></span>
-<span id="cb167-10"><a href="data-import.html#cb167-10"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="data-import.html#cb166-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb166-2"><a href="data-import.html#cb166-2"></a></span>
+<span id="cb166-3"><a href="data-import.html#cb166-3"></a>data <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span></span>
+<span id="cb166-4"><a href="data-import.html#cb166-4"></a><span class="st">1,2,3</span></span>
+<span id="cb166-5"><a href="data-import.html#cb166-5"></a><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
+<span id="cb166-6"><a href="data-import.html#cb166-6"></a></span>
+<span id="cb166-7"><a href="data-import.html#cb166-7"></a>pd.read_csv(data)</span>
+<span id="cb166-8"><a href="data-import.html#cb166-8"></a><span class="co">#&gt;    a  b  c</span></span>
+<span id="cb166-9"><a href="data-import.html#cb166-9"></a><span class="co">#&gt; 0  1  2  3</span></span>
+<span id="cb166-10"><a href="data-import.html#cb166-10"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div>
 <p>In both cases <code>pd.read_csv()</code> uses the first line of the data for the column names, which is a very common convention. There are two cases where you might want to tweak this behaviour:</p>
 <ol style="list-style-type: decimal">
 <li><p>Sometimes there are a few lines of metadata at the top of the file. You can
@@ -682,26 +684,26 @@ pd.read_csv(data_comment, comment = &quot;#&quot;)</code></pre></li>
 <li><p>The data might not have column names. You can use <code>header = None</code> to
 tell <code>read_csv()</code> not to treat the first row as headings, and instead
 label them sequentially from <code>1</code> to <code>n</code>:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="data-import.html#cb169-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
-<span id="cb169-2"><a href="data-import.html#cb169-2"></a>pd.read_csv(data_nonames, header <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb169-3"><a href="data-import.html#cb169-3"></a><span class="co">#&gt;    0  1  2</span></span>
-<span id="cb169-4"><a href="data-import.html#cb169-4"></a><span class="co">#&gt; 0  1  2  3</span></span>
-<span id="cb169-5"><a href="data-import.html#cb169-5"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="data-import.html#cb168-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
+<span id="cb168-2"><a href="data-import.html#cb168-2"></a>pd.read_csv(data_nonames, header <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb168-3"><a href="data-import.html#cb168-3"></a><span class="co">#&gt;    0  1  2</span></span>
+<span id="cb168-4"><a href="data-import.html#cb168-4"></a><span class="co">#&gt; 0  1  2  3</span></span>
+<span id="cb168-5"><a href="data-import.html#cb168-5"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div>
 <p>(<code>"\n"</code> is a convenient shortcut for adding a new line. You’ll learn more
 about it and other types of string escape in [string basics].)</p>
 <p>Alternatively you can pass <code>names</code> an list of names which will be
 used as the column names:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="data-import.html#cb170-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
-<span id="cb170-2"><a href="data-import.html#cb170-2"></a>pd.read_csv(data_nonames, names <span class="op">=</span> [<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>], header <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb170-3"><a href="data-import.html#cb170-3"></a><span class="co">#&gt;    x  y  z</span></span>
-<span id="cb170-4"><a href="data-import.html#cb170-4"></a><span class="co">#&gt; 0  1  2  3</span></span>
-<span id="cb170-5"><a href="data-import.html#cb170-5"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="data-import.html#cb169-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
+<span id="cb169-2"><a href="data-import.html#cb169-2"></a>pd.read_csv(data_nonames, names <span class="op">=</span> [<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>], header <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb169-3"><a href="data-import.html#cb169-3"></a><span class="co">#&gt;    x  y  z</span></span>
+<span id="cb169-4"><a href="data-import.html#cb169-4"></a><span class="co">#&gt; 0  1  2  3</span></span>
+<span id="cb169-5"><a href="data-import.html#cb169-5"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div></li>
 </ol>
 <p>Another option that commonly needs tweaking is <code>na</code>: this specifies the value (or values) that are used to represent missing values in your file:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb171-1"><a href="data-import.html#cb171-1"></a>data_missing <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span><span class="ch">\n</span><span class="st">1,2,.&quot;&quot;&quot;</span>)</span>
-<span id="cb171-2"><a href="data-import.html#cb171-2"></a>pd.read_csv(data_missing, na_values <span class="op">=</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb171-3"><a href="data-import.html#cb171-3"></a><span class="co">#&gt;    a  b   c</span></span>
-<span id="cb171-4"><a href="data-import.html#cb171-4"></a><span class="co">#&gt; 0  1  2 NaN</span></span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="data-import.html#cb170-1"></a>data_missing <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span><span class="ch">\n</span><span class="st">1,2,.&quot;&quot;&quot;</span>)</span>
+<span id="cb170-2"><a href="data-import.html#cb170-2"></a>pd.read_csv(data_missing, na_values <span class="op">=</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb170-3"><a href="data-import.html#cb170-3"></a><span class="co">#&gt;    a  b   c</span></span>
+<span id="cb170-4"><a href="data-import.html#cb170-4"></a><span class="co">#&gt; 0  1  2 NaN</span></span></code></pre></div>
 <p>This is all you need to know to read ~75% of CSV files that you’ll encounter in practice. You can also easily adapt what you’ve learned to read fixed width files with <code>pd.read_fwf()</code>. To read in more challenging files, you’ll need to learn more about how pandas parses each column, turning them into <code>DataFrame</code> objects.</p>
 <div id="exercises" class="section level3" number="11.2.1">
 <h3><span class="header-section-number">11.2.1</span> Exercises</h3>
@@ -716,32 +718,32 @@ causing problems they need to be surrounded by a quoting character, like
 <code>"</code> or <code>'</code>. By default, <code>pd.read_csv()</code> assumes that the quoting
 character will be <code>"</code>. What argument to <code>pd.read_csv()</code> do you need to specify
 to read the following text into a data frame?</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="data-import.html#cb172-1"></a><span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="data-import.html#cb171-1"></a><span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span></span></code></pre></div></li>
 </ol>
 </div>
 </div>
 <div id="parsing-a-vector" class="section level2" number="11.3">
 <h2><span class="header-section-number">11.3</span> Parsing a vector</h2>
 <p>Before we get into the details of how pandas reads files from disk, we need to take a little detour to talk about the <code>astype()</code> function. This function casts a pandas object to a more specialised data type like a logical or integer. The pandas package has a special <code>.to_datetime()</code> function to convert dates:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="data-import.html#cb173-1"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, np.nan]).astype(<span class="st">&#39;bool&#39;</span>)</span>
-<span id="cb173-2"><a href="data-import.html#cb173-2"></a><span class="co">#&gt; 0    True</span></span>
-<span id="cb173-3"><a href="data-import.html#cb173-3"></a><span class="co">#&gt; 1    True</span></span>
-<span id="cb173-4"><a href="data-import.html#cb173-4"></a><span class="co">#&gt; 2    True</span></span>
-<span id="cb173-5"><a href="data-import.html#cb173-5"></a><span class="co">#&gt; dtype: bool</span></span>
-<span id="cb173-6"><a href="data-import.html#cb173-6"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>]).astype(<span class="st">&#39;bool&#39;</span>)</span>
-<span id="cb173-7"><a href="data-import.html#cb173-7"></a><span class="co">#&gt; 0    True</span></span>
-<span id="cb173-8"><a href="data-import.html#cb173-8"></a><span class="co">#&gt; 1    True</span></span>
-<span id="cb173-9"><a href="data-import.html#cb173-9"></a><span class="co">#&gt; 2    True</span></span>
-<span id="cb173-10"><a href="data-import.html#cb173-10"></a><span class="co">#&gt; dtype: bool</span></span>
-<span id="cb173-11"><a href="data-import.html#cb173-11"></a>pd.Series([<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>]).astype(<span class="st">&quot;int&quot;</span>)</span>
-<span id="cb173-12"><a href="data-import.html#cb173-12"></a><span class="co">#&gt; 0    1</span></span>
-<span id="cb173-13"><a href="data-import.html#cb173-13"></a><span class="co">#&gt; 1    2</span></span>
-<span id="cb173-14"><a href="data-import.html#cb173-14"></a><span class="co">#&gt; 2    3</span></span>
-<span id="cb173-15"><a href="data-import.html#cb173-15"></a><span class="co">#&gt; dtype: int64</span></span>
-<span id="cb173-16"><a href="data-import.html#cb173-16"></a>pd.to_datetime(pd.Series([<span class="st">&#39;2010-01-01&#39;</span>, <span class="st">&#39;1970-10-14&#39;</span>]), infer_datetime_format<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb173-17"><a href="data-import.html#cb173-17"></a><span class="co">#&gt; 0   2010-01-01</span></span>
-<span id="cb173-18"><a href="data-import.html#cb173-18"></a><span class="co">#&gt; 1   1970-10-14</span></span>
-<span id="cb173-19"><a href="data-import.html#cb173-19"></a><span class="co">#&gt; dtype: datetime64[ns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="data-import.html#cb172-1"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, np.nan]).astype(<span class="st">&#39;bool&#39;</span>)</span>
+<span id="cb172-2"><a href="data-import.html#cb172-2"></a><span class="co">#&gt; 0    True</span></span>
+<span id="cb172-3"><a href="data-import.html#cb172-3"></a><span class="co">#&gt; 1    True</span></span>
+<span id="cb172-4"><a href="data-import.html#cb172-4"></a><span class="co">#&gt; 2    True</span></span>
+<span id="cb172-5"><a href="data-import.html#cb172-5"></a><span class="co">#&gt; dtype: bool</span></span>
+<span id="cb172-6"><a href="data-import.html#cb172-6"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>]).astype(<span class="st">&#39;bool&#39;</span>)</span>
+<span id="cb172-7"><a href="data-import.html#cb172-7"></a><span class="co">#&gt; 0    True</span></span>
+<span id="cb172-8"><a href="data-import.html#cb172-8"></a><span class="co">#&gt; 1    True</span></span>
+<span id="cb172-9"><a href="data-import.html#cb172-9"></a><span class="co">#&gt; 2    True</span></span>
+<span id="cb172-10"><a href="data-import.html#cb172-10"></a><span class="co">#&gt; dtype: bool</span></span>
+<span id="cb172-11"><a href="data-import.html#cb172-11"></a>pd.Series([<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>]).astype(<span class="st">&quot;int&quot;</span>)</span>
+<span id="cb172-12"><a href="data-import.html#cb172-12"></a><span class="co">#&gt; 0    1</span></span>
+<span id="cb172-13"><a href="data-import.html#cb172-13"></a><span class="co">#&gt; 1    2</span></span>
+<span id="cb172-14"><a href="data-import.html#cb172-14"></a><span class="co">#&gt; 2    3</span></span>
+<span id="cb172-15"><a href="data-import.html#cb172-15"></a><span class="co">#&gt; dtype: int64</span></span>
+<span id="cb172-16"><a href="data-import.html#cb172-16"></a>pd.to_datetime(pd.Series([<span class="st">&#39;2010-01-01&#39;</span>, <span class="st">&#39;1970-10-14&#39;</span>]), infer_datetime_format<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb172-17"><a href="data-import.html#cb172-17"></a><span class="co">#&gt; 0   2010-01-01</span></span>
+<span id="cb172-18"><a href="data-import.html#cb172-18"></a><span class="co">#&gt; 1   1970-10-14</span></span>
+<span id="cb172-19"><a href="data-import.html#cb172-19"></a><span class="co">#&gt; dtype: datetime64[ns]</span></span></code></pre></div>
 <p>These functions are useful in their own right, but are also an important building block for pandas. Once you’ve learned how the individual parsers work in this section, we’ll circle back and see how they fit together to parse a complete file in the next section.</p>
 <p>Using arsers is mostly a matter of understanding what’s available and how they deal with different types of input. There are eight particularly important <code>dtype</code>s that you can use within <code>astype()</code>:</p>
 <ol style="list-style-type: decimal">
@@ -756,13 +758,13 @@ are the most complicated because there are so many different ways of writing
 dates.</p></li>
 <li><p><code>to_numeric()</code> allows you to coerce mixed value columns to numeric using
 <code>errors = coerce</code></p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="data-import.html#cb174-1"></a>pd.to_numeric(pd.Series([<span class="st">&quot;bb&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;True&quot;</span>, <span class="st">&quot;9&quot;</span>, np.nan]), errors <span class="op">=</span> <span class="st">&#39;coerce&#39;</span>)</span>
-<span id="cb174-2"><a href="data-import.html#cb174-2"></a><span class="co">#&gt; 0    NaN</span></span>
-<span id="cb174-3"><a href="data-import.html#cb174-3"></a><span class="co">#&gt; 1    1.0</span></span>
-<span id="cb174-4"><a href="data-import.html#cb174-4"></a><span class="co">#&gt; 2    NaN</span></span>
-<span id="cb174-5"><a href="data-import.html#cb174-5"></a><span class="co">#&gt; 3    9.0</span></span>
-<span id="cb174-6"><a href="data-import.html#cb174-6"></a><span class="co">#&gt; 4    NaN</span></span>
-<span id="cb174-7"><a href="data-import.html#cb174-7"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="data-import.html#cb173-1"></a>pd.to_numeric(pd.Series([<span class="st">&quot;bb&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;True&quot;</span>, <span class="st">&quot;9&quot;</span>, np.nan]), errors <span class="op">=</span> <span class="st">&#39;coerce&#39;</span>)</span>
+<span id="cb173-2"><a href="data-import.html#cb173-2"></a><span class="co">#&gt; 0    NaN</span></span>
+<span id="cb173-3"><a href="data-import.html#cb173-3"></a><span class="co">#&gt; 1    1.0</span></span>
+<span id="cb173-4"><a href="data-import.html#cb173-4"></a><span class="co">#&gt; 2    NaN</span></span>
+<span id="cb173-5"><a href="data-import.html#cb173-5"></a><span class="co">#&gt; 3    9.0</span></span>
+<span id="cb173-6"><a href="data-import.html#cb173-6"></a><span class="co">#&gt; 4    NaN</span></span>
+<span id="cb173-7"><a href="data-import.html#cb173-7"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
 </ol>
 <p>The following sections describe these parsers in more detail.</p>
 <div id="numbers" class="section level3" number="11.3.1">
@@ -783,11 +785,11 @@ float.</p>
 <div id="readr-strings" class="section level3" number="11.3.2">
 <h3><span class="header-section-number">11.3.2</span> Strings</h3>
 <p>It seems like strings should be really simple. Unfortunately life isn’t so simple, as there are multiple ways to represent the same string. To understand what’s going on, we need to dive into the details of how computers represent strings. In Python, we can get at the underlying representation of a string using <code>hex()</code> on a binary object:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="data-import.html#cb175-1"></a>b<span class="st">&#39;Hathaway&#39;</span>.<span class="bu">hex</span>()</span>
-<span id="cb175-2"><a href="data-import.html#cb175-2"></a><span class="co"># and convert it back</span></span>
-<span id="cb175-3"><a href="data-import.html#cb175-3"></a><span class="co">#&gt; &#39;4861746861776179&#39;</span></span>
-<span id="cb175-4"><a href="data-import.html#cb175-4"></a><span class="bu">bytes</span>.fromhex(<span class="st">&#39;4861746861776179&#39;</span>).decode()</span>
-<span id="cb175-5"><a href="data-import.html#cb175-5"></a><span class="co">#&gt; &#39;Hathaway&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="data-import.html#cb174-1"></a>b<span class="st">&#39;Hathaway&#39;</span>.<span class="bu">hex</span>()</span>
+<span id="cb174-2"><a href="data-import.html#cb174-2"></a><span class="co"># and convert it back</span></span>
+<span id="cb174-3"><a href="data-import.html#cb174-3"></a><span class="co">#&gt; &#39;4861746861776179&#39;</span></span>
+<span id="cb174-4"><a href="data-import.html#cb174-4"></a><span class="bu">bytes</span>.fromhex(<span class="st">&#39;4861746861776179&#39;</span>).decode()</span>
+<span id="cb174-5"><a href="data-import.html#cb174-5"></a><span class="co">#&gt; &#39;Hathaway&#39;</span></span></code></pre></div>
 <p>Each hexadecimal number represents a byte of information: <code>48</code> is H, <code>61</code> is a, and so on. The mapping from hexadecimal number to character is called the encoding, and in this case the encoding is called ASCII. ASCII does a great job of representing English characters, because it’s the <strong>American</strong> Standard Code for Information Interchange.</p>
 <p>Things get more complicated for languages other than English. In the early days of computing there were many competing standards for encoding non-English characters, and to correctly interpret a string you needed to know both the values and the encoding. For example, two common encodings are Latin1 (aka ISO-8859-1, used for Western European languages) and Latin2 (aka ISO-8859-2, used for Eastern European languages). In Latin1, the byte <code>b1</code> is “±”, but in Latin2, it’s “ą”! Fortunately, today there is one standard that is supported almost everywhere: UTF-8. UTF-8 can encode just about every character used by humans today, as well as many extra symbols (like emoji!).</p>
 <p>Python often defaults to UTF-8: pandas assumes your data is UTF-8 encoded when you read it, and always uses it when writing. This is a good default, but will fail for data produced by older systems that don’t understand UTF-8. If this happens to you, your strings will look weird when you print them. Sometimes just one or two characters might be messed up; other times you’ll get complete gibberish. For example:</p>
@@ -796,10 +798,10 @@ float.</p>
 <div id="readr-factors" class="section level3" number="11.3.3">
 <h3><span class="header-section-number">11.3.3</span> Category (Factors)</h3>
 <p>Pandas uses category to represent categorical variables that have a known set of possible values. Give <code>pd.Categorical()</code> a Series of known <code>levels</code> to convert other unexpected value that are present to <code>nan</code>:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="data-import.html#cb176-1"></a>fruit <span class="op">=</span>  [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
-<span id="cb176-2"><a href="data-import.html#cb176-2"></a>pd.Categorical([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;bananana&quot;</span>], categories <span class="op">=</span> fruit)</span>
-<span id="cb176-3"><a href="data-import.html#cb176-3"></a><span class="co">#&gt; [apple, banana, NaN]</span></span>
-<span id="cb176-4"><a href="data-import.html#cb176-4"></a><span class="co">#&gt; Categories (2, object): [apple, banana]</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="data-import.html#cb175-1"></a>fruit <span class="op">=</span>  [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
+<span id="cb175-2"><a href="data-import.html#cb175-2"></a>pd.Categorical([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;bananana&quot;</span>], categories <span class="op">=</span> fruit)</span>
+<span id="cb175-3"><a href="data-import.html#cb175-3"></a><span class="co">#&gt; [apple, banana, NaN]</span></span>
+<span id="cb175-4"><a href="data-import.html#cb175-4"></a><span class="co">#&gt; Categories (2, object): [apple, banana]</span></span></code></pre></div>
 <p>But if you have many problematic entries, it’s often easier to leave as character vectors and then use the tools you’ll learn about in <a href="data-import.html#readr-strings">strings</a> and [factors] to clean them up.</p>
 </div>
 <div id="readr-datetimes" class="section level3" number="11.3.4">
@@ -810,11 +812,11 @@ float.</p>
 international standard in which the components of a date are
 organised from biggest to smallest: year, month, day, hour, minute,
 second.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="data-import.html#cb177-1"></a>pd.to_datetime([<span class="st">&quot;2010-10-01T2010&quot;</span>])</span>
-<span id="cb177-2"><a href="data-import.html#cb177-2"></a><span class="co"># If time is omitted, it will be set to midnight and only print date.</span></span>
-<span id="cb177-3"><a href="data-import.html#cb177-3"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01 20:10:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
-<span id="cb177-4"><a href="data-import.html#cb177-4"></a>pd.to_datetime([<span class="st">&quot;2010-10-01&quot;</span>])</span>
-<span id="cb177-5"><a href="data-import.html#cb177-5"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="data-import.html#cb176-1"></a>pd.to_datetime([<span class="st">&quot;2010-10-01T2010&quot;</span>])</span>
+<span id="cb176-2"><a href="data-import.html#cb176-2"></a><span class="co"># If time is omitted, it will be set to midnight and only print date.</span></span>
+<span id="cb176-3"><a href="data-import.html#cb176-3"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01 20:10:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb176-4"><a href="data-import.html#cb176-4"></a>pd.to_datetime([<span class="st">&quot;2010-10-01&quot;</span>])</span>
+<span id="cb176-5"><a href="data-import.html#cb176-5"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
 <p>This is the most important date/time standard, and if you work with
 dates and times frequently, I recommend reading
 <a href="https://en.wikipedia.org/wiki/ISO_8601" class="uri">https://en.wikipedia.org/wiki/ISO_8601</a></p></li>
@@ -865,15 +867,15 @@ come back to this in [time zones].
 </dd>
 </dl>
 <p>The best way to figure out the correct format is to create a few examples in a character vector, and test with one of the parsing functions. For example:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="data-import.html#cb178-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
-<span id="cb178-2"><a href="data-import.html#cb178-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
-<span id="cb178-3"><a href="data-import.html#cb178-3"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">/%m/%y&quot;</span>)</span>
-<span id="cb178-4"><a href="data-import.html#cb178-4"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-02-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
-<span id="cb178-5"><a href="data-import.html#cb178-5"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%y/%m/</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
-<span id="cb178-6"><a href="data-import.html#cb178-6"></a><span class="co">#&gt; DatetimeIndex([&#39;2001-02-15&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="data-import.html#cb177-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb177-2"><a href="data-import.html#cb177-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb177-3"><a href="data-import.html#cb177-3"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">/%m/%y&quot;</span>)</span>
+<span id="cb177-4"><a href="data-import.html#cb177-4"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-02-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb177-5"><a href="data-import.html#cb177-5"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%y/%m/</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
+<span id="cb177-6"><a href="data-import.html#cb177-6"></a><span class="co">#&gt; DatetimeIndex([&#39;2001-02-15&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
 <p>The <code>pd.to_datetime()</code> function has a handy argument <code>infer_datetime_format</code> which can often allow you to avoid entring format strings.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="data-import.html#cb179-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], infer_datetime_format <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb179-2"><a href="data-import.html#cb179-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="data-import.html#cb178-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], infer_datetime_format <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb178-2"><a href="data-import.html#cb178-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
 <!-- https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.month_name.html -->
 </div>
 <div id="exercises-1" class="section level3" number="11.3.5">
@@ -883,11 +885,11 @@ come back to this in [time zones].
 most common encodings used in Asia? Do some googling to find out.</p></li>
 <li><p>Generate the correct format string to parse each of the following
 dates and times:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="data-import.html#cb180-1"></a>d1 <span class="op">=</span> [<span class="st">&quot;January 1, 2010&quot;</span>]</span>
-<span id="cb180-2"><a href="data-import.html#cb180-2"></a>d2 <span class="op">=</span> [<span class="st">&quot;2015-Mar-07&quot;</span>]</span>
-<span id="cb180-3"><a href="data-import.html#cb180-3"></a>d3 <span class="op">=</span> [<span class="st">&quot;06-Jun-2017&quot;</span>]</span>
-<span id="cb180-4"><a href="data-import.html#cb180-4"></a>d4 <span class="op">=</span> [<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>]</span>
-<span id="cb180-5"><a href="data-import.html#cb180-5"></a>d5 <span class="op">=</span> [<span class="st">&quot;12/30/14&quot;</span>] <span class="co"># Dec 30, 2014</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="data-import.html#cb179-1"></a>d1 <span class="op">=</span> [<span class="st">&quot;January 1, 2010&quot;</span>]</span>
+<span id="cb179-2"><a href="data-import.html#cb179-2"></a>d2 <span class="op">=</span> [<span class="st">&quot;2015-Mar-07&quot;</span>]</span>
+<span id="cb179-3"><a href="data-import.html#cb179-3"></a>d3 <span class="op">=</span> [<span class="st">&quot;06-Jun-2017&quot;</span>]</span>
+<span id="cb179-4"><a href="data-import.html#cb179-4"></a>d4 <span class="op">=</span> [<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>]</span>
+<span id="cb179-5"><a href="data-import.html#cb179-5"></a>d5 <span class="op">=</span> [<span class="st">&quot;12/30/14&quot;</span>] <span class="co"># Dec 30, 2014</span></span></code></pre></div></li>
 </ol>
 </div>
 </div>
@@ -934,23 +936,23 @@ parsed elsewhere.</p></li>
 <p>The most important argument is <code>path</code> (the location to save it). You can also
 specify how missing values are written with <code>na_rep</code> and if the index is included
 in the export <code>index = False</code>.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="data-import.html#cb181-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
-<span id="cb181-2"><a href="data-import.html#cb181-2"></a>                   <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
-<span id="cb181-3"><a href="data-import.html#cb181-3"></a>                   <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
-<span id="cb181-4"><a href="data-import.html#cb181-4"></a>df.to_csv(<span class="st">&quot;my_file.csv&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="data-import.html#cb180-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
+<span id="cb180-2"><a href="data-import.html#cb180-2"></a>                   <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
+<span id="cb180-3"><a href="data-import.html#cb180-3"></a>                   <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
+<span id="cb180-4"><a href="data-import.html#cb180-4"></a>df.to_csv(<span class="st">&quot;my_file.csv&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>Note that the type information is lost when you save to csv:</p>
 <p>This makes CSVs a little unreliable for caching interim results—you need to recreate the column specification every time you load in. We recommend the feather format:</p>
 <ol style="list-style-type: decimal">
 <li><p>The feather format implements a fast binary file format that can
 be shared across programming languages:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="data-import.html#cb182-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
-<span id="cb182-2"><a href="data-import.html#cb182-2"></a>               <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
-<span id="cb182-3"><a href="data-import.html#cb182-3"></a>               <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
-<span id="cb182-4"><a href="data-import.html#cb182-4"></a>df.to_feather(<span class="st">&quot;my_file.ftr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="data-import.html#cb181-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
+<span id="cb181-2"><a href="data-import.html#cb181-2"></a>               <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
+<span id="cb181-3"><a href="data-import.html#cb181-3"></a>               <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
+<span id="cb181-4"><a href="data-import.html#cb181-4"></a>df.to_feather(<span class="st">&quot;my_file.ftr&quot;</span>)</span></code></pre></div>
 <p>There is a feather package in R to share files quickly between the two tools.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-import.html#cb183-1"></a><span class="kw">library</span>(feather)</span>
-<span id="cb183-2"><a href="data-import.html#cb183-2"></a><span class="kw">write_feather</span>(challenge, <span class="st">&quot;challenge.feather&quot;</span>)</span>
-<span id="cb183-3"><a href="data-import.html#cb183-3"></a><span class="kw">read_feather</span>(<span class="st">&quot;challenge.feather&quot;</span>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="data-import.html#cb182-1"></a><span class="kw">library</span>(feather)</span>
+<span id="cb182-2"><a href="data-import.html#cb182-2"></a><span class="kw">write_feather</span>(challenge, <span class="st">&quot;challenge.feather&quot;</span>)</span>
+<span id="cb182-3"><a href="data-import.html#cb182-3"></a><span class="kw">read_feather</span>(<span class="st">&quot;challenge.feather&quot;</span>)</span></code></pre></div></li>
 </ol>
 </div>
 <div id="other-types-of-data" class="section level2" number="11.6">

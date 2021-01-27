@@ -19,7 +19,7 @@ If this chapter leaves you wanting to learn more about data frames, you might en
 
 In this chapter we'll explore the __DataFrame__, a foundational element of pandas.
 
-```{python setup, message = FALSE}
+```{python setup, message = FALSE, cache=FALSE}
 import pandas as pd
 import pandas as pd
 import altair as alt
@@ -63,16 +63,6 @@ pd.DataFrame(np.array(
 ## Printing
 
 Data frames have a refined print method that shows only the first and last 5 rows, and all the columns that fit on screen. This makes it much easier to work with large data. 
-
-```{r}
-tibble(
-  a = lubridate::now() + runif(1e3) * 86400,
-  b = lubridate::today() + runif(1e3) * 30,
-  c = 1:1e3,
-  d = runif(1e3),
-  e = sample(letters, 1e3, replace = TRUE)
-)
-```
 
 Data frames are designed so that you don't accidentally overwhelm your console when you print large data frames. But sometimes you need more output than the default display. There are a few options that can help.
 

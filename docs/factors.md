@@ -175,8 +175,7 @@ chart = (alt.Chart(gss_cat).
 chart.save("screenshots/altair_cat_1.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_1} \end{flushleft}
+<img src="screenshots/altair_cat_1.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 By default, ggplot2 will drop levels that don't have any values. You can force them to display with:
 
@@ -194,8 +193,7 @@ chart = (alt.Chart(gss_cat).
 chart.save("screenshots/altair_cat_2.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_2} \end{flushleft}
+<img src="screenshots/altair_cat_2.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 These levels represent valid values that simply did not occur in this dataset. When working with factors, the two most common operations are changing the order of the levels, and changing the values of the levels. Those operations are described in the sections below.
 
@@ -229,8 +227,7 @@ chart = (alt.Chart(relig_summary).
 chart.save("screenshots/altair_cat_3.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_3} \end{flushleft}
+<img src="screenshots/altair_cat_3.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 It is difficult to interpret this plot because there's no overall pattern. We can improve it by reordering the levels of `relig` using the `sort` argument in `alt.Y()`. The `sort` argument uses `-x` to sort largest at the top and `x` to sort with the largest at the bottom of the y-axis. If you would like to implement more intricate sortings using `alt.EncodingSortField()` with the following arguments.
 
@@ -252,8 +249,7 @@ chart = (alt.Chart(relig_summary).
 chart.save("screenshots/altair_cat_4.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_4} \end{flushleft}
+<img src="screenshots/altair_cat_4.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 Reordering religion makes it much easier to see that people in the "Don't know" category watch much more TV, and Hinduism & Other Eastern religions watch much less.
@@ -284,8 +280,7 @@ chart = (alt.Chart(rincome_summary).
 chart.save("screenshots/altair_cat_5.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_5} \end{flushleft}
+<img src="screenshots/altair_cat_5.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 Here, arbitrarily reordering the levels isn't a good idea! That's because `rincome` already has a principled order that we shouldn't mess with. Reserve sorting for factors whose levels are arbitrarily ordered.

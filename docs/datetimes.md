@@ -52,16 +52,16 @@ To get the current date or date-time you can use `date.today()` or `datetime.now
 ```python
 # using datetime
 datetime.datetime.today()
-#> datetime.datetime(2020, 7, 16, 16, 48, 36, 690361)
+#> datetime.datetime(2020, 7, 16, 16, 4, 8, 879113)
 datetime.datetime.now()
-#> datetime.datetime(2020, 7, 16, 16, 48, 36, 694555)
+#> datetime.datetime(2020, 7, 16, 16, 4, 8, 885752)
 datetime.datetime.utcnow()
 # using pandas
-#> datetime.datetime(2020, 7, 16, 22, 48, 36, 698724)
+#> datetime.datetime(2020, 7, 16, 22, 4, 8, 890607)
 pd.to_datetime('today')
-#> Timestamp('2020-07-16 16:48:36.703199')
+#> Timestamp('2020-07-16 16:04:08.896175')
 pd.to_datetime('now')
-#> Timestamp('2020-07-16 22:48:36.710417')
+#> Timestamp('2020-07-16 22:04:08.902931')
 ```
 
 Otherwise, there are three ways you're likely to create a date/time:
@@ -237,8 +237,7 @@ chart = (alt.Chart(dat_plot).
 chart.save("screenshots/altair_datetimes_1.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_1} \end{flushleft}
+<img src="screenshots/altair_datetimes_1.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 Or within a single day:
@@ -257,8 +256,7 @@ chart = (alt.Chart(dat_plot).
 chart.save("screenshots/altair_datetimes_2.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_2} \end{flushleft}
+<img src="screenshots/altair_datetimes_2.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 ### From other types
 
@@ -339,8 +337,7 @@ chart = (alt.Chart(flights_dt).
 chart.save("screenshots/altair_datetimes_3.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_3} \end{flushleft}
+<img src="screenshots/altair_datetimes_3.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 There's an interesting pattern if we look at the average departure delay by minute within the hour. It looks like flights leaving in minutes 20-30 and 50-60 have much lower delays than the rest of the hour!
@@ -363,8 +360,7 @@ chart = (alt.Chart(plot_dat).
 chart.save("screenshots/altair_datetimes_4.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_4} \end{flushleft}
+<img src="screenshots/altair_datetimes_4.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 Interestingly, if we look at the _scheduled_ departure time we don't see such a strong pattern:
@@ -387,8 +383,7 @@ chart = (alt.Chart(sched_dep).
 chart.save("screenshots/altair_datetimes_5.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_5} \end{flushleft}
+<img src="screenshots/altair_datetimes_5.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 So why do we see that pattern with the actual departure times? Well, like much data collected by humans, there's a strong bias towards flights leaving at "nice" departure times. Always be alert for this sort of pattern whenever you work with data that involves human judgement!
@@ -402,8 +397,7 @@ chart = (alt.Chart(sched_dep).
 chart.save("screenshots/altair_datetimes_6.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_6} \end{flushleft}
+<img src="screenshots/altair_datetimes_6.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 ### Rounding
 
@@ -426,8 +420,7 @@ chart = (alt.Chart(plot_dat).
 chart.save("screenshots/altair_datetimes_7.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_7} \end{flushleft}
+<img src="screenshots/altair_datetimes_7.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Computing the difference between a rounded and unrounded date can be particularly useful.
 
@@ -483,8 +476,7 @@ chart = (alt.Chart(plot_dat).
 chart.save("screenshots/altair_datetimes_8.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_datetimes_8} \end{flushleft}
+<img src="screenshots/altair_datetimes_8.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Setting larger components of a date to a constant is a powerful technique that allows you to explore patterns in the smaller components.
 
@@ -522,7 +514,7 @@ Next you'll learn about how arithmetic with dates work, including subtraction, a
 # How old is Hathaway?
 h_age = pd.Timestamp.now() - pd.Timestamp("19770907")
 h_age
-#> Timedelta('15653 days 16:48:53.718845')
+#> Timedelta('15653 days 16:16:11.697669')
 ```
 
 A Timedelta object records a time span in nanoseconds using 64 bit integers which can make Timedeltas a little painful to work with, so Timedelta provides access to the number of days with `.days` and the number of seconds with `.total_seconds()`.

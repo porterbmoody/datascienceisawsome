@@ -52,8 +52,7 @@ chart = (alt.Chart(mpg,
 chart.save("screenshots/altair_communicate_1.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_1} \end{flushleft}
+<img src="screenshots/altair_communicate_1.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 The purpose of a plot title is to summarise the main finding. Avoid titles that just describe what the plot is, e.g. "A scatterplot of engine displacement vs. fuel economy". 
 
@@ -80,8 +79,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_communicate_2.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_2} \end{flushleft}
+<img src="screenshots/altair_communicate_2.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 You can also use `title` to replace the axis and legend titles. It's usually a good idea to replace short variable names with more detailed descriptions, and to include the units. Nextjournal provides detailed examples around editing [Scales, Axes, and Legends](https://nextjournal.com/sdanisch/scales-axes-and-legends).
 
@@ -98,8 +96,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_communicate_3.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_3} \end{flushleft}
+<img src="screenshots/altair_communicate_3.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 It is not possible to use mathematical equations instead of text strings in Altair.
 
@@ -146,8 +143,7 @@ chart = base + text
 chart.save("screenshots/altair_communicate_4.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_4} \end{flushleft}
+<img src="screenshots/altair_communicate_4.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 This is hard to read because the labels overlap with each other, and with the points. We can make things a little better by formatting the text using additional arguments with `mark_text()`. We also use the `dy` parameter to move the labels slightly above the corresponding points:
 
@@ -178,8 +174,7 @@ chart = highlight + base + text
 chart.save("screenshots/altair_communicate_5.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_5} \end{flushleft}
+<img src="screenshots/altair_communicate_5.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 That helps a bit, but if you look closely in the top-left hand corner, you'll notice that there are two labels practically on top of each other. This happens because the highway mileage and displacement for the best cars in the compact and subcompact categories are exactly the same. There's no way that we can fix these by applying the same transformation for every label. Vega and Vega-Lite are in the process of adding support to handle the display of overlapping labels [ref](https://github.com/altair-viz/altair/issues/1731).
 
@@ -207,8 +202,7 @@ chart = base + text_corner
 chart.save("screenshots/altair_communicate_6.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_6} \end{flushleft}
+<img src="screenshots/altair_communicate_6.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Remember, in addition to `.mark_text()`, you can use `.mark_rule()` in Altair to help annotate your plot. Use `.mark_rule` to add horizontal or vertical reference lines. I often make them thick (`size = 2`) and white (`colour = white`), and draw them underneath the primary data layer. That makes them easy to see, without drawing attention away from the data.
 
@@ -283,8 +277,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_communicate_7.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_7} \end{flushleft}
+<img src="screenshots/altair_communicate_7.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 You can also set it to `False` to suppress the labels altogether. This is useful for maps, or for publishing plots where you can't share the absolute numbers.
 
@@ -301,8 +294,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_communicate_8.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_8} \end{flushleft}
+<img src="screenshots/altair_communicate_8.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 You can also use `breaks` and `labels` to control the appearance of legends. Collectively axes and legends are called __guides__. Axes are used for x and y aesthetics; legends are used for everything else.
 
@@ -342,8 +334,7 @@ chart = lines + points
 chart.save("screenshots/altair_communicate_9.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_9} \end{flushleft}
+<img src="screenshots/altair_communicate_9.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Note that the specification of breaks and labels for date and datetime scales is a little different.
 
@@ -374,8 +365,7 @@ ch3.save("screenshots/altair_communicate_legend3.png")
 ch4.save("screenshots/altair_communicate_legend4.png")
 ```
 
-
-\includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend1} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend2} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend3} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_legend4} 
+<img src="screenshots/altair_communicate_legend1.png" width="50%" /><img src="screenshots/altair_communicate_legend2.png" width="50%" /><img src="screenshots/altair_communicate_legend3.png" width="50%" /><img src="screenshots/altair_communicate_legend4.png" width="50%" />
 
 There are options for putting the legend within the chart using `top-right', 'top-left', 'bottom-right', and 'bottom-left'.
 
@@ -388,8 +378,7 @@ chart = base.configure_legend(orient = 'bottom', columns = 3)
 chart.save("screenshots/altair_communicate_10.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_10} \end{flushleft}
+<img src="screenshots/altair_communicate_10.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 ### Replacing a scale
 
@@ -423,8 +412,7 @@ chart2.save("screenshots/altair_communicate_11b.png")
 ```
 
 
-
-\includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_11a} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_11b} 
+<img src="screenshots/altair_communicate_11a.png" width="50%" /><img src="screenshots/altair_communicate_11b.png" width="50%" />
 
 However, the disadvantage of this transformation is that the axes are now labelled with the transformed values, making it hard to interpret the plot. Instead of doing the transformation in the aesthetic mapping, we can instead do it with the scale. This is visually identical, except the axes are labelled on the original data scale.
 
@@ -440,8 +428,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_communicate_12.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_12} \end{flushleft}
+<img src="screenshots/altair_communicate_12.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 Another scale that is frequently customised is colour. The default categorical scale picks colours that are evenly spaced around the colour wheel. Useful alternatives are the ColorBrewer scales which have been hand tuned to work better for people with common types of colour blindness. The two plots below look similar, but there is enough difference in the shades of red and green that the dots on the right can be distinguished even by people with red-green colour blindness. Vega provides access to different named color schemes used in visualization: <https://vega.github.io/vega/docs/schemes/>.  
@@ -469,8 +456,7 @@ chart_cb.save("screenshots/altair_communicate_13b.png")
 ```
 
 
-
-\includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_13a} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_13b} 
+<img src="screenshots/altair_communicate_13a.png" width="50%" /><img src="screenshots/altair_communicate_13b.png" width="50%" />
 
 Don't forget simpler techniques. If there are just a few colours, you can add a redundant shape mapping. This will also help ensure your plot is interpretable in black and white. 
 
@@ -490,8 +476,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_communicate_14.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_14} \end{flushleft}
+<img src="screenshots/altair_communicate_14.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 When you have a predefined mapping between values and colours, use `domain` and `range` in the color scale. For example, if we map presidential party to colour, we want to use the standard mapping of red for Republicans and blue for Democrats:
 
@@ -527,8 +512,7 @@ chart = lines + points
 chart.save("screenshots/altair_communicate_15.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_communicate_15} \end{flushleft}
+<img src="screenshots/altair_communicate_15.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 For continuous colour, you can use the built-in [sequential color schemes](https://vega.github.io/vega/docs/schemes/#seq-single-hue). Diverging colour schemes allow you to give, for example, positive and negative values different colours. That's sometimes also useful if you want to distinguish points above or below the mean.
 
@@ -564,8 +548,7 @@ chart2.save("screenshots/altair_communicate_16b.png")
 ```
 
 
-
-\includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_16a} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_16b} 
+<img src="screenshots/altair_communicate_16a.png" width="50%" /><img src="screenshots/altair_communicate_16b.png" width="50%" />
 
 
 ### Exercises
@@ -610,8 +593,7 @@ chart2.save("screenshots/altair_communicate_17b.png")
 ```
 
 
-
-\includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_17a} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_17b} 
+<img src="screenshots/altair_communicate_17a.png" width="50%" /><img src="screenshots/altair_communicate_17b.png" width="50%" />
 
 You can also set the `limits` on individual scales. Reducing the limits is basically equivalent to subsetting the data. It is generally more useful if you want _expand_ the limits, for example, to match scales across different plots. For example, if we extract two classes of cars and plot them separately, it's difficult to compare the plots because all three scales (the x-axis, the y-axis, and the colour aesthetic) have different ranges.
 
@@ -643,8 +625,7 @@ chart2.save("screenshots/altair_communicate_18b.png")
 ```
 
 
-
-\includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_18a} \includegraphics[width=0.5\linewidth]{screenshots/altair_communicate_18b} 
+<img src="screenshots/altair_communicate_18a.png" width="50%" /><img src="screenshots/altair_communicate_18b.png" width="50%" />
 
 One way to overcome this problem is to share scales across multiple plots using `.resolve_scale()`.
 
@@ -675,8 +656,7 @@ chart.save("screenshots/altair_communicate_19.png")
 ```
 
 
-
-\includegraphics[width=0.75\linewidth]{screenshots/altair_communicate_19} 
+<img src="screenshots/altair_communicate_19.png" width="75%" />
 
 ## Themes
 
@@ -696,19 +676,14 @@ chart.save("screenshots/altair_communicate_20.png")
 ```
 
 
-
-\includegraphics[width=0.75\linewidth]{screenshots/altair_communicate_20} 
+<img src="screenshots/altair_communicate_20.png" width="75%" />
 
 Vega currently includes some themes which altair can access with `themes.enable()`, as shown in Figure \@ref(fig:themes). 
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.7\linewidth]{images/visualization-themes-altair} 
-
-}
-
-\caption{The eight themes built-in to ggplot2.}(\#fig:themes)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/visualization-themes-altair.png" alt="The eight themes built-in to ggplot2." width="70%" />
+<p class="caption">(\#fig:themes)The eight themes built-in to ggplot2.</p>
+</div>
 
 It's also possible to control individual components of each theme, like the size and colour of the font used for the y axis. Unfortunately, this level of detail is outside the scope of this book. I recommend Sergio Sanchez's ['Consistently Beautiful Visualizations with Altair Themes'](Consistently Beautiful Visualizations with Altair Themes) Medium article for details. You can also create your own themes, if you are trying to match a particular corporate or journal style.
 

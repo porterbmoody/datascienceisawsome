@@ -109,8 +109,7 @@ weather = pd.read_csv("{}weather/weather.csv".format(base_url))
 
 One way to show the relationships between the different tables is with a drawing:
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{diagrams/relational-nycflights} \end{center}
+<img src="diagrams/relational-nycflights.png" width="70%" style="display: block; margin: auto;" />
 
 This diagram is a little overwhelming, but it's simple compared to some you'll see in the wild! The key to understanding diagrams like this is to remember each relation always concerns a pair of tables. You don't need to understand the whole thing; you just need to understand the chain of relations between the tables that you are interested in.
 
@@ -263,8 +262,7 @@ The result of joining airlines to flights2 is an additional variable: `name`. Th
 
 To help you learn how joins work, I'm going to use a visual representation:
 
-
-\begin{center}\includegraphics[width=3.28in]{diagrams/join-setup} \end{center}
+<img src="diagrams/join-setup.png" width="118" style="display: block; margin: auto;" />
 
 ```python
 x = pd.DataFrame({
@@ -281,22 +279,19 @@ The coloured column represents the "key" variable: these are used to match the r
 
 A join is a way of connecting each row in `x` to zero, one, or more rows in `y`. The following diagram shows each potential match as an intersection of a pair of lines.
 
-
-\begin{center}\includegraphics[width=4.61in]{diagrams/join-setup2} \end{center}
+<img src="diagrams/join-setup2.png" width="166" style="display: block; margin: auto;" />
 
 (If you look closely, you might notice that we've switched the order of the key and value columns in `x`. This is to emphasise that joins match based on the key; the value is just carried along for the ride.)
 
 In an actual join, matches will be indicated with dots. The number of dots = the number of matches = the number of rows in the output.
 
-
-\begin{center}\includegraphics[width=9.39in]{diagrams/join-inner} \end{center}
+<img src="diagrams/join-inner.png" width="338" style="display: block; margin: auto;" />
 
 ### Inner join {#inner-join}
 
 The simplest type of join is the __inner join__. An inner join matches pairs of observations whenever their keys are equal using the argument `how = 'inner'`:
 
-
-\begin{center}\includegraphics[width=9.39in]{diagrams/join-inner} \end{center}
+<img src="diagrams/join-inner.png" width="338" style="display: block; margin: auto;" />
 
 (To be precise, this is an inner __equijoin__ because the keys are matched using the equality operator. Since most joins are equijoins we usually drop that specification.)
 
@@ -325,15 +320,13 @@ These joins work by adding an additional "virtual" observation to each table. Th
 
 Graphically, that looks like:
 
-
-\begin{center}\includegraphics[width=9.86in]{diagrams/join-outer} \end{center}
+<img src="diagrams/join-outer.png" width="355" style="display: block; margin: auto;" />
 
 The most commonly used join is the left join: you use this whenever you look up additional data from another table, because it preserves the original observations even when there isn't a match. The left join should be your default join: use it unless you have a strong reason to prefer one of the others.
 
 Another way to depict the different types of joins is with a Venn diagram:
 
-
-\begin{center}\includegraphics[width=15.31in]{diagrams/join-venn} \end{center}
+<img src="diagrams/join-venn.png" width="551" style="display: block; margin: auto;" />
 
 However, this is not a great representation. It might jog your memory about which join preserves the observations in which table, but it suffers from a major limitation: a Venn diagram can't show what happens when keys don't uniquely identify an observation.
 
@@ -345,8 +338,7 @@ So far all the diagrams have assumed that the keys are unique. But that's not al
     add in additional information as there is typically a one-to-many
     relationship.
 
-    
-    \begin{center}\includegraphics[width=7.75in]{diagrams/join-one-to-many} \end{center}
+    <img src="diagrams/join-one-to-many.png" width="279" style="display: block; margin: auto;" />
 
     Note that I've put the key column in a slightly different position
     in the output. This reflects that the key is a primary key in `y`
@@ -375,8 +367,7 @@ So far all the diagrams have assumed that the keys are unique. But that's not al
     neither table do the keys uniquely identify an observation. When you join
     duplicated keys, you get all possible combinations, the Cartesian product:
 
-    
-    \begin{center}\includegraphics[width=9.51in]{diagrams/join-many-to-many} \end{center}
+    <img src="diagrams/join-many-to-many.png" width="342" style="display: block; margin: auto;" />
 
     
     ```python
@@ -535,18 +526,15 @@ Instead you can use a semi-joins, which connects the two tables like a mutating 
 
 Graphically, a semi-join looks like this:
 
-
-\begin{center}\includegraphics[width=8.53in]{diagrams/join-semi} \end{center}
+<img src="diagrams/join-semi.png" width="307" style="display: block; margin: auto;" />
 
 Only the existence of a match is important; it doesn't matter which observation is matched. This means that filtering joins never duplicate rows like mutating joins do:
 
-
-\begin{center}\includegraphics[width=8.65in]{diagrams/join-semi-many} \end{center}
+<img src="diagrams/join-semi-many.png" width="312" style="display: block; margin: auto;" />
 
 The inverse of a semi-join is an anti-join. An anti-join keeps the rows that _don't_ have a match:
 
-
-\begin{center}\includegraphics[width=8.53in]{diagrams/join-anti} \end{center}
+<img src="diagrams/join-anti.png" width="307" style="display: block; margin: auto;" />
 
 Anti-joins are useful for diagnosing join mismatches. For example, when connecting `flights` and `planes`, you might be interested to know that there are many `flights` that don't have a match in `planes`:
 

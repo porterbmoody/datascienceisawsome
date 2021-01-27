@@ -33,7 +33,7 @@
   
 <link rel="prev" href="data-import.html"/>
 <link rel="next" href="relational-data.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +52,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/vega-5.9.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
@@ -641,63 +643,63 @@ own way.” –– Hadley Wickham</p>
 <h3><span class="header-section-number">12.1.1</span> Prerequisites</h3>
 <p>In this chapter we’ll focus on pandas, a package that provides a bunch of tools to help tidy up your messy datasets.</p>
 <!-- http://shzhangji.com/blog/2017/09/30/pandas-and-tidy-data/ -->
-<div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="tidy-data.html#cb184-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb184-2"><a href="tidy-data.html#cb184-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb184-3"><a href="tidy-data.html#cb184-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb183-1"><a href="tidy-data.html#cb183-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb183-2"><a href="tidy-data.html#cb183-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb183-3"><a href="tidy-data.html#cb183-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="tidy-data-1" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Tidy data</h2>
 <p>You can represent the same underlying data in multiple ways. The example below shows the same data organised in four different ways. Each dataset shows the same values of four variables <em>country</em>, <em>year</em>, <em>population</em>, and <em>cases</em>, but each dataset organises the values in a different way.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb185-1"><a href="tidy-data.html#cb185-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
-<span id="cb185-2"><a href="tidy-data.html#cb185-2"></a>table1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table1/table1.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb185-3"><a href="tidy-data.html#cb185-3"></a>table2 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table2/table2.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb185-4"><a href="tidy-data.html#cb185-4"></a>table3 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table3/table3.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb185-5"><a href="tidy-data.html#cb185-5"></a>table4a <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table4a/table4a.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb185-6"><a href="tidy-data.html#cb185-6"></a>table4b <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table4b/table4b.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb185-7"><a href="tidy-data.html#cb185-7"></a>table5 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table5/table5.csv&quot;</span>.<span class="bu">format</span>(base_url), dtype <span class="op">=</span> <span class="st">&#39;object&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb186"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="tidy-data.html#cb186-1"></a>table1</span>
-<span id="cb186-2"><a href="tidy-data.html#cb186-2"></a><span class="co">#&gt;        country  year   cases  population</span></span>
-<span id="cb186-3"><a href="tidy-data.html#cb186-3"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
-<span id="cb186-4"><a href="tidy-data.html#cb186-4"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360</span></span>
-<span id="cb186-5"><a href="tidy-data.html#cb186-5"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362</span></span>
-<span id="cb186-6"><a href="tidy-data.html#cb186-6"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898</span></span>
-<span id="cb186-7"><a href="tidy-data.html#cb186-7"></a><span class="co">#&gt; 4        China  1999  212258  1272915272</span></span>
-<span id="cb186-8"><a href="tidy-data.html#cb186-8"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span>
-<span id="cb186-9"><a href="tidy-data.html#cb186-9"></a>table2</span>
-<span id="cb186-10"><a href="tidy-data.html#cb186-10"></a><span class="co">#&gt;         country  year        type       count</span></span>
-<span id="cb186-11"><a href="tidy-data.html#cb186-11"></a><span class="co">#&gt; 0   Afghanistan  1999       cases         745</span></span>
-<span id="cb186-12"><a href="tidy-data.html#cb186-12"></a><span class="co">#&gt; 1   Afghanistan  1999  population    19987071</span></span>
-<span id="cb186-13"><a href="tidy-data.html#cb186-13"></a><span class="co">#&gt; 2   Afghanistan  2000       cases        2666</span></span>
-<span id="cb186-14"><a href="tidy-data.html#cb186-14"></a><span class="co">#&gt; 3   Afghanistan  2000  population    20595360</span></span>
-<span id="cb186-15"><a href="tidy-data.html#cb186-15"></a><span class="co">#&gt; 4        Brazil  1999       cases       37737</span></span>
-<span id="cb186-16"><a href="tidy-data.html#cb186-16"></a><span class="co">#&gt; 5        Brazil  1999  population   172006362</span></span>
-<span id="cb186-17"><a href="tidy-data.html#cb186-17"></a><span class="co">#&gt; 6        Brazil  2000       cases       80488</span></span>
-<span id="cb186-18"><a href="tidy-data.html#cb186-18"></a><span class="co">#&gt; 7        Brazil  2000  population   174504898</span></span>
-<span id="cb186-19"><a href="tidy-data.html#cb186-19"></a><span class="co">#&gt; 8         China  1999       cases      212258</span></span>
-<span id="cb186-20"><a href="tidy-data.html#cb186-20"></a><span class="co">#&gt; 9         China  1999  population  1272915272</span></span>
-<span id="cb186-21"><a href="tidy-data.html#cb186-21"></a><span class="co">#&gt; 10        China  2000       cases      213766</span></span>
-<span id="cb186-22"><a href="tidy-data.html#cb186-22"></a><span class="co">#&gt; 11        China  2000  population  1280428583</span></span>
-<span id="cb186-23"><a href="tidy-data.html#cb186-23"></a>table3</span>
-<span id="cb186-24"><a href="tidy-data.html#cb186-24"></a></span>
-<span id="cb186-25"><a href="tidy-data.html#cb186-25"></a><span class="co"># Spread across two tibbles</span></span>
-<span id="cb186-26"><a href="tidy-data.html#cb186-26"></a><span class="co">#&gt;        country  year               rate</span></span>
-<span id="cb186-27"><a href="tidy-data.html#cb186-27"></a><span class="co">#&gt; 0  Afghanistan  1999       745/19987071</span></span>
-<span id="cb186-28"><a href="tidy-data.html#cb186-28"></a><span class="co">#&gt; 1  Afghanistan  2000      2666/20595360</span></span>
-<span id="cb186-29"><a href="tidy-data.html#cb186-29"></a><span class="co">#&gt; 2       Brazil  1999    37737/172006362</span></span>
-<span id="cb186-30"><a href="tidy-data.html#cb186-30"></a><span class="co">#&gt; 3       Brazil  2000    80488/174504898</span></span>
-<span id="cb186-31"><a href="tidy-data.html#cb186-31"></a><span class="co">#&gt; 4        China  1999  212258/1272915272</span></span>
-<span id="cb186-32"><a href="tidy-data.html#cb186-32"></a><span class="co">#&gt; 5        China  2000  213766/1280428583</span></span>
-<span id="cb186-33"><a href="tidy-data.html#cb186-33"></a>table4a  <span class="co"># cases</span></span>
-<span id="cb186-34"><a href="tidy-data.html#cb186-34"></a><span class="co">#&gt;        country    1999    2000</span></span>
-<span id="cb186-35"><a href="tidy-data.html#cb186-35"></a><span class="co">#&gt; 0  Afghanistan     745    2666</span></span>
-<span id="cb186-36"><a href="tidy-data.html#cb186-36"></a><span class="co">#&gt; 1       Brazil   37737   80488</span></span>
-<span id="cb186-37"><a href="tidy-data.html#cb186-37"></a><span class="co">#&gt; 2        China  212258  213766</span></span>
-<span id="cb186-38"><a href="tidy-data.html#cb186-38"></a>table4b  <span class="co"># population</span></span>
-<span id="cb186-39"><a href="tidy-data.html#cb186-39"></a><span class="co">#&gt;        country        1999        2000</span></span>
-<span id="cb186-40"><a href="tidy-data.html#cb186-40"></a><span class="co">#&gt; 0  Afghanistan    19987071    20595360</span></span>
-<span id="cb186-41"><a href="tidy-data.html#cb186-41"></a><span class="co">#&gt; 1       Brazil   172006362   174504898</span></span>
-<span id="cb186-42"><a href="tidy-data.html#cb186-42"></a><span class="co">#&gt; 2        China  1272915272  1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="tidy-data.html#cb184-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
+<span id="cb184-2"><a href="tidy-data.html#cb184-2"></a>table1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table1/table1.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb184-3"><a href="tidy-data.html#cb184-3"></a>table2 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table2/table2.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb184-4"><a href="tidy-data.html#cb184-4"></a>table3 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table3/table3.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb184-5"><a href="tidy-data.html#cb184-5"></a>table4a <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table4a/table4a.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb184-6"><a href="tidy-data.html#cb184-6"></a>table4b <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table4b/table4b.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb184-7"><a href="tidy-data.html#cb184-7"></a>table5 <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">table5/table5.csv&quot;</span>.<span class="bu">format</span>(base_url), dtype <span class="op">=</span> <span class="st">&#39;object&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb185-1"><a href="tidy-data.html#cb185-1"></a>table1</span>
+<span id="cb185-2"><a href="tidy-data.html#cb185-2"></a><span class="co">#&gt;        country  year   cases  population</span></span>
+<span id="cb185-3"><a href="tidy-data.html#cb185-3"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
+<span id="cb185-4"><a href="tidy-data.html#cb185-4"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360</span></span>
+<span id="cb185-5"><a href="tidy-data.html#cb185-5"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362</span></span>
+<span id="cb185-6"><a href="tidy-data.html#cb185-6"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898</span></span>
+<span id="cb185-7"><a href="tidy-data.html#cb185-7"></a><span class="co">#&gt; 4        China  1999  212258  1272915272</span></span>
+<span id="cb185-8"><a href="tidy-data.html#cb185-8"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span>
+<span id="cb185-9"><a href="tidy-data.html#cb185-9"></a>table2</span>
+<span id="cb185-10"><a href="tidy-data.html#cb185-10"></a><span class="co">#&gt;         country  year        type       count</span></span>
+<span id="cb185-11"><a href="tidy-data.html#cb185-11"></a><span class="co">#&gt; 0   Afghanistan  1999       cases         745</span></span>
+<span id="cb185-12"><a href="tidy-data.html#cb185-12"></a><span class="co">#&gt; 1   Afghanistan  1999  population    19987071</span></span>
+<span id="cb185-13"><a href="tidy-data.html#cb185-13"></a><span class="co">#&gt; 2   Afghanistan  2000       cases        2666</span></span>
+<span id="cb185-14"><a href="tidy-data.html#cb185-14"></a><span class="co">#&gt; 3   Afghanistan  2000  population    20595360</span></span>
+<span id="cb185-15"><a href="tidy-data.html#cb185-15"></a><span class="co">#&gt; 4        Brazil  1999       cases       37737</span></span>
+<span id="cb185-16"><a href="tidy-data.html#cb185-16"></a><span class="co">#&gt; 5        Brazil  1999  population   172006362</span></span>
+<span id="cb185-17"><a href="tidy-data.html#cb185-17"></a><span class="co">#&gt; 6        Brazil  2000       cases       80488</span></span>
+<span id="cb185-18"><a href="tidy-data.html#cb185-18"></a><span class="co">#&gt; 7        Brazil  2000  population   174504898</span></span>
+<span id="cb185-19"><a href="tidy-data.html#cb185-19"></a><span class="co">#&gt; 8         China  1999       cases      212258</span></span>
+<span id="cb185-20"><a href="tidy-data.html#cb185-20"></a><span class="co">#&gt; 9         China  1999  population  1272915272</span></span>
+<span id="cb185-21"><a href="tidy-data.html#cb185-21"></a><span class="co">#&gt; 10        China  2000       cases      213766</span></span>
+<span id="cb185-22"><a href="tidy-data.html#cb185-22"></a><span class="co">#&gt; 11        China  2000  population  1280428583</span></span>
+<span id="cb185-23"><a href="tidy-data.html#cb185-23"></a>table3</span>
+<span id="cb185-24"><a href="tidy-data.html#cb185-24"></a></span>
+<span id="cb185-25"><a href="tidy-data.html#cb185-25"></a><span class="co"># Spread across two tibbles</span></span>
+<span id="cb185-26"><a href="tidy-data.html#cb185-26"></a><span class="co">#&gt;        country  year               rate</span></span>
+<span id="cb185-27"><a href="tidy-data.html#cb185-27"></a><span class="co">#&gt; 0  Afghanistan  1999       745/19987071</span></span>
+<span id="cb185-28"><a href="tidy-data.html#cb185-28"></a><span class="co">#&gt; 1  Afghanistan  2000      2666/20595360</span></span>
+<span id="cb185-29"><a href="tidy-data.html#cb185-29"></a><span class="co">#&gt; 2       Brazil  1999    37737/172006362</span></span>
+<span id="cb185-30"><a href="tidy-data.html#cb185-30"></a><span class="co">#&gt; 3       Brazil  2000    80488/174504898</span></span>
+<span id="cb185-31"><a href="tidy-data.html#cb185-31"></a><span class="co">#&gt; 4        China  1999  212258/1272915272</span></span>
+<span id="cb185-32"><a href="tidy-data.html#cb185-32"></a><span class="co">#&gt; 5        China  2000  213766/1280428583</span></span>
+<span id="cb185-33"><a href="tidy-data.html#cb185-33"></a>table4a  <span class="co"># cases</span></span>
+<span id="cb185-34"><a href="tidy-data.html#cb185-34"></a><span class="co">#&gt;        country    1999    2000</span></span>
+<span id="cb185-35"><a href="tidy-data.html#cb185-35"></a><span class="co">#&gt; 0  Afghanistan     745    2666</span></span>
+<span id="cb185-36"><a href="tidy-data.html#cb185-36"></a><span class="co">#&gt; 1       Brazil   37737   80488</span></span>
+<span id="cb185-37"><a href="tidy-data.html#cb185-37"></a><span class="co">#&gt; 2        China  212258  213766</span></span>
+<span id="cb185-38"><a href="tidy-data.html#cb185-38"></a>table4b  <span class="co"># population</span></span>
+<span id="cb185-39"><a href="tidy-data.html#cb185-39"></a><span class="co">#&gt;        country        1999        2000</span></span>
+<span id="cb185-40"><a href="tidy-data.html#cb185-40"></a><span class="co">#&gt; 0  Afghanistan    19987071    20595360</span></span>
+<span id="cb185-41"><a href="tidy-data.html#cb185-41"></a><span class="co">#&gt; 1       Brazil   172006362   174504898</span></span>
+<span id="cb185-42"><a href="tidy-data.html#cb185-42"></a><span class="co">#&gt; 2        China  1272915272  1280428583</span></span></code></pre></div>
 <p>These are all representations of the same underlying data, but they are not equally easy to use. One dataset, the tidy dataset, will be much easier to work with inside the tidyverse.</p>
 <p>There are three interrelated rules which make a dataset tidy:</p>
 <ol style="list-style-type: decimal">
@@ -730,34 +732,34 @@ built-in R functions work with vectors of values. That makes transforming
 tidy data feel particularly natural.</p></li>
 </ol>
 <p>Altair and pandas work well with tidy data. Here are a couple of small examples showing how you might work with <code>table1</code>.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb187-1"><a href="tidy-data.html#cb187-1"></a><span class="co"># Compute rate per 10,000</span></span>
-<span id="cb187-2"><a href="tidy-data.html#cb187-2"></a>table1.assign(</span>
-<span id="cb187-3"><a href="tidy-data.html#cb187-3"></a>    rate <span class="op">=</span> <span class="kw">lambda</span> x: x.cases <span class="op">/</span> x.population <span class="op">*</span> <span class="dv">1000</span></span>
-<span id="cb187-4"><a href="tidy-data.html#cb187-4"></a>)</span>
-<span id="cb187-5"><a href="tidy-data.html#cb187-5"></a><span class="co"># Compute cases per year</span></span>
-<span id="cb187-6"><a href="tidy-data.html#cb187-6"></a><span class="co">#&gt;        country  year   cases  population      rate</span></span>
-<span id="cb187-7"><a href="tidy-data.html#cb187-7"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071  0.037274</span></span>
-<span id="cb187-8"><a href="tidy-data.html#cb187-8"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360  0.129447</span></span>
-<span id="cb187-9"><a href="tidy-data.html#cb187-9"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362  0.219393</span></span>
-<span id="cb187-10"><a href="tidy-data.html#cb187-10"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898  0.461236</span></span>
-<span id="cb187-11"><a href="tidy-data.html#cb187-11"></a><span class="co">#&gt; 4        China  1999  212258  1272915272  0.166750</span></span>
-<span id="cb187-12"><a href="tidy-data.html#cb187-12"></a><span class="co">#&gt; 5        China  2000  213766  1280428583  0.166949</span></span>
-<span id="cb187-13"><a href="tidy-data.html#cb187-13"></a>(table1.</span>
-<span id="cb187-14"><a href="tidy-data.html#cb187-14"></a>  groupby(<span class="st">&#39;year&#39;</span>).</span>
-<span id="cb187-15"><a href="tidy-data.html#cb187-15"></a>  agg(n <span class="op">=</span> (<span class="st">&#39;cases&#39;</span>, <span class="st">&#39;sum&#39;</span>)).</span>
-<span id="cb187-16"><a href="tidy-data.html#cb187-16"></a>  reset_index())</span>
-<span id="cb187-17"><a href="tidy-data.html#cb187-17"></a></span>
-<span id="cb187-18"><a href="tidy-data.html#cb187-18"></a><span class="co"># Visualise changes over time</span></span>
-<span id="cb187-19"><a href="tidy-data.html#cb187-19"></a><span class="co"># import altair as alt</span></span>
-<span id="cb187-20"><a href="tidy-data.html#cb187-20"></a><span class="co">#&gt;    year       n</span></span>
-<span id="cb187-21"><a href="tidy-data.html#cb187-21"></a><span class="co">#&gt; 0  1999  250740</span></span>
-<span id="cb187-22"><a href="tidy-data.html#cb187-22"></a><span class="co">#&gt; 1  2000  296920</span></span>
-<span id="cb187-23"><a href="tidy-data.html#cb187-23"></a>base_chart <span class="op">=</span> (alt.Chart(table1).</span>
-<span id="cb187-24"><a href="tidy-data.html#cb187-24"></a>  encode(alt.X(<span class="st">&#39;year&#39;</span>), alt.Y(<span class="st">&#39;cases&#39;</span>), detail <span class="op">=</span> <span class="st">&#39;country&#39;</span>))</span>
-<span id="cb187-25"><a href="tidy-data.html#cb187-25"></a></span>
-<span id="cb187-26"><a href="tidy-data.html#cb187-26"></a>chart <span class="op">=</span> base_chart.mark_line() <span class="op">+</span> base_chart.encode(color <span class="op">=</span> <span class="st">&#39;country&#39;</span>).mark_circle()</span>
-<span id="cb187-27"><a href="tidy-data.html#cb187-27"></a></span>
-<span id="cb187-28"><a href="tidy-data.html#cb187-28"></a>chart.save(<span class="st">&quot;screenshots/altair_table1.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="tidy-data.html#cb186-1"></a><span class="co"># Compute rate per 10,000</span></span>
+<span id="cb186-2"><a href="tidy-data.html#cb186-2"></a>table1.assign(</span>
+<span id="cb186-3"><a href="tidy-data.html#cb186-3"></a>    rate <span class="op">=</span> <span class="kw">lambda</span> x: x.cases <span class="op">/</span> x.population <span class="op">*</span> <span class="dv">1000</span></span>
+<span id="cb186-4"><a href="tidy-data.html#cb186-4"></a>)</span>
+<span id="cb186-5"><a href="tidy-data.html#cb186-5"></a><span class="co"># Compute cases per year</span></span>
+<span id="cb186-6"><a href="tidy-data.html#cb186-6"></a><span class="co">#&gt;        country  year   cases  population      rate</span></span>
+<span id="cb186-7"><a href="tidy-data.html#cb186-7"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071  0.037274</span></span>
+<span id="cb186-8"><a href="tidy-data.html#cb186-8"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360  0.129447</span></span>
+<span id="cb186-9"><a href="tidy-data.html#cb186-9"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362  0.219393</span></span>
+<span id="cb186-10"><a href="tidy-data.html#cb186-10"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898  0.461236</span></span>
+<span id="cb186-11"><a href="tidy-data.html#cb186-11"></a><span class="co">#&gt; 4        China  1999  212258  1272915272  0.166750</span></span>
+<span id="cb186-12"><a href="tidy-data.html#cb186-12"></a><span class="co">#&gt; 5        China  2000  213766  1280428583  0.166949</span></span>
+<span id="cb186-13"><a href="tidy-data.html#cb186-13"></a>(table1.</span>
+<span id="cb186-14"><a href="tidy-data.html#cb186-14"></a>  groupby(<span class="st">&#39;year&#39;</span>).</span>
+<span id="cb186-15"><a href="tidy-data.html#cb186-15"></a>  agg(n <span class="op">=</span> (<span class="st">&#39;cases&#39;</span>, <span class="st">&#39;sum&#39;</span>)).</span>
+<span id="cb186-16"><a href="tidy-data.html#cb186-16"></a>  reset_index())</span>
+<span id="cb186-17"><a href="tidy-data.html#cb186-17"></a></span>
+<span id="cb186-18"><a href="tidy-data.html#cb186-18"></a><span class="co"># Visualise changes over time</span></span>
+<span id="cb186-19"><a href="tidy-data.html#cb186-19"></a><span class="co"># import altair as alt</span></span>
+<span id="cb186-20"><a href="tidy-data.html#cb186-20"></a><span class="co">#&gt;    year       n</span></span>
+<span id="cb186-21"><a href="tidy-data.html#cb186-21"></a><span class="co">#&gt; 0  1999  250740</span></span>
+<span id="cb186-22"><a href="tidy-data.html#cb186-22"></a><span class="co">#&gt; 1  2000  296920</span></span>
+<span id="cb186-23"><a href="tidy-data.html#cb186-23"></a>base_chart <span class="op">=</span> (alt.Chart(table1).</span>
+<span id="cb186-24"><a href="tidy-data.html#cb186-24"></a>  encode(alt.X(<span class="st">&#39;year&#39;</span>), alt.Y(<span class="st">&#39;cases&#39;</span>), detail <span class="op">=</span> <span class="st">&#39;country&#39;</span>))</span>
+<span id="cb186-25"><a href="tidy-data.html#cb186-25"></a></span>
+<span id="cb186-26"><a href="tidy-data.html#cb186-26"></a>chart <span class="op">=</span> base_chart.mark_line() <span class="op">+</span> base_chart.encode(color <span class="op">=</span> <span class="st">&#39;country&#39;</span>).mark_circle()</span>
+<span id="cb186-27"><a href="tidy-data.html#cb186-27"></a></span>
+<span id="cb186-28"><a href="tidy-data.html#cb186-28"></a>chart.save(<span class="st">&quot;screenshots/altair_table1.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_table1.png" width="50%" style="display: block; margin: auto;" /></p>
 <div id="exercises" class="section level3" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Exercises</h3>
@@ -797,11 +799,11 @@ example, data is often organised to make entry as easy as possible.</p></li>
 <div id="longer-melt" class="section level3" number="12.3.1">
 <h3><span class="header-section-number">12.3.1</span> Longer (<code>melt()</code>)</h3>
 <p>A common problem is a dataset where some of the column names are not names of variables, but <em>values</em> of a variable. Take <code>table4a</code>: the column names <code>1999</code> and <code>2000</code> represent values of the <code>year</code> variable, the values in the <code>1999</code> and <code>2000</code> columns represent values of the <code>cases</code> variable, and each row represents two observations, not one.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb188-1"><a href="tidy-data.html#cb188-1"></a>table4a</span>
-<span id="cb188-2"><a href="tidy-data.html#cb188-2"></a><span class="co">#&gt;        country    1999    2000</span></span>
-<span id="cb188-3"><a href="tidy-data.html#cb188-3"></a><span class="co">#&gt; 0  Afghanistan     745    2666</span></span>
-<span id="cb188-4"><a href="tidy-data.html#cb188-4"></a><span class="co">#&gt; 1       Brazil   37737   80488</span></span>
-<span id="cb188-5"><a href="tidy-data.html#cb188-5"></a><span class="co">#&gt; 2        China  212258  213766</span></span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb187-1"><a href="tidy-data.html#cb187-1"></a>table4a</span>
+<span id="cb187-2"><a href="tidy-data.html#cb187-2"></a><span class="co">#&gt;        country    1999    2000</span></span>
+<span id="cb187-3"><a href="tidy-data.html#cb187-3"></a><span class="co">#&gt; 0  Afghanistan     745    2666</span></span>
+<span id="cb187-4"><a href="tidy-data.html#cb187-4"></a><span class="co">#&gt; 1       Brazil   37737   80488</span></span>
+<span id="cb187-5"><a href="tidy-data.html#cb187-5"></a><span class="co">#&gt; 2        China  212258  213766</span></span></code></pre></div>
 <p>To tidy a dataset like this, we need to <strong>stack</strong> the offending columns into a new pair of variables. To describe that operation we need three parameters:</p>
 <ul>
 <li><p>The set of columns whose names are identifier variables, not values. In this example,
@@ -810,14 +812,14 @@ example, data is often organised to make entry as easy as possible.</p></li>
 <li><p>The name of the variable to move the column values to. Here it’s <code>cases</code>.</p></li>
 </ul>
 <p>Together those parameters generate the call to <code>melt()</code>:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a href="tidy-data.html#cb189-1"></a>table4a.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&quot;year&quot;</span>, value_name <span class="op">=</span> <span class="st">&quot;cases&quot;</span>)</span>
-<span id="cb189-2"><a href="tidy-data.html#cb189-2"></a><span class="co">#&gt;        country  year   cases</span></span>
-<span id="cb189-3"><a href="tidy-data.html#cb189-3"></a><span class="co">#&gt; 0  Afghanistan  1999     745</span></span>
-<span id="cb189-4"><a href="tidy-data.html#cb189-4"></a><span class="co">#&gt; 1       Brazil  1999   37737</span></span>
-<span id="cb189-5"><a href="tidy-data.html#cb189-5"></a><span class="co">#&gt; 2        China  1999  212258</span></span>
-<span id="cb189-6"><a href="tidy-data.html#cb189-6"></a><span class="co">#&gt; 3  Afghanistan  2000    2666</span></span>
-<span id="cb189-7"><a href="tidy-data.html#cb189-7"></a><span class="co">#&gt; 4       Brazil  2000   80488</span></span>
-<span id="cb189-8"><a href="tidy-data.html#cb189-8"></a><span class="co">#&gt; 5        China  2000  213766</span></span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb188-1"><a href="tidy-data.html#cb188-1"></a>table4a.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&quot;year&quot;</span>, value_name <span class="op">=</span> <span class="st">&quot;cases&quot;</span>)</span>
+<span id="cb188-2"><a href="tidy-data.html#cb188-2"></a><span class="co">#&gt;        country  year   cases</span></span>
+<span id="cb188-3"><a href="tidy-data.html#cb188-3"></a><span class="co">#&gt; 0  Afghanistan  1999     745</span></span>
+<span id="cb188-4"><a href="tidy-data.html#cb188-4"></a><span class="co">#&gt; 1       Brazil  1999   37737</span></span>
+<span id="cb188-5"><a href="tidy-data.html#cb188-5"></a><span class="co">#&gt; 2        China  1999  212258</span></span>
+<span id="cb188-6"><a href="tidy-data.html#cb188-6"></a><span class="co">#&gt; 3  Afghanistan  2000    2666</span></span>
+<span id="cb188-7"><a href="tidy-data.html#cb188-7"></a><span class="co">#&gt; 4       Brazil  2000   80488</span></span>
+<span id="cb188-8"><a href="tidy-data.html#cb188-8"></a><span class="co">#&gt; 5        China  2000  213766</span></span></code></pre></div>
 <p><code>year</code> and <code>cases</code> do not exist in <code>table4a</code> so we put their names in quotes.</p>
 <div class="figure" style="text-align: center"><span id="fig:tidy-gather"></span>
 <img src="images/tidy-9.png" alt="Pivoting `table4` into a longer, tidy form." width="100%" />
@@ -828,43 +830,43 @@ Figure 12.2: Pivoting <code>table4</code> into a longer, tidy form.
 <p>In the final result, the pivoted columns are dropped, and we get new <code>year</code> and <code>cases</code> columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure <a href="tidy-data.html#fig:tidy-gather">12.2</a>.</p>
 <p><code>melt()</code> makes datasets longer (imagine melting icecream down the cone) by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say (e.g.) that dataset A is longer than dataset B.</p>
 <p>We can use <code>melt()</code> to tidy <code>table4b</code> in a similar fashion. The only difference is the variable stored in the cell values:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="tidy-data.html#cb190-1"></a>table4b.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;population&#39;</span>)</span>
-<span id="cb190-2"><a href="tidy-data.html#cb190-2"></a><span class="co">#&gt;        country  year  population</span></span>
-<span id="cb190-3"><a href="tidy-data.html#cb190-3"></a><span class="co">#&gt; 0  Afghanistan  1999    19987071</span></span>
-<span id="cb190-4"><a href="tidy-data.html#cb190-4"></a><span class="co">#&gt; 1       Brazil  1999   172006362</span></span>
-<span id="cb190-5"><a href="tidy-data.html#cb190-5"></a><span class="co">#&gt; 2        China  1999  1272915272</span></span>
-<span id="cb190-6"><a href="tidy-data.html#cb190-6"></a><span class="co">#&gt; 3  Afghanistan  2000    20595360</span></span>
-<span id="cb190-7"><a href="tidy-data.html#cb190-7"></a><span class="co">#&gt; 4       Brazil  2000   174504898</span></span>
-<span id="cb190-8"><a href="tidy-data.html#cb190-8"></a><span class="co">#&gt; 5        China  2000  1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a href="tidy-data.html#cb189-1"></a>table4b.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;population&#39;</span>)</span>
+<span id="cb189-2"><a href="tidy-data.html#cb189-2"></a><span class="co">#&gt;        country  year  population</span></span>
+<span id="cb189-3"><a href="tidy-data.html#cb189-3"></a><span class="co">#&gt; 0  Afghanistan  1999    19987071</span></span>
+<span id="cb189-4"><a href="tidy-data.html#cb189-4"></a><span class="co">#&gt; 1       Brazil  1999   172006362</span></span>
+<span id="cb189-5"><a href="tidy-data.html#cb189-5"></a><span class="co">#&gt; 2        China  1999  1272915272</span></span>
+<span id="cb189-6"><a href="tidy-data.html#cb189-6"></a><span class="co">#&gt; 3  Afghanistan  2000    20595360</span></span>
+<span id="cb189-7"><a href="tidy-data.html#cb189-7"></a><span class="co">#&gt; 4       Brazil  2000   174504898</span></span>
+<span id="cb189-8"><a href="tidy-data.html#cb189-8"></a><span class="co">#&gt; 5        China  2000  1280428583</span></span></code></pre></div>
 <p>To combine the tidied versions of <code>table4a</code> and <code>table4b</code> into a single tibble, we need to use <code>merge()</code>, which you’ll learn about in [relational data].</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb191-1"><a href="tidy-data.html#cb191-1"></a>tidy4a <span class="op">=</span> table4a.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&quot;year&quot;</span>, value_name <span class="op">=</span> <span class="st">&quot;cases&quot;</span>)</span>
-<span id="cb191-2"><a href="tidy-data.html#cb191-2"></a>tidy4b <span class="op">=</span> table4b.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;population&#39;</span>)</span>
-<span id="cb191-3"><a href="tidy-data.html#cb191-3"></a>pd.merge(tidy4a, tidy4b, on <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>])</span>
-<span id="cb191-4"><a href="tidy-data.html#cb191-4"></a><span class="co">#&gt;        country  year   cases  population</span></span>
-<span id="cb191-5"><a href="tidy-data.html#cb191-5"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
-<span id="cb191-6"><a href="tidy-data.html#cb191-6"></a><span class="co">#&gt; 1       Brazil  1999   37737   172006362</span></span>
-<span id="cb191-7"><a href="tidy-data.html#cb191-7"></a><span class="co">#&gt; 2        China  1999  212258  1272915272</span></span>
-<span id="cb191-8"><a href="tidy-data.html#cb191-8"></a><span class="co">#&gt; 3  Afghanistan  2000    2666    20595360</span></span>
-<span id="cb191-9"><a href="tidy-data.html#cb191-9"></a><span class="co">#&gt; 4       Brazil  2000   80488   174504898</span></span>
-<span id="cb191-10"><a href="tidy-data.html#cb191-10"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="tidy-data.html#cb190-1"></a>tidy4a <span class="op">=</span> table4a.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&quot;year&quot;</span>, value_name <span class="op">=</span> <span class="st">&quot;cases&quot;</span>)</span>
+<span id="cb190-2"><a href="tidy-data.html#cb190-2"></a>tidy4b <span class="op">=</span> table4b.melt([<span class="st">&#39;country&#39;</span>], var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;population&#39;</span>)</span>
+<span id="cb190-3"><a href="tidy-data.html#cb190-3"></a>pd.merge(tidy4a, tidy4b, on <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>])</span>
+<span id="cb190-4"><a href="tidy-data.html#cb190-4"></a><span class="co">#&gt;        country  year   cases  population</span></span>
+<span id="cb190-5"><a href="tidy-data.html#cb190-5"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
+<span id="cb190-6"><a href="tidy-data.html#cb190-6"></a><span class="co">#&gt; 1       Brazil  1999   37737   172006362</span></span>
+<span id="cb190-7"><a href="tidy-data.html#cb190-7"></a><span class="co">#&gt; 2        China  1999  212258  1272915272</span></span>
+<span id="cb190-8"><a href="tidy-data.html#cb190-8"></a><span class="co">#&gt; 3  Afghanistan  2000    2666    20595360</span></span>
+<span id="cb190-9"><a href="tidy-data.html#cb190-9"></a><span class="co">#&gt; 4       Brazil  2000   80488   174504898</span></span>
+<span id="cb190-10"><a href="tidy-data.html#cb190-10"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
 </div>
 <div id="wider-pivot" class="section level3" number="12.3.2">
 <h3><span class="header-section-number">12.3.2</span> Wider (<code>pivot()</code>)</h3>
 <p><code>pivot()</code> is the opposite of <code>melt()</code>. You use it when an observation is scattered across multiple rows. For example, take <code>table2</code>: an observation is a country in a year, but each observation is spread across two rows.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="tidy-data.html#cb192-1"></a>table2</span>
-<span id="cb192-2"><a href="tidy-data.html#cb192-2"></a><span class="co">#&gt;         country  year        type       count</span></span>
-<span id="cb192-3"><a href="tidy-data.html#cb192-3"></a><span class="co">#&gt; 0   Afghanistan  1999       cases         745</span></span>
-<span id="cb192-4"><a href="tidy-data.html#cb192-4"></a><span class="co">#&gt; 1   Afghanistan  1999  population    19987071</span></span>
-<span id="cb192-5"><a href="tidy-data.html#cb192-5"></a><span class="co">#&gt; 2   Afghanistan  2000       cases        2666</span></span>
-<span id="cb192-6"><a href="tidy-data.html#cb192-6"></a><span class="co">#&gt; 3   Afghanistan  2000  population    20595360</span></span>
-<span id="cb192-7"><a href="tidy-data.html#cb192-7"></a><span class="co">#&gt; 4        Brazil  1999       cases       37737</span></span>
-<span id="cb192-8"><a href="tidy-data.html#cb192-8"></a><span class="co">#&gt; 5        Brazil  1999  population   172006362</span></span>
-<span id="cb192-9"><a href="tidy-data.html#cb192-9"></a><span class="co">#&gt; 6        Brazil  2000       cases       80488</span></span>
-<span id="cb192-10"><a href="tidy-data.html#cb192-10"></a><span class="co">#&gt; 7        Brazil  2000  population   174504898</span></span>
-<span id="cb192-11"><a href="tidy-data.html#cb192-11"></a><span class="co">#&gt; 8         China  1999       cases      212258</span></span>
-<span id="cb192-12"><a href="tidy-data.html#cb192-12"></a><span class="co">#&gt; 9         China  1999  population  1272915272</span></span>
-<span id="cb192-13"><a href="tidy-data.html#cb192-13"></a><span class="co">#&gt; 10        China  2000       cases      213766</span></span>
-<span id="cb192-14"><a href="tidy-data.html#cb192-14"></a><span class="co">#&gt; 11        China  2000  population  1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb191-1"><a href="tidy-data.html#cb191-1"></a>table2</span>
+<span id="cb191-2"><a href="tidy-data.html#cb191-2"></a><span class="co">#&gt;         country  year        type       count</span></span>
+<span id="cb191-3"><a href="tidy-data.html#cb191-3"></a><span class="co">#&gt; 0   Afghanistan  1999       cases         745</span></span>
+<span id="cb191-4"><a href="tidy-data.html#cb191-4"></a><span class="co">#&gt; 1   Afghanistan  1999  population    19987071</span></span>
+<span id="cb191-5"><a href="tidy-data.html#cb191-5"></a><span class="co">#&gt; 2   Afghanistan  2000       cases        2666</span></span>
+<span id="cb191-6"><a href="tidy-data.html#cb191-6"></a><span class="co">#&gt; 3   Afghanistan  2000  population    20595360</span></span>
+<span id="cb191-7"><a href="tidy-data.html#cb191-7"></a><span class="co">#&gt; 4        Brazil  1999       cases       37737</span></span>
+<span id="cb191-8"><a href="tidy-data.html#cb191-8"></a><span class="co">#&gt; 5        Brazil  1999  population   172006362</span></span>
+<span id="cb191-9"><a href="tidy-data.html#cb191-9"></a><span class="co">#&gt; 6        Brazil  2000       cases       80488</span></span>
+<span id="cb191-10"><a href="tidy-data.html#cb191-10"></a><span class="co">#&gt; 7        Brazil  2000  population   174504898</span></span>
+<span id="cb191-11"><a href="tidy-data.html#cb191-11"></a><span class="co">#&gt; 8         China  1999       cases      212258</span></span>
+<span id="cb191-12"><a href="tidy-data.html#cb191-12"></a><span class="co">#&gt; 9         China  1999  population  1272915272</span></span>
+<span id="cb191-13"><a href="tidy-data.html#cb191-13"></a><span class="co">#&gt; 10        China  2000       cases      213766</span></span>
+<span id="cb191-14"><a href="tidy-data.html#cb191-14"></a><span class="co">#&gt; 11        China  2000  population  1280428583</span></span></code></pre></div>
 <p>To tidy this up, we first analyse the representation in similar way to <code>melt()</code>. This time, however, we only need two parameters:</p>
 <ul>
 <li><p>The column to take variable names from. Here, it’s <code>type</code>.</p></li>
@@ -872,17 +874,17 @@ Figure 12.2: Pivoting <code>table4</code> into a longer, tidy form.
 </ul>
 <p>Once we’ve figured that out, we can use <code>pivot()</code>, as shown programmatically below, and visually in Figure <a href="tidy-data.html#fig:tidy-spread">12.3</a>.</p>
 <p>In this example, we have a multi-column <code>index</code> argument and will need to use <code>pivot_table()</code>. With a single column index <code>pivot()</code> can be used.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb193-1"><a href="tidy-data.html#cb193-1"></a>table2.pivot_table(</span>
-<span id="cb193-2"><a href="tidy-data.html#cb193-2"></a>    index <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
-<span id="cb193-3"><a href="tidy-data.html#cb193-3"></a>    columns <span class="op">=</span> <span class="st">&#39;type&#39;</span>, </span>
-<span id="cb193-4"><a href="tidy-data.html#cb193-4"></a>    values <span class="op">=</span> <span class="st">&#39;count&#39;</span>).reset_index()</span>
-<span id="cb193-5"><a href="tidy-data.html#cb193-5"></a><span class="co">#&gt; type      country  year   cases  population</span></span>
-<span id="cb193-6"><a href="tidy-data.html#cb193-6"></a><span class="co">#&gt; 0     Afghanistan  1999     745    19987071</span></span>
-<span id="cb193-7"><a href="tidy-data.html#cb193-7"></a><span class="co">#&gt; 1     Afghanistan  2000    2666    20595360</span></span>
-<span id="cb193-8"><a href="tidy-data.html#cb193-8"></a><span class="co">#&gt; 2          Brazil  1999   37737   172006362</span></span>
-<span id="cb193-9"><a href="tidy-data.html#cb193-9"></a><span class="co">#&gt; 3          Brazil  2000   80488   174504898</span></span>
-<span id="cb193-10"><a href="tidy-data.html#cb193-10"></a><span class="co">#&gt; 4           China  1999  212258  1272915272</span></span>
-<span id="cb193-11"><a href="tidy-data.html#cb193-11"></a><span class="co">#&gt; 5           China  2000  213766  1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="tidy-data.html#cb192-1"></a>table2.pivot_table(</span>
+<span id="cb192-2"><a href="tidy-data.html#cb192-2"></a>    index <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
+<span id="cb192-3"><a href="tidy-data.html#cb192-3"></a>    columns <span class="op">=</span> <span class="st">&#39;type&#39;</span>, </span>
+<span id="cb192-4"><a href="tidy-data.html#cb192-4"></a>    values <span class="op">=</span> <span class="st">&#39;count&#39;</span>).reset_index()</span>
+<span id="cb192-5"><a href="tidy-data.html#cb192-5"></a><span class="co">#&gt; type      country  year   cases  population</span></span>
+<span id="cb192-6"><a href="tidy-data.html#cb192-6"></a><span class="co">#&gt; 0     Afghanistan  1999     745    19987071</span></span>
+<span id="cb192-7"><a href="tidy-data.html#cb192-7"></a><span class="co">#&gt; 1     Afghanistan  2000    2666    20595360</span></span>
+<span id="cb192-8"><a href="tidy-data.html#cb192-8"></a><span class="co">#&gt; 2          Brazil  1999   37737   172006362</span></span>
+<span id="cb192-9"><a href="tidy-data.html#cb192-9"></a><span class="co">#&gt; 3          Brazil  2000   80488   174504898</span></span>
+<span id="cb192-10"><a href="tidy-data.html#cb192-10"></a><span class="co">#&gt; 4           China  1999  212258  1272915272</span></span>
+<span id="cb192-11"><a href="tidy-data.html#cb192-11"></a><span class="co">#&gt; 5           China  2000  213766  1280428583</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:tidy-spread"></span>
 <img src="images/tidy-8.png" alt="Pivoting `table2` into a &quot;wider&quot;, tidy form." width="100%" />
 <p class="caption">
@@ -896,20 +898,20 @@ Figure 12.3: Pivoting <code>table2</code> into a “wider”, tidy form.
 <ol style="list-style-type: decimal">
 <li><p>Why are <code>melt()</code> and <code>pivot()</code> not perfectly symmetrical?
 Carefully consider the following example:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb194-1"><a href="tidy-data.html#cb194-1"></a>stocks <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb194-2"><a href="tidy-data.html#cb194-2"></a>  <span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>],</span>
-<span id="cb194-3"><a href="tidy-data.html#cb194-3"></a>  <span class="st">&#39;half&#39;</span>:  [<span class="dv">1</span>,    <span class="dv">2</span>,     <span class="dv">1</span>,    <span class="dv">2</span>],</span>
-<span id="cb194-4"><a href="tidy-data.html#cb194-4"></a>  <span class="st">&#39;return&#39;</span>: [<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.92</span>, <span class="fl">0.17</span>]</span>
-<span id="cb194-5"><a href="tidy-data.html#cb194-5"></a>})</span>
-<span id="cb194-6"><a href="tidy-data.html#cb194-6"></a>(stocks.</span>
-<span id="cb194-7"><a href="tidy-data.html#cb194-7"></a>  pivot(</span>
-<span id="cb194-8"><a href="tidy-data.html#cb194-8"></a>    index <span class="op">=</span> <span class="st">&#39;half&#39;</span>, </span>
-<span id="cb194-9"><a href="tidy-data.html#cb194-9"></a>    columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
-<span id="cb194-10"><a href="tidy-data.html#cb194-10"></a>    values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).</span>
-<span id="cb194-11"><a href="tidy-data.html#cb194-11"></a>  melt(</span>
-<span id="cb194-12"><a href="tidy-data.html#cb194-12"></a>    var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
-<span id="cb194-13"><a href="tidy-data.html#cb194-13"></a>    value_name <span class="op">=</span> <span class="st">&#39;return&#39;</span>)</span>
-<span id="cb194-14"><a href="tidy-data.html#cb194-14"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb193-1"><a href="tidy-data.html#cb193-1"></a>stocks <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb193-2"><a href="tidy-data.html#cb193-2"></a>  <span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>],</span>
+<span id="cb193-3"><a href="tidy-data.html#cb193-3"></a>  <span class="st">&#39;half&#39;</span>:  [<span class="dv">1</span>,    <span class="dv">2</span>,     <span class="dv">1</span>,    <span class="dv">2</span>],</span>
+<span id="cb193-4"><a href="tidy-data.html#cb193-4"></a>  <span class="st">&#39;return&#39;</span>: [<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.92</span>, <span class="fl">0.17</span>]</span>
+<span id="cb193-5"><a href="tidy-data.html#cb193-5"></a>})</span>
+<span id="cb193-6"><a href="tidy-data.html#cb193-6"></a>(stocks.</span>
+<span id="cb193-7"><a href="tidy-data.html#cb193-7"></a>  pivot(</span>
+<span id="cb193-8"><a href="tidy-data.html#cb193-8"></a>    index <span class="op">=</span> <span class="st">&#39;half&#39;</span>, </span>
+<span id="cb193-9"><a href="tidy-data.html#cb193-9"></a>    columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb193-10"><a href="tidy-data.html#cb193-10"></a>    values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).</span>
+<span id="cb193-11"><a href="tidy-data.html#cb193-11"></a>  melt(</span>
+<span id="cb193-12"><a href="tidy-data.html#cb193-12"></a>    var_name <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb193-13"><a href="tidy-data.html#cb193-13"></a>    value_name <span class="op">=</span> <span class="st">&#39;return&#39;</span>)</span>
+<span id="cb193-14"><a href="tidy-data.html#cb193-14"></a>  )</span></code></pre></div>
 <p>(Hint: look at the variable types and think about column <em>names</em>.)</p></li>
 </ol>
 </div>
@@ -920,30 +922,30 @@ Carefully consider the following example:</p>
 <div id="split-separate" class="section level3" number="12.4.1">
 <h3><span class="header-section-number">12.4.1</span> Split (Separate)</h3>
 <p><code>str.split()</code> pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take <code>table3</code>:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb195-1"><a href="tidy-data.html#cb195-1"></a>table3</span>
-<span id="cb195-2"><a href="tidy-data.html#cb195-2"></a><span class="co">#&gt;        country  year               rate</span></span>
-<span id="cb195-3"><a href="tidy-data.html#cb195-3"></a><span class="co">#&gt; 0  Afghanistan  1999       745/19987071</span></span>
-<span id="cb195-4"><a href="tidy-data.html#cb195-4"></a><span class="co">#&gt; 1  Afghanistan  2000      2666/20595360</span></span>
-<span id="cb195-5"><a href="tidy-data.html#cb195-5"></a><span class="co">#&gt; 2       Brazil  1999    37737/172006362</span></span>
-<span id="cb195-6"><a href="tidy-data.html#cb195-6"></a><span class="co">#&gt; 3       Brazil  2000    80488/174504898</span></span>
-<span id="cb195-7"><a href="tidy-data.html#cb195-7"></a><span class="co">#&gt; 4        China  1999  212258/1272915272</span></span>
-<span id="cb195-8"><a href="tidy-data.html#cb195-8"></a><span class="co">#&gt; 5        China  2000  213766/1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb194-1"><a href="tidy-data.html#cb194-1"></a>table3</span>
+<span id="cb194-2"><a href="tidy-data.html#cb194-2"></a><span class="co">#&gt;        country  year               rate</span></span>
+<span id="cb194-3"><a href="tidy-data.html#cb194-3"></a><span class="co">#&gt; 0  Afghanistan  1999       745/19987071</span></span>
+<span id="cb194-4"><a href="tidy-data.html#cb194-4"></a><span class="co">#&gt; 1  Afghanistan  2000      2666/20595360</span></span>
+<span id="cb194-5"><a href="tidy-data.html#cb194-5"></a><span class="co">#&gt; 2       Brazil  1999    37737/172006362</span></span>
+<span id="cb194-6"><a href="tidy-data.html#cb194-6"></a><span class="co">#&gt; 3       Brazil  2000    80488/174504898</span></span>
+<span id="cb194-7"><a href="tidy-data.html#cb194-7"></a><span class="co">#&gt; 4        China  1999  212258/1272915272</span></span>
+<span id="cb194-8"><a href="tidy-data.html#cb194-8"></a><span class="co">#&gt; 5        China  2000  213766/1280428583</span></span></code></pre></div>
 <p>The <code>rate</code> column contains both <code>cases</code> and <code>population</code> variables, and we need to split it into two variables. <code>str.split()</code> takes the name of the column to split. The names of the columns to separate into can be names using <code>rename()</code>, as shown in Figure <a href="tidy-data.html#fig:tidy-separate">12.4</a> and the code below.</p>
 <p>By default, <code>str.split()</code> will split values on white spaces. If you wish to use a specific character to separate a column, you can pass the character to the <code>pat</code> or first argument of <code>str.split()</code>.</p>
 <p>Unlike <code>tidyr::separate()</code> in R, you will need to append the new columns back onto your data set with a <code>pd.concat()</code> with the argument <code>axis = 1</code></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb196-1"><a href="tidy-data.html#cb196-1"></a>new_columns <span class="op">=</span> (table3.</span>
-<span id="cb196-2"><a href="tidy-data.html#cb196-2"></a>  rate.<span class="bu">str</span>.split(<span class="st">&quot;/&quot;</span>, expand <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb196-3"><a href="tidy-data.html#cb196-3"></a>  rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;cases&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;population&quot;</span>})</span>
-<span id="cb196-4"><a href="tidy-data.html#cb196-4"></a>  )</span>
-<span id="cb196-5"><a href="tidy-data.html#cb196-5"></a>  </span>
-<span id="cb196-6"><a href="tidy-data.html#cb196-6"></a>pd.concat([table3.drop(columns <span class="op">=</span> <span class="st">&#39;rate&#39;</span>), new_columns], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb196-7"><a href="tidy-data.html#cb196-7"></a><span class="co">#&gt;        country  year   cases  population</span></span>
-<span id="cb196-8"><a href="tidy-data.html#cb196-8"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
-<span id="cb196-9"><a href="tidy-data.html#cb196-9"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360</span></span>
-<span id="cb196-10"><a href="tidy-data.html#cb196-10"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362</span></span>
-<span id="cb196-11"><a href="tidy-data.html#cb196-11"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898</span></span>
-<span id="cb196-12"><a href="tidy-data.html#cb196-12"></a><span class="co">#&gt; 4        China  1999  212258  1272915272</span></span>
-<span id="cb196-13"><a href="tidy-data.html#cb196-13"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb195-1"><a href="tidy-data.html#cb195-1"></a>new_columns <span class="op">=</span> (table3.</span>
+<span id="cb195-2"><a href="tidy-data.html#cb195-2"></a>  rate.<span class="bu">str</span>.split(<span class="st">&quot;/&quot;</span>, expand <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb195-3"><a href="tidy-data.html#cb195-3"></a>  rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;cases&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;population&quot;</span>})</span>
+<span id="cb195-4"><a href="tidy-data.html#cb195-4"></a>  )</span>
+<span id="cb195-5"><a href="tidy-data.html#cb195-5"></a>  </span>
+<span id="cb195-6"><a href="tidy-data.html#cb195-6"></a>pd.concat([table3.drop(columns <span class="op">=</span> <span class="st">&#39;rate&#39;</span>), new_columns], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb195-7"><a href="tidy-data.html#cb195-7"></a><span class="co">#&gt;        country  year   cases  population</span></span>
+<span id="cb195-8"><a href="tidy-data.html#cb195-8"></a><span class="co">#&gt; 0  Afghanistan  1999     745    19987071</span></span>
+<span id="cb195-9"><a href="tidy-data.html#cb195-9"></a><span class="co">#&gt; 1  Afghanistan  2000    2666    20595360</span></span>
+<span id="cb195-10"><a href="tidy-data.html#cb195-10"></a><span class="co">#&gt; 2       Brazil  1999   37737   172006362</span></span>
+<span id="cb195-11"><a href="tidy-data.html#cb195-11"></a><span class="co">#&gt; 3       Brazil  2000   80488   174504898</span></span>
+<span id="cb195-12"><a href="tidy-data.html#cb195-12"></a><span class="co">#&gt; 4        China  1999  212258  1272915272</span></span>
+<span id="cb195-13"><a href="tidy-data.html#cb195-13"></a><span class="co">#&gt; 5        China  2000  213766  1280428583</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:tidy-separate"></span>
 <img src="images/tidy-17.png" alt="Separating `table3` makes it tidy" width="75%" />
 <p class="caption">
@@ -952,33 +954,33 @@ Figure 12.4: Separating <code>table3</code> makes it tidy
 </div>
 <p>(Formally, <code>pat</code> is a regular expression, which you’ll learn more about in [strings].)</p>
 <p>Look carefully at the column types: you’ll notice that <code>cases</code> and <code>population</code> are objects or strings. This is the default behaviour in <code>str.split()</code>: it only works on object types and returns objects. Here, however, it’s not very useful as those really are numbers. We can ask use <code>astype()</code> to convert to better types:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb197-1"><a href="tidy-data.html#cb197-1"></a>pd.concat([</span>
-<span id="cb197-2"><a href="tidy-data.html#cb197-2"></a>  table3.drop(columns <span class="op">=</span> <span class="st">&#39;rate&#39;</span>), </span>
-<span id="cb197-3"><a href="tidy-data.html#cb197-3"></a>  new_columns.astype(<span class="st">&#39;float&#39;</span>)],</span>
-<span id="cb197-4"><a href="tidy-data.html#cb197-4"></a>  axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb197-5"><a href="tidy-data.html#cb197-5"></a><span class="co">#&gt;        country  year     cases    population</span></span>
-<span id="cb197-6"><a href="tidy-data.html#cb197-6"></a><span class="co">#&gt; 0  Afghanistan  1999     745.0  1.998707e+07</span></span>
-<span id="cb197-7"><a href="tidy-data.html#cb197-7"></a><span class="co">#&gt; 1  Afghanistan  2000    2666.0  2.059536e+07</span></span>
-<span id="cb197-8"><a href="tidy-data.html#cb197-8"></a><span class="co">#&gt; 2       Brazil  1999   37737.0  1.720064e+08</span></span>
-<span id="cb197-9"><a href="tidy-data.html#cb197-9"></a><span class="co">#&gt; 3       Brazil  2000   80488.0  1.745049e+08</span></span>
-<span id="cb197-10"><a href="tidy-data.html#cb197-10"></a><span class="co">#&gt; 4        China  1999  212258.0  1.272915e+09</span></span>
-<span id="cb197-11"><a href="tidy-data.html#cb197-11"></a><span class="co">#&gt; 5        China  2000  213766.0  1.280429e+09</span></span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb196-1"><a href="tidy-data.html#cb196-1"></a>pd.concat([</span>
+<span id="cb196-2"><a href="tidy-data.html#cb196-2"></a>  table3.drop(columns <span class="op">=</span> <span class="st">&#39;rate&#39;</span>), </span>
+<span id="cb196-3"><a href="tidy-data.html#cb196-3"></a>  new_columns.astype(<span class="st">&#39;float&#39;</span>)],</span>
+<span id="cb196-4"><a href="tidy-data.html#cb196-4"></a>  axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb196-5"><a href="tidy-data.html#cb196-5"></a><span class="co">#&gt;        country  year     cases    population</span></span>
+<span id="cb196-6"><a href="tidy-data.html#cb196-6"></a><span class="co">#&gt; 0  Afghanistan  1999     745.0  1.998707e+07</span></span>
+<span id="cb196-7"><a href="tidy-data.html#cb196-7"></a><span class="co">#&gt; 1  Afghanistan  2000    2666.0  2.059536e+07</span></span>
+<span id="cb196-8"><a href="tidy-data.html#cb196-8"></a><span class="co">#&gt; 2       Brazil  1999   37737.0  1.720064e+08</span></span>
+<span id="cb196-9"><a href="tidy-data.html#cb196-9"></a><span class="co">#&gt; 3       Brazil  2000   80488.0  1.745049e+08</span></span>
+<span id="cb196-10"><a href="tidy-data.html#cb196-10"></a><span class="co">#&gt; 4        China  1999  212258.0  1.272915e+09</span></span>
+<span id="cb196-11"><a href="tidy-data.html#cb196-11"></a><span class="co">#&gt; 5        China  2000  213766.0  1.280429e+09</span></span></code></pre></div>
 <p>To split on integers you would use <code>str[]</code>. <code>str[]</code> will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings and are entered <code>:2</code>; negative value start at -1 on the far-right of the strings are entered <code>-2:</code>.</p>
 <p>You can use this arrangement to separate the last two digits of each year. This make this data less tidy, but is useful in other cases, as you’ll see in a little bit.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="tidy-data.html#cb198-1"></a>cent_year <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb198-2"><a href="tidy-data.html#cb198-2"></a>    <span class="st">&#39;century&#39;</span>: table3.year.astype(<span class="bu">str</span>).<span class="bu">str</span>[:<span class="dv">2</span>],</span>
-<span id="cb198-3"><a href="tidy-data.html#cb198-3"></a>    <span class="st">&#39;year&#39;</span>: table3.year.astype(<span class="bu">str</span>).<span class="bu">str</span>[<span class="op">-</span><span class="dv">2</span>:]</span>
-<span id="cb198-4"><a href="tidy-data.html#cb198-4"></a>})</span>
-<span id="cb198-5"><a href="tidy-data.html#cb198-5"></a></span>
-<span id="cb198-6"><a href="tidy-data.html#cb198-6"></a>pd.concat([table3.drop(columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>), cent_year], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb198-7"><a href="tidy-data.html#cb198-7"></a></span>
-<span id="cb198-8"><a href="tidy-data.html#cb198-8"></a><span class="co">#&gt;        country               rate century year</span></span>
-<span id="cb198-9"><a href="tidy-data.html#cb198-9"></a><span class="co">#&gt; 0  Afghanistan       745/19987071      19   99</span></span>
-<span id="cb198-10"><a href="tidy-data.html#cb198-10"></a><span class="co">#&gt; 1  Afghanistan      2666/20595360      20   00</span></span>
-<span id="cb198-11"><a href="tidy-data.html#cb198-11"></a><span class="co">#&gt; 2       Brazil    37737/172006362      19   99</span></span>
-<span id="cb198-12"><a href="tidy-data.html#cb198-12"></a><span class="co">#&gt; 3       Brazil    80488/174504898      20   00</span></span>
-<span id="cb198-13"><a href="tidy-data.html#cb198-13"></a><span class="co">#&gt; 4        China  212258/1272915272      19   99</span></span>
-<span id="cb198-14"><a href="tidy-data.html#cb198-14"></a><span class="co">#&gt; 5        China  213766/1280428583      20   00</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb197-1"><a href="tidy-data.html#cb197-1"></a>cent_year <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb197-2"><a href="tidy-data.html#cb197-2"></a>    <span class="st">&#39;century&#39;</span>: table3.year.astype(<span class="bu">str</span>).<span class="bu">str</span>[:<span class="dv">2</span>],</span>
+<span id="cb197-3"><a href="tidy-data.html#cb197-3"></a>    <span class="st">&#39;year&#39;</span>: table3.year.astype(<span class="bu">str</span>).<span class="bu">str</span>[<span class="op">-</span><span class="dv">2</span>:]</span>
+<span id="cb197-4"><a href="tidy-data.html#cb197-4"></a>})</span>
+<span id="cb197-5"><a href="tidy-data.html#cb197-5"></a></span>
+<span id="cb197-6"><a href="tidy-data.html#cb197-6"></a>pd.concat([table3.drop(columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>), cent_year], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb197-7"><a href="tidy-data.html#cb197-7"></a></span>
+<span id="cb197-8"><a href="tidy-data.html#cb197-8"></a><span class="co">#&gt;        country               rate century year</span></span>
+<span id="cb197-9"><a href="tidy-data.html#cb197-9"></a><span class="co">#&gt; 0  Afghanistan       745/19987071      19   99</span></span>
+<span id="cb197-10"><a href="tidy-data.html#cb197-10"></a><span class="co">#&gt; 1  Afghanistan      2666/20595360      20   00</span></span>
+<span id="cb197-11"><a href="tidy-data.html#cb197-11"></a><span class="co">#&gt; 2       Brazil    37737/172006362      19   99</span></span>
+<span id="cb197-12"><a href="tidy-data.html#cb197-12"></a><span class="co">#&gt; 3       Brazil    80488/174504898      20   00</span></span>
+<span id="cb197-13"><a href="tidy-data.html#cb197-13"></a><span class="co">#&gt; 4        China  212258/1272915272      19   99</span></span>
+<span id="cb197-14"><a href="tidy-data.html#cb197-14"></a><span class="co">#&gt; 5        China  213766/1280428583      20   00</span></span></code></pre></div>
 </div>
 <div id="unite" class="section level3" number="12.4.2">
 <h3><span class="header-section-number">12.4.2</span> Unite</h3>
@@ -990,23 +992,23 @@ Figure 12.5: Uniting <code>table5</code> makes it tidy
 </p>
 </div>
 <p>We can use <code>+</code> to rejoin the <em>century</em> and <em>year</em> string columns that we created in the last example. That data is saved as <code>table5</code>. <code>+</code> takes a two series and can be assigned to the name of the new variable to create:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb199-1"><a href="tidy-data.html#cb199-1"></a>table5.assign(new <span class="op">=</span> table5[<span class="st">&#39;century&#39;</span>] <span class="op">+</span> table5[<span class="st">&#39;year&#39;</span>])</span>
-<span id="cb199-2"><a href="tidy-data.html#cb199-2"></a><span class="co">#&gt;        country  century  year               rate  new</span></span>
-<span id="cb199-3"><a href="tidy-data.html#cb199-3"></a><span class="co">#&gt; 0  Afghanistan       19    99       745/19987071  118</span></span>
-<span id="cb199-4"><a href="tidy-data.html#cb199-4"></a><span class="co">#&gt; 1  Afghanistan       20     0      2666/20595360   20</span></span>
-<span id="cb199-5"><a href="tidy-data.html#cb199-5"></a><span class="co">#&gt; 2       Brazil       19    99    37737/172006362  118</span></span>
-<span id="cb199-6"><a href="tidy-data.html#cb199-6"></a><span class="co">#&gt; 3       Brazil       20     0    80488/174504898   20</span></span>
-<span id="cb199-7"><a href="tidy-data.html#cb199-7"></a><span class="co">#&gt; 4        China       19    99  212258/1272915272  118</span></span>
-<span id="cb199-8"><a href="tidy-data.html#cb199-8"></a><span class="co">#&gt; 5        China       20     0  213766/1280428583   20</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="tidy-data.html#cb198-1"></a>table5.assign(new <span class="op">=</span> table5[<span class="st">&#39;century&#39;</span>] <span class="op">+</span> table5[<span class="st">&#39;year&#39;</span>])</span>
+<span id="cb198-2"><a href="tidy-data.html#cb198-2"></a><span class="co">#&gt;        country  century  year               rate  new</span></span>
+<span id="cb198-3"><a href="tidy-data.html#cb198-3"></a><span class="co">#&gt; 0  Afghanistan       19    99       745/19987071  118</span></span>
+<span id="cb198-4"><a href="tidy-data.html#cb198-4"></a><span class="co">#&gt; 1  Afghanistan       20     0      2666/20595360   20</span></span>
+<span id="cb198-5"><a href="tidy-data.html#cb198-5"></a><span class="co">#&gt; 2       Brazil       19    99    37737/172006362  118</span></span>
+<span id="cb198-6"><a href="tidy-data.html#cb198-6"></a><span class="co">#&gt; 3       Brazil       20     0    80488/174504898   20</span></span>
+<span id="cb198-7"><a href="tidy-data.html#cb198-7"></a><span class="co">#&gt; 4        China       19    99  212258/1272915272  118</span></span>
+<span id="cb198-8"><a href="tidy-data.html#cb198-8"></a><span class="co">#&gt; 5        China       20     0  213766/1280428583   20</span></span></code></pre></div>
 <p>If you want join the strings with a specified string or more than two columns you can use agg with <code>axis = 1</code>.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="tidy-data.html#cb200-1"></a>table5.assign(new <span class="op">=</span> table5[[<span class="st">&#39;century&#39;</span>, <span class="st">&#39;year&#39;</span>]].agg(<span class="st">&quot;_&quot;</span>.join, axis <span class="op">=</span> <span class="dv">1</span>))</span>
-<span id="cb200-2"><a href="tidy-data.html#cb200-2"></a><span class="co">#&gt;        country century year               rate    new</span></span>
-<span id="cb200-3"><a href="tidy-data.html#cb200-3"></a><span class="co">#&gt; 0  Afghanistan      19   99       745/19987071  19_99</span></span>
-<span id="cb200-4"><a href="tidy-data.html#cb200-4"></a><span class="co">#&gt; 1  Afghanistan      20   00      2666/20595360  20_00</span></span>
-<span id="cb200-5"><a href="tidy-data.html#cb200-5"></a><span class="co">#&gt; 2       Brazil      19   99    37737/172006362  19_99</span></span>
-<span id="cb200-6"><a href="tidy-data.html#cb200-6"></a><span class="co">#&gt; 3       Brazil      20   00    80488/174504898  20_00</span></span>
-<span id="cb200-7"><a href="tidy-data.html#cb200-7"></a><span class="co">#&gt; 4        China      19   99  212258/1272915272  19_99</span></span>
-<span id="cb200-8"><a href="tidy-data.html#cb200-8"></a><span class="co">#&gt; 5        China      20   00  213766/1280428583  20_00</span></span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb199-1"><a href="tidy-data.html#cb199-1"></a>table5.assign(new <span class="op">=</span> table5[[<span class="st">&#39;century&#39;</span>, <span class="st">&#39;year&#39;</span>]].agg(<span class="st">&quot;_&quot;</span>.join, axis <span class="op">=</span> <span class="dv">1</span>))</span>
+<span id="cb199-2"><a href="tidy-data.html#cb199-2"></a><span class="co">#&gt;        country century year               rate    new</span></span>
+<span id="cb199-3"><a href="tidy-data.html#cb199-3"></a><span class="co">#&gt; 0  Afghanistan      19   99       745/19987071  19_99</span></span>
+<span id="cb199-4"><a href="tidy-data.html#cb199-4"></a><span class="co">#&gt; 1  Afghanistan      20   00      2666/20595360  20_00</span></span>
+<span id="cb199-5"><a href="tidy-data.html#cb199-5"></a><span class="co">#&gt; 2       Brazil      19   99    37737/172006362  19_99</span></span>
+<span id="cb199-6"><a href="tidy-data.html#cb199-6"></a><span class="co">#&gt; 3       Brazil      20   00    80488/174504898  20_00</span></span>
+<span id="cb199-7"><a href="tidy-data.html#cb199-7"></a><span class="co">#&gt; 4        China      19   99  212258/1272915272  19_99</span></span>
+<span id="cb199-8"><a href="tidy-data.html#cb199-8"></a><span class="co">#&gt; 5        China      20   00  213766/1280428583  20_00</span></span></code></pre></div>
 </div>
 <div id="exercises-2" class="section level3" number="12.4.3">
 <h3><span class="header-section-number">12.4.3</span> Exercises</h3>
@@ -1025,11 +1027,11 @@ groups?</li>
 <li><strong>Implicitly</strong>, i.e. simply not present in the data.</li>
 </ul>
 <p>Let’s illustrate this idea with a very simple data set:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb201-1"><a href="tidy-data.html#cb201-1"></a>stocks <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb201-2"><a href="tidy-data.html#cb201-2"></a>    <span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>, <span class="dv">2016</span>],</span>
-<span id="cb201-3"><a href="tidy-data.html#cb201-3"></a>    <span class="st">&#39;qtr&#39;</span>: [   <span class="dv">1</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">4</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">4</span>],</span>
-<span id="cb201-4"><a href="tidy-data.html#cb201-4"></a>    <span class="st">&#39;return&#39;</span>: [<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.35</span>,   np.nan, <span class="fl">0.92</span>, <span class="fl">0.17</span>, <span class="fl">2.66</span>]</span>
-<span id="cb201-5"><a href="tidy-data.html#cb201-5"></a>    }) </span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="tidy-data.html#cb200-1"></a>stocks <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb200-2"><a href="tidy-data.html#cb200-2"></a>    <span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>, <span class="dv">2016</span>],</span>
+<span id="cb200-3"><a href="tidy-data.html#cb200-3"></a>    <span class="st">&#39;qtr&#39;</span>: [   <span class="dv">1</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">4</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">4</span>],</span>
+<span id="cb200-4"><a href="tidy-data.html#cb200-4"></a>    <span class="st">&#39;return&#39;</span>: [<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.35</span>,   np.nan, <span class="fl">0.92</span>, <span class="fl">0.17</span>, <span class="fl">2.66</span>]</span>
+<span id="cb200-5"><a href="tidy-data.html#cb200-5"></a>    }) </span></code></pre></div>
 <p>There are two missing values in this dataset:</p>
 <ul>
 <li><p>The return for the fourth quarter of 2015 is explicitly missing, because
@@ -1039,36 +1041,36 @@ simply does not appear in the dataset.</p></li>
 </ul>
 <p>One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence.</p>
 <p>The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting years in the columns:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb201-1"><a href="tidy-data.html#cb201-1"></a>stocks.pivot(</span>
+<span id="cb201-2"><a href="tidy-data.html#cb201-2"></a>  index <span class="op">=</span> <span class="st">&#39;qtr&#39;</span>, </span>
+<span id="cb201-3"><a href="tidy-data.html#cb201-3"></a>  columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
+<span id="cb201-4"><a href="tidy-data.html#cb201-4"></a>  values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).reset_index()</span>
+<span id="cb201-5"><a href="tidy-data.html#cb201-5"></a><span class="co">#&gt; year  qtr  2015  2016</span></span>
+<span id="cb201-6"><a href="tidy-data.html#cb201-6"></a><span class="co">#&gt; 0       1  1.88   NaN</span></span>
+<span id="cb201-7"><a href="tidy-data.html#cb201-7"></a><span class="co">#&gt; 1       2  0.59  0.92</span></span>
+<span id="cb201-8"><a href="tidy-data.html#cb201-8"></a><span class="co">#&gt; 2       3  0.35  0.17</span></span>
+<span id="cb201-9"><a href="tidy-data.html#cb201-9"></a><span class="co">#&gt; 3       4   NaN  2.66</span></span></code></pre></div>
+<p>Because these explicit missing values may not be important in other representations of the data, you turn explicit missing values implicit with <code>.dropna()</code>:</p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb202-1"><a href="tidy-data.html#cb202-1"></a>stocks.pivot(</span>
 <span id="cb202-2"><a href="tidy-data.html#cb202-2"></a>  index <span class="op">=</span> <span class="st">&#39;qtr&#39;</span>, </span>
 <span id="cb202-3"><a href="tidy-data.html#cb202-3"></a>  columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
-<span id="cb202-4"><a href="tidy-data.html#cb202-4"></a>  values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).reset_index()</span>
-<span id="cb202-5"><a href="tidy-data.html#cb202-5"></a><span class="co">#&gt; year  qtr  2015  2016</span></span>
-<span id="cb202-6"><a href="tidy-data.html#cb202-6"></a><span class="co">#&gt; 0       1  1.88   NaN</span></span>
-<span id="cb202-7"><a href="tidy-data.html#cb202-7"></a><span class="co">#&gt; 1       2  0.59  0.92</span></span>
-<span id="cb202-8"><a href="tidy-data.html#cb202-8"></a><span class="co">#&gt; 2       3  0.35  0.17</span></span>
-<span id="cb202-9"><a href="tidy-data.html#cb202-9"></a><span class="co">#&gt; 3       4   NaN  2.66</span></span></code></pre></div>
-<p>Because these explicit missing values may not be important in other representations of the data, you turn explicit missing values implicit with <code>.dropna()</code>:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="tidy-data.html#cb203-1"></a>stocks.pivot(</span>
-<span id="cb203-2"><a href="tidy-data.html#cb203-2"></a>  index <span class="op">=</span> <span class="st">&#39;qtr&#39;</span>, </span>
-<span id="cb203-3"><a href="tidy-data.html#cb203-3"></a>  columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>, </span>
-<span id="cb203-4"><a href="tidy-data.html#cb203-4"></a>  values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).reset_index().melt(id_vars <span class="op">=</span> [<span class="st">&#39;qtr&#39;</span>]).dropna()</span>
-<span id="cb203-5"><a href="tidy-data.html#cb203-5"></a><span class="co">#&gt;    qtr  year  value</span></span>
-<span id="cb203-6"><a href="tidy-data.html#cb203-6"></a><span class="co">#&gt; 0    1  2015   1.88</span></span>
-<span id="cb203-7"><a href="tidy-data.html#cb203-7"></a><span class="co">#&gt; 1    2  2015   0.59</span></span>
-<span id="cb203-8"><a href="tidy-data.html#cb203-8"></a><span class="co">#&gt; 2    3  2015   0.35</span></span>
-<span id="cb203-9"><a href="tidy-data.html#cb203-9"></a><span class="co">#&gt; 5    2  2016   0.92</span></span>
-<span id="cb203-10"><a href="tidy-data.html#cb203-10"></a><span class="co">#&gt; 6    3  2016   0.17</span></span>
-<span id="cb203-11"><a href="tidy-data.html#cb203-11"></a><span class="co">#&gt; 7    4  2016   2.66</span></span></code></pre></div>
+<span id="cb202-4"><a href="tidy-data.html#cb202-4"></a>  values <span class="op">=</span> <span class="st">&#39;return&#39;</span>).reset_index().melt(id_vars <span class="op">=</span> [<span class="st">&#39;qtr&#39;</span>]).dropna()</span>
+<span id="cb202-5"><a href="tidy-data.html#cb202-5"></a><span class="co">#&gt;    qtr  year  value</span></span>
+<span id="cb202-6"><a href="tidy-data.html#cb202-6"></a><span class="co">#&gt; 0    1  2015   1.88</span></span>
+<span id="cb202-7"><a href="tidy-data.html#cb202-7"></a><span class="co">#&gt; 1    2  2015   0.59</span></span>
+<span id="cb202-8"><a href="tidy-data.html#cb202-8"></a><span class="co">#&gt; 2    3  2015   0.35</span></span>
+<span id="cb202-9"><a href="tidy-data.html#cb202-9"></a><span class="co">#&gt; 5    2  2016   0.92</span></span>
+<span id="cb202-10"><a href="tidy-data.html#cb202-10"></a><span class="co">#&gt; 6    3  2016   0.17</span></span>
+<span id="cb202-11"><a href="tidy-data.html#cb202-11"></a><span class="co">#&gt; 7    4  2016   2.66</span></span></code></pre></div>
 <p>You can use the pandas functions <code>stack()</code> and <code>unstack()</code> with <code>set_index()</code> to take a set of columns and find all unique combinations. This ensures the original dataset contains all values by filling in explicit missingness where necessary. See <a href="https://stackoverflow.com/questions/44287445/pandas-or-python-equivalent-of-tidyr-complete">this stackoverflow</a> for an example. <code>tidyr::complete()</code> in R performs a similar function.</p>
 </div>
 <div id="case-study" class="section level2" number="12.6">
 <h2><span class="header-section-number">12.6</span> Case Study</h2>
 <p>To finish off the chapter, let’s pull together everything you’ve learned to tackle a realistic data tidying problem. The <code>tidyr::who</code> dataset contains tuberculosis (TB) cases broken down by year, country, age, gender, and diagnosis method. The data comes from the <em>2014 World Health Organization Global Tuberculosis Report</em>, available at <a href="http://www.who.int/tb/country/data/download/en/" class="uri">http://www.who.int/tb/country/data/download/en/</a>.</p>
 <p>There’s a wealth of epidemiological information in this dataset, but it’s challenging to work with the data in the form that it’s provided:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb204-1"><a href="tidy-data.html#cb204-1"></a>who <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/who/who.csv&quot;</span>)</span>
-<span id="cb204-2"><a href="tidy-data.html#cb204-2"></a><span class="co"># Fix the Namibia NA iso code.</span></span>
-<span id="cb204-3"><a href="tidy-data.html#cb204-3"></a>who.loc[who.iso2.isna(),<span class="st">&#39;iso2&#39;</span>] <span class="op">=</span> <span class="st">&quot;NA&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="tidy-data.html#cb203-1"></a>who <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/who/who.csv&quot;</span>)</span>
+<span id="cb203-2"><a href="tidy-data.html#cb203-2"></a><span class="co"># Fix the Namibia NA iso code.</span></span>
+<span id="cb203-3"><a href="tidy-data.html#cb203-3"></a>who.loc[who.iso2.isna(),<span class="st">&#39;iso2&#39;</span>] <span class="op">=</span> <span class="st">&quot;NA&quot;</span></span></code></pre></div>
 <p>This is a very typical real-life example dataset. It contains redundant columns, odd variable codes, and many missing values. In short, <code>who</code> is messy, and we’ll need multiple steps to tidy it. Pandas is designed so that each function does one thing well. That means in real-life situations you’ll usually need to string together multiple verbs into a pipeline.</p>
 <p>The best place to start is almost always to gather together the columns that are not variables. Let’s have a look at what we’ve got:</p>
 <ul>
@@ -1080,38 +1082,38 @@ in the variable names (e.g. <code>new_sp_m014</code>, <code>new_ep_m014</code>,
 these are likely to be values, not variables.</p></li>
 </ul>
 <p>So we need to gather together all the columns from <code>new_sp_m014</code> to <code>newrel_f65</code>. We don’t know what those values represent yet, so we’ll give them the generic name <code>"key"</code>. We know the cells represent the count of cases, so we’ll use the variable <code>cases</code>. There are a lot of missing values in the current representation, so for now we’ll use <code>na.rm</code> just so we can focus on the values that are present.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a href="tidy-data.html#cb205-1"></a>who1 <span class="op">=</span> who.melt(</span>
-<span id="cb205-2"><a href="tidy-data.html#cb205-2"></a>    id_vars <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;iso2&#39;</span>, <span class="st">&#39;iso3&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
-<span id="cb205-3"><a href="tidy-data.html#cb205-3"></a>    var_name <span class="op">=</span> <span class="st">&#39;key&#39;</span>, </span>
-<span id="cb205-4"><a href="tidy-data.html#cb205-4"></a>    value_name <span class="op">=</span> <span class="st">&#39;cases&#39;</span>).dropna()</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb204-1"><a href="tidy-data.html#cb204-1"></a>who1 <span class="op">=</span> who.melt(</span>
+<span id="cb204-2"><a href="tidy-data.html#cb204-2"></a>    id_vars <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;iso2&#39;</span>, <span class="st">&#39;iso3&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
+<span id="cb204-3"><a href="tidy-data.html#cb204-3"></a>    var_name <span class="op">=</span> <span class="st">&#39;key&#39;</span>, </span>
+<span id="cb204-4"><a href="tidy-data.html#cb204-4"></a>    value_name <span class="op">=</span> <span class="st">&#39;cases&#39;</span>).dropna()</span></code></pre></div>
 <p>We can get some hint of the structure of the values in the new <code>key</code> column by counting them:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="tidy-data.html#cb206-1"></a>who1.key.value_counts().head(<span class="dv">25</span>)</span>
-<span id="cb206-2"><a href="tidy-data.html#cb206-2"></a><span class="co">#&gt; new_sp_m4554    3223</span></span>
-<span id="cb206-3"><a href="tidy-data.html#cb206-3"></a><span class="co">#&gt; new_sp_m3544    3219</span></span>
-<span id="cb206-4"><a href="tidy-data.html#cb206-4"></a><span class="co">#&gt; new_sp_m5564    3218</span></span>
-<span id="cb206-5"><a href="tidy-data.html#cb206-5"></a><span class="co">#&gt; new_sp_m1524    3209</span></span>
-<span id="cb206-6"><a href="tidy-data.html#cb206-6"></a><span class="co">#&gt; new_sp_m65      3209</span></span>
-<span id="cb206-7"><a href="tidy-data.html#cb206-7"></a><span class="co">#&gt; new_sp_m2534    3206</span></span>
-<span id="cb206-8"><a href="tidy-data.html#cb206-8"></a><span class="co">#&gt; new_sp_f4554    3204</span></span>
-<span id="cb206-9"><a href="tidy-data.html#cb206-9"></a><span class="co">#&gt; new_sp_f2534    3200</span></span>
-<span id="cb206-10"><a href="tidy-data.html#cb206-10"></a><span class="co">#&gt; new_sp_f3544    3199</span></span>
-<span id="cb206-11"><a href="tidy-data.html#cb206-11"></a><span class="co">#&gt; new_sp_f65      3197</span></span>
-<span id="cb206-12"><a href="tidy-data.html#cb206-12"></a><span class="co">#&gt; new_sp_f5564    3195</span></span>
-<span id="cb206-13"><a href="tidy-data.html#cb206-13"></a><span class="co">#&gt; new_sp_f1524    3194</span></span>
-<span id="cb206-14"><a href="tidy-data.html#cb206-14"></a><span class="co">#&gt; new_sp_f014     3174</span></span>
-<span id="cb206-15"><a href="tidy-data.html#cb206-15"></a><span class="co">#&gt; new_sp_m014     3173</span></span>
-<span id="cb206-16"><a href="tidy-data.html#cb206-16"></a><span class="co">#&gt; new_sn_m014     1045</span></span>
-<span id="cb206-17"><a href="tidy-data.html#cb206-17"></a><span class="co">#&gt; new_sn_f014     1040</span></span>
-<span id="cb206-18"><a href="tidy-data.html#cb206-18"></a><span class="co">#&gt; new_ep_m014     1038</span></span>
-<span id="cb206-19"><a href="tidy-data.html#cb206-19"></a><span class="co">#&gt; new_ep_f014     1032</span></span>
-<span id="cb206-20"><a href="tidy-data.html#cb206-20"></a><span class="co">#&gt; new_sn_m1524    1030</span></span>
-<span id="cb206-21"><a href="tidy-data.html#cb206-21"></a><span class="co">#&gt; new_sn_m4554    1027</span></span>
-<span id="cb206-22"><a href="tidy-data.html#cb206-22"></a><span class="co">#&gt; new_ep_m1524    1026</span></span>
-<span id="cb206-23"><a href="tidy-data.html#cb206-23"></a><span class="co">#&gt; new_sn_m3544    1025</span></span>
-<span id="cb206-24"><a href="tidy-data.html#cb206-24"></a><span class="co">#&gt; new_ep_m3544    1024</span></span>
-<span id="cb206-25"><a href="tidy-data.html#cb206-25"></a><span class="co">#&gt; new_sn_f1524    1022</span></span>
-<span id="cb206-26"><a href="tidy-data.html#cb206-26"></a><span class="co">#&gt; new_sn_m2534    1022</span></span>
-<span id="cb206-27"><a href="tidy-data.html#cb206-27"></a><span class="co">#&gt; Name: key, dtype: int64</span></span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a href="tidy-data.html#cb205-1"></a>who1.key.value_counts().head(<span class="dv">25</span>)</span>
+<span id="cb205-2"><a href="tidy-data.html#cb205-2"></a><span class="co">#&gt; new_sp_m4554    3223</span></span>
+<span id="cb205-3"><a href="tidy-data.html#cb205-3"></a><span class="co">#&gt; new_sp_m3544    3219</span></span>
+<span id="cb205-4"><a href="tidy-data.html#cb205-4"></a><span class="co">#&gt; new_sp_m5564    3218</span></span>
+<span id="cb205-5"><a href="tidy-data.html#cb205-5"></a><span class="co">#&gt; new_sp_m1524    3209</span></span>
+<span id="cb205-6"><a href="tidy-data.html#cb205-6"></a><span class="co">#&gt; new_sp_m65      3209</span></span>
+<span id="cb205-7"><a href="tidy-data.html#cb205-7"></a><span class="co">#&gt; new_sp_m2534    3206</span></span>
+<span id="cb205-8"><a href="tidy-data.html#cb205-8"></a><span class="co">#&gt; new_sp_f4554    3204</span></span>
+<span id="cb205-9"><a href="tidy-data.html#cb205-9"></a><span class="co">#&gt; new_sp_f2534    3200</span></span>
+<span id="cb205-10"><a href="tidy-data.html#cb205-10"></a><span class="co">#&gt; new_sp_f3544    3199</span></span>
+<span id="cb205-11"><a href="tidy-data.html#cb205-11"></a><span class="co">#&gt; new_sp_f65      3197</span></span>
+<span id="cb205-12"><a href="tidy-data.html#cb205-12"></a><span class="co">#&gt; new_sp_f5564    3195</span></span>
+<span id="cb205-13"><a href="tidy-data.html#cb205-13"></a><span class="co">#&gt; new_sp_f1524    3194</span></span>
+<span id="cb205-14"><a href="tidy-data.html#cb205-14"></a><span class="co">#&gt; new_sp_f014     3174</span></span>
+<span id="cb205-15"><a href="tidy-data.html#cb205-15"></a><span class="co">#&gt; new_sp_m014     3173</span></span>
+<span id="cb205-16"><a href="tidy-data.html#cb205-16"></a><span class="co">#&gt; new_sn_m014     1045</span></span>
+<span id="cb205-17"><a href="tidy-data.html#cb205-17"></a><span class="co">#&gt; new_sn_f014     1040</span></span>
+<span id="cb205-18"><a href="tidy-data.html#cb205-18"></a><span class="co">#&gt; new_ep_m014     1038</span></span>
+<span id="cb205-19"><a href="tidy-data.html#cb205-19"></a><span class="co">#&gt; new_ep_f014     1032</span></span>
+<span id="cb205-20"><a href="tidy-data.html#cb205-20"></a><span class="co">#&gt; new_sn_m1524    1030</span></span>
+<span id="cb205-21"><a href="tidy-data.html#cb205-21"></a><span class="co">#&gt; new_sn_m4554    1027</span></span>
+<span id="cb205-22"><a href="tidy-data.html#cb205-22"></a><span class="co">#&gt; new_ep_m1524    1026</span></span>
+<span id="cb205-23"><a href="tidy-data.html#cb205-23"></a><span class="co">#&gt; new_sn_m3544    1025</span></span>
+<span id="cb205-24"><a href="tidy-data.html#cb205-24"></a><span class="co">#&gt; new_ep_m3544    1024</span></span>
+<span id="cb205-25"><a href="tidy-data.html#cb205-25"></a><span class="co">#&gt; new_sn_f1524    1022</span></span>
+<span id="cb205-26"><a href="tidy-data.html#cb205-26"></a><span class="co">#&gt; new_sn_m2534    1022</span></span>
+<span id="cb205-27"><a href="tidy-data.html#cb205-27"></a><span class="co">#&gt; Name: key, dtype: int64</span></span></code></pre></div>
 <p>You might be able to parse this out by yourself with a little thought and some experimentation, but luckily we have the data dictionary handy. It tells us:</p>
 <ol style="list-style-type: decimal">
 <li><p>The first three letters of each column denote whether the column
@@ -1141,87 +1143,87 @@ seven age groups:</p>
 </ul></li>
 </ol>
 <p>We need to make a minor fix to the format of the column names: unfortunately the names are slightly inconsistent because instead of <code>new_rel</code> we have <code>newrel</code> (it’s hard to spot this here but if you don’t fix it we’ll get errors in subsequent steps). You’ll learn about <code>str.replace()</code> in [strings], but the basic idea is pretty simple: replace the characters “newrel” with “new_rel”. This makes all variable names consistent.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb207-1"><a href="tidy-data.html#cb207-1"></a>who2 <span class="op">=</span> who1.assign(names_from <span class="op">=</span> <span class="kw">lambda</span> x: x.key.<span class="bu">str</span>.replace(<span class="st">&#39;newrel&#39;</span>, <span class="st">&#39;new_rel&#39;</span>))</span>
-<span id="cb207-2"><a href="tidy-data.html#cb207-2"></a>who2</span>
-<span id="cb207-3"><a href="tidy-data.html#cb207-3"></a><span class="co">#&gt;                           country iso2 iso3  ...          key   cases   names_from</span></span>
-<span id="cb207-4"><a href="tidy-data.html#cb207-4"></a><span class="co">#&gt; 17                    Afghanistan   AF  AFG  ...  new_sp_m014     0.0  new_sp_m014</span></span>
-<span id="cb207-5"><a href="tidy-data.html#cb207-5"></a><span class="co">#&gt; 18                    Afghanistan   AF  AFG  ...  new_sp_m014    30.0  new_sp_m014</span></span>
-<span id="cb207-6"><a href="tidy-data.html#cb207-6"></a><span class="co">#&gt; 19                    Afghanistan   AF  AFG  ...  new_sp_m014     8.0  new_sp_m014</span></span>
-<span id="cb207-7"><a href="tidy-data.html#cb207-7"></a><span class="co">#&gt; 20                    Afghanistan   AF  AFG  ...  new_sp_m014    52.0  new_sp_m014</span></span>
-<span id="cb207-8"><a href="tidy-data.html#cb207-8"></a><span class="co">#&gt; 21                    Afghanistan   AF  AFG  ...  new_sp_m014   129.0  new_sp_m014</span></span>
-<span id="cb207-9"><a href="tidy-data.html#cb207-9"></a><span class="co">#&gt; ...                           ...  ...  ...  ...          ...     ...          ...</span></span>
-<span id="cb207-10"><a href="tidy-data.html#cb207-10"></a><span class="co">#&gt; 405269                   Viet Nam   VN  VNM  ...   newrel_f65  3110.0  new_rel_f65</span></span>
-<span id="cb207-11"><a href="tidy-data.html#cb207-11"></a><span class="co">#&gt; 405303  Wallis and Futuna Islands   WF  WLF  ...   newrel_f65     2.0  new_rel_f65</span></span>
-<span id="cb207-12"><a href="tidy-data.html#cb207-12"></a><span class="co">#&gt; 405371                      Yemen   YE  YEM  ...   newrel_f65   360.0  new_rel_f65</span></span>
-<span id="cb207-13"><a href="tidy-data.html#cb207-13"></a><span class="co">#&gt; 405405                     Zambia   ZM  ZMB  ...   newrel_f65   669.0  new_rel_f65</span></span>
-<span id="cb207-14"><a href="tidy-data.html#cb207-14"></a><span class="co">#&gt; 405439                   Zimbabwe   ZW  ZWE  ...   newrel_f65   725.0  new_rel_f65</span></span>
-<span id="cb207-15"><a href="tidy-data.html#cb207-15"></a><span class="co">#&gt; </span></span>
-<span id="cb207-16"><a href="tidy-data.html#cb207-16"></a><span class="co">#&gt; [76046 rows x 7 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="tidy-data.html#cb206-1"></a>who2 <span class="op">=</span> who1.assign(names_from <span class="op">=</span> <span class="kw">lambda</span> x: x.key.<span class="bu">str</span>.replace(<span class="st">&#39;newrel&#39;</span>, <span class="st">&#39;new_rel&#39;</span>))</span>
+<span id="cb206-2"><a href="tidy-data.html#cb206-2"></a>who2</span>
+<span id="cb206-3"><a href="tidy-data.html#cb206-3"></a><span class="co">#&gt;                           country iso2 iso3  ...          key   cases   names_from</span></span>
+<span id="cb206-4"><a href="tidy-data.html#cb206-4"></a><span class="co">#&gt; 17                    Afghanistan   AF  AFG  ...  new_sp_m014     0.0  new_sp_m014</span></span>
+<span id="cb206-5"><a href="tidy-data.html#cb206-5"></a><span class="co">#&gt; 18                    Afghanistan   AF  AFG  ...  new_sp_m014    30.0  new_sp_m014</span></span>
+<span id="cb206-6"><a href="tidy-data.html#cb206-6"></a><span class="co">#&gt; 19                    Afghanistan   AF  AFG  ...  new_sp_m014     8.0  new_sp_m014</span></span>
+<span id="cb206-7"><a href="tidy-data.html#cb206-7"></a><span class="co">#&gt; 20                    Afghanistan   AF  AFG  ...  new_sp_m014    52.0  new_sp_m014</span></span>
+<span id="cb206-8"><a href="tidy-data.html#cb206-8"></a><span class="co">#&gt; 21                    Afghanistan   AF  AFG  ...  new_sp_m014   129.0  new_sp_m014</span></span>
+<span id="cb206-9"><a href="tidy-data.html#cb206-9"></a><span class="co">#&gt; ...                           ...  ...  ...  ...          ...     ...          ...</span></span>
+<span id="cb206-10"><a href="tidy-data.html#cb206-10"></a><span class="co">#&gt; 405269                   Viet Nam   VN  VNM  ...   newrel_f65  3110.0  new_rel_f65</span></span>
+<span id="cb206-11"><a href="tidy-data.html#cb206-11"></a><span class="co">#&gt; 405303  Wallis and Futuna Islands   WF  WLF  ...   newrel_f65     2.0  new_rel_f65</span></span>
+<span id="cb206-12"><a href="tidy-data.html#cb206-12"></a><span class="co">#&gt; 405371                      Yemen   YE  YEM  ...   newrel_f65   360.0  new_rel_f65</span></span>
+<span id="cb206-13"><a href="tidy-data.html#cb206-13"></a><span class="co">#&gt; 405405                     Zambia   ZM  ZMB  ...   newrel_f65   669.0  new_rel_f65</span></span>
+<span id="cb206-14"><a href="tidy-data.html#cb206-14"></a><span class="co">#&gt; 405439                   Zimbabwe   ZW  ZWE  ...   newrel_f65   725.0  new_rel_f65</span></span>
+<span id="cb206-15"><a href="tidy-data.html#cb206-15"></a><span class="co">#&gt; </span></span>
+<span id="cb206-16"><a href="tidy-data.html#cb206-16"></a><span class="co">#&gt; [76046 rows x 7 columns]</span></span></code></pre></div>
 <p>We can separate the values in each code with two passes of <code>str.split()</code>. The first pass will split the codes at each underscore.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb208-1"><a href="tidy-data.html#cb208-1"></a>new_columns <span class="op">=</span> (who2.names_from.</span>
-<span id="cb208-2"><a href="tidy-data.html#cb208-2"></a>    <span class="bu">str</span>.split(<span class="st">&quot;_&quot;</span>,expand <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb208-3"><a href="tidy-data.html#cb208-3"></a>    rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;new&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;type&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;sexage&quot;</span>}))</span>
-<span id="cb208-4"><a href="tidy-data.html#cb208-4"></a>new_columns</span>
-<span id="cb208-5"><a href="tidy-data.html#cb208-5"></a><span class="co">#&gt;         new type sexage</span></span>
-<span id="cb208-6"><a href="tidy-data.html#cb208-6"></a><span class="co">#&gt; 17      new   sp   m014</span></span>
-<span id="cb208-7"><a href="tidy-data.html#cb208-7"></a><span class="co">#&gt; 18      new   sp   m014</span></span>
-<span id="cb208-8"><a href="tidy-data.html#cb208-8"></a><span class="co">#&gt; 19      new   sp   m014</span></span>
-<span id="cb208-9"><a href="tidy-data.html#cb208-9"></a><span class="co">#&gt; 20      new   sp   m014</span></span>
-<span id="cb208-10"><a href="tidy-data.html#cb208-10"></a><span class="co">#&gt; 21      new   sp   m014</span></span>
-<span id="cb208-11"><a href="tidy-data.html#cb208-11"></a><span class="co">#&gt; ...     ...  ...    ...</span></span>
-<span id="cb208-12"><a href="tidy-data.html#cb208-12"></a><span class="co">#&gt; 405269  new  rel    f65</span></span>
-<span id="cb208-13"><a href="tidy-data.html#cb208-13"></a><span class="co">#&gt; 405303  new  rel    f65</span></span>
-<span id="cb208-14"><a href="tidy-data.html#cb208-14"></a><span class="co">#&gt; 405371  new  rel    f65</span></span>
-<span id="cb208-15"><a href="tidy-data.html#cb208-15"></a><span class="co">#&gt; 405405  new  rel    f65</span></span>
-<span id="cb208-16"><a href="tidy-data.html#cb208-16"></a><span class="co">#&gt; 405439  new  rel    f65</span></span>
-<span id="cb208-17"><a href="tidy-data.html#cb208-17"></a><span class="co">#&gt; </span></span>
-<span id="cb208-18"><a href="tidy-data.html#cb208-18"></a><span class="co">#&gt; [76046 rows x 3 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb207-1"><a href="tidy-data.html#cb207-1"></a>new_columns <span class="op">=</span> (who2.names_from.</span>
+<span id="cb207-2"><a href="tidy-data.html#cb207-2"></a>    <span class="bu">str</span>.split(<span class="st">&quot;_&quot;</span>,expand <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb207-3"><a href="tidy-data.html#cb207-3"></a>    rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;new&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;type&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;sexage&quot;</span>}))</span>
+<span id="cb207-4"><a href="tidy-data.html#cb207-4"></a>new_columns</span>
+<span id="cb207-5"><a href="tidy-data.html#cb207-5"></a><span class="co">#&gt;         new type sexage</span></span>
+<span id="cb207-6"><a href="tidy-data.html#cb207-6"></a><span class="co">#&gt; 17      new   sp   m014</span></span>
+<span id="cb207-7"><a href="tidy-data.html#cb207-7"></a><span class="co">#&gt; 18      new   sp   m014</span></span>
+<span id="cb207-8"><a href="tidy-data.html#cb207-8"></a><span class="co">#&gt; 19      new   sp   m014</span></span>
+<span id="cb207-9"><a href="tidy-data.html#cb207-9"></a><span class="co">#&gt; 20      new   sp   m014</span></span>
+<span id="cb207-10"><a href="tidy-data.html#cb207-10"></a><span class="co">#&gt; 21      new   sp   m014</span></span>
+<span id="cb207-11"><a href="tidy-data.html#cb207-11"></a><span class="co">#&gt; ...     ...  ...    ...</span></span>
+<span id="cb207-12"><a href="tidy-data.html#cb207-12"></a><span class="co">#&gt; 405269  new  rel    f65</span></span>
+<span id="cb207-13"><a href="tidy-data.html#cb207-13"></a><span class="co">#&gt; 405303  new  rel    f65</span></span>
+<span id="cb207-14"><a href="tidy-data.html#cb207-14"></a><span class="co">#&gt; 405371  new  rel    f65</span></span>
+<span id="cb207-15"><a href="tidy-data.html#cb207-15"></a><span class="co">#&gt; 405405  new  rel    f65</span></span>
+<span id="cb207-16"><a href="tidy-data.html#cb207-16"></a><span class="co">#&gt; 405439  new  rel    f65</span></span>
+<span id="cb207-17"><a href="tidy-data.html#cb207-17"></a><span class="co">#&gt; </span></span>
+<span id="cb207-18"><a href="tidy-data.html#cb207-18"></a><span class="co">#&gt; [76046 rows x 3 columns]</span></span></code></pre></div>
 <p>Then we might as well drop the <code>new</code> column because it’s constant in this dataset. While we’re dropping columns, let’s also drop <code>iso2</code> and <code>iso3</code> since they’re redundant.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb209-1"><a href="tidy-data.html#cb209-1"></a><span class="co"># who3 is in R process. They also have an error and they are not using the names_from column.</span></span>
-<span id="cb209-2"><a href="tidy-data.html#cb209-2"></a>who4 <span class="op">=</span> pd.concat([</span>
-<span id="cb209-3"><a href="tidy-data.html#cb209-3"></a>  who2.<span class="bu">filter</span>(items <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>]),</span>
-<span id="cb209-4"><a href="tidy-data.html#cb209-4"></a>  new_columns.<span class="bu">filter</span>(items <span class="op">=</span> [<span class="st">&#39;type&#39;</span>])], axis <span class="op">=</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb208-1"><a href="tidy-data.html#cb208-1"></a><span class="co"># who3 is in R process. They also have an error and they are not using the names_from column.</span></span>
+<span id="cb208-2"><a href="tidy-data.html#cb208-2"></a>who4 <span class="op">=</span> pd.concat([</span>
+<span id="cb208-3"><a href="tidy-data.html#cb208-3"></a>  who2.<span class="bu">filter</span>(items <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;year&#39;</span>]),</span>
+<span id="cb208-4"><a href="tidy-data.html#cb208-4"></a>  new_columns.<span class="bu">filter</span>(items <span class="op">=</span> [<span class="st">&#39;type&#39;</span>])], axis <span class="op">=</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Next we’ll separate <code>sexage</code> into <code>sex</code> and <code>age</code> by splitting after the first character:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="tidy-data.html#cb210-1"></a>who5 <span class="op">=</span> who4.assign(</span>
-<span id="cb210-2"><a href="tidy-data.html#cb210-2"></a>  sex <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>[:<span class="dv">1</span>],</span>
-<span id="cb210-3"><a href="tidy-data.html#cb210-3"></a>  age <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">1</span>)</span>
-<span id="cb210-4"><a href="tidy-data.html#cb210-4"></a>)</span>
-<span id="cb210-5"><a href="tidy-data.html#cb210-5"></a></span>
-<span id="cb210-6"><a href="tidy-data.html#cb210-6"></a>who5</span>
-<span id="cb210-7"><a href="tidy-data.html#cb210-7"></a><span class="co">#&gt;                           country  year type sex  age</span></span>
-<span id="cb210-8"><a href="tidy-data.html#cb210-8"></a><span class="co">#&gt; 17                    Afghanistan  1997   sp   m  014</span></span>
-<span id="cb210-9"><a href="tidy-data.html#cb210-9"></a><span class="co">#&gt; 18                    Afghanistan  1998   sp   m  014</span></span>
-<span id="cb210-10"><a href="tidy-data.html#cb210-10"></a><span class="co">#&gt; 19                    Afghanistan  1999   sp   m  014</span></span>
-<span id="cb210-11"><a href="tidy-data.html#cb210-11"></a><span class="co">#&gt; 20                    Afghanistan  2000   sp   m  014</span></span>
-<span id="cb210-12"><a href="tidy-data.html#cb210-12"></a><span class="co">#&gt; 21                    Afghanistan  2001   sp   m  014</span></span>
-<span id="cb210-13"><a href="tidy-data.html#cb210-13"></a><span class="co">#&gt; ...                           ...   ...  ...  ..  ...</span></span>
-<span id="cb210-14"><a href="tidy-data.html#cb210-14"></a><span class="co">#&gt; 405269                   Viet Nam  2013  rel   f   65</span></span>
-<span id="cb210-15"><a href="tidy-data.html#cb210-15"></a><span class="co">#&gt; 405303  Wallis and Futuna Islands  2013  rel   f   65</span></span>
-<span id="cb210-16"><a href="tidy-data.html#cb210-16"></a><span class="co">#&gt; 405371                      Yemen  2013  rel   f   65</span></span>
-<span id="cb210-17"><a href="tidy-data.html#cb210-17"></a><span class="co">#&gt; 405405                     Zambia  2013  rel   f   65</span></span>
-<span id="cb210-18"><a href="tidy-data.html#cb210-18"></a><span class="co">#&gt; 405439                   Zimbabwe  2013  rel   f   65</span></span>
-<span id="cb210-19"><a href="tidy-data.html#cb210-19"></a><span class="co">#&gt; </span></span>
-<span id="cb210-20"><a href="tidy-data.html#cb210-20"></a><span class="co">#&gt; [76046 rows x 5 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb209-1"><a href="tidy-data.html#cb209-1"></a>who5 <span class="op">=</span> who4.assign(</span>
+<span id="cb209-2"><a href="tidy-data.html#cb209-2"></a>  sex <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>[:<span class="dv">1</span>],</span>
+<span id="cb209-3"><a href="tidy-data.html#cb209-3"></a>  age <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb209-4"><a href="tidy-data.html#cb209-4"></a>)</span>
+<span id="cb209-5"><a href="tidy-data.html#cb209-5"></a></span>
+<span id="cb209-6"><a href="tidy-data.html#cb209-6"></a>who5</span>
+<span id="cb209-7"><a href="tidy-data.html#cb209-7"></a><span class="co">#&gt;                           country  year type sex  age</span></span>
+<span id="cb209-8"><a href="tidy-data.html#cb209-8"></a><span class="co">#&gt; 17                    Afghanistan  1997   sp   m  014</span></span>
+<span id="cb209-9"><a href="tidy-data.html#cb209-9"></a><span class="co">#&gt; 18                    Afghanistan  1998   sp   m  014</span></span>
+<span id="cb209-10"><a href="tidy-data.html#cb209-10"></a><span class="co">#&gt; 19                    Afghanistan  1999   sp   m  014</span></span>
+<span id="cb209-11"><a href="tidy-data.html#cb209-11"></a><span class="co">#&gt; 20                    Afghanistan  2000   sp   m  014</span></span>
+<span id="cb209-12"><a href="tidy-data.html#cb209-12"></a><span class="co">#&gt; 21                    Afghanistan  2001   sp   m  014</span></span>
+<span id="cb209-13"><a href="tidy-data.html#cb209-13"></a><span class="co">#&gt; ...                           ...   ...  ...  ..  ...</span></span>
+<span id="cb209-14"><a href="tidy-data.html#cb209-14"></a><span class="co">#&gt; 405269                   Viet Nam  2013  rel   f   65</span></span>
+<span id="cb209-15"><a href="tidy-data.html#cb209-15"></a><span class="co">#&gt; 405303  Wallis and Futuna Islands  2013  rel   f   65</span></span>
+<span id="cb209-16"><a href="tidy-data.html#cb209-16"></a><span class="co">#&gt; 405371                      Yemen  2013  rel   f   65</span></span>
+<span id="cb209-17"><a href="tidy-data.html#cb209-17"></a><span class="co">#&gt; 405405                     Zambia  2013  rel   f   65</span></span>
+<span id="cb209-18"><a href="tidy-data.html#cb209-18"></a><span class="co">#&gt; 405439                   Zimbabwe  2013  rel   f   65</span></span>
+<span id="cb209-19"><a href="tidy-data.html#cb209-19"></a><span class="co">#&gt; </span></span>
+<span id="cb209-20"><a href="tidy-data.html#cb209-20"></a><span class="co">#&gt; [76046 rows x 5 columns]</span></span></code></pre></div>
 <p>The <code>who</code> dataset is now ‘kinda’ tidy! We have left the age range as age for simplicity.</p>
 <p>I’ve shown you the code a piece at a time, assigning each interim result to a new variable. This typically isn’t how you’d work interactively. Instead, you’d use as little assignment as possible:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="tidy-data.html#cb211-1"></a><span class="co"># assigned fixed values back into key this time.</span></span>
-<span id="cb211-2"><a href="tidy-data.html#cb211-2"></a>who_melt <span class="op">=</span> who.melt(</span>
-<span id="cb211-3"><a href="tidy-data.html#cb211-3"></a>    id_vars <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;iso2&#39;</span>, <span class="st">&#39;iso3&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
-<span id="cb211-4"><a href="tidy-data.html#cb211-4"></a>    var_name <span class="op">=</span> <span class="st">&#39;key&#39;</span>, </span>
-<span id="cb211-5"><a href="tidy-data.html#cb211-5"></a>    value_name <span class="op">=</span> <span class="st">&#39;cases&#39;</span>).dropna().assign(</span>
-<span id="cb211-6"><a href="tidy-data.html#cb211-6"></a>        key <span class="op">=</span> <span class="kw">lambda</span> x: x.key.<span class="bu">str</span>.replace(<span class="st">&#39;newrel&#39;</span>, <span class="st">&#39;new_rel&#39;</span>)</span>
-<span id="cb211-7"><a href="tidy-data.html#cb211-7"></a>    )</span>
-<span id="cb211-8"><a href="tidy-data.html#cb211-8"></a></span>
-<span id="cb211-9"><a href="tidy-data.html#cb211-9"></a>new_columns <span class="op">=</span> (who_melt.key.</span>
-<span id="cb211-10"><a href="tidy-data.html#cb211-10"></a>    <span class="bu">str</span>.split(<span class="st">&quot;_&quot;</span>,expand <span class="op">=</span> <span class="va">True</span>).</span>
-<span id="cb211-11"><a href="tidy-data.html#cb211-11"></a>    rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;new&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;type&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;sexage&quot;</span>}))</span>
-<span id="cb211-12"><a href="tidy-data.html#cb211-12"></a></span>
-<span id="cb211-13"><a href="tidy-data.html#cb211-13"></a><span class="co"># Chose to assing type instead of using pd.concat.</span></span>
-<span id="cb211-14"><a href="tidy-data.html#cb211-14"></a>who_melt.assign(</span>
-<span id="cb211-15"><a href="tidy-data.html#cb211-15"></a>    <span class="bu">type</span> <span class="op">=</span> new_columns.<span class="bu">type</span>,</span>
-<span id="cb211-16"><a href="tidy-data.html#cb211-16"></a>    sex <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>[:<span class="dv">1</span>],</span>
-<span id="cb211-17"><a href="tidy-data.html#cb211-17"></a>    age <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">1</span>)</span>
-<span id="cb211-18"><a href="tidy-data.html#cb211-18"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="tidy-data.html#cb210-1"></a><span class="co"># assigned fixed values back into key this time.</span></span>
+<span id="cb210-2"><a href="tidy-data.html#cb210-2"></a>who_melt <span class="op">=</span> who.melt(</span>
+<span id="cb210-3"><a href="tidy-data.html#cb210-3"></a>    id_vars <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;iso2&#39;</span>, <span class="st">&#39;iso3&#39;</span>, <span class="st">&#39;year&#39;</span>], </span>
+<span id="cb210-4"><a href="tidy-data.html#cb210-4"></a>    var_name <span class="op">=</span> <span class="st">&#39;key&#39;</span>, </span>
+<span id="cb210-5"><a href="tidy-data.html#cb210-5"></a>    value_name <span class="op">=</span> <span class="st">&#39;cases&#39;</span>).dropna().assign(</span>
+<span id="cb210-6"><a href="tidy-data.html#cb210-6"></a>        key <span class="op">=</span> <span class="kw">lambda</span> x: x.key.<span class="bu">str</span>.replace(<span class="st">&#39;newrel&#39;</span>, <span class="st">&#39;new_rel&#39;</span>)</span>
+<span id="cb210-7"><a href="tidy-data.html#cb210-7"></a>    )</span>
+<span id="cb210-8"><a href="tidy-data.html#cb210-8"></a></span>
+<span id="cb210-9"><a href="tidy-data.html#cb210-9"></a>new_columns <span class="op">=</span> (who_melt.key.</span>
+<span id="cb210-10"><a href="tidy-data.html#cb210-10"></a>    <span class="bu">str</span>.split(<span class="st">&quot;_&quot;</span>,expand <span class="op">=</span> <span class="va">True</span>).</span>
+<span id="cb210-11"><a href="tidy-data.html#cb210-11"></a>    rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">&quot;new&quot;</span>, <span class="dv">1</span>: <span class="st">&quot;type&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;sexage&quot;</span>}))</span>
+<span id="cb210-12"><a href="tidy-data.html#cb210-12"></a></span>
+<span id="cb210-13"><a href="tidy-data.html#cb210-13"></a><span class="co"># Chose to assing type instead of using pd.concat.</span></span>
+<span id="cb210-14"><a href="tidy-data.html#cb210-14"></a>who_melt.assign(</span>
+<span id="cb210-15"><a href="tidy-data.html#cb210-15"></a>    <span class="bu">type</span> <span class="op">=</span> new_columns.<span class="bu">type</span>,</span>
+<span id="cb210-16"><a href="tidy-data.html#cb210-16"></a>    sex <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>[:<span class="dv">1</span>],</span>
+<span id="cb210-17"><a href="tidy-data.html#cb210-17"></a>    age <span class="op">=</span> new_columns.sexage.<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb210-18"><a href="tidy-data.html#cb210-18"></a>)</span></code></pre></div>
 <div id="exercises-3" class="section level3" number="12.6.1">
 <h3><span class="header-section-number">12.6.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">

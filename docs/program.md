@@ -5,8 +5,7 @@
 In this part of the book, you'll improve your programming skills. Programming is a cross-cutting skill needed for all data science work: you must use a computer to do data science; you cannot do it in your head, or with pencil and paper. 
 **Note:** This section of the book may never be completed for the python4ds version.
 
-
-\begin{center}\includegraphics[width=0.75\linewidth]{diagrams/data-science-program} \end{center}
+<img src="diagrams/data-science-program.png" width="75%" style="display: block; margin: auto;" />
 
 Programming produces code, and code is a tool of communication. Obviously code tells the computer what you want it to do. But it also communicates meaning to other humans. Thinking about code as a vehicle for communication is important because every project you do is fundamentally collaborative. Even if you're not working with other people, you'll definitely be working with future-you! Writing clear code is important so that others (like future-you) can understand why you tackled an analysis in the way you did. That means getting better at programming also involves getting better at communicating. Over time, you want your code to become not just easier to write, but easier for others to read. 
 

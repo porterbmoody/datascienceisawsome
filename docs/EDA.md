@@ -126,8 +126,7 @@ chart = (alt.Chart(chart_dat)
 chart.save("screenshots/altair_diamonds_barchart.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_barchart} \end{flushleft}
+<img src="screenshots/altair_diamonds_barchart.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 A variable is **continuous** if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram:
 
@@ -142,8 +141,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_hist_bin.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_hist_bin} \end{flushleft}
+<img src="screenshots/altair_diamonds_hist_bin.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a `carat` value between 0.25 and 0.75, which are the left and right edges of the bar.
@@ -163,8 +161,7 @@ chart = (alt.Chart(smaller)
 chart.save("screenshots/altair_diamonds_hist_smallbin.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_hist_smallbin} \end{flushleft}
+<img src="screenshots/altair_diamonds_hist_smallbin.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 If you wish to see multiple histograms, Altair doesn't have a straightforward way to overly histograms. We recommend using `.facet()`. `.facet()` performs the same calculation for each group within the facet varaible.
 
@@ -182,8 +179,7 @@ chart = (alt.Chart(smaller).
 chart.save("screenshots/altair_diamonds_facet_hist.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_facet_hist} \end{flushleft}
+<img src="screenshots/altair_diamonds_facet_hist.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 There are a few challenges with this type of plot, which we will come back to in [visualising a categorical and a continuous variable](#cat-cont).
 
@@ -219,8 +215,7 @@ chart = (alt.Chart(smaller)
 chart.save("screenshots/altair_diamonds_hist_smallestbin.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_hist_smallestbin} \end{flushleft}
+<img src="screenshots/altair_diamonds_hist_smallestbin.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Clusters of similar values suggest that subgroups exist in your data. To understand the subgroups, ask:
 
@@ -248,8 +243,7 @@ chart = (alt.Chart(faithful)
 chart.save("screenshots/altair_faithful_hist.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_faithful_hist} \end{flushleft}
+<img src="screenshots/altair_faithful_hist.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Many of the questions above will prompt you to explore a relationship *between* variables, for example, to see if the values of one variable can explain the behavior of another variable. We'll get to that shortly.
 
@@ -268,8 +262,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_y_hist.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_y_hist} \end{flushleft}
+<img src="screenshots/altair_diamonds_y_hist.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `alt.Scale()` and the argument `clip` set to `True` within `.mark_bar()` (note that [Altair has other axis options](https://altair-viz.github.io/user_guide/customization.html#adjusting-axis-limits)):
 
@@ -284,8 +277,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_y_hist_domain.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_y_hist_domain} \end{flushleft}
+<img src="screenshots/altair_diamonds_y_hist_domain.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 (`alt.Scale()` can be used within `alt.Y()` and `alt.X()` for zooming on either axis. Altair also has a `clamp` argument that functions that work slightly differently: it stacks all the data right at the limits. But it does not work with `mark_bar()`)
 
@@ -372,8 +364,7 @@ chart = (alt.Chart(diamonds2)
 chart.save("screenshots/altair_diamonds2_missing.png")            
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds2_missing} \end{flushleft}
+<img src="screenshots/altair_diamonds2_missing.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 To plot `np.nan` as `0` then set `invalid = None`:
 
@@ -388,8 +379,7 @@ chart = (alt.Chart(diamonds2)
 chart.save("screenshots/altair_diamonds2_zero.png")            
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds2_zero} \end{flushleft}
+<img src="screenshots/altair_diamonds2_zero.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 Other times you want to understand what makes observations with missing values different to observations with recorded values. For example, in `flights`, missing values in the `dep_time` variable indicate that the flight was cancelled. So you might want to compare the scheduled departure times for cancelled and non-cancelled times. You can do this by making a new variable with `pd.isna()`.
 
@@ -417,8 +407,7 @@ chart = (alt.Chart(pdat)
 chart.save("screenshots/altair_flights_scheduled.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_flights_scheduled} \end{flushleft}
+<img src="screenshots/altair_flights_scheduled.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 However this plot isn't great because there are many more non-cancelled flights than cancelled flights. In the next section we'll explore some techniques for improving this comparison.
 
 ### Exercises
@@ -445,8 +434,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_price_cut.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_price_cut} \end{flushleft}
+<img src="screenshots/altair_diamonds_price_cut.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 It's hard to see the difference in distribution because the overall counts differ so much:
 
@@ -463,8 +451,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_price_cut_bar.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_price_cut_bar} \end{flushleft}
+<img src="screenshots/altair_diamonds_price_cut_bar.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 To make the comparison easier we need to create a chart with __density__ displayed on the y-axis, which is the count standardised so that the area under each curve is one. To do this we must use `transform_density` which is one of many `transform_` functions in Altair. 
 
@@ -489,8 +476,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_price_density.png")
 ```
 
-
-\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_price_density} \end{flushleft}
+<img src="screenshots/altair_diamonds_price_density.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 There's something rather surprising about this plot - it appears that fair diamonds (the lowest quality) have the highest average price!  But maybe that's because frequency polygons are a little hard to interpret - there's a lot going on in this plot.
 
@@ -510,8 +496,7 @@ Another alternative to display the distribution of a continuous variable broken 
 * A line (or whisker) that extends from each end of the box and goes to the
   farthest non-outlier point in the distribution.
 
-
-\begin{center}\includegraphics[width=1\linewidth]{images/EDA-boxplot} \end{center}
+<img src="images/EDA-boxplot.png" width="100%" style="display: block; margin: auto;" />
 
 Let's take a look at the distribution of price by cut using `geom_boxplot()`:
 
@@ -527,8 +512,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_boxplot_2.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_boxplot_2} \end{center}
+<img src="screenshots/altair_boxplot_2.png" width="50%" style="display: block; margin: auto;" />
 
 We see much less information about the distribution, but the boxplots are much more compact so we can more easily compare them (and fit more on one plot). It supports the counterintuitive finding that better quality diamonds are cheaper on average! In the exercises, you'll be challenged to figure out why.
 
@@ -551,8 +535,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_boxplot_3.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_boxplot_3} \end{center}
+<img src="screenshots/altair_boxplot_3.png" width="50%" style="display: block; margin: auto;" />
 
 To make the trend easier to see, we can reorder `class` based on the median value of `hwy`:
 
@@ -571,8 +554,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_boxplot_4.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_boxplot_4} \end{center}
+<img src="screenshots/altair_boxplot_4.png" width="50%" style="display: block; margin: auto;" />
 
 If you have long variable names, `mark_boxplot()` will work better if you flip it 90°. You can do that with changing the `x` and `y` encodings.
 
@@ -588,8 +570,7 @@ chart = (alt.Chart(mpg)
 chart.save("screenshots/altair_boxplot_5.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_boxplot_5} \end{center}
+<img src="screenshots/altair_boxplot_5.png" width="50%" style="display: block; margin: auto;" />
 
 #### Exercises
 
@@ -637,8 +618,7 @@ chart = (alt.Chart(chart_dat)
 chart.save("screenshots/altair_heatmap.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_heatmap} \end{center}
+<img src="screenshots/altair_heatmap.png" width="70%" style="display: block; margin: auto;" />
 
 If the categorical variables are unordered, you might want to simultaneously reorder the rows and columns in order to more clearly reveal interesting patterns. 
 
@@ -667,8 +647,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_scatter_eda.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_scatter_eda} \end{center}
+<img src="screenshots/altair_diamonds_scatter_eda.png" width="70%" style="display: block; margin: auto;" />
 
 Scatterplots become less useful as the size of your dataset grows, because points begin to overplot, and pile up into areas of uniform black (as above).
 You've already seen one way to fix the problem: using the `opacity` argument to add transparency.
@@ -685,8 +664,7 @@ chart = (alt.Chart(diamonds)
 chart.save("screenshots/altair_diamonds_scatter_eda_2.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_scatter_eda_2} \end{center}
+<img src="screenshots/altair_diamonds_scatter_eda_2.png" width="70%" style="display: block; margin: auto;" />
 
 But using transparency can be challenging for very large datasets. Another solution is to use bins. Previously you used `mark_histogram()` to bin in one dimension. We will need to use pandas to bin in two directions. First create two new columns that bin `price` and `carat`.
 
@@ -748,8 +726,7 @@ chart = (alt.Chart(chart_dat_binned)
 chart.save("screenshots/altair_diamonds_scatter_binned.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_scatter_binned} \end{center}
+<img src="screenshots/altair_diamonds_scatter_binned.png" width="70%" style="display: block; margin: auto;" />
 
 Another option is to bin one continuous variable so it acts like a categorical variable. Then you can use one of the techniques for visualising the combination of a categorical and a continuous variable that you learned about. For example, you could bin `carat` and then for each group, display a boxplot:
 
@@ -766,8 +743,7 @@ chart = (alt.Chart(chart_dat)
 chart.save("screenshots/altair_diamonds_scatter_binned_boxplot.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_diamonds_scatter_binned_boxplot} \end{center}
+<img src="screenshots/altair_diamonds_scatter_binned_boxplot.png" width="50%" style="display: block; margin: auto;" />
 
 `pd.cut()`, as used above, divides `x` into bins of equal widths. By default, boxplots look roughly the same (apart from number of outliers) regardless of how many observations there are, so it's difficult to tell that each boxplot summarises a different number of points. One approach is to display approximately the same number of points in each bin. That's the job of `pd.qcut()`:
 
@@ -786,8 +762,7 @@ chart = (alt.Chart(chart_dat)
 chart.save("screenshots/altair_diamonds_scatter_binned_boxplot_quantiles.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_diamonds_scatter_binned_boxplot_quantiles} \end{center}
+<img src="screenshots/altair_diamonds_scatter_binned_boxplot_quantiles.png" width="50%" style="display: block; margin: auto;" />
 
 #### Exercises
 
@@ -816,8 +791,7 @@ chart.save("screenshots/altair_diamonds_scatter_binned_boxplot_quantiles.png")
     chart.save("screenshots/altair_diamonds_scatter_clip.png")
     ```
     
-    
-    \begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_scatter_clip} \end{center}
+    <img src="screenshots/altair_diamonds_scatter_clip.png" width="70%" style="display: block; margin: auto;" />
 
     Why is a scatterplot a better display than a binned plot for this case? What
     does `clamp = True` in `alt.Scale()` do due your chart?
@@ -850,8 +824,7 @@ chart = (alt.Chart(faithful)
 chart.save("screenshots/altair_faithful_scatter_clip.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_faithful_scatter_clip} \end{center}
+<img src="screenshots/altair_faithful_scatter_clip.png" width="70%" style="display: block; margin: auto;" />
 
 Patterns provide one of the most useful tools for data scientists because they reveal covariation. If you think of variation as a phenomenon that creates uncertainty, covariation is a phenomenon that reduces it. If two variables covary, you can use the values of one variable to make better predictions about the values of the second. If the covariation is due to a causal relationship (a special case), then you can use the value of one variable to control the value of the second.
 
@@ -875,8 +848,7 @@ chart = (alt.Chart(diamonds2)
 chart.save("screenshots/altair_diamonds_model_scatter.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.7\linewidth]{screenshots/altair_diamonds_model_scatter} \end{center}
+<img src="screenshots/altair_diamonds_model_scatter.png" width="70%" style="display: block; margin: auto;" />
 
 Once you've removed the strong relationship between carat and price, you can see what you expect in the relationship between cut and price: relative to their size, better quality diamonds are more expensive.
 
@@ -892,8 +864,7 @@ chart = (alt.Chart(diamonds2)
 chart.save("screenshots/altair_diamonds_model_boxplot.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_diamonds_model_boxplot} \end{center}
+<img src="screenshots/altair_diamonds_model_boxplot.png" width="50%" style="display: block; margin: auto;" />
 
 You'll learn how models, and the modelr package, work in the final part of the book, [model](#model-intro). We're saving modelling for later because understanding what models are and how they work is easiest once you have tools of data wrangling and programming in hand.
 

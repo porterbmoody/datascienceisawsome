@@ -4,8 +4,7 @@
 
 So far, you've learned the tools to get your data into Python, tidy it into a form convenient for analysis, and then understand your data through transformation, visualisation and modelling. However, it doesn't matter how great your analysis is unless you can explain it to others: you need to __communicate__ your results.
 
-
-\begin{center}\includegraphics[width=0.75\linewidth]{diagrams/data-science-communicate} \end{center}
+<img src="diagrams/data-science-communicate.png" width="75%" style="display: block; margin: auto;" />
 
 Communication is the theme of the following four chapters:
 

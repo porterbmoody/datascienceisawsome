@@ -101,14 +101,10 @@ There are three interrelated rules which make a dataset tidy:
 
 Figure \@ref(fig:tidy-structure) shows the rules visually.
 
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{images/tidy-1} 
-
-}
-
-\caption{Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells.}(\#fig:tidy-structure)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/tidy-1.png" alt="Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells." width="100%" />
+<p class="caption">(\#fig:tidy-structure)Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells.</p>
+</div>
 
 These three rules are interrelated because it's impossible to only satisfy two of the three. That interrelationship leads to an even simpler set of practical instructions:
 
@@ -163,8 +159,7 @@ chart = base_chart.mark_line() + base_chart.encode(color = 'country').mark_circl
 chart.save("screenshots/altair_table1.png")
 ```
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_table1} \end{center}
+<img src="screenshots/altair_table1.png" width="50%" style="display: block; margin: auto;" />
 
 
 ### Exercises
@@ -243,14 +238,10 @@ table4a.melt(['country'], var_name = "year", value_name = "cases")
 
 `year` and `cases` do not exist in `table4a` so we put their names in quotes.
 
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{images/tidy-9} 
-
-}
-
-\caption{Pivoting `table4` into a longer, tidy form.}(\#fig:tidy-gather)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/tidy-9.png" alt="Pivoting `table4` into a longer, tidy form." width="100%" />
+<p class="caption">(\#fig:tidy-gather)Pivoting `table4` into a longer, tidy form.</p>
+</div>
 
 In the final result, the pivoted columns are dropped, and we get new `year` and `cases` columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure \@ref(fig:tidy-gather).
 
@@ -333,14 +324,10 @@ table2.pivot_table(
 #> 5           China  2000  213766  1280428583
 ```
 
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{images/tidy-8} 
-
-}
-
-\caption{Pivoting `table2` into a "wider", tidy form.}(\#fig:tidy-spread)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/tidy-8.png" alt="Pivoting `table2` into a &quot;wider&quot;, tidy form." width="100%" />
+<p class="caption">(\#fig:tidy-spread)Pivoting `table2` into a "wider", tidy form.</p>
+</div>
 
 As you might have guessed from their names, `pivot()` and `pivot_table()` are complements to `melt()`. `melt()` makes wide tables narrower and longer; `pivot()` and `pivot_table()` makes long tables shorter and wider.
 
@@ -413,14 +400,10 @@ pd.concat([table3.drop(columns = 'rate'), new_columns], axis = 1)
 #> 5        China  2000  213766  1280428583
 ```
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.75\linewidth]{images/tidy-17} 
-
-}
-
-\caption{Separating `table3` makes it tidy}(\#fig:tidy-separate)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/tidy-17.png" alt="Separating `table3` makes it tidy" width="75%" />
+<p class="caption">(\#fig:tidy-separate)Separating `table3` makes it tidy</p>
+</div>
 
 (Formally, `pat` is a regular expression, which you'll learn more about in [strings].)
 
@@ -467,27 +450,23 @@ pd.concat([table3.drop(columns = 'year'), cent_year], axis = 1)
 
 For two string series the inverse of `str.split()` can be done with `+`: it combines multiple columns into a single column. You'll need it much less frequently than `str.split()`, but it's still a useful tool to have in your back pocket.
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.75\linewidth]{images/tidy-18} 
-
-}
-
-\caption{Uniting `table5` makes it tidy}(\#fig:tidy-unite)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/tidy-18.png" alt="Uniting `table5` makes it tidy" width="75%" />
+<p class="caption">(\#fig:tidy-unite)Uniting `table5` makes it tidy</p>
+</div>
 
 We can use `+` to rejoin the *century* and *year* string columns that we created in the last example. That data is saved as `table5`. `+` takes a two series and can be assigned to the name of the new variable to create:
 
 
 ```python
 table5.assign(new = table5['century'] + table5['year'])
-#>        country century year               rate   new
-#> 0  Afghanistan      19   99       745/19987071  1999
-#> 1  Afghanistan      20   00      2666/20595360  2000
-#> 2       Brazil      19   99    37737/172006362  1999
-#> 3       Brazil      20   00    80488/174504898  2000
-#> 4        China      19   99  212258/1272915272  1999
-#> 5        China      20   00  213766/1280428583  2000
+#>        country  century  year               rate  new
+#> 0  Afghanistan       19    99       745/19987071  118
+#> 1  Afghanistan       20     0      2666/20595360   20
+#> 2       Brazil       19    99    37737/172006362  118
+#> 3       Brazil       20     0    80488/174504898   20
+#> 4        China       19    99  212258/1272915272  118
+#> 5        China       20     0  213766/1280428583   20
 ```
 
 If you want join the strings with a specified string or more than two columns you can use agg with `axis = 1`.
@@ -637,8 +616,8 @@ who1.key.value_counts().head(25)
 #> new_ep_m1524    1026
 #> new_sn_m3544    1025
 #> new_ep_m3544    1024
-#> new_sn_m2534    1022
 #> new_sn_f1524    1022
+#> new_sn_m2534    1022
 #> Name: key, dtype: int64
 ```
 
