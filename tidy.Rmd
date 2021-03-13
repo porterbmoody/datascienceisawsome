@@ -19,7 +19,7 @@ use_python("usr/local/bin/python3")
 
 In this chapter, you will learn a consistent way to organise your data in Python, an organisation called __tidy data__. Getting your data into this format requires some upfront work, but that work pays off in the long term. Once you have tidy data and pandas data frames, you will spend much less time munging data from one representation to another, allowing you to spend more time on the analytic questions at hand.
 
-This chapter will give you a practical introduction to tidy data and the accompanying tools in the __pandas__ package. If you'd like to learn more about the underlying theory, you might enjoy the *Tidy Data* paper published in the Journal of Statistical Software, <http://www.jstatsoft.org/v59/i10/paper>.
+This chapter will give you a practical introduction to tidy data and the accompanying tools in the __pandas__ package. If you'd like to learn more about the underlying theory, you might enjoy the [Tidy Data article](http://www.jstatsoft.org/v59/i10/paper) published in the Journal of Statistical Software.
 
 ### Prerequisites
 
@@ -193,7 +193,7 @@ knitr::include_graphics("images/tidy-9.png")
 
 In the final result, the pivoted columns are dropped, and we get new `year` and `cases` columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure \@ref(fig:tidy-gather).
 
-`melt()` makes datasets longer (imagine melting icecream down the cone) by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say (e.g.) that dataset A is longer than dataset B.
+`melt()` makes datasets longer (imagine melting icecream down the cone) by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”. Length is a relative term, and you can only say that dataset A is longer than dataset B.
 
 We can use `melt()` to tidy `table4b` in a similar fashion. The only difference is the variable stored in the cell values:
 
@@ -311,7 +311,7 @@ pd.concat([
 
 To split on integers you would use `str[]`. `str[]` will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings and are entered `:2`; negative value start at -1 on the far-right of the strings are entered `-2:`. 
 
-You can use this arrangement to separate the last two digits of each year. This make this data less tidy, but is useful in other cases, as you'll see in a little bit.
+You can use this arrangement to separate the last two digits of each year. The data will be less tidy, but it is useful in other cases—as you'll see soon.
 
 ```{python}
 cent_year = pd.DataFrame({
@@ -400,7 +400,7 @@ You can use the pandas functions `stack()` and `unstack()` with `set_index()` to
 
 ## Case Study
 
-To finish off the chapter, let's pull together everything you've learned to tackle a realistic data tidying problem. The `tidyr::who` dataset contains tuberculosis (TB) cases broken down by year, country, age, gender, and diagnosis method. The data comes from the *2014 World Health Organization Global Tuberculosis Report*, available at <http://www.who.int/tb/country/data/download/en/>.
+To finish off the chapter, let's pull together everything you've learned to tackle a realistic data tidying problem. The `tidyr::who` dataset contains tuberculosis (TB) cases broken down by year, country, age, gender, and diagnosis method. The data comes from the [2014 World Health Organization Global Tuberculosis Report](http://www.who.int/tb/country/data/download/en/).
 
 There's a wealth of epidemiological information in this dataset, but it's challenging to work with the data in the form that it's provided:
 

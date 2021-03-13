@@ -8,7 +8,6 @@ library(vegawidget)
 use_python("usr/local/bin/python3")
 ```
 
-
 ## Introduction
 
 In [exploratory data analysis], you learned how to use plots as tools for _exploration_. When you make exploratory plots, you know---even before looking---which variables the plot will display. You made each plot for a purpose, could quickly look at it, and then move on to the next plot. In the course of most analyses, you'll produce tens or hundreds of plots, most of which are immediately thrown away.
@@ -64,7 +63,7 @@ knitr::include_graphics("screenshots/altair_communicate_1.png")
 
 The purpose of a plot title is to summarise the main finding. Avoid titles that just describe what the plot is, e.g. "A scatterplot of engine displacement vs. fuel economy". 
 
-If you need to add more text, you can use subtitles. They add additional detail in a smaller font beneath the title. Subtitles are not standardized or documented well in Altair ([see this issue](https://github.com/altair-viz/altair/issues/1919)). The subtitles can be specified as shown below. 
+If you need to add more text, you can use subtitles. They add additional detail in a smaller font beneath the title. Subtitles are not standardized or documented well in Altair (see the [Subtitle Documentation and styling](https://github.com/altair-viz/altair/issues/1919) issue). The subtitles can be specified as shown below. 
 
 Notice the use of the `.configure_<ELEMENT>()` option that allows us to modify the fonts and location of the title in this example.
 
@@ -716,7 +715,7 @@ Vega currently includes some themes which altair can access with `themes.enable(
 knitr::include_graphics("images/visualization-themes-altair.png")
 ```
 
-It's also possible to control individual components of each theme, like the size and colour of the font used for the y axis. Unfortunately, this level of detail is outside the scope of this book. I recommend Sergio Sanchez's ['Consistently Beautiful Visualizations with Altair Themes'](Consistently Beautiful Visualizations with Altair Themes) Medium article for details. You can also create your own themes, if you are trying to match a particular corporate or journal style.
+It's also possible to control individual components of each theme, like the size and colour of the font used for the y axis. Unfortunately, this level of detail is outside the scope of this book. I recommend Sergio Sanchez's ['Consistently Beautiful Visualizations with Altair Themes'](https://towardsdatascience.com/consistently-beautiful-visualizations-with-altair-themes-c7f9f889602) Medium article for details. You can also create your own themes, if you are trying to match a particular corporate or journal style.
 
 ## Saving your plots
 
@@ -752,4 +751,4 @@ You can save an Altair chart object as a PNG, SVG, or PDF image. You will need a
 
 The absolute best place to learn more is the [Altair guide](https://altair-viz.github.io/getting_started/overview.html). It goes into much more depth about the underlying theory, and has many more examples of how to combine the individual pieces to solve practical problems. 
 
-Another great resource is the Altair ecosystem <https://altair-viz.github.io/user_guide/ecosystem.html>. This site lists many of the packages that extend Altair. It's a great place to start if you're trying to do something that seems hard with Altair.
+Another great resource is the [Altair ecosystem](https://altair-viz.github.io/user_guide/ecosystem.html). This site lists many of the packages that extend Altair. It's a great place to start if you're trying to do something that seems hard with Altair.

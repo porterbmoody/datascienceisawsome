@@ -5,17 +5,17 @@ knitr::opts_chunk$set(python.reticulate = TRUE)
 library(reticulate)
 library(ggplot2)
 library(vegawidget)
-use_python("usr/local/bin/python3")
+reticulate::use_python("usr/local/bin/python3")
 ```
 
 
 ## Introduction
 
-Visualization is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you'll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You'll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.
+Visualization is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. You will often need to create some new variables or summaries, rename variables, or reorder observations for the data to be easier to manage. You'll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the pandas package and a new dataset on flights departing New York City in 2013.
 
 ### Prerequisites
 
-In this chapter we're going to focus on how to use the pandas package, the foundational package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need two additional Python packages to help us with mathematical and statistical functions - [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html). Notice the `from ____ import ____` follows the [SciPy guidance](https://docs.scipy.org/doc/scipy/reference/api.html) to import functions from submodule spaces. Now we will call functions using the SciPy package with the `stats.<FUNCTION>` structure.
+In this chapter we're going to focus on how to use the pandas package, the foundational package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need two additional Python packages to help us with mathematical and statistical functions: [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html). Notice the `from ____ import ____` follows the [SciPy guidance](https://docs.scipy.org/doc/scipy/reference/api.html) to import functions from submodule spaces. Now we will call functions using the SciPy package with the `stats.<FUNCTION>` structure.
 
 ```{python setup, cache=FALSE, message = FALSE, eval=TRUE}
 import pandas as pd
@@ -220,7 +220,7 @@ x == y
 # Illogical comparisons are False.
 ```
 
-The Python development team did decide to provide functionality to find `np.nan` objects in your code by allowing `np.nan != np.nan` to return `True`.  Once again you can [read the rationale for this decision](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). Python now has `isnan()` functions to make this comparison more straight forward in your code. 
+The Python development team did decide to provide functionality to find `np.nan` objects in your code by allowing `np.nan != np.nan` to return `True`.  Once again you can [read the rationale for this decision](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). Python now has `.isnan()` functions to make this comparison more straight forward in your code. 
 
 Pandas uses the `nan` structure in Python to identify __NA__ or 'missing' values. If you want to determine if a value is missing, use `pd.isna()`:
 
@@ -228,7 +228,7 @@ Pandas uses the `nan` structure in Python to identify __NA__ or 'missing' values
 pd.isna(x)
 ```
 
-`query()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and __NA__ values. 
+`.query()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and __NA__ values. 
 
 ```{python}
 df = pd.DataFrame({'x': [1, np.nan, 3]})
@@ -246,13 +246,13 @@ df.query('@pd.isna(x) | x > 1')
 
 1.  Find all flights that
 
-    1. Had an arrival delay of two or more hours
-    1. Flew to Houston (`IAH` or `HOU`)
-    1. Were operated by United, American, or Delta
-    1. Departed in summer (July, August, and September)
-    1. Arrived more than two hours late, but didn't leave late
-    1. Were delayed by at least an hour, but made up over 30 minutes in flight
-    1. Departed between midnight and 6am (inclusive)
+    A. Had an arrival delay of two or more hours
+    B. Flew to Houston (`IAH` or `HOU`)
+    C. Were operated by United, American, or Delta
+    D. Departed in summer (July, August, and September)
+    E. Arrived more than two hours late, but didn't leave late
+    F. Were delayed by at least an hour, but made up over 30 minutes in flight
+    G. Departed between midnight and 6am (inclusive)
 
 1.  How many flights have a missing `dep_time`? What other variables are
     missing? What might these rows represent?
@@ -390,7 +390,7 @@ Note that you can refer to columns that you've just created:
 
 ### Useful creation functions {#mutate-funs}
 
-There are many functions for creating new variables that you can use with `.assign()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. Some arithmetic operators are available in Python without the need for any additional packages. However, many arithmetic functions like `mean()` and `std()` are accessed through importing additional packages. Python comes with a `math` and `statistics` package. However, we recommend the __NumPy__ package for accessing the suite of mathematical functions needed. You would import NumPy with `import numpy as np`. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful:
+There are many functions for creating new variables that you can use with `.assign()`. The key property is that the function must be vectorised: it must take a vector of values as input, and return a vector with the same number of values as output. Some arithmetic operators are available in Python without the need for any additional packages. However, many arithmetic functions like `mean()` and `std()` are accessed through importing additional packages. Python comes with a `math` and `statistics` package. However, we recommend the __NumPy__ package for accessing the suite of mathematical functions needed. You would import NumPy with `import numpy as np`. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful:
 
 *   Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised,
     using the so called "recycling rules". If one parameter is shorter than
@@ -493,9 +493,9 @@ There are many functions for creating new variables that you can use with `.assi
 
 1.  What trigonometric functions does __NumPy__ provide?
 
-## Grouped summaries or aggregations with `agg()`
+## Grouped summaries or aggregations with `.agg()`
 
-The last key verb is `agg()`. It collapses a data frame to a single row:
+The last key verb is `.agg()`. It collapses a data frame to a single row:
 
 ```{python}
 flights.agg({'dep_delay': np.mean})
@@ -503,14 +503,14 @@ flights.agg({'dep_delay': np.mean})
 
 (Pandas aggregate functions ignores the `np.nan` values like `na.rm = TRUE` in R.)
 
-`agg()` is not terribly useful unless we pair it with `.groupby()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they'll be automatically applied "by group". For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the `.groupby()` function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called [named aggregation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation) in pandas:
+`.agg()` is not terribly useful unless we pair it with `.groupby()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they'll be automatically applied "by group". For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the `.groupby()` function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called [named aggregation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation) in pandas:
 
 ```{python}
 by_day = flights.groupby(['year', 'month', 'day'])
 by_day.agg(delay = ('dep_delay', np.mean)).reset_index()
 ```
 
-Note the use of `.reset_index()` to remove pandas creation of a [MultiIndex](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical). You can read more about the use of grouby in pandas with their [Group By: split-apply-combine user Guid documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
+Note the use of `.reset_index()` to remove pandas creation of a [MultiIndex](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical). You can read more about the use of `.groupby()` in pandas with their [Group By: split-apply-combine user Guid documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
 
 Together `.groupby()` and `.agg()` provide one of the tools that you'll use most commonly when working with pandas: grouped summaries. But before we go any further with this, we need to introduce a structure for pandas code when doing data science work. We structure our code much like 'the pipe', `%>%` in the tidyverse packages from R-Studio.
 
