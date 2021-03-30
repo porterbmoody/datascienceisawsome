@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Relational data | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Relational data | Python for Data Science" />
   <meta property="og:type" content="book" />
@@ -51,15 +51,14 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/vega-5.9.0/vega.min.js"></script>
-<script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
-<link href="libs/vega-embed-6.2.0/vega-embed.css" rel="stylesheet" />
-<script src="libs/vega-embed-6.2.0/vega-embed.js"></script>
-<script src="libs/vegawidget-binding-0.3.1.9003/vegawidget.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/vega-5.17.0/vega.min.js"></script>
+<script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
+<link href="libs/vega-embed-6.12.2/vega-embed.css" rel="stylesheet" />
+<script src="libs/vega-embed-6.12.2/vega-embed.js"></script>
+<script src="libs/vegawidget-binding-0.3.2/vegawidget.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -212,9 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="explore-intro.html"><a href="explore-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data visualisation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.1.1" data-path="data-visualisation.html"><a href="data-visualisation.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data-visualisation.html"><a href="data-visualisation.html#altair-data-management"><i class="fa fa-check"></i><b>3.1.2</b> Altair data management</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
@@ -248,13 +247,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
 <li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
 <li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
-<li class="chapter" data-level="4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#exercises-4"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
 <li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
 </ul></li>
@@ -263,22 +262,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
 <li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
 <li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
-<li class="chapter" data-level="5.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-.sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>.sort_values()</code></a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>filter()</code> or <code>loc[]</code></a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-.assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>.assign()</code></a>
 <ul>
 <li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
-<li class="chapter" data-level="5.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
+<li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>agg()</code></a>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-.agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>.agg()</code></a>
 <ul>
 <li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#combining-multiple-operations"><i class="fa fa-check"></i><b>5.6.1</b> Combining multiple operations</a></li>
 <li class="chapter" data-level="5.6.2" data-path="transform.html"><a href="transform.html#missing-values-1"><i class="fa fa-check"></i><b>5.6.2</b> Missing values</a></li>
@@ -286,11 +285,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.4" data-path="transform.html"><a href="transform.html#summarise-funs"><i class="fa fa-check"></i><b>5.6.4</b> Useful summary functions</a></li>
 <li class="chapter" data-level="5.6.5" data-path="transform.html"><a href="transform.html#grouping-by-multiple-variables"><i class="fa fa-check"></i><b>5.6.5</b> Grouping by multiple variables</a></li>
 <li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
-<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-4"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
+<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
 <ul>
-<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
@@ -299,9 +298,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
@@ -309,11 +308,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
 <li class="chapter" data-level="7.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#typical-values"><i class="fa fa-check"></i><b>7.3.2</b> Typical values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#unusual-values"><i class="fa fa-check"></i><b>7.3.3</b> Unusual values</a></li>
-<li class="chapter" data-level="7.3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-11"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values-2"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-12"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a>
 <ul>
@@ -337,26 +336,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="wrangle-intro.html"><a href="wrangle-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
 <li class="chapter" data-level="10" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<li class="chapter" data-level="10.1" data-path="dataframe.html"><a href="dataframe.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.1.1" data-path="dataframe.html"><a href="dataframe.html#prerequisites-4"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="dataframe.html"><a href="dataframe.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
 <li class="chapter" data-level="10.3" data-path="dataframe.html"><a href="dataframe.html#printing"><i class="fa fa-check"></i><b>10.3</b> Printing</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="dataframe.html"><a href="dataframe.html#subsetting"><i class="fa fa-check"></i><b>10.3.1</b> Subsetting</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
+<li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data import</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-5"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.1.1" data-path="data-import.html"><a href="data-import.html#prerequisites-5"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-17"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a>
 <ul>
@@ -364,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
 <li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
 <li class="chapter" data-level="11.3.4" data-path="data-import.html"><a href="data-import.html#readr-datetimes"><i class="fa fa-check"></i><b>11.3.4</b> Dates and times</a></li>
-<li class="chapter" data-level="11.3.5" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
+<li class="chapter" data-level="11.3.5" data-path="data-import.html"><a href="data-import.html#exercises-18"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="data-import.html"><a href="data-import.html#parsing-a-file"><i class="fa fa-check"></i><b>11.4</b> Parsing a file</a>
 <ul>
@@ -375,46 +374,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy data</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-6"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#prerequisites-6"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.2</b> Tidy data</a>
 <ul>
-<li class="chapter" data-level="12.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="12.2.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-19"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#pivoting"><i class="fa fa-check"></i><b>12.3</b> Pivoting</a>
 <ul>
 <li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#longer-melt"><i class="fa fa-check"></i><b>12.3.1</b> Longer (<code>melt()</code>)</a></li>
 <li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider-pivot"><i class="fa fa-check"></i><b>12.3.2</b> Wider (<code>pivot()</code>)</a></li>
-<li class="chapter" data-level="12.3.3" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
+<li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-20"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a>
 <ul>
 <li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#split-separate"><i class="fa fa-check"></i><b>12.4.1</b> Split (Separate)</a></li>
 <li class="chapter" data-level="12.4.2" data-path="tidy-data.html"><a href="tidy-data.html#unite"><i class="fa fa-check"></i><b>12.4.2</b> Unite</a></li>
-<li class="chapter" data-level="12.4.3" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
+<li class="chapter" data-level="12.4.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-21"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#missing-values-3"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
 <li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#case-study"><i class="fa fa-check"></i><b>12.6</b> Case Study</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
+<li class="chapter" data-level="12.6.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-22"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.7" data-path="tidy-data.html"><a href="tidy-data.html#non-tidy-data"><i class="fa fa-check"></i><b>12.7</b> Non-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>13</b> Relational data</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
+<li class="chapter" data-level="13.1" data-path="relational-data.html"><a href="relational-data.html#introduction-7"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.1.1" data-path="relational-data.html"><a href="relational-data.html#prerequisites-7"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="13.2" data-path="relational-data.html"><a href="relational-data.html#nycflights13-relational"><i class="fa fa-check"></i><b>13.2</b> nycflights13</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.2.1" data-path="relational-data.html"><a href="relational-data.html#exercises-23"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="relational-data.html"><a href="relational-data.html#keys"><i class="fa fa-check"></i><b>13.3</b> Keys</a>
 <ul>
-<li class="chapter" data-level="13.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.3.1" data-path="relational-data.html"><a href="relational-data.html#exercises-24"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.4" data-path="relational-data.html"><a href="relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>13.4</b> Mutating joins</a>
 <ul>
@@ -423,20 +422,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4.3" data-path="relational-data.html"><a href="relational-data.html#outer-join"><i class="fa fa-check"></i><b>13.4.3</b> Outer joins</a></li>
 <li class="chapter" data-level="13.4.4" data-path="relational-data.html"><a href="relational-data.html#join-matches"><i class="fa fa-check"></i><b>13.4.4</b> Duplicate keys</a></li>
 <li class="chapter" data-level="13.4.5" data-path="relational-data.html"><a href="relational-data.html#join-by"><i class="fa fa-check"></i><b>13.4.5</b> Defining the key columns</a></li>
-<li class="chapter" data-level="13.4.6" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
+<li class="chapter" data-level="13.4.6" data-path="relational-data.html"><a href="relational-data.html#exercises-25"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
 <li class="chapter" data-level="13.4.7" data-path="relational-data.html"><a href="relational-data.html#other-implementations"><i class="fa fa-check"></i><b>13.4.7</b> Other implementations</a></li>
 </ul></li>
 <li class="chapter" data-level="13.5" data-path="relational-data.html"><a href="relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>13.5</b> Filtering joins</a>
 <ul>
-<li class="chapter" data-level="13.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.5.1" data-path="relational-data.html"><a href="relational-data.html#exercises-26"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.6" data-path="relational-data.html"><a href="relational-data.html#join-problems"><i class="fa fa-check"></i><b>13.6</b> Join problems</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>14</b> Strings</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
+<li class="chapter" data-level="14.1" data-path="strings.html"><a href="strings.html#introduction-8"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.1.1" data-path="strings.html"><a href="strings.html#prerequisites-8"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="14.2" data-path="strings.html"><a href="strings.html#string-basics"><i class="fa fa-check"></i><b>14.2</b> String basics</a>
 <ul>
@@ -463,15 +462,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="strings.html"><a href="strings.html#other-types-of-pattern"><i class="fa fa-check"></i><b>14.5</b> Other types of pattern</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-10"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-37"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="strings.html"><a href="strings.html#strings-in-python"><i class="fa fa-check"></i><b>14.6</b> strings in Python</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>15</b> Factors</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
+<li class="chapter" data-level="15.1" data-path="factors.html"><a href="factors.html#introduction-9"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="15.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>15.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.1.1" data-path="factors.html"><a href="factors.html#prerequisites-9"><i class="fa fa-check"></i><b>15.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="15.2" data-path="factors.html"><a href="factors.html#creating-categories"><i class="fa fa-check"></i><b>15.2</b> Creating categories</a></li>
 <li class="chapter" data-level="15.3" data-path="factors.html"><a href="factors.html#general-social-survey"><i class="fa fa-check"></i><b>15.3</b> General Social Survey</a>
@@ -480,32 +479,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15.4" data-path="factors.html"><a href="factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>15.4</b> Modifying factor order</a>
 <ul>
-<li class="chapter" data-level="15.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="15.4.1" data-path="factors.html"><a href="factors.html#exercises-38"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="factors.html"><a href="factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>15.5</b> Modifying factor levels</a>
 <ul>
-<li class="chapter" data-level="15.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="15.5.1" data-path="factors.html"><a href="factors.html#exercises-39"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>16</b> Dates and times</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
+<li class="chapter" data-level="16.1" data-path="dates-and-times.html"><a href="dates-and-times.html#introduction-10"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="16.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>16.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="16.1.1" data-path="dates-and-times.html"><a href="dates-and-times.html#prerequisites-10"><i class="fa fa-check"></i><b>16.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="16.2" data-path="dates-and-times.html"><a href="dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.2</b> Creating date/times</a>
 <ul>
 <li class="chapter" data-level="16.2.1" data-path="dates-and-times.html"><a href="dates-and-times.html#from-strings"><i class="fa fa-check"></i><b>16.2.1</b> From strings</a></li>
 <li class="chapter" data-level="16.2.2" data-path="dates-and-times.html"><a href="dates-and-times.html#from-individual-components"><i class="fa fa-check"></i><b>16.2.2</b> From individual components</a></li>
 <li class="chapter" data-level="16.2.3" data-path="dates-and-times.html"><a href="dates-and-times.html#from-other-types"><i class="fa fa-check"></i><b>16.2.3</b> From other types</a></li>
-<li class="chapter" data-level="16.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>16.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2.4" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-40"><i class="fa fa-check"></i><b>16.2.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="dates-and-times.html"><a href="dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.3</b> Date-time components</a>
 <ul>
 <li class="chapter" data-level="16.3.1" data-path="dates-and-times.html"><a href="dates-and-times.html#getting-components"><i class="fa fa-check"></i><b>16.3.1</b> Getting components</a></li>
 <li class="chapter" data-level="16.3.2" data-path="dates-and-times.html"><a href="dates-and-times.html#rounding"><i class="fa fa-check"></i><b>16.3.2</b> Rounding</a></li>
 <li class="chapter" data-level="16.3.3" data-path="dates-and-times.html"><a href="dates-and-times.html#setting-components"><i class="fa fa-check"></i><b>16.3.3</b> Setting components</a></li>
-<li class="chapter" data-level="16.3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>16.3.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.3.4" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-41"><i class="fa fa-check"></i><b>16.3.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="dates-and-times.html"><a href="dates-and-times.html#time-spans-deltas"><i class="fa fa-check"></i><b>16.4</b> Time spans (Deltas)</a></li>
 <li class="chapter" data-level="16.5" data-path="dates-and-times.html"><a href="dates-and-times.html#time-zones"><i class="fa fa-check"></i><b>16.5</b> Time zones</a></li>
@@ -513,23 +512,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Program</b></span></li>
 <li class="chapter" data-level="17" data-path="program-intro.html"><a href="program-intro.html"><i class="fa fa-check"></i><b>17</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>17.1</b> Learning more</a></li>
+<li class="chapter" data-level="17.1" data-path="program-intro.html"><a href="program-intro.html#learning-more-1"><i class="fa fa-check"></i><b>17.1</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="pipes-not-included.html"><a href="pipes-not-included.html"><i class="fa fa-check"></i><b>18</b> Pipes (Not included)</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.1" data-path="pipes-not-included.html"><a href="pipes-not-included.html#introduction-11"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="functions-tbd.html"><a href="functions-tbd.html"><i class="fa fa-check"></i><b>19</b> Functions (TBD)</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
+<li class="chapter" data-level="19.1" data-path="functions-tbd.html"><a href="functions-tbd.html#introduction-12"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="vectors-tbd.html"><a href="vectors-tbd.html"><i class="fa fa-check"></i><b>20</b> Vectors (TBD)</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.1" data-path="vectors-tbd.html"><a href="vectors-tbd.html#introduction-13"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="iteration-tbd.html"><a href="iteration-tbd.html"><i class="fa fa-check"></i><b>21</b> Iteration (TBD)</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.1" data-path="iteration-tbd.html"><a href="iteration-tbd.html#introduction-14"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
 </ul></li>
 <li class="part"><span><b>IV Model</b></span></li>
 <li class="chapter" data-level="22" data-path="model-intro.html"><a href="model-intro.html"><i class="fa fa-check"></i><b>22</b> Introduction</a>
@@ -538,61 +537,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="23" data-path="model-basics-tbd.html"><a href="model-basics-tbd.html"><i class="fa fa-check"></i><b>23</b> Model basics (TBD)</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
+<li class="chapter" data-level="23.1" data-path="model-basics-tbd.html"><a href="model-basics-tbd.html#introduction-15"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="24" data-path="model-building-tbd.html"><a href="model-building-tbd.html"><i class="fa fa-check"></i><b>24</b> Model building (TBD)</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>24.1</b> Introduction</a></li>
+<li class="chapter" data-level="24.1" data-path="model-building-tbd.html"><a href="model-building-tbd.html#introduction-16"><i class="fa fa-check"></i><b>24.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="many-models-tbd.html"><a href="many-models-tbd.html"><i class="fa fa-check"></i><b>25</b> Many models (TBD)</a>
 <ul>
-<li class="chapter" data-level="25.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>25.1</b> Introduction</a></li>
+<li class="chapter" data-level="25.1" data-path="many-models-tbd.html"><a href="many-models-tbd.html#introduction-17"><i class="fa fa-check"></i><b>25.1</b> Introduction</a></li>
 </ul></li>
 <li class="part"><span><b>V Communicate</b></span></li>
 <li class="chapter" data-level="26" data-path="communicate-intro.html"><a href="communicate-intro.html"><i class="fa fa-check"></i><b>26</b> Introduction</a></li>
 <li class="chapter" data-level="27" data-path="markdown.html"><a href="markdown.html"><i class="fa fa-check"></i><b>27</b> Markdown</a>
 <ul>
-<li class="chapter" data-level="27.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>27.1</b> Introduction</a></li>
+<li class="chapter" data-level="27.1" data-path="markdown.html"><a href="markdown.html#introduction-18"><i class="fa fa-check"></i><b>27.1</b> Introduction</a></li>
 <li class="chapter" data-level="27.2" data-path="markdown.html"><a href="markdown.html#markdown-basics"><i class="fa fa-check"></i><b>27.2</b> Markdown basics</a></li>
 <li class="chapter" data-level="27.3" data-path="markdown.html"><a href="markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>27.3</b> Text formatting with Markdown</a>
 <ul>
-<li class="chapter" data-level="27.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>27.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="27.3.1" data-path="markdown.html"><a href="markdown.html#exercises-42"><i class="fa fa-check"></i><b>27.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="markdown.html"><a href="markdown.html#code-chunks"><i class="fa fa-check"></i><b>27.4</b> Code chunks</a>
 <ul>
 <li class="chapter" data-level="27.4.1" data-path="markdown.html"><a href="markdown.html#tables"><i class="fa fa-check"></i><b>27.4.1</b> Tables</a></li>
 </ul></li>
-<li class="chapter" data-level="27.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
+<li class="chapter" data-level="27.5" data-path="markdown.html"><a href="markdown.html#learning-more-2"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html"><i class="fa fa-check"></i><b>28</b> Graphics for communication</a>
 <ul>
-<li class="chapter" data-level="28.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
+<li class="chapter" data-level="28.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#introduction-19"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="28.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="28.1.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#prerequisites-11"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="28.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#label"><i class="fa fa-check"></i><b>28.2</b> Label</a>
 <ul>
-<li class="chapter" data-level="28.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="28.2.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-43"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>28.3</b> Annotations</a>
 <ul>
-<li class="chapter" data-level="28.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>28.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="28.3.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-44"><i class="fa fa-check"></i><b>28.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.4" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>28.4</b> Scales</a>
 <ul>
 <li class="chapter" data-level="28.4.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#axis-ticks-and-legend-keys"><i class="fa fa-check"></i><b>28.4.1</b> Axis ticks and legend keys</a></li>
 <li class="chapter" data-level="28.4.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#legend-layout"><i class="fa fa-check"></i><b>28.4.2</b> Legend layout</a></li>
 <li class="chapter" data-level="28.4.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#replacing-a-scale"><i class="fa fa-check"></i><b>28.4.3</b> Replacing a scale</a></li>
-<li class="chapter" data-level="28.4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>28.4.4</b> Exercises</a></li>
+<li class="chapter" data-level="28.4.4" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-45"><i class="fa fa-check"></i><b>28.4.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.5" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#zooming"><i class="fa fa-check"></i><b>28.5</b> Zooming</a></li>
 <li class="chapter" data-level="28.6" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#themes"><i class="fa fa-check"></i><b>28.6</b> Themes</a></li>
 <li class="chapter" data-level="28.7" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#saving-your-plots"><i class="fa fa-check"></i><b>28.7</b> Saving your plots</a></li>
-<li class="chapter" data-level="28.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>28.8</b> Learning more</a></li>
+<li class="chapter" data-level="28.8" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#learning-more-3"><i class="fa fa-check"></i><b>28.8</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html"><i class="fa fa-check"></i><b>29</b> R Markdown formats</a>
 <ul>
-<li class="chapter" data-level="29.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
+<li class="chapter" data-level="29.1" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#introduction-20"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
 <li class="chapter" data-level="29.2" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#output-options"><i class="fa fa-check"></i><b>29.2</b> Output options</a></li>
 <li class="chapter" data-level="29.3" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#documents"><i class="fa fa-check"></i><b>29.3</b> Documents</a></li>
 <li class="chapter" data-level="29.4" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#notebooks"><i class="fa fa-check"></i><b>29.4</b> Notebooks</a></li>
@@ -605,7 +604,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="29.8" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#websites"><i class="fa fa-check"></i><b>29.8</b> Websites</a></li>
 <li class="chapter" data-level="29.9" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#other-formats"><i class="fa fa-check"></i><b>29.9</b> Other formats</a></li>
-<li class="chapter" data-level="29.10" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
+<li class="chapter" data-level="29.10" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#learning-more-4"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="r-markdown-workflow-and-jupyter.html"><a href="r-markdown-workflow-and-jupyter.html"><i class="fa fa-check"></i><b>30</b> R Markdown workflow (and Jupyter)</a></li>
 </ul>
@@ -627,7 +626,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="relational-data" class="section level1" number="13">
 <h1><span class="header-section-number">13</span> Relational data</h1>
-<div id="introduction" class="section level2" number="13.1">
+<div id="introduction-7" class="section level2" number="13.1">
 <h2><span class="header-section-number">13.1</span> Introduction</h2>
 <p>It’s rare that a data analysis involves only a single table of data. Typically you have many tables of data, and you must combine them to answer the questions that you’re interested in. Collectively, multiple tables of data are called <strong>relational data</strong> because it is the relations, not just the individual datasets, that are important.</p>
 <p>Relations are always defined between a pair of tables. All other relations are built up from this simple idea: the relations of three or more tables are always a property of the relations between each pair. Sometimes both elements of a pair can be the same table! This is needed if, for example, you have a table of people, and each person has a reference to their parents.</p>
@@ -640,64 +639,394 @@ whether or not they match an observation in the other table.</p></li>
 <li><p><strong>Set operations</strong>, which treat observations as if they were set elements.</p></li>
 </ul>
 <p>The most common place to find relational data is in a <em>relational</em> database management system (or RDBMS), a term that encompasses almost all modern databases. If you’ve used a database before, you’ve almost certainly used SQL. If so, you should find the concepts in this chapter familiar, although their expression in pandas is a little different. Generally, pandas is a little easier to use than SQL because pandas is specialised to do data analysis: it makes common data analysis operations easier, at the expense of making it more difficult to do other things that aren’t commonly needed for data analysis.</p>
-<div id="prerequisites" class="section level3" number="13.1.1">
+<div id="prerequisites-7" class="section level3" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Prerequisites</h3>
 <p>We will explore relational data from <code>nycflights13</code> using the two-table verbs from dplyr.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="relational-data.html#cb211-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb211-2"><a href="relational-data.html#cb211-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb211-3"><a href="relational-data.html#cb211-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="relational-data.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb210-2"><a href="relational-data.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb210-3"><a href="relational-data.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="nycflights13-relational" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> nycflights13</h2>
-<p>We will use the nycflights13 package to learn about relational data. nycflights13 contains four tibbles that are related to the <code>flights</code> table that you used in [data transformation]:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="relational-data.html#cb212-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
-<span id="cb212-2"><a href="relational-data.html#cb212-2"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">flights/flights.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb212-3"><a href="relational-data.html#cb212-3"></a>airlines <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airlines/airlines.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb212-4"><a href="relational-data.html#cb212-4"></a>airports <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airports/airports.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb212-5"><a href="relational-data.html#cb212-5"></a>planes <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">planes/planes.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb212-6"><a href="relational-data.html#cb212-6"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">weather/weather.csv&quot;</span>.<span class="bu">format</span>(base_url))</span></code></pre></div>
+<p>We will use the nycflights13 package to learn about relational data. nycflights13 contains four tibbles that are related to the <code>flights</code> table that you used in <a href="transform.html#transform">data transformation</a>:</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="relational-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
+<span id="cb211-2"><a href="relational-data.html#cb211-2" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">flights/flights.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb211-3"><a href="relational-data.html#cb211-3" aria-hidden="true" tabindex="-1"></a>airlines <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airlines/airlines.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb211-4"><a href="relational-data.html#cb211-4" aria-hidden="true" tabindex="-1"></a>airports <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airports/airports.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb211-5"><a href="relational-data.html#cb211-5" aria-hidden="true" tabindex="-1"></a>planes <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">planes/planes.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb211-6"><a href="relational-data.html#cb211-6" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">weather/weather.csv&quot;</span>.<span class="bu">format</span>(base_url))</span></code></pre></div>
 <ul>
 <li><p><code>airlines</code> lets you look up the full carrier name from its abbreviated
 code:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="relational-data.html#cb213-1"></a>airlines.head()</span>
-<span id="cb213-2"><a href="relational-data.html#cb213-2"></a><span class="co">#&gt;   carrier                    name</span></span>
-<span id="cb213-3"><a href="relational-data.html#cb213-3"></a><span class="co">#&gt; 0      9E       Endeavor Air Inc.</span></span>
-<span id="cb213-4"><a href="relational-data.html#cb213-4"></a><span class="co">#&gt; 1      AA  American Airlines Inc.</span></span>
-<span id="cb213-5"><a href="relational-data.html#cb213-5"></a><span class="co">#&gt; 2      AS    Alaska Airlines Inc.</span></span>
-<span id="cb213-6"><a href="relational-data.html#cb213-6"></a><span class="co">#&gt; 3      B6         JetBlue Airways</span></span>
-<span id="cb213-7"><a href="relational-data.html#cb213-7"></a><span class="co">#&gt; 4      DL    Delta Air Lines Inc.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="relational-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a>airlines.head()</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>carrier</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9E</td>
+      <td>Endeavor Air Inc.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AA</td>
+      <td>American Airlines Inc.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AS</td>
+      <td>Alaska Airlines Inc.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>B6</td>
+      <td>JetBlue Airways</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DL</td>
+      <td>Delta Air Lines Inc.</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 <li><p><code>airports</code> gives information about each airport, identified by the <code>faa</code>
 airport code:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="relational-data.html#cb214-1"></a>airports.head()</span>
-<span id="cb214-2"><a href="relational-data.html#cb214-2"></a><span class="co">#&gt;    faa                           name        lat  ...  tz  dst             tzone</span></span>
-<span id="cb214-3"><a href="relational-data.html#cb214-3"></a><span class="co">#&gt; 0  04G              Lansdowne Airport  41.130472  ...  -5    A  America/New_York</span></span>
-<span id="cb214-4"><a href="relational-data.html#cb214-4"></a><span class="co">#&gt; 1  06A  Moton Field Municipal Airport  32.460572  ...  -6    A   America/Chicago</span></span>
-<span id="cb214-5"><a href="relational-data.html#cb214-5"></a><span class="co">#&gt; 2  06C            Schaumburg Regional  41.989341  ...  -6    A   America/Chicago</span></span>
-<span id="cb214-6"><a href="relational-data.html#cb214-6"></a><span class="co">#&gt; 3  06N                Randall Airport  41.431912  ...  -5    A  America/New_York</span></span>
-<span id="cb214-7"><a href="relational-data.html#cb214-7"></a><span class="co">#&gt; 4  09J          Jekyll Island Airport  31.074472  ...  -5    A  America/New_York</span></span>
-<span id="cb214-8"><a href="relational-data.html#cb214-8"></a><span class="co">#&gt; </span></span>
-<span id="cb214-9"><a href="relational-data.html#cb214-9"></a><span class="co">#&gt; [5 rows x 8 columns]</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="relational-data.html#cb213-1" aria-hidden="true" tabindex="-1"></a>airports.head()</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>faa</th>
+      <th>name</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>alt</th>
+      <th>tz</th>
+      <th>dst</th>
+      <th>tzone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>04G</td>
+      <td>Lansdowne Airport</td>
+      <td>41.130472</td>
+      <td>-80.619583</td>
+      <td>1044</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>06A</td>
+      <td>Moton Field Municipal Airport</td>
+      <td>32.460572</td>
+      <td>-85.680028</td>
+      <td>264</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>06C</td>
+      <td>Schaumburg Regional</td>
+      <td>41.989341</td>
+      <td>-88.101243</td>
+      <td>801</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>06N</td>
+      <td>Randall Airport</td>
+      <td>41.431912</td>
+      <td>-74.391561</td>
+      <td>523</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>09J</td>
+      <td>Jekyll Island Airport</td>
+      <td>31.074472</td>
+      <td>-81.427778</td>
+      <td>11</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 <li><p><code>planes</code> gives information about each plane, identified by its <code>tailnum</code>:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="relational-data.html#cb215-1"></a>planes.head()</span>
-<span id="cb215-2"><a href="relational-data.html#cb215-2"></a><span class="co">#&gt;   tailnum    year                     type  ... seats speed     engine</span></span>
-<span id="cb215-3"><a href="relational-data.html#cb215-3"></a><span class="co">#&gt; 0  N10156  2004.0  Fixed wing multi engine  ...    55   NaN  Turbo-fan</span></span>
-<span id="cb215-4"><a href="relational-data.html#cb215-4"></a><span class="co">#&gt; 1  N102UW  1998.0  Fixed wing multi engine  ...   182   NaN  Turbo-fan</span></span>
-<span id="cb215-5"><a href="relational-data.html#cb215-5"></a><span class="co">#&gt; 2  N103US  1999.0  Fixed wing multi engine  ...   182   NaN  Turbo-fan</span></span>
-<span id="cb215-6"><a href="relational-data.html#cb215-6"></a><span class="co">#&gt; 3  N104UW  1999.0  Fixed wing multi engine  ...   182   NaN  Turbo-fan</span></span>
-<span id="cb215-7"><a href="relational-data.html#cb215-7"></a><span class="co">#&gt; 4  N10575  2002.0  Fixed wing multi engine  ...    55   NaN  Turbo-fan</span></span>
-<span id="cb215-8"><a href="relational-data.html#cb215-8"></a><span class="co">#&gt; </span></span>
-<span id="cb215-9"><a href="relational-data.html#cb215-9"></a><span class="co">#&gt; [5 rows x 9 columns]</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="relational-data.html#cb214-1" aria-hidden="true" tabindex="-1"></a>planes.head()</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tailnum</th>
+      <th>year</th>
+      <th>type</th>
+      <th>manufacturer</th>
+      <th>model</th>
+      <th>engines</th>
+      <th>seats</th>
+      <th>speed</th>
+      <th>engine</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N10156</td>
+      <td>2004.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>EMBRAER</td>
+      <td>EMB-145XR</td>
+      <td>2</td>
+      <td>55</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>N102UW</td>
+      <td>1998.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>AIRBUS INDUSTRIE</td>
+      <td>A320-214</td>
+      <td>2</td>
+      <td>182</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>N103US</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>AIRBUS INDUSTRIE</td>
+      <td>A320-214</td>
+      <td>2</td>
+      <td>182</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>N104UW</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>AIRBUS INDUSTRIE</td>
+      <td>A320-214</td>
+      <td>2</td>
+      <td>182</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>N10575</td>
+      <td>2002.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>EMBRAER</td>
+      <td>EMB-145LR</td>
+      <td>2</td>
+      <td>55</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 <li><p><code>weather</code> gives the weather at each NYC airport for each hour:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb216-1"><a href="relational-data.html#cb216-1"></a>weather.head()</span>
-<span id="cb216-2"><a href="relational-data.html#cb216-2"></a><span class="co">#&gt;   origin  year  month  day  ...  precip  pressure  visib             time_hour</span></span>
-<span id="cb216-3"><a href="relational-data.html#cb216-3"></a><span class="co">#&gt; 0    EWR  2013      1    1  ...     0.0    1012.0   10.0  2013-01-01T06:00:00Z</span></span>
-<span id="cb216-4"><a href="relational-data.html#cb216-4"></a><span class="co">#&gt; 1    EWR  2013      1    1  ...     0.0    1012.3   10.0  2013-01-01T07:00:00Z</span></span>
-<span id="cb216-5"><a href="relational-data.html#cb216-5"></a><span class="co">#&gt; 2    EWR  2013      1    1  ...     0.0    1012.5   10.0  2013-01-01T08:00:00Z</span></span>
-<span id="cb216-6"><a href="relational-data.html#cb216-6"></a><span class="co">#&gt; 3    EWR  2013      1    1  ...     0.0    1012.2   10.0  2013-01-01T09:00:00Z</span></span>
-<span id="cb216-7"><a href="relational-data.html#cb216-7"></a><span class="co">#&gt; 4    EWR  2013      1    1  ...     0.0    1011.9   10.0  2013-01-01T10:00:00Z</span></span>
-<span id="cb216-8"><a href="relational-data.html#cb216-8"></a><span class="co">#&gt; </span></span>
-<span id="cb216-9"><a href="relational-data.html#cb216-9"></a><span class="co">#&gt; [5 rows x 15 columns]</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="relational-data.html#cb215-1" aria-hidden="true" tabindex="-1"></a>weather.head()</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>origin</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>temp</th>
+      <th>dewp</th>
+      <th>humid</th>
+      <th>wind_dir</th>
+      <th>wind_speed</th>
+      <th>wind_gust</th>
+      <th>precip</th>
+      <th>pressure</th>
+      <th>visib</th>
+      <th>time_hour</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>EWR</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>39.02</td>
+      <td>26.06</td>
+      <td>59.37</td>
+      <td>270.0</td>
+      <td>10.35702</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1012.0</td>
+      <td>10.0</td>
+      <td>2013-01-01T06:00:00Z</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>EWR</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>39.02</td>
+      <td>26.96</td>
+      <td>61.63</td>
+      <td>250.0</td>
+      <td>8.05546</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1012.3</td>
+      <td>10.0</td>
+      <td>2013-01-01T07:00:00Z</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>EWR</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>39.02</td>
+      <td>28.04</td>
+      <td>64.43</td>
+      <td>240.0</td>
+      <td>11.50780</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1012.5</td>
+      <td>10.0</td>
+      <td>2013-01-01T08:00:00Z</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>EWR</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>39.92</td>
+      <td>28.04</td>
+      <td>62.21</td>
+      <td>250.0</td>
+      <td>12.65858</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1012.2</td>
+      <td>10.0</td>
+      <td>2013-01-01T09:00:00Z</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>EWR</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>39.02</td>
+      <td>28.04</td>
+      <td>64.43</td>
+      <td>260.0</td>
+      <td>12.65858</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1011.9</td>
+      <td>10.0</td>
+      <td>2013-01-01T10:00:00Z</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 </ul>
 <p>One way to show the relationships between the different tables is with a drawing:</p>
 <p><img src="diagrams/relational-nycflights.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -711,7 +1040,7 @@ airport code:</p>
 <li><p><code>flights</code> connects to <code>weather</code> via <code>origin</code> (the location), and
 <code>year</code>, <code>month</code>, <code>day</code> and <code>hour</code> (the time).</p></li>
 </ul>
-<div id="exercises" class="section level3" number="13.2.1">
+<div id="exercises-23" class="section level3" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Imagine you wanted to draw (approximately) the route each plane flies from
@@ -743,36 +1072,36 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 </ul>
 <p>A variable can be both a primary key <em>and</em> a foreign key. For example, <code>origin</code> is part of the <code>weather</code> primary key, and is also a foreign key for the <code>airport</code> table.</p>
 <p>Once you’ve identified the primary keys in your tables, it’s good practice to verify that they do indeed uniquely identify each observation. One way to do that is to <code>value_counts()</code> the primary keys and look for entries where the count is greater than one:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="relational-data.html#cb217-1"></a>planes.tailnum.value_counts().value_counts()</span>
-<span id="cb217-2"><a href="relational-data.html#cb217-2"></a><span class="co">#&gt; 1    3322</span></span>
-<span id="cb217-3"><a href="relational-data.html#cb217-3"></a><span class="co">#&gt; Name: tailnum, dtype: int64</span></span>
-<span id="cb217-4"><a href="relational-data.html#cb217-4"></a>(weather.</span>
-<span id="cb217-5"><a href="relational-data.html#cb217-5"></a>    groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>]).</span>
-<span id="cb217-6"><a href="relational-data.html#cb217-6"></a>    size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
-<span id="cb217-7"><a href="relational-data.html#cb217-7"></a><span class="co">#&gt; 1    26109</span></span>
-<span id="cb217-8"><a href="relational-data.html#cb217-8"></a><span class="co">#&gt; 2        3</span></span>
-<span id="cb217-9"><a href="relational-data.html#cb217-9"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb216-1"><a href="relational-data.html#cb216-1" aria-hidden="true" tabindex="-1"></a>planes.tailnum.value_counts().value_counts()</span>
+<span id="cb216-2"><a href="relational-data.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    3322</span></span>
+<span id="cb216-3"><a href="relational-data.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: tailnum, dtype: int64</span></span>
+<span id="cb216-4"><a href="relational-data.html#cb216-4" aria-hidden="true" tabindex="-1"></a>(weather.</span>
+<span id="cb216-5"><a href="relational-data.html#cb216-5" aria-hidden="true" tabindex="-1"></a>    groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>]).</span>
+<span id="cb216-6"><a href="relational-data.html#cb216-6" aria-hidden="true" tabindex="-1"></a>    size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
+<span id="cb216-7"><a href="relational-data.html#cb216-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    26109</span></span>
+<span id="cb216-8"><a href="relational-data.html#cb216-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        3</span></span>
+<span id="cb216-9"><a href="relational-data.html#cb216-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
 <p>Sometimes a table doesn’t have an explicit primary key: each row is an observation, but no combination of variables reliably identifies it. For example, what’s the primary key in the <code>flights</code> table? You might think it would be the date plus the flight or tail number, but neither of those are unique:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb218-1"><a href="relational-data.html#cb218-1"></a>(flights.</span>
-<span id="cb218-2"><a href="relational-data.html#cb218-2"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;flight&#39;</span>]).</span>
-<span id="cb218-3"><a href="relational-data.html#cb218-3"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
-<span id="cb218-4"><a href="relational-data.html#cb218-4"></a><span class="co">#&gt; 1    274398</span></span>
-<span id="cb218-5"><a href="relational-data.html#cb218-5"></a><span class="co">#&gt; 2     27029</span></span>
-<span id="cb218-6"><a href="relational-data.html#cb218-6"></a><span class="co">#&gt; 3      2636</span></span>
-<span id="cb218-7"><a href="relational-data.html#cb218-7"></a><span class="co">#&gt; 4       103</span></span>
-<span id="cb218-8"><a href="relational-data.html#cb218-8"></a><span class="co">#&gt; Name: n, dtype: int64</span></span>
-<span id="cb218-9"><a href="relational-data.html#cb218-9"></a>(flights.</span>
-<span id="cb218-10"><a href="relational-data.html#cb218-10"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;tailnum&#39;</span>]).</span>
-<span id="cb218-11"><a href="relational-data.html#cb218-11"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
-<span id="cb218-12"><a href="relational-data.html#cb218-12"></a><span class="co">#&gt; 1    186729</span></span>
-<span id="cb218-13"><a href="relational-data.html#cb218-13"></a><span class="co">#&gt; 2     49530</span></span>
-<span id="cb218-14"><a href="relational-data.html#cb218-14"></a><span class="co">#&gt; 3     12211</span></span>
-<span id="cb218-15"><a href="relational-data.html#cb218-15"></a><span class="co">#&gt; 4      2863</span></span>
-<span id="cb218-16"><a href="relational-data.html#cb218-16"></a><span class="co">#&gt; 5        78</span></span>
-<span id="cb218-17"><a href="relational-data.html#cb218-17"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="relational-data.html#cb217-1" aria-hidden="true" tabindex="-1"></a>(flights.</span>
+<span id="cb217-2"><a href="relational-data.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;flight&#39;</span>]).</span>
+<span id="cb217-3"><a href="relational-data.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
+<span id="cb217-4"><a href="relational-data.html#cb217-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    274398</span></span>
+<span id="cb217-5"><a href="relational-data.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     27029</span></span>
+<span id="cb217-6"><a href="relational-data.html#cb217-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      2636</span></span>
+<span id="cb217-7"><a href="relational-data.html#cb217-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       103</span></span>
+<span id="cb217-8"><a href="relational-data.html#cb217-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span>
+<span id="cb217-9"><a href="relational-data.html#cb217-9" aria-hidden="true" tabindex="-1"></a>(flights.</span>
+<span id="cb217-10"><a href="relational-data.html#cb217-10" aria-hidden="true" tabindex="-1"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;tailnum&#39;</span>]).</span>
+<span id="cb217-11"><a href="relational-data.html#cb217-11" aria-hidden="true" tabindex="-1"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
+<span id="cb217-12"><a href="relational-data.html#cb217-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    186729</span></span>
+<span id="cb217-13"><a href="relational-data.html#cb217-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     49530</span></span>
+<span id="cb217-14"><a href="relational-data.html#cb217-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     12211</span></span>
+<span id="cb217-15"><a href="relational-data.html#cb217-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      2863</span></span>
+<span id="cb217-16"><a href="relational-data.html#cb217-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        78</span></span>
+<span id="cb217-17"><a href="relational-data.html#cb217-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
 <p>When starting to work with this data, I had naively assumed that each flight number would be only used once per day: that would make it much easier to communicate problems with a specific flight. Unfortunately that is not the case! If a table lacks a primary key, it’s sometimes useful to add one with <code>mutate()</code> and <code>row_number()</code>. That makes it easier to match observations if you’ve done some filtering and want to check back in with the original data. This is called a <strong>surrogate key</strong>.</p>
 <p>A primary key and the corresponding foreign key in another table form a <strong>relation</strong>. Relations are typically one-to-many. For example, each flight has one plane, but each plane has many flights. In other data, you’ll occasionally see a 1-to-1 relationship. You can think of this as a special case of 1-to-many. You can model many-to-many relations with a many-to-1 relation plus a 1-to-many relation. For example, in this data there’s a many-to-many relationship between airlines and airports: each airline flies to many airports; each airport hosts many airlines.</p>
-<div id="exercises-1" class="section level3" number="13.3.1">
+<div id="exercises-24" class="section level3" number="13.3.1">
 <h3><span class="header-section-number">13.3.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li>Add a surrogate key to <code>flights</code>.</li>
@@ -783,54 +1112,322 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 <h2><span class="header-section-number">13.4</span> Mutating joins</h2>
 <p>The first tool we’ll look at for combining a pair of tables is the <strong>mutating join</strong>. A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.</p>
 <p>Like <code>assign()</code>, the join functions add variables to the right, so if you have a lot of variables already, the new variables won’t get printed out. For these examples, we’ll make it easier to see what’s going on in the examples by creating a narrower dataset:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="relational-data.html#cb219-1"></a>flights2 <span class="op">=</span> flights.<span class="bu">filter</span>([<span class="st">&#39;year&#39;</span>,<span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>, <span class="st">&#39;tailnum&#39;</span>, <span class="st">&#39;carrier&#39;</span>])</span>
-<span id="cb219-2"><a href="relational-data.html#cb219-2"></a>flights2</span>
-<span id="cb219-3"><a href="relational-data.html#cb219-3"></a><span class="co">#&gt;         year  month  day  hour origin dest tailnum carrier</span></span>
-<span id="cb219-4"><a href="relational-data.html#cb219-4"></a><span class="co">#&gt; 0       2013      1    1     5    EWR  IAH  N14228      UA</span></span>
-<span id="cb219-5"><a href="relational-data.html#cb219-5"></a><span class="co">#&gt; 1       2013      1    1     5    LGA  IAH  N24211      UA</span></span>
-<span id="cb219-6"><a href="relational-data.html#cb219-6"></a><span class="co">#&gt; 2       2013      1    1     5    JFK  MIA  N619AA      AA</span></span>
-<span id="cb219-7"><a href="relational-data.html#cb219-7"></a><span class="co">#&gt; 3       2013      1    1     5    JFK  BQN  N804JB      B6</span></span>
-<span id="cb219-8"><a href="relational-data.html#cb219-8"></a><span class="co">#&gt; 4       2013      1    1     6    LGA  ATL  N668DN      DL</span></span>
-<span id="cb219-9"><a href="relational-data.html#cb219-9"></a><span class="co">#&gt; ...      ...    ...  ...   ...    ...  ...     ...     ...</span></span>
-<span id="cb219-10"><a href="relational-data.html#cb219-10"></a><span class="co">#&gt; 336771  2013      9   30    14    JFK  DCA     NaN      9E</span></span>
-<span id="cb219-11"><a href="relational-data.html#cb219-11"></a><span class="co">#&gt; 336772  2013      9   30    22    LGA  SYR     NaN      9E</span></span>
-<span id="cb219-12"><a href="relational-data.html#cb219-12"></a><span class="co">#&gt; 336773  2013      9   30    12    LGA  BNA  N535MQ      MQ</span></span>
-<span id="cb219-13"><a href="relational-data.html#cb219-13"></a><span class="co">#&gt; 336774  2013      9   30    11    LGA  CLE  N511MQ      MQ</span></span>
-<span id="cb219-14"><a href="relational-data.html#cb219-14"></a><span class="co">#&gt; 336775  2013      9   30     8    LGA  RDU  N839MQ      MQ</span></span>
-<span id="cb219-15"><a href="relational-data.html#cb219-15"></a><span class="co">#&gt; </span></span>
-<span id="cb219-16"><a href="relational-data.html#cb219-16"></a><span class="co">#&gt; [336776 rows x 8 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb218-1"><a href="relational-data.html#cb218-1" aria-hidden="true" tabindex="-1"></a>flights2 <span class="op">=</span> flights.<span class="bu">filter</span>([<span class="st">&#39;year&#39;</span>,<span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>, <span class="st">&#39;tailnum&#39;</span>, <span class="st">&#39;carrier&#39;</span>])</span>
+<span id="cb218-2"><a href="relational-data.html#cb218-2" aria-hidden="true" tabindex="-1"></a>flights2</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>origin</th>
+      <th>dest</th>
+      <th>tailnum</th>
+      <th>carrier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>IAH</td>
+      <td>N14228</td>
+      <td>UA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>LGA</td>
+      <td>IAH</td>
+      <td>N24211</td>
+      <td>UA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>JFK</td>
+      <td>MIA</td>
+      <td>N619AA</td>
+      <td>AA</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>JFK</td>
+      <td>BQN</td>
+      <td>N804JB</td>
+      <td>B6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>LGA</td>
+      <td>ATL</td>
+      <td>N668DN</td>
+      <td>DL</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>336771</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>14</td>
+      <td>JFK</td>
+      <td>DCA</td>
+      <td>NaN</td>
+      <td>9E</td>
+    </tr>
+    <tr>
+      <th>336772</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>LGA</td>
+      <td>SYR</td>
+      <td>NaN</td>
+      <td>9E</td>
+    </tr>
+    <tr>
+      <th>336773</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>12</td>
+      <td>LGA</td>
+      <td>BNA</td>
+      <td>N535MQ</td>
+      <td>MQ</td>
+    </tr>
+    <tr>
+      <th>336774</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>11</td>
+      <td>LGA</td>
+      <td>CLE</td>
+      <td>N511MQ</td>
+      <td>MQ</td>
+    </tr>
+    <tr>
+      <th>336775</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>8</td>
+      <td>LGA</td>
+      <td>RDU</td>
+      <td>N839MQ</td>
+      <td>MQ</td>
+    </tr>
+  </tbody>
+</table>
+<p>336776 rows × 8 columns</p>
+</div>
 <p>(Remember, when you’re in VS Code, you can also use the data viewer to avoid this problem.)</p>
 <p>Imagine you want to add the full airline name to the <code>flights2</code> data. You can combine the <code>airlines</code> and <code>flights2</code> data frames with <code>merge()</code> using <code>how = 'left'</code>:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb220-1"><a href="relational-data.html#cb220-1"></a>(flights2.</span>
-<span id="cb220-2"><a href="relational-data.html#cb220-2"></a>  merge(airlines, on <span class="op">=</span> <span class="st">&#39;carrier&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>).</span>
-<span id="cb220-3"><a href="relational-data.html#cb220-3"></a>  drop(columns <span class="op">=</span> [<span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>]))</span>
-<span id="cb220-4"><a href="relational-data.html#cb220-4"></a><span class="co">#&gt;         year  month  day  hour tailnum carrier                    name</span></span>
-<span id="cb220-5"><a href="relational-data.html#cb220-5"></a><span class="co">#&gt; 0       2013      1    1     5  N14228      UA   United Air Lines Inc.</span></span>
-<span id="cb220-6"><a href="relational-data.html#cb220-6"></a><span class="co">#&gt; 1       2013      1    1     5  N24211      UA   United Air Lines Inc.</span></span>
-<span id="cb220-7"><a href="relational-data.html#cb220-7"></a><span class="co">#&gt; 2       2013      1    1     5  N619AA      AA  American Airlines Inc.</span></span>
-<span id="cb220-8"><a href="relational-data.html#cb220-8"></a><span class="co">#&gt; 3       2013      1    1     5  N804JB      B6         JetBlue Airways</span></span>
-<span id="cb220-9"><a href="relational-data.html#cb220-9"></a><span class="co">#&gt; 4       2013      1    1     6  N668DN      DL    Delta Air Lines Inc.</span></span>
-<span id="cb220-10"><a href="relational-data.html#cb220-10"></a><span class="co">#&gt; ...      ...    ...  ...   ...     ...     ...                     ...</span></span>
-<span id="cb220-11"><a href="relational-data.html#cb220-11"></a><span class="co">#&gt; 336771  2013      9   30    14     NaN      9E       Endeavor Air Inc.</span></span>
-<span id="cb220-12"><a href="relational-data.html#cb220-12"></a><span class="co">#&gt; 336772  2013      9   30    22     NaN      9E       Endeavor Air Inc.</span></span>
-<span id="cb220-13"><a href="relational-data.html#cb220-13"></a><span class="co">#&gt; 336773  2013      9   30    12  N535MQ      MQ               Envoy Air</span></span>
-<span id="cb220-14"><a href="relational-data.html#cb220-14"></a><span class="co">#&gt; 336774  2013      9   30    11  N511MQ      MQ               Envoy Air</span></span>
-<span id="cb220-15"><a href="relational-data.html#cb220-15"></a><span class="co">#&gt; 336775  2013      9   30     8  N839MQ      MQ               Envoy Air</span></span>
-<span id="cb220-16"><a href="relational-data.html#cb220-16"></a><span class="co">#&gt; </span></span>
-<span id="cb220-17"><a href="relational-data.html#cb220-17"></a><span class="co">#&gt; [336776 rows x 7 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="relational-data.html#cb219-1" aria-hidden="true" tabindex="-1"></a>(flights2.</span>
+<span id="cb219-2"><a href="relational-data.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  merge(airlines, on <span class="op">=</span> <span class="st">&#39;carrier&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>).</span>
+<span id="cb219-3"><a href="relational-data.html#cb219-3" aria-hidden="true" tabindex="-1"></a>  drop(columns <span class="op">=</span> [<span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>]))</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>tailnum</th>
+      <th>carrier</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>United Air Lines Inc.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>N24211</td>
+      <td>UA</td>
+      <td>United Air Lines Inc.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>N619AA</td>
+      <td>AA</td>
+      <td>American Airlines Inc.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>N804JB</td>
+      <td>B6</td>
+      <td>JetBlue Airways</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>N668DN</td>
+      <td>DL</td>
+      <td>Delta Air Lines Inc.</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>336771</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>14</td>
+      <td>NaN</td>
+      <td>9E</td>
+      <td>Endeavor Air Inc.</td>
+    </tr>
+    <tr>
+      <th>336772</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>NaN</td>
+      <td>9E</td>
+      <td>Endeavor Air Inc.</td>
+    </tr>
+    <tr>
+      <th>336773</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>12</td>
+      <td>N535MQ</td>
+      <td>MQ</td>
+      <td>Envoy Air</td>
+    </tr>
+    <tr>
+      <th>336774</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>11</td>
+      <td>N511MQ</td>
+      <td>MQ</td>
+      <td>Envoy Air</td>
+    </tr>
+    <tr>
+      <th>336775</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>8</td>
+      <td>N839MQ</td>
+      <td>MQ</td>
+      <td>Envoy Air</td>
+    </tr>
+  </tbody>
+</table>
+<p>336776 rows × 7 columns</p>
+</div>
 <p>The result of joining airlines to flights2 is an additional variable: <code>name</code>. The following sections explain, in detail, how mutating joins work. You’ll start by learning a useful visual representation of joins. We’ll then use that to explain the four mutating join functions: the inner join, and the three outer joins. When working with real data, keys don’t always uniquely identify observations, so next we’ll talk about what happens when there isn’t a unique match. Finally, you’ll learn how to tell dplyr which variables are the keys for a given join.</p>
 <div id="understanding-joins" class="section level3" number="13.4.1">
 <h3><span class="header-section-number">13.4.1</span> Understanding joins</h3>
 <p>To help you learn how joins work, I’m going to use a visual representation:</p>
 <p><img src="diagrams/join-setup.png" width="118" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="relational-data.html#cb221-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb221-2"><a href="relational-data.html#cb221-2"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb221-3"><a href="relational-data.html#cb221-3"></a>    <span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>]})</span>
-<span id="cb221-4"><a href="relational-data.html#cb221-4"></a></span>
-<span id="cb221-5"><a href="relational-data.html#cb221-5"></a></span>
-<span id="cb221-6"><a href="relational-data.html#cb221-6"></a>y <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb221-7"><a href="relational-data.html#cb221-7"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb221-8"><a href="relational-data.html#cb221-8"></a>    <span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>, <span class="st">&#39;y3&#39;</span>]})</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb220-1"><a href="relational-data.html#cb220-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb220-2"><a href="relational-data.html#cb220-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
+<span id="cb220-3"><a href="relational-data.html#cb220-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>]})</span>
+<span id="cb220-4"><a href="relational-data.html#cb220-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-5"><a href="relational-data.html#cb220-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-6"><a href="relational-data.html#cb220-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb220-7"><a href="relational-data.html#cb220-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
+<span id="cb220-8"><a href="relational-data.html#cb220-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>, <span class="st">&#39;y3&#39;</span>]})</span></code></pre></div>
 <p>The coloured column represents the “key” variable: these are used to match the rows between the tables. The grey column represents the “value” column that is carried along for the ride. In these examples I’ll show a single key variable, but the idea generalises in a straightforward way to multiple keys and multiple values.</p>
 <p>A join is a way of connecting each row in <code>x</code> to zero, one, or more rows in <code>y</code>. The following diagram shows each potential match as an intersection of a pair of lines.</p>
 <p><img src="diagrams/join-setup2.png" width="166" style="display: block; margin: auto;" /></p>
@@ -844,11 +1441,52 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 <p><img src="diagrams/join-inner.png" width="338" style="display: block; margin: auto;" /></p>
 <p>(To be precise, this is an inner <strong>equijoin</strong> because the keys are matched using the equality operator. Since most joins are equijoins we usually drop that specification.)</p>
 <p>The output of an inner join is a new data frame that contains the key, the x values, and the y values. We use <code>by</code> to tell dplyr which variable is the key:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb222-1"><a href="relational-data.html#cb222-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;inner&#39;</span>)</span>
-<span id="cb222-2"><a href="relational-data.html#cb222-2"></a><span class="co">#&gt;    key val_x val_y</span></span>
-<span id="cb222-3"><a href="relational-data.html#cb222-3"></a><span class="co">#&gt; 0    1    x1    y1</span></span>
-<span id="cb222-4"><a href="relational-data.html#cb222-4"></a><span class="co">#&gt; 1    2    x2    y2</span></span>
-<span id="cb222-5"><a href="relational-data.html#cb222-5"></a><span class="co">#&gt; 2    3    x3    y3</span></span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="relational-data.html#cb221-1" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;inner&#39;</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>val_x</th>
+      <th>val_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>x1</td>
+      <td>y1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>x2</td>
+      <td>y2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>x3</td>
+      <td>y3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>The most important property of an inner join is that unmatched rows are not included in the result. This means that generally inner joins are usually not appropriate for use in analysis because it’s too easy to lose observations.</p>
 </div>
 <div id="outer-join" class="section level3" number="13.4.3">
@@ -878,39 +1516,131 @@ relationship.</p>
 <p>Note that I’ve put the key column in a slightly different position
 in the output. This reflects that the key is a primary key in <code>y</code>
 and a foreign key in <code>x</code>.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="relational-data.html#cb223-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb223-2"><a href="relational-data.html#cb223-2"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
-<span id="cb223-3"><a href="relational-data.html#cb223-3"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
-<span id="cb223-4"><a href="relational-data.html#cb223-4"></a></span>
-<span id="cb223-5"><a href="relational-data.html#cb223-5"></a></span>
-<span id="cb223-6"><a href="relational-data.html#cb223-6"></a>y <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb223-7"><a href="relational-data.html#cb223-7"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
-<span id="cb223-8"><a href="relational-data.html#cb223-8"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
-<span id="cb223-9"><a href="relational-data.html#cb223-9"></a></span>
-<span id="cb223-10"><a href="relational-data.html#cb223-10"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span>
-<span id="cb223-11"><a href="relational-data.html#cb223-11"></a><span class="co">#&gt;    key val_x val_y</span></span>
-<span id="cb223-12"><a href="relational-data.html#cb223-12"></a><span class="co">#&gt; 0    1    x1    y1</span></span>
-<span id="cb223-13"><a href="relational-data.html#cb223-13"></a><span class="co">#&gt; 1    2    x2    y2</span></span>
-<span id="cb223-14"><a href="relational-data.html#cb223-14"></a><span class="co">#&gt; 2    2    x3    y2</span></span>
-<span id="cb223-15"><a href="relational-data.html#cb223-15"></a><span class="co">#&gt; 3    1    x4    y1</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb222"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb222-1"><a href="relational-data.html#cb222-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb222-2"><a href="relational-data.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb222-3"><a href="relational-data.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
+<span id="cb222-4"><a href="relational-data.html#cb222-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-5"><a href="relational-data.html#cb222-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-6"><a href="relational-data.html#cb222-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb222-7"><a href="relational-data.html#cb222-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb222-8"><a href="relational-data.html#cb222-8" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
+<span id="cb222-9"><a href="relational-data.html#cb222-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-10"><a href="relational-data.html#cb222-10" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>val_x</th>
+      <th>val_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>x1</td>
+      <td>y1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>x2</td>
+      <td>y2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>x3</td>
+      <td>y2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>x4</td>
+      <td>y1</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 <li><p>Both tables have duplicate keys. This is usually an error because in
 neither table do the keys uniquely identify an observation. When you join
 duplicated keys, you get all possible combinations, the Cartesian product:</p>
 <p><img src="diagrams/join-many-to-many.png" width="342" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb224-1"><a href="relational-data.html#cb224-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb224-2"><a href="relational-data.html#cb224-2"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
-<span id="cb224-3"><a href="relational-data.html#cb224-3"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
-<span id="cb224-4"><a href="relational-data.html#cb224-4"></a></span>
-<span id="cb224-5"><a href="relational-data.html#cb224-5"></a>y <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb224-6"><a href="relational-data.html#cb224-6"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
-<span id="cb224-7"><a href="relational-data.html#cb224-7"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
-<span id="cb224-8"><a href="relational-data.html#cb224-8"></a></span>
-<span id="cb224-9"><a href="relational-data.html#cb224-9"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span>
-<span id="cb224-10"><a href="relational-data.html#cb224-10"></a><span class="co">#&gt;    key val_x val_y</span></span>
-<span id="cb224-11"><a href="relational-data.html#cb224-11"></a><span class="co">#&gt; 0    1    x1    y1</span></span>
-<span id="cb224-12"><a href="relational-data.html#cb224-12"></a><span class="co">#&gt; 1    2    x2    y2</span></span>
-<span id="cb224-13"><a href="relational-data.html#cb224-13"></a><span class="co">#&gt; 2    2    x3    y2</span></span>
-<span id="cb224-14"><a href="relational-data.html#cb224-14"></a><span class="co">#&gt; 3    1    x4    y1</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb223"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="relational-data.html#cb223-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb223-2"><a href="relational-data.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb223-3"><a href="relational-data.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
+<span id="cb223-4"><a href="relational-data.html#cb223-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-5"><a href="relational-data.html#cb223-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb223-6"><a href="relational-data.html#cb223-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb223-7"><a href="relational-data.html#cb223-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
+<span id="cb223-8"><a href="relational-data.html#cb223-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-9"><a href="relational-data.html#cb223-9" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>val_x</th>
+      <th>val_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>x1</td>
+      <td>y1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>x2</td>
+      <td>y2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>x3</td>
+      <td>y2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>x4</td>
+      <td>y1</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 </ol>
 </div>
 <div id="join-by" class="section level3" number="13.4.5">
@@ -921,40 +1651,536 @@ duplicated keys, you get all possible combinations, the Cartesian product:</p>
 the so called <strong>natural</strong> join. The default <code>how</code> is <strong>left join</strong>. For example,
 the flights and weather tables match on their common variables:
 <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</code> and <code>origin</code>.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="relational-data.html#cb225-1"></a>flights2.merge(weather)</span>
-<span id="cb225-2"><a href="relational-data.html#cb225-2"></a><span class="co">#&gt;         year  month  day  hour  ... precip pressure visib             time_hour</span></span>
-<span id="cb225-3"><a href="relational-data.html#cb225-3"></a><span class="co">#&gt; 0       2013      1    1     5  ...    0.0   1011.9  10.0  2013-01-01T10:00:00Z</span></span>
-<span id="cb225-4"><a href="relational-data.html#cb225-4"></a><span class="co">#&gt; 1       2013      1    1     5  ...    0.0   1011.9  10.0  2013-01-01T10:00:00Z</span></span>
-<span id="cb225-5"><a href="relational-data.html#cb225-5"></a><span class="co">#&gt; 2       2013      1    1     5  ...    0.0   1011.4  10.0  2013-01-01T10:00:00Z</span></span>
-<span id="cb225-6"><a href="relational-data.html#cb225-6"></a><span class="co">#&gt; 3       2013      1    1     5  ...    0.0   1012.1  10.0  2013-01-01T10:00:00Z</span></span>
-<span id="cb225-7"><a href="relational-data.html#cb225-7"></a><span class="co">#&gt; 4       2013      1    1     5  ...    0.0   1012.1  10.0  2013-01-01T10:00:00Z</span></span>
-<span id="cb225-8"><a href="relational-data.html#cb225-8"></a><span class="co">#&gt; ...      ...    ...  ...   ...  ...    ...      ...   ...                   ...</span></span>
-<span id="cb225-9"><a href="relational-data.html#cb225-9"></a><span class="co">#&gt; 335215  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
-<span id="cb225-10"><a href="relational-data.html#cb225-10"></a><span class="co">#&gt; 335216  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
-<span id="cb225-11"><a href="relational-data.html#cb225-11"></a><span class="co">#&gt; 335217  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
-<span id="cb225-12"><a href="relational-data.html#cb225-12"></a><span class="co">#&gt; 335218  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
-<span id="cb225-13"><a href="relational-data.html#cb225-13"></a><span class="co">#&gt; 335219  2013      9   30    23  ...    0.0   1016.3  10.0  2013-10-01T03:00:00Z</span></span>
-<span id="cb225-14"><a href="relational-data.html#cb225-14"></a><span class="co">#&gt; </span></span>
-<span id="cb225-15"><a href="relational-data.html#cb225-15"></a><span class="co">#&gt; [335220 rows x 18 columns]</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb224"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb224-1"><a href="relational-data.html#cb224-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(weather)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>origin</th>
+      <th>dest</th>
+      <th>tailnum</th>
+      <th>carrier</th>
+      <th>temp</th>
+      <th>dewp</th>
+      <th>humid</th>
+      <th>wind_dir</th>
+      <th>wind_speed</th>
+      <th>wind_gust</th>
+      <th>precip</th>
+      <th>pressure</th>
+      <th>visib</th>
+      <th>time_hour</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>IAH</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>39.02</td>
+      <td>28.04</td>
+      <td>64.43</td>
+      <td>260.0</td>
+      <td>12.65858</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1011.9</td>
+      <td>10.0</td>
+      <td>2013-01-01T10:00:00Z</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>ORD</td>
+      <td>N39463</td>
+      <td>UA</td>
+      <td>39.02</td>
+      <td>28.04</td>
+      <td>64.43</td>
+      <td>260.0</td>
+      <td>12.65858</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1011.9</td>
+      <td>10.0</td>
+      <td>2013-01-01T10:00:00Z</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>LGA</td>
+      <td>IAH</td>
+      <td>N24211</td>
+      <td>UA</td>
+      <td>39.92</td>
+      <td>24.98</td>
+      <td>54.81</td>
+      <td>250.0</td>
+      <td>14.96014</td>
+      <td>21.86482</td>
+      <td>0.0</td>
+      <td>1011.4</td>
+      <td>10.0</td>
+      <td>2013-01-01T10:00:00Z</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>JFK</td>
+      <td>MIA</td>
+      <td>N619AA</td>
+      <td>AA</td>
+      <td>39.02</td>
+      <td>26.96</td>
+      <td>61.63</td>
+      <td>260.0</td>
+      <td>14.96014</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1012.1</td>
+      <td>10.0</td>
+      <td>2013-01-01T10:00:00Z</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>JFK</td>
+      <td>BQN</td>
+      <td>N804JB</td>
+      <td>B6</td>
+      <td>39.02</td>
+      <td>26.96</td>
+      <td>61.63</td>
+      <td>260.0</td>
+      <td>14.96014</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1012.1</td>
+      <td>10.0</td>
+      <td>2013-01-01T10:00:00Z</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>335215</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>SYR</td>
+      <td>N354JB</td>
+      <td>B6</td>
+      <td>60.98</td>
+      <td>55.94</td>
+      <td>83.47</td>
+      <td>230.0</td>
+      <td>9.20624</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1016.5</td>
+      <td>10.0</td>
+      <td>2013-10-01T02:00:00Z</td>
+    </tr>
+    <tr>
+      <th>335216</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>BUF</td>
+      <td>N281JB</td>
+      <td>B6</td>
+      <td>60.98</td>
+      <td>55.94</td>
+      <td>83.47</td>
+      <td>230.0</td>
+      <td>9.20624</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1016.5</td>
+      <td>10.0</td>
+      <td>2013-10-01T02:00:00Z</td>
+    </tr>
+    <tr>
+      <th>335217</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>ROC</td>
+      <td>N346JB</td>
+      <td>B6</td>
+      <td>60.98</td>
+      <td>55.94</td>
+      <td>83.47</td>
+      <td>230.0</td>
+      <td>9.20624</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1016.5</td>
+      <td>10.0</td>
+      <td>2013-10-01T02:00:00Z</td>
+    </tr>
+    <tr>
+      <th>335218</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>BOS</td>
+      <td>N565JB</td>
+      <td>B6</td>
+      <td>60.98</td>
+      <td>55.94</td>
+      <td>83.47</td>
+      <td>230.0</td>
+      <td>9.20624</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1016.5</td>
+      <td>10.0</td>
+      <td>2013-10-01T02:00:00Z</td>
+    </tr>
+    <tr>
+      <th>335219</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>23</td>
+      <td>JFK</td>
+      <td>PSE</td>
+      <td>N516JB</td>
+      <td>B6</td>
+      <td>60.08</td>
+      <td>55.04</td>
+      <td>83.41</td>
+      <td>240.0</td>
+      <td>9.20624</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1016.3</td>
+      <td>10.0</td>
+      <td>2013-10-01T03:00:00Z</td>
+    </tr>
+  </tbody>
+</table>
+<p>335220 rows × 18 columns</p>
+</div></li>
 <li><p>A character vector, <code>on = "x"</code>. This is like a natural join, but uses only
 some of the common variables. For example, <code>flights</code> and <code>planes</code> have
 <code>year</code> variables, but they mean different things so we only want to join by
 <code>tailnum</code>. If you have two variables then you can use <code>on = ["x", "y"]</code></p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb226-1"><a href="relational-data.html#cb226-1"></a>flights2.merge(planes, on <span class="op">=</span> <span class="st">&#39;tailnum&#39;</span>)</span>
-<span id="cb226-2"><a href="relational-data.html#cb226-2"></a><span class="co">#&gt;         year_x  month  day  hour  ... engines seats speed     engine</span></span>
-<span id="cb226-3"><a href="relational-data.html#cb226-3"></a><span class="co">#&gt; 0         2013      1    1     5  ...       2   149   NaN  Turbo-fan</span></span>
-<span id="cb226-4"><a href="relational-data.html#cb226-4"></a><span class="co">#&gt; 1         2013      1    8    14  ...       2   149   NaN  Turbo-fan</span></span>
-<span id="cb226-5"><a href="relational-data.html#cb226-5"></a><span class="co">#&gt; 2         2013      1    9     7  ...       2   149   NaN  Turbo-fan</span></span>
-<span id="cb226-6"><a href="relational-data.html#cb226-6"></a><span class="co">#&gt; 3         2013      1    9    11  ...       2   149   NaN  Turbo-fan</span></span>
-<span id="cb226-7"><a href="relational-data.html#cb226-7"></a><span class="co">#&gt; 4         2013      1   13     8  ...       2   149   NaN  Turbo-fan</span></span>
-<span id="cb226-8"><a href="relational-data.html#cb226-8"></a><span class="co">#&gt; ...        ...    ...  ...   ...  ...     ...   ...   ...        ...</span></span>
-<span id="cb226-9"><a href="relational-data.html#cb226-9"></a><span class="co">#&gt; 284165    2013      9   20    18  ...       2    80   NaN  Turbo-fan</span></span>
-<span id="cb226-10"><a href="relational-data.html#cb226-10"></a><span class="co">#&gt; 284166    2013      9   22    18  ...       2    80   NaN  Turbo-fan</span></span>
-<span id="cb226-11"><a href="relational-data.html#cb226-11"></a><span class="co">#&gt; 284167    2013      9   23    18  ...       2    80   NaN  Turbo-fan</span></span>
-<span id="cb226-12"><a href="relational-data.html#cb226-12"></a><span class="co">#&gt; 284168    2013      9   24    18  ...       2    80   NaN  Turbo-fan</span></span>
-<span id="cb226-13"><a href="relational-data.html#cb226-13"></a><span class="co">#&gt; 284169    2013      9   28     7  ...       2   149   NaN  Turbo-fan</span></span>
-<span id="cb226-14"><a href="relational-data.html#cb226-14"></a><span class="co">#&gt; </span></span>
-<span id="cb226-15"><a href="relational-data.html#cb226-15"></a><span class="co">#&gt; [284170 rows x 16 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="relational-data.html#cb225-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(planes, on <span class="op">=</span> <span class="st">&#39;tailnum&#39;</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year_x</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>origin</th>
+      <th>dest</th>
+      <th>tailnum</th>
+      <th>carrier</th>
+      <th>year_y</th>
+      <th>type</th>
+      <th>manufacturer</th>
+      <th>model</th>
+      <th>engines</th>
+      <th>seats</th>
+      <th>speed</th>
+      <th>engine</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>IAH</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOEING</td>
+      <td>737-824</td>
+      <td>2</td>
+      <td>149</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>8</td>
+      <td>14</td>
+      <td>EWR</td>
+      <td>MIA</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOEING</td>
+      <td>737-824</td>
+      <td>2</td>
+      <td>149</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>9</td>
+      <td>7</td>
+      <td>EWR</td>
+      <td>BOS</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOEING</td>
+      <td>737-824</td>
+      <td>2</td>
+      <td>149</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>9</td>
+      <td>11</td>
+      <td>EWR</td>
+      <td>TPA</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOEING</td>
+      <td>737-824</td>
+      <td>2</td>
+      <td>149</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>13</td>
+      <td>8</td>
+      <td>EWR</td>
+      <td>BOS</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>1999.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOEING</td>
+      <td>737-824</td>
+      <td>2</td>
+      <td>149</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>284165</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>20</td>
+      <td>18</td>
+      <td>LGA</td>
+      <td>CLE</td>
+      <td>N766SK</td>
+      <td>OO</td>
+      <td>2005.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOMBARDIER INC</td>
+      <td>CL-600-2C10</td>
+      <td>2</td>
+      <td>80</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>284166</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>22</td>
+      <td>18</td>
+      <td>LGA</td>
+      <td>CLE</td>
+      <td>N772SK</td>
+      <td>OO</td>
+      <td>2005.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOMBARDIER INC</td>
+      <td>CL-600-2C10</td>
+      <td>2</td>
+      <td>80</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>284167</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>23</td>
+      <td>18</td>
+      <td>LGA</td>
+      <td>CLE</td>
+      <td>N776SK</td>
+      <td>OO</td>
+      <td>2006.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOMBARDIER INC</td>
+      <td>CL-600-2C10</td>
+      <td>2</td>
+      <td>80</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>284168</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>24</td>
+      <td>18</td>
+      <td>LGA</td>
+      <td>CLE</td>
+      <td>N785SK</td>
+      <td>OO</td>
+      <td>2009.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOMBARDIER INC</td>
+      <td>CL-600-2C10</td>
+      <td>2</td>
+      <td>80</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+    <tr>
+      <th>284169</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>28</td>
+      <td>7</td>
+      <td>EWR</td>
+      <td>SEA</td>
+      <td>N557AS</td>
+      <td>AS</td>
+      <td>2006.0</td>
+      <td>Fixed wing multi engine</td>
+      <td>BOEING</td>
+      <td>737-890</td>
+      <td>2</td>
+      <td>149</td>
+      <td>NaN</td>
+      <td>Turbo-fan</td>
+    </tr>
+  </tbody>
+</table>
+<p>284170 rows × 16 columns</p>
+</div>
 <p>Note that the <code>year</code> variables (which appear in both input data frames,
 but are not constrained to be equal) are disambiguated in the output with
 a suffix.</p></li>
@@ -963,39 +2189,511 @@ a suffix.</p></li>
 with the airports data which contains the location (<code>lat</code> and <code>lon</code>) of
 each airport. Each flight has an origin and destination <code>airport</code>, so we
 need to specify which one we want to join to:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="relational-data.html#cb227-1"></a>flights2.merge(airports, left_on <span class="op">=</span> <span class="st">&#39;dest&#39;</span>, right_on <span class="op">=</span> <span class="st">&#39;faa&#39;</span>)</span>
-<span id="cb227-2"><a href="relational-data.html#cb227-2"></a><span class="co">#&gt;         year  month  day  hour  ...  alt tz dst              tzone</span></span>
-<span id="cb227-3"><a href="relational-data.html#cb227-3"></a><span class="co">#&gt; 0       2013      1    1     5  ...   97 -6   A    America/Chicago</span></span>
-<span id="cb227-4"><a href="relational-data.html#cb227-4"></a><span class="co">#&gt; 1       2013      1    1     5  ...   97 -6   A    America/Chicago</span></span>
-<span id="cb227-5"><a href="relational-data.html#cb227-5"></a><span class="co">#&gt; 2       2013      1    1     6  ...   97 -6   A    America/Chicago</span></span>
-<span id="cb227-6"><a href="relational-data.html#cb227-6"></a><span class="co">#&gt; 3       2013      1    1     7  ...   97 -6   A    America/Chicago</span></span>
-<span id="cb227-7"><a href="relational-data.html#cb227-7"></a><span class="co">#&gt; 4       2013      1    1     7  ...   97 -6   A    America/Chicago</span></span>
-<span id="cb227-8"><a href="relational-data.html#cb227-8"></a><span class="co">#&gt; ...      ...    ...  ...   ...  ...  ... ..  ..                ...</span></span>
-<span id="cb227-9"><a href="relational-data.html#cb227-9"></a><span class="co">#&gt; 329169  2013      8    3    16  ...  152 -9   A  America/Anchorage</span></span>
-<span id="cb227-10"><a href="relational-data.html#cb227-10"></a><span class="co">#&gt; 329170  2013      8   10    16  ...  152 -9   A  America/Anchorage</span></span>
-<span id="cb227-11"><a href="relational-data.html#cb227-11"></a><span class="co">#&gt; 329171  2013      8   17    16  ...  152 -9   A  America/Anchorage</span></span>
-<span id="cb227-12"><a href="relational-data.html#cb227-12"></a><span class="co">#&gt; 329172  2013      8   24    16  ...  152 -9   A  America/Anchorage</span></span>
-<span id="cb227-13"><a href="relational-data.html#cb227-13"></a><span class="co">#&gt; 329173  2013      7   27     1  ...   22 -5   A   America/New_York</span></span>
-<span id="cb227-14"><a href="relational-data.html#cb227-14"></a><span class="co">#&gt; </span></span>
-<span id="cb227-15"><a href="relational-data.html#cb227-15"></a><span class="co">#&gt; [329174 rows x 16 columns]</span></span>
-<span id="cb227-16"><a href="relational-data.html#cb227-16"></a>flights2.merge(airports, left_on <span class="op">=</span> <span class="st">&#39;origin&#39;</span>, right_on <span class="op">=</span> <span class="st">&#39;faa&#39;</span>)</span>
-<span id="cb227-17"><a href="relational-data.html#cb227-17"></a><span class="co">#&gt;         year  month  day  hour origin  ...        lon alt tz dst             tzone</span></span>
-<span id="cb227-18"><a href="relational-data.html#cb227-18"></a><span class="co">#&gt; 0       2013      1    1     5    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
-<span id="cb227-19"><a href="relational-data.html#cb227-19"></a><span class="co">#&gt; 1       2013      1    1     5    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
-<span id="cb227-20"><a href="relational-data.html#cb227-20"></a><span class="co">#&gt; 2       2013      1    1     6    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
-<span id="cb227-21"><a href="relational-data.html#cb227-21"></a><span class="co">#&gt; 3       2013      1    1     6    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
-<span id="cb227-22"><a href="relational-data.html#cb227-22"></a><span class="co">#&gt; 4       2013      1    1     6    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
-<span id="cb227-23"><a href="relational-data.html#cb227-23"></a><span class="co">#&gt; ...      ...    ...  ...   ...    ...  ...        ...  .. ..  ..               ...</span></span>
-<span id="cb227-24"><a href="relational-data.html#cb227-24"></a><span class="co">#&gt; 336771  2013      9   30    22    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
-<span id="cb227-25"><a href="relational-data.html#cb227-25"></a><span class="co">#&gt; 336772  2013      9   30    22    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
-<span id="cb227-26"><a href="relational-data.html#cb227-26"></a><span class="co">#&gt; 336773  2013      9   30    22    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
-<span id="cb227-27"><a href="relational-data.html#cb227-27"></a><span class="co">#&gt; 336774  2013      9   30    23    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
-<span id="cb227-28"><a href="relational-data.html#cb227-28"></a><span class="co">#&gt; 336775  2013      9   30    14    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
-<span id="cb227-29"><a href="relational-data.html#cb227-29"></a><span class="co">#&gt; </span></span>
-<span id="cb227-30"><a href="relational-data.html#cb227-30"></a><span class="co">#&gt; [336776 rows x 16 columns]</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb226"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb226-1"><a href="relational-data.html#cb226-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(airports, left_on <span class="op">=</span> <span class="st">&#39;dest&#39;</span>, right_on <span class="op">=</span> <span class="st">&#39;faa&#39;</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>origin</th>
+      <th>dest</th>
+      <th>tailnum</th>
+      <th>carrier</th>
+      <th>faa</th>
+      <th>name</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>alt</th>
+      <th>tz</th>
+      <th>dst</th>
+      <th>tzone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>IAH</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>IAH</td>
+      <td>George Bush Intercontinental</td>
+      <td>29.984433</td>
+      <td>-95.341442</td>
+      <td>97</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>LGA</td>
+      <td>IAH</td>
+      <td>N24211</td>
+      <td>UA</td>
+      <td>IAH</td>
+      <td>George Bush Intercontinental</td>
+      <td>29.984433</td>
+      <td>-95.341442</td>
+      <td>97</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>LGA</td>
+      <td>IAH</td>
+      <td>N459UA</td>
+      <td>UA</td>
+      <td>IAH</td>
+      <td>George Bush Intercontinental</td>
+      <td>29.984433</td>
+      <td>-95.341442</td>
+      <td>97</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>LGA</td>
+      <td>IAH</td>
+      <td>N488UA</td>
+      <td>UA</td>
+      <td>IAH</td>
+      <td>George Bush Intercontinental</td>
+      <td>29.984433</td>
+      <td>-95.341442</td>
+      <td>97</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>EWR</td>
+      <td>IAH</td>
+      <td>N37408</td>
+      <td>UA</td>
+      <td>IAH</td>
+      <td>George Bush Intercontinental</td>
+      <td>29.984433</td>
+      <td>-95.341442</td>
+      <td>97</td>
+      <td>-6</td>
+      <td>A</td>
+      <td>America/Chicago</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>329169</th>
+      <td>2013</td>
+      <td>8</td>
+      <td>3</td>
+      <td>16</td>
+      <td>EWR</td>
+      <td>ANC</td>
+      <td>N572UA</td>
+      <td>UA</td>
+      <td>ANC</td>
+      <td>Ted Stevens Anchorage Intl</td>
+      <td>61.174361</td>
+      <td>-149.996361</td>
+      <td>152</td>
+      <td>-9</td>
+      <td>A</td>
+      <td>America/Anchorage</td>
+    </tr>
+    <tr>
+      <th>329170</th>
+      <td>2013</td>
+      <td>8</td>
+      <td>10</td>
+      <td>16</td>
+      <td>EWR</td>
+      <td>ANC</td>
+      <td>N559UA</td>
+      <td>UA</td>
+      <td>ANC</td>
+      <td>Ted Stevens Anchorage Intl</td>
+      <td>61.174361</td>
+      <td>-149.996361</td>
+      <td>152</td>
+      <td>-9</td>
+      <td>A</td>
+      <td>America/Anchorage</td>
+    </tr>
+    <tr>
+      <th>329171</th>
+      <td>2013</td>
+      <td>8</td>
+      <td>17</td>
+      <td>16</td>
+      <td>EWR</td>
+      <td>ANC</td>
+      <td>N528UA</td>
+      <td>UA</td>
+      <td>ANC</td>
+      <td>Ted Stevens Anchorage Intl</td>
+      <td>61.174361</td>
+      <td>-149.996361</td>
+      <td>152</td>
+      <td>-9</td>
+      <td>A</td>
+      <td>America/Anchorage</td>
+    </tr>
+    <tr>
+      <th>329172</th>
+      <td>2013</td>
+      <td>8</td>
+      <td>24</td>
+      <td>16</td>
+      <td>EWR</td>
+      <td>ANC</td>
+      <td>N534UA</td>
+      <td>UA</td>
+      <td>ANC</td>
+      <td>Ted Stevens Anchorage Intl</td>
+      <td>61.174361</td>
+      <td>-149.996361</td>
+      <td>152</td>
+      <td>-9</td>
+      <td>A</td>
+      <td>America/Anchorage</td>
+    </tr>
+    <tr>
+      <th>329173</th>
+      <td>2013</td>
+      <td>7</td>
+      <td>27</td>
+      <td>1</td>
+      <td>EWR</td>
+      <td>LGA</td>
+      <td>NaN</td>
+      <td>US</td>
+      <td>LGA</td>
+      <td>La Guardia</td>
+      <td>40.777245</td>
+      <td>-73.872608</td>
+      <td>22</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+  </tbody>
+</table>
+<p>329174 rows × 16 columns</p>
+</div>
+flights2.merge(airports, left_on = 'origin', right_on = 'faa')
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>origin</th>
+      <th>dest</th>
+      <th>tailnum</th>
+      <th>carrier</th>
+      <th>faa</th>
+      <th>name</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>alt</th>
+      <th>tz</th>
+      <th>dst</th>
+      <th>tzone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>IAH</td>
+      <td>N14228</td>
+      <td>UA</td>
+      <td>EWR</td>
+      <td>Newark Liberty Intl</td>
+      <td>40.692500</td>
+      <td>-74.168667</td>
+      <td>18</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>5</td>
+      <td>EWR</td>
+      <td>ORD</td>
+      <td>N39463</td>
+      <td>UA</td>
+      <td>EWR</td>
+      <td>Newark Liberty Intl</td>
+      <td>40.692500</td>
+      <td>-74.168667</td>
+      <td>18</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>EWR</td>
+      <td>FLL</td>
+      <td>N516JB</td>
+      <td>B6</td>
+      <td>EWR</td>
+      <td>Newark Liberty Intl</td>
+      <td>40.692500</td>
+      <td>-74.168667</td>
+      <td>18</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>EWR</td>
+      <td>SFO</td>
+      <td>N53441</td>
+      <td>UA</td>
+      <td>EWR</td>
+      <td>Newark Liberty Intl</td>
+      <td>40.692500</td>
+      <td>-74.168667</td>
+      <td>18</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2013</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>EWR</td>
+      <td>LAS</td>
+      <td>N76515</td>
+      <td>UA</td>
+      <td>EWR</td>
+      <td>Newark Liberty Intl</td>
+      <td>40.692500</td>
+      <td>-74.168667</td>
+      <td>18</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>336771</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>BUF</td>
+      <td>N281JB</td>
+      <td>B6</td>
+      <td>JFK</td>
+      <td>John F Kennedy Intl</td>
+      <td>40.639751</td>
+      <td>-73.778925</td>
+      <td>13</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>336772</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>ROC</td>
+      <td>N346JB</td>
+      <td>B6</td>
+      <td>JFK</td>
+      <td>John F Kennedy Intl</td>
+      <td>40.639751</td>
+      <td>-73.778925</td>
+      <td>13</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>336773</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>22</td>
+      <td>JFK</td>
+      <td>BOS</td>
+      <td>N565JB</td>
+      <td>B6</td>
+      <td>JFK</td>
+      <td>John F Kennedy Intl</td>
+      <td>40.639751</td>
+      <td>-73.778925</td>
+      <td>13</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>336774</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>23</td>
+      <td>JFK</td>
+      <td>PSE</td>
+      <td>N516JB</td>
+      <td>B6</td>
+      <td>JFK</td>
+      <td>John F Kennedy Intl</td>
+      <td>40.639751</td>
+      <td>-73.778925</td>
+      <td>13</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+    <tr>
+      <th>336775</th>
+      <td>2013</td>
+      <td>9</td>
+      <td>30</td>
+      <td>14</td>
+      <td>JFK</td>
+      <td>DCA</td>
+      <td>NaN</td>
+      <td>9E</td>
+      <td>JFK</td>
+      <td>John F Kennedy Intl</td>
+      <td>40.639751</td>
+      <td>-73.778925</td>
+      <td>13</td>
+      <td>-5</td>
+      <td>A</td>
+      <td>America/New_York</td>
+    </tr>
+  </tbody>
+</table>
+<p>336776 rows × 16 columns</p>
+</div></li>
 </ul>
 </div>
-<div id="exercises-2" class="section level3" number="13.4.6">
+<div id="exercises-25" class="section level3" number="13.4.6">
 <h3><span class="header-section-number">13.4.6</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Add the location of the origin <em>and</em> destination (i.e. the <code>lat</code> and <code>lon</code>)
@@ -1059,7 +2757,7 @@ to <code>flights</code>.</p></li>
 <p><img src="diagrams/join-anti.png" width="307" style="display: block; margin: auto;" /></p>
 <p>Anti-joins are useful for diagnosing join mismatches. For example, when connecting <code>flights</code> and <code>planes</code>, you might be interested to know that there are many <code>flights</code> that don’t have a match in <code>planes</code>:</p>
 <p>the pandas merge arguments don’t handle these two types of joins. However you can use pandas to get the same results. <a href="https://stackoverflow.com/questions/38516664/anti-join-pandas">Anti-Join Pandas on stackoverflow</a> provides a guide.</p>
-<div id="exercises-3" class="section level3" number="13.5.1">
+<div id="exercises-26" class="section level3" number="13.5.1">
 <h3><span class="header-section-number">13.5.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>What does it mean for a flight to have a missing <code>tailnum</code>? What do the
@@ -1089,9 +2787,9 @@ unique in your current data but the relationship might not be true in
 general.</p>
 <p>For example, the altitude and longitude uniquely identify each airport,
 but they are not good identifiers!</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb228-1"><a href="relational-data.html#cb228-1"></a>airports.groupby([<span class="st">&#39;alt&#39;</span>, <span class="st">&#39;lon&#39;</span>]).size().value_counts()</span>
-<span id="cb228-2"><a href="relational-data.html#cb228-2"></a><span class="co">#&gt; 1    1458</span></span>
-<span id="cb228-3"><a href="relational-data.html#cb228-3"></a><span class="co">#&gt; dtype: int64</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb227"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="relational-data.html#cb227-1" aria-hidden="true" tabindex="-1"></a>airports.groupby([<span class="st">&#39;alt&#39;</span>, <span class="st">&#39;lon&#39;</span>]).size().value_counts()</span>
+<span id="cb227-2"><a href="relational-data.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    1458</span></span>
+<span id="cb227-3"><a href="relational-data.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span></code></pre></div></li>
 <li><p>Check that none of the variables in the primary key are missing. If
 a value is missing then it can’t identify an observation!</p></li>
 <li><p>Check that your foreign keys match primary keys in another table. It’s
@@ -1144,7 +2842,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "toc": {
 "collapse": "section"
 }

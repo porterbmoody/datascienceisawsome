@@ -67,11 +67,11 @@ Now you can create a factor:
 ```python
 y1 = pd.Categorical(x1, categories=month_levels)
 y1
-#> [Dec, Apr, Jan, Mar]
-#> Categories (12, object): [Jan, Feb, Mar, Apr, ..., Sep, Oct, Nov, Dec]
+#> ['Dec', 'Apr', 'Jan', 'Mar']
+#> Categories (12, object): ['Jan', 'Feb', 'Mar', 'Apr', ..., 'Sep', 'Oct', 'Nov', 'Dec']
 y1.sort_values()
-#> [Jan, Mar, Apr, Dec]
-#> Categories (12, object): [Jan, Feb, Mar, Apr, ..., Sep, Oct, Nov, Dec]
+#> ['Jan', 'Mar', 'Apr', 'Dec']
+#> Categories (12, object): ['Jan', 'Feb', 'Mar', 'Apr', ..., 'Sep', 'Oct', 'Nov', 'Dec']
 ```
 
 And any values not in the set will be silently converted to `nan`:
@@ -80,8 +80,8 @@ And any values not in the set will be silently converted to `nan`:
 ```python
 y2 = pd.Categorical(x2, categories=month_levels)
 y2
-#> [Dec, Apr, NaN, Mar]
-#> Categories (12, object): [Jan, Feb, Mar, Apr, ..., Sep, Oct, Nov, Dec]
+#> ['Dec', 'Apr', NaN, 'Mar']
+#> Categories (12, object): ['Jan', 'Feb', 'Mar', 'Apr', ..., 'Sep', 'Oct', 'Nov', 'Dec']
 ```
 
 Sometimes you'd prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to `pd.unique(x)`:
@@ -90,8 +90,8 @@ Sometimes you'd prefer that the order of the levels match the order of the first
 ```python
 f1 = pd.Categorical(x1, categories=pd.unique(x1))
 f1
-#> [Dec, Apr, Jan, Mar]
-#> Categories (4, object): [Dec, Apr, Jan, Mar]
+#> ['Dec', 'Apr', 'Jan', 'Mar']
+#> Categories (4, object): ['Dec', 'Apr', 'Jan', 'Mar']
 ```
 
 If you ever need to access the set of valid levels directly, you can do so with `levels()`:
@@ -175,7 +175,8 @@ chart = (alt.Chart(gss_cat).
 chart.save("screenshots/altair_cat_1.png")
 ```
 
-<img src="screenshots/altair_cat_1.png" width="70%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_1} \end{flushleft}
 
 By default, ggplot2 will drop levels that don't have any values. You can force them to display with:
 
@@ -193,7 +194,8 @@ chart = (alt.Chart(gss_cat).
 chart.save("screenshots/altair_cat_2.png")
 ```
 
-<img src="screenshots/altair_cat_2.png" width="70%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_2} \end{flushleft}
 
 These levels represent valid values that simply did not occur in this dataset. When working with factors, the two most common operations are changing the order of the levels, and changing the values of the levels. Those operations are described in the sections below.
 
@@ -227,7 +229,8 @@ chart = (alt.Chart(relig_summary).
 chart.save("screenshots/altair_cat_3.png")
 ```
 
-<img src="screenshots/altair_cat_3.png" width="70%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_3} \end{flushleft}
 
 It is difficult to interpret this plot because there's no overall pattern. We can improve it by reordering the levels of `relig` using the `sort` argument in `alt.Y()`. The `sort` argument uses `-x` to sort largest at the top and `x` to sort with the largest at the bottom of the y-axis. If you would like to implement more intricate sortings using `alt.EncodingSortField()` with the following arguments.
 
@@ -249,7 +252,8 @@ chart = (alt.Chart(relig_summary).
 chart.save("screenshots/altair_cat_4.png")
 ```
 
-<img src="screenshots/altair_cat_4.png" width="70%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_4} \end{flushleft}
 
 
 Reordering religion makes it much easier to see that people in the "Don't know" category watch much more TV, and Hinduism & Other Eastern religions watch much less.
@@ -280,7 +284,8 @@ chart = (alt.Chart(rincome_summary).
 chart.save("screenshots/altair_cat_5.png")
 ```
 
-<img src="screenshots/altair_cat_5.png" width="70%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_cat_5} \end{flushleft}
 
 
 Here, arbitrarily reordering the levels isn't a good idea! That's because `rincome` already has a principled order that we shouldn't mess with. Reserve sorting for factors whose levels are arbitrarily ordered.

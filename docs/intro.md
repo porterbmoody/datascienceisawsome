@@ -6,7 +6,8 @@ Data science is an exciting discipline that allows you to turn raw data into und
 
 Data science is a huge field, and there's no way you can master it by reading a single book. The goal of this book is to give you a foundation in the essential tools. Our model of the tools needed in a typical data science project looks something like this:
 
-<img src="diagrams/data-science.png" width="75%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.75\linewidth]{diagrams/data-science} \end{center}
 
 First you must __import__ your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a data frame in Python. If you can't get your data into Python, you can't do data science on it!
 
@@ -124,7 +125,8 @@ Visual Studio Code is a lightweight but powerful source code editor which runs o
 
 When you use VS code, you'll have four key regions in the interface:
 
-<img src="diagrams/vscode-console.png" width="75%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.75\linewidth]{diagrams/vscode-console} \end{center}
 
 VS Code comes with a [simple and intuitive layout](https://code.visualstudio.com/docs/getstarted/userinterface) that maximizes the space provided for the editor while leaving ample room to browse and access the full context of your folder or project. The UI is divided into five areas:
 
@@ -343,7 +345,7 @@ This book was built with:
 
 ```r
 sessioninfo::session_info()
-#> ─ Session info ───────────────────────────────────────────────────────────────
+#> - Session info ---------------------------------------------------------------
 #>  setting  value                       
 #>  version  R version 3.6.3 (2020-02-29)
 #>  os       macOS Catalina 10.15.4      
@@ -355,7 +357,7 @@ sessioninfo::session_info()
 #>  tz       America/Boise               
 #>  date     2020-05-13                  
 #> 
-#> ─ Packages ───────────────────────────────────────────────────────────────────
+#> - Packages -------------------------------------------------------------------
 #>  package     * version date       lib source                            
 #>  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.0)                    
 #>  backports     1.1.6   2020-04-05 [1] CRAN (R 3.6.3)                    

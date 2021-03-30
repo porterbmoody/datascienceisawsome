@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>23 Model basics (TBD) | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="23 Model basics (TBD) | Python for Data Science" />
   <meta property="og:type" content="book" />
@@ -51,15 +51,14 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/vega-5.9.0/vega.min.js"></script>
-<script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
-<link href="libs/vega-embed-6.2.0/vega-embed.css" rel="stylesheet" />
-<script src="libs/vega-embed-6.2.0/vega-embed.js"></script>
-<script src="libs/vegawidget-binding-0.3.1.9003/vegawidget.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/vega-5.17.0/vega.min.js"></script>
+<script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
+<link href="libs/vega-embed-6.12.2/vega-embed.css" rel="stylesheet" />
+<script src="libs/vega-embed-6.12.2/vega-embed.js"></script>
+<script src="libs/vegawidget-binding-0.3.2/vegawidget.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -212,9 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="explore-intro.html"><a href="explore-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data visualisation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.1.1" data-path="data-visualisation.html"><a href="data-visualisation.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data-visualisation.html"><a href="data-visualisation.html#altair-data-management"><i class="fa fa-check"></i><b>3.1.2</b> Altair data management</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
@@ -248,13 +247,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
 <li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
 <li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
-<li class="chapter" data-level="4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#exercises-4"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
 <li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
 </ul></li>
@@ -263,22 +262,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
 <li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
 <li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
-<li class="chapter" data-level="5.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-.sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>.sort_values()</code></a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>filter()</code> or <code>loc[]</code></a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-.assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>.assign()</code></a>
 <ul>
 <li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
-<li class="chapter" data-level="5.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
+<li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>agg()</code></a>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-.agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>.agg()</code></a>
 <ul>
 <li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#combining-multiple-operations"><i class="fa fa-check"></i><b>5.6.1</b> Combining multiple operations</a></li>
 <li class="chapter" data-level="5.6.2" data-path="transform.html"><a href="transform.html#missing-values-1"><i class="fa fa-check"></i><b>5.6.2</b> Missing values</a></li>
@@ -286,11 +285,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.4" data-path="transform.html"><a href="transform.html#summarise-funs"><i class="fa fa-check"></i><b>5.6.4</b> Useful summary functions</a></li>
 <li class="chapter" data-level="5.6.5" data-path="transform.html"><a href="transform.html#grouping-by-multiple-variables"><i class="fa fa-check"></i><b>5.6.5</b> Grouping by multiple variables</a></li>
 <li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
-<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-4"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
+<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
 <ul>
-<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
@@ -299,9 +298,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
@@ -309,11 +308,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
 <li class="chapter" data-level="7.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#typical-values"><i class="fa fa-check"></i><b>7.3.2</b> Typical values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#unusual-values"><i class="fa fa-check"></i><b>7.3.3</b> Unusual values</a></li>
-<li class="chapter" data-level="7.3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-11"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values-2"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-12"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a>
 <ul>
@@ -337,26 +336,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="wrangle-intro.html"><a href="wrangle-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
 <li class="chapter" data-level="10" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<li class="chapter" data-level="10.1" data-path="dataframe.html"><a href="dataframe.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.1.1" data-path="dataframe.html"><a href="dataframe.html#prerequisites-4"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="dataframe.html"><a href="dataframe.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
 <li class="chapter" data-level="10.3" data-path="dataframe.html"><a href="dataframe.html#printing"><i class="fa fa-check"></i><b>10.3</b> Printing</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="dataframe.html"><a href="dataframe.html#subsetting"><i class="fa fa-check"></i><b>10.3.1</b> Subsetting</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
+<li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data import</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-5"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.1.1" data-path="data-import.html"><a href="data-import.html#prerequisites-5"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-17"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a>
 <ul>
@@ -364,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
 <li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
 <li class="chapter" data-level="11.3.4" data-path="data-import.html"><a href="data-import.html#readr-datetimes"><i class="fa fa-check"></i><b>11.3.4</b> Dates and times</a></li>
-<li class="chapter" data-level="11.3.5" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
+<li class="chapter" data-level="11.3.5" data-path="data-import.html"><a href="data-import.html#exercises-18"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="data-import.html"><a href="data-import.html#parsing-a-file"><i class="fa fa-check"></i><b>11.4</b> Parsing a file</a>
 <ul>
@@ -375,46 +374,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy data</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-6"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#prerequisites-6"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.2</b> Tidy data</a>
 <ul>
-<li class="chapter" data-level="12.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="12.2.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-19"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#pivoting"><i class="fa fa-check"></i><b>12.3</b> Pivoting</a>
 <ul>
 <li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#longer-melt"><i class="fa fa-check"></i><b>12.3.1</b> Longer (<code>melt()</code>)</a></li>
 <li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider-pivot"><i class="fa fa-check"></i><b>12.3.2</b> Wider (<code>pivot()</code>)</a></li>
-<li class="chapter" data-level="12.3.3" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
+<li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-20"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a>
 <ul>
 <li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#split-separate"><i class="fa fa-check"></i><b>12.4.1</b> Split (Separate)</a></li>
 <li class="chapter" data-level="12.4.2" data-path="tidy-data.html"><a href="tidy-data.html#unite"><i class="fa fa-check"></i><b>12.4.2</b> Unite</a></li>
-<li class="chapter" data-level="12.4.3" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
+<li class="chapter" data-level="12.4.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-21"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#missing-values-3"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
 <li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#case-study"><i class="fa fa-check"></i><b>12.6</b> Case Study</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
+<li class="chapter" data-level="12.6.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-22"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.7" data-path="tidy-data.html"><a href="tidy-data.html#non-tidy-data"><i class="fa fa-check"></i><b>12.7</b> Non-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>13</b> Relational data</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
+<li class="chapter" data-level="13.1" data-path="relational-data.html"><a href="relational-data.html#introduction-7"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.1.1" data-path="relational-data.html"><a href="relational-data.html#prerequisites-7"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="13.2" data-path="relational-data.html"><a href="relational-data.html#nycflights13-relational"><i class="fa fa-check"></i><b>13.2</b> nycflights13</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.2.1" data-path="relational-data.html"><a href="relational-data.html#exercises-23"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="relational-data.html"><a href="relational-data.html#keys"><i class="fa fa-check"></i><b>13.3</b> Keys</a>
 <ul>
-<li class="chapter" data-level="13.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.3.1" data-path="relational-data.html"><a href="relational-data.html#exercises-24"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.4" data-path="relational-data.html"><a href="relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>13.4</b> Mutating joins</a>
 <ul>
@@ -423,20 +422,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4.3" data-path="relational-data.html"><a href="relational-data.html#outer-join"><i class="fa fa-check"></i><b>13.4.3</b> Outer joins</a></li>
 <li class="chapter" data-level="13.4.4" data-path="relational-data.html"><a href="relational-data.html#join-matches"><i class="fa fa-check"></i><b>13.4.4</b> Duplicate keys</a></li>
 <li class="chapter" data-level="13.4.5" data-path="relational-data.html"><a href="relational-data.html#join-by"><i class="fa fa-check"></i><b>13.4.5</b> Defining the key columns</a></li>
-<li class="chapter" data-level="13.4.6" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
+<li class="chapter" data-level="13.4.6" data-path="relational-data.html"><a href="relational-data.html#exercises-25"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
 <li class="chapter" data-level="13.4.7" data-path="relational-data.html"><a href="relational-data.html#other-implementations"><i class="fa fa-check"></i><b>13.4.7</b> Other implementations</a></li>
 </ul></li>
 <li class="chapter" data-level="13.5" data-path="relational-data.html"><a href="relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>13.5</b> Filtering joins</a>
 <ul>
-<li class="chapter" data-level="13.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.5.1" data-path="relational-data.html"><a href="relational-data.html#exercises-26"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.6" data-path="relational-data.html"><a href="relational-data.html#join-problems"><i class="fa fa-check"></i><b>13.6</b> Join problems</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>14</b> Strings</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
+<li class="chapter" data-level="14.1" data-path="strings.html"><a href="strings.html#introduction-8"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.1.1" data-path="strings.html"><a href="strings.html#prerequisites-8"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="14.2" data-path="strings.html"><a href="strings.html#string-basics"><i class="fa fa-check"></i><b>14.2</b> String basics</a>
 <ul>
@@ -463,15 +462,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="strings.html"><a href="strings.html#other-types-of-pattern"><i class="fa fa-check"></i><b>14.5</b> Other types of pattern</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-10"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-37"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="strings.html"><a href="strings.html#strings-in-python"><i class="fa fa-check"></i><b>14.6</b> strings in Python</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>15</b> Factors</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
+<li class="chapter" data-level="15.1" data-path="factors.html"><a href="factors.html#introduction-9"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="15.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>15.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.1.1" data-path="factors.html"><a href="factors.html#prerequisites-9"><i class="fa fa-check"></i><b>15.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="15.2" data-path="factors.html"><a href="factors.html#creating-categories"><i class="fa fa-check"></i><b>15.2</b> Creating categories</a></li>
 <li class="chapter" data-level="15.3" data-path="factors.html"><a href="factors.html#general-social-survey"><i class="fa fa-check"></i><b>15.3</b> General Social Survey</a>
@@ -480,32 +479,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15.4" data-path="factors.html"><a href="factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>15.4</b> Modifying factor order</a>
 <ul>
-<li class="chapter" data-level="15.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="15.4.1" data-path="factors.html"><a href="factors.html#exercises-38"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="factors.html"><a href="factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>15.5</b> Modifying factor levels</a>
 <ul>
-<li class="chapter" data-level="15.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="15.5.1" data-path="factors.html"><a href="factors.html#exercises-39"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>16</b> Dates and times</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
+<li class="chapter" data-level="16.1" data-path="dates-and-times.html"><a href="dates-and-times.html#introduction-10"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="16.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>16.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="16.1.1" data-path="dates-and-times.html"><a href="dates-and-times.html#prerequisites-10"><i class="fa fa-check"></i><b>16.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="16.2" data-path="dates-and-times.html"><a href="dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.2</b> Creating date/times</a>
 <ul>
 <li class="chapter" data-level="16.2.1" data-path="dates-and-times.html"><a href="dates-and-times.html#from-strings"><i class="fa fa-check"></i><b>16.2.1</b> From strings</a></li>
 <li class="chapter" data-level="16.2.2" data-path="dates-and-times.html"><a href="dates-and-times.html#from-individual-components"><i class="fa fa-check"></i><b>16.2.2</b> From individual components</a></li>
 <li class="chapter" data-level="16.2.3" data-path="dates-and-times.html"><a href="dates-and-times.html#from-other-types"><i class="fa fa-check"></i><b>16.2.3</b> From other types</a></li>
-<li class="chapter" data-level="16.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>16.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2.4" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-40"><i class="fa fa-check"></i><b>16.2.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="dates-and-times.html"><a href="dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.3</b> Date-time components</a>
 <ul>
 <li class="chapter" data-level="16.3.1" data-path="dates-and-times.html"><a href="dates-and-times.html#getting-components"><i class="fa fa-check"></i><b>16.3.1</b> Getting components</a></li>
 <li class="chapter" data-level="16.3.2" data-path="dates-and-times.html"><a href="dates-and-times.html#rounding"><i class="fa fa-check"></i><b>16.3.2</b> Rounding</a></li>
 <li class="chapter" data-level="16.3.3" data-path="dates-and-times.html"><a href="dates-and-times.html#setting-components"><i class="fa fa-check"></i><b>16.3.3</b> Setting components</a></li>
-<li class="chapter" data-level="16.3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>16.3.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.3.4" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-41"><i class="fa fa-check"></i><b>16.3.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="dates-and-times.html"><a href="dates-and-times.html#time-spans-deltas"><i class="fa fa-check"></i><b>16.4</b> Time spans (Deltas)</a></li>
 <li class="chapter" data-level="16.5" data-path="dates-and-times.html"><a href="dates-and-times.html#time-zones"><i class="fa fa-check"></i><b>16.5</b> Time zones</a></li>
@@ -513,23 +512,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Program</b></span></li>
 <li class="chapter" data-level="17" data-path="program-intro.html"><a href="program-intro.html"><i class="fa fa-check"></i><b>17</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>17.1</b> Learning more</a></li>
+<li class="chapter" data-level="17.1" data-path="program-intro.html"><a href="program-intro.html#learning-more-1"><i class="fa fa-check"></i><b>17.1</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="pipes-not-included.html"><a href="pipes-not-included.html"><i class="fa fa-check"></i><b>18</b> Pipes (Not included)</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.1" data-path="pipes-not-included.html"><a href="pipes-not-included.html#introduction-11"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="functions-tbd.html"><a href="functions-tbd.html"><i class="fa fa-check"></i><b>19</b> Functions (TBD)</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
+<li class="chapter" data-level="19.1" data-path="functions-tbd.html"><a href="functions-tbd.html#introduction-12"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="vectors-tbd.html"><a href="vectors-tbd.html"><i class="fa fa-check"></i><b>20</b> Vectors (TBD)</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.1" data-path="vectors-tbd.html"><a href="vectors-tbd.html#introduction-13"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="iteration-tbd.html"><a href="iteration-tbd.html"><i class="fa fa-check"></i><b>21</b> Iteration (TBD)</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.1" data-path="iteration-tbd.html"><a href="iteration-tbd.html#introduction-14"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
 </ul></li>
 <li class="part"><span><b>IV Model</b></span></li>
 <li class="chapter" data-level="22" data-path="model-intro.html"><a href="model-intro.html"><i class="fa fa-check"></i><b>22</b> Introduction</a>
@@ -538,61 +537,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="23" data-path="model-basics-tbd.html"><a href="model-basics-tbd.html"><i class="fa fa-check"></i><b>23</b> Model basics (TBD)</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
+<li class="chapter" data-level="23.1" data-path="model-basics-tbd.html"><a href="model-basics-tbd.html#introduction-15"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="24" data-path="model-building-tbd.html"><a href="model-building-tbd.html"><i class="fa fa-check"></i><b>24</b> Model building (TBD)</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>24.1</b> Introduction</a></li>
+<li class="chapter" data-level="24.1" data-path="model-building-tbd.html"><a href="model-building-tbd.html#introduction-16"><i class="fa fa-check"></i><b>24.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="many-models-tbd.html"><a href="many-models-tbd.html"><i class="fa fa-check"></i><b>25</b> Many models (TBD)</a>
 <ul>
-<li class="chapter" data-level="25.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>25.1</b> Introduction</a></li>
+<li class="chapter" data-level="25.1" data-path="many-models-tbd.html"><a href="many-models-tbd.html#introduction-17"><i class="fa fa-check"></i><b>25.1</b> Introduction</a></li>
 </ul></li>
 <li class="part"><span><b>V Communicate</b></span></li>
 <li class="chapter" data-level="26" data-path="communicate-intro.html"><a href="communicate-intro.html"><i class="fa fa-check"></i><b>26</b> Introduction</a></li>
 <li class="chapter" data-level="27" data-path="markdown.html"><a href="markdown.html"><i class="fa fa-check"></i><b>27</b> Markdown</a>
 <ul>
-<li class="chapter" data-level="27.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>27.1</b> Introduction</a></li>
+<li class="chapter" data-level="27.1" data-path="markdown.html"><a href="markdown.html#introduction-18"><i class="fa fa-check"></i><b>27.1</b> Introduction</a></li>
 <li class="chapter" data-level="27.2" data-path="markdown.html"><a href="markdown.html#markdown-basics"><i class="fa fa-check"></i><b>27.2</b> Markdown basics</a></li>
 <li class="chapter" data-level="27.3" data-path="markdown.html"><a href="markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>27.3</b> Text formatting with Markdown</a>
 <ul>
-<li class="chapter" data-level="27.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>27.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="27.3.1" data-path="markdown.html"><a href="markdown.html#exercises-42"><i class="fa fa-check"></i><b>27.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="markdown.html"><a href="markdown.html#code-chunks"><i class="fa fa-check"></i><b>27.4</b> Code chunks</a>
 <ul>
 <li class="chapter" data-level="27.4.1" data-path="markdown.html"><a href="markdown.html#tables"><i class="fa fa-check"></i><b>27.4.1</b> Tables</a></li>
 </ul></li>
-<li class="chapter" data-level="27.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
+<li class="chapter" data-level="27.5" data-path="markdown.html"><a href="markdown.html#learning-more-2"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html"><i class="fa fa-check"></i><b>28</b> Graphics for communication</a>
 <ul>
-<li class="chapter" data-level="28.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
+<li class="chapter" data-level="28.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#introduction-19"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="28.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="28.1.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#prerequisites-11"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="28.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#label"><i class="fa fa-check"></i><b>28.2</b> Label</a>
 <ul>
-<li class="chapter" data-level="28.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="28.2.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-43"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>28.3</b> Annotations</a>
 <ul>
-<li class="chapter" data-level="28.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>28.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="28.3.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-44"><i class="fa fa-check"></i><b>28.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.4" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>28.4</b> Scales</a>
 <ul>
 <li class="chapter" data-level="28.4.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#axis-ticks-and-legend-keys"><i class="fa fa-check"></i><b>28.4.1</b> Axis ticks and legend keys</a></li>
 <li class="chapter" data-level="28.4.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#legend-layout"><i class="fa fa-check"></i><b>28.4.2</b> Legend layout</a></li>
 <li class="chapter" data-level="28.4.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#replacing-a-scale"><i class="fa fa-check"></i><b>28.4.3</b> Replacing a scale</a></li>
-<li class="chapter" data-level="28.4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>28.4.4</b> Exercises</a></li>
+<li class="chapter" data-level="28.4.4" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-45"><i class="fa fa-check"></i><b>28.4.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.5" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#zooming"><i class="fa fa-check"></i><b>28.5</b> Zooming</a></li>
 <li class="chapter" data-level="28.6" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#themes"><i class="fa fa-check"></i><b>28.6</b> Themes</a></li>
 <li class="chapter" data-level="28.7" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#saving-your-plots"><i class="fa fa-check"></i><b>28.7</b> Saving your plots</a></li>
-<li class="chapter" data-level="28.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>28.8</b> Learning more</a></li>
+<li class="chapter" data-level="28.8" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#learning-more-3"><i class="fa fa-check"></i><b>28.8</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html"><i class="fa fa-check"></i><b>29</b> R Markdown formats</a>
 <ul>
-<li class="chapter" data-level="29.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
+<li class="chapter" data-level="29.1" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#introduction-20"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
 <li class="chapter" data-level="29.2" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#output-options"><i class="fa fa-check"></i><b>29.2</b> Output options</a></li>
 <li class="chapter" data-level="29.3" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#documents"><i class="fa fa-check"></i><b>29.3</b> Documents</a></li>
 <li class="chapter" data-level="29.4" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#notebooks"><i class="fa fa-check"></i><b>29.4</b> Notebooks</a></li>
@@ -605,7 +604,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="29.8" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#websites"><i class="fa fa-check"></i><b>29.8</b> Websites</a></li>
 <li class="chapter" data-level="29.9" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#other-formats"><i class="fa fa-check"></i><b>29.9</b> Other formats</a></li>
-<li class="chapter" data-level="29.10" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
+<li class="chapter" data-level="29.10" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#learning-more-4"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="r-markdown-workflow-and-jupyter.html"><a href="r-markdown-workflow-and-jupyter.html"><i class="fa fa-check"></i><b>30</b> R Markdown workflow (and Jupyter)</a></li>
 </ul>
@@ -627,7 +626,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="model-basics-tbd" class="section level1" number="23">
 <h1><span class="header-section-number">23</span> Model basics (TBD)</h1>
-<div id="introduction" class="section level2" number="23.1">
+<div id="introduction-15" class="section level2" number="23.1">
 <h2><span class="header-section-number">23.1</span> Introduction</h2>
 <p>The goal of a model is to provide a simple low-dimensional summary of a dataset. In the context of this book we’re going to use models to partition data into patterns and residuals. Strong patterns will hide subtler trends, so we’ll use models to help peel back layers of structure as we explore a dataset.</p>
 <p>However, before we can start using models on interesting, real, datasets, you need to understand the basics of how models work. For that reason, this chapter of the book is unique because it uses only simulated datasets. These datasets are very simple, and not at all interesting, but they will help you understand the essence of modelling before you apply the same techniques to real data in the next chapter.</p>
@@ -1177,7 +1176,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "toc": {
 "collapse": "section"
 }

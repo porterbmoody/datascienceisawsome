@@ -1,11 +1,11 @@
 # Data transformation {#transform}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, cache=FALSE}
 knitr::opts_chunk$set(python.reticulate = TRUE)
 library(reticulate)
 library(ggplot2)
 library(vegawidget)
-reticulate::use_python("usr/local/bin/python3")
+knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
 ```
 
 
@@ -539,11 +539,13 @@ chart_base = (alt.Chart(delay_filter)
     ))
   
 chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').mark_line()  
+chart.save("screenshots/transform_1.png")
 ```
 
-```{r, fig.width = 6, echo=FALSE}
-vegawidget::as_vegaspec(py$chart$to_json())
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/transform_1.png")
 ```
+
 
 There are three steps to prepare this data:
 
@@ -613,10 +615,12 @@ chart = (alt.Chart(delays)
       y = 'density:Q'
       )
     .mark_line())
+
+chart.save("screenshots/transform_2.png")
 ```
 
-```{r, fig.width = 6, echo=FALSE}
-vegawidget::as_vegaspec(py$chart$to_json())
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/transform_2.png")
 ```
 
 Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)!
@@ -639,11 +643,11 @@ chart = (alt.Chart(delays)
     .mark_point(
       filled = True, 
       opacity = 1/10))
+chart.save("screenshots/transform_3.png")
 ```
 
-
-```{r, fig.width = 6, echo=FALSE}
-vegawidget::as_vegaspec(py$chart$to_json())
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/transform_3.png")
 ```
 
 Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases.

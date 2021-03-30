@@ -48,9 +48,33 @@ data = StringIO("""a,b,c
 4,5,6""")
 
 pd.read_csv(data)
-#>    a  b  c
-#> 0  1  2  3
-#> 1  4  5  6
+```
+
+```{=html}
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 
@@ -89,9 +113,33 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     ```python
     data_nonames = StringIO("""1,2,3\n4,5,6""")
     pd.read_csv(data_nonames, header = None)
-    #>    0  1  2
-    #> 0  1  2  3
-    #> 1  4  5  6
+    ```
+    
+    ```{=html}
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+      </tbody>
+    </table>
     ```
     
     (`"\n"` is a convenient shortcut for adding a new line. You'll learn more
@@ -104,9 +152,33 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     ```python
     data_nonames = StringIO("""1,2,3\n4,5,6""")
     pd.read_csv(data_nonames, names = ["x", "y", "z"], header = None)
-    #>    x  y  z
-    #> 0  1  2  3
-    #> 1  4  5  6
+    ```
+    
+    ```{=html}
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>x</th>
+          <th>y</th>
+          <th>z</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+      </tbody>
+    </table>
     ```
 
 Another option that commonly needs tweaking is `na`: this specifies the value (or values) that are used to represent missing values in your file:
@@ -115,8 +187,27 @@ Another option that commonly needs tweaking is `na`: this specifies the value (o
 ```python
 data_missing = StringIO("""a,b,c\n1,2,.""")
 pd.read_csv(data_missing, na_values = ".")
-#>    a  b   c
-#> 0  1  2 NaN
+```
+
+```{=html}
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 This is all you need to know to read ~75% of CSV files that you'll encounter in practice. You can also easily adapt what you've learned to read fixed width files with `pd.read_fwf()`. To read in more challenging files, you'll need to learn more about how pandas parses each column, turning them into `DataFrame` objects.
@@ -250,8 +341,8 @@ Pandas uses category to represent categorical variables that have a known set of
 ```python
 fruit =  ["apple", "banana"]
 pd.Categorical(["apple", "banana", "bananana"], categories = fruit)
-#> [apple, banana, NaN]
-#> Categories (2, object): [apple, banana]
+#> ['apple', 'banana', NaN]
+#> Categories (2, object): ['apple', 'banana']
 ```
 
 But if you have many problematic entries, it's often easier to leave as character vectors and then use the tools you'll learn about in [strings] and [factors] to clean them up.

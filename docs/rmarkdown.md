@@ -49,7 +49,8 @@ When you open a `.md` in VS code, you see a text file where code and output can 
 
 Within the preview window you can right click to see an export menu and use the `Chrome(Puppeteer)` menu to find the export options. This will create a report in the same folder of the `.md` file with the same file name and the chosen export extension.
 
-<img src="markdown/diamond-sizes-report.png" width="75%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.75\linewidth]{markdown/diamond-sizes-report} \end{center}
 
 When you __export__ the document, the Markdown PDF extension sends the .md file to __chromium__, which then builds the report. To get started with your own `.md` file, simply create a new file and use the extension `.md`. The following sections dive into the two components of a Markdown document in more details: the markdown text, the code chunks.
 

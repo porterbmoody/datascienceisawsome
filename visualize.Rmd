@@ -1,15 +1,13 @@
 # Data visualisation
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, cache=FALSE}
+knitr::opts_chunk$set(python.reticulate = TRUE)
 library(reticulate)
 library(ggplot2)
 library(vegawidget)
-knitr::opts_chunk$set(engine.path = '/usr/bin/python3')
-knitr::opts_chunk$set(python.reticulate = TRUE)
-reticulate::use_python("/usr/bin/python3", required=T)
+knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
 
-reticulate::py_install('altair', pip = TRUE)
-py_run_string("import altair as alt")
+#use_python("usr/local/bin/python3.8", required = TRUE)
 ```
 
 ## Introduction
@@ -536,9 +534,7 @@ chart.save("screenshots/altair_points_dashed_lines.png")
 ```
 
 ```{R, echo=FALSE, fig.align="left"}
-
 knitr::include_graphics("screenshots/altair_points_dashed_lines.png")
-
 ```
 
 Notice that this plot contains two marks in the same graph! If this makes you excited, buckle up. We will learn how to place multiple marks on the same chart very soon.

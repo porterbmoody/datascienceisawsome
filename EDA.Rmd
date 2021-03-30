@@ -1,11 +1,11 @@
 # Exploratory Data Analysis
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, cache=FALSE}
 knitr::opts_chunk$set(python.reticulate = TRUE)
 library(reticulate)
 library(ggplot2)
 library(vegawidget)
-use_python("usr/local/bin/python3")
+knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
 ```
 
 ## Introduction

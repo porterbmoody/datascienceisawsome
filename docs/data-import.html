@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Data import | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Data import | Python for Data Science" />
   <meta property="og:type" content="book" />
@@ -51,15 +51,14 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/vega-5.9.0/vega.min.js"></script>
-<script src="libs/vega-lite-4.0.2/vega-lite.min.js"></script>
-<link href="libs/vega-embed-6.2.0/vega-embed.css" rel="stylesheet" />
-<script src="libs/vega-embed-6.2.0/vega-embed.js"></script>
-<script src="libs/vegawidget-binding-0.3.1.9003/vegawidget.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/vega-5.17.0/vega.min.js"></script>
+<script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
+<link href="libs/vega-embed-6.12.2/vega-embed.css" rel="stylesheet" />
+<script src="libs/vega-embed-6.12.2/vega-embed.js"></script>
+<script src="libs/vegawidget-binding-0.3.2/vegawidget.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -212,9 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="explore-intro.html"><a href="explore-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data visualisation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<li class="chapter" data-level="3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.1.1" data-path="data-visualisation.html"><a href="data-visualisation.html#prerequisites-1"><i class="fa fa-check"></i><b>3.1.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data-visualisation.html"><a href="data-visualisation.html#altair-data-management"><i class="fa fa-check"></i><b>3.1.2</b> Altair data management</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="data-visualisation.html"><a href="data-visualisation.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a>
@@ -248,13 +247,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
 <li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
 <li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
-<li class="chapter" data-level="4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#exercises-4"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.1.1" data-path="transform.html"><a href="transform.html#prerequisites-2"><i class="fa fa-check"></i><b>5.1.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="5.1.2" data-path="transform.html"><a href="transform.html#nycflights13"><i class="fa fa-check"></i><b>5.1.2</b> nycflights13</a></li>
 <li class="chapter" data-level="5.1.3" data-path="transform.html"><a href="transform.html#pandas-data-manipulation-basics"><i class="fa fa-check"></i><b>5.1.3</b> pandas data manipulation basics</a></li>
 </ul></li>
@@ -263,22 +262,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.1" data-path="transform.html"><a href="transform.html#comparisons"><i class="fa fa-check"></i><b>5.2.1</b> Comparisons</a></li>
 <li class="chapter" data-level="5.2.2" data-path="transform.html"><a href="transform.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
 <li class="chapter" data-level="5.2.3" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2.3</b> Missing values</a></li>
-<li class="chapter" data-level="5.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.2.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#arrange-or-sort-rows-with-.sort_values"><i class="fa fa-check"></i><b>5.3</b> Arrange or sort rows with <code>.sort_values()</code></a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.3.1" data-path="transform.html"><a href="transform.html#exercises-6"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>filter()</code> or <code>loc[]</code></a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.4.1" data-path="transform.html"><a href="transform.html#exercises-7"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#add-new-variables-with-.assign"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>.assign()</code></a>
 <ul>
 <li class="chapter" data-level="5.5.1" data-path="transform.html"><a href="transform.html#mutate-funs"><i class="fa fa-check"></i><b>5.5.1</b> Useful creation functions</a></li>
-<li class="chapter" data-level="5.5.2" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
+<li class="chapter" data-level="5.5.2" data-path="transform.html"><a href="transform.html#exercises-8"><i class="fa fa-check"></i><b>5.5.2</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>agg()</code></a>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#grouped-summaries-or-aggregations-with-.agg"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries or aggregations with <code>.agg()</code></a>
 <ul>
 <li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#combining-multiple-operations"><i class="fa fa-check"></i><b>5.6.1</b> Combining multiple operations</a></li>
 <li class="chapter" data-level="5.6.2" data-path="transform.html"><a href="transform.html#missing-values-1"><i class="fa fa-check"></i><b>5.6.2</b> Missing values</a></li>
@@ -286,11 +285,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.4" data-path="transform.html"><a href="transform.html#summarise-funs"><i class="fa fa-check"></i><b>5.6.4</b> Useful summary functions</a></li>
 <li class="chapter" data-level="5.6.5" data-path="transform.html"><a href="transform.html#grouping-by-multiple-variables"><i class="fa fa-check"></i><b>5.6.5</b> Grouping by multiple variables</a></li>
 <li class="chapter" data-level="5.6.6" data-path="transform.html"><a href="transform.html#ungrouping-reseting-the-index"><i class="fa fa-check"></i><b>5.6.6</b> Ungrouping (reseting the index)</a></li>
-<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-4"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
+<li class="chapter" data-level="5.6.7" data-path="transform.html"><a href="transform.html#exercises-9"><i class="fa fa-check"></i><b>5.6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#grouped-transforms-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped transforms (and filters)</a>
 <ul>
-<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-5"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="5.7.1" data-path="transform.html"><a href="transform.html#exercises-10"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a>
@@ -299,9 +298,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#prerequisites-3"><i class="fa fa-check"></i><b>7.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a>
@@ -309,11 +308,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualising-distributions"><i class="fa fa-check"></i><b>7.3.1</b> Visualising distributions</a></li>
 <li class="chapter" data-level="7.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#typical-values"><i class="fa fa-check"></i><b>7.3.2</b> Typical values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#unusual-values"><i class="fa fa-check"></i><b>7.3.3</b> Unusual values</a></li>
-<li class="chapter" data-level="7.3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-11"><i class="fa fa-check"></i><b>7.3.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values-2"><i class="fa fa-check"></i><b>7.4</b> Missing values</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-12"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a>
 <ul>
@@ -337,26 +336,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="wrangle-intro.html"><a href="wrangle-intro.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
 <li class="chapter" data-level="10" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<li class="chapter" data-level="10.1" data-path="dataframe.html"><a href="dataframe.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.1.1" data-path="dataframe.html"><a href="dataframe.html#prerequisites-4"><i class="fa fa-check"></i><b>10.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="dataframe.html"><a href="dataframe.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
 <li class="chapter" data-level="10.3" data-path="dataframe.html"><a href="dataframe.html#printing"><i class="fa fa-check"></i><b>10.3</b> Printing</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="dataframe.html"><a href="dataframe.html#subsetting"><i class="fa fa-check"></i><b>10.3.1</b> Subsetting</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
+<li class="chapter" data-level="10.4" data-path="dataframe.html"><a href="dataframe.html#exercises-16"><i class="fa fa-check"></i><b>10.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data import</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-5"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.1.1" data-path="data-import.html"><a href="data-import.html#prerequisites-5"><i class="fa fa-check"></i><b>11.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-17"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a>
 <ul>
@@ -364,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.2" data-path="data-import.html"><a href="data-import.html#readr-strings"><i class="fa fa-check"></i><b>11.3.2</b> Strings</a></li>
 <li class="chapter" data-level="11.3.3" data-path="data-import.html"><a href="data-import.html#readr-factors"><i class="fa fa-check"></i><b>11.3.3</b> Category (Factors)</a></li>
 <li class="chapter" data-level="11.3.4" data-path="data-import.html"><a href="data-import.html#readr-datetimes"><i class="fa fa-check"></i><b>11.3.4</b> Dates and times</a></li>
-<li class="chapter" data-level="11.3.5" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
+<li class="chapter" data-level="11.3.5" data-path="data-import.html"><a href="data-import.html#exercises-18"><i class="fa fa-check"></i><b>11.3.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="data-import.html"><a href="data-import.html#parsing-a-file"><i class="fa fa-check"></i><b>11.4</b> Parsing a file</a>
 <ul>
@@ -375,46 +374,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy data</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-6"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#prerequisites-6"><i class="fa fa-check"></i><b>12.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.2</b> Tidy data</a>
 <ul>
-<li class="chapter" data-level="12.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="12.2.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-19"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#pivoting"><i class="fa fa-check"></i><b>12.3</b> Pivoting</a>
 <ul>
 <li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#longer-melt"><i class="fa fa-check"></i><b>12.3.1</b> Longer (<code>melt()</code>)</a></li>
 <li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#wider-pivot"><i class="fa fa-check"></i><b>12.3.2</b> Wider (<code>pivot()</code>)</a></li>
-<li class="chapter" data-level="12.3.3" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
+<li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-20"><i class="fa fa-check"></i><b>12.3.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a>
 <ul>
 <li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#split-separate"><i class="fa fa-check"></i><b>12.4.1</b> Split (Separate)</a></li>
 <li class="chapter" data-level="12.4.2" data-path="tidy-data.html"><a href="tidy-data.html#unite"><i class="fa fa-check"></i><b>12.4.2</b> Unite</a></li>
-<li class="chapter" data-level="12.4.3" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
+<li class="chapter" data-level="12.4.3" data-path="tidy-data.html"><a href="tidy-data.html#exercises-21"><i class="fa fa-check"></i><b>12.4.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#missing-values-3"><i class="fa fa-check"></i><b>12.5</b> Missing values</a></li>
 <li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#case-study"><i class="fa fa-check"></i><b>12.6</b> Case Study</a>
 <ul>
-<li class="chapter" data-level="12.6.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
+<li class="chapter" data-level="12.6.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-22"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="12.7" data-path="tidy-data.html"><a href="tidy-data.html#non-tidy-data"><i class="fa fa-check"></i><b>12.7</b> Non-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>13</b> Relational data</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
+<li class="chapter" data-level="13.1" data-path="relational-data.html"><a href="relational-data.html#introduction-7"><i class="fa fa-check"></i><b>13.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.1.1" data-path="relational-data.html"><a href="relational-data.html#prerequisites-7"><i class="fa fa-check"></i><b>13.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="13.2" data-path="relational-data.html"><a href="relational-data.html#nycflights13-relational"><i class="fa fa-check"></i><b>13.2</b> nycflights13</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.2.1" data-path="relational-data.html"><a href="relational-data.html#exercises-23"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="relational-data.html"><a href="relational-data.html#keys"><i class="fa fa-check"></i><b>13.3</b> Keys</a>
 <ul>
-<li class="chapter" data-level="13.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.3.1" data-path="relational-data.html"><a href="relational-data.html#exercises-24"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.4" data-path="relational-data.html"><a href="relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>13.4</b> Mutating joins</a>
 <ul>
@@ -423,20 +422,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4.3" data-path="relational-data.html"><a href="relational-data.html#outer-join"><i class="fa fa-check"></i><b>13.4.3</b> Outer joins</a></li>
 <li class="chapter" data-level="13.4.4" data-path="relational-data.html"><a href="relational-data.html#join-matches"><i class="fa fa-check"></i><b>13.4.4</b> Duplicate keys</a></li>
 <li class="chapter" data-level="13.4.5" data-path="relational-data.html"><a href="relational-data.html#join-by"><i class="fa fa-check"></i><b>13.4.5</b> Defining the key columns</a></li>
-<li class="chapter" data-level="13.4.6" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
+<li class="chapter" data-level="13.4.6" data-path="relational-data.html"><a href="relational-data.html#exercises-25"><i class="fa fa-check"></i><b>13.4.6</b> Exercises</a></li>
 <li class="chapter" data-level="13.4.7" data-path="relational-data.html"><a href="relational-data.html#other-implementations"><i class="fa fa-check"></i><b>13.4.7</b> Other implementations</a></li>
 </ul></li>
 <li class="chapter" data-level="13.5" data-path="relational-data.html"><a href="relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>13.5</b> Filtering joins</a>
 <ul>
-<li class="chapter" data-level="13.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-3"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="13.5.1" data-path="relational-data.html"><a href="relational-data.html#exercises-26"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13.6" data-path="relational-data.html"><a href="relational-data.html#join-problems"><i class="fa fa-check"></i><b>13.6</b> Join problems</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>14</b> Strings</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
+<li class="chapter" data-level="14.1" data-path="strings.html"><a href="strings.html#introduction-8"><i class="fa fa-check"></i><b>14.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.1.1" data-path="strings.html"><a href="strings.html#prerequisites-8"><i class="fa fa-check"></i><b>14.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="14.2" data-path="strings.html"><a href="strings.html#string-basics"><i class="fa fa-check"></i><b>14.2</b> String basics</a>
 <ul>
@@ -463,15 +462,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="strings.html"><a href="strings.html#other-types-of-pattern"><i class="fa fa-check"></i><b>14.5</b> Other types of pattern</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-10"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="14.5.1" data-path="strings.html"><a href="strings.html#exercises-37"><i class="fa fa-check"></i><b>14.5.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="strings.html"><a href="strings.html#strings-in-python"><i class="fa fa-check"></i><b>14.6</b> strings in Python</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>15</b> Factors</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
+<li class="chapter" data-level="15.1" data-path="factors.html"><a href="factors.html#introduction-9"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="15.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>15.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.1.1" data-path="factors.html"><a href="factors.html#prerequisites-9"><i class="fa fa-check"></i><b>15.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="15.2" data-path="factors.html"><a href="factors.html#creating-categories"><i class="fa fa-check"></i><b>15.2</b> Creating categories</a></li>
 <li class="chapter" data-level="15.3" data-path="factors.html"><a href="factors.html#general-social-survey"><i class="fa fa-check"></i><b>15.3</b> General Social Survey</a>
@@ -480,32 +479,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15.4" data-path="factors.html"><a href="factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>15.4</b> Modifying factor order</a>
 <ul>
-<li class="chapter" data-level="15.4.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
+<li class="chapter" data-level="15.4.1" data-path="factors.html"><a href="factors.html#exercises-38"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="factors.html"><a href="factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>15.5</b> Modifying factor levels</a>
 <ul>
-<li class="chapter" data-level="15.5.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
+<li class="chapter" data-level="15.5.1" data-path="factors.html"><a href="factors.html#exercises-39"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>16</b> Dates and times</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
+<li class="chapter" data-level="16.1" data-path="dates-and-times.html"><a href="dates-and-times.html#introduction-10"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="16.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>16.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="16.1.1" data-path="dates-and-times.html"><a href="dates-and-times.html#prerequisites-10"><i class="fa fa-check"></i><b>16.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="16.2" data-path="dates-and-times.html"><a href="dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.2</b> Creating date/times</a>
 <ul>
 <li class="chapter" data-level="16.2.1" data-path="dates-and-times.html"><a href="dates-and-times.html#from-strings"><i class="fa fa-check"></i><b>16.2.1</b> From strings</a></li>
 <li class="chapter" data-level="16.2.2" data-path="dates-and-times.html"><a href="dates-and-times.html#from-individual-components"><i class="fa fa-check"></i><b>16.2.2</b> From individual components</a></li>
 <li class="chapter" data-level="16.2.3" data-path="dates-and-times.html"><a href="dates-and-times.html#from-other-types"><i class="fa fa-check"></i><b>16.2.3</b> From other types</a></li>
-<li class="chapter" data-level="16.2.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>16.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2.4" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-40"><i class="fa fa-check"></i><b>16.2.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="dates-and-times.html"><a href="dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.3</b> Date-time components</a>
 <ul>
 <li class="chapter" data-level="16.3.1" data-path="dates-and-times.html"><a href="dates-and-times.html#getting-components"><i class="fa fa-check"></i><b>16.3.1</b> Getting components</a></li>
 <li class="chapter" data-level="16.3.2" data-path="dates-and-times.html"><a href="dates-and-times.html#rounding"><i class="fa fa-check"></i><b>16.3.2</b> Rounding</a></li>
 <li class="chapter" data-level="16.3.3" data-path="dates-and-times.html"><a href="dates-and-times.html#setting-components"><i class="fa fa-check"></i><b>16.3.3</b> Setting components</a></li>
-<li class="chapter" data-level="16.3.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>16.3.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.3.4" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-41"><i class="fa fa-check"></i><b>16.3.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="dates-and-times.html"><a href="dates-and-times.html#time-spans-deltas"><i class="fa fa-check"></i><b>16.4</b> Time spans (Deltas)</a></li>
 <li class="chapter" data-level="16.5" data-path="dates-and-times.html"><a href="dates-and-times.html#time-zones"><i class="fa fa-check"></i><b>16.5</b> Time zones</a></li>
@@ -513,23 +512,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Program</b></span></li>
 <li class="chapter" data-level="17" data-path="program-intro.html"><a href="program-intro.html"><i class="fa fa-check"></i><b>17</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>17.1</b> Learning more</a></li>
+<li class="chapter" data-level="17.1" data-path="program-intro.html"><a href="program-intro.html#learning-more-1"><i class="fa fa-check"></i><b>17.1</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="pipes-not-included.html"><a href="pipes-not-included.html"><i class="fa fa-check"></i><b>18</b> Pipes (Not included)</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.1" data-path="pipes-not-included.html"><a href="pipes-not-included.html#introduction-11"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="functions-tbd.html"><a href="functions-tbd.html"><i class="fa fa-check"></i><b>19</b> Functions (TBD)</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
+<li class="chapter" data-level="19.1" data-path="functions-tbd.html"><a href="functions-tbd.html#introduction-12"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="vectors-tbd.html"><a href="vectors-tbd.html"><i class="fa fa-check"></i><b>20</b> Vectors (TBD)</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.1" data-path="vectors-tbd.html"><a href="vectors-tbd.html#introduction-13"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="iteration-tbd.html"><a href="iteration-tbd.html"><i class="fa fa-check"></i><b>21</b> Iteration (TBD)</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.1" data-path="iteration-tbd.html"><a href="iteration-tbd.html#introduction-14"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
 </ul></li>
 <li class="part"><span><b>IV Model</b></span></li>
 <li class="chapter" data-level="22" data-path="model-intro.html"><a href="model-intro.html"><i class="fa fa-check"></i><b>22</b> Introduction</a>
@@ -538,61 +537,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="23" data-path="model-basics-tbd.html"><a href="model-basics-tbd.html"><i class="fa fa-check"></i><b>23</b> Model basics (TBD)</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
+<li class="chapter" data-level="23.1" data-path="model-basics-tbd.html"><a href="model-basics-tbd.html#introduction-15"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="24" data-path="model-building-tbd.html"><a href="model-building-tbd.html"><i class="fa fa-check"></i><b>24</b> Model building (TBD)</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>24.1</b> Introduction</a></li>
+<li class="chapter" data-level="24.1" data-path="model-building-tbd.html"><a href="model-building-tbd.html#introduction-16"><i class="fa fa-check"></i><b>24.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="many-models-tbd.html"><a href="many-models-tbd.html"><i class="fa fa-check"></i><b>25</b> Many models (TBD)</a>
 <ul>
-<li class="chapter" data-level="25.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>25.1</b> Introduction</a></li>
+<li class="chapter" data-level="25.1" data-path="many-models-tbd.html"><a href="many-models-tbd.html#introduction-17"><i class="fa fa-check"></i><b>25.1</b> Introduction</a></li>
 </ul></li>
 <li class="part"><span><b>V Communicate</b></span></li>
 <li class="chapter" data-level="26" data-path="communicate-intro.html"><a href="communicate-intro.html"><i class="fa fa-check"></i><b>26</b> Introduction</a></li>
 <li class="chapter" data-level="27" data-path="markdown.html"><a href="markdown.html"><i class="fa fa-check"></i><b>27</b> Markdown</a>
 <ul>
-<li class="chapter" data-level="27.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>27.1</b> Introduction</a></li>
+<li class="chapter" data-level="27.1" data-path="markdown.html"><a href="markdown.html#introduction-18"><i class="fa fa-check"></i><b>27.1</b> Introduction</a></li>
 <li class="chapter" data-level="27.2" data-path="markdown.html"><a href="markdown.html#markdown-basics"><i class="fa fa-check"></i><b>27.2</b> Markdown basics</a></li>
 <li class="chapter" data-level="27.3" data-path="markdown.html"><a href="markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>27.3</b> Text formatting with Markdown</a>
 <ul>
-<li class="chapter" data-level="27.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>27.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="27.3.1" data-path="markdown.html"><a href="markdown.html#exercises-42"><i class="fa fa-check"></i><b>27.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="markdown.html"><a href="markdown.html#code-chunks"><i class="fa fa-check"></i><b>27.4</b> Code chunks</a>
 <ul>
 <li class="chapter" data-level="27.4.1" data-path="markdown.html"><a href="markdown.html#tables"><i class="fa fa-check"></i><b>27.4.1</b> Tables</a></li>
 </ul></li>
-<li class="chapter" data-level="27.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
+<li class="chapter" data-level="27.5" data-path="markdown.html"><a href="markdown.html#learning-more-2"><i class="fa fa-check"></i><b>27.5</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html"><i class="fa fa-check"></i><b>28</b> Graphics for communication</a>
 <ul>
-<li class="chapter" data-level="28.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
+<li class="chapter" data-level="28.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#introduction-19"><i class="fa fa-check"></i><b>28.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="28.1.1" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="28.1.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#prerequisites-11"><i class="fa fa-check"></i><b>28.1.1</b> Prerequisites</a></li>
 </ul></li>
 <li class="chapter" data-level="28.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#label"><i class="fa fa-check"></i><b>28.2</b> Label</a>
 <ul>
-<li class="chapter" data-level="28.2.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="28.2.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-43"><i class="fa fa-check"></i><b>28.2.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>28.3</b> Annotations</a>
 <ul>
-<li class="chapter" data-level="28.3.1" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-1"><i class="fa fa-check"></i><b>28.3.1</b> Exercises</a></li>
+<li class="chapter" data-level="28.3.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-44"><i class="fa fa-check"></i><b>28.3.1</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.4" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>28.4</b> Scales</a>
 <ul>
 <li class="chapter" data-level="28.4.1" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#axis-ticks-and-legend-keys"><i class="fa fa-check"></i><b>28.4.1</b> Axis ticks and legend keys</a></li>
 <li class="chapter" data-level="28.4.2" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#legend-layout"><i class="fa fa-check"></i><b>28.4.2</b> Legend layout</a></li>
 <li class="chapter" data-level="28.4.3" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#replacing-a-scale"><i class="fa fa-check"></i><b>28.4.3</b> Replacing a scale</a></li>
-<li class="chapter" data-level="28.4.4" data-path="data-visualisation.html"><a href="data-visualisation.html#exercises-2"><i class="fa fa-check"></i><b>28.4.4</b> Exercises</a></li>
+<li class="chapter" data-level="28.4.4" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#exercises-45"><i class="fa fa-check"></i><b>28.4.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="28.5" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#zooming"><i class="fa fa-check"></i><b>28.5</b> Zooming</a></li>
 <li class="chapter" data-level="28.6" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#themes"><i class="fa fa-check"></i><b>28.6</b> Themes</a></li>
 <li class="chapter" data-level="28.7" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#saving-your-plots"><i class="fa fa-check"></i><b>28.7</b> Saving your plots</a></li>
-<li class="chapter" data-level="28.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>28.8</b> Learning more</a></li>
+<li class="chapter" data-level="28.8" data-path="graphics-for-communication.html"><a href="graphics-for-communication.html#learning-more-3"><i class="fa fa-check"></i><b>28.8</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html"><i class="fa fa-check"></i><b>29</b> R Markdown formats</a>
 <ul>
-<li class="chapter" data-level="29.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
+<li class="chapter" data-level="29.1" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#introduction-20"><i class="fa fa-check"></i><b>29.1</b> Introduction</a></li>
 <li class="chapter" data-level="29.2" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#output-options"><i class="fa fa-check"></i><b>29.2</b> Output options</a></li>
 <li class="chapter" data-level="29.3" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#documents"><i class="fa fa-check"></i><b>29.3</b> Documents</a></li>
 <li class="chapter" data-level="29.4" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#notebooks"><i class="fa fa-check"></i><b>29.4</b> Notebooks</a></li>
@@ -605,7 +604,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="29.8" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#websites"><i class="fa fa-check"></i><b>29.8</b> Websites</a></li>
 <li class="chapter" data-level="29.9" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#other-formats"><i class="fa fa-check"></i><b>29.9</b> Other formats</a></li>
-<li class="chapter" data-level="29.10" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
+<li class="chapter" data-level="29.10" data-path="r-markdown-formats.html"><a href="r-markdown-formats.html#learning-more-4"><i class="fa fa-check"></i><b>29.10</b> Learning more</a></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="r-markdown-workflow-and-jupyter.html"><a href="r-markdown-workflow-and-jupyter.html"><i class="fa fa-check"></i><b>30</b> R Markdown workflow (and Jupyter)</a></li>
 </ul>
@@ -627,15 +626,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-import" class="section level1" number="11">
 <h1><span class="header-section-number">11</span> Data import</h1>
-<div id="introduction" class="section level2" number="11.1">
+<div id="introduction-5" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Introduction</h2>
 <p>In this chapter, you’ll learn how to read plain-text rectangular files into Python. Here, we’ll only scratch the surface of data import, but many of the principles will translate to other forms of data. We’ll finish with a few pointers to packages that are useful for other types of data.</p>
-<div id="prerequisites" class="section level3" number="11.1.1">
+<div id="prerequisites-5" class="section level3" number="11.1.1">
 <h3><span class="header-section-number">11.1.1</span> Prerequisites</h3>
 <p>In this chapter, you’ll learn how to load flat files in R with the <strong>pandas</strong> package.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="data-import.html#cb164-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb164-2"><a href="data-import.html#cb164-2"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb164-3"><a href="data-import.html#cb164-3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="data-import.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb163-2"><a href="data-import.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb163-3"><a href="data-import.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="getting-started" class="section level2" number="11.2">
@@ -649,18 +648,54 @@ widths with <code>widths</code> or their position with <code>colspecs</code> arg
 </ul>
 <p>These functions all have similar syntax: once you’ve mastered one, you can use the others with ease. For the rest of this chapter we’ll focus on <code>pd.read_csv()</code>. Not only are csv files one of the most common forms of data storage, but once you understand <code>pd.read_csv()</code>, you can easily apply your knowledge to all the other input/output functions in pandas. You can see the full set of functions by <a href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">reading the pandas documentation</a>.</p>
 <p>The first argument to <code>pd.read_csv()</code> is the most important: it’s the path to the file to read.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="data-import.html#cb165-1"></a>heights <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/heights.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="data-import.html#cb164-1" aria-hidden="true" tabindex="-1"></a>heights <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/heights.csv&quot;</span>)</span></code></pre></div>
 <p>You can also supply an inline csv file with the use of <code>StringIO</code> in the <code>io</code> package. StringIO creates a buffer from a string. This is useful for experimenting with pandas and for creating reproducible examples to share with others:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="data-import.html#cb166-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
-<span id="cb166-2"><a href="data-import.html#cb166-2"></a></span>
-<span id="cb166-3"><a href="data-import.html#cb166-3"></a>data <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span></span>
-<span id="cb166-4"><a href="data-import.html#cb166-4"></a><span class="st">1,2,3</span></span>
-<span id="cb166-5"><a href="data-import.html#cb166-5"></a><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
-<span id="cb166-6"><a href="data-import.html#cb166-6"></a></span>
-<span id="cb166-7"><a href="data-import.html#cb166-7"></a>pd.read_csv(data)</span>
-<span id="cb166-8"><a href="data-import.html#cb166-8"></a><span class="co">#&gt;    a  b  c</span></span>
-<span id="cb166-9"><a href="data-import.html#cb166-9"></a><span class="co">#&gt; 0  1  2  3</span></span>
-<span id="cb166-10"><a href="data-import.html#cb166-10"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="data-import.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb165-2"><a href="data-import.html#cb165-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-3"><a href="data-import.html#cb165-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span></span>
+<span id="cb165-4"><a href="data-import.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="st">1,2,3</span></span>
+<span id="cb165-5"><a href="data-import.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
+<span id="cb165-6"><a href="data-import.html#cb165-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-7"><a href="data-import.html#cb165-7" aria-hidden="true" tabindex="-1"></a>pd.read_csv(data)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>In both cases <code>pd.read_csv()</code> uses the first line of the data for the column names, which is a very common convention. There are two cases where you might want to tweak this behaviour:</p>
 <ol style="list-style-type: decimal">
 <li><p>Sometimes there are a few lines of metadata at the top of the file. You can
@@ -684,28 +719,131 @@ pd.read_csv(data_comment, comment = &quot;#&quot;)</code></pre></li>
 <li><p>The data might not have column names. You can use <code>header = None</code> to
 tell <code>read_csv()</code> not to treat the first row as headings, and instead
 label them sequentially from <code>1</code> to <code>n</code>:</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="data-import.html#cb168-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
-<span id="cb168-2"><a href="data-import.html#cb168-2"></a>pd.read_csv(data_nonames, header <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb168-3"><a href="data-import.html#cb168-3"></a><span class="co">#&gt;    0  1  2</span></span>
-<span id="cb168-4"><a href="data-import.html#cb168-4"></a><span class="co">#&gt; 0  1  2  3</span></span>
-<span id="cb168-5"><a href="data-import.html#cb168-5"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="data-import.html#cb167-1" aria-hidden="true" tabindex="-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
+<span id="cb167-2"><a href="data-import.html#cb167-2" aria-hidden="true" tabindex="-1"></a>pd.read_csv(data_nonames, header <span class="op">=</span> <span class="va">None</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>(<code>"\n"</code> is a convenient shortcut for adding a new line. You’ll learn more
-about it and other types of string escape in [string basics].)</p>
+about it and other types of string escape in <a href="strings.html#string-basics">string basics</a>.)</p>
 <p>Alternatively you can pass <code>names</code> an list of names which will be
 used as the column names:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="data-import.html#cb169-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
-<span id="cb169-2"><a href="data-import.html#cb169-2"></a>pd.read_csv(data_nonames, names <span class="op">=</span> [<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>], header <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb169-3"><a href="data-import.html#cb169-3"></a><span class="co">#&gt;    x  y  z</span></span>
-<span id="cb169-4"><a href="data-import.html#cb169-4"></a><span class="co">#&gt; 0  1  2  3</span></span>
-<span id="cb169-5"><a href="data-import.html#cb169-5"></a><span class="co">#&gt; 1  4  5  6</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="data-import.html#cb168-1" aria-hidden="true" tabindex="-1"></a>data_nonames <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;1,2,3</span><span class="ch">\n</span><span class="st">4,5,6&quot;&quot;&quot;</span>)</span>
+<span id="cb168-2"><a href="data-import.html#cb168-2" aria-hidden="true" tabindex="-1"></a>pd.read_csv(data_nonames, names <span class="op">=</span> [<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>], header <span class="op">=</span> <span class="va">None</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></li>
 </ol>
 <p>Another option that commonly needs tweaking is <code>na</code>: this specifies the value (or values) that are used to represent missing values in your file:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="data-import.html#cb170-1"></a>data_missing <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span><span class="ch">\n</span><span class="st">1,2,.&quot;&quot;&quot;</span>)</span>
-<span id="cb170-2"><a href="data-import.html#cb170-2"></a>pd.read_csv(data_missing, na_values <span class="op">=</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb170-3"><a href="data-import.html#cb170-3"></a><span class="co">#&gt;    a  b   c</span></span>
-<span id="cb170-4"><a href="data-import.html#cb170-4"></a><span class="co">#&gt; 0  1  2 NaN</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="data-import.html#cb169-1" aria-hidden="true" tabindex="-1"></a>data_missing <span class="op">=</span> StringIO(<span class="st">&quot;&quot;&quot;a,b,c</span><span class="ch">\n</span><span class="st">1,2,.&quot;&quot;&quot;</span>)</span>
+<span id="cb169-2"><a href="data-import.html#cb169-2" aria-hidden="true" tabindex="-1"></a>pd.read_csv(data_missing, na_values <span class="op">=</span> <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>This is all you need to know to read ~75% of CSV files that you’ll encounter in practice. You can also easily adapt what you’ve learned to read fixed width files with <code>pd.read_fwf()</code>. To read in more challenging files, you’ll need to learn more about how pandas parses each column, turning them into <code>DataFrame</code> objects.</p>
-<div id="exercises" class="section level3" number="11.2.1">
+<div id="exercises-17" class="section level3" number="11.2.1">
 <h3><span class="header-section-number">11.2.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>What function would you use to read a file where fields were separated with<br />
@@ -718,32 +856,32 @@ causing problems they need to be surrounded by a quoting character, like
 <code>"</code> or <code>'</code>. By default, <code>pd.read_csv()</code> assumes that the quoting
 character will be <code>"</code>. What argument to <code>pd.read_csv()</code> do you need to specify
 to read the following text into a data frame?</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="data-import.html#cb171-1"></a><span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="data-import.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;x,y</span><span class="sc">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span></span></code></pre></div></li>
 </ol>
 </div>
 </div>
 <div id="parsing-a-vector" class="section level2" number="11.3">
 <h2><span class="header-section-number">11.3</span> Parsing a vector</h2>
 <p>Before we get into the details of how pandas reads files from disk, we need to take a little detour to talk about the <code>astype()</code> function. This function casts a pandas object to a more specialised data type like a logical or integer. The pandas package has a special <code>.to_datetime()</code> function to convert dates:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="data-import.html#cb172-1"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, np.nan]).astype(<span class="st">&#39;bool&#39;</span>)</span>
-<span id="cb172-2"><a href="data-import.html#cb172-2"></a><span class="co">#&gt; 0    True</span></span>
-<span id="cb172-3"><a href="data-import.html#cb172-3"></a><span class="co">#&gt; 1    True</span></span>
-<span id="cb172-4"><a href="data-import.html#cb172-4"></a><span class="co">#&gt; 2    True</span></span>
-<span id="cb172-5"><a href="data-import.html#cb172-5"></a><span class="co">#&gt; dtype: bool</span></span>
-<span id="cb172-6"><a href="data-import.html#cb172-6"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>]).astype(<span class="st">&#39;bool&#39;</span>)</span>
-<span id="cb172-7"><a href="data-import.html#cb172-7"></a><span class="co">#&gt; 0    True</span></span>
-<span id="cb172-8"><a href="data-import.html#cb172-8"></a><span class="co">#&gt; 1    True</span></span>
-<span id="cb172-9"><a href="data-import.html#cb172-9"></a><span class="co">#&gt; 2    True</span></span>
-<span id="cb172-10"><a href="data-import.html#cb172-10"></a><span class="co">#&gt; dtype: bool</span></span>
-<span id="cb172-11"><a href="data-import.html#cb172-11"></a>pd.Series([<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>]).astype(<span class="st">&quot;int&quot;</span>)</span>
-<span id="cb172-12"><a href="data-import.html#cb172-12"></a><span class="co">#&gt; 0    1</span></span>
-<span id="cb172-13"><a href="data-import.html#cb172-13"></a><span class="co">#&gt; 1    2</span></span>
-<span id="cb172-14"><a href="data-import.html#cb172-14"></a><span class="co">#&gt; 2    3</span></span>
-<span id="cb172-15"><a href="data-import.html#cb172-15"></a><span class="co">#&gt; dtype: int64</span></span>
-<span id="cb172-16"><a href="data-import.html#cb172-16"></a>pd.to_datetime(pd.Series([<span class="st">&#39;2010-01-01&#39;</span>, <span class="st">&#39;1970-10-14&#39;</span>]), infer_datetime_format<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb172-17"><a href="data-import.html#cb172-17"></a><span class="co">#&gt; 0   2010-01-01</span></span>
-<span id="cb172-18"><a href="data-import.html#cb172-18"></a><span class="co">#&gt; 1   1970-10-14</span></span>
-<span id="cb172-19"><a href="data-import.html#cb172-19"></a><span class="co">#&gt; dtype: datetime64[ns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb171-1"><a href="data-import.html#cb171-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, np.nan]).astype(<span class="st">&#39;bool&#39;</span>)</span>
+<span id="cb171-2"><a href="data-import.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    True</span></span>
+<span id="cb171-3"><a href="data-import.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    True</span></span>
+<span id="cb171-4"><a href="data-import.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    True</span></span>
+<span id="cb171-5"><a href="data-import.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: bool</span></span>
+<span id="cb171-6"><a href="data-import.html#cb171-6" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>]).astype(<span class="st">&#39;bool&#39;</span>)</span>
+<span id="cb171-7"><a href="data-import.html#cb171-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    True</span></span>
+<span id="cb171-8"><a href="data-import.html#cb171-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    True</span></span>
+<span id="cb171-9"><a href="data-import.html#cb171-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    True</span></span>
+<span id="cb171-10"><a href="data-import.html#cb171-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: bool</span></span>
+<span id="cb171-11"><a href="data-import.html#cb171-11" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>]).astype(<span class="st">&quot;int&quot;</span>)</span>
+<span id="cb171-12"><a href="data-import.html#cb171-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1</span></span>
+<span id="cb171-13"><a href="data-import.html#cb171-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    2</span></span>
+<span id="cb171-14"><a href="data-import.html#cb171-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    3</span></span>
+<span id="cb171-15"><a href="data-import.html#cb171-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span>
+<span id="cb171-16"><a href="data-import.html#cb171-16" aria-hidden="true" tabindex="-1"></a>pd.to_datetime(pd.Series([<span class="st">&#39;2010-01-01&#39;</span>, <span class="st">&#39;1970-10-14&#39;</span>]), infer_datetime_format<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb171-17"><a href="data-import.html#cb171-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0   2010-01-01</span></span>
+<span id="cb171-18"><a href="data-import.html#cb171-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   1970-10-14</span></span>
+<span id="cb171-19"><a href="data-import.html#cb171-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: datetime64[ns]</span></span></code></pre></div>
 <p>These functions are useful in their own right, but are also an important building block for pandas. Once you’ve learned how the individual parsers work in this section, we’ll circle back and see how they fit together to parse a complete file in the next section.</p>
 <p>Using arsers is mostly a matter of understanding what’s available and how they deal with different types of input. There are eight particularly important <code>dtype</code>s that you can use within <code>astype()</code>:</p>
 <ol style="list-style-type: decimal">
@@ -758,13 +896,13 @@ are the most complicated because there are so many different ways of writing
 dates.</p></li>
 <li><p><code>to_numeric()</code> allows you to coerce mixed value columns to numeric using
 <code>errors = coerce</code></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="data-import.html#cb173-1"></a>pd.to_numeric(pd.Series([<span class="st">&quot;bb&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;True&quot;</span>, <span class="st">&quot;9&quot;</span>, np.nan]), errors <span class="op">=</span> <span class="st">&#39;coerce&#39;</span>)</span>
-<span id="cb173-2"><a href="data-import.html#cb173-2"></a><span class="co">#&gt; 0    NaN</span></span>
-<span id="cb173-3"><a href="data-import.html#cb173-3"></a><span class="co">#&gt; 1    1.0</span></span>
-<span id="cb173-4"><a href="data-import.html#cb173-4"></a><span class="co">#&gt; 2    NaN</span></span>
-<span id="cb173-5"><a href="data-import.html#cb173-5"></a><span class="co">#&gt; 3    9.0</span></span>
-<span id="cb173-6"><a href="data-import.html#cb173-6"></a><span class="co">#&gt; 4    NaN</span></span>
-<span id="cb173-7"><a href="data-import.html#cb173-7"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="data-import.html#cb172-1" aria-hidden="true" tabindex="-1"></a>pd.to_numeric(pd.Series([<span class="st">&quot;bb&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;True&quot;</span>, <span class="st">&quot;9&quot;</span>, np.nan]), errors <span class="op">=</span> <span class="st">&#39;coerce&#39;</span>)</span>
+<span id="cb172-2"><a href="data-import.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    NaN</span></span>
+<span id="cb172-3"><a href="data-import.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    1.0</span></span>
+<span id="cb172-4"><a href="data-import.html#cb172-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    NaN</span></span>
+<span id="cb172-5"><a href="data-import.html#cb172-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    9.0</span></span>
+<span id="cb172-6"><a href="data-import.html#cb172-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    NaN</span></span>
+<span id="cb172-7"><a href="data-import.html#cb172-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div></li>
 </ol>
 <p>The following sections describe these parsers in more detail.</p>
 <div id="numbers" class="section level3" number="11.3.1">
@@ -785,11 +923,11 @@ float.</p>
 <div id="readr-strings" class="section level3" number="11.3.2">
 <h3><span class="header-section-number">11.3.2</span> Strings</h3>
 <p>It seems like strings should be really simple. Unfortunately life isn’t so simple, as there are multiple ways to represent the same string. To understand what’s going on, we need to dive into the details of how computers represent strings. In Python, we can get at the underlying representation of a string using <code>hex()</code> on a binary object:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="data-import.html#cb174-1"></a>b<span class="st">&#39;Hathaway&#39;</span>.<span class="bu">hex</span>()</span>
-<span id="cb174-2"><a href="data-import.html#cb174-2"></a><span class="co"># and convert it back</span></span>
-<span id="cb174-3"><a href="data-import.html#cb174-3"></a><span class="co">#&gt; &#39;4861746861776179&#39;</span></span>
-<span id="cb174-4"><a href="data-import.html#cb174-4"></a><span class="bu">bytes</span>.fromhex(<span class="st">&#39;4861746861776179&#39;</span>).decode()</span>
-<span id="cb174-5"><a href="data-import.html#cb174-5"></a><span class="co">#&gt; &#39;Hathaway&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="data-import.html#cb173-1" aria-hidden="true" tabindex="-1"></a>b<span class="st">&#39;Hathaway&#39;</span>.<span class="bu">hex</span>()</span>
+<span id="cb173-2"><a href="data-import.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and convert it back</span></span>
+<span id="cb173-3"><a href="data-import.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;4861746861776179&#39;</span></span>
+<span id="cb173-4"><a href="data-import.html#cb173-4" aria-hidden="true" tabindex="-1"></a><span class="bu">bytes</span>.fromhex(<span class="st">&#39;4861746861776179&#39;</span>).decode()</span>
+<span id="cb173-5"><a href="data-import.html#cb173-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;Hathaway&#39;</span></span></code></pre></div>
 <p>Each hexadecimal number represents a byte of information: <code>48</code> is H, <code>61</code> is a, and so on. The mapping from hexadecimal number to character is called the encoding, and in this case the encoding is called ASCII. ASCII does a great job of representing English characters, because it’s the <strong>American</strong> Standard Code for Information Interchange.</p>
 <p>Things get more complicated for languages other than English. In the early days of computing there were many competing standards for encoding non-English characters, and to correctly interpret a string you needed to know both the values and the encoding. For example, two common encodings are Latin1 (aka ISO-8859-1, used for Western European languages) and Latin2 (aka ISO-8859-2, used for Eastern European languages). In Latin1, the byte <code>b1</code> is “±”, but in Latin2, it’s “ą”! Fortunately, today there is one standard that is supported almost everywhere: UTF-8. UTF-8 can encode just about every character used by humans today, as well as many extra symbols (like emoji!).</p>
 <p>Python often defaults to UTF-8: pandas assumes your data is UTF-8 encoded when you read it, and always uses it when writing. This is a good default, but will fail for data produced by older systems that don’t understand UTF-8. If this happens to you, your strings will look weird when you print them. Sometimes just one or two characters might be messed up; other times you’ll get complete gibberish. For example:</p>
@@ -798,11 +936,11 @@ float.</p>
 <div id="readr-factors" class="section level3" number="11.3.3">
 <h3><span class="header-section-number">11.3.3</span> Category (Factors)</h3>
 <p>Pandas uses category to represent categorical variables that have a known set of possible values. Give <code>pd.Categorical()</code> a Series of known <code>levels</code> to convert other unexpected value that are present to <code>nan</code>:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="data-import.html#cb175-1"></a>fruit <span class="op">=</span>  [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
-<span id="cb175-2"><a href="data-import.html#cb175-2"></a>pd.Categorical([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;bananana&quot;</span>], categories <span class="op">=</span> fruit)</span>
-<span id="cb175-3"><a href="data-import.html#cb175-3"></a><span class="co">#&gt; [apple, banana, NaN]</span></span>
-<span id="cb175-4"><a href="data-import.html#cb175-4"></a><span class="co">#&gt; Categories (2, object): [apple, banana]</span></span></code></pre></div>
-<p>But if you have many problematic entries, it’s often easier to leave as character vectors and then use the tools you’ll learn about in <a href="data-import.html#readr-strings">strings</a> and [factors] to clean them up.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="data-import.html#cb174-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="op">=</span>  [<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>]</span>
+<span id="cb174-2"><a href="data-import.html#cb174-2" aria-hidden="true" tabindex="-1"></a>pd.Categorical([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;bananana&quot;</span>], categories <span class="op">=</span> fruit)</span>
+<span id="cb174-3"><a href="data-import.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;apple&#39;, &#39;banana&#39;, NaN]</span></span>
+<span id="cb174-4"><a href="data-import.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (2, object): [&#39;apple&#39;, &#39;banana&#39;]</span></span></code></pre></div>
+<p>But if you have many problematic entries, it’s often easier to leave as character vectors and then use the tools you’ll learn about in <a href="strings.html#strings">strings</a> and <a href="factors.html#factors">factors</a> to clean them up.</p>
 </div>
 <div id="readr-datetimes" class="section level3" number="11.3.4">
 <h3><span class="header-section-number">11.3.4</span> Dates and times</h3>
@@ -812,11 +950,11 @@ float.</p>
 international standard in which the components of a date are
 organised from biggest to smallest: year, month, day, hour, minute,
 second.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="data-import.html#cb176-1"></a>pd.to_datetime([<span class="st">&quot;2010-10-01T2010&quot;</span>])</span>
-<span id="cb176-2"><a href="data-import.html#cb176-2"></a><span class="co"># If time is omitted, it will be set to midnight and only print date.</span></span>
-<span id="cb176-3"><a href="data-import.html#cb176-3"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01 20:10:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
-<span id="cb176-4"><a href="data-import.html#cb176-4"></a>pd.to_datetime([<span class="st">&quot;2010-10-01&quot;</span>])</span>
-<span id="cb176-5"><a href="data-import.html#cb176-5"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="data-import.html#cb175-1" aria-hidden="true" tabindex="-1"></a>pd.to_datetime([<span class="st">&quot;2010-10-01T2010&quot;</span>])</span>
+<span id="cb175-2"><a href="data-import.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If time is omitted, it will be set to midnight and only print date.</span></span>
+<span id="cb175-3"><a href="data-import.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01 20:10:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb175-4"><a href="data-import.html#cb175-4" aria-hidden="true" tabindex="-1"></a>pd.to_datetime([<span class="st">&quot;2010-10-01&quot;</span>])</span>
+<span id="cb175-5"><a href="data-import.html#cb175-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DatetimeIndex([&#39;2010-10-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
 <p>This is the most important date/time standard, and if you work with
 dates and times frequently, I recommend reading
 <a href="https://en.wikipedia.org/wiki/ISO_8601" class="uri">https://en.wikipedia.org/wiki/ISO_8601</a></p></li>
@@ -856,7 +994,7 @@ dates and times frequently, I recommend reading
 <dd><code>%Z</code> Time zone (as name, e.g. <code>America/Chicago</code>). Beware of abbreviations:
 if you’re American, note that “EST” is a Canadian time zone that does not
 have daylight savings time. It is <em>not</em> Eastern Standard Time! We’ll
-come back to this in [time zones].
+come back to this in <a href="dates-and-times.html#time-zones">time zones</a>.
 </dd>
 <dd><code>%z</code> (as offset from UTC, e.g. <code>+0800</code>).
 </dd>
@@ -867,29 +1005,29 @@ come back to this in [time zones].
 </dd>
 </dl>
 <p>The best way to figure out the correct format is to create a few examples in a character vector, and test with one of the parsing functions. For example:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="data-import.html#cb177-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
-<span id="cb177-2"><a href="data-import.html#cb177-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
-<span id="cb177-3"><a href="data-import.html#cb177-3"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">/%m/%y&quot;</span>)</span>
-<span id="cb177-4"><a href="data-import.html#cb177-4"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-02-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
-<span id="cb177-5"><a href="data-import.html#cb177-5"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%y/%m/</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
-<span id="cb177-6"><a href="data-import.html#cb177-6"></a><span class="co">#&gt; DatetimeIndex([&#39;2001-02-15&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="data-import.html#cb176-1" aria-hidden="true" tabindex="-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb176-2"><a href="data-import.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb176-3"><a href="data-import.html#cb176-3" aria-hidden="true" tabindex="-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">/%m/%y&quot;</span>)</span>
+<span id="cb176-4"><a href="data-import.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-02-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span>
+<span id="cb176-5"><a href="data-import.html#cb176-5" aria-hidden="true" tabindex="-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;%y/%m/</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
+<span id="cb176-6"><a href="data-import.html#cb176-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DatetimeIndex([&#39;2001-02-15&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
 <p>The <code>pd.to_datetime()</code> function has a handy argument <code>infer_datetime_format</code> which can often allow you to avoid entring format strings.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="data-import.html#cb178-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], infer_datetime_format <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb178-2"><a href="data-import.html#cb178-2"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="data-import.html#cb177-1" aria-hidden="true" tabindex="-1"></a>pd.to_datetime([<span class="st">&quot;01/02/15&quot;</span>], infer_datetime_format <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb177-2"><a href="data-import.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DatetimeIndex([&#39;2015-01-02&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span></span></code></pre></div>
 <!-- https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.month_name.html -->
 </div>
-<div id="exercises-1" class="section level3" number="11.3.5">
+<div id="exercises-18" class="section level3" number="11.3.5">
 <h3><span class="header-section-number">11.3.5</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>What are the most common encodings used in Europe? What are the
 most common encodings used in Asia? Do some googling to find out.</p></li>
 <li><p>Generate the correct format string to parse each of the following
 dates and times:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="data-import.html#cb179-1"></a>d1 <span class="op">=</span> [<span class="st">&quot;January 1, 2010&quot;</span>]</span>
-<span id="cb179-2"><a href="data-import.html#cb179-2"></a>d2 <span class="op">=</span> [<span class="st">&quot;2015-Mar-07&quot;</span>]</span>
-<span id="cb179-3"><a href="data-import.html#cb179-3"></a>d3 <span class="op">=</span> [<span class="st">&quot;06-Jun-2017&quot;</span>]</span>
-<span id="cb179-4"><a href="data-import.html#cb179-4"></a>d4 <span class="op">=</span> [<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>]</span>
-<span id="cb179-5"><a href="data-import.html#cb179-5"></a>d5 <span class="op">=</span> [<span class="st">&quot;12/30/14&quot;</span>] <span class="co"># Dec 30, 2014</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="data-import.html#cb178-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="op">=</span> [<span class="st">&quot;January 1, 2010&quot;</span>]</span>
+<span id="cb178-2"><a href="data-import.html#cb178-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="op">=</span> [<span class="st">&quot;2015-Mar-07&quot;</span>]</span>
+<span id="cb178-3"><a href="data-import.html#cb178-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> [<span class="st">&quot;06-Jun-2017&quot;</span>]</span>
+<span id="cb178-4"><a href="data-import.html#cb178-4" aria-hidden="true" tabindex="-1"></a>d4 <span class="op">=</span> [<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>]</span>
+<span id="cb178-5"><a href="data-import.html#cb178-5" aria-hidden="true" tabindex="-1"></a>d5 <span class="op">=</span> [<span class="st">&quot;12/30/14&quot;</span>] <span class="co"># Dec 30, 2014</span></span></code></pre></div></li>
 </ol>
 </div>
 </div>
@@ -936,23 +1074,23 @@ parsed elsewhere.</p></li>
 <p>The most important argument is <code>path</code> (the location to save it). You can also
 specify how missing values are written with <code>na_rep</code> and if the index is included
 in the export <code>index = False</code>.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="data-import.html#cb180-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
-<span id="cb180-2"><a href="data-import.html#cb180-2"></a>                   <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
-<span id="cb180-3"><a href="data-import.html#cb180-3"></a>                   <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
-<span id="cb180-4"><a href="data-import.html#cb180-4"></a>df.to_csv(<span class="st">&quot;my_file.csv&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="data-import.html#cb179-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
+<span id="cb179-2"><a href="data-import.html#cb179-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
+<span id="cb179-3"><a href="data-import.html#cb179-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
+<span id="cb179-4"><a href="data-import.html#cb179-4" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">&quot;my_file.csv&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>Note that the type information is lost when you save to csv:</p>
 <p>This makes CSVs a little unreliable for caching interim results—you need to recreate the column specification every time you load in. We recommend the feather format:</p>
 <ol style="list-style-type: decimal">
 <li><p>The feather format implements a fast binary file format that can
 be shared across programming languages:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="data-import.html#cb181-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
-<span id="cb181-2"><a href="data-import.html#cb181-2"></a>               <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
-<span id="cb181-3"><a href="data-import.html#cb181-3"></a>               <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
-<span id="cb181-4"><a href="data-import.html#cb181-4"></a>df.to_feather(<span class="st">&quot;my_file.ftr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="data-import.html#cb180-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Raphael&#39;</span>, <span class="st">&#39;Donatello&#39;</span>],</span>
+<span id="cb180-2"><a href="data-import.html#cb180-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&#39;mask&#39;</span>: [<span class="st">&#39;red&#39;</span>, <span class="st">&#39;purple&#39;</span>],</span>
+<span id="cb180-3"><a href="data-import.html#cb180-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">&#39;weapon&#39;</span>: [<span class="st">&#39;sai&#39;</span>, <span class="st">&#39;bo staff&#39;</span>]})</span>
+<span id="cb180-4"><a href="data-import.html#cb180-4" aria-hidden="true" tabindex="-1"></a>df.to_feather(<span class="st">&quot;my_file.ftr&quot;</span>)</span></code></pre></div>
 <p>There is a feather package in R to share files quickly between the two tools.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="data-import.html#cb182-1"></a><span class="kw">library</span>(feather)</span>
-<span id="cb182-2"><a href="data-import.html#cb182-2"></a><span class="kw">write_feather</span>(challenge, <span class="st">&quot;challenge.feather&quot;</span>)</span>
-<span id="cb182-3"><a href="data-import.html#cb182-3"></a><span class="kw">read_feather</span>(<span class="st">&quot;challenge.feather&quot;</span>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="data-import.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(feather)</span>
+<span id="cb181-2"><a href="data-import.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_feather</span>(challenge, <span class="st">&quot;challenge.feather&quot;</span>)</span>
+<span id="cb181-3"><a href="data-import.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_feather</span>(<span class="st">&quot;challenge.feather&quot;</span>)</span></code></pre></div></li>
 </ol>
 </div>
 <div id="other-types-of-data" class="section level2" number="11.6">
@@ -1000,7 +1138,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "toc": {
 "collapse": "section"
 }

@@ -133,7 +133,8 @@ Quotation marks and parentheses must always come in a pair. VS Code does its bes
 
 Now look at your Python interactive environment in VS Code in the top toolbar by selecting the icon circled in red :
 
-<img src="screenshots/vscode-env.png" width="365" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=10.14in]{screenshots/vscode-env} \end{center}
 
 Here you can see all of the objects that you've created.
 

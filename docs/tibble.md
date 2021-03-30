@@ -33,12 +33,51 @@ pd.DataFrame({
   'x': [1, 2, 3, 4, 5],
   'y': 1}
 ).assign(z = lambda x: x.x**2 + x.y)
-#>    x  y   z
-#> 0  1  1   2
-#> 1  2  1   5
-#> 2  3  1  10
-#> 3  4  1  17
-#> 4  5  1  26
+```
+
+```{=html}
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>26</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 Unlike R data frames, pandas data frames can have column names that are not valid R variable names, aka __non-syntactic__ names. For example, they might not start with a letter, or they might contain unusual characters like a space. Notice the use of index as we are passing all scalar values:
@@ -51,8 +90,27 @@ tb = pd.DataFrame({
   '2000': 'number'},index=[0])
   
 tb
-#>       :)           2000
-#> 0  smile  space  number
+```
+
+```{=html}
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>:)</th>
+      <th></th>
+      <th>2000</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>smile</td>
+      <td>space</td>
+      <td>number</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 Another way to create a tibble is with `np.arrray()`.  Sometimes `np.array()` makes it possible to lay out small amounts of data in easy to read form.
@@ -63,9 +121,33 @@ pd.DataFrame(np.array(
   [["a", 2, 3.6], 
   ["b", 1, 8.5]]), columns = 
   ['x', 'y', 'z'])
-#>    x  y    z
-#> 0  a  2  3.6
-#> 1  b  1  8.5
+```
+
+```{=html}
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>2</td>
+      <td>3.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>1</td>
+      <td>8.5</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 ## Printing
@@ -103,33 +185,60 @@ df = pd.DataFrame({
 # Extract by name as pandas data frame
 df[["x"]]
 # Extract by name as array
-#>           x
-#> 0  0.301687
-#> 1  0.378155
-#> 2  0.550999
-#> 3  0.332235
-#> 4  0.826612
+```
+
+```{=html}
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.339566</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.367684</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.008885</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.380393</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.204926</td>
+    </tr>
+  </tbody>
+</table>
 df["x"]
 # Extract by position
-#> 0    0.301687
-#> 1    0.378155
-#> 2    0.550999
-#> 3    0.332235
-#> 4    0.826612
+#> 0    0.339566
+#> 1    0.367684
+#> 2    0.008885
+#> 3    0.380393
+#> 4    0.204926
 #> Name: x, dtype: float64
 df.iloc[:, 1]
-#> 0   -0.342634
-#> 1   -0.834539
-#> 2    1.434735
-#> 3   -0.496875
-#> 4    0.576148
+#> 0   -0.524201
+#> 1   -2.228838
+#> 2   -0.544383
+#> 3   -0.398942
+#> 4    0.763637
 #> Name: y, dtype: float64
 df[df.columns[1]]
-#> 0   -0.342634
-#> 1   -0.834539
-#> 2    1.434735
-#> 3   -0.496875
-#> 4    0.576148
+#> 0   -0.524201
+#> 1   -2.228838
+#> 2   -0.544383
+#> 3   -0.398942
+#> 4    0.763637
 #> Name: y, dtype: float64
 ```
 

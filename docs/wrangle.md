@@ -4,7 +4,8 @@
 
 In this part of the book, you'll learn about data wrangling, the art of getting your data into R in a useful form for visualisation and modelling. Data wrangling is very important: without it you can't work with your own data! There are three main parts to data wrangling:
 
-<img src="diagrams/data-science-wrangle.png" width="75%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.75\linewidth]{diagrams/data-science-wrangle} \end{center}
 
 This part of the book proceeds as follows:
 

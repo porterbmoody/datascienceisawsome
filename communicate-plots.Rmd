@@ -1,11 +1,11 @@
 # Graphics for communication
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, cache=FALSE}
 knitr::opts_chunk$set(python.reticulate = TRUE)
 library(reticulate)
 library(ggplot2)
 library(vegawidget)
-use_python("usr/local/bin/python3")
+knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
 ```
 
 ## Introduction
@@ -233,7 +233,7 @@ The only limit is your imagination (and your patience with positioning annotatio
 
 The third way you can make your plot better for communication is to adjust the scales. Scales control the mapping from data values to things that you can perceive. Normally, Altair automatically adds scales for you. For example, when you type:
 
-```{python default-scales, fig.show = "hide"}
+```{python default-scales, fig.show = "hide", eval=FALSE}
 (alt.Chart(mpg)
   .encode(
     alt.X('displ'), 
@@ -245,7 +245,7 @@ The third way you can make your plot better for communication is to adjust the s
 
 Altair automatically adds default scales behind the scenes:
 
-```{python, fig.show = "hide"}
+```{python, fig.show = "hide", eval=FALSE}
 (alt.Chart(mpg)
   .encode(
     alt.X('displ', scale = alt.Scale(type = 'linear')), 
