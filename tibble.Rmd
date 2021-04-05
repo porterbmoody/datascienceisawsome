@@ -1,14 +1,5 @@
 # DataFrame
 
-```{r, echo=FALSE, cache=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
-```
-
-
 ## Introduction
 
 Throughout this book we work with pandas _DataFrame__. Python is an old language, and the tools for data in Python that were useful 10 or 20 years ago now get in your way. Here we will describe the __DataFrame__ data structure, which provides opinionated data frames that make working in with data easier. In most places, I'll use the term data frame.

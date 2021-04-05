@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Introduction | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Introduction | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
-  <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta property="og:image" content="https://byuidatascience.github.io/python4ds//cover.png" />
   <meta property="og:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="1 Introduction | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds//cover.png" />
 
 <meta name="author" content="J. Hathaway" />
 <meta name="author" content="Katie Larson" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="explore-intro.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/vega-5.17.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
@@ -62,10 +62,10 @@
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132356198-3"></script>
 <script>
@@ -106,6 +106,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -165,6 +166,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="r4ds.css" type="text/css" />
 </head>
@@ -782,9 +784,9 @@ Each time you start VS Code, it opens up in the same state it was in when you la
 <p><strong>Everything in your path is clean and you are an admin on your computer</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="introduction.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
 <p><strong>Everything in your path is clean and you want to install package for the user</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="introduction.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install --user numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="introduction.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--user</span> numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
 <p><strong>You have multiple Python versions installed you want to install package for the user without a need to understand which pip maps to which Python</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="introduction.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> -m pip install --user numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="introduction.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--user</span> numpy pandas xlrd matplotlib seaborn</span></code></pre></div>
 </div>
 </div>
 <div id="the-data-science-packages" class="section level3" number="1.4.4">
@@ -933,81 +935,62 @@ easier it is to fix.</p></li>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introduction.html#cb9-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span>
 <span id="cb9-2"><a href="introduction.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ─ Session info ───────────────────────────────────────────────────────────────</span></span>
 <span id="cb9-3"><a href="introduction.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  setting  value                       </span></span>
-<span id="cb9-4"><a href="introduction.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  version  R version 3.6.3 (2020-02-29)</span></span>
-<span id="cb9-5"><a href="introduction.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  os       macOS Catalina 10.15.4      </span></span>
-<span id="cb9-6"><a href="introduction.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  system   x86_64, darwin15.6.0        </span></span>
+<span id="cb9-4"><a href="introduction.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  version  R version 4.0.4 (2021-02-15)</span></span>
+<span id="cb9-5"><a href="introduction.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  os       macOS Big Sur 10.16         </span></span>
+<span id="cb9-6"><a href="introduction.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  system   x86_64, darwin17.0          </span></span>
 <span id="cb9-7"><a href="introduction.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ui       X11                         </span></span>
 <span id="cb9-8"><a href="introduction.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  language (EN)                        </span></span>
 <span id="cb9-9"><a href="introduction.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  collate  en_US.UTF-8                 </span></span>
 <span id="cb9-10"><a href="introduction.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ctype    en_US.UTF-8                 </span></span>
 <span id="cb9-11"><a href="introduction.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tz       America/Boise               </span></span>
-<span id="cb9-12"><a href="introduction.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  date     2020-05-13                  </span></span>
+<span id="cb9-12"><a href="introduction.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  date     2021-04-05                  </span></span>
 <span id="cb9-13"><a href="introduction.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb9-14"><a href="introduction.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ─ Packages ───────────────────────────────────────────────────────────────────</span></span>
-<span id="cb9-15"><a href="introduction.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  package     * version date       lib source                            </span></span>
-<span id="cb9-16"><a href="introduction.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-17"><a href="introduction.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  backports     1.1.6   2020-04-05 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-18"><a href="introduction.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  bookdown      0.18    2020-03-05 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-19"><a href="introduction.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  broom         0.5.6   2020-04-20 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-20"><a href="introduction.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  cellranger    1.1.0   2016-07-27 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-21"><a href="introduction.html#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  cli           2.0.2   2020-02-28 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-22"><a href="introduction.html#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  codetools     0.2-16  2018-12-24 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-23"><a href="introduction.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  colorspace    1.4-1   2019-03-18 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-24"><a href="introduction.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  crayon        1.3.4   2017-09-16 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-25"><a href="introduction.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DBI           1.0.0   2018-05-02 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-26"><a href="introduction.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dbplyr        1.4.2   2019-06-17 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-27"><a href="introduction.html#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  digest        0.6.25  2020-02-23 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-28"><a href="introduction.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dplyr       * 0.8.5   2020-03-07 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-29"><a href="introduction.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ellipsis      0.3.0   2019-09-20 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-30"><a href="introduction.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  evaluate      0.14    2019-05-28 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-31"><a href="introduction.html#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  fansi         0.4.1   2020-01-08 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-32"><a href="introduction.html#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  forcats     * 0.5.0   2020-03-01 [1] CRAN (R 3.6.1)                    </span></span>
-<span id="cb9-33"><a href="introduction.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  fs            1.4.1   2020-04-04 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-34"><a href="introduction.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  generics      0.0.2   2018-11-29 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-35"><a href="introduction.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ggplot2     * 3.3.0   2020-03-05 [1] CRAN (R 3.6.1)                    </span></span>
-<span id="cb9-36"><a href="introduction.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  glue          1.4.0   2020-04-03 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-37"><a href="introduction.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  gtable        0.3.0   2019-03-25 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-38"><a href="introduction.html#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  haven         2.2.0   2019-11-08 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-39"><a href="introduction.html#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  hms           0.5.3   2020-01-08 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-40"><a href="introduction.html#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  htmltools     0.4.0   2019-10-04 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-41"><a href="introduction.html#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  httr          1.4.1   2019-08-05 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-42"><a href="introduction.html#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  jsonlite      1.6.1   2020-02-02 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-43"><a href="introduction.html#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  knitr         1.28    2020-02-06 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-44"><a href="introduction.html#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lattice       0.20-38 2018-11-04 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-45"><a href="introduction.html#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lifecycle     0.2.0   2020-03-06 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-46"><a href="introduction.html#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lubridate     1.7.4   2018-04-11 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-47"><a href="introduction.html#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  magrittr      1.5     2014-11-22 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-48"><a href="introduction.html#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  modelr        0.1.5   2019-08-08 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-49"><a href="introduction.html#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  munsell       0.5.0   2018-06-12 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-50"><a href="introduction.html#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  nlme          3.1-144 2020-02-06 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-51"><a href="introduction.html#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pillar        1.4.4   2020-05-05 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-52"><a href="introduction.html#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-53"><a href="introduction.html#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  purrr       * 0.3.4   2020-04-17 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-54"><a href="introduction.html#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  R6            2.4.1   2019-11-12 [1] CRAN (R 3.6.1)                    </span></span>
-<span id="cb9-55"><a href="introduction.html#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Rcpp          1.0.4.6 2020-04-09 [1] CRAN (R 3.6.3)                    </span></span>
-<span id="cb9-56"><a href="introduction.html#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  readr       * 1.3.1   2018-12-21 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-57"><a href="introduction.html#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  readxl        1.3.1   2019-03-13 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-58"><a href="introduction.html#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  reprex        0.3.0   2019-05-16 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-59"><a href="introduction.html#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  reticulate    1.14    2019-12-17 [1] CRAN (R 3.6.1)                    </span></span>
-<span id="cb9-60"><a href="introduction.html#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rlang         0.4.6   2020-05-02 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-61"><a href="introduction.html#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rmarkdown     2.1.3   2020-05-07 [1] Github (rstudio/rmarkdown@d7e1bda)</span></span>
-<span id="cb9-62"><a href="introduction.html#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rstudioapi    0.11    2020-02-07 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-63"><a href="introduction.html#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rvest         0.3.5   2019-11-08 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-64"><a href="introduction.html#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  scales        1.1.0   2019-11-18 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-65"><a href="introduction.html#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-66"><a href="introduction.html#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringi       1.4.6   2020-02-17 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-67"><a href="introduction.html#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringr     * 1.4.0   2019-02-10 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-68"><a href="introduction.html#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tibble      * 3.0.1   2020-04-20 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-69"><a href="introduction.html#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-70"><a href="introduction.html#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tidyselect    1.0.0   2020-01-27 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-71"><a href="introduction.html#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tidyverse   * 1.3.0   2019-11-21 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-72"><a href="introduction.html#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  vctrs         0.2.4   2020-03-10 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-73"><a href="introduction.html#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  withr         2.2.0   2020-04-20 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-74"><a href="introduction.html#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xfun          0.13    2020-04-13 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-75"><a href="introduction.html#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xml2          1.3.2   2020-04-23 [1] CRAN (R 3.6.2)                    </span></span>
-<span id="cb9-76"><a href="introduction.html#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  yaml          2.2.1   2020-02-01 [1] CRAN (R 3.6.0)                    </span></span>
-<span id="cb9-77"><a href="introduction.html#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-78"><a href="introduction.html#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] /Library/Frameworks/R.framework/Versions/3.6/Resources/library</span></span></code></pre></div>
+<span id="cb9-15"><a href="introduction.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  package     * version   date       lib source                             </span></span>
+<span id="cb9-16"><a href="introduction.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  assertthat    0.2.1     2019-03-21 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-17"><a href="introduction.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  bookdown      0.21.7    2021-03-30 [1] Github (rstudio/bookdown@f7d0622)  </span></span>
+<span id="cb9-18"><a href="introduction.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  cli           2.2.0     2020-11-20 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-19"><a href="introduction.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  colorspace    2.0-0     2020-11-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-20"><a href="introduction.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  crayon        1.3.4     2017-09-16 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-21"><a href="introduction.html#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  digest        0.6.27    2020-10-24 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-22"><a href="introduction.html#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dplyr         1.0.2     2020-08-18 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-23"><a href="introduction.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ellipsis      0.3.1     2020-05-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-24"><a href="introduction.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  evaluate      0.14      2019-05-28 [1] CRAN (R 4.0.1)                     </span></span>
+<span id="cb9-25"><a href="introduction.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  fansi         0.4.2     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-26"><a href="introduction.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  generics      0.1.0     2020-10-31 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-27"><a href="introduction.html#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ggplot2     * 3.3.3     2020-12-30 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-28"><a href="introduction.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  glue          1.4.2     2020-08-27 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-29"><a href="introduction.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  gtable        0.3.0     2019-03-25 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-30"><a href="introduction.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  highr         0.8       2019-03-20 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-31"><a href="introduction.html#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  htmltools     0.5.1.1   2021-01-22 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-32"><a href="introduction.html#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  jsonlite      1.7.2     2020-12-09 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-33"><a href="introduction.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  knitr         1.31      2021-01-27 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-34"><a href="introduction.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lattice       0.20-41   2020-04-02 [1] CRAN (R 4.0.4)                     </span></span>
+<span id="cb9-35"><a href="introduction.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lifecycle     0.2.0     2020-03-06 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-36"><a href="introduction.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  magrittr      2.0.1     2020-11-17 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-37"><a href="introduction.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Matrix        1.3-2     2021-01-06 [1] CRAN (R 4.0.4)                     </span></span>
+<span id="cb9-38"><a href="introduction.html#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  munsell       0.5.0     2018-06-12 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-39"><a href="introduction.html#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pillar        1.4.7     2020-11-20 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-40"><a href="introduction.html#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pkgconfig     2.0.3     2019-09-22 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-41"><a href="introduction.html#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  purrr         0.3.4     2020-04-17 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-42"><a href="introduction.html#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  R6            2.5.0     2020-10-28 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-43"><a href="introduction.html#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Rcpp          1.0.6     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-44"><a href="introduction.html#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  reticulate  * 1.18-9008 2021-04-05 [1] Github (rstudio/reticulate@1aff9d8)</span></span>
+<span id="cb9-45"><a href="introduction.html#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rlang         0.4.10    2020-12-30 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-46"><a href="introduction.html#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rmarkdown     2.7.4     2021-03-30 [1] Github (rstudio/rmarkdown@a11240d) </span></span>
+<span id="cb9-47"><a href="introduction.html#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rstudioapi    0.13      2020-11-12 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-48"><a href="introduction.html#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  scales        1.1.1     2020-05-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-49"><a href="introduction.html#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  sessioninfo   1.1.1     2018-11-05 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-50"><a href="introduction.html#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringi       1.5.3     2020-09-09 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-51"><a href="introduction.html#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringr       1.4.0     2019-02-10 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-52"><a href="introduction.html#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tibble        3.0.5     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-53"><a href="introduction.html#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tidyselect    1.1.0     2020-05-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-54"><a href="introduction.html#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  vctrs         0.3.6     2020-12-17 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-55"><a href="introduction.html#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  withr         2.4.1     2021-01-26 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-56"><a href="introduction.html#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xfun          0.22      2021-03-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-57"><a href="introduction.html#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  yaml          2.2.1     2020-02-01 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-58"><a href="introduction.html#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-59"><a href="introduction.html#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</span></span></code></pre></div>
 
 </div>
 </div>
@@ -1053,7 +1036,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "toc": {
 "collapse": "section"
 }

@@ -9,9 +9,11 @@ Before we go any further, let's make sure you've got a solid foundation in runni
 Let's review some basics we've so far omitted in the interests of getting you plotting as quickly as possible. You can use Python as a calculator:
 
 
-```pyton
+```python
 1 / 200 * 30
+#> 0.15
 (59 + 73 + 2) / 3
+#> 44.666666666666664
 ```
 
 You can create new objects with `=`:
@@ -147,12 +149,12 @@ Here you can see all of the objects that you've created.
     my_variable <- 10
     #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'my_variable' is not defined
     #> 
-    #> Detailed traceback: 
+    #> Detailed traceback:
     #>   File "<string>", line 1, in <module>
     my_varıable
     #> Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name 'my_varıable' is not defined
     #> 
-    #> Detailed traceback: 
+    #> Detailed traceback:
     #>   File "<string>", line 1, in <module>
     ```
     

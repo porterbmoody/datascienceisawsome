@@ -1,14 +1,5 @@
 # Strings
 
-```{r, echo=FALSE, cache=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
-```
-
-
 ## Introduction
 
 This chapter introduces you to string manipulation in Python. You'll learn the basics of how strings work and how to create them by hand, but the focus of this chapter will be on regular expressions, or regexps for short. Regular expressions are useful because strings usually contain unstructured or semi-structured data, and regexps are a concise language for describing patterns in strings. When you first look at a regexp, you'll think a cat walked across your keyboard, but as your understanding improves they will soon start to make sense.

@@ -9,7 +9,8 @@ Visualization is an important tool for insight generation, but it is rare that y
 
 In this chapter we're going to focus on how to use the pandas package, the foundational package for data science in Python. We'll illustrate the key ideas using data from the nycflights13 R package, and use Altair to help us understand the data. We will also need two additional Python packages to help us with mathematical and statistical functions: [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/scipylib/index.html). Notice the `from ____ import ____` follows the [SciPy guidance](https://docs.scipy.org/doc/scipy/reference/api.html) to import functions from submodule spaces. Now we will call functions using the SciPy package with the `stats.<FUNCTION>` structure.
 
-```{python setup, cache=FALSE, message = FALSE, eval=TRUE}
+
+```python
 import pandas as pd
 import altair as alt
 import numpy as np
@@ -19,23 +20,56 @@ flights_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data
 
 flights = pd.read_csv(flights_url)
 flights['time_hour'] = pd.to_datetime(flights.time_hour, format = "%Y-%m-%d %H:%M:%S")
-
 ```
 
 ### nycflights13
 
-To explore the basic data manipulation verbs of pandas, we'll use `flights`. This data frame contains all `r format(nrow(nycflights13::flights), big.mark = ",")` flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is [documented here](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
+To explore the basic data manipulation verbs of pandas, we'll use `flights`. This data frame contains all 336,776 flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is [documented here](https://github.com/byuidatascience/data4python4ds/blob/master/data.md).
 
-```{python, echo=FALSE}
-flights
+
+```
+#>         year  month  day  ...  hour  minute                 time_hour
+#> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+#> 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+#> 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+#> 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+#> 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
 ```
 
 You might notice that this data frame does not print in its entirety as other data frames you might have seen in the past: it only shows the first few and last few rows with only the columns that fit on one screen. (To see the whole dataset, you can open the variable view in your interactive Python window and double click on the flights object which will open the dataset in the VS Code data viewer). 
 
 Using `flights.dtypes` will show you the variables types for each column.  These describe the type of each variable:
 
-```{python, echo=FALSE}
-flights.dtypes
+
+```
+#> year                            int64
+#> month                           int64
+#> day                             int64
+#> dep_time                      float64
+#> sched_dep_time                  int64
+#> dep_delay                     float64
+#> arr_time                      float64
+#> sched_arr_time                  int64
+#> arr_delay                     float64
+#> carrier                        object
+#> flight                          int64
+#> tailnum                        object
+#> origin                         object
+#> dest                           object
+#> air_time                      float64
+#> distance                        int64
+#> hour                            int64
+#> minute                          int64
+#> time_hour         datetime64[ns, UTC]
+#> dtype: object
 ```
 
 * `int64` stands for integers.
@@ -55,8 +89,35 @@ There are three other common types of variables that aren't used in this dataset
 
 Using `flights.info()` also provides a print out of data types on other useful information about your pandas data frame.
 
-```{python}
+
+```python
 flights.info()
+#> <class 'pandas.core.frame.DataFrame'>
+#> RangeIndex: 336776 entries, 0 to 336775
+#> Data columns (total 19 columns):
+#>  #   Column          Non-Null Count   Dtype              
+#> ---  ------          --------------   -----              
+#>  0   year            336776 non-null  int64              
+#>  1   month           336776 non-null  int64              
+#>  2   day             336776 non-null  int64              
+#>  3   dep_time        328521 non-null  float64            
+#>  4   sched_dep_time  336776 non-null  int64              
+#>  5   dep_delay       328521 non-null  float64            
+#>  6   arr_time        328063 non-null  float64            
+#>  7   sched_arr_time  336776 non-null  int64              
+#>  8   arr_delay       327346 non-null  float64            
+#>  9   carrier         336776 non-null  object             
+#>  10  flight          336776 non-null  int64              
+#>  11  tailnum         334264 non-null  object             
+#>  12  origin          336776 non-null  object             
+#>  13  dest            336776 non-null  object             
+#>  14  air_time        327346 non-null  float64            
+#>  15  distance        336776 non-null  int64              
+#>  16  hour            336776 non-null  int64              
+#>  17  minute          336776 non-null  int64              
+#>  18  time_hour       336776 non-null  datetime64[ns, UTC]
+#> dtypes: datetime64[ns, UTC](1), float64(5), int64(9), object(4)
+#> memory usage: 48.8+ MB
 ```
 
 
@@ -78,17 +139,42 @@ In this chapter you are going to learn five key pandas functions or object metho
 The pandas package can handle all of the same functionality of dplyr in R.  You can read [pandas mapping guide](https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html) and [this towards data science article](https://towardsdatascience.com/tidying-up-pandas-4572bfa38776) to get more details on the following brief table. 
 
 
-```{r, echo=FALSE}
-library(tidyverse)
-dat <- tibble(`R dplyr function` = c('`filter()`', '`arrange()`', '`select()`',
-                                     '`rename ()`', '`mutate()`', '`group_by ()`',
-                                     '`summarise()`'), 
-              `Python pandas function` = c('`query()`', '`sort_values()`',
-                                          '`filter()` or `loc[]`', '`rename()`', 
-                                          '`assign()` (see note)', '`groupby()`', 
-                                          '`agg()`'))
-knitr::kable(dat, caption = "Comparable functions in R-Dplyr and Python-Pandas")
+
 ```
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+#> v tibble  3.0.5     v dplyr   1.0.2
+#> v tidyr   1.1.2     v stringr 1.4.0
+#> v readr   1.3.1     v forcats 0.5.0
+#> v purrr   0.3.4
+#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
+```
+
+\begin{table}
+
+\caption{(\#tab:unnamed-chunk-4)Comparable functions in R-Dplyr and Python-Pandas}
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+R dplyr function & Python pandas function\\
+\hline
+`filter()` & `query()`\\
+\hline
+`arrange()` & `sort\_values()`\\
+\hline
+`select()` & `filter()` or `loc[]`\\
+\hline
+`rename ()` & `rename()`\\
+\hline
+`mutate()` & `assign()` (see note)\\
+\hline
+`group\_by ()` & `groupby()`\\
+\hline
+`summarise()` & `agg()`\\
+\hline
+\end{tabular}
+\end{table}
 
 
 **Note:** The `dpylr::mutate()` function works similar to `assign()` in pandas on data frames.  But you cannot use `assign()` on grouped data frame in pandas like you would use `dplyr::mutate()` on a grouped object. In that case you would use `transform()` and even then the functionality is not quite the same.
@@ -109,8 +195,23 @@ Together these properties make it easy to chain together multiple simple steps t
 
 `.query()` allows you to subset observations based on their values. The first argument specifies the rows to be selected. This argument can be label names or a boolean series. The second argument specifies the columns to be selected. The bolean filter on the rows is our focus. For example, we can select all flights on January 1st with:
 
-```{python}
+
+```python
 flights.query('month == 1 & day == 1')
+#>      year  month  day  ...  hour  minute                 time_hour
+#> 0    2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1    2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2    2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3    2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4    2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ..    ...    ...  ...  ...   ...     ...                       ...
+#> 837  2013      1    1  ...    23      59 2013-01-02 04:00:00+00:00
+#> 838  2013      1    1  ...    16      30 2013-01-01 21:00:00+00:00
+#> 839  2013      1    1  ...    19      35 2013-01-02 00:00:00+00:00
+#> 840  2013      1    1  ...    15       0 2013-01-01 20:00:00+00:00
+#> 841  2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> 
+#> [842 rows x 19 columns]
 ```
 
 The previous expression is equivalent to `flights[(flights.month == 1) & (flights.day == 1)]`
@@ -118,7 +219,8 @@ The previous expression is equivalent to `flights[(flights.month == 1) & (flight
 
 When you run that line of code, pandas executes the filtering operation and returns a new data frame. pandas functions usually don't modify their inputs, so if you want to save the result, you'll need to use the assignment operator, `=`:
 
-```{python}
+
+```pandas
 jan1 = flights.query('month == 1 & day == 1')
 ```
 
@@ -130,35 +232,70 @@ To use filtering effectively, you have to know how to select the observations th
 
 When you're starting out with Python, the easiest mistake to make is to use `=` instead of `==` when testing for equality. When this happens you'll get an error:
 
-```{python, error = TRUE}
+
+```python
 flights.query('month = 1')
+#> Error in py_call_impl(callable, dots$args, dots$keywords): ValueError: cannot assign without a target object
+#> 
+#> Detailed traceback:
+#>   File "<string>", line 1, in <module>
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/frame.py", line 3341, in query
+#>     res = self.eval(expr, **kwargs)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/frame.py", line 3471, in eval
+#>     return _eval(expr, inplace=inplace, **kwargs)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/eval.py", line 341, in eval
+#>     parsed_expr = Expr(expr, engine=engine, parser=parser, env=env)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/expr.py", line 787, in __init__
+#>     self.terms = self.parse()
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/expr.py", line 806, in parse
+#>     return self._visitor.visit(self.expr)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/expr.py", line 398, in visit
+#>     return visitor(node, **kwargs)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/expr.py", line 404, in visit_Module
+#>     return self.visit(expr, **kwargs)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/expr.py", line 398, in visit
+#>     return visitor(node, **kwargs)
+#>   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/computation/expr.py", line 607, in visit_Assign
+#>     raise ValueError("cannot assign without a target object")
 ```
 
 There's another common problem you might encounter when using `==`: floating point numbers. The following result might surprise you!
 
-```{python}
+
+```python
 np.sqrt(2) ** 2 ==  2
+#> False
 1 / 49 * 49 == 1
+#> False
 ```
 
 Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `np.isclose()`:
 
-```{python}
+
+```python
 np.isclose(np.sqrt(2) ** 2,  2)
+#> True
 np.isclose(1 / 49 * 49, 1)
+#> True
 ```
 
 ### Logical operators
 
 Multiple arguments to `query()` are combined with "and": every expression must be true in order for a row to be included in the output. For other types of combinations, you'll need to use Boolean operators yourself: `&` is "and", `|` is "or", and `!` is "not". Figure \@ref(fig:bool-ops) shows the complete set of Boolean operations.
 
-```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
-knitr::include_graphics("diagrams/transform-logical.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{diagrams/transform-logical} 
+
+}
+
+\caption{Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects.}(\#fig:bool-ops)
+\end{figure}
 
 The following code finds all flights that departed in November or December:
 
-```{python, eval = FALSE}
+
+```python
 flights.query('month == 11 | month == 12')
 ```
 
@@ -166,13 +303,15 @@ The order of operations doesn't work like English. You can't write `flights.quer
 
 A useful short-hand for this problem is `x in y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above:
 
-```{python, eval = FALSE}
+
+```python
 nov_dec = flights.query('month in [11, 12]')
 ```
 
 Sometimes you can simplify complicated subsetting by remembering De Morgan's law: `!(x & y)` is the same as `!x | !y`, and `!(x | y)` is the same as `!x & !y`. For example, if you wanted to find flights that weren't delayed (on arrival or departure) by more than two hours, you could use either of the following two filters:
 
-```{python, eval = FALSE}
+
+```python
 flights.query('arr_delay > 120 | dep_delay > 120')
 flights.query('arr_delay <= 120 | dep_delay <= 120')
 ```
@@ -185,22 +324,30 @@ Whenever you start using complicated, multipart expressions in `.query()`, consi
 
 One important feature of pandas in Python that can make comparison tricky are missing values, or `NA`s ("not availables"). `NA` represents an unknown value so missing values are "contagious": almost any operation involving an unknown value will also be unknown.
 
-```{python}
+
+```python
 np.nan + 10
+#> nan
 np.nan / 2
+#> nan
 ```
 
 The most confusing result are the comparisons. They always return a `False`. The logic for this result [is explained on stackoverflow](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). The [pandas missing data guide](https://pandas.pydata.org/pandas-docs/dev/user_guide/missing_data.html) is a helpful read.
 
-```{python}
+
+```python
 np.nan > 5
+#> False
 10 == np.nan
+#> False
 np.nan == np.nan
+#> False
 ```
 
 It's easiest to understand why this is true with a bit more context:
 
-```{python}
+
+```python
 # Let x be Mary's age. We don't know how old she is.
 x = np.nan
 
@@ -210,28 +357,41 @@ y = np.nan
 # Are John and Mary the same age?
 x == y
 # Illogical comparisons are False.
+#> False
 ```
 
 The Python development team did decide to provide functionality to find `np.nan` objects in your code by allowing `np.nan != np.nan` to return `True`.  Once again you can [read the rationale for this decision](https://stackoverflow.com/questions/1565164/what-is-the-rationale-for-all-comparisons-returning-false-for-ieee754-nan-values). Python now has `.isnan()` functions to make this comparison more straight forward in your code. 
 
 Pandas uses the `nan` structure in Python to identify __NA__ or 'missing' values. If you want to determine if a value is missing, use `pd.isna()`:
 
-```{python}
+
+```python
 pd.isna(x)
+#> True
 ```
 
 `.query()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and __NA__ values. 
 
-```{python}
+
+```python
 df = pd.DataFrame({'x': [1, np.nan, 3]})
 df.query('x > 1')
+#>      x
+#> 2  3.0
 ```
 
 If you want to preserve missing values, ask for them explicitly using the trick mentioned in the previous paragraph or by using `pd.isna()` with the symbolic reference `@` in your condition:
 
-```{python}
+
+```python
 df.query('x != x | x > 1')
+#>      x
+#> 1  NaN
+#> 2  3.0
 df.query('@pd.isna(x) | x > 1')
+#>      x
+#> 1  NaN
+#> 2  3.0
 ```
 
 ### Exercises
@@ -253,22 +413,61 @@ df.query('@pd.isna(x) | x > 1')
 
 `.sort_values()` works similarly to `.query()` except that instead of selecting rows, it changes their order. It takes a data frame and a column name or a list of column names to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 
-```{python}
+
+```python
 flights.sort_values(by = ['year', 'month', 'day'])
+#>         year  month  day  ...  hour  minute                 time_hour
+#> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 111291  2013     12   31  ...     7       5 2013-12-31 12:00:00+00:00
+#> 111292  2013     12   31  ...     8      25 2013-12-31 13:00:00+00:00
+#> 111293  2013     12   31  ...    16      15 2013-12-31 21:00:00+00:00
+#> 111294  2013     12   31  ...     6       0 2013-12-31 11:00:00+00:00
+#> 111295  2013     12   31  ...     8      30 2013-12-31 13:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
 ```
 
 Use the argument `ascending = False` to re-order by a column in descending order:
 
-```{python}
+
+```python
 flights.sort_values(by = ['year', 'month', 'day'], ascending = False)
+#>         year  month  day  ...  hour  minute                 time_hour
+#> 110520  2013     12   31  ...    23      59 2014-01-01 04:00:00+00:00
+#> 110521  2013     12   31  ...    23      59 2014-01-01 04:00:00+00:00
+#> 110522  2013     12   31  ...    22      45 2014-01-01 03:00:00+00:00
+#> 110523  2013     12   31  ...     5       0 2013-12-31 10:00:00+00:00
+#> 110524  2013     12   31  ...     5      15 2013-12-31 10:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 837     2013      1    1  ...    23      59 2013-01-02 04:00:00+00:00
+#> 838     2013      1    1  ...    16      30 2013-01-01 21:00:00+00:00
+#> 839     2013      1    1  ...    19      35 2013-01-02 00:00:00+00:00
+#> 840     2013      1    1  ...    15       0 2013-01-01 20:00:00+00:00
+#> 841     2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
 ```
 
 Missing values are always sorted at the end:
 
-```{python}
+
+```python
 df = pd.DataFrame({'x': [5, 2, np.nan]})
 df.sort_values('x')
+#>      x
+#> 1  2.0
+#> 0  5.0
+#> 2  NaN
 df.sort_values('x', ascending = False)
+#>      x
+#> 0  5.0
+#> 1  2.0
+#> 2  NaN
 ```
 
 ### Exercises
@@ -295,21 +494,79 @@ Additionaly, `.loc[]` is often used to select columns by many user of pandas. Yo
 `.filter()` is not terribly useful with the flights data because we only have 19 variables, but you can still get the general idea:
 
 
-```{python}
+
+```python
 # Select columns by name
 flights.filter(['year', 'month', 'day'])
 # Select all columns except year and day (inclusive)
+#>         year  month  day
+#> 0       2013      1    1
+#> 1       2013      1    1
+#> 2       2013      1    1
+#> 3       2013      1    1
+#> 4       2013      1    1
+#> ...      ...    ...  ...
+#> 336771  2013      9   30
+#> 336772  2013      9   30
+#> 336773  2013      9   30
+#> 336774  2013      9   30
+#> 336775  2013      9   30
+#> 
+#> [336776 rows x 3 columns]
 flights.drop(columns = ['year', 'day'])
+#>         month  dep_time  sched_dep_time  ...  hour  minute                 time_hour
+#> 0           1     517.0             515  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1           1     533.0             529  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2           1     542.0             540  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3           1     544.0             545  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4           1     554.0             600  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...       ...       ...             ...  ...   ...     ...                       ...
+#> 336771      9       NaN            1455  ...    14      55 2013-09-30 18:00:00+00:00
+#> 336772      9       NaN            2200  ...    22       0 2013-10-01 02:00:00+00:00
+#> 336773      9       NaN            1210  ...    12      10 2013-09-30 16:00:00+00:00
+#> 336774      9       NaN            1159  ...    11      59 2013-09-30 15:00:00+00:00
+#> 336775      9       NaN             840  ...     8      40 2013-09-30 12:00:00+00:00
+#> 
+#> [336776 rows x 17 columns]
 ```
 
 `loc[]` functions in a similar fashion.
 
-```{python}
+
+```python
 # Select columns by name
 flights.loc[:, ['year', 'month', 'day']]
 # Select all columns between year and day (inclusive)
+#>         year  month  day
+#> 0       2013      1    1
+#> 1       2013      1    1
+#> 2       2013      1    1
+#> 3       2013      1    1
+#> 4       2013      1    1
+#> ...      ...    ...  ...
+#> 336771  2013      9   30
+#> 336772  2013      9   30
+#> 336773  2013      9   30
+#> 336774  2013      9   30
+#> 336775  2013      9   30
+#> 
+#> [336776 rows x 3 columns]
 flights.loc[:, 'year':'day']
 # Select all columns except year and day (inclusive)
+#>         year  month  day
+#> 0       2013      1    1
+#> 1       2013      1    1
+#> 2       2013      1    1
+#> 3       2013      1    1
+#> 4       2013      1    1
+#> ...      ...    ...  ...
+#> 336771  2013      9   30
+#> 336772  2013      9   30
+#> 336773  2013      9   30
+#> 336774  2013      9   30
+#> 336775  2013      9   30
+#> 
+#> [336776 rows x 3 columns]
 ```
 
 There are a number of helper regular expressions you can use within `filter()`:
@@ -328,8 +585,23 @@ See [pandas filter documentation](https://pandas.pydata.org/pandas-docs/stable/r
 
 Use `rename()` to rename a column or multiple columns.
 
-```{python}
+
+```python
 flights.rename(columns = {'year': 'YEAR', 'month':'MONTH'})
+#>         YEAR  MONTH  day  ...  hour  minute                 time_hour
+#> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+#> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+#> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+#> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+#> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+#> ...      ...    ...  ...  ...   ...     ...                       ...
+#> 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+#> 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+#> 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+#> 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+#> 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
+#> 
+#> [336776 rows x 19 columns]
 ```
 
 
@@ -344,7 +616,8 @@ flights.rename(columns = {'year': 'YEAR', 'month':'MONTH'})
 1.  Does the result of running the following code surprise you?  How do the
     select helpers deal with case by default? How can you change that default?
 
-    ```{r, eval = FALSE}
+    
+    ```r
     flights.filter(regex = "TIME")
     ```
 
@@ -354,7 +627,8 @@ Besides selecting sets of existing columns, it's often useful to add new columns
 
 `.assign()` always adds new columns at the end of your dataset so we'll start by creating a narrower dataset so we can see the new variables. 
 
-```{python, cache=FALSE}
+
+```python
 
 flights_sml = (flights
     .filter(regex = "^year$|^month$|^day$|delay$|^distance$|^air_time$"))
@@ -365,12 +639,18 @@ flights_sml = (flights
     speed = lambda x: x.distance / x.air_time * 60
     )
   .head())
-
+#>    year  month  day  dep_delay  arr_delay  air_time  distance  gain       speed
+#> 0  2013      1    1        2.0       11.0     227.0      1400  -9.0  370.044053
+#> 1  2013      1    1        4.0       20.0     227.0      1416 -16.0  374.273128
+#> 2  2013      1    1        2.0       33.0     160.0      1089 -31.0  408.375000
+#> 3  2013      1    1       -1.0      -18.0     183.0      1576  17.0  516.721311
+#> 4  2013      1    1       -6.0      -25.0     116.0       762  19.0  394.137931
 ```
 
 Note that you can refer to columns that you've just created:
 
-```{python}
+
+```python
 (flights_sml
   .assign(
     gain = lambda x: x.dep_delay - x.arr_delay,
@@ -378,6 +658,14 @@ Note that you can refer to columns that you've just created:
     gain_per_hour = lambda x: x.gain / x.hours
     )
   .head())
+#>    year  month  day  dep_delay  ...  distance  gain     hours  gain_per_hour
+#> 0  2013      1    1        2.0  ...      1400  -9.0  3.783333      -2.378855
+#> 1  2013      1    1        4.0  ...      1416 -16.0  3.783333      -4.229075
+#> 2  2013      1    1        2.0  ...      1089 -31.0  2.666667     -11.625000
+#> 3  2013      1    1       -1.0  ...      1576  17.0  3.050000       5.573770
+#> 4  2013      1    1       -6.0  ...       762  19.0  1.933333       9.827586
+#> 
+#> [5 rows x 10 columns]
 ```
 
 ### Useful creation functions {#mutate-funs}
@@ -400,13 +688,28 @@ There are many functions for creating new variables that you can use with `.assi
     it allows you to break integers up into pieces. For example, in the
     flights dataset, you can compute `hour` and `minute` from `dep_time` with:
 
-    ```{python}
+    
+    ```python
     (flights
         .filter(['dep_time'])
         .assign(
           hour = lambda x: x.dep_time // 100,
           minute = lambda x: x.dep_time % 100
           ))
+    #>         dep_time  hour  minute
+    #> 0          517.0   5.0    17.0
+    #> 1          533.0   5.0    33.0
+    #> 2          542.0   5.0    42.0
+    #> 3          544.0   5.0    44.0
+    #> 4          554.0   5.0    54.0
+    #> ...          ...   ...     ...
+    #> 336771       NaN   NaN     NaN
+    #> 336772       NaN   NaN     NaN
+    #> 336773       NaN   NaN     NaN
+    #> 336774       NaN   NaN     NaN
+    #> 336775       NaN   NaN     NaN
+    #> 
+    #> [336776 rows x 3 columns]
     ```
 
 *   Logs: `np.log()`, `np.log2()`, `np.log10()`. Logarithms are an incredibly useful
@@ -423,10 +726,31 @@ There are many functions for creating new variables that you can use with `.assi
     or find when values change (`x != x.shift(1)`). They are most useful in
     conjunction with `groupby()`, which you'll learn about shortly.
 
-    ```{python}
+    
+    ```python
     x = pd.Series(np.arange(1,10))
     x.shift(1)
+    #> 0    NaN
+    #> 1    1.0
+    #> 2    2.0
+    #> 3    3.0
+    #> 4    4.0
+    #> 5    5.0
+    #> 6    6.0
+    #> 7    7.0
+    #> 8    8.0
+    #> dtype: float64
     x.shift(-1)
+    #> 0    2.0
+    #> 1    3.0
+    #> 2    4.0
+    #> 3    5.0
+    #> 4    6.0
+    #> 5    7.0
+    #> 6    8.0
+    #> 7    9.0
+    #> 8    NaN
+    #> dtype: float64
     ```
 
 *   Cumulative and rolling aggregates: pandas provides functions for running sums,
@@ -434,10 +758,41 @@ There are many functions for creating new variables that you can use with `.assi
     If you need rolling aggregates (i.e. a sum computed over a rolling window), 
     try the `rolling()` in the pandas package.
 
-    ```{python}
+    
+    ```python
     x
+    #> 0    1
+    #> 1    2
+    #> 2    3
+    #> 3    4
+    #> 4    5
+    #> 5    6
+    #> 6    7
+    #> 7    8
+    #> 8    9
+    #> dtype: int64
     x.cumsum()
+    #> 0     1
+    #> 1     3
+    #> 2     6
+    #> 3    10
+    #> 4    15
+    #> 5    21
+    #> 6    28
+    #> 7    36
+    #> 8    45
+    #> dtype: int64
     x.rolling(2).mean()
+    #> 0    NaN
+    #> 1    1.5
+    #> 2    2.5
+    #> 3    3.5
+    #> 4    4.5
+    #> 5    5.5
+    #> 6    6.5
+    #> 7    7.5
+    #> 8    8.5
+    #> dtype: float64
     ```
 
 *   Logical comparisons, `<`, `<=`, `>`, `>=`, `!=`, and `==`, which you learned about
@@ -450,20 +805,57 @@ There are many functions for creating new variables that you can use with `.assi
     (e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small
     ranks; use `desc(x)` to give the largest values the smallest ranks.
 
-    ```{python}
+    
+    ```python
     y = pd.Series([1, 2, 2, np.nan, 3, 4])
     y.rank(method = 'min')
+    #> 0    1.0
+    #> 1    2.0
+    #> 2    2.0
+    #> 3    NaN
+    #> 4    4.0
+    #> 5    5.0
+    #> dtype: float64
     y.rank(ascending=False, method = 'min')
+    #> 0    5.0
+    #> 1    3.0
+    #> 2    3.0
+    #> 3    NaN
+    #> 4    2.0
+    #> 5    1.0
+    #> dtype: float64
     ```
 
     If `method = 'min'` doesn't do what you need, look at the variants
     `method = 'first'`, `method = 'dense'`, `method = 'percent'`, `pct = True`.
     See the rank [help page](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rank.html) for more details.
 
-    ```{python}
+    
+    ```python
     y.rank(method = 'first')
+    #> 0    1.0
+    #> 1    2.0
+    #> 2    3.0
+    #> 3    NaN
+    #> 4    4.0
+    #> 5    5.0
+    #> dtype: float64
     y.rank(method = 'dense')
+    #> 0    1.0
+    #> 1    2.0
+    #> 2    2.0
+    #> 3    NaN
+    #> 4    3.0
+    #> 5    4.0
+    #> dtype: float64
     y.rank(pct = True)
+    #> 0    0.2
+    #> 1    0.5
+    #> 2    0.5
+    #> 3    NaN
+    #> 4    0.8
+    #> 5    1.0
+    #> dtype: float64
     ```
 
 ### Exercises
@@ -489,17 +881,35 @@ There are many functions for creating new variables that you can use with `.assi
 
 The last key verb is `.agg()`. It collapses a data frame to a single row:
 
-```{python}
+
+```python
 flights.agg({'dep_delay': np.mean})
+#> dep_delay    12.63907
+#> dtype: float64
 ```
 
 (Pandas aggregate functions ignores the `np.nan` values like `na.rm = TRUE` in R.)
 
 `.agg()` is not terribly useful unless we pair it with `.groupby()`. This changes the unit of analysis from the complete dataset to individual groups. Then, when you use the pandas functions on a grouped data frame they'll be automatically applied "by group". For example, if we applied similiar code to a data frame grouped by date, we get the average delay per date. Note that with the `.groupby()` function we used tuple to identify the column (first entry) and the function to apply on the column (second entry). This is called [named aggregation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#named-aggregation) in pandas:
 
-```{python}
+
+```python
 by_day = flights.groupby(['year', 'month', 'day'])
 by_day.agg(delay = ('dep_delay', np.mean)).reset_index()
+#>      year  month  day      delay
+#> 0    2013      1    1  11.548926
+#> 1    2013      1    2  13.858824
+#> 2    2013      1    3  10.987832
+#> 3    2013      1    4   8.951595
+#> 4    2013      1    5   5.732218
+#> ..    ...    ...  ...        ...
+#> 360  2013     12   27  10.937630
+#> 361  2013     12   28   7.981550
+#> 362  2013     12   29  22.309551
+#> 363  2013     12   30  10.698113
+#> 364  2013     12   31   6.996053
+#> 
+#> [365 rows x 4 columns]
 ```
 
 Note the use of `.reset_index()` to remove pandas creation of a [MultiIndex](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical). You can read more about the use of `.groupby()` in pandas with their [Group By: split-apply-combine user Guid documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
@@ -510,7 +920,8 @@ Together `.groupby()` and `.agg()` provide one of the tools that you'll use most
 
 Imagine that we want to explore the relationship between the distance and average delay for each location. Using what you know about pandas, you might write code like this:
 
-```{python, fig.width = 6}
+
+```python
 by_dest = flights.groupby('dest')
 
 delay = by_dest.agg(
@@ -534,9 +945,8 @@ chart = chart_base.mark_point() + chart_base.transform_loess('dist', 'delay').ma
 chart.save("screenshots/transform_1.png")
 ```
 
-```{R, echo=FALSE, fig.align="left"}
-knitr::include_graphics("screenshots/transform_1.png")
-```
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/transform_1} \end{flushleft}
 
 
 There are three steps to prepare this data:
@@ -552,7 +962,8 @@ This code is a little frustrating to write because we have to give each intermed
 
 There's another way to tackle the same problem without the additional objects:
 
-```{python}
+
+```python
 delays = (flights
     .groupby('dest')
     .agg(
@@ -583,7 +994,8 @@ Pandas' and NumPy's handling of missing values defaults to the opposite function
 
 In our case, where missing values represent cancelled flights, we could also tackle the problem by first removing the cancelled flights. We'll save this dataset so we can reuse it in the next few examples.
 
-```{python, cache=FALSE}
+
+```python
 not_cancelled = flights.dropna(subset = ['dep_delay', 'arr_delay']) 
 ```
 
@@ -591,7 +1003,8 @@ not_cancelled = flights.dropna(subset = ['dep_delay', 'arr_delay'])
 
 Whenever you do any aggregation, it's always a good idea to include either a count (`size()`), or a count of non-missing values (`sum(!is.na(x))`). That way you can check that you're not drawing conclusions based on very small amounts of data. For example, let's look at the planes (identified by their tail number) that have the highest average delays:
 
-```{python, cache=FALSE}
+
+```python
 delays = not_cancelled.groupby('tailnum').agg(
     delay = ("arr_delay", np.mean)
 )
@@ -611,15 +1024,15 @@ chart = (alt.Chart(delays)
 chart.save("screenshots/transform_2.png")
 ```
 
-```{R, echo=FALSE, fig.align="left"}
-knitr::include_graphics("screenshots/transform_2.png")
-```
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/transform_2} \end{flushleft}
 
 Wow, there are some planes that have an _average_ delay of 5 hours (300 minutes)!
 
 The story is actually a little more nuanced. We can get more insight if we draw a scatterplot of number of flights vs. average delay:
 
-```{python, cache = FALSE}
+
+```python
 delays = (not_cancelled
   .groupby('tailnum')
   .agg(
@@ -638,15 +1051,15 @@ chart = (alt.Chart(delays)
 chart.save("screenshots/transform_3.png")
 ```
 
-```{R, echo=FALSE, fig.align="left"}
-knitr::include_graphics("screenshots/transform_3.png")
-```
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/transform_3} \end{flushleft}
 
 Not surprisingly, there is much greater variation in the average delay when there are few flights. The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you'll see that the variation decreases as the sample size increases.
 
 When looking at this sort of plot, it's often useful to filter out the groups with the smallest numbers of observations, so you can see more of the pattern and less of the extreme variation in the smallest groups. This is what the following code does, as well as showing you a handy pattern for simple data frame manipulations only needed for a chart. 
 
-```{python}
+
+```python
 chart = (alt.Chart(delays.query("n > 25"))
     .encode(
       x = 'n',
@@ -659,9 +1072,8 @@ chart = (alt.Chart(delays.query("n > 25"))
 chart.save("screenshots/altair_delays.png")
 ```
 
-```{R, echo=FALSE, fig.align="left"}
-knitr::include_graphics("screenshots/altair_delays.png")
-```
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_delays} \end{flushleft}
 
 There's another common variation of this type of pattern. Let's look at how the average performance of batters in baseball is related to the number of times they're at bat. Here I use data from the __Lahman__ package to compute the batting average (number of hits / number of attempts) of every major league baseball player.
 
@@ -674,10 +1086,11 @@ When I plot the skill of the batter (measured by the batting average, `ba`) agai
     hit the ball (`ab`). This is because teams control who gets to play,
     and obviously they'll pick their best players.
 
-```{python}
+
+```python
 # settings for Altair to handle large data
 alt.data_transformers.enable('json')
-
+#> DataTransformerRegistry.enable('json')
 batting_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/batting/batting.csv"
 batting = pd.read_csv(batting_url)
 
@@ -699,14 +1112,26 @@ chart = (alt.Chart(batters.query('ab > 100'))
 chart.save("screenshots/altair_batters.png")
 ```
 
-```{R, echo=FALSE, fig.align="left"}
-knitr::include_graphics("screenshots/altair_batters.png")
-```
+
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_batters} \end{flushleft}
 
 This also has important implications for ranking. If you naively sort on `desc(ba)`, the people with the best batting averages are clearly lucky, not skilled:
 
-```{python}
+
+```python
 batters.sort_values('ba', ascending = False).head(10)
+#>            ab  h   ba
+#> playerID             
+#> egeco01     1  1  1.0
+#> simspe01    1  1  1.0
+#> paciojo01   3  3  1.0
+#> bruneju01   1  1  1.0
+#> liddeda01   1  1  1.0
+#> garcimi02   1  1  1.0
+#> meehabi01   1  1  1.0
+#> rodried01   1  1  1.0
+#> hopkimi01   2  2  1.0
+#> gallaja01   1  1  1.0
 ```
 
 You can find a good explanation of this problem at <http://varianceexplained.org/r/empirical_bayes_baseball/> and <http://www.evanmiller.org/how-not-to-sort-by-average-rating.html>.
@@ -723,13 +1148,29 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     We haven't talked about this sort of subsetting yet, but you'll learn more
     about it in [subsetting].
 
-    ```{python}
+    
+    ```python
     (not_cancelled
     .groupby(['year', 'month', 'day'])
     .agg(
       avg_delay1 = ('arr_delay', np.mean),
       avg_delay2 = ('arr_delay', lambda x: np.mean(x[x > 0]))
       ))
+    #>                 avg_delay1  avg_delay2
+    #> year month day                        
+    #> 2013 1     1     12.651023   32.481562
+    #>            2     12.692888   32.029907
+    #>            3      5.733333   27.660870
+    #>            4     -1.932819   28.309764
+    #>            5     -1.525802   22.558824
+    #> ...                    ...         ...
+    #>      12    27    -0.148803   29.046832
+    #>            28    -3.259533   25.607692
+    #>            29    18.763825   47.256356
+    #>            30    10.057712   31.243802
+    #>            31     6.212121   24.455959
+    #> 
+    #> [365 rows x 2 columns]
     ```
 
 *   Measures of spread: `np.sd()`, `stats.iqr()`, `stats.median_absolute_deviation()`. 
@@ -738,12 +1179,28 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     `stats.median_absolute_deviation()` are robust equivalents that may be more useful if
     you have outliers.
 
-    ```{python}
+    
+    ```python
     # Why is distance to some destinations more variable than to others?
     (not_cancelled
     .groupby(['dest'])
     .agg(distance_sd = ('distance', np.std))
     .sort_values('distance_sd', ascending = False))
+    #>       distance_sd
+    #> dest             
+    #> EGE     10.542765
+    #> SAN     10.350094
+    #> SFO     10.216017
+    #> HNL     10.004197
+    #> SEA      9.977993
+    #> ...           ...
+    #> BZN      0.000000
+    #> BUR      0.000000
+    #> PSE      0.000000
+    #> ABQ      0.000000
+    #> LEX           NaN
+    #> 
+    #> [104 rows x 1 columns]
     ```
 
 *   Measures of rank: `np.min()`, `np.quantile()`, `np.max()`. Quantiles
@@ -751,7 +1208,8 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     will find a value of `x` that is greater than 25% of the values,
     and less than the remaining 75%.
 
-    ```{python}
+    
+    ```python
     # When do the first and last flights leave each day?
     (not_cancelled
       .groupby(['year', 'month', 'day'])
@@ -759,6 +1217,21 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
         first = ('dep_time', np.min),
         last = ('dep_time', np.max)
         ))
+    #>                 first    last
+    #> year month day               
+    #> 2013 1     1    517.0  2356.0
+    #>            2     42.0  2354.0
+    #>            3     32.0  2349.0
+    #>            4     25.0  2358.0
+    #>            5     14.0  2357.0
+    #> ...               ...     ...
+    #>      12    27     2.0  2351.0
+    #>            28     7.0  2358.0
+    #>            29     3.0  2400.0
+    #>            30     1.0  2356.0
+    #>            31    13.0  2356.0
+    #> 
+    #> [365 rows x 2 columns]
     ```
 
 *   Measures of position: `first()`, `nth()`, `last()`. These work
@@ -767,7 +1240,8 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     element from a group that only has two elements). For example, we can
     find the first and last departure for each day:
 
-    ```{python}
+    
+    ```python
     # using first and last
     (not_cancelled
       .groupby(['year', 'month','day'])
@@ -775,9 +1249,25 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
         first_dep = ('dep_time', 'first'),
         last_dep  = ('dep_time', 'last')
         ))
+    #>                 first_dep  last_dep
+    #> year month day                     
+    #> 2013 1     1        517.0    2356.0
+    #>            2         42.0    2354.0
+    #>            3         32.0    2349.0
+    #>            4         25.0    2358.0
+    #>            5         14.0    2357.0
+    #> ...                   ...       ...
+    #>      12    27         2.0    2351.0
+    #>            28         7.0    2358.0
+    #>            29         3.0    2400.0
+    #>            30         1.0    2356.0
+    #>            31        13.0    2356.0
+    #> 
+    #> [365 rows x 2 columns]
     ```
 
-    ```{python}
+    
+    ```python
     # using position
     (not_cancelled
       .groupby(['year', 'month','day'])
@@ -785,6 +1275,21 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
         first_dep = ('dep_time', lambda x: list(x)[0]),
         last_dep = ('dep_time', lambda x: list(x)[-1])
         ))
+    #>                 first_dep  last_dep
+    #> year month day                     
+    #> 2013 1     1        517.0    2356.0
+    #>            2         42.0    2354.0
+    #>            3         32.0    2349.0
+    #>            4         25.0    2358.0
+    #>            5         14.0    2357.0
+    #> ...                   ...       ...
+    #>      12    27         2.0    2351.0
+    #>            28         7.0    2358.0
+    #>            29         3.0    2400.0
+    #>            30         1.0    2356.0
+    #>            31        13.0    2356.0
+    #> 
+    #> [365 rows x 2 columns]
     ```
   
     <!-- These functions are complementary to filtering on ranks. Filtering gives -->
@@ -813,7 +1318,8 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     `isnull().sum()`. To count the number of unique (distinct) values, use
     `nunique()`.
 
-    ```{python}
+    
+    ```python
     # Which destinations have the most carriers?
     (flights
       .groupby('dest')
@@ -822,13 +1328,41 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
         carriers_count = ('carrier', 'size'),
         missing_time = ('dep_time', lambda x: x.isnull().sum())
         ))
+    #>       carriers_unique  carriers_count  missing_time
+    #> dest                                               
+    #> ABQ                 1             254           0.0
+    #> ACK                 1             265           0.0
+    #> ALB                 1             439          20.0
+    #> ANC                 1               8           0.0
+    #> ATL                 7           17215         317.0
+    #> ...               ...             ...           ...
+    #> TPA                 7            7466          59.0
+    #> TUL                 1             315          16.0
+    #> TVC                 2             101           5.0
+    #> TYS                 2             631          52.0
+    #> XNA                 2            1036          25.0
+    #> 
+    #> [105 rows x 3 columns]
     ```
 
     Counts are useful and pandas provides a simple helper if all you want is
     a count:
 
-    ```{python}
+    
+    ```python
     not_cancelled['dest'].value_counts()
+    #> ATL    16837
+    #> ORD    16566
+    #> LAX    16026
+    #> BOS    15022
+    #> MCO    13967
+    #>        ...  
+    #> MTJ       14
+    #> HDN       14
+    #> SBN       10
+    #> ANC        8
+    #> LEX        1
+    #> Name: dest, Length: 104, dtype: int64
     ```
 
 *   Counts and proportions of logical values: `sum(x > 10)`, `mean(y == 0)`.
@@ -836,17 +1370,48 @@ Just using means, counts, and sum can get you a long way, but NumPy, SciPy, and 
     This makes `sum()` and `mean()` very useful: `sum(x)` gives the number of
     `TRUE`s in `x`, and `mean(x)` gives the proportion.
 
-    ```{python}
+    
+    ```python
     # How many flights left before 5am? (these usually indicate delayed
     # flights from the previous day)
     (not_cancelled
       .groupby(['year', 'month','day'])
       .agg(n_early = ('dep_time', lambda x: np.sum(x < 500))))
-
+    
     # What proportion of flights are delayed by more than an hour?
+    #>                 n_early
+    #> year month day         
+    #> 2013 1     1        0.0
+    #>            2        3.0
+    #>            3        4.0
+    #>            4        3.0
+    #>            5        3.0
+    #> ...                 ...
+    #>      12    27       7.0
+    #>            28       2.0
+    #>            29       3.0
+    #>            30       6.0
+    #>            31       4.0
+    #> 
+    #> [365 rows x 1 columns]
     (not_cancelled
       .groupby(['year', 'month','day'])
       .agg(hour_prop = ('arr_delay', lambda x: np.sum(x > 60))))
+    #>                 hour_prop
+    #> year month day           
+    #> 2013 1     1         60.0
+    #>            2         79.0
+    #>            3         51.0
+    #>            4         36.0
+    #>            5         25.0
+    #> ...                   ...
+    #>      12    27        51.0
+    #>            28        31.0
+    #>            29       129.0
+    #>            30        69.0
+    #>            31        33.0
+    #> 
+    #> [365 rows x 1 columns]
     ```
 
 ### Grouping by multiple variables
@@ -857,13 +1422,27 @@ Be careful when progressively rolling up summaries: it's OK for sums and counts,
 
 If you need to remove grouping and MultiIndex use `reset.index()`. This is a rough equivalent to `ungroup()` in R but it is not the same thing. Notice the column names are no longer in multiple levels.
 
-```{python}
+
+```python
 dat = (not_cancelled
         .groupby(['year', 'month','day'])
         .agg(hour_prop = ('arr_delay', lambda x: np.sum(x > 60))))
 
 dat.head()
+#>                 hour_prop
+#> year month day           
+#> 2013 1     1         60.0
+#>            2         79.0
+#>            3         51.0
+#>            4         36.0
+#>            5         25.0
 dat.reset_index().head()
+#>    year  month  day  hour_prop
+#> 0  2013      1    1       60.0
+#> 1  2013      1    2       79.0
+#> 2  2013      1    3       51.0
+#> 3  2013      1    4       36.0
+#> 4  2013      1    5       25.0
 ```
 
 ### Exercises
@@ -899,32 +1478,82 @@ Grouping is most useful in conjunction with `.agg()`, but you can also do conven
 
 *   Find the worst members of each group:
 
-    ```{python}
+    
+    ```python
     flights_sml['ranks'] = (flights_sml
                             .groupby(['year', 'month','day']).arr_delay
                             .rank(ascending = False))
                             
+    #> <string>:1: SettingWithCopyWarning: 
+    #> A value is trying to be set on a copy of a slice from a DataFrame.
+    #> Try using .loc[row_indexer,col_indexer] = value instead
+    #> 
+    #> See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
     flights_sml.query('ranks < 10').drop(columns = 'ranks')
+    #>         year  month  day  dep_delay  arr_delay  air_time  distance
+    #> 151     2013      1    1      853.0      851.0      41.0       184
+    #> 649     2013      1    1      290.0      338.0     213.0      1134
+    #> 673     2013      1    1      260.0      263.0      46.0       266
+    #> 729     2013      1    1      157.0      174.0      60.0       213
+    #> 746     2013      1    1      216.0      222.0     121.0       708
+    #> ...      ...    ...  ...        ...        ...       ...       ...
+    #> 336579  2013      9   30      158.0      121.0      95.0       765
+    #> 336668  2013      9   30      182.0      174.0      95.0       708
+    #> 336724  2013      9   30      158.0      136.0      91.0       746
+    #> 336757  2013      9   30      194.0      194.0      50.0       301
+    #> 336763  2013      9   30      154.0      130.0     123.0       944
+    #> 
+    #> [3306 rows x 7 columns]
     ```
 
 *   Find all groups bigger than a threshold:
 
-    ```{python, cache=FALSE}
+    
+    ```python
     popular_dests = flights
     popular_dests['n'] = popular_dests.groupby('dest').arr_delay.transform('size')
     popular_dests = flights.query('n > 365').drop(columns = 'n')
     popular_dests
+    #>         year  month  day  ...  hour  minute                 time_hour
+    #> 0       2013      1    1  ...     5      15 2013-01-01 10:00:00+00:00
+    #> 1       2013      1    1  ...     5      29 2013-01-01 10:00:00+00:00
+    #> 2       2013      1    1  ...     5      40 2013-01-01 10:00:00+00:00
+    #> 3       2013      1    1  ...     5      45 2013-01-01 10:00:00+00:00
+    #> 4       2013      1    1  ...     6       0 2013-01-01 11:00:00+00:00
+    #> ...      ...    ...  ...  ...   ...     ...                       ...
+    #> 336771  2013      9   30  ...    14      55 2013-09-30 18:00:00+00:00
+    #> 336772  2013      9   30  ...    22       0 2013-10-01 02:00:00+00:00
+    #> 336773  2013      9   30  ...    12      10 2013-09-30 16:00:00+00:00
+    #> 336774  2013      9   30  ...    11      59 2013-09-30 15:00:00+00:00
+    #> 336775  2013      9   30  ...     8      40 2013-09-30 12:00:00+00:00
+    #> 
+    #> [332577 rows x 19 columns]
     ```
 
 *   Standardise to compute per group metrics:
 
-    ```{python}
+    
+    ```python
     (popular_dests
       .query('arr_delay > 0')
       .assign(
         prop_delay = lambda x: x.arr_delay / x.groupby('dest').arr_delay.transform('sum')
         )
       .filter(['year', 'month', 'day', 'dest', 'arr_delay', 'prop_delay']))
+    #>         year  month  day dest  arr_delay  prop_delay
+    #> 0       2013      1    1  IAH       11.0    0.000111
+    #> 1       2013      1    1  IAH       20.0    0.000201
+    #> 2       2013      1    1  MIA       33.0    0.000235
+    #> 5       2013      1    1  ORD       12.0    0.000042
+    #> 6       2013      1    1  FLL       19.0    0.000094
+    #> ...      ...    ...  ...  ...        ...         ...
+    #> 336759  2013      9   30  BNA        7.0    0.000057
+    #> 336760  2013      9   30  STL       57.0    0.000717
+    #> 336762  2013      9   30  SFO       42.0    0.000204
+    #> 336763  2013      9   30  MCO      130.0    0.000631
+    #> 336768  2013      9   30  BOS        1.0    0.000005
+    #> 
+    #> [131106 rows x 6 columns]
     ```
 
 ### Exercises

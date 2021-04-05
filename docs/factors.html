@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>15 Factors | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
 
   <meta property="og:title" content="15 Factors | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
-  <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta property="og:image" content="https://byuidatascience.github.io/python4ds//cover.png" />
   <meta property="og:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="15 Factors | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds//cover.png" />
 
 <meta name="author" content="J. Hathaway" />
 <meta name="author" content="Katie Larson" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="strings.html"/>
 <link rel="next" href="dates-and-times.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/vega-5.17.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
@@ -62,10 +62,10 @@
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132356198-3"></script>
 <script>
@@ -106,6 +106,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -165,6 +166,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="r4ds.css" type="text/css" />
 </head>
@@ -632,126 +634,126 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="prerequisites-9" class="section level3" number="15.1.1">
 <h3><span class="header-section-number">15.1.1</span> Prerequisites</h3>
 <p>To work with categorical variables, we’ll use the <strong>category</strong> data type in pandas. It supports tools for dealing with categorical variables using a wide range of helper methods.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb273-1"><a href="factors.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb273-2"><a href="factors.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb273-3"><a href="factors.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb273-4"><a href="factors.html#cb273-4" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.enable(<span class="st">&#39;json&#39;</span>)</span>
-<span id="cb273-5"><a href="factors.html#cb273-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DataTransformerRegistry.enable(&#39;json&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb275-1"><a href="factors.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb275-2"><a href="factors.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb275-3"><a href="factors.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb275-4"><a href="factors.html#cb275-4" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.enable(<span class="st">&#39;json&#39;</span>)</span>
+<span id="cb275-5"><a href="factors.html#cb275-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; DataTransformerRegistry.enable(&#39;json&#39;)</span></span></code></pre></div>
 </div>
 </div>
 <div id="creating-categories" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Creating categories</h2>
 <p>Imagine that you have a variable that records month:</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb274-1"><a href="factors.html#cb274-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> pd.Series([<span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Mar&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb276-1"><a href="factors.html#cb276-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> pd.Series([<span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Mar&quot;</span>])</span></code></pre></div>
 <p>Using a string to record this variable has two problems:</p>
 <ol style="list-style-type: decimal">
 <li><p>There are only twelve possible months, and there’s nothing saving you
 from typos:</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb275-1"><a href="factors.html#cb275-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> pd.Series([<span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Jam&quot;</span>, <span class="st">&quot;Mar&quot;</span>])</span></code></pre></div></li>
+<div class="sourceCode" id="cb277"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb277-1"><a href="factors.html#cb277-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> pd.Series([<span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Jam&quot;</span>, <span class="st">&quot;Mar&quot;</span>])</span></code></pre></div></li>
 <li><p>It doesn’t sort in a useful way:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb276-1"><a href="factors.html#cb276-1" aria-hidden="true" tabindex="-1"></a>x1.sort_values()</span>
-<span id="cb276-2"><a href="factors.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Apr</span></span>
-<span id="cb276-3"><a href="factors.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    Dec</span></span>
-<span id="cb276-4"><a href="factors.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    Jan</span></span>
-<span id="cb276-5"><a href="factors.html#cb276-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    Mar</span></span>
-<span id="cb276-6"><a href="factors.html#cb276-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb278"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb278-1"><a href="factors.html#cb278-1" aria-hidden="true" tabindex="-1"></a>x1.sort_values()</span>
+<span id="cb278-2"><a href="factors.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Apr</span></span>
+<span id="cb278-3"><a href="factors.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    Dec</span></span>
+<span id="cb278-4"><a href="factors.html#cb278-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    Jan</span></span>
+<span id="cb278-5"><a href="factors.html#cb278-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    Mar</span></span>
+<span id="cb278-6"><a href="factors.html#cb278-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div></li>
 </ol>
 <p>You can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid <strong>levels</strong>:</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb277-1"><a href="factors.html#cb277-1" aria-hidden="true" tabindex="-1"></a>month_levels <span class="op">=</span> pd.Series([</span>
-<span id="cb277-2"><a href="factors.html#cb277-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, </span>
-<span id="cb277-3"><a href="factors.html#cb277-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Jul&quot;</span>, <span class="st">&quot;Aug&quot;</span>, <span class="st">&quot;Sep&quot;</span>, <span class="st">&quot;Oct&quot;</span>, <span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span></span>
-<span id="cb277-4"><a href="factors.html#cb277-4" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb279-1"><a href="factors.html#cb279-1" aria-hidden="true" tabindex="-1"></a>month_levels <span class="op">=</span> pd.Series([</span>
+<span id="cb279-2"><a href="factors.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, </span>
+<span id="cb279-3"><a href="factors.html#cb279-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Jul&quot;</span>, <span class="st">&quot;Aug&quot;</span>, <span class="st">&quot;Sep&quot;</span>, <span class="st">&quot;Oct&quot;</span>, <span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span></span>
+<span id="cb279-4"><a href="factors.html#cb279-4" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div>
 <p>Now you can create a factor:</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb278-1"><a href="factors.html#cb278-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> pd.Categorical(x1, categories<span class="op">=</span>month_levels)</span>
-<span id="cb278-2"><a href="factors.html#cb278-2" aria-hidden="true" tabindex="-1"></a>y1</span>
-<span id="cb278-3"><a href="factors.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;]</span></span>
-<span id="cb278-4"><a href="factors.html#cb278-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (12, object): [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, ..., &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]</span></span>
-<span id="cb278-5"><a href="factors.html#cb278-5" aria-hidden="true" tabindex="-1"></a>y1.sort_values()</span>
-<span id="cb278-6"><a href="factors.html#cb278-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Jan&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;Dec&#39;]</span></span>
-<span id="cb278-7"><a href="factors.html#cb278-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (12, object): [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, ..., &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]</span></span></code></pre></div>
-<p>And any values not in the set will be silently converted to <code>nan</code>:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb279-1"><a href="factors.html#cb279-1" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> pd.Categorical(x2, categories<span class="op">=</span>month_levels)</span>
-<span id="cb279-2"><a href="factors.html#cb279-2" aria-hidden="true" tabindex="-1"></a>y2</span>
-<span id="cb279-3"><a href="factors.html#cb279-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Dec&#39;, &#39;Apr&#39;, NaN, &#39;Mar&#39;]</span></span>
-<span id="cb279-4"><a href="factors.html#cb279-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (12, object): [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, ..., &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]</span></span></code></pre></div>
-<p>Sometimes you’d prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to <code>pd.unique(x)</code>:</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb280-1"><a href="factors.html#cb280-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> pd.Categorical(x1, categories<span class="op">=</span>pd.unique(x1))</span>
-<span id="cb280-2"><a href="factors.html#cb280-2" aria-hidden="true" tabindex="-1"></a>f1</span>
+<div class="sourceCode" id="cb280"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb280-1"><a href="factors.html#cb280-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> pd.Categorical(x1, categories<span class="op">=</span>month_levels)</span>
+<span id="cb280-2"><a href="factors.html#cb280-2" aria-hidden="true" tabindex="-1"></a>y1</span>
 <span id="cb280-3"><a href="factors.html#cb280-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;]</span></span>
-<span id="cb280-4"><a href="factors.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (4, object): [&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;]</span></span></code></pre></div>
+<span id="cb280-4"><a href="factors.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (12, object): [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, ..., &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]</span></span>
+<span id="cb280-5"><a href="factors.html#cb280-5" aria-hidden="true" tabindex="-1"></a>y1.sort_values()</span>
+<span id="cb280-6"><a href="factors.html#cb280-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Jan&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;Dec&#39;]</span></span>
+<span id="cb280-7"><a href="factors.html#cb280-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (12, object): [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, ..., &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]</span></span></code></pre></div>
+<p>And any values not in the set will be silently converted to <code>nan</code>:</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb281-1"><a href="factors.html#cb281-1" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> pd.Categorical(x2, categories<span class="op">=</span>month_levels)</span>
+<span id="cb281-2"><a href="factors.html#cb281-2" aria-hidden="true" tabindex="-1"></a>y2</span>
+<span id="cb281-3"><a href="factors.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Dec&#39;, &#39;Apr&#39;, NaN, &#39;Mar&#39;]</span></span>
+<span id="cb281-4"><a href="factors.html#cb281-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (12, object): [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, ..., &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]</span></span></code></pre></div>
+<p>Sometimes you’d prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to <code>pd.unique(x)</code>:</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb282-1"><a href="factors.html#cb282-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> pd.Categorical(x1, categories<span class="op">=</span>pd.unique(x1))</span>
+<span id="cb282-2"><a href="factors.html#cb282-2" aria-hidden="true" tabindex="-1"></a>f1</span>
+<span id="cb282-3"><a href="factors.html#cb282-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;]</span></span>
+<span id="cb282-4"><a href="factors.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Categories (4, object): [&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;]</span></span></code></pre></div>
 <p>If you ever need to access the set of valid levels directly, you can do so with <code>levels()</code>:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb281-1"><a href="factors.html#cb281-1" aria-hidden="true" tabindex="-1"></a>pd.Series(f1).cat.categories</span>
-<span id="cb281-2"><a href="factors.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Index([&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;], dtype=&#39;object&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb283-1"><a href="factors.html#cb283-1" aria-hidden="true" tabindex="-1"></a>pd.Series(f1).cat.categories</span>
+<span id="cb283-2"><a href="factors.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Index([&#39;Dec&#39;, &#39;Apr&#39;, &#39;Jan&#39;, &#39;Mar&#39;], dtype=&#39;object&#39;)</span></span></code></pre></div>
 </div>
 <div id="general-social-survey" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> General Social Survey</h2>
 <p>For the rest of this chapter, we’re going to focus on <code>gss_cat</code> data found in the <code>forcats</code> R package. It’s a sample of data from the <a href="http://gss.norc.org">General Social Survey</a>, which is a long-running US survey conducted by the independent research organization NORC at the University of Chicago. The survey has thousands of questions, so in <code>gss_cat</code> I’ve selected a handful that will illustrate some common challenges you’ll encounter when working with factors.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb282-1"><a href="factors.html#cb282-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/gss_cat/gss_cat.csv&quot;</span>)</span>
-<span id="cb282-2"><a href="factors.html#cb282-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-3"><a href="factors.html#cb282-3" aria-hidden="true" tabindex="-1"></a>marital_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Never married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Widowed&quot;</span>, <span class="st">&quot;Married&quot;</span>]</span>
-<span id="cb282-4"><a href="factors.html#cb282-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-5"><a href="factors.html#cb282-5" aria-hidden="true" tabindex="-1"></a>race_levels <span class="op">=</span> [<span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Black&quot;</span>, <span class="st">&quot;White&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
-<span id="cb282-6"><a href="factors.html#cb282-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-7"><a href="factors.html#cb282-7" aria-hidden="true" tabindex="-1"></a>income_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refused&quot;</span>, <span class="st">&quot;$25000 or more&quot;</span>, <span class="st">&quot;$20000 - 24999&quot;</span>, </span>
-<span id="cb282-8"><a href="factors.html#cb282-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;$15000 - 19999&quot;</span>, <span class="st">&quot;$10000 - 14999&quot;</span>, <span class="st">&quot;$8000 to 9999&quot;</span>, <span class="st">&quot;$7000 to 7999&quot;</span>, <span class="st">&quot;$6000 to 6999&quot;</span>, </span>
-<span id="cb282-9"><a href="factors.html#cb282-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;$5000 to 5999&quot;</span>, <span class="st">&quot;$4000 to 4999&quot;</span>, <span class="st">&quot;$3000 to 3999&quot;</span>, <span class="st">&quot;$1000 to 2999&quot;</span>, <span class="st">&quot;Lt $1000&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
-<span id="cb282-10"><a href="factors.html#cb282-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-11"><a href="factors.html#cb282-11" aria-hidden="true" tabindex="-1"></a>party_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>, <span class="st">&quot;Strong republican&quot;</span>, <span class="st">&quot;Not str republican&quot;</span>, </span>
-<span id="cb282-12"><a href="factors.html#cb282-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>, <span class="st">&quot;Not str democrat&quot;</span>, <span class="st">&quot;Strong democrat&quot;</span>]</span>
-<span id="cb282-13"><a href="factors.html#cb282-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-14"><a href="factors.html#cb282-14" aria-hidden="true" tabindex="-1"></a>religion_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Inter-nondenominational&quot;</span>, <span class="st">&quot;Native american&quot;</span>, <span class="st">&quot;Christian&quot;</span>, </span>
-<span id="cb282-15"><a href="factors.html#cb282-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Orthodox-christian&quot;</span>, <span class="st">&quot;Moslem/islam&quot;</span>, <span class="st">&quot;Other eastern&quot;</span>, <span class="st">&quot;Hinduism&quot;</span>, <span class="st">&quot;Buddhism&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;None&quot;</span>, <span class="st">&quot;Jewish&quot;</span>, </span>
-<span id="cb282-16"><a href="factors.html#cb282-16" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Catholic&quot;</span>, <span class="st">&quot;Protestant&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
-<span id="cb282-17"><a href="factors.html#cb282-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-18"><a href="factors.html#cb282-18" aria-hidden="true" tabindex="-1"></a>denom_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;No denomination&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Episcopal&quot;</span>, <span class="st">&quot;Presbyterian-dk wh&quot;</span>, </span>
-<span id="cb282-19"><a href="factors.html#cb282-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Presbyterian, merged&quot;</span>, <span class="st">&quot;Other presbyterian&quot;</span>, <span class="st">&quot;United pres ch in us&quot;</span>, <span class="st">&quot;Presbyterian c in us&quot;</span>, </span>
-<span id="cb282-20"><a href="factors.html#cb282-20" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Lutheran-dk which&quot;</span>, <span class="st">&quot;Evangelical luth&quot;</span>, <span class="st">&quot;Other lutheran&quot;</span>, <span class="st">&quot;Wi evan luth synod&quot;</span>, <span class="st">&quot;Lutheran-mo synod&quot;</span>, </span>
-<span id="cb282-21"><a href="factors.html#cb282-21" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Luth ch in america&quot;</span>, <span class="st">&quot;Am lutheran&quot;</span>, <span class="st">&quot;Methodist-dk which&quot;</span>, <span class="st">&quot;Other methodist&quot;</span>, <span class="st">&quot;United methodist&quot;</span>, </span>
-<span id="cb282-22"><a href="factors.html#cb282-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Afr meth ep zion&quot;</span>, <span class="st">&quot;Afr meth episcopal&quot;</span>, <span class="st">&quot;Baptist-dk which&quot;</span>, <span class="st">&quot;Other baptists&quot;</span>, <span class="st">&quot;Southern baptist&quot;</span>, </span>
-<span id="cb282-23"><a href="factors.html#cb282-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Nat bapt conv usa&quot;</span>, <span class="st">&quot;Nat bapt conv of am&quot;</span>, <span class="st">&quot;Am bapt ch in usa&quot;</span>, <span class="st">&quot;Am baptist asso&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
-<span id="cb282-24"><a href="factors.html#cb282-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-25"><a href="factors.html#cb282-25" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="op">=</span> gss_cat.assign(</span>
-<span id="cb282-26"><a href="factors.html#cb282-26" aria-hidden="true" tabindex="-1"></a>    marital <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.marital, categories<span class="op">=</span>marital_levels),</span>
-<span id="cb282-27"><a href="factors.html#cb282-27" aria-hidden="true" tabindex="-1"></a>    race <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.race, categories<span class="op">=</span>race_levels),</span>
-<span id="cb282-28"><a href="factors.html#cb282-28" aria-hidden="true" tabindex="-1"></a>    rincome <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.rincome, categories<span class="op">=</span>income_levels),</span>
-<span id="cb282-29"><a href="factors.html#cb282-29" aria-hidden="true" tabindex="-1"></a>    partyid <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.partyid, categories<span class="op">=</span>party_levels),</span>
-<span id="cb282-30"><a href="factors.html#cb282-30" aria-hidden="true" tabindex="-1"></a>    relig <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.relig, categories<span class="op">=</span>religion_levels),</span>
-<span id="cb282-31"><a href="factors.html#cb282-31" aria-hidden="true" tabindex="-1"></a>    denom <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.denom, categories<span class="op">=</span>denom_levels),</span>
-<span id="cb282-32"><a href="factors.html#cb282-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-33"><a href="factors.html#cb282-33" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb284-1"><a href="factors.html#cb284-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/gss_cat/gss_cat.csv&quot;</span>)</span>
+<span id="cb284-2"><a href="factors.html#cb284-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-3"><a href="factors.html#cb284-3" aria-hidden="true" tabindex="-1"></a>marital_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Never married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Widowed&quot;</span>, <span class="st">&quot;Married&quot;</span>]</span>
+<span id="cb284-4"><a href="factors.html#cb284-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-5"><a href="factors.html#cb284-5" aria-hidden="true" tabindex="-1"></a>race_levels <span class="op">=</span> [<span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Black&quot;</span>, <span class="st">&quot;White&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
+<span id="cb284-6"><a href="factors.html#cb284-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-7"><a href="factors.html#cb284-7" aria-hidden="true" tabindex="-1"></a>income_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refused&quot;</span>, <span class="st">&quot;$25000 or more&quot;</span>, <span class="st">&quot;$20000 - 24999&quot;</span>, </span>
+<span id="cb284-8"><a href="factors.html#cb284-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;$15000 - 19999&quot;</span>, <span class="st">&quot;$10000 - 14999&quot;</span>, <span class="st">&quot;$8000 to 9999&quot;</span>, <span class="st">&quot;$7000 to 7999&quot;</span>, <span class="st">&quot;$6000 to 6999&quot;</span>, </span>
+<span id="cb284-9"><a href="factors.html#cb284-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;$5000 to 5999&quot;</span>, <span class="st">&quot;$4000 to 4999&quot;</span>, <span class="st">&quot;$3000 to 3999&quot;</span>, <span class="st">&quot;$1000 to 2999&quot;</span>, <span class="st">&quot;Lt $1000&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
+<span id="cb284-10"><a href="factors.html#cb284-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-11"><a href="factors.html#cb284-11" aria-hidden="true" tabindex="-1"></a>party_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>, <span class="st">&quot;Strong republican&quot;</span>, <span class="st">&quot;Not str republican&quot;</span>, </span>
+<span id="cb284-12"><a href="factors.html#cb284-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>, <span class="st">&quot;Not str democrat&quot;</span>, <span class="st">&quot;Strong democrat&quot;</span>]</span>
+<span id="cb284-13"><a href="factors.html#cb284-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-14"><a href="factors.html#cb284-14" aria-hidden="true" tabindex="-1"></a>religion_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Inter-nondenominational&quot;</span>, <span class="st">&quot;Native american&quot;</span>, <span class="st">&quot;Christian&quot;</span>, </span>
+<span id="cb284-15"><a href="factors.html#cb284-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Orthodox-christian&quot;</span>, <span class="st">&quot;Moslem/islam&quot;</span>, <span class="st">&quot;Other eastern&quot;</span>, <span class="st">&quot;Hinduism&quot;</span>, <span class="st">&quot;Buddhism&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;None&quot;</span>, <span class="st">&quot;Jewish&quot;</span>, </span>
+<span id="cb284-16"><a href="factors.html#cb284-16" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Catholic&quot;</span>, <span class="st">&quot;Protestant&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
+<span id="cb284-17"><a href="factors.html#cb284-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-18"><a href="factors.html#cb284-18" aria-hidden="true" tabindex="-1"></a>denom_levels <span class="op">=</span> [<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;No denomination&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Episcopal&quot;</span>, <span class="st">&quot;Presbyterian-dk wh&quot;</span>, </span>
+<span id="cb284-19"><a href="factors.html#cb284-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Presbyterian, merged&quot;</span>, <span class="st">&quot;Other presbyterian&quot;</span>, <span class="st">&quot;United pres ch in us&quot;</span>, <span class="st">&quot;Presbyterian c in us&quot;</span>, </span>
+<span id="cb284-20"><a href="factors.html#cb284-20" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Lutheran-dk which&quot;</span>, <span class="st">&quot;Evangelical luth&quot;</span>, <span class="st">&quot;Other lutheran&quot;</span>, <span class="st">&quot;Wi evan luth synod&quot;</span>, <span class="st">&quot;Lutheran-mo synod&quot;</span>, </span>
+<span id="cb284-21"><a href="factors.html#cb284-21" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Luth ch in america&quot;</span>, <span class="st">&quot;Am lutheran&quot;</span>, <span class="st">&quot;Methodist-dk which&quot;</span>, <span class="st">&quot;Other methodist&quot;</span>, <span class="st">&quot;United methodist&quot;</span>, </span>
+<span id="cb284-22"><a href="factors.html#cb284-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Afr meth ep zion&quot;</span>, <span class="st">&quot;Afr meth episcopal&quot;</span>, <span class="st">&quot;Baptist-dk which&quot;</span>, <span class="st">&quot;Other baptists&quot;</span>, <span class="st">&quot;Southern baptist&quot;</span>, </span>
+<span id="cb284-23"><a href="factors.html#cb284-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Nat bapt conv usa&quot;</span>, <span class="st">&quot;Nat bapt conv of am&quot;</span>, <span class="st">&quot;Am bapt ch in usa&quot;</span>, <span class="st">&quot;Am baptist asso&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>]</span>
+<span id="cb284-24"><a href="factors.html#cb284-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-25"><a href="factors.html#cb284-25" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="op">=</span> gss_cat.assign(</span>
+<span id="cb284-26"><a href="factors.html#cb284-26" aria-hidden="true" tabindex="-1"></a>    marital <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.marital, categories<span class="op">=</span>marital_levels),</span>
+<span id="cb284-27"><a href="factors.html#cb284-27" aria-hidden="true" tabindex="-1"></a>    race <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.race, categories<span class="op">=</span>race_levels),</span>
+<span id="cb284-28"><a href="factors.html#cb284-28" aria-hidden="true" tabindex="-1"></a>    rincome <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.rincome, categories<span class="op">=</span>income_levels),</span>
+<span id="cb284-29"><a href="factors.html#cb284-29" aria-hidden="true" tabindex="-1"></a>    partyid <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.partyid, categories<span class="op">=</span>party_levels),</span>
+<span id="cb284-30"><a href="factors.html#cb284-30" aria-hidden="true" tabindex="-1"></a>    relig <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.relig, categories<span class="op">=</span>religion_levels),</span>
+<span id="cb284-31"><a href="factors.html#cb284-31" aria-hidden="true" tabindex="-1"></a>    denom <span class="op">=</span> <span class="kw">lambda</span> x: pd.Categorical(x.denom, categories<span class="op">=</span>denom_levels),</span>
+<span id="cb284-32"><a href="factors.html#cb284-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-33"><a href="factors.html#cb284-33" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>(You can get more information about the variables using the <a href="https://github.com/byuidatascience/data4python4ds/blob/master/data.md#a-sample-of-categorical-variables-from-the-general-social-survey">data description sheet in data4python4ds</a>.)</p>
 <p>When factors are stored in a tibble, you can’t see their levels so easily. One way to see them is with <code>value_counts()</code> or you can get a high level summary with <code>describe()</code>:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb283-1"><a href="factors.html#cb283-1" aria-hidden="true" tabindex="-1"></a>gss_cat.race.value_counts()</span>
-<span id="cb283-2"><a href="factors.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; White             16395</span></span>
-<span id="cb283-3"><a href="factors.html#cb283-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Black              3129</span></span>
-<span id="cb283-4"><a href="factors.html#cb283-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Other              1959</span></span>
-<span id="cb283-5"><a href="factors.html#cb283-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Not applicable        0</span></span>
-<span id="cb283-6"><a href="factors.html#cb283-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: race, dtype: int64</span></span>
-<span id="cb283-7"><a href="factors.html#cb283-7" aria-hidden="true" tabindex="-1"></a>gss_cat.race.describe()</span>
-<span id="cb283-8"><a href="factors.html#cb283-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; count     21483</span></span>
-<span id="cb283-9"><a href="factors.html#cb283-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique        3</span></span>
-<span id="cb283-10"><a href="factors.html#cb283-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; top       White</span></span>
-<span id="cb283-11"><a href="factors.html#cb283-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; freq      16395</span></span>
-<span id="cb283-12"><a href="factors.html#cb283-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: race, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb285-1"><a href="factors.html#cb285-1" aria-hidden="true" tabindex="-1"></a>gss_cat.race.value_counts()</span>
+<span id="cb285-2"><a href="factors.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; White             16395</span></span>
+<span id="cb285-3"><a href="factors.html#cb285-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Black              3129</span></span>
+<span id="cb285-4"><a href="factors.html#cb285-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Other              1959</span></span>
+<span id="cb285-5"><a href="factors.html#cb285-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Not applicable        0</span></span>
+<span id="cb285-6"><a href="factors.html#cb285-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: race, dtype: int64</span></span>
+<span id="cb285-7"><a href="factors.html#cb285-7" aria-hidden="true" tabindex="-1"></a>gss_cat.race.describe()</span>
+<span id="cb285-8"><a href="factors.html#cb285-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; count     21483</span></span>
+<span id="cb285-9"><a href="factors.html#cb285-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique        3</span></span>
+<span id="cb285-10"><a href="factors.html#cb285-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; top       White</span></span>
+<span id="cb285-11"><a href="factors.html#cb285-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; freq      16395</span></span>
+<span id="cb285-12"><a href="factors.html#cb285-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: race, dtype: object</span></span></code></pre></div>
 <p>Or with a bar chart:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb284-1"><a href="factors.html#cb284-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(gss_cat).</span>
-<span id="cb284-2"><a href="factors.html#cb284-2" aria-hidden="true" tabindex="-1"></a>  encode(alt.X(<span class="st">&#39;race&#39;</span>), alt.Y(<span class="st">&#39;count()&#39;</span>)).</span>
-<span id="cb284-3"><a href="factors.html#cb284-3" aria-hidden="true" tabindex="-1"></a>  mark_bar().</span>
-<span id="cb284-4"><a href="factors.html#cb284-4" aria-hidden="true" tabindex="-1"></a>  properties(width <span class="op">=</span> <span class="dv">400</span>))</span>
-<span id="cb284-5"><a href="factors.html#cb284-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb284-6"><a href="factors.html#cb284-6" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_1.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="factors.html#cb286-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(gss_cat).</span>
+<span id="cb286-2"><a href="factors.html#cb286-2" aria-hidden="true" tabindex="-1"></a>  encode(alt.X(<span class="st">&#39;race&#39;</span>), alt.Y(<span class="st">&#39;count()&#39;</span>)).</span>
+<span id="cb286-3"><a href="factors.html#cb286-3" aria-hidden="true" tabindex="-1"></a>  mark_bar().</span>
+<span id="cb286-4"><a href="factors.html#cb286-4" aria-hidden="true" tabindex="-1"></a>  properties(width <span class="op">=</span> <span class="dv">400</span>))</span>
+<span id="cb286-5"><a href="factors.html#cb286-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-6"><a href="factors.html#cb286-6" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_1.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_cat_1.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>By default, ggplot2 will drop levels that don’t have any values. You can force them to display with:</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb285-1"><a href="factors.html#cb285-1" aria-hidden="true" tabindex="-1"></a>levels_use <span class="op">=</span> gss_cat.race.cat.categories.to_list()</span>
-<span id="cb285-2"><a href="factors.html#cb285-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb285-3"><a href="factors.html#cb285-3" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(gss_cat).</span>
-<span id="cb285-4"><a href="factors.html#cb285-4" aria-hidden="true" tabindex="-1"></a>    encode( </span>
-<span id="cb285-5"><a href="factors.html#cb285-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> alt.X(<span class="st">&#39;race&#39;</span>, scale <span class="op">=</span> alt.Scale(domain <span class="op">=</span> levels_use)), </span>
-<span id="cb285-6"><a href="factors.html#cb285-6" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> alt.Y(<span class="st">&#39;count()&#39;</span>)).</span>
-<span id="cb285-7"><a href="factors.html#cb285-7" aria-hidden="true" tabindex="-1"></a>    mark_bar().</span>
-<span id="cb285-8"><a href="factors.html#cb285-8" aria-hidden="true" tabindex="-1"></a>    properties(width <span class="op">=</span> <span class="dv">400</span>))</span>
-<span id="cb285-9"><a href="factors.html#cb285-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb285-10"><a href="factors.html#cb285-10" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_2.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb287-1"><a href="factors.html#cb287-1" aria-hidden="true" tabindex="-1"></a>levels_use <span class="op">=</span> gss_cat.race.cat.categories.to_list()</span>
+<span id="cb287-2"><a href="factors.html#cb287-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-3"><a href="factors.html#cb287-3" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(gss_cat).</span>
+<span id="cb287-4"><a href="factors.html#cb287-4" aria-hidden="true" tabindex="-1"></a>    encode( </span>
+<span id="cb287-5"><a href="factors.html#cb287-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> alt.X(<span class="st">&#39;race&#39;</span>, scale <span class="op">=</span> alt.Scale(domain <span class="op">=</span> levels_use)), </span>
+<span id="cb287-6"><a href="factors.html#cb287-6" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> alt.Y(<span class="st">&#39;count()&#39;</span>)).</span>
+<span id="cb287-7"><a href="factors.html#cb287-7" aria-hidden="true" tabindex="-1"></a>    mark_bar().</span>
+<span id="cb287-8"><a href="factors.html#cb287-8" aria-hidden="true" tabindex="-1"></a>    properties(width <span class="op">=</span> <span class="dv">400</span>))</span>
+<span id="cb287-9"><a href="factors.html#cb287-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-10"><a href="factors.html#cb287-10" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_2.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_cat_2.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>These levels represent valid values that simply did not occur in this dataset. When working with factors, the two most common operations are changing the order of the levels, and changing the values of the levels. Those operations are described in the sections below.</p>
 <div id="exercise" class="section level3" number="15.3.1">
@@ -769,17 +771,17 @@ out with a table? How can you find out with a visualisation?</p></li>
 <div id="modifying-factor-order" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Modifying factor order</h2>
 <p>It’s often useful to change the order of the factor levels in a visualisation. For example, imagine you want to explore the average number of hours spent watching TV per day across religions:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="factors.html#cb286-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="op">=</span> gss_cat.groupby(<span class="st">&#39;relig&#39;</span>).agg(</span>
-<span id="cb286-2"><a href="factors.html#cb286-2" aria-hidden="true" tabindex="-1"></a>    age <span class="op">=</span> (<span class="st">&#39;age&#39;</span>, np.mean),</span>
-<span id="cb286-3"><a href="factors.html#cb286-3" aria-hidden="true" tabindex="-1"></a>    tvhours <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, np.mean),</span>
-<span id="cb286-4"><a href="factors.html#cb286-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, <span class="st">&#39;size&#39;</span>)</span>
-<span id="cb286-5"><a href="factors.html#cb286-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
-<span id="cb286-6"><a href="factors.html#cb286-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb286-7"><a href="factors.html#cb286-7" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(relig_summary).</span>
-<span id="cb286-8"><a href="factors.html#cb286-8" aria-hidden="true" tabindex="-1"></a>          encode(alt.X(<span class="st">&#39;tvhours&#39;</span>), alt.Y(<span class="st">&#39;relig&#39;</span>)).</span>
-<span id="cb286-9"><a href="factors.html#cb286-9" aria-hidden="true" tabindex="-1"></a>          mark_circle())</span>
-<span id="cb286-10"><a href="factors.html#cb286-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb286-11"><a href="factors.html#cb286-11" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_3.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="factors.html#cb288-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="op">=</span> gss_cat.groupby(<span class="st">&#39;relig&#39;</span>).agg(</span>
+<span id="cb288-2"><a href="factors.html#cb288-2" aria-hidden="true" tabindex="-1"></a>    age <span class="op">=</span> (<span class="st">&#39;age&#39;</span>, np.mean),</span>
+<span id="cb288-3"><a href="factors.html#cb288-3" aria-hidden="true" tabindex="-1"></a>    tvhours <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, np.mean),</span>
+<span id="cb288-4"><a href="factors.html#cb288-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, <span class="st">&#39;size&#39;</span>)</span>
+<span id="cb288-5"><a href="factors.html#cb288-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb288-6"><a href="factors.html#cb288-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb288-7"><a href="factors.html#cb288-7" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(relig_summary).</span>
+<span id="cb288-8"><a href="factors.html#cb288-8" aria-hidden="true" tabindex="-1"></a>          encode(alt.X(<span class="st">&#39;tvhours&#39;</span>), alt.Y(<span class="st">&#39;relig&#39;</span>)).</span>
+<span id="cb288-9"><a href="factors.html#cb288-9" aria-hidden="true" tabindex="-1"></a>          mark_circle())</span>
+<span id="cb288-10"><a href="factors.html#cb288-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb288-11"><a href="factors.html#cb288-11" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_3.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_cat_3.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>It is difficult to interpret this plot because there’s no overall pattern. We can improve it by reordering the levels of <code>relig</code> using the <code>sort</code> argument in <code>alt.Y()</code>. The <code>sort</code> argument uses <code>-x</code> to sort largest at the top and <code>x</code> to sort with the largest at the bottom of the y-axis. If you would like to implement more intricate sortings using <code>alt.EncodingSortField()</code> with the following arguments.</p>
 <ul>
@@ -790,31 +792,31 @@ function and sort them as <code>'descending'</code> or <code>'ascending'</code>.
 </ul>
 <p>Thus, if we were going to implement more detailed sorting we would use
 <code>alt.EncodingSortField(field = 'tvhours', op = 'sum', order = 'ascending'))</code>. Note that sorting within Altair for boxplots is not very functional. You would need to use <code>pd.Categorical()</code> to put the categories in your prefered order.</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb287-1"><a href="factors.html#cb287-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(relig_summary).</span>
-<span id="cb287-2"><a href="factors.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  encode(alt.X(<span class="st">&#39;tvhours&#39;</span>), alt.Y(<span class="st">&#39;relig&#39;</span>)).</span>
-<span id="cb287-3"><a href="factors.html#cb287-3" aria-hidden="true" tabindex="-1"></a>  mark_circle())</span>
-<span id="cb287-4"><a href="factors.html#cb287-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb287-5"><a href="factors.html#cb287-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb287-6"><a href="factors.html#cb287-6" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_4.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb289-1"><a href="factors.html#cb289-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(relig_summary).</span>
+<span id="cb289-2"><a href="factors.html#cb289-2" aria-hidden="true" tabindex="-1"></a>  encode(alt.X(<span class="st">&#39;tvhours&#39;</span>), alt.Y(<span class="st">&#39;relig&#39;</span>)).</span>
+<span id="cb289-3"><a href="factors.html#cb289-3" aria-hidden="true" tabindex="-1"></a>  mark_circle())</span>
+<span id="cb289-4"><a href="factors.html#cb289-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb289-5"><a href="factors.html#cb289-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb289-6"><a href="factors.html#cb289-6" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_4.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_cat_4.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Reordering religion makes it much easier to see that people in the “Don’t know” category watch much more TV, and Hinduism &amp; Other Eastern religions watch much less.</p>
 <p>As you start making more complicated transformations, I’d recommend moving them out of Altair and into a new variable using pandas.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="factors.html#cb288-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(relig_summary).</span>
-<span id="cb288-2"><a href="factors.html#cb288-2" aria-hidden="true" tabindex="-1"></a>    encode(alt.X(<span class="st">&#39;tvhours&#39;</span>), alt.Y(<span class="st">&#39;relig&#39;</span>, sort <span class="op">=</span> <span class="st">&#39;-x&#39;</span>)).</span>
-<span id="cb288-3"><a href="factors.html#cb288-3" aria-hidden="true" tabindex="-1"></a>    mark_circle())</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb290-1"><a href="factors.html#cb290-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(relig_summary).</span>
+<span id="cb290-2"><a href="factors.html#cb290-2" aria-hidden="true" tabindex="-1"></a>    encode(alt.X(<span class="st">&#39;tvhours&#39;</span>), alt.Y(<span class="st">&#39;relig&#39;</span>, sort <span class="op">=</span> <span class="st">&#39;-x&#39;</span>)).</span>
+<span id="cb290-3"><a href="factors.html#cb290-3" aria-hidden="true" tabindex="-1"></a>    mark_circle())</span></code></pre></div>
 <p>As you start making more complicated transformations, I’d recommend moving them out of Altair and into a new variable using pandas. What if we create a similar plot looking at how average age varies across reported income level?</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb289-1"><a href="factors.html#cb289-1" aria-hidden="true" tabindex="-1"></a>rincome_summary <span class="op">=</span> gss_cat.groupby(<span class="st">&#39;rincome&#39;</span>).agg(</span>
-<span id="cb289-2"><a href="factors.html#cb289-2" aria-hidden="true" tabindex="-1"></a>    age <span class="op">=</span> (<span class="st">&#39;age&#39;</span>, np.mean),</span>
-<span id="cb289-3"><a href="factors.html#cb289-3" aria-hidden="true" tabindex="-1"></a>        tvhours <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, np.mean),</span>
-<span id="cb289-4"><a href="factors.html#cb289-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, <span class="st">&#39;size&#39;</span>)</span>
-<span id="cb289-5"><a href="factors.html#cb289-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
-<span id="cb289-6"><a href="factors.html#cb289-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb289-7"><a href="factors.html#cb289-7" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(rincome_summary).</span>
-<span id="cb289-8"><a href="factors.html#cb289-8" aria-hidden="true" tabindex="-1"></a>          encode(alt.X(<span class="st">&#39;age&#39;</span>), alt.Y(<span class="st">&#39;rincome&#39;</span>, sort <span class="op">=</span> <span class="st">&#39;-x&#39;</span>)).</span>
-<span id="cb289-9"><a href="factors.html#cb289-9" aria-hidden="true" tabindex="-1"></a>          mark_circle())</span>
-<span id="cb289-10"><a href="factors.html#cb289-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb289-11"><a href="factors.html#cb289-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb289-12"><a href="factors.html#cb289-12" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_5.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a href="factors.html#cb291-1" aria-hidden="true" tabindex="-1"></a>rincome_summary <span class="op">=</span> gss_cat.groupby(<span class="st">&#39;rincome&#39;</span>).agg(</span>
+<span id="cb291-2"><a href="factors.html#cb291-2" aria-hidden="true" tabindex="-1"></a>    age <span class="op">=</span> (<span class="st">&#39;age&#39;</span>, np.mean),</span>
+<span id="cb291-3"><a href="factors.html#cb291-3" aria-hidden="true" tabindex="-1"></a>        tvhours <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, np.mean),</span>
+<span id="cb291-4"><a href="factors.html#cb291-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> (<span class="st">&#39;tvhours&#39;</span>, <span class="st">&#39;size&#39;</span>)</span>
+<span id="cb291-5"><a href="factors.html#cb291-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb291-6"><a href="factors.html#cb291-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-7"><a href="factors.html#cb291-7" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (alt.Chart(rincome_summary).</span>
+<span id="cb291-8"><a href="factors.html#cb291-8" aria-hidden="true" tabindex="-1"></a>          encode(alt.X(<span class="st">&#39;age&#39;</span>), alt.Y(<span class="st">&#39;rincome&#39;</span>, sort <span class="op">=</span> <span class="st">&#39;-x&#39;</span>)).</span>
+<span id="cb291-9"><a href="factors.html#cb291-9" aria-hidden="true" tabindex="-1"></a>          mark_circle())</span>
+<span id="cb291-10"><a href="factors.html#cb291-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-11"><a href="factors.html#cb291-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-12"><a href="factors.html#cb291-12" aria-hidden="true" tabindex="-1"></a>chart.save(<span class="st">&quot;screenshots/altair_cat_5.png&quot;</span>)</span></code></pre></div>
 <p><img src="screenshots/altair_cat_5.png" width="70%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Here, arbitrarily reordering the levels isn’t a good idea! That’s because <code>rincome</code> already has a principled order that we shouldn’t mess with. Reserve sorting for factors whose levels are arbitrarily ordered.</p>
 <p>Why do you think the average age for “Not applicable” is so high?</p>
@@ -888,7 +890,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "toc": {
 "collapse": "section"
 }

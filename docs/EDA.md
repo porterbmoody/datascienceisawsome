@@ -1,7 +1,5 @@
 # Exploratory Data Analysis
 
-
-
 ## Introduction
 
 This chapter will show you how to use visualisation and transformation to explore your data in a systematic way, a task that statisticians call exploratory data analysis, or EDA for short. EDA is an iterative cycle. You:
@@ -299,85 +297,16 @@ unusual = (diamonds
             .sort_values('y'))
             
 unusual
-```
-
-```{=html}
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>price</th>
-      <th>x</th>
-      <th>y</th>
-      <th>z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>11963</th>
-      <td>5139</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>15951</th>
-      <td>6381</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>24520</th>
-      <td>12800</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>26243</th>
-      <td>15686</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>27429</th>
-      <td>18034</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>49556</th>
-      <td>2130</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>49557</th>
-      <td>2130</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>49189</th>
-      <td>2075</td>
-      <td>5.15</td>
-      <td>31.8</td>
-      <td>5.12</td>
-    </tr>
-    <tr>
-      <th>24067</th>
-      <td>12210</td>
-      <td>8.09</td>
-      <td>58.9</td>
-      <td>8.06</td>
-    </tr>
-  </tbody>
-</table>
+#>        price     x     y     z
+#> 11963   5139  0.00   0.0  0.00
+#> 15951   6381  0.00   0.0  0.00
+#> 24520  12800  0.00   0.0  0.00
+#> 26243  15686  0.00   0.0  0.00
+#> 27429  18034  0.00   0.0  0.00
+#> 49556   2130  0.00   0.0  0.00
+#> 49557   2130  0.00   0.0  0.00
+#> 49189   2075  5.15  31.8  5.12
+#> 24067  12210  8.09  58.9  8.06
 ```
 
 The `y` variable measures one of the three dimensions of these diamonds, in mm. We know that diamonds can't have a width of 0mm, so these values must be incorrect. We might also suspect that measurements of 32mm and 59mm are implausible: those diamonds are over an inch long, but don't cost hundreds of thousands of dollars!
@@ -682,51 +611,12 @@ chart_dat = (diamonds
     .reset_index(name = 'n'))
     
 chart_dat.head()
-```
-
-```{=html}
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>color</th>
-      <th>cut</th>
-      <th>n</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>D</td>
-      <td>Fair</td>
-      <td>163</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>D</td>
-      <td>Good</td>
-      <td>662</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>D</td>
-      <td>Very Good</td>
-      <td>1513</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>D</td>
-      <td>Premium</td>
-      <td>1603</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>D</td>
-      <td>Ideal</td>
-      <td>2834</td>
-    </tr>
-  </tbody>
-</table>
+#>   color        cut     n
+#> 0     D       Fair   163
+#> 1     D       Good   662
+#> 2     D  Very Good  1513
+#> 3     D    Premium  1603
+#> 4     D      Ideal  2834
 ```
 
 Then visualise with `mark_rect()` and the color aesthetic:
@@ -811,105 +701,14 @@ chart_dat = (smaller
       ))
       
 chart_dat.head()      
-```
-
-```{=html}
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>carat</th>
-      <th>cut</th>
-      <th>color</th>
-      <th>clarity</th>
-      <th>depth</th>
-      <th>table</th>
-      <th>price</th>
-      <th>x</th>
-      <th>y</th>
-      <th>z</th>
-      <th>price_cut</th>
-      <th>carat_cut</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.23</td>
-      <td>Ideal</td>
-      <td>E</td>
-      <td>SI2</td>
-      <td>61.5</td>
-      <td>55.0</td>
-      <td>326</td>
-      <td>3.95</td>
-      <td>3.98</td>
-      <td>2.43</td>
-      <td>0</td>
-      <td>0.2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.21</td>
-      <td>Premium</td>
-      <td>E</td>
-      <td>SI1</td>
-      <td>59.8</td>
-      <td>61.0</td>
-      <td>326</td>
-      <td>3.89</td>
-      <td>3.84</td>
-      <td>2.31</td>
-      <td>0</td>
-      <td>0.2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.23</td>
-      <td>Good</td>
-      <td>E</td>
-      <td>VS1</td>
-      <td>56.9</td>
-      <td>65.0</td>
-      <td>327</td>
-      <td>4.05</td>
-      <td>4.07</td>
-      <td>2.31</td>
-      <td>0</td>
-      <td>0.2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.29</td>
-      <td>Premium</td>
-      <td>I</td>
-      <td>VS2</td>
-      <td>62.4</td>
-      <td>58.0</td>
-      <td>334</td>
-      <td>4.20</td>
-      <td>4.23</td>
-      <td>2.63</td>
-      <td>0</td>
-      <td>0.2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.31</td>
-      <td>Good</td>
-      <td>J</td>
-      <td>SI2</td>
-      <td>63.3</td>
-      <td>58.0</td>
-      <td>335</td>
-      <td>4.34</td>
-      <td>4.35</td>
-      <td>2.75</td>
-      <td>0</td>
-      <td>0.2</td>
-    </tr>
-  </tbody>
-</table>
+#>    carat      cut color clarity  depth  ...     x     y     z  price_cut  carat_cut
+#> 0   0.23    Ideal     E     SI2   61.5  ...  3.95  3.98  2.43          0        0.2
+#> 1   0.21  Premium     E     SI1   59.8  ...  3.89  3.84  2.31          0        0.2
+#> 2   0.23     Good     E     VS1   56.9  ...  4.05  4.07  2.31          0        0.2
+#> 3   0.29  Premium     I     VS2   62.4  ...  4.20  4.23  2.63          0        0.2
+#> 4   0.31     Good     J     SI2   63.3  ...  4.34  4.35  2.75          0        0.2
+#> 
+#> [5 rows x 12 columns]
 ```
 
 Then create the binned counts and replace all zero counts with `np.nan`.
@@ -924,51 +723,12 @@ chart_dat_binned = (chart_dat
 chart_dat_binned['n'].replace(to_replace = 0, value = np.nan, inplace = True)
 
 chart_dat_binned.head()    
-```
-
-```{=html}
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>carat_cut</th>
-      <th>price_cut</th>
-      <th>n</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.0</td>
-      <td>1000</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.0</td>
-      <td>2000</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.0</td>
-      <td>3000</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.0</td>
-      <td>4000</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
+#>   carat_cut price_cut     n
+#> 0       0.0         0  12.0
+#> 1       0.0      1000   NaN
+#> 2       0.0      2000   NaN
+#> 3       0.0      3000   NaN
+#> 4       0.0      4000   NaN
 ```
 
 `mark_rect` can then use the divided coordinate plane (2d bins) and then use a fill color to display how many points fall into each bin. Notice the use of `sort = 'y'' to reorient the y-axis.

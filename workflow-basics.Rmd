@@ -8,7 +8,7 @@ Before we go any further, let's make sure you've got a solid foundation in runni
 
 Let's review some basics we've so far omitted in the interests of getting you plotting as quickly as possible. You can use Python as a calculator:
 
-```{pyton}
+```{python}
 1 / 200 * 30
 (59 + 73 + 2) / 3
 ```

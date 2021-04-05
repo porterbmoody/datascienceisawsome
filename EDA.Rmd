@@ -1,13 +1,5 @@
 # Exploratory Data Analysis
 
-```{r, echo=FALSE, cache=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
-```
-
 ## Introduction
 
 This chapter will show you how to use visualisation and transformation to explore your data in a systematic way, a task that statisticians call exploratory data analysis, or EDA for short. EDA is an iterative cycle. You:

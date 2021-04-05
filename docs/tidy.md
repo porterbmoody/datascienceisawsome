@@ -19,7 +19,8 @@ In this chapter we'll focus on pandas, a package that provides a bunch of tools 
 
 <!-- http://shzhangji.com/blog/2017/09/30/pandas-and-tidy-data/ -->
 
-```{python setup, message = FALSE, cache = FALSE}
+
+```python
 import pandas as pd
 import altair as alt
 import numpy as np
@@ -29,7 +30,8 @@ import numpy as np
 
 You can represent the same underlying data in multiple ways. The example below shows the same data organised in four different ways. Each dataset shows the same values of four variables *country*, *year*, *population*, and *cases*, but each dataset organises the values in a different way.
 
-```{python, cache=FALSE}
+
+```python
 base_url = "https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/"
 table1 = pd.read_csv("{}table1/table1.csv".format(base_url))
 table2 = pd.read_csv("{}table2/table2.csv".format(base_url))
@@ -37,19 +39,54 @@ table3 = pd.read_csv("{}table3/table3.csv".format(base_url))
 table4a = pd.read_csv("{}table4a/table4a.csv".format(base_url))
 table4b = pd.read_csv("{}table4b/table4b.csv".format(base_url))
 table5 = pd.read_csv("{}table5/table5.csv".format(base_url), dtype = 'object')
-
 ```
 
 
 
-```{python}
+
+```python
 table1
+#>        country  year   cases  population
+#> 0  Afghanistan  1999     745    19987071
+#> 1  Afghanistan  2000    2666    20595360
+#> 2       Brazil  1999   37737   172006362
+#> 3       Brazil  2000   80488   174504898
+#> 4        China  1999  212258  1272915272
+#> 5        China  2000  213766  1280428583
 table2
+#>         country  year        type       count
+#> 0   Afghanistan  1999       cases         745
+#> 1   Afghanistan  1999  population    19987071
+#> 2   Afghanistan  2000       cases        2666
+#> 3   Afghanistan  2000  population    20595360
+#> 4        Brazil  1999       cases       37737
+#> 5        Brazil  1999  population   172006362
+#> 6        Brazil  2000       cases       80488
+#> 7        Brazil  2000  population   174504898
+#> 8         China  1999       cases      212258
+#> 9         China  1999  population  1272915272
+#> 10        China  2000       cases      213766
+#> 11        China  2000  population  1280428583
 table3
 
 # Spread across two tibbles
+#>        country  year               rate
+#> 0  Afghanistan  1999       745/19987071
+#> 1  Afghanistan  2000      2666/20595360
+#> 2       Brazil  1999    37737/172006362
+#> 3       Brazil  2000    80488/174504898
+#> 4        China  1999  212258/1272915272
+#> 5        China  2000  213766/1280428583
 table4a  # cases
+#>        country    1999    2000
+#> 0  Afghanistan     745    2666
+#> 1       Brazil   37737   80488
+#> 2        China  212258  213766
 table4b  # population
+#>        country        1999        2000
+#> 0  Afghanistan    19987071    20595360
+#> 1       Brazil   172006362   174504898
+#> 2        China  1272915272  1280428583
 ```
 
 These are all representations of the same underlying data, but they are not equally easy to use. One dataset, the tidy dataset, will be much easier to work with inside the tidyverse.
@@ -62,9 +99,14 @@ There are three interrelated rules which make a dataset tidy:
 
 Figure \@ref(fig:tidy-structure) shows the rules visually.
 
-```{r tidy-structure, echo = FALSE, out.width = "100%", fig.cap = "Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells."}
-knitr::include_graphics("images/tidy-1.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/tidy-1} 
+
+}
+
+\caption{Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells.}(\#fig:tidy-structure)
+\end{figure}
 
 These three rules are interrelated because it's impossible to only satisfy two of the three. That interrelationship leads to an even simpler set of practical instructions:
 
@@ -87,12 +129,20 @@ Why ensure that your data is tidy? There are two main advantages:
 
 Altair and pandas work well with tidy data. Here are a couple of small examples showing how you might work with `table1`.
 
-```{python}
+
+```python
 # Compute rate per 10,000
 table1.assign(
     rate = lambda x: x.cases / x.population * 1000
 )
 # Compute cases per year
+#>        country  year   cases  population      rate
+#> 0  Afghanistan  1999     745    19987071  0.037274
+#> 1  Afghanistan  2000    2666    20595360  0.129447
+#> 2       Brazil  1999   37737   172006362  0.219393
+#> 3       Brazil  2000   80488   174504898  0.461236
+#> 4        China  1999  212258  1272915272  0.166750
+#> 5        China  2000  213766  1280428583  0.166949
 (table1.
   groupby('year').
   agg(n = ('cases', 'sum')).
@@ -100,20 +150,19 @@ table1.assign(
 
 # Visualise changes over time
 # import altair as alt
+#>    year       n
+#> 0  1999  250740
+#> 1  2000  296920
 base_chart = (alt.Chart(table1).
   encode(alt.X('year'), alt.Y('cases'), detail = 'country'))
 
 chart = base_chart.mark_line() + base_chart.encode(color = 'country').mark_circle()
 
 chart.save("screenshots/altair_table1.png")
-
 ```
 
-```{R, echo=FALSE, out.width = "50%"}
 
-knitr::include_graphics("screenshots/altair_table1.png")
-
-```
+\begin{center}\includegraphics[width=0.5\linewidth]{screenshots/altair_table1} \end{center}
 
 
 ### Exercises
@@ -158,8 +207,13 @@ Typically a dataset will only suffer from one of these problems; it'll only suff
 
 A common problem is a dataset where some of the column names are not names of variables, but _values_ of a variable. Take `table4a`: the column names `1999` and `2000` represent values of the `year` variable, the values in the `1999` and `2000` columns represent values of the `cases` variable, and each row represents two observations, not one.
 
-```{python}
+
+```python
 table4a
+#>        country    1999    2000
+#> 0  Afghanistan     745    2666
+#> 1       Brazil   37737   80488
+#> 2        China  212258  213766
 ```
 
 To tidy a dataset like this, we need to __stack__ the offending columns into a new pair of variables. To describe that operation we need three parameters:
@@ -173,15 +227,28 @@ To tidy a dataset like this, we need to __stack__ the offending columns into a n
 
 Together those parameters generate the call to `melt()`:
 
-```{python}
+
+```python
 table4a.melt(['country'], var_name = "year", value_name = "cases")
+#>        country  year   cases
+#> 0  Afghanistan  1999     745
+#> 1       Brazil  1999   37737
+#> 2        China  1999  212258
+#> 3  Afghanistan  2000    2666
+#> 4       Brazil  2000   80488
+#> 5        China  2000  213766
 ```
 
 `year` and `cases` do not exist in `table4a` so we put their names in quotes.
 
-```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Pivoting `table4` into a longer, tidy form."}
-knitr::include_graphics("images/tidy-9.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/tidy-9} 
+
+}
+
+\caption{Pivoting `table4` into a longer, tidy form.}(\#fig:tidy-gather)
+\end{figure}
 
 In the final result, the pivoted columns are dropped, and we get new `year` and `cases` columns. Otherwise, the relationships between the original variables are preserved. Visually, this is shown in Figure \@ref(fig:tidy-gather).
 
@@ -189,25 +256,54 @@ In the final result, the pivoted columns are dropped, and we get new `year` and 
 
 We can use `melt()` to tidy `table4b` in a similar fashion. The only difference is the variable stored in the cell values:
 
-```{python}
+
+```python
 table4b.melt(['country'], var_name = 'year', value_name = 'population')
+#>        country  year  population
+#> 0  Afghanistan  1999    19987071
+#> 1       Brazil  1999   172006362
+#> 2        China  1999  1272915272
+#> 3  Afghanistan  2000    20595360
+#> 4       Brazil  2000   174504898
+#> 5        China  2000  1280428583
 ```
 
 To combine the tidied versions of `table4a` and `table4b` into a single tibble, we need to use `merge()`, which you'll learn about in [relational data].
 
-```{python}
+
+```python
 tidy4a = table4a.melt(['country'], var_name = "year", value_name = "cases")
 tidy4b = table4b.melt(['country'], var_name = 'year', value_name = 'population')
 pd.merge(tidy4a, tidy4b, on = ['country', 'year'])
-
+#>        country  year   cases  population
+#> 0  Afghanistan  1999     745    19987071
+#> 1       Brazil  1999   37737   172006362
+#> 2        China  1999  212258  1272915272
+#> 3  Afghanistan  2000    2666    20595360
+#> 4       Brazil  2000   80488   174504898
+#> 5        China  2000  213766  1280428583
 ```
 
 ### Wider (`pivot()`)
 
 `pivot()` is the opposite of `melt()`. You use it when an observation is scattered across multiple rows. For example, take `table2`: an observation is a country in a year, but each observation is spread across two rows.
 
-```{python}
+
+```python
 table2
+#>         country  year        type       count
+#> 0   Afghanistan  1999       cases         745
+#> 1   Afghanistan  1999  population    19987071
+#> 2   Afghanistan  2000       cases        2666
+#> 3   Afghanistan  2000  population    20595360
+#> 4        Brazil  1999       cases       37737
+#> 5        Brazil  1999  population   172006362
+#> 6        Brazil  2000       cases       80488
+#> 7        Brazil  2000  population   174504898
+#> 8         China  1999       cases      212258
+#> 9         China  1999  population  1272915272
+#> 10        China  2000       cases      213766
+#> 11        China  2000  population  1280428583
 ```
 
 To tidy this up, we first analyse the representation in similar way to `melt()`. This time, however, we only need two parameters:
@@ -220,16 +316,29 @@ Once we've figured that out, we can use `pivot()`, as shown programmatically bel
 
 In this example, we have a multi-column `index` argument and will need to use `pivot_table()`.  With a single column index `pivot()` can be used.
 
-```{python}
+
+```python
 table2.pivot_table(
     index = ['country', 'year'], 
     columns = 'type', 
     values = 'count').reset_index()
+#> type      country  year   cases  population
+#> 0     Afghanistan  1999     745    19987071
+#> 1     Afghanistan  2000    2666    20595360
+#> 2          Brazil  1999   37737   172006362
+#> 3          Brazil  2000   80488   174504898
+#> 4           China  1999  212258  1272915272
+#> 5           China  2000  213766  1280428583
 ```
 
-```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Pivoting `table2` into a \"wider\", tidy form."}
-knitr::include_graphics("images/tidy-8.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/tidy-8} 
+
+}
+
+\caption{Pivoting `table2` into a "wider", tidy form.}(\#fig:tidy-spread)
+\end{figure}
 
 As you might have guessed from their names, `pivot()` and `pivot_table()` are complements to `melt()`. `melt()` makes wide tables narrower and longer; `pivot()` and `pivot_table()` makes long tables shorter and wider.
 
@@ -238,7 +347,8 @@ As you might have guessed from their names, `pivot()` and `pivot_table()` are co
 1.  Why are `melt()` and `pivot()` not perfectly symmetrical?
     Carefully consider the following example:
 
-    ```{python, eval = FALSE}
+    
+    ```python
     stocks = pd.DataFrame({
       'year': [2015, 2015, 2016, 2016],
       'half':  [1,    2,     1,    2],
@@ -265,8 +375,16 @@ So far you've learned how to tidy `table2` and `table4`, but not `table3`. `tabl
 
 `str.split()` pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take `table3`:
 
-```{python}
+
+```python
 table3
+#>        country  year               rate
+#> 0  Afghanistan  1999       745/19987071
+#> 1  Afghanistan  2000      2666/20595360
+#> 2       Brazil  1999    37737/172006362
+#> 3       Brazil  2000    80488/174504898
+#> 4        China  1999  212258/1272915272
+#> 5        China  2000  213766/1280428583
 ```
 
 The `rate` column contains both `cases` and `population` variables, and we need to split it into two variables. `str.split()` takes the name of the column to split. The names of the columns to separate into can be names using `rename()`, as shown in Figure \@ref(fig:tidy-separate) and the code below.
@@ -276,36 +394,57 @@ By default, `str.split()` will split values on white spaces. If you wish to use 
 Unlike `tidyr::separate()` in R, you will need to append the new columns back onto your data set with a `pd.concat()` with the argument `axis = 1` 
 
 
-```{python, cache=FALSE}
+
+```python
 new_columns = (table3.
   rate.str.split("/", expand = True).
   rename(columns = {0: "cases", 1: "population"})
   )
   
 pd.concat([table3.drop(columns = 'rate'), new_columns], axis = 1)
-
+#>        country  year   cases  population
+#> 0  Afghanistan  1999     745    19987071
+#> 1  Afghanistan  2000    2666    20595360
+#> 2       Brazil  1999   37737   172006362
+#> 3       Brazil  2000   80488   174504898
+#> 4        China  1999  212258  1272915272
+#> 5        China  2000  213766  1280428583
 ```
 
-```{r tidy-separate, echo = FALSE, out.width = "75%", fig.cap = "Separating `table3` makes it tidy"}
-knitr::include_graphics("images/tidy-17.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=0.75\linewidth]{images/tidy-17} 
+
+}
+
+\caption{Separating `table3` makes it tidy}(\#fig:tidy-separate)
+\end{figure}
 
 (Formally, `pat` is a regular expression, which you'll learn more about in [strings].)
 
 Look carefully at the column types: you'll notice that `cases` and `population` are objects or strings. This is the default behaviour in `str.split()`: it only works on object types and returns objects. Here, however, it's not very useful as those really are numbers. We can ask use `astype()` to convert to better types:
 
-```{python}
+
+```python
 pd.concat([
   table3.drop(columns = 'rate'), 
   new_columns.astype('float')],
   axis = 1)
+#>        country  year     cases    population
+#> 0  Afghanistan  1999     745.0  1.998707e+07
+#> 1  Afghanistan  2000    2666.0  2.059536e+07
+#> 2       Brazil  1999   37737.0  1.720064e+08
+#> 3       Brazil  2000   80488.0  1.745049e+08
+#> 4        China  1999  212258.0  1.272915e+09
+#> 5        China  2000  213766.0  1.280429e+09
 ```
 
 To split on integers you would use `str[]`. `str[]` will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings and are entered `:2`; negative value start at -1 on the far-right of the strings are entered `-2:`. 
 
 You can use this arrangement to separate the last two digits of each year. The data will be less tidy, but it is useful in other cases—as you'll see soon.
 
-```{python}
+
+```python
 cent_year = pd.DataFrame({
     'century': table3.year.astype(str).str[:2],
     'year': table3.year.astype(str).str[-2:]
@@ -313,27 +452,54 @@ cent_year = pd.DataFrame({
 
 pd.concat([table3.drop(columns = 'year'), cent_year], axis = 1)
 
-
+#>        country               rate century year
+#> 0  Afghanistan       745/19987071      19   99
+#> 1  Afghanistan      2666/20595360      20   00
+#> 2       Brazil    37737/172006362      19   99
+#> 3       Brazil    80488/174504898      20   00
+#> 4        China  212258/1272915272      19   99
+#> 5        China  213766/1280428583      20   00
 ```
 
 ### Unite
 
 For two string series the inverse of `str.split()` can be done with `+`: it combines multiple columns into a single column. You'll need it much less frequently than `str.split()`, but it's still a useful tool to have in your back pocket.
 
-```{r tidy-unite, echo = FALSE, out.width = "75%", fig.cap = "Uniting `table5` makes it tidy"}
-knitr::include_graphics("images/tidy-18.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=0.75\linewidth]{images/tidy-18} 
+
+}
+
+\caption{Uniting `table5` makes it tidy}(\#fig:tidy-unite)
+\end{figure}
 
 We can use `+` to rejoin the *century* and *year* string columns that we created in the last example. That data is saved as `table5`. `+` takes a two series and can be assigned to the name of the new variable to create:
 
-```{python}
+
+```python
 table5.assign(new = table5['century'] + table5['year'])
+#>        country century year               rate   new
+#> 0  Afghanistan      19   99       745/19987071  1999
+#> 1  Afghanistan      20   00      2666/20595360  2000
+#> 2       Brazil      19   99    37737/172006362  1999
+#> 3       Brazil      20   00    80488/174504898  2000
+#> 4        China      19   99  212258/1272915272  1999
+#> 5        China      20   00  213766/1280428583  2000
 ```
 
 If you want join the strings with a specified string or more than two columns you can use agg with `axis = 1`.
 
-```{python}
+
+```python
 table5.assign(new = table5[['century', 'year']].agg("_".join, axis = 1))
+#>        country century year               rate    new
+#> 0  Afghanistan      19   99       745/19987071  19_99
+#> 1  Afghanistan      20   00      2666/20595360  20_00
+#> 2       Brazil      19   99    37737/172006362  19_99
+#> 3       Brazil      20   00    80488/174504898  20_00
+#> 4        China      19   99  212258/1272915272  19_99
+#> 5        China      20   00  213766/1280428583  20_00
 ```
 
 ### Exercises
@@ -351,7 +517,8 @@ Changing the representation of a dataset brings up an important subtlety of miss
 
 Let's illustrate this idea with a very simple data set:
 
-```{python, cache=FALSE}
+
+```python
 stocks = pd.DataFrame({
     'year': [2015, 2015, 2015, 2015, 2016, 2016, 2016],
     'qtr': [   1,    2,    3,    4,    2,    3,    4],
@@ -371,20 +538,34 @@ One way to think about the difference is with this Zen-like koan: An explicit mi
 
 The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting years in the columns:
 
-```{python}
+
+```python
 stocks.pivot(
   index = 'qtr', 
   columns = 'year', 
   values = 'return').reset_index()
+#> year  qtr  2015  2016
+#> 0       1  1.88   NaN
+#> 1       2  0.59  0.92
+#> 2       3  0.35  0.17
+#> 3       4   NaN  2.66
 ```
 
 Because these explicit missing values may not be important in other representations of the data, you turn explicit missing values implicit with `.dropna()`:
 
-```{python}
+
+```python
 stocks.pivot(
   index = 'qtr', 
   columns = 'year', 
   values = 'return').reset_index().melt(id_vars = ['qtr']).dropna()
+#>    qtr  year  value
+#> 0    1  2015   1.88
+#> 1    2  2015   0.59
+#> 2    3  2015   0.35
+#> 5    2  2016   0.92
+#> 6    3  2016   0.17
+#> 7    4  2016   2.66
 ```
 
 You can use the pandas functions `stack()` and `unstack()` with `set_index()` to take a set of columns and find all unique combinations. This ensures the original dataset contains all values by filling in explicit missingness where necessary. See [this stackoverflow](https://stackoverflow.com/questions/44287445/pandas-or-python-equivalent-of-tidyr-complete) for an example. `tidyr::complete()` in R performs a similar function.
@@ -396,7 +577,8 @@ To finish off the chapter, let's pull together everything you've learned to tack
 
 There's a wealth of epidemiological information in this dataset, but it's challenging to work with the data in the form that it's provided:
 
-```{python, cache = FALSE}
+
+```python
 who = pd.read_csv("https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/who/who.csv")
 # Fix the Namibia NA iso code.
 who.loc[who.iso2.isna(),'iso2'] = "NA"
@@ -417,7 +599,8 @@ The best place to start is almost always to gather together the columns that are
 
 So we need to gather together all the columns from `new_sp_m014` to `newrel_f65`. We don't know what those values represent yet, so we'll give them the generic name `"key"`. We know the cells represent the count of cases, so we'll use the variable `cases`. There are a lot of missing values in the current representation, so for now we'll use `na.rm` just so we can focus on the values that are present.
 
-```{python, cache=FALSE}
+
+```python
 who1 = who.melt(
     id_vars = ['country', 'iso2', 'iso3', 'year'], 
     var_name = 'key', 
@@ -426,9 +609,35 @@ who1 = who.melt(
 
 We can get some hint of the structure of the values in the new `key` column by counting them:
 
-```{python}
-who1.key.value_counts().head(25)
 
+```python
+who1.key.value_counts().head(25)
+#> new_sp_m4554    3223
+#> new_sp_m3544    3219
+#> new_sp_m5564    3218
+#> new_sp_m65      3209
+#> new_sp_m1524    3209
+#> new_sp_m2534    3206
+#> new_sp_f4554    3204
+#> new_sp_f2534    3200
+#> new_sp_f3544    3199
+#> new_sp_f65      3197
+#> new_sp_f5564    3195
+#> new_sp_f1524    3194
+#> new_sp_f014     3174
+#> new_sp_m014     3173
+#> new_sn_m014     1045
+#> new_sn_f014     1040
+#> new_ep_m014     1038
+#> new_ep_f014     1032
+#> new_sn_m1524    1030
+#> new_sn_m4554    1027
+#> new_ep_m1524    1026
+#> new_sn_m3544    1025
+#> new_ep_m3544    1024
+#> new_sn_m2534    1022
+#> new_sn_f1524    1022
+#> Name: key, dtype: int64
 ```
 
 You might be able to parse this out by yourself with a little thought and some experimentation, but luckily we have the data dictionary handy. It tells us:
@@ -462,23 +671,54 @@ You might be able to parse this out by yourself with a little thought and some e
 
 We need to make a minor fix to the format of the column names: unfortunately the names are slightly inconsistent because instead of `new_rel` we have `newrel` (it's hard to spot this here but if you don't fix it we'll get errors in subsequent steps). You'll learn about `str.replace()` in [strings], but the basic idea is pretty simple: replace the characters "newrel" with "new_rel". This makes all variable names consistent.
 
-```{python, cache=FALSE}
+
+```python
 who2 = who1.assign(names_from = lambda x: x.key.str.replace('newrel', 'new_rel'))
 who2
+#>                           country iso2 iso3  ...          key   cases   names_from
+#> 17                    Afghanistan   AF  AFG  ...  new_sp_m014     0.0  new_sp_m014
+#> 18                    Afghanistan   AF  AFG  ...  new_sp_m014    30.0  new_sp_m014
+#> 19                    Afghanistan   AF  AFG  ...  new_sp_m014     8.0  new_sp_m014
+#> 20                    Afghanistan   AF  AFG  ...  new_sp_m014    52.0  new_sp_m014
+#> 21                    Afghanistan   AF  AFG  ...  new_sp_m014   129.0  new_sp_m014
+#> ...                           ...  ...  ...  ...          ...     ...          ...
+#> 405269                   Viet Nam   VN  VNM  ...   newrel_f65  3110.0  new_rel_f65
+#> 405303  Wallis and Futuna Islands   WF  WLF  ...   newrel_f65     2.0  new_rel_f65
+#> 405371                      Yemen   YE  YEM  ...   newrel_f65   360.0  new_rel_f65
+#> 405405                     Zambia   ZM  ZMB  ...   newrel_f65   669.0  new_rel_f65
+#> 405439                   Zimbabwe   ZW  ZWE  ...   newrel_f65   725.0  new_rel_f65
+#> 
+#> [76046 rows x 7 columns]
 ```
 
 We can separate the values in each code with two passes of `str.split()`. The first pass will split the codes at each underscore.
 
-```{python, cache=FALSE}
+
+```python
 new_columns = (who2.names_from.
     str.split("_",expand = True).
     rename(columns = {0: "new", 1: "type", 2: "sexage"}))
 new_columns
+#>         new type sexage
+#> 17      new   sp   m014
+#> 18      new   sp   m014
+#> 19      new   sp   m014
+#> 20      new   sp   m014
+#> 21      new   sp   m014
+#> ...     ...  ...    ...
+#> 405269  new  rel    f65
+#> 405303  new  rel    f65
+#> 405371  new  rel    f65
+#> 405405  new  rel    f65
+#> 405439  new  rel    f65
+#> 
+#> [76046 rows x 3 columns]
 ```
 
 Then we might as well drop the `new` column because it's constant in this dataset. While we're dropping columns, let's also drop `iso2` and `iso3` since they're redundant.
 
-```{python, cache=FALSE}
+
+```python
 # who3 is in R process. They also have an error and they are not using the names_from column.
 who4 = pd.concat([
   who2.filter(items = ['country', 'year']),
@@ -487,20 +727,36 @@ who4 = pd.concat([
 
 Next we'll separate `sexage` into `sex` and `age` by splitting after the first character:
 
-```{python}
+
+```python
 who5 = who4.assign(
   sex = new_columns.sexage.str[:1],
   age = new_columns.sexage.str.slice(1)
 )
 
 who5
+#>                           country  year type sex  age
+#> 17                    Afghanistan  1997   sp   m  014
+#> 18                    Afghanistan  1998   sp   m  014
+#> 19                    Afghanistan  1999   sp   m  014
+#> 20                    Afghanistan  2000   sp   m  014
+#> 21                    Afghanistan  2001   sp   m  014
+#> ...                           ...   ...  ...  ..  ...
+#> 405269                   Viet Nam  2013  rel   f   65
+#> 405303  Wallis and Futuna Islands  2013  rel   f   65
+#> 405371                      Yemen  2013  rel   f   65
+#> 405405                     Zambia  2013  rel   f   65
+#> 405439                   Zimbabwe  2013  rel   f   65
+#> 
+#> [76046 rows x 5 columns]
 ```
 
 The `who` dataset is now 'kinda' tidy! We have left the age range as age for simplicity.
 
 I've shown you the code a piece at a time, assigning each interim result to a new variable. This typically isn't how you'd work interactively. Instead, you'd use as little assignment as possible:
 
-```{python, results = "hide"}
+
+```python
 # assigned fixed values back into key this time.
 who_melt = who.melt(
     id_vars = ['country', 'iso2', 'iso3', 'year'], 

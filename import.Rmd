@@ -1,14 +1,5 @@
 # Data import
 
-```{r, echo=FALSE, cache=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
-```
-
-
 ## Introduction
 
 In this chapter, you'll learn how to read plain-text rectangular files into Python. Here, we'll only scratch the surface of data import, but many of the principles will translate to other forms of data. We'll finish with a few pointers to packages that are useful for other types of data.
@@ -46,9 +37,11 @@ You can also supply an inline csv file with the use of `StringIO` in the `io` pa
 ```{python}
 from io import StringIO
 
-data = StringIO("""a,b,c
+data = StringIO("""
+a,b,c
 1,2,3
-4,5,6""")
+4,5,6
+""")
 
 pd.read_csv(data)
 
@@ -64,7 +57,7 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     all lines that start with (e.g.) `#`. Both arguments have other methods that 
     can be used - see [the pandas documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html).
     
-    ```{pandas}
+    ```{python}
     
     data_metada = StringIO("""The first line of metadata
       The second line of metadata

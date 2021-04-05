@@ -1,8 +1,5 @@
 # Data import
 
-
-
-
 ## Introduction
 
 In this chapter, you'll learn how to read plain-text rectangular files into Python. Here, we'll only scratch the surface of data import, but many of the principles will translate to other forms of data. We'll finish with a few pointers to packages that are useful for other types of data.
@@ -43,38 +40,16 @@ You can also supply an inline csv file with the use of `StringIO` in the `io` pa
 ```python
 from io import StringIO
 
-data = StringIO("""a,b,c
+data = StringIO("""
+a,b,c
 1,2,3
-4,5,6""")
+4,5,6
+""")
 
 pd.read_csv(data)
-```
-
-```{=html}
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>5</td>
-      <td>6</td>
-    </tr>
-  </tbody>
-</table>
+#>    a  b  c
+#> 0  1  2  3
+#> 1  4  5  6
 ```
 
 
@@ -88,7 +63,7 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     can be used - see [the pandas documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html).
     
     
-    ```pandas
+    ```python
     
     data_metada = StringIO("""The first line of metadata
       The second line of metadata
@@ -96,13 +71,16 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
       1,2,3""")
     
     pd.read_csv(data_metada, skiprows = 2)
-    
+    #>      x  y  z
+    #> 0    1  2  3
     data_comment = StringIO("""# A comment I want to skip
       x,y,z
       1,2,3
     """)
     
     pd.read_csv(data_comment, comment = "#")
+    #>      x  y  z
+    #> 0    1  2  3
     ```
     
 1.  The data might not have column names. You can use `header = None` to
@@ -113,33 +91,9 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     ```python
     data_nonames = StringIO("""1,2,3\n4,5,6""")
     pd.read_csv(data_nonames, header = None)
-    ```
-    
-    ```{=html}
-    <table border="1" class="dataframe">
-      <thead>
-        <tr style="text-align: right;">
-          <th></th>
-          <th>0</th>
-          <th>1</th>
-          <th>2</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>0</th>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <th>1</th>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-        </tr>
-      </tbody>
-    </table>
+    #>    0  1  2
+    #> 0  1  2  3
+    #> 1  4  5  6
     ```
     
     (`"\n"` is a convenient shortcut for adding a new line. You'll learn more
@@ -152,33 +106,9 @@ In both cases `pd.read_csv()` uses the first line of the data for the column nam
     ```python
     data_nonames = StringIO("""1,2,3\n4,5,6""")
     pd.read_csv(data_nonames, names = ["x", "y", "z"], header = None)
-    ```
-    
-    ```{=html}
-    <table border="1" class="dataframe">
-      <thead>
-        <tr style="text-align: right;">
-          <th></th>
-          <th>x</th>
-          <th>y</th>
-          <th>z</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>0</th>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <th>1</th>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-        </tr>
-      </tbody>
-    </table>
+    #>    x  y  z
+    #> 0  1  2  3
+    #> 1  4  5  6
     ```
 
 Another option that commonly needs tweaking is `na`: this specifies the value (or values) that are used to represent missing values in your file:
@@ -187,27 +117,8 @@ Another option that commonly needs tweaking is `na`: this specifies the value (o
 ```python
 data_missing = StringIO("""a,b,c\n1,2,.""")
 pd.read_csv(data_missing, na_values = ".")
-```
-
-```{=html}
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
+#>    a  b   c
+#> 0  1  2 NaN
 ```
 
 This is all you need to know to read ~75% of CSV files that you'll encounter in practice. You can also easily adapt what you've learned to read fixed width files with `pd.read_fwf()`. To read in more challenging files, you'll need to learn more about how pandas parses each column, turning them into `DataFrame` objects.

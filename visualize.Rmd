@@ -1,15 +1,5 @@
 # Data visualisation
 
-```{r, echo=FALSE, cache=FALSE}
-knitr::opts_chunk$set(python.reticulate = TRUE)
-library(reticulate)
-library(ggplot2)
-library(vegawidget)
-knitr::opts_chunk$set(engine.path = '/usr/local/bin/python3.8')
-
-#use_python("usr/local/bin/python3.8", required = TRUE)
-```
-
 ## Introduction
 
 > "The simple graph has brought more information to the data analyst’s mind 

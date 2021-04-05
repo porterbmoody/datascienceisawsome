@@ -1,8 +1,6 @@
 # Factors
 
 
-
-
 ## Introduction
 
 In pandas, categorical variables (factors in R) are variables that have a fixed and known set of possible values. They are also useful when you want to display character vectors in a non-alphabetical order. You can read the [pandas documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/categorical.html).

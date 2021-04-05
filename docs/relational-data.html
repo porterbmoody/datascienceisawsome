@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Relational data | Python for Data Science</title>
   <meta name="description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Relational data | Python for Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://byuidatascience.github.io/python4ds/" />
-  <meta property="og:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta property="og:image" content="https://byuidatascience.github.io/python4ds//cover.png" />
   <meta property="og:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
   <meta name="github-repo" content="byuidatascience/python4ds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="13 Relational data | Python for Data Science" />
   <meta name="twitter:site" content="@byuidss" />
   <meta name="twitter:description" content="This book will teach you how to do data science with R Python: You’ll learn how to get your data into Python, get it into the most useful structure, transform it, visualise it and model it. In this book, you will find a practicum of skills for data science. Just as a chemist learns how to clean test tubes and stock a lab, you’ll learn how to clean data and draw plots—and many other things besides. These are the skills that allow data science to happen, and here you will find the best practices for doing each of these things with Python. You’ll learn how to use the grammar of graphics, literate programming, and reproducible research to save time. You’ll also learn how to manage cognitive resources to facilitate discoveries when wrangling, visualising, and exploring data." />
-  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds/cover.png" />
+  <meta name="twitter:image" content="https://byuidatascience.github.io/python4ds//cover.png" />
 
 <meta name="author" content="J. Hathaway" />
 <meta name="author" content="Katie Larson" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="tidy-data.html"/>
 <link rel="next" href="strings.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/vega-5.17.0/vega.min.js"></script>
 <script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
@@ -62,10 +62,10 @@
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132356198-3"></script>
 <script>
@@ -106,6 +106,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -165,6 +166,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="r4ds.css" type="text/css" />
 </head>
@@ -642,391 +644,61 @@ whether or not they match an observation in the other table.</p></li>
 <div id="prerequisites-7" class="section level3" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Prerequisites</h3>
 <p>We will explore relational data from <code>nycflights13</code> using the two-table verbs from dplyr.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="relational-data.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb210-2"><a href="relational-data.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb210-3"><a href="relational-data.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="relational-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb212-2"><a href="relational-data.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb212-3"><a href="relational-data.html#cb212-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="nycflights13-relational" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> nycflights13</h2>
 <p>We will use the nycflights13 package to learn about relational data. nycflights13 contains four tibbles that are related to the <code>flights</code> table that you used in <a href="transform.html#transform">data transformation</a>:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="relational-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
-<span id="cb211-2"><a href="relational-data.html#cb211-2" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">flights/flights.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb211-3"><a href="relational-data.html#cb211-3" aria-hidden="true" tabindex="-1"></a>airlines <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airlines/airlines.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb211-4"><a href="relational-data.html#cb211-4" aria-hidden="true" tabindex="-1"></a>airports <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airports/airports.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb211-5"><a href="relational-data.html#cb211-5" aria-hidden="true" tabindex="-1"></a>planes <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">planes/planes.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
-<span id="cb211-6"><a href="relational-data.html#cb211-6" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">weather/weather.csv&quot;</span>.<span class="bu">format</span>(base_url))</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="relational-data.html#cb213-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/&quot;</span></span>
+<span id="cb213-2"><a href="relational-data.html#cb213-2" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">flights/flights.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb213-3"><a href="relational-data.html#cb213-3" aria-hidden="true" tabindex="-1"></a>airlines <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airlines/airlines.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb213-4"><a href="relational-data.html#cb213-4" aria-hidden="true" tabindex="-1"></a>airports <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">airports/airports.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb213-5"><a href="relational-data.html#cb213-5" aria-hidden="true" tabindex="-1"></a>planes <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">planes/planes.csv&quot;</span>.<span class="bu">format</span>(base_url))</span>
+<span id="cb213-6"><a href="relational-data.html#cb213-6" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">weather/weather.csv&quot;</span>.<span class="bu">format</span>(base_url))</span></code></pre></div>
 <ul>
 <li><p><code>airlines</code> lets you look up the full carrier name from its abbreviated
 code:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="relational-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a>airlines.head()</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>carrier</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9E</td>
-      <td>Endeavor Air Inc.</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>AA</td>
-      <td>American Airlines Inc.</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>AS</td>
-      <td>Alaska Airlines Inc.</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>B6</td>
-      <td>JetBlue Airways</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>DL</td>
-      <td>Delta Air Lines Inc.</td>
-    </tr>
-  </tbody>
-</table>
-</div></li>
+<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="relational-data.html#cb214-1" aria-hidden="true" tabindex="-1"></a>airlines.head()</span>
+<span id="cb214-2"><a href="relational-data.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   carrier                    name</span></span>
+<span id="cb214-3"><a href="relational-data.html#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0      9E       Endeavor Air Inc.</span></span>
+<span id="cb214-4"><a href="relational-data.html#cb214-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      AA  American Airlines Inc.</span></span>
+<span id="cb214-5"><a href="relational-data.html#cb214-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      AS    Alaska Airlines Inc.</span></span>
+<span id="cb214-6"><a href="relational-data.html#cb214-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      B6         JetBlue Airways</span></span>
+<span id="cb214-7"><a href="relational-data.html#cb214-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      DL    Delta Air Lines Inc.</span></span></code></pre></div></li>
 <li><p><code>airports</code> gives information about each airport, identified by the <code>faa</code>
 airport code:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="relational-data.html#cb213-1" aria-hidden="true" tabindex="-1"></a>airports.head()</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>faa</th>
-      <th>name</th>
-      <th>lat</th>
-      <th>lon</th>
-      <th>alt</th>
-      <th>tz</th>
-      <th>dst</th>
-      <th>tzone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>04G</td>
-      <td>Lansdowne Airport</td>
-      <td>41.130472</td>
-      <td>-80.619583</td>
-      <td>1044</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>06A</td>
-      <td>Moton Field Municipal Airport</td>
-      <td>32.460572</td>
-      <td>-85.680028</td>
-      <td>264</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>06C</td>
-      <td>Schaumburg Regional</td>
-      <td>41.989341</td>
-      <td>-88.101243</td>
-      <td>801</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>06N</td>
-      <td>Randall Airport</td>
-      <td>41.431912</td>
-      <td>-74.391561</td>
-      <td>523</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>09J</td>
-      <td>Jekyll Island Airport</td>
-      <td>31.074472</td>
-      <td>-81.427778</td>
-      <td>11</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-  </tbody>
-</table>
-</div></li>
+<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="relational-data.html#cb215-1" aria-hidden="true" tabindex="-1"></a>airports.head()</span>
+<span id="cb215-2"><a href="relational-data.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    faa                           name        lat  ...  tz  dst             tzone</span></span>
+<span id="cb215-3"><a href="relational-data.html#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0  04G              Lansdowne Airport  41.130472  ...  -5    A  America/New_York</span></span>
+<span id="cb215-4"><a href="relational-data.html#cb215-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  06A  Moton Field Municipal Airport  32.460572  ...  -6    A   America/Chicago</span></span>
+<span id="cb215-5"><a href="relational-data.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  06C            Schaumburg Regional  41.989341  ...  -6    A   America/Chicago</span></span>
+<span id="cb215-6"><a href="relational-data.html#cb215-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  06N                Randall Airport  41.431912  ...  -5    A  America/New_York</span></span>
+<span id="cb215-7"><a href="relational-data.html#cb215-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  09J          Jekyll Island Airport  31.074472  ...  -5    A  America/New_York</span></span>
+<span id="cb215-8"><a href="relational-data.html#cb215-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb215-9"><a href="relational-data.html#cb215-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5 rows x 8 columns]</span></span></code></pre></div></li>
 <li><p><code>planes</code> gives information about each plane, identified by its <code>tailnum</code>:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="relational-data.html#cb214-1" aria-hidden="true" tabindex="-1"></a>planes.head()</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tailnum</th>
-      <th>year</th>
-      <th>type</th>
-      <th>manufacturer</th>
-      <th>model</th>
-      <th>engines</th>
-      <th>seats</th>
-      <th>speed</th>
-      <th>engine</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>N10156</td>
-      <td>2004.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>EMBRAER</td>
-      <td>EMB-145XR</td>
-      <td>2</td>
-      <td>55</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>N102UW</td>
-      <td>1998.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>AIRBUS INDUSTRIE</td>
-      <td>A320-214</td>
-      <td>2</td>
-      <td>182</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>N103US</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>AIRBUS INDUSTRIE</td>
-      <td>A320-214</td>
-      <td>2</td>
-      <td>182</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>N104UW</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>AIRBUS INDUSTRIE</td>
-      <td>A320-214</td>
-      <td>2</td>
-      <td>182</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>N10575</td>
-      <td>2002.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>EMBRAER</td>
-      <td>EMB-145LR</td>
-      <td>2</td>
-      <td>55</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-  </tbody>
-</table>
-</div></li>
+<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb216-1"><a href="relational-data.html#cb216-1" aria-hidden="true" tabindex="-1"></a>planes.head()</span>
+<span id="cb216-2"><a href="relational-data.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tailnum    year                     type  ... seats speed     engine</span></span>
+<span id="cb216-3"><a href="relational-data.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0  N10156  2004.0  Fixed wing multi engine  ...    55   NaN  Turbo-fan</span></span>
+<span id="cb216-4"><a href="relational-data.html#cb216-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  N102UW  1998.0  Fixed wing multi engine  ...   182   NaN  Turbo-fan</span></span>
+<span id="cb216-5"><a href="relational-data.html#cb216-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  N103US  1999.0  Fixed wing multi engine  ...   182   NaN  Turbo-fan</span></span>
+<span id="cb216-6"><a href="relational-data.html#cb216-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  N104UW  1999.0  Fixed wing multi engine  ...   182   NaN  Turbo-fan</span></span>
+<span id="cb216-7"><a href="relational-data.html#cb216-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  N10575  2002.0  Fixed wing multi engine  ...    55   NaN  Turbo-fan</span></span>
+<span id="cb216-8"><a href="relational-data.html#cb216-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb216-9"><a href="relational-data.html#cb216-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5 rows x 9 columns]</span></span></code></pre></div></li>
 <li><p><code>weather</code> gives the weather at each NYC airport for each hour:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="relational-data.html#cb215-1" aria-hidden="true" tabindex="-1"></a>weather.head()</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>origin</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>temp</th>
-      <th>dewp</th>
-      <th>humid</th>
-      <th>wind_dir</th>
-      <th>wind_speed</th>
-      <th>wind_gust</th>
-      <th>precip</th>
-      <th>pressure</th>
-      <th>visib</th>
-      <th>time_hour</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>EWR</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>39.02</td>
-      <td>26.06</td>
-      <td>59.37</td>
-      <td>270.0</td>
-      <td>10.35702</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1012.0</td>
-      <td>10.0</td>
-      <td>2013-01-01T06:00:00Z</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>EWR</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>39.02</td>
-      <td>26.96</td>
-      <td>61.63</td>
-      <td>250.0</td>
-      <td>8.05546</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1012.3</td>
-      <td>10.0</td>
-      <td>2013-01-01T07:00:00Z</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>EWR</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>39.02</td>
-      <td>28.04</td>
-      <td>64.43</td>
-      <td>240.0</td>
-      <td>11.50780</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1012.5</td>
-      <td>10.0</td>
-      <td>2013-01-01T08:00:00Z</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>EWR</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>39.92</td>
-      <td>28.04</td>
-      <td>62.21</td>
-      <td>250.0</td>
-      <td>12.65858</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1012.2</td>
-      <td>10.0</td>
-      <td>2013-01-01T09:00:00Z</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>EWR</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>39.02</td>
-      <td>28.04</td>
-      <td>64.43</td>
-      <td>260.0</td>
-      <td>12.65858</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1011.9</td>
-      <td>10.0</td>
-      <td>2013-01-01T10:00:00Z</td>
-    </tr>
-  </tbody>
-</table>
-</div></li>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="relational-data.html#cb217-1" aria-hidden="true" tabindex="-1"></a>weather.head()</span>
+<span id="cb217-2"><a href="relational-data.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   origin  year  month  day  ...  precip  pressure  visib             time_hour</span></span>
+<span id="cb217-3"><a href="relational-data.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    EWR  2013      1    1  ...     0.0    1012.0   10.0  2013-01-01T06:00:00Z</span></span>
+<span id="cb217-4"><a href="relational-data.html#cb217-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    EWR  2013      1    1  ...     0.0    1012.3   10.0  2013-01-01T07:00:00Z</span></span>
+<span id="cb217-5"><a href="relational-data.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    EWR  2013      1    1  ...     0.0    1012.5   10.0  2013-01-01T08:00:00Z</span></span>
+<span id="cb217-6"><a href="relational-data.html#cb217-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    EWR  2013      1    1  ...     0.0    1012.2   10.0  2013-01-01T09:00:00Z</span></span>
+<span id="cb217-7"><a href="relational-data.html#cb217-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    EWR  2013      1    1  ...     0.0    1011.9   10.0  2013-01-01T10:00:00Z</span></span>
+<span id="cb217-8"><a href="relational-data.html#cb217-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb217-9"><a href="relational-data.html#cb217-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5 rows x 15 columns]</span></span></code></pre></div></li>
 </ul>
 <p>One way to show the relationships between the different tables is with a drawing:</p>
 <p><img src="diagrams/relational-nycflights.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -1072,33 +744,33 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 </ul>
 <p>A variable can be both a primary key <em>and</em> a foreign key. For example, <code>origin</code> is part of the <code>weather</code> primary key, and is also a foreign key for the <code>airport</code> table.</p>
 <p>Once you’ve identified the primary keys in your tables, it’s good practice to verify that they do indeed uniquely identify each observation. One way to do that is to <code>value_counts()</code> the primary keys and look for entries where the count is greater than one:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb216-1"><a href="relational-data.html#cb216-1" aria-hidden="true" tabindex="-1"></a>planes.tailnum.value_counts().value_counts()</span>
-<span id="cb216-2"><a href="relational-data.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    3322</span></span>
-<span id="cb216-3"><a href="relational-data.html#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: tailnum, dtype: int64</span></span>
-<span id="cb216-4"><a href="relational-data.html#cb216-4" aria-hidden="true" tabindex="-1"></a>(weather.</span>
-<span id="cb216-5"><a href="relational-data.html#cb216-5" aria-hidden="true" tabindex="-1"></a>    groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>]).</span>
-<span id="cb216-6"><a href="relational-data.html#cb216-6" aria-hidden="true" tabindex="-1"></a>    size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
-<span id="cb216-7"><a href="relational-data.html#cb216-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    26109</span></span>
-<span id="cb216-8"><a href="relational-data.html#cb216-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        3</span></span>
-<span id="cb216-9"><a href="relational-data.html#cb216-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb218-1"><a href="relational-data.html#cb218-1" aria-hidden="true" tabindex="-1"></a>planes.tailnum.value_counts().value_counts()</span>
+<span id="cb218-2"><a href="relational-data.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    3322</span></span>
+<span id="cb218-3"><a href="relational-data.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: tailnum, dtype: int64</span></span>
+<span id="cb218-4"><a href="relational-data.html#cb218-4" aria-hidden="true" tabindex="-1"></a>(weather.</span>
+<span id="cb218-5"><a href="relational-data.html#cb218-5" aria-hidden="true" tabindex="-1"></a>    groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>]).</span>
+<span id="cb218-6"><a href="relational-data.html#cb218-6" aria-hidden="true" tabindex="-1"></a>    size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
+<span id="cb218-7"><a href="relational-data.html#cb218-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    26109</span></span>
+<span id="cb218-8"><a href="relational-data.html#cb218-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        3</span></span>
+<span id="cb218-9"><a href="relational-data.html#cb218-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
 <p>Sometimes a table doesn’t have an explicit primary key: each row is an observation, but no combination of variables reliably identifies it. For example, what’s the primary key in the <code>flights</code> table? You might think it would be the date plus the flight or tail number, but neither of those are unique:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="relational-data.html#cb217-1" aria-hidden="true" tabindex="-1"></a>(flights.</span>
-<span id="cb217-2"><a href="relational-data.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;flight&#39;</span>]).</span>
-<span id="cb217-3"><a href="relational-data.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
-<span id="cb217-4"><a href="relational-data.html#cb217-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    274398</span></span>
-<span id="cb217-5"><a href="relational-data.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     27029</span></span>
-<span id="cb217-6"><a href="relational-data.html#cb217-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      2636</span></span>
-<span id="cb217-7"><a href="relational-data.html#cb217-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       103</span></span>
-<span id="cb217-8"><a href="relational-data.html#cb217-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span>
-<span id="cb217-9"><a href="relational-data.html#cb217-9" aria-hidden="true" tabindex="-1"></a>(flights.</span>
-<span id="cb217-10"><a href="relational-data.html#cb217-10" aria-hidden="true" tabindex="-1"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;tailnum&#39;</span>]).</span>
-<span id="cb217-11"><a href="relational-data.html#cb217-11" aria-hidden="true" tabindex="-1"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
-<span id="cb217-12"><a href="relational-data.html#cb217-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    186729</span></span>
-<span id="cb217-13"><a href="relational-data.html#cb217-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     49530</span></span>
-<span id="cb217-14"><a href="relational-data.html#cb217-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     12211</span></span>
-<span id="cb217-15"><a href="relational-data.html#cb217-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      2863</span></span>
-<span id="cb217-16"><a href="relational-data.html#cb217-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        78</span></span>
-<span id="cb217-17"><a href="relational-data.html#cb217-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="relational-data.html#cb219-1" aria-hidden="true" tabindex="-1"></a>(flights.</span>
+<span id="cb219-2"><a href="relational-data.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;flight&#39;</span>]).</span>
+<span id="cb219-3"><a href="relational-data.html#cb219-3" aria-hidden="true" tabindex="-1"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
+<span id="cb219-4"><a href="relational-data.html#cb219-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    274398</span></span>
+<span id="cb219-5"><a href="relational-data.html#cb219-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     27029</span></span>
+<span id="cb219-6"><a href="relational-data.html#cb219-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      2636</span></span>
+<span id="cb219-7"><a href="relational-data.html#cb219-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       103</span></span>
+<span id="cb219-8"><a href="relational-data.html#cb219-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span>
+<span id="cb219-9"><a href="relational-data.html#cb219-9" aria-hidden="true" tabindex="-1"></a>(flights.</span>
+<span id="cb219-10"><a href="relational-data.html#cb219-10" aria-hidden="true" tabindex="-1"></a>  groupby([<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>,<span class="st">&#39;day&#39;</span>, <span class="st">&#39;tailnum&#39;</span>]).</span>
+<span id="cb219-11"><a href="relational-data.html#cb219-11" aria-hidden="true" tabindex="-1"></a>  size().reset_index(name <span class="op">=</span> <span class="st">&#39;n&#39;</span>).n.value_counts())</span>
+<span id="cb219-12"><a href="relational-data.html#cb219-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    186729</span></span>
+<span id="cb219-13"><a href="relational-data.html#cb219-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     49530</span></span>
+<span id="cb219-14"><a href="relational-data.html#cb219-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     12211</span></span>
+<span id="cb219-15"><a href="relational-data.html#cb219-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      2863</span></span>
+<span id="cb219-16"><a href="relational-data.html#cb219-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        78</span></span>
+<span id="cb219-17"><a href="relational-data.html#cb219-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: n, dtype: int64</span></span></code></pre></div>
 <p>When starting to work with this data, I had naively assumed that each flight number would be only used once per day: that would make it much easier to communicate problems with a specific flight. Unfortunately that is not the case! If a table lacks a primary key, it’s sometimes useful to add one with <code>mutate()</code> and <code>row_number()</code>. That makes it easier to match observations if you’ve done some filtering and want to check back in with the original data. This is called a <strong>surrogate key</strong>.</p>
 <p>A primary key and the corresponding foreign key in another table form a <strong>relation</strong>. Relations are typically one-to-many. For example, each flight has one plane, but each plane has many flights. In other data, you’ll occasionally see a 1-to-1 relationship. You can think of this as a special case of 1-to-many. You can model many-to-many relations with a many-to-1 relation plus a 1-to-many relation. For example, in this data there’s a many-to-many relationship between airlines and airports: each airline flies to many airports; each airport hosts many airlines.</p>
 <div id="exercises-24" class="section level3" number="13.3.1">
@@ -1112,322 +784,54 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 <h2><span class="header-section-number">13.4</span> Mutating joins</h2>
 <p>The first tool we’ll look at for combining a pair of tables is the <strong>mutating join</strong>. A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.</p>
 <p>Like <code>assign()</code>, the join functions add variables to the right, so if you have a lot of variables already, the new variables won’t get printed out. For these examples, we’ll make it easier to see what’s going on in the examples by creating a narrower dataset:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb218-1"><a href="relational-data.html#cb218-1" aria-hidden="true" tabindex="-1"></a>flights2 <span class="op">=</span> flights.<span class="bu">filter</span>([<span class="st">&#39;year&#39;</span>,<span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>, <span class="st">&#39;tailnum&#39;</span>, <span class="st">&#39;carrier&#39;</span>])</span>
-<span id="cb218-2"><a href="relational-data.html#cb218-2" aria-hidden="true" tabindex="-1"></a>flights2</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>origin</th>
-      <th>dest</th>
-      <th>tailnum</th>
-      <th>carrier</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>IAH</td>
-      <td>N14228</td>
-      <td>UA</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>LGA</td>
-      <td>IAH</td>
-      <td>N24211</td>
-      <td>UA</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>JFK</td>
-      <td>MIA</td>
-      <td>N619AA</td>
-      <td>AA</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>JFK</td>
-      <td>BQN</td>
-      <td>N804JB</td>
-      <td>B6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6</td>
-      <td>LGA</td>
-      <td>ATL</td>
-      <td>N668DN</td>
-      <td>DL</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>336771</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>14</td>
-      <td>JFK</td>
-      <td>DCA</td>
-      <td>NaN</td>
-      <td>9E</td>
-    </tr>
-    <tr>
-      <th>336772</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>LGA</td>
-      <td>SYR</td>
-      <td>NaN</td>
-      <td>9E</td>
-    </tr>
-    <tr>
-      <th>336773</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>12</td>
-      <td>LGA</td>
-      <td>BNA</td>
-      <td>N535MQ</td>
-      <td>MQ</td>
-    </tr>
-    <tr>
-      <th>336774</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>11</td>
-      <td>LGA</td>
-      <td>CLE</td>
-      <td>N511MQ</td>
-      <td>MQ</td>
-    </tr>
-    <tr>
-      <th>336775</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>8</td>
-      <td>LGA</td>
-      <td>RDU</td>
-      <td>N839MQ</td>
-      <td>MQ</td>
-    </tr>
-  </tbody>
-</table>
-<p>336776 rows × 8 columns</p>
-</div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb220-1"><a href="relational-data.html#cb220-1" aria-hidden="true" tabindex="-1"></a>flights2 <span class="op">=</span> flights.<span class="bu">filter</span>([<span class="st">&#39;year&#39;</span>,<span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>,<span class="st">&#39;hour&#39;</span>, <span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>, <span class="st">&#39;tailnum&#39;</span>, <span class="st">&#39;carrier&#39;</span>])</span>
+<span id="cb220-2"><a href="relational-data.html#cb220-2" aria-hidden="true" tabindex="-1"></a>flights2</span>
+<span id="cb220-3"><a href="relational-data.html#cb220-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         year  month  day  hour origin dest tailnum carrier</span></span>
+<span id="cb220-4"><a href="relational-data.html#cb220-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       2013      1    1     5    EWR  IAH  N14228      UA</span></span>
+<span id="cb220-5"><a href="relational-data.html#cb220-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       2013      1    1     5    LGA  IAH  N24211      UA</span></span>
+<span id="cb220-6"><a href="relational-data.html#cb220-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       2013      1    1     5    JFK  MIA  N619AA      AA</span></span>
+<span id="cb220-7"><a href="relational-data.html#cb220-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       2013      1    1     5    JFK  BQN  N804JB      B6</span></span>
+<span id="cb220-8"><a href="relational-data.html#cb220-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       2013      1    1     6    LGA  ATL  N668DN      DL</span></span>
+<span id="cb220-9"><a href="relational-data.html#cb220-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...      ...    ...  ...   ...    ...  ...     ...     ...</span></span>
+<span id="cb220-10"><a href="relational-data.html#cb220-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336771  2013      9   30    14    JFK  DCA     NaN      9E</span></span>
+<span id="cb220-11"><a href="relational-data.html#cb220-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336772  2013      9   30    22    LGA  SYR     NaN      9E</span></span>
+<span id="cb220-12"><a href="relational-data.html#cb220-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336773  2013      9   30    12    LGA  BNA  N535MQ      MQ</span></span>
+<span id="cb220-13"><a href="relational-data.html#cb220-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336774  2013      9   30    11    LGA  CLE  N511MQ      MQ</span></span>
+<span id="cb220-14"><a href="relational-data.html#cb220-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336775  2013      9   30     8    LGA  RDU  N839MQ      MQ</span></span>
+<span id="cb220-15"><a href="relational-data.html#cb220-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb220-16"><a href="relational-data.html#cb220-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [336776 rows x 8 columns]</span></span></code></pre></div>
 <p>(Remember, when you’re in VS Code, you can also use the data viewer to avoid this problem.)</p>
 <p>Imagine you want to add the full airline name to the <code>flights2</code> data. You can combine the <code>airlines</code> and <code>flights2</code> data frames with <code>merge()</code> using <code>how = 'left'</code>:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="relational-data.html#cb219-1" aria-hidden="true" tabindex="-1"></a>(flights2.</span>
-<span id="cb219-2"><a href="relational-data.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  merge(airlines, on <span class="op">=</span> <span class="st">&#39;carrier&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>).</span>
-<span id="cb219-3"><a href="relational-data.html#cb219-3" aria-hidden="true" tabindex="-1"></a>  drop(columns <span class="op">=</span> [<span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>]))</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>tailnum</th>
-      <th>carrier</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>United Air Lines Inc.</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>N24211</td>
-      <td>UA</td>
-      <td>United Air Lines Inc.</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>N619AA</td>
-      <td>AA</td>
-      <td>American Airlines Inc.</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>N804JB</td>
-      <td>B6</td>
-      <td>JetBlue Airways</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6</td>
-      <td>N668DN</td>
-      <td>DL</td>
-      <td>Delta Air Lines Inc.</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>336771</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>14</td>
-      <td>NaN</td>
-      <td>9E</td>
-      <td>Endeavor Air Inc.</td>
-    </tr>
-    <tr>
-      <th>336772</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>NaN</td>
-      <td>9E</td>
-      <td>Endeavor Air Inc.</td>
-    </tr>
-    <tr>
-      <th>336773</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>12</td>
-      <td>N535MQ</td>
-      <td>MQ</td>
-      <td>Envoy Air</td>
-    </tr>
-    <tr>
-      <th>336774</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>11</td>
-      <td>N511MQ</td>
-      <td>MQ</td>
-      <td>Envoy Air</td>
-    </tr>
-    <tr>
-      <th>336775</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>8</td>
-      <td>N839MQ</td>
-      <td>MQ</td>
-      <td>Envoy Air</td>
-    </tr>
-  </tbody>
-</table>
-<p>336776 rows × 7 columns</p>
-</div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="relational-data.html#cb221-1" aria-hidden="true" tabindex="-1"></a>(flights2.</span>
+<span id="cb221-2"><a href="relational-data.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  merge(airlines, on <span class="op">=</span> <span class="st">&#39;carrier&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>).</span>
+<span id="cb221-3"><a href="relational-data.html#cb221-3" aria-hidden="true" tabindex="-1"></a>  drop(columns <span class="op">=</span> [<span class="st">&#39;origin&#39;</span>, <span class="st">&#39;dest&#39;</span>]))</span>
+<span id="cb221-4"><a href="relational-data.html#cb221-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         year  month  day  hour tailnum carrier                    name</span></span>
+<span id="cb221-5"><a href="relational-data.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       2013      1    1     5  N14228      UA   United Air Lines Inc.</span></span>
+<span id="cb221-6"><a href="relational-data.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       2013      1    1     5  N24211      UA   United Air Lines Inc.</span></span>
+<span id="cb221-7"><a href="relational-data.html#cb221-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       2013      1    1     5  N619AA      AA  American Airlines Inc.</span></span>
+<span id="cb221-8"><a href="relational-data.html#cb221-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       2013      1    1     5  N804JB      B6         JetBlue Airways</span></span>
+<span id="cb221-9"><a href="relational-data.html#cb221-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       2013      1    1     6  N668DN      DL    Delta Air Lines Inc.</span></span>
+<span id="cb221-10"><a href="relational-data.html#cb221-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...      ...    ...  ...   ...     ...     ...                     ...</span></span>
+<span id="cb221-11"><a href="relational-data.html#cb221-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336771  2013      9   30    14     NaN      9E       Endeavor Air Inc.</span></span>
+<span id="cb221-12"><a href="relational-data.html#cb221-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336772  2013      9   30    22     NaN      9E       Endeavor Air Inc.</span></span>
+<span id="cb221-13"><a href="relational-data.html#cb221-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336773  2013      9   30    12  N535MQ      MQ               Envoy Air</span></span>
+<span id="cb221-14"><a href="relational-data.html#cb221-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336774  2013      9   30    11  N511MQ      MQ               Envoy Air</span></span>
+<span id="cb221-15"><a href="relational-data.html#cb221-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336775  2013      9   30     8  N839MQ      MQ               Envoy Air</span></span>
+<span id="cb221-16"><a href="relational-data.html#cb221-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb221-17"><a href="relational-data.html#cb221-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [336776 rows x 7 columns]</span></span></code></pre></div>
 <p>The result of joining airlines to flights2 is an additional variable: <code>name</code>. The following sections explain, in detail, how mutating joins work. You’ll start by learning a useful visual representation of joins. We’ll then use that to explain the four mutating join functions: the inner join, and the three outer joins. When working with real data, keys don’t always uniquely identify observations, so next we’ll talk about what happens when there isn’t a unique match. Finally, you’ll learn how to tell dplyr which variables are the keys for a given join.</p>
 <div id="understanding-joins" class="section level3" number="13.4.1">
 <h3><span class="header-section-number">13.4.1</span> Understanding joins</h3>
 <p>To help you learn how joins work, I’m going to use a visual representation:</p>
 <p><img src="diagrams/join-setup.png" width="118" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb220-1"><a href="relational-data.html#cb220-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb220-2"><a href="relational-data.html#cb220-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb220-3"><a href="relational-data.html#cb220-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>]})</span>
-<span id="cb220-4"><a href="relational-data.html#cb220-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-5"><a href="relational-data.html#cb220-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-6"><a href="relational-data.html#cb220-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb220-7"><a href="relational-data.html#cb220-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb220-8"><a href="relational-data.html#cb220-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>, <span class="st">&#39;y3&#39;</span>]})</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb222-1"><a href="relational-data.html#cb222-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb222-2"><a href="relational-data.html#cb222-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
+<span id="cb222-3"><a href="relational-data.html#cb222-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>]})</span>
+<span id="cb222-4"><a href="relational-data.html#cb222-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-5"><a href="relational-data.html#cb222-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-6"><a href="relational-data.html#cb222-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb222-7"><a href="relational-data.html#cb222-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
+<span id="cb222-8"><a href="relational-data.html#cb222-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>, <span class="st">&#39;y3&#39;</span>]})</span></code></pre></div>
 <p>The coloured column represents the “key” variable: these are used to match the rows between the tables. The grey column represents the “value” column that is carried along for the ride. In these examples I’ll show a single key variable, but the idea generalises in a straightforward way to multiple keys and multiple values.</p>
 <p>A join is a way of connecting each row in <code>x</code> to zero, one, or more rows in <code>y</code>. The following diagram shows each potential match as an intersection of a pair of lines.</p>
 <p><img src="diagrams/join-setup2.png" width="166" style="display: block; margin: auto;" /></p>
@@ -1441,52 +845,11 @@ For example, <code>flights.tailnum</code> is a foreign key because it appears in
 <p><img src="diagrams/join-inner.png" width="338" style="display: block; margin: auto;" /></p>
 <p>(To be precise, this is an inner <strong>equijoin</strong> because the keys are matched using the equality operator. Since most joins are equijoins we usually drop that specification.)</p>
 <p>The output of an inner join is a new data frame that contains the key, the x values, and the y values. We use <code>by</code> to tell dplyr which variable is the key:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="relational-data.html#cb221-1" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;inner&#39;</span>)</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key</th>
-      <th>val_x</th>
-      <th>val_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>x1</td>
-      <td>y1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>x2</td>
-      <td>y2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>x3</td>
-      <td>y3</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="relational-data.html#cb223-1" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;inner&#39;</span>)</span>
+<span id="cb223-2"><a href="relational-data.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    key val_x val_y</span></span>
+<span id="cb223-3"><a href="relational-data.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1    x1    y1</span></span>
+<span id="cb223-4"><a href="relational-data.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    2    x2    y2</span></span>
+<span id="cb223-5"><a href="relational-data.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    3    x3    y3</span></span></code></pre></div>
 <p>The most important property of an inner join is that unmatched rows are not included in the result. This means that generally inner joins are usually not appropriate for use in analysis because it’s too easy to lose observations.</p>
 </div>
 <div id="outer-join" class="section level3" number="13.4.3">
@@ -1516,131 +879,39 @@ relationship.</p>
 <p>Note that I’ve put the key column in a slightly different position
 in the output. This reflects that the key is a primary key in <code>y</code>
 and a foreign key in <code>x</code>.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb222-1"><a href="relational-data.html#cb222-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb222-2"><a href="relational-data.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
-<span id="cb222-3"><a href="relational-data.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
-<span id="cb222-4"><a href="relational-data.html#cb222-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb222-5"><a href="relational-data.html#cb222-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb222-6"><a href="relational-data.html#cb222-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb222-7"><a href="relational-data.html#cb222-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
-<span id="cb222-8"><a href="relational-data.html#cb222-8" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
-<span id="cb222-9"><a href="relational-data.html#cb222-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb222-10"><a href="relational-data.html#cb222-10" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key</th>
-      <th>val_x</th>
-      <th>val_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>x1</td>
-      <td>y1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>x2</td>
-      <td>y2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>x3</td>
-      <td>y2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>x4</td>
-      <td>y1</td>
-    </tr>
-  </tbody>
-</table>
-</div></li>
+<div class="sourceCode" id="cb224"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb224-1"><a href="relational-data.html#cb224-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb224-2"><a href="relational-data.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb224-3"><a href="relational-data.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
+<span id="cb224-4"><a href="relational-data.html#cb224-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-5"><a href="relational-data.html#cb224-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-6"><a href="relational-data.html#cb224-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb224-7"><a href="relational-data.html#cb224-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb224-8"><a href="relational-data.html#cb224-8" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
+<span id="cb224-9"><a href="relational-data.html#cb224-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-10"><a href="relational-data.html#cb224-10" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span>
+<span id="cb224-11"><a href="relational-data.html#cb224-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    key val_x val_y</span></span>
+<span id="cb224-12"><a href="relational-data.html#cb224-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1    x1    y1</span></span>
+<span id="cb224-13"><a href="relational-data.html#cb224-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    2    x2    y2</span></span>
+<span id="cb224-14"><a href="relational-data.html#cb224-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    2    x3    y2</span></span>
+<span id="cb224-15"><a href="relational-data.html#cb224-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    1    x4    y1</span></span></code></pre></div></li>
 <li><p>Both tables have duplicate keys. This is usually an error because in
 neither table do the keys uniquely identify an observation. When you join
 duplicated keys, you get all possible combinations, the Cartesian product:</p>
 <p><img src="diagrams/join-many-to-many.png" width="342" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="relational-data.html#cb223-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb223-2"><a href="relational-data.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
-<span id="cb223-3"><a href="relational-data.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
-<span id="cb223-4"><a href="relational-data.html#cb223-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb223-5"><a href="relational-data.html#cb223-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb223-6"><a href="relational-data.html#cb223-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
-<span id="cb223-7"><a href="relational-data.html#cb223-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
-<span id="cb223-8"><a href="relational-data.html#cb223-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb223-9"><a href="relational-data.html#cb223-9" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key</th>
-      <th>val_x</th>
-      <th>val_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>x1</td>
-      <td>y1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>x2</td>
-      <td>y2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>x3</td>
-      <td>y2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>x4</td>
-      <td>y1</td>
-    </tr>
-  </tbody>
-</table>
-</div></li>
+<div class="sourceCode" id="cb225"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="relational-data.html#cb225-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb225-2"><a href="relational-data.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb225-3"><a href="relational-data.html#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_x&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x4&#39;</span>]})</span>
+<span id="cb225-4"><a href="relational-data.html#cb225-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-5"><a href="relational-data.html#cb225-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb225-6"><a href="relational-data.html#cb225-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;key&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb225-7"><a href="relational-data.html#cb225-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;val_y&#39;</span>: [<span class="st">&#39;y1&#39;</span>, <span class="st">&#39;y2&#39;</span>]})</span>
+<span id="cb225-8"><a href="relational-data.html#cb225-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-9"><a href="relational-data.html#cb225-9" aria-hidden="true" tabindex="-1"></a>x.merge(y, on <span class="op">=</span> <span class="st">&#39;key&#39;</span>, how <span class="op">=</span> <span class="st">&#39;left&#39;</span>)</span>
+<span id="cb225-10"><a href="relational-data.html#cb225-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    key val_x val_y</span></span>
+<span id="cb225-11"><a href="relational-data.html#cb225-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1    x1    y1</span></span>
+<span id="cb225-12"><a href="relational-data.html#cb225-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    2    x2    y2</span></span>
+<span id="cb225-13"><a href="relational-data.html#cb225-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    2    x3    y2</span></span>
+<span id="cb225-14"><a href="relational-data.html#cb225-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    1    x4    y1</span></span></code></pre></div></li>
 </ol>
 </div>
 <div id="join-by" class="section level3" number="13.4.5">
@@ -1651,536 +922,40 @@ duplicated keys, you get all possible combinations, the Cartesian product:</p>
 the so called <strong>natural</strong> join. The default <code>how</code> is <strong>left join</strong>. For example,
 the flights and weather tables match on their common variables:
 <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</code> and <code>origin</code>.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb224-1"><a href="relational-data.html#cb224-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(weather)</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>origin</th>
-      <th>dest</th>
-      <th>tailnum</th>
-      <th>carrier</th>
-      <th>temp</th>
-      <th>dewp</th>
-      <th>humid</th>
-      <th>wind_dir</th>
-      <th>wind_speed</th>
-      <th>wind_gust</th>
-      <th>precip</th>
-      <th>pressure</th>
-      <th>visib</th>
-      <th>time_hour</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>IAH</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>39.02</td>
-      <td>28.04</td>
-      <td>64.43</td>
-      <td>260.0</td>
-      <td>12.65858</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1011.9</td>
-      <td>10.0</td>
-      <td>2013-01-01T10:00:00Z</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>ORD</td>
-      <td>N39463</td>
-      <td>UA</td>
-      <td>39.02</td>
-      <td>28.04</td>
-      <td>64.43</td>
-      <td>260.0</td>
-      <td>12.65858</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1011.9</td>
-      <td>10.0</td>
-      <td>2013-01-01T10:00:00Z</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>LGA</td>
-      <td>IAH</td>
-      <td>N24211</td>
-      <td>UA</td>
-      <td>39.92</td>
-      <td>24.98</td>
-      <td>54.81</td>
-      <td>250.0</td>
-      <td>14.96014</td>
-      <td>21.86482</td>
-      <td>0.0</td>
-      <td>1011.4</td>
-      <td>10.0</td>
-      <td>2013-01-01T10:00:00Z</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>JFK</td>
-      <td>MIA</td>
-      <td>N619AA</td>
-      <td>AA</td>
-      <td>39.02</td>
-      <td>26.96</td>
-      <td>61.63</td>
-      <td>260.0</td>
-      <td>14.96014</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1012.1</td>
-      <td>10.0</td>
-      <td>2013-01-01T10:00:00Z</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>JFK</td>
-      <td>BQN</td>
-      <td>N804JB</td>
-      <td>B6</td>
-      <td>39.02</td>
-      <td>26.96</td>
-      <td>61.63</td>
-      <td>260.0</td>
-      <td>14.96014</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1012.1</td>
-      <td>10.0</td>
-      <td>2013-01-01T10:00:00Z</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>335215</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>SYR</td>
-      <td>N354JB</td>
-      <td>B6</td>
-      <td>60.98</td>
-      <td>55.94</td>
-      <td>83.47</td>
-      <td>230.0</td>
-      <td>9.20624</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1016.5</td>
-      <td>10.0</td>
-      <td>2013-10-01T02:00:00Z</td>
-    </tr>
-    <tr>
-      <th>335216</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>BUF</td>
-      <td>N281JB</td>
-      <td>B6</td>
-      <td>60.98</td>
-      <td>55.94</td>
-      <td>83.47</td>
-      <td>230.0</td>
-      <td>9.20624</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1016.5</td>
-      <td>10.0</td>
-      <td>2013-10-01T02:00:00Z</td>
-    </tr>
-    <tr>
-      <th>335217</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>ROC</td>
-      <td>N346JB</td>
-      <td>B6</td>
-      <td>60.98</td>
-      <td>55.94</td>
-      <td>83.47</td>
-      <td>230.0</td>
-      <td>9.20624</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1016.5</td>
-      <td>10.0</td>
-      <td>2013-10-01T02:00:00Z</td>
-    </tr>
-    <tr>
-      <th>335218</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>BOS</td>
-      <td>N565JB</td>
-      <td>B6</td>
-      <td>60.98</td>
-      <td>55.94</td>
-      <td>83.47</td>
-      <td>230.0</td>
-      <td>9.20624</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1016.5</td>
-      <td>10.0</td>
-      <td>2013-10-01T02:00:00Z</td>
-    </tr>
-    <tr>
-      <th>335219</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>23</td>
-      <td>JFK</td>
-      <td>PSE</td>
-      <td>N516JB</td>
-      <td>B6</td>
-      <td>60.08</td>
-      <td>55.04</td>
-      <td>83.41</td>
-      <td>240.0</td>
-      <td>9.20624</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>1016.3</td>
-      <td>10.0</td>
-      <td>2013-10-01T03:00:00Z</td>
-    </tr>
-  </tbody>
-</table>
-<p>335220 rows × 18 columns</p>
-</div></li>
+<div class="sourceCode" id="cb226"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb226-1"><a href="relational-data.html#cb226-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(weather)</span>
+<span id="cb226-2"><a href="relational-data.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         year  month  day  hour  ... precip pressure visib             time_hour</span></span>
+<span id="cb226-3"><a href="relational-data.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       2013      1    1     5  ...    0.0   1011.9  10.0  2013-01-01T10:00:00Z</span></span>
+<span id="cb226-4"><a href="relational-data.html#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       2013      1    1     5  ...    0.0   1011.9  10.0  2013-01-01T10:00:00Z</span></span>
+<span id="cb226-5"><a href="relational-data.html#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       2013      1    1     5  ...    0.0   1011.4  10.0  2013-01-01T10:00:00Z</span></span>
+<span id="cb226-6"><a href="relational-data.html#cb226-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       2013      1    1     5  ...    0.0   1012.1  10.0  2013-01-01T10:00:00Z</span></span>
+<span id="cb226-7"><a href="relational-data.html#cb226-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       2013      1    1     5  ...    0.0   1012.1  10.0  2013-01-01T10:00:00Z</span></span>
+<span id="cb226-8"><a href="relational-data.html#cb226-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...      ...    ...  ...   ...  ...    ...      ...   ...                   ...</span></span>
+<span id="cb226-9"><a href="relational-data.html#cb226-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 335215  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
+<span id="cb226-10"><a href="relational-data.html#cb226-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 335216  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
+<span id="cb226-11"><a href="relational-data.html#cb226-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 335217  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
+<span id="cb226-12"><a href="relational-data.html#cb226-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 335218  2013      9   30    22  ...    0.0   1016.5  10.0  2013-10-01T02:00:00Z</span></span>
+<span id="cb226-13"><a href="relational-data.html#cb226-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 335219  2013      9   30    23  ...    0.0   1016.3  10.0  2013-10-01T03:00:00Z</span></span>
+<span id="cb226-14"><a href="relational-data.html#cb226-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb226-15"><a href="relational-data.html#cb226-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [335220 rows x 18 columns]</span></span></code></pre></div></li>
 <li><p>A character vector, <code>on = "x"</code>. This is like a natural join, but uses only
 some of the common variables. For example, <code>flights</code> and <code>planes</code> have
 <code>year</code> variables, but they mean different things so we only want to join by
 <code>tailnum</code>. If you have two variables then you can use <code>on = ["x", "y"]</code></p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="relational-data.html#cb225-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(planes, on <span class="op">=</span> <span class="st">&#39;tailnum&#39;</span>)</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year_x</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>origin</th>
-      <th>dest</th>
-      <th>tailnum</th>
-      <th>carrier</th>
-      <th>year_y</th>
-      <th>type</th>
-      <th>manufacturer</th>
-      <th>model</th>
-      <th>engines</th>
-      <th>seats</th>
-      <th>speed</th>
-      <th>engine</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>IAH</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOEING</td>
-      <td>737-824</td>
-      <td>2</td>
-      <td>149</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>8</td>
-      <td>14</td>
-      <td>EWR</td>
-      <td>MIA</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOEING</td>
-      <td>737-824</td>
-      <td>2</td>
-      <td>149</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>9</td>
-      <td>7</td>
-      <td>EWR</td>
-      <td>BOS</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOEING</td>
-      <td>737-824</td>
-      <td>2</td>
-      <td>149</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>9</td>
-      <td>11</td>
-      <td>EWR</td>
-      <td>TPA</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOEING</td>
-      <td>737-824</td>
-      <td>2</td>
-      <td>149</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>13</td>
-      <td>8</td>
-      <td>EWR</td>
-      <td>BOS</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>1999.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOEING</td>
-      <td>737-824</td>
-      <td>2</td>
-      <td>149</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>284165</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>20</td>
-      <td>18</td>
-      <td>LGA</td>
-      <td>CLE</td>
-      <td>N766SK</td>
-      <td>OO</td>
-      <td>2005.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOMBARDIER INC</td>
-      <td>CL-600-2C10</td>
-      <td>2</td>
-      <td>80</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>284166</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>22</td>
-      <td>18</td>
-      <td>LGA</td>
-      <td>CLE</td>
-      <td>N772SK</td>
-      <td>OO</td>
-      <td>2005.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOMBARDIER INC</td>
-      <td>CL-600-2C10</td>
-      <td>2</td>
-      <td>80</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>284167</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>23</td>
-      <td>18</td>
-      <td>LGA</td>
-      <td>CLE</td>
-      <td>N776SK</td>
-      <td>OO</td>
-      <td>2006.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOMBARDIER INC</td>
-      <td>CL-600-2C10</td>
-      <td>2</td>
-      <td>80</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>284168</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>24</td>
-      <td>18</td>
-      <td>LGA</td>
-      <td>CLE</td>
-      <td>N785SK</td>
-      <td>OO</td>
-      <td>2009.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOMBARDIER INC</td>
-      <td>CL-600-2C10</td>
-      <td>2</td>
-      <td>80</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-    <tr>
-      <th>284169</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>28</td>
-      <td>7</td>
-      <td>EWR</td>
-      <td>SEA</td>
-      <td>N557AS</td>
-      <td>AS</td>
-      <td>2006.0</td>
-      <td>Fixed wing multi engine</td>
-      <td>BOEING</td>
-      <td>737-890</td>
-      <td>2</td>
-      <td>149</td>
-      <td>NaN</td>
-      <td>Turbo-fan</td>
-    </tr>
-  </tbody>
-</table>
-<p>284170 rows × 16 columns</p>
-</div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="relational-data.html#cb227-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(planes, on <span class="op">=</span> <span class="st">&#39;tailnum&#39;</span>)</span>
+<span id="cb227-2"><a href="relational-data.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         year_x  month  day  hour  ... engines seats speed     engine</span></span>
+<span id="cb227-3"><a href="relational-data.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         2013      1    1     5  ...       2   149   NaN  Turbo-fan</span></span>
+<span id="cb227-4"><a href="relational-data.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         2013      1    8    14  ...       2   149   NaN  Turbo-fan</span></span>
+<span id="cb227-5"><a href="relational-data.html#cb227-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         2013      1    9     7  ...       2   149   NaN  Turbo-fan</span></span>
+<span id="cb227-6"><a href="relational-data.html#cb227-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3         2013      1    9    11  ...       2   149   NaN  Turbo-fan</span></span>
+<span id="cb227-7"><a href="relational-data.html#cb227-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4         2013      1   13     8  ...       2   149   NaN  Turbo-fan</span></span>
+<span id="cb227-8"><a href="relational-data.html#cb227-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...        ...    ...  ...   ...  ...     ...   ...   ...        ...</span></span>
+<span id="cb227-9"><a href="relational-data.html#cb227-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 284165    2013      9   20    18  ...       2    80   NaN  Turbo-fan</span></span>
+<span id="cb227-10"><a href="relational-data.html#cb227-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 284166    2013      9   22    18  ...       2    80   NaN  Turbo-fan</span></span>
+<span id="cb227-11"><a href="relational-data.html#cb227-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 284167    2013      9   23    18  ...       2    80   NaN  Turbo-fan</span></span>
+<span id="cb227-12"><a href="relational-data.html#cb227-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 284168    2013      9   24    18  ...       2    80   NaN  Turbo-fan</span></span>
+<span id="cb227-13"><a href="relational-data.html#cb227-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 284169    2013      9   28     7  ...       2   149   NaN  Turbo-fan</span></span>
+<span id="cb227-14"><a href="relational-data.html#cb227-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb227-15"><a href="relational-data.html#cb227-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [284170 rows x 16 columns]</span></span></code></pre></div>
 <p>Note that the <code>year</code> variables (which appear in both input data frames,
 but are not constrained to be equal) are disambiguated in the output with
 a suffix.</p></li>
@@ -2189,508 +964,36 @@ a suffix.</p></li>
 with the airports data which contains the location (<code>lat</code> and <code>lon</code>) of
 each airport. Each flight has an origin and destination <code>airport</code>, so we
 need to specify which one we want to join to:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb226-1"><a href="relational-data.html#cb226-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(airports, left_on <span class="op">=</span> <span class="st">&#39;dest&#39;</span>, right_on <span class="op">=</span> <span class="st">&#39;faa&#39;</span>)</span></code></pre></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>origin</th>
-      <th>dest</th>
-      <th>tailnum</th>
-      <th>carrier</th>
-      <th>faa</th>
-      <th>name</th>
-      <th>lat</th>
-      <th>lon</th>
-      <th>alt</th>
-      <th>tz</th>
-      <th>dst</th>
-      <th>tzone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>IAH</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>IAH</td>
-      <td>George Bush Intercontinental</td>
-      <td>29.984433</td>
-      <td>-95.341442</td>
-      <td>97</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>LGA</td>
-      <td>IAH</td>
-      <td>N24211</td>
-      <td>UA</td>
-      <td>IAH</td>
-      <td>George Bush Intercontinental</td>
-      <td>29.984433</td>
-      <td>-95.341442</td>
-      <td>97</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6</td>
-      <td>LGA</td>
-      <td>IAH</td>
-      <td>N459UA</td>
-      <td>UA</td>
-      <td>IAH</td>
-      <td>George Bush Intercontinental</td>
-      <td>29.984433</td>
-      <td>-95.341442</td>
-      <td>97</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>7</td>
-      <td>LGA</td>
-      <td>IAH</td>
-      <td>N488UA</td>
-      <td>UA</td>
-      <td>IAH</td>
-      <td>George Bush Intercontinental</td>
-      <td>29.984433</td>
-      <td>-95.341442</td>
-      <td>97</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>7</td>
-      <td>EWR</td>
-      <td>IAH</td>
-      <td>N37408</td>
-      <td>UA</td>
-      <td>IAH</td>
-      <td>George Bush Intercontinental</td>
-      <td>29.984433</td>
-      <td>-95.341442</td>
-      <td>97</td>
-      <td>-6</td>
-      <td>A</td>
-      <td>America/Chicago</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>329169</th>
-      <td>2013</td>
-      <td>8</td>
-      <td>3</td>
-      <td>16</td>
-      <td>EWR</td>
-      <td>ANC</td>
-      <td>N572UA</td>
-      <td>UA</td>
-      <td>ANC</td>
-      <td>Ted Stevens Anchorage Intl</td>
-      <td>61.174361</td>
-      <td>-149.996361</td>
-      <td>152</td>
-      <td>-9</td>
-      <td>A</td>
-      <td>America/Anchorage</td>
-    </tr>
-    <tr>
-      <th>329170</th>
-      <td>2013</td>
-      <td>8</td>
-      <td>10</td>
-      <td>16</td>
-      <td>EWR</td>
-      <td>ANC</td>
-      <td>N559UA</td>
-      <td>UA</td>
-      <td>ANC</td>
-      <td>Ted Stevens Anchorage Intl</td>
-      <td>61.174361</td>
-      <td>-149.996361</td>
-      <td>152</td>
-      <td>-9</td>
-      <td>A</td>
-      <td>America/Anchorage</td>
-    </tr>
-    <tr>
-      <th>329171</th>
-      <td>2013</td>
-      <td>8</td>
-      <td>17</td>
-      <td>16</td>
-      <td>EWR</td>
-      <td>ANC</td>
-      <td>N528UA</td>
-      <td>UA</td>
-      <td>ANC</td>
-      <td>Ted Stevens Anchorage Intl</td>
-      <td>61.174361</td>
-      <td>-149.996361</td>
-      <td>152</td>
-      <td>-9</td>
-      <td>A</td>
-      <td>America/Anchorage</td>
-    </tr>
-    <tr>
-      <th>329172</th>
-      <td>2013</td>
-      <td>8</td>
-      <td>24</td>
-      <td>16</td>
-      <td>EWR</td>
-      <td>ANC</td>
-      <td>N534UA</td>
-      <td>UA</td>
-      <td>ANC</td>
-      <td>Ted Stevens Anchorage Intl</td>
-      <td>61.174361</td>
-      <td>-149.996361</td>
-      <td>152</td>
-      <td>-9</td>
-      <td>A</td>
-      <td>America/Anchorage</td>
-    </tr>
-    <tr>
-      <th>329173</th>
-      <td>2013</td>
-      <td>7</td>
-      <td>27</td>
-      <td>1</td>
-      <td>EWR</td>
-      <td>LGA</td>
-      <td>NaN</td>
-      <td>US</td>
-      <td>LGA</td>
-      <td>La Guardia</td>
-      <td>40.777245</td>
-      <td>-73.872608</td>
-      <td>22</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-  </tbody>
-</table>
-<p>329174 rows × 16 columns</p>
-</div>
-flights2.merge(airports, left_on = 'origin', right_on = 'faa')
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>origin</th>
-      <th>dest</th>
-      <th>tailnum</th>
-      <th>carrier</th>
-      <th>faa</th>
-      <th>name</th>
-      <th>lat</th>
-      <th>lon</th>
-      <th>alt</th>
-      <th>tz</th>
-      <th>dst</th>
-      <th>tzone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>IAH</td>
-      <td>N14228</td>
-      <td>UA</td>
-      <td>EWR</td>
-      <td>Newark Liberty Intl</td>
-      <td>40.692500</td>
-      <td>-74.168667</td>
-      <td>18</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>5</td>
-      <td>EWR</td>
-      <td>ORD</td>
-      <td>N39463</td>
-      <td>UA</td>
-      <td>EWR</td>
-      <td>Newark Liberty Intl</td>
-      <td>40.692500</td>
-      <td>-74.168667</td>
-      <td>18</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6</td>
-      <td>EWR</td>
-      <td>FLL</td>
-      <td>N516JB</td>
-      <td>B6</td>
-      <td>EWR</td>
-      <td>Newark Liberty Intl</td>
-      <td>40.692500</td>
-      <td>-74.168667</td>
-      <td>18</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6</td>
-      <td>EWR</td>
-      <td>SFO</td>
-      <td>N53441</td>
-      <td>UA</td>
-      <td>EWR</td>
-      <td>Newark Liberty Intl</td>
-      <td>40.692500</td>
-      <td>-74.168667</td>
-      <td>18</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2013</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6</td>
-      <td>EWR</td>
-      <td>LAS</td>
-      <td>N76515</td>
-      <td>UA</td>
-      <td>EWR</td>
-      <td>Newark Liberty Intl</td>
-      <td>40.692500</td>
-      <td>-74.168667</td>
-      <td>18</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>336771</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>BUF</td>
-      <td>N281JB</td>
-      <td>B6</td>
-      <td>JFK</td>
-      <td>John F Kennedy Intl</td>
-      <td>40.639751</td>
-      <td>-73.778925</td>
-      <td>13</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>336772</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>ROC</td>
-      <td>N346JB</td>
-      <td>B6</td>
-      <td>JFK</td>
-      <td>John F Kennedy Intl</td>
-      <td>40.639751</td>
-      <td>-73.778925</td>
-      <td>13</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>336773</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>22</td>
-      <td>JFK</td>
-      <td>BOS</td>
-      <td>N565JB</td>
-      <td>B6</td>
-      <td>JFK</td>
-      <td>John F Kennedy Intl</td>
-      <td>40.639751</td>
-      <td>-73.778925</td>
-      <td>13</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>336774</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>23</td>
-      <td>JFK</td>
-      <td>PSE</td>
-      <td>N516JB</td>
-      <td>B6</td>
-      <td>JFK</td>
-      <td>John F Kennedy Intl</td>
-      <td>40.639751</td>
-      <td>-73.778925</td>
-      <td>13</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-    <tr>
-      <th>336775</th>
-      <td>2013</td>
-      <td>9</td>
-      <td>30</td>
-      <td>14</td>
-      <td>JFK</td>
-      <td>DCA</td>
-      <td>NaN</td>
-      <td>9E</td>
-      <td>JFK</td>
-      <td>John F Kennedy Intl</td>
-      <td>40.639751</td>
-      <td>-73.778925</td>
-      <td>13</td>
-      <td>-5</td>
-      <td>A</td>
-      <td>America/New_York</td>
-    </tr>
-  </tbody>
-</table>
-<p>336776 rows × 16 columns</p>
-</div></li>
+<div class="sourceCode" id="cb228"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb228-1"><a href="relational-data.html#cb228-1" aria-hidden="true" tabindex="-1"></a>flights2.merge(airports, left_on <span class="op">=</span> <span class="st">&#39;dest&#39;</span>, right_on <span class="op">=</span> <span class="st">&#39;faa&#39;</span>)</span>
+<span id="cb228-2"><a href="relational-data.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         year  month  day  hour  ...  alt tz dst              tzone</span></span>
+<span id="cb228-3"><a href="relational-data.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       2013      1    1     5  ...   97 -6   A    America/Chicago</span></span>
+<span id="cb228-4"><a href="relational-data.html#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       2013      1    1     5  ...   97 -6   A    America/Chicago</span></span>
+<span id="cb228-5"><a href="relational-data.html#cb228-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       2013      1    1     6  ...   97 -6   A    America/Chicago</span></span>
+<span id="cb228-6"><a href="relational-data.html#cb228-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       2013      1    1     7  ...   97 -6   A    America/Chicago</span></span>
+<span id="cb228-7"><a href="relational-data.html#cb228-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       2013      1    1     7  ...   97 -6   A    America/Chicago</span></span>
+<span id="cb228-8"><a href="relational-data.html#cb228-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...      ...    ...  ...   ...  ...  ... ..  ..                ...</span></span>
+<span id="cb228-9"><a href="relational-data.html#cb228-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 329169  2013      8    3    16  ...  152 -9   A  America/Anchorage</span></span>
+<span id="cb228-10"><a href="relational-data.html#cb228-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 329170  2013      8   10    16  ...  152 -9   A  America/Anchorage</span></span>
+<span id="cb228-11"><a href="relational-data.html#cb228-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 329171  2013      8   17    16  ...  152 -9   A  America/Anchorage</span></span>
+<span id="cb228-12"><a href="relational-data.html#cb228-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 329172  2013      8   24    16  ...  152 -9   A  America/Anchorage</span></span>
+<span id="cb228-13"><a href="relational-data.html#cb228-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 329173  2013      7   27     1  ...   22 -5   A   America/New_York</span></span>
+<span id="cb228-14"><a href="relational-data.html#cb228-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb228-15"><a href="relational-data.html#cb228-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [329174 rows x 16 columns]</span></span>
+<span id="cb228-16"><a href="relational-data.html#cb228-16" aria-hidden="true" tabindex="-1"></a>flights2.merge(airports, left_on <span class="op">=</span> <span class="st">&#39;origin&#39;</span>, right_on <span class="op">=</span> <span class="st">&#39;faa&#39;</span>)</span>
+<span id="cb228-17"><a href="relational-data.html#cb228-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         year  month  day  hour origin  ...        lon alt tz dst             tzone</span></span>
+<span id="cb228-18"><a href="relational-data.html#cb228-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       2013      1    1     5    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
+<span id="cb228-19"><a href="relational-data.html#cb228-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       2013      1    1     5    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
+<span id="cb228-20"><a href="relational-data.html#cb228-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       2013      1    1     6    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
+<span id="cb228-21"><a href="relational-data.html#cb228-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       2013      1    1     6    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
+<span id="cb228-22"><a href="relational-data.html#cb228-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       2013      1    1     6    EWR  ... -74.168667  18 -5   A  America/New_York</span></span>
+<span id="cb228-23"><a href="relational-data.html#cb228-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ...      ...    ...  ...   ...    ...  ...        ...  .. ..  ..               ...</span></span>
+<span id="cb228-24"><a href="relational-data.html#cb228-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336771  2013      9   30    22    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
+<span id="cb228-25"><a href="relational-data.html#cb228-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336772  2013      9   30    22    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
+<span id="cb228-26"><a href="relational-data.html#cb228-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336773  2013      9   30    22    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
+<span id="cb228-27"><a href="relational-data.html#cb228-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336774  2013      9   30    23    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
+<span id="cb228-28"><a href="relational-data.html#cb228-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 336775  2013      9   30    14    JFK  ... -73.778925  13 -5   A  America/New_York</span></span>
+<span id="cb228-29"><a href="relational-data.html#cb228-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb228-30"><a href="relational-data.html#cb228-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [336776 rows x 16 columns]</span></span></code></pre></div></li>
 </ul>
 </div>
 <div id="exercises-25" class="section level3" number="13.4.6">
@@ -2787,9 +1090,9 @@ unique in your current data but the relationship might not be true in
 general.</p>
 <p>For example, the altitude and longitude uniquely identify each airport,
 but they are not good identifiers!</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="relational-data.html#cb227-1" aria-hidden="true" tabindex="-1"></a>airports.groupby([<span class="st">&#39;alt&#39;</span>, <span class="st">&#39;lon&#39;</span>]).size().value_counts()</span>
-<span id="cb227-2"><a href="relational-data.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    1458</span></span>
-<span id="cb227-3"><a href="relational-data.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb229"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb229-1"><a href="relational-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a>airports.groupby([<span class="st">&#39;alt&#39;</span>, <span class="st">&#39;lon&#39;</span>]).size().value_counts()</span>
+<span id="cb229-2"><a href="relational-data.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    1458</span></span>
+<span id="cb229-3"><a href="relational-data.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span></code></pre></div></li>
 <li><p>Check that none of the variables in the primary key are missing. If
 a value is missing then it can’t identify an observation!</p></li>
 <li><p>Check that your foreign keys match primary keys in another table. It’s
@@ -2842,7 +1145,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "toc": {
 "collapse": "section"
 }
