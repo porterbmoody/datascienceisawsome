@@ -634,89 +634,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="prerequisites-8" class="section level3" number="14.1.1">
 <h3><span class="header-section-number">14.1.1</span> Prerequisites</h3>
 <p>This chapter will focus on the <strong>pandas</strong> package for string manipulation.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb230-1"><a href="strings.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb230-2"><a href="strings.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb230-3"><a href="strings.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb229-1"><a href="strings.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb229-2"><a href="strings.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb229-3"><a href="strings.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 </div>
 </div>
 <div id="string-basics" class="section level2" number="14.2">
 <h2><span class="header-section-number">14.2</span> String basics</h2>
 <p>You can create strings with either single quotes or double quotes. You can read the pandas user guide on <a href="https://pandas.pydata.org/docs/user_guide/text.html">working with text data</a> for more details.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb231-1"><a href="strings.html#cb231-1" aria-hidden="true" tabindex="-1"></a>string1 <span class="op">=</span> <span class="st">&quot;This is a string&quot;</span></span>
-<span id="cb231-2"><a href="strings.html#cb231-2" aria-hidden="true" tabindex="-1"></a>string2 <span class="op">=</span> <span class="st">&#39;If I want to include a &quot;quote&quot; inside a string, I use single quotes&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb230-1"><a href="strings.html#cb230-1" aria-hidden="true" tabindex="-1"></a>string1 <span class="op">=</span> <span class="st">&quot;This is a string&quot;</span></span>
+<span id="cb230-2"><a href="strings.html#cb230-2" aria-hidden="true" tabindex="-1"></a>string2 <span class="op">=</span> <span class="st">&#39;If I want to include a &quot;quote&quot; inside a string, I use single quotes&#39;</span></span></code></pre></div>
 <p>To include a literal single or double quote in a string you can use <code>\</code> to “escape” it:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb232-1"><a href="strings.html#cb232-1" aria-hidden="true" tabindex="-1"></a>double_quote <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span> <span class="co"># or &#39;&quot;&#39;</span></span>
-<span id="cb232-2"><a href="strings.html#cb232-2" aria-hidden="true" tabindex="-1"></a>single_quote <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\&#39;</span><span class="st">&#39;</span> <span class="co"># or &quot;&#39;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb231-1"><a href="strings.html#cb231-1" aria-hidden="true" tabindex="-1"></a>double_quote <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span> <span class="co"># or &#39;&quot;&#39;</span></span>
+<span id="cb231-2"><a href="strings.html#cb231-2" aria-hidden="true" tabindex="-1"></a>single_quote <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\&#39;</span><span class="st">&#39;</span> <span class="co"># or &quot;&#39;&quot;</span></span></code></pre></div>
 <p>That means if you want to include a literal backslash, you’ll need to double it up: <code>"\\"</code>.</p>
 <p>Beware that the printed representation of a string is not the same as string itself, because the printed representation shows the escapes:</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb233-1"><a href="strings.html#cb233-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st"> </span><span class="ch">\\</span><span class="st">&quot;</span></span>
-<span id="cb233-2"><a href="strings.html#cb233-2" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb233-3"><a href="strings.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;&quot; \\&#39;</span></span>
-<span id="cb233-4"><a href="strings.html#cb233-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
-<span id="cb233-5"><a href="strings.html#cb233-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &quot; \</span></span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb232-1"><a href="strings.html#cb232-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st"> </span><span class="ch">\\</span><span class="st">&quot;</span></span>
+<span id="cb232-2"><a href="strings.html#cb232-2" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb232-3"><a href="strings.html#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;&quot; \\&#39;</span></span>
+<span id="cb232-4"><a href="strings.html#cb232-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb232-5"><a href="strings.html#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &quot; \</span></span></code></pre></div>
 <p>There are a handful of other special characters. The most common are <code>"\n"</code>, newline, and <code>"\t"</code>, tab, but you can see the complete list in the <a href="https://docs.python.org/2.0/ref/strings.html">Python reference manual</a>. You’ll also sometimes see strings like <code>"\u00b5"</code>, this is a way of writing non-English characters that works on all platforms:</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb234-1"><a href="strings.html#cb234-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\u00b5</span><span class="st">&quot;</span></span>
-<span id="cb234-2"><a href="strings.html#cb234-2" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb234-3"><a href="strings.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;µ&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb233-1"><a href="strings.html#cb233-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\u00b5</span><span class="st">&quot;</span></span>
+<span id="cb233-2"><a href="strings.html#cb233-2" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb233-3"><a href="strings.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;µ&#39;</span></span></code></pre></div>
 <p>Multiple strings are often stored in a object series, which you can create with <code>[]</code>:</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb235-1"><a href="strings.html#cb235-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>])</span>
-<span id="cb235-2"><a href="strings.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0      one</span></span>
-<span id="cb235-3"><a href="strings.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      two</span></span>
-<span id="cb235-4"><a href="strings.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    three</span></span>
-<span id="cb235-5"><a href="strings.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb234-1"><a href="strings.html#cb234-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>])</span>
+<span id="cb234-2"><a href="strings.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0      one</span></span>
+<span id="cb234-3"><a href="strings.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      two</span></span>
+<span id="cb234-4"><a href="strings.html#cb234-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    three</span></span>
+<span id="cb234-5"><a href="strings.html#cb234-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <div id="string-length" class="section level3" number="14.2.1">
 <h3><span class="header-section-number">14.2.1</span> String length</h3>
 <p>Python contains many functions to work with strings. We’ll use the functions from pandas for use on series. These all start with <code>str</code>. For example, <code>str.length()</code> tells you the number of characters in a string:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb236-1"><a href="strings.html#cb236-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;R for data science&quot;</span>, np.nan]).<span class="bu">str</span>.<span class="bu">len</span>()</span>
-<span id="cb236-2"><a href="strings.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     1.0</span></span>
-<span id="cb236-3"><a href="strings.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    18.0</span></span>
-<span id="cb236-4"><a href="strings.html#cb236-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     NaN</span></span>
-<span id="cb236-5"><a href="strings.html#cb236-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb235-1"><a href="strings.html#cb235-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;R for data science&quot;</span>, np.nan]).<span class="bu">str</span>.<span class="bu">len</span>()</span>
+<span id="cb235-2"><a href="strings.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     1.0</span></span>
+<span id="cb235-3"><a href="strings.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    18.0</span></span>
+<span id="cb235-4"><a href="strings.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     NaN</span></span>
+<span id="cb235-5"><a href="strings.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div>
 </div>
 <div id="combining-strings" class="section level3" number="14.2.2">
 <h3><span class="header-section-number">14.2.2</span> Combining strings</h3>
 <p>To combine two or more strings, use <code>str_c()</code>:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb237-1"><a href="strings.html#cb237-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>]).<span class="bu">str</span>.cat()</span>
-<span id="cb237-2"><a href="strings.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;xy&#39;</span></span>
-<span id="cb237-3"><a href="strings.html#cb237-3" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>]).<span class="bu">str</span>.cat()</span>
-<span id="cb237-4"><a href="strings.html#cb237-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;xyz&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb236-1"><a href="strings.html#cb236-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>]).<span class="bu">str</span>.cat()</span>
+<span id="cb236-2"><a href="strings.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;xy&#39;</span></span>
+<span id="cb236-3"><a href="strings.html#cb236-3" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>]).<span class="bu">str</span>.cat()</span>
+<span id="cb236-4"><a href="strings.html#cb236-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;xyz&#39;</span></span></code></pre></div>
 <p>Use the <code>sep</code> argument to control how they’re separated:</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb238-1"><a href="strings.html#cb238-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>]).<span class="bu">str</span>.cat(sep <span class="op">=</span> <span class="st">&#39;_&#39;</span>)</span>
-<span id="cb238-2"><a href="strings.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;x_y&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb237-1"><a href="strings.html#cb237-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>]).<span class="bu">str</span>.cat(sep <span class="op">=</span> <span class="st">&#39;_&#39;</span>)</span>
+<span id="cb237-2"><a href="strings.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;x_y&#39;</span></span></code></pre></div>
 <p>Like most other functions in Python, missing values are contagious. If you want them to print as <code>"NA"</code>, use <code>fillna()</code> or <code>na_rep = 'NA'</code>:</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb239-1"><a href="strings.html#cb239-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;abc&quot;</span>, np.nan])</span>
-<span id="cb239-2"><a href="strings.html#cb239-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.cat()</span>
-<span id="cb239-3"><a href="strings.html#cb239-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;abc&#39;</span></span>
-<span id="cb239-4"><a href="strings.html#cb239-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.cat(na_rep <span class="op">=</span> <span class="st">&quot;NA&quot;</span>)</span>
-<span id="cb239-5"><a href="strings.html#cb239-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;abcNA&#39;</span></span>
-<span id="cb239-6"><a href="strings.html#cb239-6" aria-hidden="true" tabindex="-1"></a>x.fillna(<span class="st">&#39;NA&#39;</span>).<span class="bu">str</span>.cat()</span>
-<span id="cb239-7"><a href="strings.html#cb239-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;abcNA&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb238-1"><a href="strings.html#cb238-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;abc&quot;</span>, np.nan])</span>
+<span id="cb238-2"><a href="strings.html#cb238-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.cat()</span>
+<span id="cb238-3"><a href="strings.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;abc&#39;</span></span>
+<span id="cb238-4"><a href="strings.html#cb238-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.cat(na_rep <span class="op">=</span> <span class="st">&quot;NA&quot;</span>)</span>
+<span id="cb238-5"><a href="strings.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;abcNA&#39;</span></span>
+<span id="cb238-6"><a href="strings.html#cb238-6" aria-hidden="true" tabindex="-1"></a>x.fillna(<span class="st">&#39;NA&#39;</span>).<span class="bu">str</span>.cat()</span>
+<span id="cb238-7"><a href="strings.html#cb238-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;abcNA&#39;</span></span></code></pre></div>
 </div>
 <div id="subsetting-strings" class="section level3" number="14.2.3">
 <h3><span class="header-section-number">14.2.3</span> Subsetting strings</h3>
 <p>You can extract parts of a string using <code>str[]</code>. As well as the string, <code>str[]</code> takes <code>start:end</code> arguments which give the (inclusive) position of the substring:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb240-1"><a href="strings.html#cb240-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;Pear&quot;</span>])</span>
-<span id="cb240-2"><a href="strings.html#cb240-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>[<span class="dv">0</span>:<span class="dv">3</span>]</span>
-<span id="cb240-3"><a href="strings.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="co"># negative numbers count backwards from end</span></span>
-<span id="cb240-4"><a href="strings.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    App</span></span>
-<span id="cb240-5"><a href="strings.html#cb240-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Ban</span></span>
-<span id="cb240-6"><a href="strings.html#cb240-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    Pea</span></span>
-<span id="cb240-7"><a href="strings.html#cb240-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb240-8"><a href="strings.html#cb240-8" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>[<span class="op">-</span><span class="dv">3</span>:]</span>
-<span id="cb240-9"><a href="strings.html#cb240-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    ple</span></span>
-<span id="cb240-10"><a href="strings.html#cb240-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    ana</span></span>
-<span id="cb240-11"><a href="strings.html#cb240-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    ear</span></span>
-<span id="cb240-12"><a href="strings.html#cb240-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb239-1"><a href="strings.html#cb239-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;Pear&quot;</span>])</span>
+<span id="cb239-2"><a href="strings.html#cb239-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb239-3"><a href="strings.html#cb239-3" aria-hidden="true" tabindex="-1"></a><span class="co"># negative numbers count backwards from end</span></span>
+<span id="cb239-4"><a href="strings.html#cb239-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    App</span></span>
+<span id="cb239-5"><a href="strings.html#cb239-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Ban</span></span>
+<span id="cb239-6"><a href="strings.html#cb239-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    Pea</span></span>
+<span id="cb239-7"><a href="strings.html#cb239-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb239-8"><a href="strings.html#cb239-8" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>[<span class="op">-</span><span class="dv">3</span>:]</span>
+<span id="cb239-9"><a href="strings.html#cb239-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    ple</span></span>
+<span id="cb239-10"><a href="strings.html#cb239-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    ana</span></span>
+<span id="cb239-11"><a href="strings.html#cb239-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    ear</span></span>
+<span id="cb239-12"><a href="strings.html#cb239-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>Note that <code>str[]</code> won’t fail if the string is too short: it will just return as much as possible:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb241-1"><a href="strings.html#cb241-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;a&quot;</span>]).<span class="bu">str</span>[<span class="dv">0</span>:<span class="dv">5</span>]</span>
-<span id="cb241-2"><a href="strings.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    a</span></span>
-<span id="cb241-3"><a href="strings.html#cb241-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb240-1"><a href="strings.html#cb240-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;a&quot;</span>]).<span class="bu">str</span>[<span class="dv">0</span>:<span class="dv">5</span>]</span>
+<span id="cb240-2"><a href="strings.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    a</span></span>
+<span id="cb240-3"><a href="strings.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>You can also use the assign strings using <code>str.slice_replace()</code> to modify strings:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb242-1"><a href="strings.html#cb242-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.slice_replace(<span class="dv">0</span>,<span class="dv">0</span>, repl <span class="op">=</span> <span class="st">&quot;5&quot;</span>)</span>
-<span id="cb242-2"><a href="strings.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     5Apple</span></span>
-<span id="cb242-3"><a href="strings.html#cb242-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    5Banana</span></span>
-<span id="cb242-4"><a href="strings.html#cb242-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      5Pear</span></span>
-<span id="cb242-5"><a href="strings.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb241-1"><a href="strings.html#cb241-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.slice_replace(<span class="dv">0</span>,<span class="dv">0</span>, repl <span class="op">=</span> <span class="st">&quot;5&quot;</span>)</span>
+<span id="cb241-2"><a href="strings.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     5Apple</span></span>
+<span id="cb241-3"><a href="strings.html#cb241-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    5Banana</span></span>
+<span id="cb241-4"><a href="strings.html#cb241-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      5Pear</span></span>
+<span id="cb241-5"><a href="strings.html#cb241-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 </div>
 </div>
 <div id="matching-patterns-with-regular-expressions" class="section level2" number="14.3">
@@ -725,40 +725,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="basic-matches" class="section level3" number="14.3.1">
 <h3><span class="header-section-number">14.3.1</span> Basic matches</h3>
 <p>The simplest patterns match exact strings:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb243-1"><a href="strings.html#cb243-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
-<span id="cb243-2"><a href="strings.html#cb243-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;an&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb243-3"><a href="strings.html#cb243-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       apple</span></span>
-<span id="cb243-4"><a href="strings.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    b-M--M-a</span></span>
-<span id="cb243-5"><a href="strings.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        pear</span></span>
-<span id="cb243-6"><a href="strings.html#cb243-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb242-1"><a href="strings.html#cb242-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb242-2"><a href="strings.html#cb242-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;an&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb242-3"><a href="strings.html#cb242-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       apple</span></span>
+<span id="cb242-4"><a href="strings.html#cb242-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    b-M--M-a</span></span>
+<span id="cb242-5"><a href="strings.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        pear</span></span>
+<span id="cb242-6"><a href="strings.html#cb242-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>The next step up in complexity is <code>.</code>, which matches any character (except a newline):</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb244-1"><a href="strings.html#cb244-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;.a.&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb244-2"><a href="strings.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     apple</span></span>
-<span id="cb244-3"><a href="strings.html#cb244-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -M-ana</span></span>
-<span id="cb244-4"><a href="strings.html#cb244-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      p-M-</span></span>
-<span id="cb244-5"><a href="strings.html#cb244-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb243-1"><a href="strings.html#cb243-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;.a.&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb243-2"><a href="strings.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     apple</span></span>
+<span id="cb243-3"><a href="strings.html#cb243-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -M-ana</span></span>
+<span id="cb243-4"><a href="strings.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      p-M-</span></span>
+<span id="cb243-5"><a href="strings.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>But if “<code>.</code>” matches any character, how do you match the character “<code>.</code>”? You need to use an “escape” to tell the regular expression you want to match it exactly, not use its special behaviour. Like strings, regexps use the backslash, <code>\</code>, to escape special behaviour. So to match an <code>.</code>, you need the regexp <code>\.</code>. Unfortunately this creates a problem. We use strings to represent regular expressions, and <code>\</code> is also used as an escape symbol in strings. So to create the regular expression <code>\.</code> we need the string <code>"\\."</code>.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb245-1"><a href="strings.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To create the regular expression, we need \\</span></span>
-<span id="cb245-2"><a href="strings.html#cb245-2" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span></span>
-<span id="cb245-3"><a href="strings.html#cb245-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-4"><a href="strings.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="co"># But the expression itself only contains one:</span></span>
-<span id="cb245-5"><a href="strings.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dot)</span>
-<span id="cb245-6"><a href="strings.html#cb245-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-7"><a href="strings.html#cb245-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And this tells pandas to look for an explicit .</span></span>
-<span id="cb245-8"><a href="strings.html#cb245-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \.</span></span>
-<span id="cb245-9"><a href="strings.html#cb245-9" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;a.c&quot;</span>, <span class="st">&quot;bef&quot;</span>]).replace(<span class="st">&#39;a</span><span class="ch">\\</span><span class="st">.c&#39;</span>, <span class="st">&#39;-M-&#39;</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb245-10"><a href="strings.html#cb245-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    abc</span></span>
-<span id="cb245-11"><a href="strings.html#cb245-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -M-</span></span>
-<span id="cb245-12"><a href="strings.html#cb245-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    bef</span></span>
-<span id="cb245-13"><a href="strings.html#cb245-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb244-1"><a href="strings.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To create the regular expression, we need \\</span></span>
+<span id="cb244-2"><a href="strings.html#cb244-2" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span></span>
+<span id="cb244-3"><a href="strings.html#cb244-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb244-4"><a href="strings.html#cb244-4" aria-hidden="true" tabindex="-1"></a><span class="co"># But the expression itself only contains one:</span></span>
+<span id="cb244-5"><a href="strings.html#cb244-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dot)</span>
+<span id="cb244-6"><a href="strings.html#cb244-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb244-7"><a href="strings.html#cb244-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And this tells pandas to look for an explicit .</span></span>
+<span id="cb244-8"><a href="strings.html#cb244-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \.</span></span>
+<span id="cb244-9"><a href="strings.html#cb244-9" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;a.c&quot;</span>, <span class="st">&quot;bef&quot;</span>]).replace(<span class="st">&#39;a</span><span class="ch">\\</span><span class="st">.c&#39;</span>, <span class="st">&#39;-M-&#39;</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb244-10"><a href="strings.html#cb244-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    abc</span></span>
+<span id="cb244-11"><a href="strings.html#cb244-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -M-</span></span>
+<span id="cb244-12"><a href="strings.html#cb244-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    bef</span></span>
+<span id="cb244-13"><a href="strings.html#cb244-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>If <code>\</code> is used as an escape character in regular expressions, how do you match a literal <code>\</code>? Well you need to escape it, creating the regular expression <code>\\</code>. To create that regular expression, you need to use a string, which also needs to escape <code>\</code>. That means to match a literal <code>\</code> you need to write <code>"\\\\"</code> — you need four backslashes to match one!</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb246-1"><a href="strings.html#cb246-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;a</span><span class="ch">\\</span><span class="st">b&quot;</span>])</span>
-<span id="cb246-2"><a href="strings.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
-<span id="cb246-3"><a href="strings.html#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    a\b</span></span>
-<span id="cb246-4"><a href="strings.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb246-5"><a href="strings.html#cb246-5" aria-hidden="true" tabindex="-1"></a>x.replace(<span class="st">&#39;</span><span class="ch">\\\\</span><span class="st">&#39;</span>, <span class="st">&#39;-M-&#39;</span>, regex <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb246-6"><a href="strings.html#cb246-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    a-M-b</span></span>
-<span id="cb246-7"><a href="strings.html#cb246-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb245-1"><a href="strings.html#cb245-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;a</span><span class="ch">\\</span><span class="st">b&quot;</span>])</span>
+<span id="cb245-2"><a href="strings.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb245-3"><a href="strings.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    a\b</span></span>
+<span id="cb245-4"><a href="strings.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb245-5"><a href="strings.html#cb245-5" aria-hidden="true" tabindex="-1"></a>x.replace(<span class="st">&#39;</span><span class="ch">\\\\</span><span class="st">&#39;</span>, <span class="st">&#39;-M-&#39;</span>, regex <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb245-6"><a href="strings.html#cb245-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    a-M-b</span></span>
+<span id="cb245-7"><a href="strings.html#cb245-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>In this book, I’ll write regular expression as <code>\.</code> and strings that represent the regular expression as <code>"\\."</code>.</p>
 <div id="exercises-27" class="section level4" number="14.3.1.1">
 <h4><span class="header-section-number">14.3.1.1</span> Exercises</h4>
@@ -776,30 +776,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>$</code> to match the end of the string.</li>
 </ul>
 <p>You can also use pandas <code>startwith()</code> and <code>endswith()</code> that work similiar but return booleans.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb247-1"><a href="strings.html#cb247-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
-<span id="cb247-2"><a href="strings.html#cb247-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;^a&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb247-3"><a href="strings.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    -M-pple</span></span>
-<span id="cb247-4"><a href="strings.html#cb247-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     banana</span></span>
-<span id="cb247-5"><a href="strings.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       pear</span></span>
-<span id="cb247-6"><a href="strings.html#cb247-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb247-7"><a href="strings.html#cb247-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a$&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb247-8"><a href="strings.html#cb247-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       apple</span></span>
-<span id="cb247-9"><a href="strings.html#cb247-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    banan-M-</span></span>
-<span id="cb247-10"><a href="strings.html#cb247-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        pear</span></span>
-<span id="cb247-11"><a href="strings.html#cb247-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb246-1"><a href="strings.html#cb246-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb246-2"><a href="strings.html#cb246-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;^a&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb246-3"><a href="strings.html#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    -M-pple</span></span>
+<span id="cb246-4"><a href="strings.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     banana</span></span>
+<span id="cb246-5"><a href="strings.html#cb246-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       pear</span></span>
+<span id="cb246-6"><a href="strings.html#cb246-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb246-7"><a href="strings.html#cb246-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a$&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb246-8"><a href="strings.html#cb246-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       apple</span></span>
+<span id="cb246-9"><a href="strings.html#cb246-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    banan-M-</span></span>
+<span id="cb246-10"><a href="strings.html#cb246-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        pear</span></span>
+<span id="cb246-11"><a href="strings.html#cb246-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>To remember which is which, try this mnemonic which I learned from <a href="https://twitter.com/emisshula/status/323863393167613953">Evan Misshula</a>: if you begin with power (<code>^</code>), you end up with money (<code>$</code>).</p>
 <p>To force a regular expression to only match a complete string, anchor it with both <code>^</code> and <code>$</code>:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb248-1"><a href="strings.html#cb248-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple pie&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;apple cake&quot;</span>])</span>
-<span id="cb248-2"><a href="strings.html#cb248-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb248-3"><a href="strings.html#cb248-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     -M- pie</span></span>
-<span id="cb248-4"><a href="strings.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         -M-</span></span>
-<span id="cb248-5"><a href="strings.html#cb248-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -M- cake</span></span>
-<span id="cb248-6"><a href="strings.html#cb248-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb248-7"><a href="strings.html#cb248-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;^apple$&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb248-8"><a href="strings.html#cb248-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     apple pie</span></span>
-<span id="cb248-9"><a href="strings.html#cb248-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           -M-</span></span>
-<span id="cb248-10"><a href="strings.html#cb248-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    apple cake</span></span>
-<span id="cb248-11"><a href="strings.html#cb248-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb247-1"><a href="strings.html#cb247-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple pie&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;apple cake&quot;</span>])</span>
+<span id="cb247-2"><a href="strings.html#cb247-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb247-3"><a href="strings.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     -M- pie</span></span>
+<span id="cb247-4"><a href="strings.html#cb247-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         -M-</span></span>
+<span id="cb247-5"><a href="strings.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -M- cake</span></span>
+<span id="cb247-6"><a href="strings.html#cb247-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb247-7"><a href="strings.html#cb247-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;^apple$&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb247-8"><a href="strings.html#cb247-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     apple pie</span></span>
+<span id="cb247-9"><a href="strings.html#cb247-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           -M-</span></span>
+<span id="cb247-10"><a href="strings.html#cb247-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    apple cake</span></span>
+<span id="cb247-11"><a href="strings.html#cb247-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>You can also match the boundary between words with <code>\b</code>. I don’t often use this in Python, but I will sometimes use it when I’m doing a search to find the name of a function that’s a component of other functions. For example, I’ll search for <code>\bsum\b</code> to avoid matching <code>summarise</code>, <code>summary</code>, <code>rowsum</code> and so on.</p>
 <div id="exercises-28" class="section level4" number="14.3.2.1">
 <h4><span class="header-section-number">14.3.2.1</span> Exercises</h4>
@@ -819,32 +819,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Remember, to create a regular expression containing <code>\d</code> or <code>\s</code>, you’ll need to escape the <code>\</code> for the string, so you’ll type <code>"\\d"</code> or <code>"\\s"</code>.</p>
 <p>A character class containing a single character is a nice alternative to backslash escapes when you want to include a single metacharacter in a regex. Many people find this more readable.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb249-1"><a href="strings.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for a literal character that normally has special meaning in a regex</span></span>
-<span id="cb249-2"><a href="strings.html#cb249-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;a.c&quot;</span>, <span class="st">&quot;a*c&quot;</span>, <span class="st">&quot;a c&quot;</span>])</span>
-<span id="cb249-3"><a href="strings.html#cb249-3" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a[.]c&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb249-4"><a href="strings.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    abc</span></span>
-<span id="cb249-5"><a href="strings.html#cb249-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -M-</span></span>
-<span id="cb249-6"><a href="strings.html#cb249-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    a*c</span></span>
-<span id="cb249-7"><a href="strings.html#cb249-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    a c</span></span>
-<span id="cb249-8"><a href="strings.html#cb249-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb249-9"><a href="strings.html#cb249-9" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;.[*]c&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb249-10"><a href="strings.html#cb249-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    abc</span></span>
-<span id="cb249-11"><a href="strings.html#cb249-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    a.c</span></span>
-<span id="cb249-12"><a href="strings.html#cb249-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -M-</span></span>
-<span id="cb249-13"><a href="strings.html#cb249-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    a c</span></span>
-<span id="cb249-14"><a href="strings.html#cb249-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb249-15"><a href="strings.html#cb249-15" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a[ ]&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb249-16"><a href="strings.html#cb249-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     abc</span></span>
-<span id="cb249-17"><a href="strings.html#cb249-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     a.c</span></span>
-<span id="cb249-18"><a href="strings.html#cb249-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     a*c</span></span>
-<span id="cb249-19"><a href="strings.html#cb249-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    -M-c</span></span>
-<span id="cb249-20"><a href="strings.html#cb249-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb248-1"><a href="strings.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for a literal character that normally has special meaning in a regex</span></span>
+<span id="cb248-2"><a href="strings.html#cb248-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;a.c&quot;</span>, <span class="st">&quot;a*c&quot;</span>, <span class="st">&quot;a c&quot;</span>])</span>
+<span id="cb248-3"><a href="strings.html#cb248-3" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a[.]c&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb248-4"><a href="strings.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    abc</span></span>
+<span id="cb248-5"><a href="strings.html#cb248-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -M-</span></span>
+<span id="cb248-6"><a href="strings.html#cb248-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    a*c</span></span>
+<span id="cb248-7"><a href="strings.html#cb248-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    a c</span></span>
+<span id="cb248-8"><a href="strings.html#cb248-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb248-9"><a href="strings.html#cb248-9" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;.[*]c&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb248-10"><a href="strings.html#cb248-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    abc</span></span>
+<span id="cb248-11"><a href="strings.html#cb248-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    a.c</span></span>
+<span id="cb248-12"><a href="strings.html#cb248-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -M-</span></span>
+<span id="cb248-13"><a href="strings.html#cb248-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    a c</span></span>
+<span id="cb248-14"><a href="strings.html#cb248-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb248-15"><a href="strings.html#cb248-15" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;a[ ]&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb248-16"><a href="strings.html#cb248-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     abc</span></span>
+<span id="cb248-17"><a href="strings.html#cb248-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     a.c</span></span>
+<span id="cb248-18"><a href="strings.html#cb248-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     a*c</span></span>
+<span id="cb248-19"><a href="strings.html#cb248-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    -M-c</span></span>
+<span id="cb248-20"><a href="strings.html#cb248-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>This works for most (but not all) regex metacharacters: <code>$</code> <code>.</code> <code>|</code> <code>?</code> <code>*</code> <code>+</code> <code>(</code> <code>)</code> <code>[</code> <code>{</code>. Unfortunately, a few characters have special meaning even inside a character class and must be handled with backslash escapes: <code>]</code> <code>\</code> <code>^</code> and <code>-</code>.</p>
 <p>You can use <em>alternation</em> to pick between one or more alternative patterns. For example, <code>abc|d..f</code> will match either ‘“abc”’, or <code>"deaf"</code>. Note that the precedence for <code>|</code> is low, so that <code>abc|xyz</code> matches <code>abc</code> or <code>xyz</code> not <code>abcyz</code> or <code>abxyz</code>. Like with mathematical expressions, if precedence ever gets confusing, use parentheses to make it clear what you want:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb250-1"><a href="strings.html#cb250-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;gray&quot;</span>]).<span class="bu">str</span>.replace(<span class="st">&quot;r(e|a)&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
-<span id="cb250-2"><a href="strings.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    g-M-y</span></span>
-<span id="cb250-3"><a href="strings.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    g-M-y</span></span>
-<span id="cb250-4"><a href="strings.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb249-1"><a href="strings.html#cb249-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;gray&quot;</span>]).<span class="bu">str</span>.replace(<span class="st">&quot;r(e|a)&quot;</span>, <span class="st">&quot;-M-&quot;</span>)</span>
+<span id="cb249-2"><a href="strings.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    g-M-y</span></span>
+<span id="cb249-3"><a href="strings.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    g-M-y</span></span>
+<span id="cb249-4"><a href="strings.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <div id="exercises-29" class="section level4" number="14.3.3.1">
 <h4><span class="header-section-number">14.3.3.1</span> Exercises</h4>
 <ol style="list-style-type: decimal">
@@ -873,16 +873,16 @@ written in your country.</p></li>
 <li><code>*</code>: 0 or more</li>
 </ul>
 <p>Notice the use of <code>n = 1</code> which functions like the R package <code>stringr::str_&lt;TYPE&gt;</code> the default argument for <code>str.replace()</code> of <code>n = -1</code> functions like <code>stringr::str_&lt;TYPE&gt;_all</code>.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb251-1"><a href="strings.html#cb251-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;1888 in Roman numerals: MDCCCLXXXVIII&quot;</span>])</span>
-<span id="cb251-2"><a href="strings.html#cb251-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;CC?&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb251-3"><a href="strings.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
-<span id="cb251-4"><a href="strings.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb251-5"><a href="strings.html#cb251-5" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;CC+&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb251-6"><a href="strings.html#cb251-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
-<span id="cb251-7"><a href="strings.html#cb251-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb251-8"><a href="strings.html#cb251-8" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&#39;C[LX]+&#39;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb251-9"><a href="strings.html#cb251-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MDCC-M-VIII</span></span>
-<span id="cb251-10"><a href="strings.html#cb251-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb250-1"><a href="strings.html#cb250-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;1888 in Roman numerals: MDCCCLXXXVIII&quot;</span>])</span>
+<span id="cb250-2"><a href="strings.html#cb250-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;CC?&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb250-3"><a href="strings.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
+<span id="cb250-4"><a href="strings.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb250-5"><a href="strings.html#cb250-5" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;CC+&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb250-6"><a href="strings.html#cb250-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
+<span id="cb250-7"><a href="strings.html#cb250-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb250-8"><a href="strings.html#cb250-8" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&#39;C[LX]+&#39;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb250-9"><a href="strings.html#cb250-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MDCC-M-VIII</span></span>
+<span id="cb250-10"><a href="strings.html#cb250-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>Note that the precedence of these operators is high, so you can write: <code>colou?r</code> to match either American or British spellings. That means most uses will need parentheses, like <code>bana(na)+</code>.</p>
 <p>You can also specify the number of matches precisely:</p>
 <ul>
@@ -891,22 +891,22 @@ written in your country.</p></li>
 <li><code>{,m}</code>: at most m</li>
 <li><code>{n,m}</code>: between n and m</li>
 </ul>
-<div class="sourceCode" id="cb252"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb252-1"><a href="strings.html#cb252-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C</span><span class="sc">{2}</span><span class="st">&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<div class="sourceCode" id="cb251"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb251-1"><a href="strings.html#cb251-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C</span><span class="sc">{2}</span><span class="st">&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb251-2"><a href="strings.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
+<span id="cb251-3"><a href="strings.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb251-4"><a href="strings.html#cb251-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,}&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb251-5"><a href="strings.html#cb251-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
+<span id="cb251-6"><a href="strings.html#cb251-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb251-7"><a href="strings.html#cb251-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,3}&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb251-8"><a href="strings.html#cb251-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
+<span id="cb251-9"><a href="strings.html#cb251-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<p>By default these matches are “greedy”: they will match the longest string possible. You can make them “lazy”, matching the shortest string possible by putting a <code>?</code> after them. This is an advanced feature of regular expressions, but it’s useful to know that it exists:</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb252-1"><a href="strings.html#cb252-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,3}?&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb252-2"><a href="strings.html#cb252-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
 <span id="cb252-3"><a href="strings.html#cb252-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb252-4"><a href="strings.html#cb252-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,}&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb252-5"><a href="strings.html#cb252-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
-<span id="cb252-6"><a href="strings.html#cb252-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb252-7"><a href="strings.html#cb252-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,3}&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb252-8"><a href="strings.html#cb252-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-LXXXVIII</span></span>
-<span id="cb252-9"><a href="strings.html#cb252-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
-<p>By default these matches are “greedy”: they will match the longest string possible. You can make them “lazy”, matching the shortest string possible by putting a <code>?</code> after them. This is an advanced feature of regular expressions, but it’s useful to know that it exists:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb253-1"><a href="strings.html#cb253-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&quot;C{2,3}?&quot;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb253-2"><a href="strings.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MD-M-CLXXXVIII</span></span>
-<span id="cb253-3"><a href="strings.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb253-4"><a href="strings.html#cb253-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&#39;C[LX]+?&#39;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb253-5"><a href="strings.html#cb253-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MDCC-M-XXXVIII</span></span>
-<span id="cb253-6"><a href="strings.html#cb253-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<span id="cb252-4"><a href="strings.html#cb252-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace(<span class="st">&#39;C[LX]+?&#39;</span>, <span class="st">&quot;-M-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb252-5"><a href="strings.html#cb252-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1888 in Roman numerals: MDCC-M-XXXVIII</span></span>
+<span id="cb252-6"><a href="strings.html#cb252-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <div id="exercises-30" class="section level4" number="14.3.4.1">
 <h4><span class="header-section-number">14.3.4.1</span> Exercises</h4>
 <ol style="list-style-type: decimal">
@@ -934,50 +934,50 @@ that defines a regular expression.)</p>
 <div id="grouping-and-backreferences" class="section level3" number="14.3.5">
 <h3><span class="header-section-number">14.3.5</span> Grouping and backreferences</h3>
 <p>We will use a few csv files that contain one column labeld <code>name</code>. The <code>fruit</code> names and <code>words</code> as taken from the <code>stringr::fruit</code> character vectors.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb254-1"><a href="strings.html#cb254-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/fruit/fruit.csv&quot;</span>)</span>
-<span id="cb254-2"><a href="strings.html#cb254-2" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/words/words.csv&quot;</span>)</span>
-<span id="cb254-3"><a href="strings.html#cb254-3" aria-hidden="true" tabindex="-1"></a>fruit</span>
-<span id="cb254-4"><a href="strings.html#cb254-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            name</span></span>
-<span id="cb254-5"><a href="strings.html#cb254-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         apple</span></span>
-<span id="cb254-6"><a href="strings.html#cb254-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       apricot</span></span>
-<span id="cb254-7"><a href="strings.html#cb254-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       avocado</span></span>
-<span id="cb254-8"><a href="strings.html#cb254-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        banana</span></span>
-<span id="cb254-9"><a href="strings.html#cb254-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   bell pepper</span></span>
-<span id="cb254-10"><a href="strings.html#cb254-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..          ...</span></span>
-<span id="cb254-11"><a href="strings.html#cb254-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 75   strawberry</span></span>
-<span id="cb254-12"><a href="strings.html#cb254-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 76    tamarillo</span></span>
-<span id="cb254-13"><a href="strings.html#cb254-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 77    tangerine</span></span>
-<span id="cb254-14"><a href="strings.html#cb254-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 78   ugli fruit</span></span>
-<span id="cb254-15"><a href="strings.html#cb254-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 79   watermelon</span></span>
-<span id="cb254-16"><a href="strings.html#cb254-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb254-17"><a href="strings.html#cb254-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [80 rows x 1 columns]</span></span>
-<span id="cb254-18"><a href="strings.html#cb254-18" aria-hidden="true" tabindex="-1"></a>words</span>
-<span id="cb254-19"><a href="strings.html#cb254-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           name</span></span>
-<span id="cb254-20"><a href="strings.html#cb254-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0            a</span></span>
-<span id="cb254-21"><a href="strings.html#cb254-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         able</span></span>
-<span id="cb254-22"><a href="strings.html#cb254-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        about</span></span>
-<span id="cb254-23"><a href="strings.html#cb254-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     absolute</span></span>
-<span id="cb254-24"><a href="strings.html#cb254-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       accept</span></span>
-<span id="cb254-25"><a href="strings.html#cb254-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..         ...</span></span>
-<span id="cb254-26"><a href="strings.html#cb254-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 975        yes</span></span>
-<span id="cb254-27"><a href="strings.html#cb254-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 976  yesterday</span></span>
-<span id="cb254-28"><a href="strings.html#cb254-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 977        yet</span></span>
-<span id="cb254-29"><a href="strings.html#cb254-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 978        you</span></span>
-<span id="cb254-30"><a href="strings.html#cb254-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 979      young</span></span>
-<span id="cb254-31"><a href="strings.html#cb254-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb254-32"><a href="strings.html#cb254-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [980 rows x 1 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb253-1"><a href="strings.html#cb253-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/fruit/fruit.csv&quot;</span>)</span>
+<span id="cb253-2"><a href="strings.html#cb253-2" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/words/words.csv&quot;</span>)</span>
+<span id="cb253-3"><a href="strings.html#cb253-3" aria-hidden="true" tabindex="-1"></a>fruit</span>
+<span id="cb253-4"><a href="strings.html#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            name</span></span>
+<span id="cb253-5"><a href="strings.html#cb253-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         apple</span></span>
+<span id="cb253-6"><a href="strings.html#cb253-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       apricot</span></span>
+<span id="cb253-7"><a href="strings.html#cb253-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       avocado</span></span>
+<span id="cb253-8"><a href="strings.html#cb253-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        banana</span></span>
+<span id="cb253-9"><a href="strings.html#cb253-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   bell pepper</span></span>
+<span id="cb253-10"><a href="strings.html#cb253-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..          ...</span></span>
+<span id="cb253-11"><a href="strings.html#cb253-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 75   strawberry</span></span>
+<span id="cb253-12"><a href="strings.html#cb253-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 76    tamarillo</span></span>
+<span id="cb253-13"><a href="strings.html#cb253-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 77    tangerine</span></span>
+<span id="cb253-14"><a href="strings.html#cb253-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 78   ugli fruit</span></span>
+<span id="cb253-15"><a href="strings.html#cb253-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 79   watermelon</span></span>
+<span id="cb253-16"><a href="strings.html#cb253-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb253-17"><a href="strings.html#cb253-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [80 rows x 1 columns]</span></span>
+<span id="cb253-18"><a href="strings.html#cb253-18" aria-hidden="true" tabindex="-1"></a>words</span>
+<span id="cb253-19"><a href="strings.html#cb253-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           name</span></span>
+<span id="cb253-20"><a href="strings.html#cb253-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0            a</span></span>
+<span id="cb253-21"><a href="strings.html#cb253-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         able</span></span>
+<span id="cb253-22"><a href="strings.html#cb253-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        about</span></span>
+<span id="cb253-23"><a href="strings.html#cb253-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     absolute</span></span>
+<span id="cb253-24"><a href="strings.html#cb253-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       accept</span></span>
+<span id="cb253-25"><a href="strings.html#cb253-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..         ...</span></span>
+<span id="cb253-26"><a href="strings.html#cb253-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 975        yes</span></span>
+<span id="cb253-27"><a href="strings.html#cb253-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 976  yesterday</span></span>
+<span id="cb253-28"><a href="strings.html#cb253-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 977        yet</span></span>
+<span id="cb253-29"><a href="strings.html#cb253-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 978        you</span></span>
+<span id="cb253-30"><a href="strings.html#cb253-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 979      young</span></span>
+<span id="cb253-31"><a href="strings.html#cb253-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb253-32"><a href="strings.html#cb253-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [980 rows x 1 columns]</span></span></code></pre></div>
 <p>Earlier, you learned about parentheses as a way to disambiguate complex expressions. Parentheses also create a <em>numbered</em> capturing group (number 1, 2 etc.). A capturing group stores <em>the part of the string</em> matched by the part of the regular expression inside the parentheses. You can refer to the same text as previously matched by a capturing group with <em>backreferences</em>, like <code>\1</code>, <code>\2</code> etc. For example, the following regular expression finds all fruits that have a repeated pair of letters.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb255-1"><a href="strings.html#cb255-1" aria-hidden="true" tabindex="-1"></a>fruit[fruit[<span class="st">&#39;name&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&#39;(..)</span><span class="ch">\\</span><span class="st">1&#39;</span>)]</span>
-<span id="cb255-2"><a href="strings.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            name</span></span>
-<span id="cb255-3"><a href="strings.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        banana</span></span>
-<span id="cb255-4"><a href="strings.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19      coconut</span></span>
-<span id="cb255-5"><a href="strings.html#cb255-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21     cucumber</span></span>
-<span id="cb255-6"><a href="strings.html#cb255-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40       jujube</span></span>
-<span id="cb255-7"><a href="strings.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55       papaya</span></span>
-<span id="cb255-8"><a href="strings.html#cb255-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 72  salal berry</span></span>
-<span id="cb255-9"><a href="strings.html#cb255-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb255-10"><a href="strings.html#cb255-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/strings.py:2001: UserWarning: This pattern has match groups. To actually get the groups, use str.extract.</span></span>
-<span id="cb255-11"><a href="strings.html#cb255-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   return func(self, *args, **kwargs)</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb254-1"><a href="strings.html#cb254-1" aria-hidden="true" tabindex="-1"></a>fruit[fruit[<span class="st">&#39;name&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&#39;(..)</span><span class="ch">\\</span><span class="st">1&#39;</span>)]</span>
+<span id="cb254-2"><a href="strings.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            name</span></span>
+<span id="cb254-3"><a href="strings.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        banana</span></span>
+<span id="cb254-4"><a href="strings.html#cb254-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19      coconut</span></span>
+<span id="cb254-5"><a href="strings.html#cb254-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21     cucumber</span></span>
+<span id="cb254-6"><a href="strings.html#cb254-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40       jujube</span></span>
+<span id="cb254-7"><a href="strings.html#cb254-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55       papaya</span></span>
+<span id="cb254-8"><a href="strings.html#cb254-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 72  salal berry</span></span>
+<span id="cb254-9"><a href="strings.html#cb254-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb254-10"><a href="strings.html#cb254-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/strings.py:2001: UserWarning: This pattern has match groups. To actually get the groups, use str.extract.</span></span>
+<span id="cb254-11"><a href="strings.html#cb254-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   return func(self, *args, **kwargs)</span></span></code></pre></div>
 <div id="exercises-31" class="section level4" number="14.3.5.1">
 <h4><span class="header-section-number">14.3.5.1</span> Exercises</h4>
 <ol style="list-style-type: decimal">
@@ -1104,78 +1104,78 @@ r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()&lt;&gt;@,;:\\&qu
 <div id="detect-matches" class="section level3" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Detect matches</h3>
 <p>To determine if a character vector matches a pattern, use <code>str.contains()</code>. It returns a logical vector the same length as the input:</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb257-1"><a href="strings.html#cb257-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
-<span id="cb257-2"><a href="strings.html#cb257-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.contains(<span class="st">&quot;e&quot;</span>)</span>
-<span id="cb257-3"><a href="strings.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     True</span></span>
-<span id="cb257-4"><a href="strings.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    False</span></span>
-<span id="cb257-5"><a href="strings.html#cb257-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     True</span></span>
-<span id="cb257-6"><a href="strings.html#cb257-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: bool</span></span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb256-1"><a href="strings.html#cb256-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb256-2"><a href="strings.html#cb256-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.contains(<span class="st">&quot;e&quot;</span>)</span>
+<span id="cb256-3"><a href="strings.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     True</span></span>
+<span id="cb256-4"><a href="strings.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    False</span></span>
+<span id="cb256-5"><a href="strings.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     True</span></span>
+<span id="cb256-6"><a href="strings.html#cb256-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: bool</span></span></code></pre></div>
 <p>Remember that when you use a logical vector in a numeric context, <code>FALSE</code> becomes 0 and <code>TRUE</code> becomes 1. That makes <code>sum()</code> and <code>mean()</code> useful if you want to answer questions about matches across a larger vector:</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb258-1"><a href="strings.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many common words start with t?</span></span>
-<span id="cb258-2"><a href="strings.html#cb258-2" aria-hidden="true" tabindex="-1"></a>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;^t&quot;</span>).<span class="bu">sum</span>()</span>
-<span id="cb258-3"><a href="strings.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="co"># What proportion of common words end with a vowel?</span></span>
-<span id="cb258-4"><a href="strings.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 65</span></span>
-<span id="cb258-5"><a href="strings.html#cb258-5" aria-hidden="true" tabindex="-1"></a>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;[aeiou]$&quot;</span>).mean()</span>
-<span id="cb258-6"><a href="strings.html#cb258-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.27653061224489794</span></span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb257-1"><a href="strings.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many common words start with t?</span></span>
+<span id="cb257-2"><a href="strings.html#cb257-2" aria-hidden="true" tabindex="-1"></a>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;^t&quot;</span>).<span class="bu">sum</span>()</span>
+<span id="cb257-3"><a href="strings.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="co"># What proportion of common words end with a vowel?</span></span>
+<span id="cb257-4"><a href="strings.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 65</span></span>
+<span id="cb257-5"><a href="strings.html#cb257-5" aria-hidden="true" tabindex="-1"></a>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;[aeiou]$&quot;</span>).mean()</span>
+<span id="cb257-6"><a href="strings.html#cb257-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.27653061224489794</span></span></code></pre></div>
 <p>When you have complex logical conditions (e.g. match a or b but not c unless d) it’s often easier to combine multiple <code>str.contains()</code> calls with logical operators, rather than trying to create a single regular expression. For example, here are two ways to find all words that don’t contain any vowels:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb259-1"><a href="strings.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all words containing at least one vowel, and negate</span></span>
-<span id="cb259-2"><a href="strings.html#cb259-2" aria-hidden="true" tabindex="-1"></a>no_vowels_1 <span class="op">=</span> <span class="op">~</span>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;[aeiou]&quot;</span>)</span>
-<span id="cb259-3"><a href="strings.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all words consisting only of consonants (non-vowels)</span></span>
-<span id="cb259-4"><a href="strings.html#cb259-4" aria-hidden="true" tabindex="-1"></a>no_vowels_2 <span class="op">=</span> words.name.<span class="bu">str</span>.contains(<span class="st">&quot;^[^aeiou]+$&quot;</span>)</span>
-<span id="cb259-5"><a href="strings.html#cb259-5" aria-hidden="true" tabindex="-1"></a>no_vowels_1.tolist() <span class="op">==</span> no_vowels_2.tolist()</span>
-<span id="cb259-6"><a href="strings.html#cb259-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb258-1"><a href="strings.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all words containing at least one vowel, and negate</span></span>
+<span id="cb258-2"><a href="strings.html#cb258-2" aria-hidden="true" tabindex="-1"></a>no_vowels_1 <span class="op">=</span> <span class="op">~</span>words.name.<span class="bu">str</span>.contains(<span class="st">&quot;[aeiou]&quot;</span>)</span>
+<span id="cb258-3"><a href="strings.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all words consisting only of consonants (non-vowels)</span></span>
+<span id="cb258-4"><a href="strings.html#cb258-4" aria-hidden="true" tabindex="-1"></a>no_vowels_2 <span class="op">=</span> words.name.<span class="bu">str</span>.contains(<span class="st">&quot;^[^aeiou]+$&quot;</span>)</span>
+<span id="cb258-5"><a href="strings.html#cb258-5" aria-hidden="true" tabindex="-1"></a>no_vowels_1.tolist() <span class="op">==</span> no_vowels_2.tolist()</span>
+<span id="cb258-6"><a href="strings.html#cb258-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div>
 <p>The results are identical, but I think the first approach is significantly easier to understand. If your regular expression gets overly complicated, try breaking it up into smaller pieces, giving each piece a name, and then combining the pieces with logical operations.</p>
 <p>As you saw above, a common use of <code>str.containst()</code> is to select the elements that match a pattern:</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb260-1"><a href="strings.html#cb260-1" aria-hidden="true" tabindex="-1"></a>words[words[<span class="st">&#39;name&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&quot;x$&quot;</span>)]</span>
-<span id="cb260-2"><a href="strings.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     name</span></span>
-<span id="cb260-3"><a href="strings.html#cb260-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 107  box</span></span>
-<span id="cb260-4"><a href="strings.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 746  sex</span></span>
-<span id="cb260-5"><a href="strings.html#cb260-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 771  six</span></span>
-<span id="cb260-6"><a href="strings.html#cb260-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 840  tax</span></span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb259-1"><a href="strings.html#cb259-1" aria-hidden="true" tabindex="-1"></a>words[words[<span class="st">&#39;name&#39;</span>].<span class="bu">str</span>.contains(<span class="st">&quot;x$&quot;</span>)]</span>
+<span id="cb259-2"><a href="strings.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     name</span></span>
+<span id="cb259-3"><a href="strings.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 107  box</span></span>
+<span id="cb259-4"><a href="strings.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 746  sex</span></span>
+<span id="cb259-5"><a href="strings.html#cb259-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 771  six</span></span>
+<span id="cb259-6"><a href="strings.html#cb259-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 840  tax</span></span></code></pre></div>
 <p>Typically, however, your strings will be one column of a data frame, and you’ll want to use filter instead:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb261-1"><a href="strings.html#cb261-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb261-2"><a href="strings.html#cb261-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;words&#39;</span>: words.name,</span>
-<span id="cb261-3"><a href="strings.html#cb261-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;i&#39;</span>: words.index})</span>
-<span id="cb261-4"><a href="strings.html#cb261-4" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">&#39;words.str.contains(&quot;x$&quot;)&#39;</span>)</span>
-<span id="cb261-5"><a href="strings.html#cb261-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     words    i</span></span>
-<span id="cb261-6"><a href="strings.html#cb261-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 107   box  107</span></span>
-<span id="cb261-7"><a href="strings.html#cb261-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 746   sex  746</span></span>
-<span id="cb261-8"><a href="strings.html#cb261-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 771   six  771</span></span>
-<span id="cb261-9"><a href="strings.html#cb261-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 840   tax  840</span></span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb260-1"><a href="strings.html#cb260-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb260-2"><a href="strings.html#cb260-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;words&#39;</span>: words.name,</span>
+<span id="cb260-3"><a href="strings.html#cb260-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;i&#39;</span>: words.index})</span>
+<span id="cb260-4"><a href="strings.html#cb260-4" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">&#39;words.str.contains(&quot;x$&quot;)&#39;</span>)</span>
+<span id="cb260-5"><a href="strings.html#cb260-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     words    i</span></span>
+<span id="cb260-6"><a href="strings.html#cb260-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 107   box  107</span></span>
+<span id="cb260-7"><a href="strings.html#cb260-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 746   sex  746</span></span>
+<span id="cb260-8"><a href="strings.html#cb260-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 771   six  771</span></span>
+<span id="cb260-9"><a href="strings.html#cb260-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 840   tax  840</span></span></code></pre></div>
 <p>A variation on <code>str.contains()</code> is <code>str_count()</code>: rather than a simple yes or no, it tells you how many matches there are in a string:</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb262-1"><a href="strings.html#cb262-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
-<span id="cb262-2"><a href="strings.html#cb262-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.count(<span class="st">&quot;a&quot;</span>)</span>
-<span id="cb262-3"><a href="strings.html#cb262-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-4"><a href="strings.html#cb262-4" aria-hidden="true" tabindex="-1"></a><span class="co"># On average, how many vowels per word?</span></span>
-<span id="cb262-5"><a href="strings.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1</span></span>
-<span id="cb262-6"><a href="strings.html#cb262-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    3</span></span>
-<span id="cb262-7"><a href="strings.html#cb262-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    1</span></span>
-<span id="cb262-8"><a href="strings.html#cb262-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span>
-<span id="cb262-9"><a href="strings.html#cb262-9" aria-hidden="true" tabindex="-1"></a>words.name.<span class="bu">str</span>.count(<span class="st">&quot;[aeiou]&quot;</span>).mean()</span>
-<span id="cb262-10"><a href="strings.html#cb262-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1.9918367346938775</span></span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb261-1"><a href="strings.html#cb261-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb261-2"><a href="strings.html#cb261-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.count(<span class="st">&quot;a&quot;</span>)</span>
+<span id="cb261-3"><a href="strings.html#cb261-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-4"><a href="strings.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="co"># On average, how many vowels per word?</span></span>
+<span id="cb261-5"><a href="strings.html#cb261-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    1</span></span>
+<span id="cb261-6"><a href="strings.html#cb261-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    3</span></span>
+<span id="cb261-7"><a href="strings.html#cb261-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    1</span></span>
+<span id="cb261-8"><a href="strings.html#cb261-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span>
+<span id="cb261-9"><a href="strings.html#cb261-9" aria-hidden="true" tabindex="-1"></a>words.name.<span class="bu">str</span>.count(<span class="st">&quot;[aeiou]&quot;</span>).mean()</span>
+<span id="cb261-10"><a href="strings.html#cb261-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1.9918367346938775</span></span></code></pre></div>
 <p>You can use <code>str.count()</code> with <code>assign()</code>:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb263-1"><a href="strings.html#cb263-1" aria-hidden="true" tabindex="-1"></a>df.assign(</span>
-<span id="cb263-2"><a href="strings.html#cb263-2" aria-hidden="true" tabindex="-1"></a>    vowels <span class="op">=</span> words.name.<span class="bu">str</span>.count(<span class="st">&quot;[aeiou]&quot;</span>),</span>
-<span id="cb263-3"><a href="strings.html#cb263-3" aria-hidden="true" tabindex="-1"></a>    consonants <span class="op">=</span> words.name.<span class="bu">str</span>.count(<span class="st">&quot;[^aeiou]&quot;</span>)</span>
-<span id="cb263-4"><a href="strings.html#cb263-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb263-5"><a href="strings.html#cb263-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          words    i  vowels  consonants</span></span>
-<span id="cb263-6"><a href="strings.html#cb263-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0            a    0       1           0</span></span>
-<span id="cb263-7"><a href="strings.html#cb263-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         able    1       2           2</span></span>
-<span id="cb263-8"><a href="strings.html#cb263-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        about    2       3           2</span></span>
-<span id="cb263-9"><a href="strings.html#cb263-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     absolute    3       4           4</span></span>
-<span id="cb263-10"><a href="strings.html#cb263-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       accept    4       2           4</span></span>
-<span id="cb263-11"><a href="strings.html#cb263-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..         ...  ...     ...         ...</span></span>
-<span id="cb263-12"><a href="strings.html#cb263-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 975        yes  975       1           2</span></span>
-<span id="cb263-13"><a href="strings.html#cb263-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 976  yesterday  976       3           6</span></span>
-<span id="cb263-14"><a href="strings.html#cb263-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 977        yet  977       1           2</span></span>
-<span id="cb263-15"><a href="strings.html#cb263-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 978        you  978       2           1</span></span>
-<span id="cb263-16"><a href="strings.html#cb263-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 979      young  979       2           3</span></span>
-<span id="cb263-17"><a href="strings.html#cb263-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb263-18"><a href="strings.html#cb263-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [980 rows x 4 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb262-1"><a href="strings.html#cb262-1" aria-hidden="true" tabindex="-1"></a>df.assign(</span>
+<span id="cb262-2"><a href="strings.html#cb262-2" aria-hidden="true" tabindex="-1"></a>    vowels <span class="op">=</span> words.name.<span class="bu">str</span>.count(<span class="st">&quot;[aeiou]&quot;</span>),</span>
+<span id="cb262-3"><a href="strings.html#cb262-3" aria-hidden="true" tabindex="-1"></a>    consonants <span class="op">=</span> words.name.<span class="bu">str</span>.count(<span class="st">&quot;[^aeiou]&quot;</span>)</span>
+<span id="cb262-4"><a href="strings.html#cb262-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb262-5"><a href="strings.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          words    i  vowels  consonants</span></span>
+<span id="cb262-6"><a href="strings.html#cb262-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0            a    0       1           0</span></span>
+<span id="cb262-7"><a href="strings.html#cb262-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         able    1       2           2</span></span>
+<span id="cb262-8"><a href="strings.html#cb262-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        about    2       3           2</span></span>
+<span id="cb262-9"><a href="strings.html#cb262-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     absolute    3       4           4</span></span>
+<span id="cb262-10"><a href="strings.html#cb262-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       accept    4       2           4</span></span>
+<span id="cb262-11"><a href="strings.html#cb262-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..         ...  ...     ...         ...</span></span>
+<span id="cb262-12"><a href="strings.html#cb262-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 975        yes  975       1           2</span></span>
+<span id="cb262-13"><a href="strings.html#cb262-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 976  yesterday  976       3           6</span></span>
+<span id="cb262-14"><a href="strings.html#cb262-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 977        yet  977       1           2</span></span>
+<span id="cb262-15"><a href="strings.html#cb262-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 978        you  978       2           1</span></span>
+<span id="cb262-16"><a href="strings.html#cb262-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 979      young  979       2           3</span></span>
+<span id="cb262-17"><a href="strings.html#cb262-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb262-18"><a href="strings.html#cb262-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [980 rows x 4 columns]</span></span></code></pre></div>
 <p>Note that matches never overlap. For example, in <code>"abababa"</code>, how many times will the pattern <code>"aba"</code> match? Regular expressions say two, not three:</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb264-1"><a href="strings.html#cb264-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;abababa&quot;</span>]).<span class="bu">str</span>.count(<span class="st">&quot;aba&quot;</span>)</span>
-<span id="cb264-2"><a href="strings.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    2</span></span>
-<span id="cb264-3"><a href="strings.html#cb264-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb263-1"><a href="strings.html#cb263-1" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&quot;abababa&quot;</span>]).<span class="bu">str</span>.count(<span class="st">&quot;aba&quot;</span>)</span>
+<span id="cb263-2"><a href="strings.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    2</span></span>
+<span id="cb263-3"><a href="strings.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: int64</span></span></code></pre></div>
 <div id="exercises-32" class="section level4" number="14.4.1.1">
 <h4><span class="header-section-number">14.4.1.1</span> Exercises</h4>
 <ol style="list-style-type: decimal">
@@ -1195,37 +1195,37 @@ proportion of vowels? (Hint: what is the denominator?)</p></li>
 <div id="extract-matches" class="section level3" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Extract matches</h3>
 <p>To extract the actual text of a match, use <code>str.findall()</code>. To show that off, we’re going to need a more complicated example. I’m going to use the <a href="https://en.wikipedia.org/wiki/Harvard_sentences">Harvard sentences</a>, which were designed to test VOIP systems, but are also useful for practicing regexps. These are provided in <code>stringr::sentences</code>:</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb265-1"><a href="strings.html#cb265-1" aria-hidden="true" tabindex="-1"></a>sentences <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/sentences/sentences.csv&quot;</span>)</span>
-<span id="cb265-2"><a href="strings.html#cb265-2" aria-hidden="true" tabindex="-1"></a>sentences.count</span>
-<span id="cb265-3"><a href="strings.html#cb265-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;bound method DataFrame.count of                                             name</span></span>
-<span id="cb265-4"><a href="strings.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     The birch canoe slid on the smooth planks.</span></span>
-<span id="cb265-5"><a href="strings.html#cb265-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Glue the sheet to the dark blue background.</span></span>
-<span id="cb265-6"><a href="strings.html#cb265-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         It&#39;s easy to tell the depth of a well.</span></span>
-<span id="cb265-7"><a href="strings.html#cb265-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       These days a chicken leg is a rare dish.</span></span>
-<span id="cb265-8"><a href="strings.html#cb265-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           Rice is often served in round bowls.</span></span>
-<span id="cb265-9"><a href="strings.html#cb265-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..                                           ...</span></span>
-<span id="cb265-10"><a href="strings.html#cb265-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 715      The grass and bushes were wet with dew.</span></span>
-<span id="cb265-11"><a href="strings.html#cb265-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 716         The blind man counted his old coins.</span></span>
-<span id="cb265-12"><a href="strings.html#cb265-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 717           A severe storm tore down the barn.</span></span>
-<span id="cb265-13"><a href="strings.html#cb265-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 718              She called his name many times.</span></span>
-<span id="cb265-14"><a href="strings.html#cb265-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719        When you hear the bell, come quickly.</span></span>
-<span id="cb265-15"><a href="strings.html#cb265-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb265-16"><a href="strings.html#cb265-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [720 rows x 1 columns]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb264-1"><a href="strings.html#cb264-1" aria-hidden="true" tabindex="-1"></a>sentences <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://github.com/byuidatascience/data4python4ds/raw/master/data-raw/sentences/sentences.csv&quot;</span>)</span>
+<span id="cb264-2"><a href="strings.html#cb264-2" aria-hidden="true" tabindex="-1"></a>sentences.count</span>
+<span id="cb264-3"><a href="strings.html#cb264-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;bound method DataFrame.count of                                             name</span></span>
+<span id="cb264-4"><a href="strings.html#cb264-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     The birch canoe slid on the smooth planks.</span></span>
+<span id="cb264-5"><a href="strings.html#cb264-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Glue the sheet to the dark blue background.</span></span>
+<span id="cb264-6"><a href="strings.html#cb264-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         It&#39;s easy to tell the depth of a well.</span></span>
+<span id="cb264-7"><a href="strings.html#cb264-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       These days a chicken leg is a rare dish.</span></span>
+<span id="cb264-8"><a href="strings.html#cb264-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           Rice is often served in round bowls.</span></span>
+<span id="cb264-9"><a href="strings.html#cb264-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ..                                           ...</span></span>
+<span id="cb264-10"><a href="strings.html#cb264-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 715      The grass and bushes were wet with dew.</span></span>
+<span id="cb264-11"><a href="strings.html#cb264-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 716         The blind man counted his old coins.</span></span>
+<span id="cb264-12"><a href="strings.html#cb264-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 717           A severe storm tore down the barn.</span></span>
+<span id="cb264-13"><a href="strings.html#cb264-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 718              She called his name many times.</span></span>
+<span id="cb264-14"><a href="strings.html#cb264-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719        When you hear the bell, come quickly.</span></span>
+<span id="cb264-15"><a href="strings.html#cb264-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb264-16"><a href="strings.html#cb264-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [720 rows x 1 columns]&gt;</span></span></code></pre></div>
 <p>Imagine we want to find all sentences that contain a colour. We first create a vector of colour names, and then turn it into a single regular expression:</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb266-1"><a href="strings.html#cb266-1" aria-hidden="true" tabindex="-1"></a>colours <span class="op">=</span> pd.Series([<span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>])</span>
-<span id="cb266-2"><a href="strings.html#cb266-2" aria-hidden="true" tabindex="-1"></a>colour_match <span class="op">=</span> colours.<span class="bu">str</span>.cat(sep <span class="op">=</span> <span class="st">&quot;|&quot;</span>)</span>
-<span id="cb266-3"><a href="strings.html#cb266-3" aria-hidden="true" tabindex="-1"></a>colour_match</span>
-<span id="cb266-4"><a href="strings.html#cb266-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;red|orange|yellow|green|blue|purple&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb265-1"><a href="strings.html#cb265-1" aria-hidden="true" tabindex="-1"></a>colours <span class="op">=</span> pd.Series([<span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>])</span>
+<span id="cb265-2"><a href="strings.html#cb265-2" aria-hidden="true" tabindex="-1"></a>colour_match <span class="op">=</span> colours.<span class="bu">str</span>.cat(sep <span class="op">=</span> <span class="st">&quot;|&quot;</span>)</span>
+<span id="cb265-3"><a href="strings.html#cb265-3" aria-hidden="true" tabindex="-1"></a>colour_match</span>
+<span id="cb265-4"><a href="strings.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;red|orange|yellow|green|blue|purple&#39;</span></span></code></pre></div>
 <p>Now we can select the sentences that contain a colour, and then extract the colour to figure out which one it is:</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb267-1"><a href="strings.html#cb267-1" aria-hidden="true" tabindex="-1"></a>has_colour <span class="op">=</span> sentences.query(<span class="st">&#39;name.str.contains(@colour_match)&#39;</span>)</span>
-<span id="cb267-2"><a href="strings.html#cb267-2" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> has_colour.name.<span class="bu">str</span>.findall(colour_match)</span>
-<span id="cb267-3"><a href="strings.html#cb267-3" aria-hidden="true" tabindex="-1"></a>matches.head()</span>
-<span id="cb267-4"><a href="strings.html#cb267-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     [blue]</span></span>
-<span id="cb267-5"><a href="strings.html#cb267-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25    [blue]</span></span>
-<span id="cb267-6"><a href="strings.html#cb267-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27     [red]</span></span>
-<span id="cb267-7"><a href="strings.html#cb267-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43     [red]</span></span>
-<span id="cb267-8"><a href="strings.html#cb267-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 81     [red]</span></span>
-<span id="cb267-9"><a href="strings.html#cb267-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb266-1"><a href="strings.html#cb266-1" aria-hidden="true" tabindex="-1"></a>has_colour <span class="op">=</span> sentences.query(<span class="st">&#39;name.str.contains(@colour_match)&#39;</span>)</span>
+<span id="cb266-2"><a href="strings.html#cb266-2" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> has_colour.name.<span class="bu">str</span>.findall(colour_match)</span>
+<span id="cb266-3"><a href="strings.html#cb266-3" aria-hidden="true" tabindex="-1"></a>matches.head()</span>
+<span id="cb266-4"><a href="strings.html#cb266-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     [blue]</span></span>
+<span id="cb266-5"><a href="strings.html#cb266-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25    [blue]</span></span>
+<span id="cb266-6"><a href="strings.html#cb266-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27     [red]</span></span>
+<span id="cb266-7"><a href="strings.html#cb266-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43     [red]</span></span>
+<span id="cb266-8"><a href="strings.html#cb266-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 81     [red]</span></span>
+<span id="cb266-9"><a href="strings.html#cb266-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
 <p>Note that <code>str.findall()</code> extracts all matches. You’ll learn more about lists in <a href="#lists">lists</a> and [iteration].</p>
 <div id="exercises-33" class="section level4" number="14.4.2.1">
 <h4><span class="header-section-number">14.4.2.1</span> Exercises</h4>
@@ -1245,17 +1245,17 @@ regex to fix the problem.</p></li>
 <div id="grouped-matches" class="section level3" number="14.4.3">
 <h3><span class="header-section-number">14.4.3</span> Grouped matches</h3>
 <p>Earlier in this chapter we talked about the use of parentheses for clarifying precedence and for backreferences when matching. You can also use parentheses to extract parts of a complex match. For example, imagine we want to extract nouns from the sentences. As a heuristic, we’ll look for any word that comes after “a” or “the”. Defining a “word” in a regular expression is a little tricky, so here I use a simple approximation: a sequence of at least one character that isn’t a space. <code>str.findall()</code> gives us the complete match:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb268-1"><a href="strings.html#cb268-1" aria-hidden="true" tabindex="-1"></a>noun <span class="op">=</span> <span class="st">&#39;(a|the) ([^ ]+)&#39;</span></span>
-<span id="cb268-2"><a href="strings.html#cb268-2" aria-hidden="true" tabindex="-1"></a>has_noun <span class="op">=</span> sentences.query(<span class="st">&#39;name.str.contains(@noun)&#39;</span>)</span>
-<span id="cb268-3"><a href="strings.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/strings.py:2001: UserWarning: This pattern has match groups. To actually get the groups, use str.extract.</span></span>
-<span id="cb268-4"><a href="strings.html#cb268-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   return func(self, *args, **kwargs)</span></span>
-<span id="cb268-5"><a href="strings.html#cb268-5" aria-hidden="true" tabindex="-1"></a>has_noun.name.<span class="bu">str</span>.findall(noun).head()</span>
-<span id="cb268-6"><a href="strings.html#cb268-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0                [(the, smooth)]</span></span>
-<span id="cb268-7"><a href="strings.html#cb268-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    [(the, sheet), (the, dark)]</span></span>
-<span id="cb268-8"><a href="strings.html#cb268-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     [(the, depth), (a, well.)]</span></span>
-<span id="cb268-9"><a href="strings.html#cb268-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      [(a, chicken), (a, rare)]</span></span>
-<span id="cb268-10"><a href="strings.html#cb268-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                [(the, parked)]</span></span>
-<span id="cb268-11"><a href="strings.html#cb268-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb267-1"><a href="strings.html#cb267-1" aria-hidden="true" tabindex="-1"></a>noun <span class="op">=</span> <span class="st">&#39;(a|the) ([^ ]+)&#39;</span></span>
+<span id="cb267-2"><a href="strings.html#cb267-2" aria-hidden="true" tabindex="-1"></a>has_noun <span class="op">=</span> sentences.query(<span class="st">&#39;name.str.contains(@noun)&#39;</span>)</span>
+<span id="cb267-3"><a href="strings.html#cb267-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pandas/core/strings.py:2001: UserWarning: This pattern has match groups. To actually get the groups, use str.extract.</span></span>
+<span id="cb267-4"><a href="strings.html#cb267-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   return func(self, *args, **kwargs)</span></span>
+<span id="cb267-5"><a href="strings.html#cb267-5" aria-hidden="true" tabindex="-1"></a>has_noun.name.<span class="bu">str</span>.findall(noun).head()</span>
+<span id="cb267-6"><a href="strings.html#cb267-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0                [(the, smooth)]</span></span>
+<span id="cb267-7"><a href="strings.html#cb267-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    [(the, sheet), (the, dark)]</span></span>
+<span id="cb267-8"><a href="strings.html#cb267-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     [(the, depth), (a, well.)]</span></span>
+<span id="cb267-9"><a href="strings.html#cb267-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      [(a, chicken), (a, rare)]</span></span>
+<span id="cb267-10"><a href="strings.html#cb267-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                [(the, parked)]</span></span>
+<span id="cb267-11"><a href="strings.html#cb267-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
 <p>(Unsurprisingly, our heuristic for detecting nouns is poor, and also picks up adjectives like smooth and parked.)</p>
 <div id="exercises-34" class="section level4" number="14.4.3.1">
 <h4><span class="header-section-number">14.4.3.1</span> Exercises</h4>
@@ -1270,25 +1270,25 @@ apostrophe.</p></li>
 <div id="replacing-matches" class="section level3" number="14.4.4">
 <h3><span class="header-section-number">14.4.4</span> Replacing matches</h3>
 <p><code>str.replace()</code> allows you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb269-1"><a href="strings.html#cb269-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
-<span id="cb269-2"><a href="strings.html#cb269-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace( <span class="st">&quot;[aeiou]&quot;</span>, <span class="st">&quot;-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb269-3"><a href="strings.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     -pple</span></span>
-<span id="cb269-4"><a href="strings.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    b-nana</span></span>
-<span id="cb269-5"><a href="strings.html#cb269-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      p-ar</span></span>
-<span id="cb269-6"><a href="strings.html#cb269-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb269-7"><a href="strings.html#cb269-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace( <span class="st">&quot;[aeiou]&quot;</span>, <span class="st">&quot;-&quot;</span>)</span>
-<span id="cb269-8"><a href="strings.html#cb269-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     -ppl-</span></span>
-<span id="cb269-9"><a href="strings.html#cb269-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    b-n-n-</span></span>
-<span id="cb269-10"><a href="strings.html#cb269-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      p--r</span></span>
-<span id="cb269-11"><a href="strings.html#cb269-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb268-1"><a href="strings.html#cb268-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series([<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>])</span>
+<span id="cb268-2"><a href="strings.html#cb268-2" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace( <span class="st">&quot;[aeiou]&quot;</span>, <span class="st">&quot;-&quot;</span>, n <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb268-3"><a href="strings.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     -pple</span></span>
+<span id="cb268-4"><a href="strings.html#cb268-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    b-nana</span></span>
+<span id="cb268-5"><a href="strings.html#cb268-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      p-ar</span></span>
+<span id="cb268-6"><a href="strings.html#cb268-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb268-7"><a href="strings.html#cb268-7" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">str</span>.replace( <span class="st">&quot;[aeiou]&quot;</span>, <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb268-8"><a href="strings.html#cb268-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     -ppl-</span></span>
+<span id="cb268-9"><a href="strings.html#cb268-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    b-n-n-</span></span>
+<span id="cb268-10"><a href="strings.html#cb268-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      p--r</span></span>
+<span id="cb268-11"><a href="strings.html#cb268-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <p>Instead of replacing with a fixed string you can use backreferences to insert components of the match. In the following code, I flip the order of the second and third words.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb270-1"><a href="strings.html#cb270-1" aria-hidden="true" tabindex="-1"></a>sentences.name.<span class="bu">str</span>.replace(<span class="st">&quot;([^ ]+) ([^ ]+) ([^ ]+)&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1 </span><span class="ch">\\</span><span class="st">3 </span><span class="ch">\\</span><span class="st">2&quot;</span>).head()</span>
-<span id="cb270-2"><a href="strings.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     The canoe birch slid the on smooth planks.</span></span>
-<span id="cb270-3"><a href="strings.html#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Glue sheet the to dark the blue background.</span></span>
-<span id="cb270-4"><a href="strings.html#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         It&#39;s to easy tell depth the of well. a</span></span>
-<span id="cb270-5"><a href="strings.html#cb270-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       These a days chicken is leg a dish. rare</span></span>
-<span id="cb270-6"><a href="strings.html#cb270-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           Rice often is served round in bowls.</span></span>
-<span id="cb270-7"><a href="strings.html#cb270-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb269-1"><a href="strings.html#cb269-1" aria-hidden="true" tabindex="-1"></a>sentences.name.<span class="bu">str</span>.replace(<span class="st">&quot;([^ ]+) ([^ ]+) ([^ ]+)&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1 </span><span class="ch">\\</span><span class="st">3 </span><span class="ch">\\</span><span class="st">2&quot;</span>).head()</span>
+<span id="cb269-2"><a href="strings.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0     The canoe birch slid the on smooth planks.</span></span>
+<span id="cb269-3"><a href="strings.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Glue sheet the to dark the blue background.</span></span>
+<span id="cb269-4"><a href="strings.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         It&#39;s to easy tell depth the of well. a</span></span>
+<span id="cb269-5"><a href="strings.html#cb269-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       These a days chicken is leg a dish. rare</span></span>
+<span id="cb269-6"><a href="strings.html#cb269-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           Rice often is served round in bowls.</span></span>
+<span id="cb269-7"><a href="strings.html#cb269-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
 <div id="exercises-35" class="section level4" number="14.4.4.1">
 <h4><span class="header-section-number">14.4.4.1</span> Exercises</h4>
 <ol style="list-style-type: decimal">
@@ -1302,34 +1302,34 @@ are still words?</p></li>
 <div id="splitting" class="section level3" number="14.4.5">
 <h3><span class="header-section-number">14.4.5</span> Splitting</h3>
 <p>Use <code>str.split()</code> to split a string up into pieces. For example, we could split sentences into words:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb271-1"><a href="strings.html#cb271-1" aria-hidden="true" tabindex="-1"></a>sentences.name.<span class="bu">str</span>.split(<span class="st">&quot; &quot;</span>).head()</span>
-<span id="cb271-2"><a href="strings.html#cb271-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    [The, birch, canoe, slid, on, the, smooth, pla...</span></span>
-<span id="cb271-3"><a href="strings.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    [Glue, the, sheet, to, the, dark, blue, backgr...</span></span>
-<span id="cb271-4"><a href="strings.html#cb271-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     [It&#39;s, easy, to, tell, the, depth, of, a, well.]</span></span>
-<span id="cb271-5"><a href="strings.html#cb271-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    [These, days, a, chicken, leg, is, a, rare, di...</span></span>
-<span id="cb271-6"><a href="strings.html#cb271-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4         [Rice, is, often, served, in, round, bowls.]</span></span>
-<span id="cb271-7"><a href="strings.html#cb271-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb270-1"><a href="strings.html#cb270-1" aria-hidden="true" tabindex="-1"></a>sentences.name.<span class="bu">str</span>.split(<span class="st">&quot; &quot;</span>).head()</span>
+<span id="cb270-2"><a href="strings.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    [The, birch, canoe, slid, on, the, smooth, pla...</span></span>
+<span id="cb270-3"><a href="strings.html#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    [Glue, the, sheet, to, the, dark, blue, backgr...</span></span>
+<span id="cb270-4"><a href="strings.html#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     [It&#39;s, easy, to, tell, the, depth, of, a, well.]</span></span>
+<span id="cb270-5"><a href="strings.html#cb270-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    [These, days, a, chicken, leg, is, a, rare, di...</span></span>
+<span id="cb270-6"><a href="strings.html#cb270-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4         [Rice, is, often, served, in, round, bowls.]</span></span>
+<span id="cb270-7"><a href="strings.html#cb270-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, dtype: object</span></span></code></pre></div>
 <p>Because each component might contain a different number of pieces, this returns an object with list elements. If you want all items in each list to a row you can use <code>explode()</code>:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb272-1"><a href="strings.html#cb272-1" aria-hidden="true" tabindex="-1"></a>sentences.name.<span class="bu">str</span>.split(<span class="st">&quot; &quot;</span>).explode()</span>
-<span id="cb272-2"><a href="strings.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0           The</span></span>
-<span id="cb272-3"><a href="strings.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         birch</span></span>
-<span id="cb272-4"><a href="strings.html#cb272-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         canoe</span></span>
-<span id="cb272-5"><a href="strings.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0          slid</span></span>
-<span id="cb272-6"><a href="strings.html#cb272-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0            on</span></span>
-<span id="cb272-7"><a href="strings.html#cb272-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          ...   </span></span>
-<span id="cb272-8"><a href="strings.html#cb272-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719        hear</span></span>
-<span id="cb272-9"><a href="strings.html#cb272-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719         the</span></span>
-<span id="cb272-10"><a href="strings.html#cb272-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719       bell,</span></span>
-<span id="cb272-11"><a href="strings.html#cb272-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719        come</span></span>
-<span id="cb272-12"><a href="strings.html#cb272-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719    quickly.</span></span>
-<span id="cb272-13"><a href="strings.html#cb272-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, Length: 5741, dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb271-1"><a href="strings.html#cb271-1" aria-hidden="true" tabindex="-1"></a>sentences.name.<span class="bu">str</span>.split(<span class="st">&quot; &quot;</span>).explode()</span>
+<span id="cb271-2"><a href="strings.html#cb271-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0           The</span></span>
+<span id="cb271-3"><a href="strings.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         birch</span></span>
+<span id="cb271-4"><a href="strings.html#cb271-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0         canoe</span></span>
+<span id="cb271-5"><a href="strings.html#cb271-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0          slid</span></span>
+<span id="cb271-6"><a href="strings.html#cb271-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0            on</span></span>
+<span id="cb271-7"><a href="strings.html#cb271-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          ...   </span></span>
+<span id="cb271-8"><a href="strings.html#cb271-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719        hear</span></span>
+<span id="cb271-9"><a href="strings.html#cb271-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719         the</span></span>
+<span id="cb271-10"><a href="strings.html#cb271-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719       bell,</span></span>
+<span id="cb271-11"><a href="strings.html#cb271-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719        come</span></span>
+<span id="cb271-12"><a href="strings.html#cb271-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 719    quickly.</span></span>
+<span id="cb271-13"><a href="strings.html#cb271-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: name, Length: 5741, dtype: object</span></span></code></pre></div>
 <p>You can also request a maximum number of pieces:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb273-1"><a href="strings.html#cb273-1" aria-hidden="true" tabindex="-1"></a>fields <span class="op">=</span> pd.Series([<span class="st">&quot;Name: Hadley&quot;</span>, <span class="st">&quot;Country: NZ&quot;</span>, <span class="st">&quot;Age: 35&quot;</span>])</span>
-<span id="cb273-2"><a href="strings.html#cb273-2" aria-hidden="true" tabindex="-1"></a>fields.<span class="bu">str</span>.split(<span class="st">&quot;: &quot;</span>, n <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb273-3"><a href="strings.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    [Name, Hadley]</span></span>
-<span id="cb273-4"><a href="strings.html#cb273-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     [Country, NZ]</span></span>
-<span id="cb273-5"><a href="strings.html#cb273-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         [Age, 35]</span></span>
-<span id="cb273-6"><a href="strings.html#cb273-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb272-1"><a href="strings.html#cb272-1" aria-hidden="true" tabindex="-1"></a>fields <span class="op">=</span> pd.Series([<span class="st">&quot;Name: Hadley&quot;</span>, <span class="st">&quot;Country: NZ&quot;</span>, <span class="st">&quot;Age: 35&quot;</span>])</span>
+<span id="cb272-2"><a href="strings.html#cb272-2" aria-hidden="true" tabindex="-1"></a>fields.<span class="bu">str</span>.split(<span class="st">&quot;: &quot;</span>, n <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb272-3"><a href="strings.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    [Name, Hadley]</span></span>
+<span id="cb272-4"><a href="strings.html#cb272-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     [Country, NZ]</span></span>
+<span id="cb272-5"><a href="strings.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         [Age, 35]</span></span>
+<span id="cb272-6"><a href="strings.html#cb272-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div>
 <div id="exercises-36" class="section level4" number="14.4.5.1">
 <h4><span class="header-section-number">14.4.5.1</span> Exercises</h4>
 <ol style="list-style-type: decimal">
@@ -1352,22 +1352,22 @@ then read the documentation.</p></li>
 <ul>
 <li><p><code>case = False</code> allows characters to match either their uppercase or
 lowercase forms. The default is <code>case = True</code> if the pattern is a string.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb274-1"><a href="strings.html#cb274-1" aria-hidden="true" tabindex="-1"></a>bananas <span class="op">=</span> pd.Series([<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;BANANA&quot;</span>])</span>
-<span id="cb274-2"><a href="strings.html#cb274-2" aria-hidden="true" tabindex="-1"></a>bananas.<span class="bu">str</span>.replace(<span class="st">&#39;banana&#39;</span>, <span class="st">&quot;-R-&quot;</span>)</span>
-<span id="cb274-3"><a href="strings.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       -R-</span></span>
-<span id="cb274-4"><a href="strings.html#cb274-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Banana</span></span>
-<span id="cb274-5"><a href="strings.html#cb274-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    BANANA</span></span>
-<span id="cb274-6"><a href="strings.html#cb274-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb274-7"><a href="strings.html#cb274-7" aria-hidden="true" tabindex="-1"></a>bananas.<span class="bu">str</span>.replace(<span class="st">&#39;banana&#39;</span>, <span class="st">&quot;-R-&quot;</span>, case <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb274-8"><a href="strings.html#cb274-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       -R-</span></span>
-<span id="cb274-9"><a href="strings.html#cb274-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Banana</span></span>
-<span id="cb274-10"><a href="strings.html#cb274-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    BANANA</span></span>
-<span id="cb274-11"><a href="strings.html#cb274-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
-<span id="cb274-12"><a href="strings.html#cb274-12" aria-hidden="true" tabindex="-1"></a>bananas.<span class="bu">str</span>.replace(<span class="st">&#39;banana&#39;</span>, <span class="st">&quot;-R-&quot;</span>, case <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb274-13"><a href="strings.html#cb274-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    -R-</span></span>
-<span id="cb274-14"><a href="strings.html#cb274-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -R-</span></span>
-<span id="cb274-15"><a href="strings.html#cb274-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -R-</span></span>
-<span id="cb274-16"><a href="strings.html#cb274-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb273"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb273-1"><a href="strings.html#cb273-1" aria-hidden="true" tabindex="-1"></a>bananas <span class="op">=</span> pd.Series([<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;BANANA&quot;</span>])</span>
+<span id="cb273-2"><a href="strings.html#cb273-2" aria-hidden="true" tabindex="-1"></a>bananas.<span class="bu">str</span>.replace(<span class="st">&#39;banana&#39;</span>, <span class="st">&quot;-R-&quot;</span>)</span>
+<span id="cb273-3"><a href="strings.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       -R-</span></span>
+<span id="cb273-4"><a href="strings.html#cb273-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Banana</span></span>
+<span id="cb273-5"><a href="strings.html#cb273-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    BANANA</span></span>
+<span id="cb273-6"><a href="strings.html#cb273-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb273-7"><a href="strings.html#cb273-7" aria-hidden="true" tabindex="-1"></a>bananas.<span class="bu">str</span>.replace(<span class="st">&#39;banana&#39;</span>, <span class="st">&quot;-R-&quot;</span>, case <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb273-8"><a href="strings.html#cb273-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0       -R-</span></span>
+<span id="cb273-9"><a href="strings.html#cb273-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Banana</span></span>
+<span id="cb273-10"><a href="strings.html#cb273-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    BANANA</span></span>
+<span id="cb273-11"><a href="strings.html#cb273-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span>
+<span id="cb273-12"><a href="strings.html#cb273-12" aria-hidden="true" tabindex="-1"></a>bananas.<span class="bu">str</span>.replace(<span class="st">&#39;banana&#39;</span>, <span class="st">&quot;-R-&quot;</span>, case <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb273-13"><a href="strings.html#cb273-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    -R-</span></span>
+<span id="cb273-14"><a href="strings.html#cb273-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    -R-</span></span>
+<span id="cb273-15"><a href="strings.html#cb273-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -R-</span></span>
+<span id="cb273-16"><a href="strings.html#cb273-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div></li>
 </ul>
 <div id="exercises-37" class="section level3" number="14.5.1">
 <h3><span class="header-section-number">14.5.1</span> Exercises</h3>

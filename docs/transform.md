@@ -139,18 +139,6 @@ In this chapter you are going to learn five key pandas functions or object metho
 The pandas package can handle all of the same functionality of dplyr in R.  You can read [pandas mapping guide](https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html) and [this towards data science article](https://towardsdatascience.com/tidying-up-pandas-4572bfa38776) to get more details on the following brief table. 
 
 
-
-```
-#> -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-#> v tibble  3.0.5     v dplyr   1.0.2
-#> v tidyr   1.1.2     v stringr 1.4.0
-#> v readr   1.3.1     v forcats 0.5.0
-#> v purrr   0.3.4
-#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
-```
-
 \begin{table}
 
 \caption{(\#tab:unnamed-chunk-4)Comparable functions in R-Dplyr and Python-Pandas}
@@ -220,7 +208,7 @@ The previous expression is equivalent to `flights[(flights.month == 1) & (flight
 When you run that line of code, pandas executes the filtering operation and returns a new data frame. pandas functions usually don't modify their inputs, so if you want to save the result, you'll need to use the assignment operator, `=`:
 
 
-```pandas
+```python
 jan1 = flights.query('month == 1 & day == 1')
 ```
 

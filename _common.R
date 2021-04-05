@@ -15,7 +15,9 @@ knitr::opts_chunk$set(
   fig.show = "hold",
   cache = FALSE,
   engine.path = '/usr/local/bin/python3.8',
-  python.reticulate = TRUE
+  python.reticulate = TRUE,
+  message = FALSE,
+  warning = FALSE
 )
 
 options(dplyr.print_min = 6, dplyr.print_max = 6)
