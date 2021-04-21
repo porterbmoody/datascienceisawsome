@@ -615,8 +615,8 @@ who1.key.value_counts().head(25)
 #> new_sp_m4554    3223
 #> new_sp_m3544    3219
 #> new_sp_m5564    3218
-#> new_sp_m1524    3209
 #> new_sp_m65      3209
+#> new_sp_m1524    3209
 #> new_sp_m2534    3206
 #> new_sp_f4554    3204
 #> new_sp_f2534    3200
@@ -635,8 +635,8 @@ who1.key.value_counts().head(25)
 #> new_ep_m1524    1026
 #> new_sn_m3544    1025
 #> new_ep_m3544    1024
-#> new_sn_m2534    1022
 #> new_sn_f1524    1022
+#> new_sn_m2534    1022
 #> Name: key, dtype: int64
 ```
 

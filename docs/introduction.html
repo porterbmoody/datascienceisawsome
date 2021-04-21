@@ -54,11 +54,6 @@
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/vega-5.17.0/vega.min.js"></script>
-<script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
-<link href="libs/vega-embed-6.12.2/vega-embed.css" rel="stylesheet" />
-<script src="libs/vega-embed-6.12.2/vega-embed.js"></script>
-<script src="libs/vegawidget-binding-0.3.2/vegawidget.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -943,54 +938,53 @@ easier it is to fix.</p></li>
 <span id="cb9-9"><a href="introduction.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  collate  en_US.UTF-8                 </span></span>
 <span id="cb9-10"><a href="introduction.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ctype    en_US.UTF-8                 </span></span>
 <span id="cb9-11"><a href="introduction.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tz       America/Boise               </span></span>
-<span id="cb9-12"><a href="introduction.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  date     2021-04-05                  </span></span>
+<span id="cb9-12"><a href="introduction.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  date     2021-04-21                  </span></span>
 <span id="cb9-13"><a href="introduction.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb9-14"><a href="introduction.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ─ Packages ───────────────────────────────────────────────────────────────────</span></span>
 <span id="cb9-15"><a href="introduction.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  package     * version   date       lib source                             </span></span>
-<span id="cb9-16"><a href="introduction.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  assertthat    0.2.1     2019-03-21 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-17"><a href="introduction.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  bookdown      0.21.7    2021-03-30 [1] Github (rstudio/bookdown@f7d0622)  </span></span>
-<span id="cb9-18"><a href="introduction.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  cli           2.2.0     2020-11-20 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-19"><a href="introduction.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  colorspace    2.0-0     2020-11-11 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-20"><a href="introduction.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  crayon        1.3.4     2017-09-16 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-21"><a href="introduction.html#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  digest        0.6.27    2020-10-24 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-22"><a href="introduction.html#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dplyr         1.0.2     2020-08-18 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-23"><a href="introduction.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ellipsis      0.3.1     2020-05-15 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-24"><a href="introduction.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  evaluate      0.14      2019-05-28 [1] CRAN (R 4.0.1)                     </span></span>
-<span id="cb9-25"><a href="introduction.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  fansi         0.4.2     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-26"><a href="introduction.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  generics      0.1.0     2020-10-31 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-27"><a href="introduction.html#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ggplot2     * 3.3.3     2020-12-30 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-28"><a href="introduction.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  glue          1.4.2     2020-08-27 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-29"><a href="introduction.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  gtable        0.3.0     2019-03-25 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-30"><a href="introduction.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  highr         0.8       2019-03-20 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-31"><a href="introduction.html#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  htmltools     0.5.1.1   2021-01-22 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-32"><a href="introduction.html#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  jsonlite      1.7.2     2020-12-09 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-33"><a href="introduction.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  knitr         1.31      2021-01-27 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-34"><a href="introduction.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lattice       0.20-41   2020-04-02 [1] CRAN (R 4.0.4)                     </span></span>
-<span id="cb9-35"><a href="introduction.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lifecycle     0.2.0     2020-03-06 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-36"><a href="introduction.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  magrittr      2.0.1     2020-11-17 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-37"><a href="introduction.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Matrix        1.3-2     2021-01-06 [1] CRAN (R 4.0.4)                     </span></span>
-<span id="cb9-38"><a href="introduction.html#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  munsell       0.5.0     2018-06-12 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-39"><a href="introduction.html#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pillar        1.4.7     2020-11-20 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-40"><a href="introduction.html#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pkgconfig     2.0.3     2019-09-22 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-41"><a href="introduction.html#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  purrr         0.3.4     2020-04-17 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-42"><a href="introduction.html#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  R6            2.5.0     2020-10-28 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-43"><a href="introduction.html#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Rcpp          1.0.6     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-44"><a href="introduction.html#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  reticulate  * 1.18-9008 2021-04-05 [1] Github (rstudio/reticulate@1aff9d8)</span></span>
-<span id="cb9-45"><a href="introduction.html#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rlang         0.4.10    2020-12-30 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-46"><a href="introduction.html#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rmarkdown     2.7.4     2021-03-30 [1] Github (rstudio/rmarkdown@a11240d) </span></span>
-<span id="cb9-47"><a href="introduction.html#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rstudioapi    0.13      2020-11-12 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-48"><a href="introduction.html#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  scales        1.1.1     2020-05-11 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-49"><a href="introduction.html#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  sessioninfo   1.1.1     2018-11-05 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-50"><a href="introduction.html#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringi       1.5.3     2020-09-09 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-51"><a href="introduction.html#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringr       1.4.0     2019-02-10 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-52"><a href="introduction.html#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tibble        3.0.5     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-53"><a href="introduction.html#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tidyselect    1.1.0     2020-05-11 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-54"><a href="introduction.html#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  vctrs         0.3.6     2020-12-17 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-55"><a href="introduction.html#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  withr         2.4.1     2021-01-26 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-56"><a href="introduction.html#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xfun          0.22      2021-03-11 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-57"><a href="introduction.html#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  yaml          2.2.1     2020-02-01 [1] CRAN (R 4.0.2)                     </span></span>
-<span id="cb9-58"><a href="introduction.html#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-59"><a href="introduction.html#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</span></span></code></pre></div>
+<span id="cb9-16"><a href="introduction.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  bookdown      0.21.7    2021-03-30 [1] Github (rstudio/bookdown@f7d0622)  </span></span>
+<span id="cb9-17"><a href="introduction.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  cli           2.4.0     2021-04-05 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-18"><a href="introduction.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  colorspace    2.0-0     2020-11-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-19"><a href="introduction.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  crayon        1.4.1     2021-02-08 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-20"><a href="introduction.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  digest        0.6.27    2020-10-24 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-21"><a href="introduction.html#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  dplyr         1.0.2     2020-08-18 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-22"><a href="introduction.html#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ellipsis      0.3.1     2020-05-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-23"><a href="introduction.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  evaluate      0.14      2019-05-28 [1] CRAN (R 4.0.1)                     </span></span>
+<span id="cb9-24"><a href="introduction.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  fansi         0.4.2     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-25"><a href="introduction.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  generics      0.1.0     2020-10-31 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-26"><a href="introduction.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ggplot2     * 3.3.3     2020-12-30 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-27"><a href="introduction.html#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  glue          1.4.2     2020-08-27 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-28"><a href="introduction.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  gtable        0.3.0     2019-03-25 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-29"><a href="introduction.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  highr         0.8       2019-03-20 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-30"><a href="introduction.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  htmltools     0.5.1.1   2021-01-22 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-31"><a href="introduction.html#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  jsonlite      1.7.2     2020-12-09 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-32"><a href="introduction.html#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  knitr         1.31      2021-01-27 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-33"><a href="introduction.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lattice       0.20-41   2020-04-02 [1] CRAN (R 4.0.4)                     </span></span>
+<span id="cb9-34"><a href="introduction.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  lifecycle     1.0.0     2021-02-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-35"><a href="introduction.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  magrittr      2.0.1     2020-11-17 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-36"><a href="introduction.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Matrix        1.3-2     2021-01-06 [1] CRAN (R 4.0.4)                     </span></span>
+<span id="cb9-37"><a href="introduction.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  munsell       0.5.0     2018-06-12 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-38"><a href="introduction.html#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pillar        1.5.1     2021-03-05 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-39"><a href="introduction.html#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  pkgconfig     2.0.3     2019-09-22 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-40"><a href="introduction.html#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  purrr         0.3.4     2020-04-17 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-41"><a href="introduction.html#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  R6            2.5.0     2020-10-28 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-42"><a href="introduction.html#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Rcpp          1.0.6     2021-01-15 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-43"><a href="introduction.html#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  reticulate  * 1.18-9008 2021-04-05 [1] Github (rstudio/reticulate@1aff9d8)</span></span>
+<span id="cb9-44"><a href="introduction.html#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rlang         0.4.10    2020-12-30 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-45"><a href="introduction.html#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  rmarkdown     2.7.4     2021-03-30 [1] Github (rstudio/rmarkdown@a11240d) </span></span>
+<span id="cb9-46"><a href="introduction.html#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  scales        1.1.1     2020-05-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-47"><a href="introduction.html#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  sessioninfo   1.1.1     2018-11-05 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-48"><a href="introduction.html#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringi       1.5.3     2020-09-09 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-49"><a href="introduction.html#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  stringr       1.4.0     2019-02-10 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-50"><a href="introduction.html#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tibble        3.1.0     2021-02-25 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-51"><a href="introduction.html#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  tidyselect    1.1.0     2020-05-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-52"><a href="introduction.html#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  utf8          1.2.1     2021-03-12 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-53"><a href="introduction.html#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  vctrs         0.3.7     2021-03-29 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-54"><a href="introduction.html#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  withr         2.4.1     2021-01-26 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-55"><a href="introduction.html#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xfun          0.22      2021-03-11 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-56"><a href="introduction.html#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  yaml          2.2.1     2020-02-01 [1] CRAN (R 4.0.2)                     </span></span>
+<span id="cb9-57"><a href="introduction.html#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-58"><a href="introduction.html#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</span></span></code></pre></div>
 
 </div>
 </div>

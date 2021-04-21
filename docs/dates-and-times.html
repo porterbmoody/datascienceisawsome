@@ -54,11 +54,6 @@
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/vega-5.17.0/vega.min.js"></script>
-<script src="libs/vega-lite-4.17.0/vega-lite.min.js"></script>
-<link href="libs/vega-embed-6.12.2/vega-embed.css" rel="stylesheet" />
-<script src="libs/vega-embed-6.12.2/vega-embed.js"></script>
-<script src="libs/vegawidget-binding-0.3.2/vegawidget.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -668,16 +663,16 @@ provides the speed and ease of use in handling complex time handling.</li>
 <p>To get the current date or date-time you can use <code>date.today()</code> or <code>datetime.now()</code>:</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb292-1"><a href="dates-and-times.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using datetime</span></span>
 <span id="cb292-2"><a href="dates-and-times.html#cb292-2" aria-hidden="true" tabindex="-1"></a>datetime.datetime.today()</span>
-<span id="cb292-3"><a href="dates-and-times.html#cb292-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; datetime.datetime(2021, 4, 5, 16, 58, 13, 797469)</span></span>
+<span id="cb292-3"><a href="dates-and-times.html#cb292-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; datetime.datetime(2021, 4, 21, 9, 26, 9, 477062)</span></span>
 <span id="cb292-4"><a href="dates-and-times.html#cb292-4" aria-hidden="true" tabindex="-1"></a>datetime.datetime.now()</span>
-<span id="cb292-5"><a href="dates-and-times.html#cb292-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; datetime.datetime(2021, 4, 5, 16, 58, 13, 802579)</span></span>
+<span id="cb292-5"><a href="dates-and-times.html#cb292-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; datetime.datetime(2021, 4, 21, 9, 26, 9, 482146)</span></span>
 <span id="cb292-6"><a href="dates-and-times.html#cb292-6" aria-hidden="true" tabindex="-1"></a>datetime.datetime.utcnow()</span>
 <span id="cb292-7"><a href="dates-and-times.html#cb292-7" aria-hidden="true" tabindex="-1"></a><span class="co"># using pandas</span></span>
-<span id="cb292-8"><a href="dates-and-times.html#cb292-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; datetime.datetime(2021, 4, 5, 22, 58, 13, 808073)</span></span>
+<span id="cb292-8"><a href="dates-and-times.html#cb292-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; datetime.datetime(2021, 4, 21, 15, 26, 9, 487579)</span></span>
 <span id="cb292-9"><a href="dates-and-times.html#cb292-9" aria-hidden="true" tabindex="-1"></a>pd.to_datetime(<span class="st">&#39;today&#39;</span>)</span>
-<span id="cb292-10"><a href="dates-and-times.html#cb292-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timestamp(&#39;2021-04-05 16:58:13.813220&#39;)</span></span>
+<span id="cb292-10"><a href="dates-and-times.html#cb292-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timestamp(&#39;2021-04-21 09:26:09.492831&#39;)</span></span>
 <span id="cb292-11"><a href="dates-and-times.html#cb292-11" aria-hidden="true" tabindex="-1"></a>pd.to_datetime(<span class="st">&#39;now&#39;</span>)</span>
-<span id="cb292-12"><a href="dates-and-times.html#cb292-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timestamp(&#39;2021-04-05 22:58:13.818569&#39;)</span></span></code></pre></div>
+<span id="cb292-12"><a href="dates-and-times.html#cb292-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timestamp(&#39;2021-04-21 15:26:09.502088&#39;)</span></span></code></pre></div>
 <p>Otherwise, there are three ways you’re likely to create a date/time:</p>
 <ul>
 <li>From a string.</li>
@@ -1004,7 +999,7 @@ was delayed.</p></li>
 <div class="sourceCode" id="cb315"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb315-1"><a href="dates-and-times.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How old is Hathaway?</span></span>
 <span id="cb315-2"><a href="dates-and-times.html#cb315-2" aria-hidden="true" tabindex="-1"></a>h_age <span class="op">=</span> pd.Timestamp.now() <span class="op">-</span> pd.Timestamp(<span class="st">&quot;19770907&quot;</span>)</span>
 <span id="cb315-3"><a href="dates-and-times.html#cb315-3" aria-hidden="true" tabindex="-1"></a>h_age</span>
-<span id="cb315-4"><a href="dates-and-times.html#cb315-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timedelta(&#39;15916 days 16:58:55.468255&#39;)</span></span></code></pre></div>
+<span id="cb315-4"><a href="dates-and-times.html#cb315-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timedelta(&#39;15932 days 09:26:53.361259&#39;)</span></span></code></pre></div>
 <p>A Timedelta object records a time span in nanoseconds using 64 bit integers which can make Timedeltas a little painful to work with, so Timedelta provides access to the number of days with <code>.days</code> and the number of seconds with <code>.total_seconds()</code>.</p>
 <div class="sourceCode" id="cb316"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb316-1"><a href="dates-and-times.html#cb316-1" aria-hidden="true" tabindex="-1"></a>h_age.days</span>
 <span id="cb316-2"><a href="dates-and-times.html#cb316-2" aria-hidden="true" tabindex="-1"></a>h_age.days <span class="op">//</span> <span class="dv">365</span> <span class="co"># to get years</span></span>

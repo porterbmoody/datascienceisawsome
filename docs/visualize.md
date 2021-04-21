@@ -96,14 +96,12 @@ chart = (alt.Chart(mpg)
     y='hwy')
   .mark_circle()
 )
+
+chart.save("screenshots/altair_viz_1.png")
 ```
 
 
-
-```
-#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-bc7fc20d2fb9a94416e89f69941e6a24.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:9356)\n    at Object.Nt [as load] (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:8422)\n    at async HB.request (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57897)\n    at async HB.preload (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57746)\nWARN Infinite extent for field \"displ\": [Infinity, -Infinity]\nWARN Infinite extent for field \"hwy\": [Infinity, -Infinity]\n"
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_viz_1} \end{flushleft}
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?
 
@@ -171,13 +169,12 @@ chart = (alt.Chart(mpg)
     color = "class"
     )
   .mark_circle())
+
+chart.save("screenshots/altair_viz_2.png")
 ```
 
 
-```
-#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-bc7fc20d2fb9a94416e89f69941e6a24.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:9356)\n    at Object.Nt [as load] (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:8422)\n    at async HB.request (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57897)\n    at async HB.preload (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57746)\nWARN Infinite extent for field \"displ\": [Infinity, -Infinity]\nWARN Infinite extent for field \"hwy\": [Infinity, -Infinity]\n"
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_viz_2} \end{flushleft}
 
 (We don't prefer British English, like Hadley, so don't use `colour` instead of `color`.)
 
@@ -196,13 +193,13 @@ chart = (alt.Chart(mpg)
     size = "class"
     )
   .mark_circle())
+  
+chart.save("screenshots/altair_viz_3.png")
+#> WARN Channel size should not be used with an unsorted discrete field.
 ```
 
 
-```
-#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-bc7fc20d2fb9a94416e89f69941e6a24.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:9356)\n    at Object.Nt [as load] (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:8422)\n    at async HB.request (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57897)\n    at async HB.preload (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57746)\nWARN Infinite extent for field \"displ\": [Infinity, -Infinity]\nWARN Infinite extent for field \"hwy\": [Infinity, -Infinity]\n"
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_viz_3} \end{flushleft}
 
 Or we could have mapped `class` to the _opacity_ encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.
 
@@ -254,13 +251,12 @@ chart = (alt.Chart(mpg)
     color = alt.value("blue")
     )
   .mark_circle())
+
+chart.save("screenshots/altair_viz_4.png")
 ```
 
 
-```
-#> [1] "Error printing vegawidget in non-HTML format:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-#> [2] "Error in compiling to svg:\nWARN Loading failed altair-data-bc7fc20d2fb9a94416e89f69941e6a24.json TypeError: Only absolute URLs are supported\n    at getNodeRequestOptions (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1293:9)\n    at /Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1393:19\n    at new Promise (<anonymous>)\n    at fetch (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/bin/node_modules/node-fetch/lib/index.js:1390:9)\n    at Object.http (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:9356)\n    at Object.Nt [as load] (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:8422)\n    at async HB.request (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57897)\n    at async HB.preload (/Library/Frameworks/R.framework/Versions/4.0/Resources/library/vegawidget/htmlwidgets/lib/vega/vega.min.js:1:57746)\nWARN Infinite extent for field \"displ\": [Infinity, -Infinity]\nWARN Infinite extent for field \"hwy\": [Infinity, -Infinity]\n"
-```
+\begin{flushleft}\includegraphics[width=0.7\linewidth]{screenshots/altair_viz_4} \end{flushleft}
 
 Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `.encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
 

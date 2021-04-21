@@ -50,16 +50,16 @@ To get the current date or date-time you can use `date.today()` or `datetime.now
 ```python
 # using datetime
 datetime.datetime.today()
-#> datetime.datetime(2021, 4, 5, 17, 6, 26, 132119)
+#> datetime.datetime(2021, 4, 21, 9, 34, 18, 884318)
 datetime.datetime.now()
-#> datetime.datetime(2021, 4, 5, 17, 6, 26, 137109)
+#> datetime.datetime(2021, 4, 21, 9, 34, 18, 888773)
 datetime.datetime.utcnow()
 # using pandas
-#> datetime.datetime(2021, 4, 5, 23, 6, 26, 142240)
+#> datetime.datetime(2021, 4, 21, 15, 34, 18, 893171)
 pd.to_datetime('today')
-#> Timestamp('2021-04-05 17:06:26.147640')
+#> Timestamp('2021-04-21 09:34:18.897638')
 pd.to_datetime('now')
-#> Timestamp('2021-04-05 23:06:26.152945')
+#> Timestamp('2021-04-21 15:34:18.905668')
 ```
 
 Otherwise, there are three ways you're likely to create a date/time:
@@ -522,7 +522,7 @@ Next you'll learn about how arithmetic with dates work, including subtraction, a
 # How old is Hathaway?
 h_age = pd.Timestamp.now() - pd.Timestamp("19770907")
 h_age
-#> Timedelta('15916 days 17:07:07.971258')
+#> Timedelta('15932 days 09:35:01.237747')
 ```
 
 A Timedelta object records a time span in nanoseconds using 64 bit integers which can make Timedeltas a little painful to work with, so Timedelta provides access to the number of days with `.days` and the number of seconds with `.total_seconds()`.

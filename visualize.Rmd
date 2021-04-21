@@ -92,13 +92,13 @@ chart = (alt.Chart(mpg)
     y='hwy')
   .mark_circle()
 )
+
+chart.save("screenshots/altair_viz_1.png")
+
 ```
 
-
-```{R, echo=FALSE}
-
-vegawidget::as_vegaspec(py$chart$to_json())
-
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/altair_viz_1.png")
 ```
 
 The plot shows a negative relationship between engine size (`displ`) and fuel efficiency (`hwy`). In other words, cars with big engines use more fuel. Does this confirm or refute your hypothesis about fuel efficiency and engine size?
@@ -190,12 +190,12 @@ chart = (alt.Chart(mpg)
     )
   .mark_circle())
 
+chart.save("screenshots/altair_viz_2.png")
+
 ```
 
-```{R, echo=FALSE}
-
-vegawidget::as_vegaspec(py$chart$to_json())
-
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/altair_viz_2.png")
 ```
 
 (We don't prefer British English, like Hadley, so don't use `colour` instead of `color`.)
@@ -214,12 +214,13 @@ chart = (alt.Chart(mpg)
     size = "class"
     )
   .mark_circle())
+  
+chart.save("screenshots/altair_viz_3.png")
+
 ```
 
-```{R, echo=FALSE}
-
-vegawidget::as_vegaspec(py$chart$to_json())
-
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/altair_viz_3.png")
 ```
 
 Or we could have mapped `class` to the _opacity_ encoding, which controls the transparency of the points, or to the shape encoding, which controls the shape of the points.
@@ -272,12 +273,12 @@ chart = (alt.Chart(mpg)
     )
   .mark_circle())
 
+chart.save("screenshots/altair_viz_4.png")
+
 ```
 
-```{R, echo=FALSE}
-
-vegawidget::as_vegaspec(py$chart$to_json())
-
+```{R, echo=FALSE, fig.align="left"}
+knitr::include_graphics("screenshots/altair_viz_4.png")
 ```
 
 Here, the color doesn't convey information about a variable, but only changes the appearance of the plot. To set an encoding manually, use `alt.value()` by name as an argument of your `.encode()` function; i.e. the value goes _inside_ of `alt.value()`. You'll need to pick a level that makes sense for that encoding:
